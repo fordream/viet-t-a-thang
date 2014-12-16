@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:padding="@dimen/dimen_10dp" >
+
+    <ImageView
+        android:id="@+id/home_item_img_icon"
+        android:layout_marginRight="@dimen/dimen_5dp"
+        android:layout_width="@dimen/dimen_80dp"
+        android:layout_height="@dimen/dimen_80dp"
+        android:background="@drawable/dvanybook" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/dimen_0dp"
+        android:paddingRight="@dimen/dimen_3dp" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/home_item_tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text="ten dv"
+                android:textColor="#336666"
+                android:textSize="@dimen/dimen_14dp" />
+
+            <TextView
+                android:id="@+id/TextView01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:singleLine="true"
+                android:text="15000"
+                android:textColor="#336666"
+                android:textSize="@dimen/dimen_14dp" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/home_item_tv_link"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_3dp"
+            android:singleLine="true"
+            android:text="link dv"
+            android:textColor="#666666"
+            android:textSize="@dimen/dimen_10dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_3dp"
+            android:layout_marginTop="@dimen/dimen_3dp"
+            android:gravity="center" >
+
+            <Button
+                android:id="@+id/chitietdichvu_no_feature_moi"
+                android:layout_width="@dimen/dimen_80dp"
+                android:layout_height="@dimen/dimen_30dp"
+                android:layout_marginRight="@dimen/dimen_10dp"
+                android:background="@drawable/xml_btn_infor"
+                android:text="@string/moi"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/dimen_13dp" />
+
+            <Button
+                android:id="@+id/chitietdichvu_no_feature_dangky"
+                android:layout_width="@dimen/dimen_80dp"
+                android:layout_height="@dimen/dimen_30dp"
+                android:background="@drawable/xml_btn_dangky"
+                android:text="@string/dangky"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/dimen_13dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

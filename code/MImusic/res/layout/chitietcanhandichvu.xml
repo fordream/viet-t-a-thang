@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical" >
+
+    <vnp.com.mimusic.view.MusicListView
+        android:id="@+id/chitietcanhandichvu_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@drawable/tranfer"
+        android:dividerHeight="@dimen/dimen_3dp"
+        android:listSelector="@drawable/tranfer" >
+    </vnp.com.mimusic.view.MusicListView>
+
+</LinearLayout>

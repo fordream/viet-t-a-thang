@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:slidemenu="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    slidemenu:layout_role="content"
+    android:background="#ffffff"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/layout_main_tab"
+        android:layout_below="@+id/layout_main_header" >
+
+        <FrameLayout
+            android:id="@+id/layout_main_home"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            slidemenu:layout_role="content"
+            android:background="#ffffff"
+            android:orientation="vertical" >
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/layout_main_dichvu"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            slidemenu:layout_role="content"
+            android:background="#ffffff"
+            android:orientation="vertical"
+            android:visibility="gone" >
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/layout_main_bangxephang"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            slidemenu:layout_role="content"
+            android:background="#ffffff"
+            android:orientation="vertical"
+            android:visibility="gone" >
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/layout_main_bangxeptimkiem"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            slidemenu:layout_role="content"
+            android:background="#ffffff"
+            android:orientation="vertical"
+            android:visibility="gone" >
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/layout_main_orther"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            slidemenu:layout_role="content"
+            android:background="#ffffff"
+            android:orientation="vertical"
+            android:visibility="gone" >
+        </FrameLayout>
+    </RelativeLayout>
+
+    <a.com.acv.bynal.v3.NoScollViewPager
+        android:id="@+id/layout_main_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+    </a.com.acv.bynal.v3.NoScollViewPager>
+
+    <vnp.com.mimusic.view.HeaderView
+        android:id="@+id/layout_main_header"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_45dp" >
+    </vnp.com.mimusic.view.HeaderView>
+
+    <vnp.com.mimusic.view.TabView
+        android:id="@+id/layout_main_tab"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_50dp"
+        android:layout_alignParentBottom="true" >
+    </vnp.com.mimusic.view.TabView>
+
+</RelativeLayout>

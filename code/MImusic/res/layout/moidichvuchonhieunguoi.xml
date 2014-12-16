@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical" >
+
+    <vnp.com.mimusic.view.ChiTietDichVuNoFeatureView
+        android:id="@+id/moidichvuchonhieunguoi_chiteitdichvunofeatureview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </vnp.com.mimusic.view.ChiTietDichVuNoFeatureView>
+
+    <vnp.com.mimusic.view.MusicListView
+        android:id="@+id/moidichvuchonhieunguoi_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="#333333"
+        android:dividerHeight="1px" >
+    </vnp.com.mimusic.view.MusicListView>
+
+</LinearLayout>

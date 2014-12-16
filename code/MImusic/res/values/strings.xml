@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">MImusic</string>
+
+    <!-- new for content -->
+    <string-array name="menuleft_list">
+        <item>Bảng xếp hạng</item>
+        <item>Lịch sử bán hàng</item>
+        <item>Quy định bán hàng</item>
+        <item>Hướng dẫn bán hàng</item>
+        <item>Chỉnh sửa thông tin</item>
+    </string-array>
+
+    <string name="trangchu">Trang chủ</string>
+    <string name="dichvu">Dịch vụ</string>
+    <string name="bangxephang">Bảng xếp hạng</string>
+    <string name="timkiem">Tìm kiếm</string>
+
+    <!--  -->
+    <string name="sogiaodichthanhcongtrongthang">Số giao dịch thành công trong tháng</string>
+    <string name="sogiaodichthanhcong">Số giao dịch thành công</string>
+    <string name="sotienhoahongtrongthang">Số tiền hoa hồng trong tháng</string>
+    <string name="sotienhoahong">Số tiền hoa hồng</string>
+
+    <!--  -->
+    <string name="ten">Tên</string>
+    <string name="email">Email</string>
+    <string name="luthaydoi">Lưu thay đổi</string>
+    <string name="dangky">Đăng ký</string>
+    <string name="huy">Hủy</string>
+    <string name="moi">Mời</string>
+    <string name="gui">Gửi</string>
+    
+    <string name="dangnhap">Đăng nhập</string>
+
+</resources>

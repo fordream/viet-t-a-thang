@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:gravity="center_horizontal"
+    android:orientation="vertical" >
+
+    <vnp.com.mimusic.view.MusicListView
+        android:id="@+id/guidichvuchonhieunguoi_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/guidichvuchonhieunguoi_ll"
+        android:divider="#333333"
+        android:dividerHeight="1px" >
+
+    </vnp.com.mimusic.view.MusicListView>
+
+    <LinearLayout
+        android:id="@+id/guidichvuchonhieunguoi_ll"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_45dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center" >
+
+        <Button
+            android:id="@+id/guidichvuchonhieunguoi_gui"
+            android:layout_width="@dimen/dimen_200dp"
+            android:layout_height="@dimen/dimen_30dp"
+            android:background="@drawable/xml_btn_infor"
+            android:singleLine="true"
+            android:text="@string/gui"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/dimen_15dp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</RelativeLayout>

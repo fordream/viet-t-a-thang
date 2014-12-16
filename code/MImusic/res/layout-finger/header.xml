@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dimen_45dp"
+    android:background="@drawable/bg_header"
+    android:orientation="vertical" >
+
+    <ImageButton
+        android:id="@+id/header_btn_left"
+        android:layout_width="@dimen/dimen_45dp"
+        android:layout_height="@dimen/dimen_45dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/xml_btn2"
+        android:padding="@dimen/dimen_12dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/header_home_1" />
+
+    <ImageButton
+        android:id="@+id/header_btn_right"
+        android:layout_width="@dimen/dimen_45dp"
+        android:layout_height="@dimen/dimen_45dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/xml_btn2"
+        android:padding="@dimen/dimen_12dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/header_home_2" />
+
+    <TextView
+        android:id="@+id/header_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="@string/trangchu"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/dimen_13dp"
+        android:textStyle="bold" />
+
+</RelativeLayout>

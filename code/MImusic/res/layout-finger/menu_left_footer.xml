@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/dimen_25dp"
+    android:paddingTop="@dimen/dimen_25dp" >
+
+    <ImageButton
+        android:id="@+id/menu_footer_t"
+        android:layout_width="@dimen/dimen_35dp"
+        android:layout_height="@dimen/dimen_35dp"
+        android:background="@drawable/xml_btn2"
+        android:padding="@dimen/dimen_5dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/t" />
+
+    <ImageButton
+        android:id="@+id/menu_footer_f"
+        android:layout_width="@dimen/dimen_35dp"
+        android:layout_height="@dimen/dimen_35dp"
+        android:layout_marginLeft="@dimen/dimen_10dp"
+        android:layout_marginRight="@dimen/dimen_10dp"
+        android:background="@drawable/xml_btn2"
+        android:padding="@dimen/dimen_5dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/f" />
+
+    <ImageButton
+        android:id="@+id/menu_footer_t_1"
+        android:layout_width="@dimen/dimen_35dp"
+        android:layout_height="@dimen/dimen_35dp"
+        android:layout_marginRight="@dimen/dimen_10dp"
+        android:background="@drawable/xml_btn2"
+        android:padding="@dimen/dimen_5dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/t_1" />
+
+    <ImageButton
+        android:id="@+id/menu_footer_g"
+        android:layout_width="@dimen/dimen_35dp"
+        android:layout_height="@dimen/dimen_35dp"
+        android:background="@drawable/xml_btn2"
+        android:padding="@dimen/dimen_5dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/g" />
+
+</LinearLayout>
