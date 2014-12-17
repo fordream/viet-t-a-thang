@@ -3,6 +3,7 @@ package com.aretha.slidemenudemo.fragment;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.adapter.BangXepHangAdaper;
+import vnp.com.mimusic.view.BangXepHangHeaderView;
 import vnp.com.mimusic.view.BangXepHangItemView;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -24,6 +25,8 @@ public class BangXepHangFragment extends Fragment implements OnItemClickListener
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.bangxephang, null);
 		ListView bangxephang_list = (ListView) view.findViewById(R.id.bangxephang_list);
+
+		bangxephang_list.addHeaderView(new BangXepHangHeaderView(getActivity()));
 		bangxephang_list.setOnItemClickListener(this);
 		bangxephang_list.setAdapter(new BangXepHangAdaper(getActivity(), new String[] { "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a" }));
 		return view;
