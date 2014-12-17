@@ -79,7 +79,7 @@
                 android:id="@+id/tab_3_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/bangxephang"
+                android:text="@string/tintuc"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/dimen_10dp" />
         </LinearLayout>

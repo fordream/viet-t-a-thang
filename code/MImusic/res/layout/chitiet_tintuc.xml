@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:orientation="horizontal" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/chitiettintuc_item_tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dimen_5dp"
+            android:singleLine="true"
+            android:text="Khuyến mãi nhạc trờ iMusicz"
+            android:textColor="#336666"
+            android:textSize="@dimen/dimen_14dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/chitiettintuc_item_tv_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_5dp"
+            android:padding="@dimen/dimen_5dp"
+            android:singleLine="true"
+            android:text="27/06/2014"
+            android:textColor="#336666"
+            android:textSize="@dimen/dimen_10dp" />
+
+        <TextView
+            android:id="@+id/TextView02"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:padding="@dimen/dimen_5dp"
+            android:text="Việc thanh toán cước viễn thông sẽ trở nên dễ dàng, nhanh chóng, thuận tiện hơn với Cổng thanh toán dịch vụ viễn thông trực tuyến của Viettel.Việc thanh toán cước viễn thông sẽ trở nên dễ dàng, nhanh chóng, thuận tiện hơn với Cổng thanh toán dịch vụ viễn thông trực tuyến của Viettel.Việc thanh toán cước viễn thông sẽ trở nên dễ dàng, nhanh chóng, thuận tiện hơn với Cổng thanh toán dịch vụ viễn thông trực tuyến của Viettel.Việc thanh toán cước viễn thông sẽ trở nên dễ dàng, nhanh chóng, thuận tiện hơn với Cổng thanh toán dịch vụ viễn thông trực tuyến của Viettel."
+            android:textColor="#336666"
+            android:textSize="@dimen/dimen_14dp" />
+
+        <ImageView
+            android:id="@+id/chitiettintuc_item_img_icon"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_200dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/chitiettintuc_exampe" />
+
+        <TextView
+            android:id="@+id/chitiettintuc_item_tv_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:padding="@dimen/dimen_5dp"
+            android:text="Việc thanh toán cước viễn thông sẽ trở nên dễ dàng, nhanh chóng, thuận tiện hơn với Cổng thanh toán dịch vụ viễn thông trực tuyến của Viettel."
+            android:textColor="#336666"
+            android:textSize="@dimen/dimen_14dp" />
+
+        <TextView
+            android:id="@+id/TextView01"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/tinkhac_bg"
+            android:padding="@dimen/dimen_5dp"
+            android:singleLine="true"
+            android:text="@string/tinkhac"
+            android:textColor="#336666"
+            android:textSize="@dimen/dimen_14dp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#cccccc" />
+
+        <LinearLayout
+            android:id="@+id/chitiet_tintuc_tintuckhac_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/home_item_img_icon"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/dimen_0dp"
+            android:paddingRight="@dimen/dimen_0dp" >
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

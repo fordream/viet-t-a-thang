@@ -20,6 +20,7 @@ import com.aretha.slidemenudemo.fragment.BangXepHangFragment;
 import com.aretha.slidemenudemo.fragment.ChiTietCaNhanBangXepHangFragment;
 import com.aretha.slidemenudemo.fragment.ChiTietCaNhanDichVuFragment;
 import com.aretha.slidemenudemo.fragment.ChiTietDichVuFragment;
+import com.aretha.slidemenudemo.fragment.ChiTietTintucFragment;
 import com.aretha.slidemenudemo.fragment.DichVuFragment;
 import com.aretha.slidemenudemo.fragment.GuiDvChoNhieuNguoiFragment;
 import com.aretha.slidemenudemo.fragment.HomeFragment;
@@ -29,6 +30,7 @@ import com.aretha.slidemenudemo.fragment.LichSuBanHangFragment;
 import com.aretha.slidemenudemo.fragment.MoiDvChoNhieuNguoiFragment;
 import com.aretha.slidemenudemo.fragment.QuyDinhBanHangFragment;
 import com.aretha.slidemenudemo.fragment.SearchFragment;
+import com.aretha.slidemenudemo.fragment.TinTucFragment;
 
 /**
  * class base for all activity
@@ -63,6 +65,8 @@ public class RootMenuActivity extends FragmentActivity {
 			changeFragemt(R.id.root_main_fragment, new SearchFragment());
 		} else if (Conts.INFOR.equals(type)) {
 			changeFragemt(R.id.root_main_fragment, new InforFragment());
+		} else if (Conts.TINTUC.equals(type)) {
+			changeFragemt(R.id.root_main_fragment, new TinTucFragment());
 		}
 	}
 
@@ -149,5 +153,12 @@ public class RootMenuActivity extends FragmentActivity {
 		GuiDvChoNhieuNguoiFragment choNhieuNguoiFragment = new GuiDvChoNhieuNguoiFragment();
 		choNhieuNguoiFragment.setArguments(bundle);
 		changeFragemt(R.id.root_main_fragment, choNhieuNguoiFragment, true);
+	}
+
+	public void gotoChiTietTinTuc(AdapterView<?> parent, View view, int position, long id) {
+		Bundle bundle = new Bundle();
+		ChiTietTintucFragment chitiettintuc = new ChiTietTintucFragment();
+		chitiettintuc.setArguments(bundle);
+		changeFragemt(R.id.root_main_fragment, chitiettintuc, true);
 	}
 }

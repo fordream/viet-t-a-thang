@@ -11,5 +11,5 @@ public class Conts {
 	public final static String TIMKIEM = "timkiem";
 	public final static String ORTHER = "other";
 	public static final String INFOR = "infor";
-
+	public static final String TINTUC = "tintuc";
 }

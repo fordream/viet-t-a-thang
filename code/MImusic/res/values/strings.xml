@@ -16,6 +16,7 @@
     <string name="dichvu">Dịch vụ</string>
     <string name="bangxephang">Bảng xếp hạng</string>
     <string name="timkiem">Tìm kiếm</string>
+    <string name="tintuc">Tin tức</string>
 
     <!--  -->
     <string name="sogiaodichthanhcongtrongthang">Số giao dịch thành công trong tháng</string>
@@ -31,7 +32,7 @@
     <string name="huy">Hủy</string>
     <string name="moi">Mời</string>
     <string name="gui">Gửi</string>
-    
     <string name="dangnhap">Đăng nhập</string>
+    <string name="tinkhac">Tin khác</string>
 
 </resources>

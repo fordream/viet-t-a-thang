@@ -55,8 +55,8 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 				Conts.DICHVU,//
 				Conts.INFOR,//
 				Conts.TIMKIEM,//
-				Conts.ORTHER //
-		};//
+				Conts.ORTHER, //
+				Conts.TINTUC };//
 
 		for (String menu : menus) {
 			addTab(RootMenuActivity.class, menu, menu, menu);
@@ -146,7 +146,7 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 			} else if (v.getId() == R.id.tab_2) {
 				getTabHost().setCurrentTab(5);
 			} else if (v.getId() == R.id.tab_3) {
-				getTabHost().setCurrentTab(1);
+				getTabHost().setCurrentTab(9);
 			} else if (v.getId() == R.id.tab_4) {
 				getTabHost().setCurrentTab(7);
 			}
