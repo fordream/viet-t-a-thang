@@ -11,7 +11,7 @@
         android:layout_height="@dimen/dimen_45dp"
         android:orientation="horizontal" >
 
-        <RadioButton
+        <vnp.com.mimusic.view.BangXepHangHeaderRadioButton
             android:id="@+id/radio0"
             android:layout_width="@dimen/dimen_1dp"
             android:layout_height="match_parent"
@@ -22,7 +22,7 @@
             android:padding="@dimen/dimen_0dp"
             android:text="Số lượng" />
 
-        <RadioButton
+        <vnp.com.mimusic.view.BangXepHangHeaderRadioButton
             android:id="@+id/radio1"
             android:layout_width="@dimen/dimen_1dp"
             android:layout_height="match_parent"
