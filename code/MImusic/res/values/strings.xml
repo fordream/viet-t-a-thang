@@ -34,5 +34,7 @@
     <string name="gui">Gửi</string>
     <string name="dangnhap">Đăng nhập</string>
     <string name="tinkhac">Tin khác</string>
+    <string name="recoment">Recomnet</string>
+    <string name="khuyenmai">Khuyến mãi</string>
 
 </resources>

@@ -32,12 +32,42 @@ public class HomeFragment extends Fragment implements OnItemClickListener, View.
 		menu_left_list.setOnItemClickListener(this);
 
 		View home_header = ((LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.home_header, null);
+		home_header.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+			}
+		});
 		menu_left_list.addHeaderView(home_header);
 
 		List<ContentValues> objects = new ArrayList<ContentValues>();
+		addBlock(R.string.khuyenmai, objects);
+		addBlock(R.string.recoment, objects);
 
+		menu_left_list.setAdapter(new HomeAdapter(getActivity(), objects) {
+			@Override
+			public void moiDVChoNhieuNguoi() {
+				(((RootMenuActivity) getActivity())).gotoMoiDvChoNhieuNguoi();
+			}
+		});
+
+		return view;
+	}
+
+	private void addBlock(int recoment, List<ContentValues> objects) {
+
+		ContentValues mcontentValues = new ContentValues();
+		mcontentValues.put("type", true);
+		mcontentValues.put("icon", "icon");
+		mcontentValues.put("name", getString(recoment));
+		mcontentValues.put("link", "http://imusiz.vn/");
+		mcontentValues.put("content", "");
+
+		objects.add(mcontentValues);
 		for (int i = 0; i < 10; i++) {
 			ContentValues contentValues = new ContentValues();
+			contentValues.put("type", false);
 			contentValues.put("icon", "icon");
 			contentValues.put("name", "Dịch vụ Imusiz " + i);
 			contentValues.put("link", "http://imusiz.vn/" + i);
@@ -46,15 +76,6 @@ public class HomeFragment extends Fragment implements OnItemClickListener, View.
 							"Website nhạc trực tuyến lớn nhất VN, đầy đủ album, video clip tất cả các thể loại, cập nhật liên tục bài hát mới, ca khúc hot, MV chất lượng cao, cài đặt nhạc chờ, nhạc chuông hay nhất hiện nay. ... Infinite F · Zing Music Awards 2014 ");
 			objects.add(contentValues);
 		}
-
-		menu_left_list.setAdapter(new HomeAdapter(getActivity(), objects){
-			@Override
-			public void moiDVChoNhieuNguoi() {
-				(((RootMenuActivity) getActivity())).gotoMoiDvChoNhieuNguoi();
-			}
-		});
-
-		return view;
 	}
 
 	@Override

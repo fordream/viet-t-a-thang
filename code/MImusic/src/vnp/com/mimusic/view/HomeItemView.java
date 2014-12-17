@@ -25,9 +25,16 @@ public class HomeItemView extends LinearLayout {
 
 	private void init() {
 		((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.home_item, this);
+		findViewById(R.id.home_item_header).setOnClickListener(null);
 	}
 
 	public void setData(final ContentValues contentValues) {
+
+		boolean type = contentValues.getAsBoolean("type");
+
+		findViewById(R.id.home_item_header).setVisibility(type ? View.VISIBLE : View.GONE);
+		findViewById(R.id.home_item_main).setVisibility(!type ? View.VISIBLE : View.GONE);
+
 		ImageView home_item_img_icon = (ImageView) findViewById(R.id.home_item_img_icon);
 		ImageView home_item_right_control_1 = (ImageView) findViewById(R.id.home_item_right_control_1);
 		ImageView home_item_right_control_2 = (ImageView) findViewById(R.id.home_item_right_control_2);
@@ -35,10 +42,11 @@ public class HomeItemView extends LinearLayout {
 		TextView home_item_tv_name = (TextView) findViewById(R.id.home_item_tv_name);
 		TextView home_item_tv_link = (TextView) findViewById(R.id.home_item_tv_link);
 		TextView home_item_tv_content = (TextView) findViewById(R.id.home_item_tv_content);
-
+		TextView home_item_header_tv = (TextView) findViewById(R.id.home_item_header_tv);
 		home_item_img_icon.setBackgroundResource(R.drawable.icon_imusiz);
 
 		home_item_tv_name.setText(contentValues.getAsString("name"));
+		home_item_header_tv.setText(contentValues.getAsString("name"));
 		home_item_tv_link.setText(contentValues.getAsString("link"));
 		home_item_tv_content.setText(contentValues.getAsString("content"));
 
