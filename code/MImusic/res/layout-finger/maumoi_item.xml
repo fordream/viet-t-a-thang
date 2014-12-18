@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/maumoi_item_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/dimen_5dp" >
+
+        <TextView
+            android:id="@+id/bangxephang_item_tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="Mẫu tin mời"
+            android:textColor="#475055"
+            android:textSize="@dimen/dimen_14dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/bangxephang_item_tv_listdv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_3dp"
+            android:layout_marginTop="@dimen/dimen_5dp"
+            android:text="Thuê bao XXXX mời bạn sử dụng dịch vụ imusiz(700 vnđ), Để sử dụng dịch vụ , soạn tin YES gửi 567, Để từ trối nhận bản tin lan tỏa từ thuê bao khác soạn NO gửi XXX. "
+            android:textColor="#475055"
+            android:textSize="@dimen/dimen_13dp" />
+    </LinearLayout>
+
+</LinearLayout>

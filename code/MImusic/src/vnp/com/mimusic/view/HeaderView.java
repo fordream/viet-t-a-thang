@@ -5,6 +5,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -39,4 +40,13 @@ public class HeaderView extends LinearLayout {
 		findViewById(R.id.header_btn_right).setVisibility(rightShow ? View.VISIBLE : View.INVISIBLE);
 	}
 
+	public void setButtonLeftImage(boolean needShow, int btnBack) {
+		findViewById(R.id.header_btn_left).setVisibility(needShow ? View.VISIBLE : View.GONE);
+		((ImageButton) findViewById(R.id.header_btn_left)).setImageResource(btnBack);
+	}
+
+	public void setButtonRightImage(boolean needShow, int btnBack) {
+		((ImageButton) findViewById(R.id.header_btn_right)).setImageResource(btnBack);
+		findViewById(R.id.header_btn_right).setVisibility(needShow ? View.VISIBLE : View.GONE);
+	}
 }

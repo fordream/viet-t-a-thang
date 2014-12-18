@@ -11,12 +11,72 @@
         android:layout_height="wrap_content" >
     </vnp.com.mimusic.view.ChiTietDichVuNoFeatureView>
 
-    <vnp.com.mimusic.view.MusicListView
-        android:id="@+id/moidichvuchonhieunguoi_list"
+    <LinearLayout
+        android:id="@+id/home_item_header"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="#333333"
-        android:dividerHeight="1px" >
-    </vnp.com.mimusic.view.MusicListView>
+        android:layout_height="@dimen/dimen_35dp"
+        android:background="@drawable/tinkhac_bg"
+        android:gravity="center_vertical" >
+
+        <View
+            android:layout_width="@dimen/dimen_5dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/home_item_header_img" />
+
+        <TextView
+            android:id="@+id/home_item_header_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/dimen_5dp"
+            android:singleLine="true"
+            android:text="@string/danhsachcacthuebaodachon"
+            android:textColor="#336666"
+            android:textSize="@dimen/dimen_14dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <vnp.com.mimusic.view.MusicListView
+            android:id="@+id/moidichvuchonhieunguoi_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/moidichvuchonhieunguoi_bottom"
+            android:divider="#333333"
+            android:dividerHeight="1px" >
+        </vnp.com.mimusic.view.MusicListView>
+
+        <LinearLayout
+            android:id="@+id/moidichvuchonhieunguoi_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_45dp"
+            android:layout_alignParentBottom="true"
+            android:background="#dfdfdf"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/moidichvuchonhieunguoi_chonloimoi"
+                android:layout_width="@dimen/dimen_140dp"
+                android:layout_height="@dimen/dimen_30dp"
+                android:layout_marginRight="@dimen/dimen_10dp"
+                android:background="@drawable/xml_btn_infor"
+                android:text="@string/chonloimoi"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/dimen_13dp" />
+
+            <Button
+                android:id="@+id/moidichvuchonhieunguoi_moi"
+                android:layout_width="@dimen/dimen_140dp"
+                android:layout_height="@dimen/dimen_30dp"
+                android:background="@drawable/xml_btn_dangky"
+                android:text="@string/moi"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/dimen_13dp" />
+        </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>
