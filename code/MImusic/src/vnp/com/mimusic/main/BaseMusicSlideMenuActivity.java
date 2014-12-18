@@ -148,7 +148,7 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 			} else if (v.getId() == R.id.tab_3) {
 				getTabHost().setCurrentTab(9);
 			} else if (v.getId() == R.id.tab_4) {
-				getTabHost().setCurrentTab(7);
+				getTabHost().setCurrentTab(1);
 			}
 		}
 	};
