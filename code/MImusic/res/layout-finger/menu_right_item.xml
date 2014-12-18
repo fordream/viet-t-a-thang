@@ -48,6 +48,7 @@
     </LinearLayout>
 
     <Button
+        android:visibility="gone"
         android:id="@+id/menu_right_bnt_moi"
         android:layout_width="@dimen/dimen_40dp"
         android:layout_height="@dimen/dimen_25dp"

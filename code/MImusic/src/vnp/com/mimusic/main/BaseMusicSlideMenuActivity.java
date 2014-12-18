@@ -2,6 +2,7 @@ package vnp.com.mimusic.main;
 
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
+import vnp.com.mimusic.base.diablog.MoiNhieuDichVuDialog;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.view.MenuLeftView;
 import vnp.com.mimusic.view.MenuRightView;
@@ -96,7 +97,19 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 		// Menu Right
 		final MenuRightView mactivity_menu_right = (MenuRightView) findViewById(R.id.mactivity_menu_right);
 		mactivity_menu_right.initData();
+		mactivity_menu_right.setOnItemClickListener(new OnItemClickListener() {
 
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+				getSlideMenu().close(true);
+				getSlideMenu().postDelayed(new Runnable() {
+					@Override
+					public void run() {
+						new MoiNhieuDichVuDialog(BaseMusicSlideMenuActivity.this).show();
+					}
+				}, 100);
+			}
+		});
 		getSlideMenu().setiSlideMenuListener(new ISlideMenuListener() {
 
 			@Override
@@ -113,7 +126,6 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 
 			@Override
 			public void onSlideStateChange(int slideState) {
-
 				Log.e("onSlideStateChange", slideState + "");
 				hiddenKeyBoard(BaseMusicSlideMenuActivity.this);
 			}

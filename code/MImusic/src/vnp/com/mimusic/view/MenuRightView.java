@@ -72,10 +72,19 @@ public class MenuRightView extends LinearLayout {
 				menu_right_detail_view.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.abc_slide_right_in));
 			}
 		});
+
+		menu_right_list.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+				mOnItemClickListener.onItemClick(arg0, arg1, arg2, arg3);
+			}
+		});
 		menu_right_img_search.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				String txt = menu_right_editext.getText().toString();
+
 			}
 		});
 	}
