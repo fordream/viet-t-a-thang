@@ -57,14 +57,13 @@ public class HomeFragment extends Fragment implements OnItemClickListener, View.
 
 	private void addBlock(int recoment, List<ContentValues> objects) {
 
-		ContentValues mcontentValues = new ContentValues();
-		mcontentValues.put("type", true);
-		mcontentValues.put("icon", "icon");
-		mcontentValues.put("name", getString(recoment));
-		mcontentValues.put("link", "http://imusiz.vn/");
-		mcontentValues.put("content", "");
-
-		objects.add(mcontentValues);
+//		ContentValues mcontentValues = new ContentValues();
+//		mcontentValues.put("type", true);
+//		mcontentValues.put("icon", "icon");
+//		mcontentValues.put("name", getString(recoment));
+//		mcontentValues.put("link", "http://imusiz.vn/");
+//		mcontentValues.put("content", "");
+//		objects.add(mcontentValues);
 		for (int i = 0; i < 10; i++) {
 			ContentValues contentValues = new ContentValues();
 			contentValues.put("type", false);
