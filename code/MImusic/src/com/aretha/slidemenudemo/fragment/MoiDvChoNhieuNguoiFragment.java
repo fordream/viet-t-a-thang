@@ -3,6 +3,7 @@ package com.aretha.slidemenudemo.fragment;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.adapter.MoiDvChoNhieuNguoiAdaper;
+import vnp.com.mimusic.base.diablog.ChonListContactDialog;
 import vnp.com.mimusic.view.ChiTietDichVuNoFeatureView;
 import vnp.com.mimusic.view.HeaderView;
 import android.os.Bundle;
@@ -25,6 +26,20 @@ public class MoiDvChoNhieuNguoiFragment extends Fragment implements OnItemClickL
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.moidichvuchonhieunguoi, null);
 
+		view.findViewById(R.id.moidichvuchonhieunguoi_contact).setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				new ChonListContactDialog(v.getContext()).show();
+			}
+		});
+
+		view.findViewById(R.id.moidichvuchonhieunguoi_add).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+
+			}
+		});
 		HeaderView chitiettintuc_headerview = (HeaderView) view.findViewById(R.id.moidichvuchonhieunguoi_headerview);
 		chitiettintuc_headerview.setTextHeader(R.string.moidichvuchonhieunguoi);
 		chitiettintuc_headerview.setButtonLeftImage(true, R.drawable.btn_back);

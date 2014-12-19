@@ -27,10 +27,6 @@ public class HomeFragment extends Fragment implements OnItemClickListener, View.
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.home, null);
 
-		ListView menu_left_list = (ListView) view.findViewById(R.id.home_list);
-
-		menu_left_list.setOnItemClickListener(this);
-
 		View home_header = ((LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.home_header, null);
 		home_header.setOnClickListener(new View.OnClickListener() {
 
@@ -39,6 +35,10 @@ public class HomeFragment extends Fragment implements OnItemClickListener, View.
 
 			}
 		});
+
+		ListView menu_left_list = (ListView) view.findViewById(R.id.home_list);
+
+		menu_left_list.setOnItemClickListener(this);
 		menu_left_list.addHeaderView(home_header);
 
 		List<ContentValues> objects = new ArrayList<ContentValues>();
