@@ -74,6 +74,8 @@ public class RootMenuActivity extends FragmentActivity {
 			changeFragemt(R.id.root_main_fragment, new MoiNhieuDichVuFragment());
 		} else if (Conts.CHITIETTINTUC.equals(type)) {
 			changeFragemt(R.id.root_main_fragment, new ChiTietTintucFragment());
+		} else if (Conts.MOIDICHVUCHONHIEUNGUOI.equals(type)) {
+			changeFragemt(R.id.root_main_fragment, new MoiDvChoNhieuNguoiFragment());
 		}
 
 	}
@@ -148,7 +150,13 @@ public class RootMenuActivity extends FragmentActivity {
 	}
 
 	public void gotoMoiDvChoNhieuNguoi() {
-		changeFragemt(R.id.root_main_fragment, new MoiDvChoNhieuNguoiFragment(), true);
+		// changeFragemt(R.id.root_main_fragment, new
+		// MoiDvChoNhieuNguoiFragment(), true);
+
+		Intent intent = new Intent(this, RootMenuActivity.class);
+		intent.putExtra("type", Conts.MOIDICHVUCHONHIEUNGUOI);
+		getParent().startActivity(intent);
+		getParent().overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_slide_left_out);
 	}
 
 	public void gotoSendDvChoNhieuNguoi(boolean isEmail) {

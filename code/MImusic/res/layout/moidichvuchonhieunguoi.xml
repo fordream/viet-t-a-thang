@@ -5,6 +5,12 @@
     android:background="@android:color/white"
     android:orientation="vertical" >
 
+    <vnp.com.mimusic.view.HeaderView
+        android:id="@+id/moidichvuchonhieunguoi_headerview"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+    </vnp.com.mimusic.view.HeaderView>
+
     <vnp.com.mimusic.view.ChiTietDichVuNoFeatureView
         android:id="@+id/moidichvuchonhieunguoi_chiteitdichvunofeatureview"
         android:layout_width="match_parent"

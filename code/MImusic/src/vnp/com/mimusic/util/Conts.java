@@ -14,5 +14,6 @@ public class Conts {
 
 	public static final String NHIEUDICHVU = "NHIEUDICHVU";
 	public static final String CHITIETTINTUC = "CHITIETTINTUC";
+	public static final String MOIDICHVUCHONHIEUNGUOI = "MOIDICHVUCHONHIEUNGUOI";
 
 }

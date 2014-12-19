@@ -1,8 +1,10 @@
 package com.aretha.slidemenudemo.fragment;
 
 import vnp.com.mimusic.R;
+import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.adapter.MoiDvChoNhieuNguoiAdaper;
 import vnp.com.mimusic.view.ChiTietDichVuNoFeatureView;
+import vnp.com.mimusic.view.HeaderView;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -22,6 +24,19 @@ public class MoiDvChoNhieuNguoiFragment extends Fragment implements OnItemClickL
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.moidichvuchonhieunguoi, null);
+
+		HeaderView chitiettintuc_headerview = (HeaderView) view.findViewById(R.id.moidichvuchonhieunguoi_headerview);
+		chitiettintuc_headerview.setTextHeader(R.string.moidichvuchonhieunguoi);
+		chitiettintuc_headerview.setButtonLeftImage(true, R.drawable.btn_back);
+		chitiettintuc_headerview.setButtonRightImage(false, R.drawable.btn_back);
+
+		chitiettintuc_headerview.findViewById(R.id.header_btn_left).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				getActivity().onBackPressed();
+			}
+		});
+
 		ListView moi_list = (ListView) view.findViewById(R.id.moidichvuchonhieunguoi_list);
 
 		ChiTietDichVuNoFeatureView header = (ChiTietDichVuNoFeatureView) view.findViewById(R.id.moidichvuchonhieunguoi_chiteitdichvunofeatureview);
@@ -38,6 +53,8 @@ public class MoiDvChoNhieuNguoiFragment extends Fragment implements OnItemClickL
 			@Override
 			public void onClick(View v) {
 				// new MauMoiDialog(getActivity()).show();
+
+				(((RootMenuActivity) getActivity())).gotoLoiMoi();
 
 			}
 		});
