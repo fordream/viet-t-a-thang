@@ -19,6 +19,36 @@
     </vnp.com.mimusic.view.MenuRightItemView>
 
     <LinearLayout
+        android:id="@+id/LinearLayout01"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/tinkhac_bg"
+        android:gravity="center"
+        android:padding="@dimen/dimen_5dp" >
+
+        <EditText
+            android:id="@+id/moidichvuchonhieunguoi_number"
+            android:layout_width="@dimen/dimen_200dp"
+            android:layout_height="@dimen/dimen_45dp"
+            android:background="@drawable/menu_right_edit"
+            android:gravity="center_vertical"
+            android:hint="@string/timkiem"
+            android:inputType="phone"
+            android:paddingLeft="@dimen/dimen_15dp"
+            android:singleLine="true"
+            android:textColor="#336666"
+            android:textSize="@dimen/dimen_14dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/moidichvuchonhieunguoi_add"
+            android:layout_width="@dimen/dimen_45dp"
+            android:layout_height="@dimen/dimen_45dp"
+            android:layout_marginLeft="@dimen/dimen_5dp"
+            android:background="@drawable/add" />
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/home_item_header"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_35dp"
