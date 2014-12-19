@@ -27,7 +27,9 @@ import com.aretha.slidemenudemo.fragment.HomeFragment;
 import com.aretha.slidemenudemo.fragment.HuongDanBanHangFragment;
 import com.aretha.slidemenudemo.fragment.InforFragment;
 import com.aretha.slidemenudemo.fragment.LichSuBanHangFragment;
+import com.aretha.slidemenudemo.fragment.MauMoiFragment;
 import com.aretha.slidemenudemo.fragment.MoiDvChoNhieuNguoiFragment;
+import com.aretha.slidemenudemo.fragment.MoiNhieuDichVuFragment;
 import com.aretha.slidemenudemo.fragment.QuyDinhBanHangFragment;
 import com.aretha.slidemenudemo.fragment.SearchFragment;
 import com.aretha.slidemenudemo.fragment.TinTucFragment;
@@ -58,7 +60,7 @@ public class RootMenuActivity extends FragmentActivity {
 		} else if (Conts.LICHSUBANHANG.equals(type)) {
 			changeFragemt(R.id.root_main_fragment, new LichSuBanHangFragment());
 		} else if (Conts.ORTHER.equals(type)) {
-			// changeFragemt(R.id.root_main_fragment, new HomeFragment());
+			//
 		} else if (Conts.QUYDINHBANHANG.equals(type)) {
 			changeFragemt(R.id.root_main_fragment, new QuyDinhBanHangFragment());
 		} else if (Conts.TIMKIEM.equals(type)) {
@@ -67,7 +69,10 @@ public class RootMenuActivity extends FragmentActivity {
 			changeFragemt(R.id.root_main_fragment, new InforFragment());
 		} else if (Conts.TINTUC.equals(type)) {
 			changeFragemt(R.id.root_main_fragment, new TinTucFragment());
+		} else if (Conts.NHIEUDICHVU.equals(type)) {
+			changeFragemt(R.id.root_main_fragment, new MoiNhieuDichVuFragment());
 		}
+
 	}
 
 	/**
@@ -96,17 +101,15 @@ public class RootMenuActivity extends FragmentActivity {
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		int count = fragmentManager.getBackStackEntryCount();
 
-		// Toast.makeText(getActivity(), count + "", Toast.LENGTH_SHORT).show();
-
 		if (count > 1) {
 			fragmentManager.popBackStack();
 		} else if (count == 1) {
-			// finish();
-			// overridePendingTransition(R.anim.abc_nothing,
-			// R.anim.abc_slide_right_out);
-
-			((BaseMusicSlideMenuActivity) getParent()).finish(true);
-
+			try {
+				((BaseMusicSlideMenuActivity) getParent()).finish(true);
+			} catch (Exception exception) {
+				finish();
+				overridePendingTransition(R.anim.abc_slide_left_in, R.anim.abc_slide_right_out);
+			}
 		} else {
 			super.onBackPressed();
 		}
@@ -122,8 +125,6 @@ public class RootMenuActivity extends FragmentActivity {
 
 		if (haveAnimation) {
 			transaction.setCustomAnimations(R.anim.abc_slide_right_in, R.anim.abc_slide_right_in, R.anim.abc_slide_right_out, R.anim.abc_slide_right_out);
-			// transaction.setCustomAnimations(R.anim.enter, R.anim.exit,
-			// R.anim.pop_enter, R.anim.pop_exit);
 		}
 		transaction.add(res, fragment, "" + System.currentTimeMillis());
 		transaction.addToBackStack(null);
@@ -160,5 +161,13 @@ public class RootMenuActivity extends FragmentActivity {
 		ChiTietTintucFragment chitiettintuc = new ChiTietTintucFragment();
 		chitiettintuc.setArguments(bundle);
 		changeFragemt(R.id.root_main_fragment, chitiettintuc, true);
+	}
+
+	public void gotoLoiMoi() {
+		Bundle bundle = new Bundle();
+		MauMoiFragment chitiettintuc = new MauMoiFragment();
+		chitiettintuc.setArguments(bundle);
+		changeFragemt(R.id.root_main_fragment, chitiettintuc, true);
+
 	}
 }

@@ -1,12 +1,8 @@
 package com.aretha.slidemenudemo.fragment;
 
 import vnp.com.mimusic.R;
-import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.adapter.MoiDvChoNhieuNguoiAdaper;
-import vnp.com.mimusic.base.diablog.MauMoiDialog;
 import vnp.com.mimusic.view.ChiTietDichVuNoFeatureView;
-import android.app.AlertDialog.Builder;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -41,7 +37,8 @@ public class MoiDvChoNhieuNguoiFragment extends Fragment implements OnItemClickL
 
 			@Override
 			public void onClick(View v) {
-				new MauMoiDialog(getActivity()).show();
+				// new MauMoiDialog(getActivity()).show();
+
 			}
 		});
 

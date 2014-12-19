@@ -1,6 +1,5 @@
 package vnp.com.mimusic.util;
 
-
 public class Conts {
 	public final static String HOME = "home";
 	public final static String BANGXEPHANG = "bangxephang";
@@ -12,4 +11,7 @@ public class Conts {
 	public final static String ORTHER = "other";
 	public static final String INFOR = "infor";
 	public static final String TINTUC = "tintuc";
+
+	public static final String NHIEUDICHVU = "NHIEUDICHVU";
+
 }

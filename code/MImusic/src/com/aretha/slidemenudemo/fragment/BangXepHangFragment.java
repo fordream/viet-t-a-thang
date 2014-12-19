@@ -4,16 +4,14 @@ import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.adapter.BangXepHangAdaper;
 import vnp.com.mimusic.view.BangXepHangHeaderView;
-import vnp.com.mimusic.view.BangXepHangItemView;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
 
 public class BangXepHangFragment extends Fragment implements OnItemClickListener, View.OnClickListener {
 	@Override

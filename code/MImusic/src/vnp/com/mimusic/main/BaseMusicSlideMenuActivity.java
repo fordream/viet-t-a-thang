@@ -2,7 +2,6 @@ package vnp.com.mimusic.main;
 
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
-import vnp.com.mimusic.base.diablog.MoiNhieuDichVuDialog;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.view.MenuLeftView;
 import vnp.com.mimusic.view.MenuRightView;
@@ -105,7 +104,11 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 				getSlideMenu().postDelayed(new Runnable() {
 					@Override
 					public void run() {
-						new MoiNhieuDichVuDialog(BaseMusicSlideMenuActivity.this).show();
+
+						Intent intent = new Intent(BaseMusicSlideMenuActivity.this, RootMenuActivity.class);
+						intent.putExtra("type", Conts.NHIEUDICHVU);
+						startActivity(intent);
+						overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_slide_left_out);
 					}
 				}, 100);
 			}

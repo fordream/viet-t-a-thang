@@ -12,10 +12,36 @@
         android:layout_height="wrap_content" >
     </vnp.com.mimusic.view.HeaderView>
 
-    <vnp.com.mimusic.view.MusicListView
-        android:id="@+id/maumoi_list"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
-    </vnp.com.mimusic.view.MusicListView>
+
+        <vnp.com.mimusic.view.MusicListView
+            android:id="@+id/maumoi_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+        </vnp.com.mimusic.view.MusicListView>
+
+        <LinearLayout
+            android:id="@+id/moidichvuchonhieunguoi_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_45dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:background="#dfdfdf"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/moinhieudichvu_dialog_moi"
+                android:layout_width="@dimen/dimen_140dp"
+                android:layout_height="@dimen/dimen_30dp"
+                android:background="@drawable/xml_btn_dangky"
+                android:text="@string/moi"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/dimen_13dp" />
+        </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>
