@@ -8,6 +8,7 @@ import vnp.com.mimusic.main.BaseMusicSlideMenuActivity;
 import vnp.com.mimusic.util.Conts;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -71,6 +72,8 @@ public class RootMenuActivity extends FragmentActivity {
 			changeFragemt(R.id.root_main_fragment, new TinTucFragment());
 		} else if (Conts.NHIEUDICHVU.equals(type)) {
 			changeFragemt(R.id.root_main_fragment, new MoiNhieuDichVuFragment());
+		} else if (Conts.CHITIETTINTUC.equals(type)) {
+			changeFragemt(R.id.root_main_fragment, new ChiTietTintucFragment());
 		}
 
 	}
@@ -157,10 +160,14 @@ public class RootMenuActivity extends FragmentActivity {
 	}
 
 	public void gotoChiTietTinTuc(AdapterView<?> parent, View view, int position, long id) {
-		Bundle bundle = new Bundle();
-		ChiTietTintucFragment chitiettintuc = new ChiTietTintucFragment();
-		chitiettintuc.setArguments(bundle);
-		changeFragemt(R.id.root_main_fragment, chitiettintuc, true);
+		// Bundle bundle = new Bundle();
+		// ChiTietTintucFragment chitiettintuc = new ChiTietTintucFragment();
+		// chitiettintuc.setArguments(bundle);
+		// changeFragemt(R.id.root_main_fragment, chitiettintuc, true);
+		Intent intent = new Intent(this, RootMenuActivity.class);
+		intent.putExtra("type", Conts.CHITIETTINTUC);
+		getParent().startActivity(intent);
+		getParent().overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_slide_left_out);
 	}
 
 	public void gotoLoiMoi() {
