@@ -46,6 +46,7 @@
     <string name="nhapsodienthoai">Nhập số điện thoại</string>
     <string name="chontatca">Chọn tất cả</string>
     <string name="chon">Chọn</string>
+    <string name="chitietdichvu">Chi tiết dịch vụ</string>
 
     <color name="bangxephang_header_activr">#a73444</color>
     <color name="bangxephang_header_un_active">#475055</color>

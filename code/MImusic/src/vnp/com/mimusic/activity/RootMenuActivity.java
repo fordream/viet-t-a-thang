@@ -76,6 +76,8 @@ public class RootMenuActivity extends FragmentActivity {
 			changeFragemt(R.id.root_main_fragment, new ChiTietTintucFragment());
 		} else if (Conts.MOIDICHVUCHONHIEUNGUOI.equals(type)) {
 			changeFragemt(R.id.root_main_fragment, new MoiDvChoNhieuNguoiFragment());
+		} else if (Conts.CHITIETDICHVU.equals(type)) {
+			changeFragemt(R.id.root_main_fragment, new ChiTietDichVuFragment());
 		}
 
 	}
@@ -146,7 +148,13 @@ public class RootMenuActivity extends FragmentActivity {
 	}
 
 	public void gotoChiTietDichVu(AdapterView<?> parent, View view, int position, long id) {
-		changeFragemt(R.id.root_main_fragment, new ChiTietDichVuFragment(), true);
+		// changeFragemt(R.id.root_main_fragment, new ChiTietDichVuFragment(),
+		// true);
+
+		Intent intent = new Intent(this, RootMenuActivity.class);
+		intent.putExtra("type", Conts.CHITIETDICHVU);
+		getParent().startActivity(intent);
+		getParent().overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_slide_left_out);
 	}
 
 	public void gotoMoiDvChoNhieuNguoi() {
@@ -157,6 +165,15 @@ public class RootMenuActivity extends FragmentActivity {
 		intent.putExtra("type", Conts.MOIDICHVUCHONHIEUNGUOI);
 		getParent().startActivity(intent);
 		getParent().overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_slide_left_out);
+	}
+
+	public void gotoMoiDvChoNhieuNguoiFragment() {
+		changeFragemt(R.id.root_main_fragment, new MoiDvChoNhieuNguoiFragment(), true);
+
+//		Intent intent = new Intent(this, RootMenuActivity.class);
+//		intent.putExtra("type", Conts.MOIDICHVUCHONHIEUNGUOI);
+//		getParent().startActivity(intent);
+//		getParent().overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_slide_left_out);
 	}
 
 	public void gotoSendDvChoNhieuNguoi(boolean isEmail) {
