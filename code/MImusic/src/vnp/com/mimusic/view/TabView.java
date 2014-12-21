@@ -30,4 +30,16 @@ public class TabView extends LinearLayout {
 		findViewById(R.id.tab_headerview).findViewById(R.id.header_btn_left).setOnClickListener(homeOnClick);
 		findViewById(R.id.tab_headerview).findViewById(R.id.header_btn_right).setOnClickListener(homeOnClick);
 	}
+
+	public void setTextHeader(int res) {
+		HeaderView headerView = (HeaderView) findViewById(R.id.tab_headerview);
+		headerView.setTextHeader(res);
+	}
+
+	public void updateTab(int res) {
+		findViewById(R.id.tab_1).setBackgroundResource(res == R.string.kenhbanvas ? R.drawable.tab_indivicator_selected : R.drawable.tab_indivicator);
+		findViewById(R.id.tab_2).setBackgroundResource(res == R.string.dichvu ? R.drawable.tab_indivicator_selected : R.drawable.tab_indivicator);
+		findViewById(R.id.tab_3).setBackgroundResource(res == R.string.tintuc ? R.drawable.tab_indivicator_selected : R.drawable.tab_indivicator);
+		findViewById(R.id.tab_4).setBackgroundResource(res == R.string.bangxephang ? R.drawable.tab_indivicator_selected : R.drawable.tab_indivicator);
+	}
 }

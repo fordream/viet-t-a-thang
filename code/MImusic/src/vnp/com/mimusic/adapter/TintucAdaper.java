@@ -1,5 +1,6 @@
 package vnp.com.mimusic.adapter;
 
+import vnp.com.mimusic.R;
 import vnp.com.mimusic.view.TintucItemView;
 import android.content.Context;
 import android.view.View;
@@ -19,6 +20,7 @@ public class TintucAdaper extends ArrayAdapter<String> {
 			convertView = new TintucItemView(parent.getContext());
 		}
 
+		convertView.findViewById(R.id.tintuc_item_main).setBackgroundColor(parent.getContext().getResources().getColor(position % 2 == 0 ? android.R.color.white : R.color.f3f3f3));
 		return convertView;
 	}
 }

@@ -18,6 +18,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TabHost;
+import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabSpec;
 
 import com.aretha.slidemenu.ISlideMenuListener;
@@ -44,6 +45,28 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 
 		overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_slide_left_out);
 		setContentView(R.layout.mactivity_slidemenu);
+
+		getTabHost().setOnTabChangedListener(new OnTabChangeListener() {
+			@Override
+			public void onTabChanged(String tabId) {
+				int[] menus = new int[] {//
+				R.string.kenhbanvas,//
+						R.string.bangxephang,//
+						R.string.lichsubanhang,//
+						R.string.quydinhbanhang,//
+						R.string.huongdanbanhang,//
+						R.string.dichvu,//
+						R.string.thuongtinnguoidung,//
+						R.string.timkiem,//
+						R.string.orther, //
+						R.string.tintuc };//
+
+				TabView mactivityslide_menu_tabview = (TabView) findViewById(R.id.mactivityslide_menu_tabview);
+				mactivityslide_menu_tabview.setTextHeader(menus[getTabHost().getCurrentTab()]);
+				mactivityslide_menu_tabview.updateTab(menus[getTabHost().getCurrentTab()]);
+			}
+		});
+
 		mSlideMenu = (SlideMenu) findViewById(R.id.slideMenu);
 
 		String[] menus = new String[] {//
