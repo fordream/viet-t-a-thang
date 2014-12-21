@@ -20,7 +20,7 @@ public class MauMoiFragment extends Fragment implements android.view.View.OnClic
 		maumoi_headerview.setTextHeader(R.string.mautinmoitemplete);
 		maumoi_headerview.setButtonLeftImage(true, R.drawable.btn_back);
 		maumoi_headerview.setButtonRightImage(false, R.drawable.btn_back);
-		maumoi_list.addHeaderView(new BangXepHangHeaderView(getActivity()));
+		//maumoi_list.addHeaderView(new BangXepHangHeaderView(getActivity()));
 		maumoi_list.setAdapter(new MauMoiAdaper(getActivity(), new String[] { "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a" }));
 
 		maumoi_headerview.findViewById(R.id.header_btn_left).setOnClickListener(new View.OnClickListener() {
