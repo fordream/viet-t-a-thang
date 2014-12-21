@@ -17,18 +17,21 @@ public abstract class HomeAdapter extends ArrayAdapter<ContentValues> {
 	}
 
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
+	public View getView(final int position, View convertView, ViewGroup parent) {
 		if (convertView == null) {
 			convertView = new HomeItemView(parent.getContext());
 		}
 
-		((HomeItemView) convertView).setData(getItem(position),position);
+		((HomeItemView) convertView).setData(getItem(position), position);
 
 		convertView.findViewById(R.id.home_item_right_control_2).setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				moiDVChoNhieuNguoi();
+
+				if (!((ContentValues) getItem(position)).getAsBoolean("dangky")){
+					moiDVChoNhieuNguoi();
+				}
 			}
 		});
 

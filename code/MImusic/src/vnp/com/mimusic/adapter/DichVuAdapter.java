@@ -29,8 +29,8 @@ public abstract class DichVuAdapter extends CursorAdapter {
 		((DichVuItemView) convertView).setData(cursor);
 
 		ImageView home_item_img_icon = (ImageView) convertView.findViewById(R.id.home_item_img_icon);
-		ImageView home_item_right_control_1 = (ImageView) convertView.findViewById(R.id.home_item_right_control_1);
-		ImageView home_item_right_control_2 = (ImageView) convertView.findViewById(R.id.home_item_right_control_2);
+		View home_item_right_control_1 = (View) convertView.findViewById(R.id.home_item_right_control_1);
+		View home_item_right_control_2 = (View) convertView.findViewById(R.id.home_item_right_control_2);
 
 		TextView home_item_tv_name = (TextView) convertView.findViewById(R.id.home_item_tv_name);
 		TextView home_item_tv_link = (TextView) convertView.findViewById(R.id.home_item_tv_link);

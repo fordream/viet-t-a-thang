@@ -43,7 +43,7 @@ public class HomeItemView extends LinearLayout {
 
 		((TextView) findViewById(R.id.home_item_right_control_2_tv)).setTextColor(getResources().getColor(poistion == 0 ? android.R.color.white : R.color.a73444));
 
-		findViewById(R.id.home_item_right_control_icon).setBackgroundResource(poistion == 0 ? R.drawable.home_dangky_1 : R.drawable.home_dangky_2);
+		findViewById(R.id.home_item_right_control_icon).setBackgroundResource(isDangKy ? R.drawable.home_dangky_2 : (poistion == 0 ? R.drawable.home_dangky_1 : R.drawable.home_dangky_2));
 		findViewById(R.id.home_item_right_control_2_icon).setBackgroundResource(poistion == 0 ? R.drawable.home_moi_1 : R.drawable.home_moi_2);
 
 		/**
