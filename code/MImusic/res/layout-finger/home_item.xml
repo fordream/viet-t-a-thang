@@ -66,7 +66,7 @@
                     android:gravity="center"
                     android:text="@string/dangky"
                     android:textColor="#336666"
-                    android:textSize="@dimen/dimen_10dp" />
+                    android:textSize="@dimen/dimen_8dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -92,7 +92,7 @@
                     android:singleLine="true"
                     android:text="@string/moi"
                     android:textColor="#bc7782"
-                    android:textSize="@dimen/dimen_10dp" />
+                    android:textSize="@dimen/dimen_8dp" />
             </LinearLayout>
         </LinearLayout>
 
