@@ -22,7 +22,7 @@ public abstract class HomeAdapter extends ArrayAdapter<ContentValues> {
 			convertView = new HomeItemView(parent.getContext());
 		}
 
-		((HomeItemView) convertView).setData(getItem(position));
+		((HomeItemView) convertView).setData(getItem(position),position);
 
 		convertView.findViewById(R.id.home_item_right_control_2).setOnClickListener(new OnClickListener() {
 

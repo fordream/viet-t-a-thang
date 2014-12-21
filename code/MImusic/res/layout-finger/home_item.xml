@@ -36,43 +36,85 @@
         android:orientation="horizontal" >
 
         <LinearLayout
-            android:background="#e7e9ec"
             android:id="@+id/home_item_right_control"
-            android:layout_width="@dimen/dimen_40dp"
+            android:layout_width="@dimen/dimen_50dp"
             android:layout_height="@dimen/dimen_96dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:background="#e7e9ec"
             android:orientation="vertical" >
 
-            <ImageView
+            <LinearLayout
+                android:gravity="center"
                 android:id="@+id/home_item_right_control_1"
-                android:layout_width="@dimen/dimen_40dp"
+                android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_48dp"
-                android:background="@drawable/home_controller_img_1"
+                android:orientation="vertical"
                 android:scaleType="fitXY"
-                android:src="@drawable/xml_btn2" />
+                android:src="@drawable/xml_btn2" >
 
-            <ImageView
+                <ImageView
+                    android:id="@+id/home_item_right_control_icon"
+                    android:layout_width="@dimen/dimen_20dp"
+                    android:layout_height="@dimen/dimen_20dp"
+                    android:background="@drawable/home_dangky_1" />
+
+                <TextView
+                    android:id="@+id/home_item_right_control_1_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="@string/dangky"
+                    android:textColor="#336666"
+                    android:textSize="@dimen/dimen_10dp" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/home_item_right_control_2"
-                android:layout_width="@dimen/dimen_40dp"
+                android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_48dp"
-                android:background="@drawable/home_controller_img_2"
+                android:gravity="center"
+                android:orientation="vertical"
                 android:scaleType="fitXY"
-                android:src="@drawable/xml_btn2" />
+                android:src="@drawable/xml_btn2" >
+
+                <ImageView
+                    android:id="@+id/home_item_right_control_2_icon"
+                    android:layout_width="@dimen/dimen_20dp"
+                    android:layout_height="@dimen/dimen_20dp"
+                    android:background="@drawable/home_moi_1" />
+
+                <TextView
+                    android:id="@+id/home_item_right_control_2_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="@string/moi"
+                    android:textColor="#bc7782"
+                    android:textSize="@dimen/dimen_10dp" />
+            </LinearLayout>
         </LinearLayout>
 
         <ImageView
             android:id="@+id/home_item_img_icon"
-            android:layout_width="@dimen/dimen_80dp"
-            android:layout_height="@dimen/dimen_80dp"
+            android:layout_width="@dimen/dimen_75dp"
+            android:layout_height="@dimen/dimen_75dp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:background="@drawable/dvanybook" />
+            android:layout_marginLeft="@dimen/dimen_10dp"
+            android:layout_marginRight="@dimen/dimen_10dp"
+            android:background="@color/f3f3f3"
+            android:padding="@dimen/dimen_10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/dvanybook" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dimen_5dp"
             android:layout_toLeftOf="@+id/home_item_right_control"
             android:layout_toRightOf="@+id/home_item_img_icon"
             android:orientation="vertical"
@@ -96,15 +138,16 @@
                 android:singleLine="true"
                 android:text="link dich vu"
                 android:textColor="#666666"
-                android:textSize="@dimen/dimen_10dp" />
+                android:textSize="@dimen/dimen_10dp"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/home_item_tv_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
-                android:lines="2"
-                android:maxLines="2"
+                android:lines="3"
+                android:maxLines="3"
                 android:text="mo ta dich vu"
                 android:textColor="#333333"
                 android:textSize="@dimen/dimen_13dp" />

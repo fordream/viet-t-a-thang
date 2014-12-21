@@ -2,6 +2,7 @@ package com.aretha.slidemenudemo.fragment;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
@@ -57,16 +58,11 @@ public class HomeFragment extends Fragment implements OnItemClickListener, View.
 
 	private void addBlock(int recoment, List<ContentValues> objects) {
 
-//		ContentValues mcontentValues = new ContentValues();
-//		mcontentValues.put("type", true);
-//		mcontentValues.put("icon", "icon");
-//		mcontentValues.put("name", getString(recoment));
-//		mcontentValues.put("link", "http://imusiz.vn/");
-//		mcontentValues.put("content", "");
-//		objects.add(mcontentValues);
 		for (int i = 0; i < 10; i++) {
 			ContentValues contentValues = new ContentValues();
 			contentValues.put("type", false);
+
+			contentValues.put("dangky", new Random().nextBoolean());
 			contentValues.put("icon", "icon");
 			contentValues.put("name", "Dịch vụ Imusiz " + i);
 			contentValues.put("link", "http://imusiz.vn/" + i);
