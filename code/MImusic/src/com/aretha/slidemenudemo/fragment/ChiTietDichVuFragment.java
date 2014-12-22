@@ -6,11 +6,13 @@ import vnp.com.mimusic.base.diablog.DangKyDialog;
 import vnp.com.mimusic.view.ChiTietDichVuNoFeatureView;
 import vnp.com.mimusic.view.HeaderView;
 import android.content.ContentValues;
+import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 public class ChiTietDichVuFragment extends Fragment implements View.OnClickListener {
 	@Override
@@ -26,11 +28,21 @@ public class ChiTietDichVuFragment extends Fragment implements View.OnClickListe
 		HeaderView chitiettintuc_headerview = (HeaderView) view.findViewById(R.id.chitietdichvu_headerview);
 		chitiettintuc_headerview.setTextHeader(R.string.chitietdichvu);
 		chitiettintuc_headerview.setButtonLeftImage(true, R.drawable.btn_back);
-		chitiettintuc_headerview.setButtonRightImage(false, R.drawable.btn_back);
+		chitiettintuc_headerview.setButtonRightImage(true, R.drawable.chititetdichvu_right);
 		chitiettintuc_headerview.findViewById(R.id.header_btn_left).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				getActivity().onBackPressed();
+			}
+		});
+
+		chitiettintuc_headerview.findViewById(R.id.header_btn_right).setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// Huong dan ban hang
+				// TODO
+				Toast.makeText(v.getContext(), "huong dan ban hang", Toast.LENGTH_SHORT).show();
 			}
 		});
 
@@ -41,8 +53,8 @@ public class ChiTietDichVuFragment extends Fragment implements View.OnClickListe
 			@Override
 			public void onClick(View v) {
 				ContentValues values = new ContentValues();
-				values.put("name", "dich vu 1");
-				values.put("content", "content");
+				values.put("name", "Dịch vụ Imuzik");
+				values.put("content", "Website nhặc trực tuyến của tập đoản viễn thông quân đội viettel, các bài hát hot nhất, mới nhất , kết nối với các nhạc sĩ tên tuổi nhất...");
 				new DangKyDialog(v.getContext(), values).show();
 			}
 		});

@@ -18,14 +18,36 @@
         android:layout_height="wrap_content" >
     </vnp.com.mimusic.view.ChiTietDichVuNoFeatureView>
 
-    <TextView
-        android:id="@+id/home_item_tv_name"
+    <ScrollView
+        android:id="@+id/scrollView1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/dimen_10sp"
-        android:singleLine="true"
-        android:text="featrue"
-        android:textColor="#336666"
-        android:textSize="@dimen/dimen_14dp" />
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/home_item_tv_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dimen_14sp"
+                android:singleLine="true"
+                android:text="@string/tinhnangdichvu"
+                android:textColor="#475055"
+                android:textSize="@dimen/dimen_14dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/TextView01"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dimen_13sp"
+                android:text="@string/tinhnangdichvuexample"
+                android:textColor="#475055"
+                android:textSize="@dimen/dimen_14dp" />
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
