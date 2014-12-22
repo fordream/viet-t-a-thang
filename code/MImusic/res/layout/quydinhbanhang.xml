@@ -4,11 +4,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/black"
-        android:text="Qiu dinh ban hang" />
+    <vnp.com.mimusic.view.MusicListView
+        android:id="@+id/quydinhbanhang_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="#333333"
+        android:dividerHeight="1px" >
+    </vnp.com.mimusic.view.MusicListView>
 
 </LinearLayout>

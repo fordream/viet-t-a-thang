@@ -109,18 +109,41 @@
             android:textColorHint="#999999"
             android:textSize="@dimen/dimen_13dp" />
 
-        <Button
-            android:id="@+id/activity_login_btn"
+        <RelativeLayout
             android:layout_width="@dimen/dimen_200dp"
-            android:layout_height="@dimen/dimen_45dp"
-            android:background="@drawable/xml_btn_infor"
-            android:paddingLeft="@dimen/dimen_10dp"
-            android:paddingRight="@dimen/dimen_10dp"
-            android:singleLine="true"
-            android:text="@string/luthaydoi"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/dimen_15dp"
-            android:textStyle="bold" />
+            android:layout_height="@dimen/dimen_45dp" >
+
+            <Button
+                android:id="@+id/activity_login_btn"
+                android:layout_width="@dimen/dimen_90dp"
+                android:layout_height="@dimen/dimen_35dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:background="@drawable/xml_btn_infor"
+                android:paddingLeft="@dimen/dimen_10dp"
+                android:paddingRight="@dimen/dimen_10dp"
+                android:singleLine="true"
+                android:text="@string/luthaydoi"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/dimen_10dp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/Button01"
+                android:layout_width="@dimen/dimen_90dp"
+                android:layout_height="@dimen/dimen_35dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:background="@drawable/xml_btn_dangky"
+                android:paddingLeft="@dimen/dimen_10dp"
+                android:paddingRight="@dimen/dimen_10dp"
+                android:singleLine="true"
+                android:text="@string/huy"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/dimen_10dp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
     </LinearLayout>
 
 </ScrollView>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/quydinhbanhang_item_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dimen_5dp"
+            android:orientation="vertical"
+            android:padding="@dimen/dimen_10dp" >
+
+            <TextView
+                android:id="@+id/home_item_tv_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text="Điều khoản 1"
+                android:textColor="#475055"
+                android:textSize="@dimen/dimen_15dp" />
+
+            <TextView
+                android:layout_marginTop="@dimen/dimen_5dp"
+                android:id="@+id/home_item_tv_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:text="Thuê bao xxx mời bạn sử đụng dịch vụ DV All Blocking. Để sử đụng dịch vụ.Thuê bao xxx mời bạn sử đụng dịch vụ DV All Blocking. Để sử đụng dịch vụ.Thuê bao xxx mời bạn sử đụng dịch vụ DV All Blocking. Để sử đụng dịch vụ.Thuê bao xxx mời bạn sử đụng dịch vụ DV All Blocking. Để sử đụng dịch vụ"
+                android:textColor="#475055"
+                android:textSize="@dimen/dimen_13dp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>
