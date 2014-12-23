@@ -12,7 +12,7 @@
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:background="@drawable/xml_btn2"
-        android:padding="@dimen/dimen_12dp"
+        android:padding="@dimen/dimen_8dp"
         android:scaleType="fitXY"
         android:src="@drawable/header_home_1" />
 
@@ -23,7 +23,7 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:background="@drawable/xml_btn2"
-        android:padding="@dimen/dimen_12dp"
+        android:padding="@dimen/dimen_8dp"
         android:scaleType="fitXY"
         android:src="@drawable/header_home_2" />
 
@@ -35,19 +35,19 @@
         android:layout_centerVertical="true"
         android:text="@string/trangchu"
         android:textColor="@android:color/white"
-        android:textSize="@dimen/dimen_13dp"
+        android:textSize="@dimen/dimen_15dp"
         android:textStyle="bold" />
 
     <RelativeLayout
-        android:visibility="gone"
         android:id="@+id/header_btn_right_moi"
-        android:layout_marginRight="@dimen/dimen_10dp"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/dimen_71dp"
         android:layout_height="@dimen/dimen_45dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
+        android:layout_marginRight="@dimen/dimen_10dp"
         android:orientation="horizontal"
-        android:scaleType="fitXY" >
+        android:scaleType="fitXY"
+        android:visibility="gone" >
 
         <ImageView
             android:layout_width="@dimen/dimen_71dp"
@@ -62,12 +62,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="@string/moi"
             android:layout_marginRight="@dimen/dimen_15dp"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/dimen_13dp"
-            android:textStyle="bold" />
-
+            android:text="@string/moi"
+            android:textColor="@android:color/white" />
     </RelativeLayout>
 
 </RelativeLayout>
