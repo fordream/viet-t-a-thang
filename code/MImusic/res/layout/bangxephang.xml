@@ -6,13 +6,23 @@
     android:orientation="vertical" >
 
     <vnp.com.mimusic.view.BangXepHangHeaderView
-         android:id="@+id/bangxephang_bangxephangheader"
+        android:id="@+id/bangxephang_bangxephangheader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
     </vnp.com.mimusic.view.BangXepHangHeaderView>
 
     <vnp.com.mimusic.view.MusicListView
         android:id="@+id/bangxephang_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@drawable/tranfer"
+        android:dividerHeight="@dimen/dimen_5dp"
+        android:paddingBottom="@dimen/dimen_5dp"
+        android:paddingTop="@dimen/dimen_5dp" >
+    </vnp.com.mimusic.view.MusicListView>
+
+    <vnp.com.mimusic.view.MusicListView
+        android:id="@+id/bangxephang_list_doanhthu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="@drawable/tranfer"
