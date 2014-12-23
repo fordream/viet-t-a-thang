@@ -19,6 +19,7 @@ import android.widget.AdapterView;
 
 import com.aretha.slidemenudemo.fragment.BangXepHangFragment;
 import com.aretha.slidemenudemo.fragment.ChiTietCaNhanBangXepHangFragment;
+import com.aretha.slidemenudemo.fragment.ChiTietCaNhanBangXepHangTungDichVuFragment;
 import com.aretha.slidemenudemo.fragment.ChiTietCaNhanDichVuFragment;
 import com.aretha.slidemenudemo.fragment.ChiTietDichVuFragment;
 import com.aretha.slidemenudemo.fragment.ChiTietTintucFragment;
@@ -78,6 +79,8 @@ public class RootMenuActivity extends FragmentActivity {
 			changeFragemt(R.id.root_main_fragment, new MoiDvChoNhieuNguoiFragment());
 		} else if (Conts.CHITIETDICHVU.equals(type)) {
 			changeFragemt(R.id.root_main_fragment, new ChiTietDichVuFragment());
+		} else if (Conts.CHITIETCANHANBANGXEPHANG.equals(type)) {
+			changeFragemt(R.id.root_main_fragment, new ChiTietCaNhanBangXepHangFragment());
 		}
 
 	}
@@ -140,16 +143,25 @@ public class RootMenuActivity extends FragmentActivity {
 	}
 
 	public void gotoChiTietCaNhanBangXepHang(AdapterView<?> parent, View view, int position, long id) {
-		changeFragemt(R.id.root_main_fragment, new ChiTietCaNhanBangXepHangFragment(), true);
+		// changeFragemt(R.id.root_main_fragment, new
+		// ChiTietCaNhanBangXepHangFragment(), true);
+
+		Intent intent = new Intent(this, RootMenuActivity.class);
+		intent.putExtra("type", Conts.CHITIETCANHANBANGXEPHANG);
+		getParent().startActivity(intent);
+		getParent().overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_slide_left_out);
 	}
 
-	public void gotoChiTietCaNhanDichVu(AdapterView<?> parent, View view, int position, long id) {
+	public void gotoChiTietCaNhanDichVu() {
 		changeFragemt(R.id.root_main_fragment, new ChiTietCaNhanDichVuFragment(), true);
 	}
 
+	public void gotoChiTietCaNhanTungDichVu(AdapterView<?> parent, View view, int position, long id) {
+		changeFragemt(R.id.root_main_fragment, new ChiTietCaNhanBangXepHangTungDichVuFragment(), true);
+
+	}
+
 	public void gotoChiTietDichVu(AdapterView<?> parent, View view, int position, long id) {
-		// changeFragemt(R.id.root_main_fragment, new ChiTietDichVuFragment(),
-		// true);
 
 		Intent intent = new Intent(this, RootMenuActivity.class);
 		intent.putExtra("type", Conts.CHITIETDICHVU);
@@ -211,4 +223,5 @@ public class RootMenuActivity extends FragmentActivity {
 		chitiettintuc.setArguments(bundle);
 		changeFragemt(R.id.root_main_fragment, chitiettintuc, true);
 	}
+
 }

@@ -2,7 +2,7 @@ package com.aretha.slidemenudemo.fragment;
 
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
-import vnp.com.mimusic.adapter.ChiTietCaNhanDichVuAdaper;
+import vnp.com.mimusic.adapter.ChiTietCaNhanBangXepHangAdaper;
 import vnp.com.mimusic.view.BangXepHangItemView;
 import vnp.com.mimusic.view.HeaderView;
 import android.os.Bundle;
@@ -14,7 +14,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-public class ChiTietCaNhanDichVuFragment extends Fragment implements OnItemClickListener, View.OnClickListener {
+public class ChiTietCaNhanBangXepHangTungDichVuFragment extends Fragment implements View.OnClickListener {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
@@ -22,9 +22,9 @@ public class ChiTietCaNhanDichVuFragment extends Fragment implements OnItemClick
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.chitietcanhandichvu, null);
+		View view = inflater.inflate(R.layout.chitietcanhanbangxephangtungdichvu, null);
 
-		HeaderView chitiettintuc_headerview = (HeaderView) view.findViewById(R.id.chitietcanhandichvu_header);
+		HeaderView chitiettintuc_headerview = (HeaderView) view.findViewById(R.id.chitietcanhanbangxephangtungdichvu_header);
 		chitiettintuc_headerview.setTextHeader(R.string.chitietcanhanbangxephang);
 		chitiettintuc_headerview.setButtonLeftImage(true, R.drawable.btn_back);
 		chitiettintuc_headerview.setButtonRightImage(false, R.drawable.chititetdichvu_right);
@@ -35,12 +35,13 @@ public class ChiTietCaNhanDichVuFragment extends Fragment implements OnItemClick
 			}
 		});
 
-		ListView bangxephang_list = (ListView) view.findViewById(R.id.chitietcanhandichvu_list);
-		bangxephang_list.addHeaderView(new BangXepHangItemView(getActivity()));
-		// bangxephang_list.addHeaderView(new
-		// ChiTietCaNhanBangXepHangItemView(getActivity()));
-		bangxephang_list.setAdapter(new ChiTietCaNhanDichVuAdaper(getActivity(), new String[] { "a", "a", "a", "a", "a", "a", "a", "a", "a", "a" }));
-		bangxephang_list.setOnItemClickListener(this);
+		view.findViewById(R.id.chitietcanhanbangxephang_tracuu).setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				(((RootMenuActivity) getActivity())).gotoChiTietCaNhanDichVu();
+			}
+		});
 		return view;
 	}
 
@@ -48,8 +49,4 @@ public class ChiTietCaNhanDichVuFragment extends Fragment implements OnItemClick
 	public void onClick(View v) {
 	}
 
-	@Override
-	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		(((RootMenuActivity) getActivity())).gotoChiTietCaNhanTungDichVu(parent, view, position, id);
-	}
 }

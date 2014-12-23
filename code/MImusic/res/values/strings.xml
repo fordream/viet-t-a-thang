@@ -18,6 +18,7 @@
     <string name="timkiem">Tìm kiếm</string>
     <string name="tintuc">Tin tức</string>
     <string name="dexuatchoban">Đề xuất cho bạn</string>
+    <string name="chitietcanhanbangxephang">Chi tiết cá nhân bảng xếp hạng</string>
 
     <!--  -->
     <string name="sogiaodichthanhcongtrongthang">Số giao dịch thành công trong tháng</string>
@@ -27,6 +28,7 @@
     <string name="dichvubanchay">Dịch vụ bán chạy</string>
     <string name="dexuatbanhang">Để xuất bán hàng</string>
     <string name="sothuebaonemoi">Số thuê bao nên mời</string>
+    <string name="baocaochitiettaikhoan">Báo cáo chi tiết tài khoản</string>
     <!--  -->
     <string name="ten">Tên</string>
     <string name="email">Email</string>
@@ -77,8 +79,8 @@
     <string name="banmuondongugndung">Bạn muốn đóng ứng dụng</string>
     <string name="close_ungdung_comfirm">Click vào Đồng ý để đóng ứng dụng.</string>
     <string name="dongy">Đồng ý</string>
-
     <string name="bangxephang_no_data">Xin lỗi quý khách hàng!\n\nHiện tại KÊNH BÁN VAS không có bảng xếp hạng doanh thu nào. Chúng tôi sẽ cập nhật lại sau.</string>
+    <string name="tatca">Tất cả</string>
     <color name="bangxephang_header_activr">#a73444</color>
     <color name="bangxephang_header_un_active">#475055</color>
     <color name="f3f3f3">#f3f3f3</color>
@@ -87,5 +89,6 @@
     <color name="e7e9ec">#e7e9ec</color>
     <color name="c657180">#657180</color>
     <color name="c475055">#475055</color>
+    
 
 </resources>

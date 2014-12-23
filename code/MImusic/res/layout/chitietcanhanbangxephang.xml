@@ -5,13 +5,96 @@
     android:background="@android:color/white"
     android:orientation="vertical" >
 
-    <vnp.com.mimusic.view.MusicListView
-        android:id="@+id/chitietcanhanbangxephang_list"
+    <vnp.com.mimusic.view.HeaderView
+        android:id="@+id/chitietcanhanbangxephang_header"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="@drawable/tranfer"
-        android:dividerHeight="@dimen/dimen_3dp"
-      >
-    </vnp.com.mimusic.view.MusicListView>
+        android:layout_height="wrap_content" >
+    </vnp.com.mimusic.view.HeaderView>
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <vnp.com.mimusic.view.BangXepHangItemView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+            </vnp.com.mimusic.view.BangXepHangItemView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/dimen_20dp" >
+
+                <TextView
+                    android:id="@+id/TextView01"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="@string/baocaochitiettaikhoan"
+                    android:textColor="#333333"
+                    android:textSize="@dimen/dimen_14dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dimen_8dp"
+                    android:layout_marginTop="@dimen/dimen_20dp"
+                    android:singleLine="true"
+                    android:text="@string/dichvu"
+                    android:textColor="#333333"
+                    android:textSize="@dimen/dimen_14dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_35dp"
+                    android:background="@drawable/menu_right_edit"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="@string/tatca"
+                    android:textColor="#333333"
+                    android:textSize="@dimen/dimen_14dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dimen_8dp"
+                    android:layout_marginTop="@dimen/dimen_20dp"
+                    android:singleLine="true"
+                    android:text="@string/trangthai"
+                    android:textColor="#333333"
+                    android:textSize="@dimen/dimen_14dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_35dp"
+                    android:background="@drawable/menu_right_edit"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="@string/tatca"
+                    android:textColor="#333333"
+                    android:textSize="@dimen/dimen_14dp" />
+
+                <TextView
+                    android:id="@+id/chitietcanhanbangxephang_tracuu"
+                    android:layout_marginTop="@dimen/dimen_20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_35dp"
+                    android:background="@drawable/xml_btn_infor"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="@string/tracuu"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/dimen_14dp" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

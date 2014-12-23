@@ -5,7 +5,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
-
+//vnp.com.mimusic.view.BangXepHangItemView
 public class BangXepHangItemView extends LinearLayout {
 
 	public BangXepHangItemView(Context context) {
