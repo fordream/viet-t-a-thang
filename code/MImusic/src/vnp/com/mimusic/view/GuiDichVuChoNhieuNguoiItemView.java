@@ -24,7 +24,7 @@ public class GuiDichVuChoNhieuNguoiItemView extends LinearLayout {
 		((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.guidichvuchonhieunguoi_item, this);
 
 		findViewById(R.id.guidichvuchonhieunguoi_item_dichvuitemview).findViewById(R.id.home_item_right_control).setVisibility(View.INVISIBLE);
-		findViewById(R.id.guidichvuchonhieunguoi_item_menurightitemview).findViewById(R.id.menu_right_bnt_moi).setVisibility(View.INVISIBLE);
+		//findViewById(R.id.guidichvuchonhieunguoi_item_menurightitemview).findViewById(R.id.menu_right_bnt_moi).setVisibility(View.INVISIBLE);
 	}
 
 	public void show(int i, String string) {

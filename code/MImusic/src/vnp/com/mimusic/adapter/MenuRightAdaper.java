@@ -25,9 +25,9 @@ public abstract class MenuRightAdaper extends ArrayAdapter<ContentValues> {
 		if (convertView == null) {
 			convertView = new MenuRightItemView(parent.getContext());
 		}
+
 		final ContentValues contentValues = objects.get(position);
 		((MenuRightItemView) convertView).initData(contentValues);
-		convertView.findViewById(R.id.menu_right_bnt_moi).setOnClickListener(new OnClickBtnMoi(contentValues));
 		return convertView;
 	}
 

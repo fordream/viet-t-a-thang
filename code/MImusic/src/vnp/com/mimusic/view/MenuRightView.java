@@ -61,8 +61,8 @@ public class MenuRightView extends LinearLayout {
 		for (int i = 0; i < 100; i++) {
 			ContentValues contentValues = new ContentValues();
 			contentValues.put("check", false);
-			contentValues.put("name", "Dịch vụ Imusiz " + i);
-			contentValues.put("link", "http://imusiz.vn/" + i);
+			contentValues.put("name", "Trần Hữu Nhật Minh " + i);
+			contentValues.put("link", "imusiz | imusiz | imusiz" + i);
 			list.add(contentValues);
 		}
 		menu_right_list.setAdapter(new MenuRightAdaper(getContext(), list) {

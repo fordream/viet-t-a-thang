@@ -32,9 +32,9 @@ public class MenuRightItemView extends LinearLayout {
 
 		TextView menu_right_item_tv_name = (TextView) findViewById(R.id.menu_right_item_tv_name);
 		TextView menu_right_item_tv_link = (TextView) findViewById(R.id.menu_right_item_tv_link);
-		final Button menu_right_checkbox = (Button) findViewById(R.id.menu_right_bnt_moi);
+		//final Button menu_right_checkbox = (Button) findViewById(R.id.menu_right_bnt_moi);
 
-		menu_right_item_img_icon.setBackgroundResource(R.drawable.avatar_example);
+		menu_right_item_img_icon.setBackgroundResource(R.drawable.bangxephang_avatar_example);
 
 		menu_right_item_tv_name.setText(contentValues.getAsString("name"));
 		menu_right_item_tv_link.setText(contentValues.getAsString("link"));
