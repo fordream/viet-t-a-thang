@@ -60,10 +60,10 @@
                 android:layout_marginBottom="@dimen/dimen_3dp"
                 android:singleLine="true"
                 android:text="giá : 15.000VNĐ"
-                android:textColor="#666666"
-                android:textSize="@dimen/dimen_10dp"
+                android:textColor="#a73444"
+                android:textSize="@dimen/dimen_14dp"
+                android:textStyle="bold"
                 android:visibility="gone" />
-
         </LinearLayout>
 
         <RelativeLayout
