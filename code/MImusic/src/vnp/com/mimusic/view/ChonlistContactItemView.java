@@ -9,13 +9,13 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 //vnp.com.mimusic.view.DichVuItemView
-public class MoiDanhBaItemView extends LinearLayout {
-	public MoiDanhBaItemView(Context context) {
+public class ChonlistContactItemView extends LinearLayout {
+	public ChonlistContactItemView(Context context) {
 		super(context);
 		init();
 	}
 
-	public MoiDanhBaItemView(Context context, AttributeSet attrs) {
+	public ChonlistContactItemView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		init();
 	}

@@ -1,7 +1,7 @@
 package vnp.com.mimusic.adapter;
 
 import vnp.com.mimusic.view.MauMoiItemView;
-import vnp.com.mimusic.view.MoiDanhBaItemView;
+import vnp.com.mimusic.view.ChonlistContactItemView;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +17,7 @@ public class MoiDanhBaAdapter extends ArrayAdapter<String> {
 	public View getView(int position, View convertView, ViewGroup parent) {
 
 		if (convertView == null) {
-			convertView = new MoiDanhBaItemView(parent.getContext());
+			convertView = new ChonlistContactItemView(parent.getContext());
 		}
 
 		return convertView;
