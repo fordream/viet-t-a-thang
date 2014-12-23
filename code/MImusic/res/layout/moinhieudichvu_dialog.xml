@@ -24,12 +24,12 @@
         android:layout_height="wrap_content"
         android:background="@drawable/tinkhac_bg"
         android:gravity="center"
-        android:padding="@dimen/dimen_5dp" >
+        android:padding="@dimen/dimen_10dp" >
 
         <EditText
             android:id="@+id/moidichvuchonhieunguoi_number"
-            android:layout_width="@dimen/dimen_200dp"
-            android:layout_height="@dimen/dimen_45dp"
+            android:layout_width="@dimen/dimen_250dp"
+            android:layout_height="@dimen/dimen_35dp"
             android:background="@drawable/menu_right_edit"
             android:gravity="center_vertical"
             android:hint="@string/timkiem"
@@ -42,8 +42,8 @@
 
         <Button
             android:id="@+id/moidichvuchonhieunguoi_add"
-            android:layout_width="@dimen/dimen_45dp"
-            android:layout_height="@dimen/dimen_45dp"
+            android:layout_width="@dimen/dimen_35dp"
+            android:layout_height="@dimen/dimen_35dp"
             android:layout_marginLeft="@dimen/dimen_5dp"
             android:background="@drawable/add" />
     </LinearLayout>

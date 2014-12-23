@@ -3,6 +3,7 @@ package com.aretha.slidemenudemo.fragment;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.adapter.MoiDanhBaAdapter;
+import vnp.com.mimusic.adapter.MoiNhieuDichVuAdapter;
 import vnp.com.mimusic.view.HeaderView;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -29,7 +30,7 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 			}
 		});
 		ListView maumoi_list = (ListView) view.findViewById(R.id.moinhieudichvu_dialog_list);
-		maumoi_list.setAdapter(new MoiDanhBaAdapter(getActivity(), new String[] { "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a" }));
+		maumoi_list.setAdapter(new MoiNhieuDichVuAdapter(getActivity(), new String[] { "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a" }));
 
 		view.findViewById(R.id.moinhieudichvu_dialog_chonloimoi).setOnClickListener(new OnClickListener() {
 
