@@ -24,7 +24,8 @@
     <string name="sogiaodichthanhcong">Số giao dịch thành công</string>
     <string name="sotienhoahongtrongthang">Số tiền hoa hồng trong tháng</string>
     <string name="sotienhoahong">Số tiền hoa hồng</string>
-<string name="dichvubanchay">Dịch vụ bán chạy</string>
+    <string name="dichvubanchay">Dịch vụ bán chạy</string>
+    <string name="dexuatbanhang">Để xuất bán hàng</string>
     <!--  -->
     <string name="ten">Tên</string>
     <string name="email">Email</string>

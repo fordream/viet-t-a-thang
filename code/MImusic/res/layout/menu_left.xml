@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/RelativeLayout1"
-    android:layout_width="@dimen/dimen_250dp"
+    android:layout_width="@dimen/dimen_300dp"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="@drawable/menu_left_item_bg"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -21,6 +21,7 @@
                 android:id="@+id/menu_left_img_cover"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:scaleType="fitXY"
                 android:src="@drawable/bg_avatar_example" />
 
             <ImageView
@@ -44,26 +45,22 @@
             android:id="@+id/menu_left_tv_name"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_40dp"
-            android:background="@drawable/bg_menu_left_tv_name"
+            android:background="@drawable/menu_left_name_bg"
             android:gravity="center"
             android:singleLine="true"
             android:text="Hoài Anh (0968678678)"
-            android:textColor="#333333"
+            android:textColor="#2a2d2f"
             android:textSize="@dimen/dimen_13dp" />
     </LinearLayout>
 
-    <!--         android:cacheColorHint="@android:color/transparent"
-        android:listSelector="@drawable/xml_list_selection" -->
     <vnp.com.mimusic.view.MusicListView
         android:id="@+id/menu_left_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/menu_left_footer"
         android:layout_below="@+id/menu_left_header"
-
         android:divider="#333333"
-        android:dividerHeight="1px"
-         >
+        android:dividerHeight="1px" >
     </vnp.com.mimusic.view.MusicListView>
 
     <vnp.com.mimusic.view.MenuLeftFooterView

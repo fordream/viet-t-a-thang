@@ -7,6 +7,7 @@ import java.util.Random;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.adapter.HomeAdapter;
+import vnp.com.mimusic.view.HeaderView;
 import android.content.ContentValues;
 import android.content.Context;
 import android.os.Bundle;
@@ -28,6 +29,9 @@ public class HomeFragment extends Fragment implements OnItemClickListener, View.
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.home, null);
 
+		//HeaderView home_headerview = (HeaderView) view.findViewById(R.id.home_headerview);
+		//home_headerview.setTextHeader(R.string.kenhbanvas);
+
 		View home_header = ((LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.home_header, null);
 		home_header.setOnClickListener(new View.OnClickListener() {
 
@@ -36,12 +40,10 @@ public class HomeFragment extends Fragment implements OnItemClickListener, View.
 
 			}
 		});
-
+		
 		ListView menu_left_list = (ListView) view.findViewById(R.id.home_list);
-
-		menu_left_list.setOnItemClickListener(this);
 		menu_left_list.addHeaderView(home_header);
-
+		menu_left_list.setOnItemClickListener(this);
 		List<ContentValues> objects = new ArrayList<ContentValues>();
 		addBlock(R.string.khuyenmai, objects);
 		addBlock(R.string.recoment, objects);

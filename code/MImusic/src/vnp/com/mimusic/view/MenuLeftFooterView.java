@@ -19,7 +19,11 @@ public class MenuLeftFooterView extends LinearLayout {
 	}
 
 	private void init() {
-		((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.menu_left_footer, this);
+		try {
+			((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.menu_left_footer, this);
+		} catch (Exception ex) {
+
+		}
 	}
 
 }

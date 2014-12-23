@@ -10,7 +10,7 @@
 
         <FrameLayout
             xmlns:slidemenu="http://schemas.android.com/apk/res-auto"
-            android:layout_width="@dimen/dimen_250dp"
+            android:layout_width="@dimen/dimen_280dp"
             android:layout_height="match_parent"
             slidemenu:layout_role="primaryMenu" >
 
@@ -48,8 +48,7 @@
                         android:id="@android:id/tabcontent"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                        android:layout_marginBottom="@dimen/dimen_50dp"
-                        android:layout_marginTop="@dimen/dimen_45dp" />
+                       />
 
                     <vnp.com.mimusic.view.TabView
                         android:id="@+id/mactivityslide_menu_tabview"
@@ -62,7 +61,7 @@
 
         <FrameLayout
             xmlns:slidemenu="http://schemas.android.com/apk/res-auto"
-            android:layout_width="@dimen/dimen_250dp"
+            android:layout_width="@dimen/dimen_280dp"
             android:layout_height="match_parent"
             slidemenu:layout_role="secondaryMenu"
             android:background="@android:color/white"

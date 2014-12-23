@@ -72,6 +72,7 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 				TabView mactivityslide_menu_tabview = (TabView) findViewById(R.id.mactivityslide_menu_tabview);
 				mactivityslide_menu_tabview.setTextHeader(menus[getTabHost().getCurrentTab()]);
 				mactivityslide_menu_tabview.updateTab(menus[getTabHost().getCurrentTab()]);
+				// TODO
 			}
 		});
 
