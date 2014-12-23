@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import vnp.com.mimusic.R;
-import vnp.com.mimusic.adapter.MoiDanhBaAdapter;
+import vnp.com.mimusic.adapter.ChonlistContactAdapter;
 import vnp.com.mimusic.base.BaseAdialog;
 import vnp.com.mimusic.view.HeaderView;
 import android.content.ContentValues;
@@ -47,7 +47,7 @@ public class ChonListContactDialog extends BaseAdialog implements android.view.V
 			objects.add(new ContentValues());
 		}
 
-		menu_left_list.setAdapter(new MoiDanhBaAdapter(getContext(), new String[] { "a", "a", "a", "a", "a", "a", "a" }) {
+		menu_left_list.setAdapter(new ChonlistContactAdapter(getContext(), new String[] { "a", "a", "a", "a", "a", "a", "a" }) {
 
 		});
 
