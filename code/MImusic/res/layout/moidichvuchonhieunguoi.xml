@@ -23,44 +23,47 @@
         android:layout_height="wrap_content"
         android:background="@drawable/tinkhac_bg"
         android:gravity="center"
-        android:padding="@dimen/dimen_5dp" >
+        android:padding="@dimen/dimen_10dp" >
 
         <Button
             android:id="@+id/moidichvuchonhieunguoi_contact"
-            android:layout_width="@dimen/dimen_45dp"
-            android:layout_height="@dimen/dimen_45dp"
+            android:layout_width="@dimen/dimen_100dp"
+            android:layout_height="@dimen/dimen_35dp"
             android:layout_marginLeft="@dimen/dimen_5dp"
             android:layout_marginRight="@dimen/dimen_5dp"
-            android:background="@drawable/contact" />
+            android:background="@drawable/xml_btn_infor"
+            android:text="@string/timnhieuhon"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/dimen_13dp" />
 
         <EditText
             android:id="@+id/moidichvuchonhieunguoi_number"
-            android:layout_width="@dimen/dimen_200dp"
-            android:layout_height="@dimen/dimen_45dp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_35dp"
+            android:layout_marginLeft="@dimen/dimen_5dp"
             android:background="@drawable/menu_right_edit"
             android:gravity="center_vertical"
-            android:inputType="phone"
             android:hint="@string/nhapsodienthoai"
+            android:inputType="phone"
             android:paddingLeft="@dimen/dimen_15dp"
             android:singleLine="true"
             android:textColor="#336666"
             android:textSize="@dimen/dimen_14dp"
             android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/moidichvuchonhieunguoi_add"
-            android:layout_width="@dimen/dimen_45dp"
-            android:layout_height="@dimen/dimen_45dp"
-            android:layout_marginLeft="@dimen/dimen_5dp"
-            android:background="@drawable/add" />
     </LinearLayout>
+
+    <View
+        android:background="@color/c657180"
+        android:layout_width="match_parent"
+        android:layout_height="1px" />
 
     <LinearLayout
         android:id="@+id/home_item_header"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_35dp"
         android:background="@drawable/tinkhac_bg"
-        android:gravity="center_vertical" >
+        android:gravity="center_vertical"
+        android:visibility="gone" >
 
         <View
             android:layout_width="@dimen/dimen_5dp"
@@ -89,6 +92,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/moidichvuchonhieunguoi_bottom"
+            android:background="@color/f3f3f3"
             android:divider="#333333"
             android:dividerHeight="1px" >
         </vnp.com.mimusic.view.MusicListView>
@@ -105,9 +109,9 @@
             <Button
                 android:id="@+id/moidichvuchonhieunguoi_chonloimoi"
                 android:layout_width="@dimen/dimen_140dp"
-                android:layout_height="@dimen/dimen_30dp"
+                android:layout_height="@dimen/dimen_35dp"
                 android:layout_marginRight="@dimen/dimen_10dp"
-                android:background="@drawable/xml_btn_infor"
+                android:background="@drawable/xml_btn_dangky"
                 android:text="@string/chonloimoi"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/dimen_13dp" />
@@ -115,8 +119,8 @@
             <Button
                 android:id="@+id/moidichvuchonhieunguoi_moi"
                 android:layout_width="@dimen/dimen_140dp"
-                android:layout_height="@dimen/dimen_30dp"
-                android:background="@drawable/xml_btn_dangky"
+                android:layout_height="@dimen/dimen_35dp"
+                android:background="@drawable/xml_btn_infor"
                 android:text="@string/moi"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/dimen_13dp" />

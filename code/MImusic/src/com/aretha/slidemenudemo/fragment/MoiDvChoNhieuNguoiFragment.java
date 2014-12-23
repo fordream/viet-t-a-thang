@@ -34,12 +34,12 @@ public class MoiDvChoNhieuNguoiFragment extends Fragment implements OnItemClickL
 			}
 		});
 
-		view.findViewById(R.id.moidichvuchonhieunguoi_add).setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-
-			}
-		});
+//		view.findViewById(R.id.moidichvuchonhieunguoi_add).setOnClickListener(new OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//
+//			}
+//		});
 		HeaderView chitiettintuc_headerview = (HeaderView) view.findViewById(R.id.moidichvuchonhieunguoi_headerview);
 		chitiettintuc_headerview.setTextHeader(R.string.moidichvuchonhieunguoi);
 		chitiettintuc_headerview.setButtonLeftImage(true, R.drawable.btn_back);
@@ -55,6 +55,8 @@ public class MoiDvChoNhieuNguoiFragment extends Fragment implements OnItemClickL
 		ListView moi_list = (ListView) view.findViewById(R.id.moidichvuchonhieunguoi_list);
 
 		ChiTietDichVuNoFeatureView header = (ChiTietDichVuNoFeatureView) view.findViewById(R.id.moidichvuchonhieunguoi_chiteitdichvunofeatureview);
+		header.setBackground(android.R.color.white);
+		header.useValue2(true);
 		header.setOnClickListener(null);
 		header.findViewById(R.id.chitietdichvu_no_feature_dangky).setVisibility(View.INVISIBLE);
 		header.findViewById(R.id.chitietdichvu_no_feature_moi).setVisibility(View.INVISIBLE);

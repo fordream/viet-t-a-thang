@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/chitietdichvu_no_feature_main"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/f3f3f3"
@@ -21,42 +22,49 @@
         android:paddingLeft="@dimen/dimen_10dp"
         android:paddingRight="@dimen/dimen_3dp" >
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
-            <TextView
-                android:id="@+id/home_item_tv_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:text="Dịch vụ Imuzik"
-                android:textColor="#475055"
-                android:textSize="@dimen/dimen_15dp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/home_item_right_control_1_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:singleLine="true"
-                android:text="15.000VNĐ"
-                android:textColor="#a73444"
-                android:textSize="@dimen/dimen_14dp"
-                android:textStyle="bold" />
-        </RelativeLayout>
-
-        <TextView
-            android:id="@+id/home_item_tv_link"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dimen_3dp"
-            android:singleLine="true"
-            android:text="link dv"
-            android:textColor="#666666"
-            android:textSize="@dimen/dimen_10dp"
-            android:visibility="gone" />
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/home_item_tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="Dịch vụ Imuzik"
+                    android:textColor="#475055"
+                    android:textSize="@dimen/dimen_15dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/chitietdichvu_no_feature_gia_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:singleLine="true"
+                    android:text="15.000VNĐ"
+                    android:textColor="#a73444"
+                    android:textSize="@dimen/dimen_14dp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/chitietdichvu_no_feature_gia_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dimen_3dp"
+                android:singleLine="true"
+                android:text="giá : 15.000VNĐ"
+                android:textColor="#666666"
+                android:textSize="@dimen/dimen_10dp"
+                android:visibility="gone" />
+
+        </LinearLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"

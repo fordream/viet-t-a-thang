@@ -14,6 +14,37 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_50dp"
+        android:background="@color/f3f3f3"
+        android:padding="@dimen/dimen_10dp" >
+
+        <EditText
+            android:id="@+id/editText1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/menu_right_edit"
+            android:hint="@string/timkiem"
+            android:paddingLeft="@dimen/dimen_10dp"
+            android:paddingRight="@dimen/dimen_40dp"
+            android:singleLine="true"
+            android:textSize="@dimen/dimen_13dp" >
+        </EditText>
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="@dimen/dimen_30dp"
+            android:layout_height="@dimen/dimen_30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/dimen_10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/menu_right_search" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
         <vnp.com.mimusic.view.MusicListView
@@ -21,7 +52,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/moidichvuchonhieunguoi_bottom" >
-
         </vnp.com.mimusic.view.MusicListView>
 
         <LinearLayout
