@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_dialog"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_70dp"
+        android:background="#003333"
+        android:padding="@dimen/dimen_10dp" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@+id/recomment_close"
+            android:gravity="center_vertical"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/recomment_dialog_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dimen_3dp"
+                android:layout_marginTop="@dimen/dimen_3dp"
+                android:text="2014/10/22 6PM"
+                android:textColor="#666666"
+                android:textSize="@dimen/dimen_12dp" />
+
+            <TextView
+                android:id="@+id/dangky_dialog_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dimen_3dp"
+                android:layout_marginTop="@dimen/dimen_5dp"
+                android:text="Recomment"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/dimen_15dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/recomment_close"
+            android:layout_width="@dimen/dimen_30dp"
+            android:layout_height="@dimen/dimen_30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/recomment_close" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="4" >
+
+        <LinearLayout
+            android:layout_width="@dimen/dimen_1dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dimen_80dp"
+                android:background="@color/f3f3f3"
+                android:padding="@dimen/dimen_20dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/dvanybook" />
+
+            <TextView
+                android:id="@+id/dangky_dialog_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#cccccc"
+                android:gravity="center_horizontal"
+                android:padding="@dimen/dimen_3dp"
+                android:singleLine="true"
+                android:text="Dịch vụ imuzic"
+                android:textColor="#666666"
+                android:textSize="@dimen/dimen_10dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/dimen_1dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dimen_80dp"
+                android:background="@android:color/white"
+                android:padding="@dimen/dimen_20dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/dvanybook" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/recomment_bg_1"
+                android:gravity="center_horizontal"
+                android:padding="@dimen/dimen_3dp"
+                android:singleLine="true"
+                android:text="Dịch vụ imuzic"
+                android:textColor="#666666"
+                android:textSize="@dimen/dimen_10dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/dimen_1dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dimen_80dp"
+                android:background="@color/f3f3f3"
+                android:padding="@dimen/dimen_20dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/dvanybook" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#cccccc"
+                android:gravity="center_horizontal"
+                android:padding="@dimen/dimen_3dp"
+                android:singleLine="true"
+                android:text="Dịch vụ imuzic"
+                android:textColor="#666666"
+                android:textSize="@dimen/dimen_10dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/dimen_1dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dimen_80dp"
+                android:background="@android:color/white"
+                android:padding="@dimen/dimen_20dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/dvanybook" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/recomment_bg_1"
+                android:gravity="center_horizontal"
+                android:padding="@dimen/dimen_3dp"
+                android:singleLine="true"
+                android:text="Dịch vụ imuzic"
+                android:textColor="#666666"
+                android:textSize="@dimen/dimen_10dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/home_item_header"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_35dp"
+        android:background="@drawable/tinkhac_bg"
+        android:gravity="center_vertical" >
+
+        <View
+            android:layout_width="@dimen/dimen_5dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/home_item_header_img" />
+
+        <TextView
+            android:id="@+id/home_item_header_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/dimen_5dp"
+            android:singleLine="true"
+            android:text="@string/dexuatchoban"
+            android:textColor="#336666"
+            android:textSize="@dimen/dimen_13dp" />
+    </LinearLayout>
+
+</LinearLayout>
