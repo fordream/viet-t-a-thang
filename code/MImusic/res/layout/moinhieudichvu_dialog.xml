@@ -16,9 +16,7 @@
         android:id="@+id/moinhieudichvu_dialog_menurightitem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
-    </vnp.com.mimusic.view.MenuRightItemView>
-
-    <LinearLayout
+    </vnp.com.mimusic.view.MenuRightItemView>    <RelativeLayout
         android:id="@+id/LinearLayout01"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,11 +26,11 @@
 
         <EditText
             android:id="@+id/moidichvuchonhieunguoi_number"
-            android:layout_width="@dimen/dimen_250dp"
+            android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_35dp"
             android:background="@drawable/menu_right_edit"
             android:gravity="center_vertical"
-            android:hint="@string/timkiem"
+            android:hint="@string/timkiemdichvu"
             android:inputType="phone"
             android:paddingLeft="@dimen/dimen_15dp"
             android:singleLine="true"
@@ -40,38 +38,17 @@
             android:textSize="@dimen/dimen_14dp"
             android:textStyle="bold" />
 
-        <Button
+        <ImageView
             android:id="@+id/moidichvuchonhieunguoi_add"
             android:layout_width="@dimen/dimen_35dp"
             android:layout_height="@dimen/dimen_35dp"
+            android:layout_alignRight="@+id/moidichvuchonhieunguoi_number"
             android:layout_marginLeft="@dimen/dimen_5dp"
-            android:background="@drawable/add" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/home_item_header"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_35dp"
-        android:background="@drawable/tinkhac_bg"
-        android:gravity="center_vertical" >
-
-        <View
-            android:layout_width="@dimen/dimen_5dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/home_item_header_img" />
-
-        <TextView
-            android:id="@+id/home_item_header_tv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:paddingLeft="@dimen/dimen_5dp"
-            android:singleLine="true"
-            android:text="@string/danhsachdichvudachon"
-            android:textColor="#336666"
-            android:textSize="@dimen/dimen_14dp"
-            android:textStyle="bold" />
-    </LinearLayout>
+            android:background="@drawable/tranfer"
+            android:padding="@dimen/dimen_5dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/menu_right_search" />
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -81,39 +58,25 @@
             android:id="@+id/moinhieudichvu_dialog_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/moidichvuchonhieunguoi_bottom"
+            android:layout_above="@+id/horizontalScrollView1"
             android:divider="#333333"
             android:dividerHeight="1px" >
         </vnp.com.mimusic.view.MusicListView>
 
-        <LinearLayout
-            android:id="@+id/moidichvuchonhieunguoi_bottom"
+        <HorizontalScrollView
+            android:id="@+id/horizontalScrollView1"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_45dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:background="#dfdfdf"
-            android:gravity="center"
-            android:orientation="horizontal" >
+            android:background="@color/f3f3f3" >
 
-            <Button
-                android:id="@+id/moinhieudichvu_dialog_chonloimoi"
-                android:layout_width="@dimen/dimen_140dp"
-                android:layout_height="@dimen/dimen_35dp"
-                android:layout_marginRight="@dimen/dimen_10dp"
-                android:background="@drawable/xml_btn_dangky"
-                android:text="@string/chonloimoi"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/dimen_13dp" />
-
-            <Button
-                android:id="@+id/moinhieudichvu_dialog_moi"
-                android:layout_width="@dimen/dimen_140dp"
-                android:layout_height="@dimen/dimen_35dp"
-                android:background="@drawable/xml_btn_infor"
-                android:text="@string/moi"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/dimen_13dp" />
-        </LinearLayout>
+            <LinearLayout
+                android:id="@+id/moinhieudichvu_dialog_list_hor"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal" >
+            </LinearLayout>
+        </HorizontalScrollView>
     </RelativeLayout>
 
 </LinearLayout>

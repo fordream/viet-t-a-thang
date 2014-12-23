@@ -49,4 +49,9 @@ public class HeaderView extends LinearLayout {
 		((ImageButton) findViewById(R.id.header_btn_right)).setImageResource(btnBack);
 		findViewById(R.id.header_btn_right).setVisibility(needShow ? View.VISIBLE : View.GONE);
 	}
+
+	public void setButtonMoi(boolean needShow) {
+		findViewById(R.id.header_btn_right_moi).setVisibility(needShow ? View.VISIBLE : View.GONE);
+
+	}
 }

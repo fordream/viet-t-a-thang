@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/dimen_45dp"
-    android:background="@drawable/header_bg"
+    android:background="#2e3d51"
     android:orientation="vertical" >
 
     <ImageButton
@@ -37,5 +37,37 @@
         android:textColor="@android:color/white"
         android:textSize="@dimen/dimen_13dp"
         android:textStyle="bold" />
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/header_btn_right_moi"
+        android:layout_marginRight="@dimen/dimen_10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dimen_45dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal"
+        android:scaleType="fitXY" >
+
+        <ImageView
+            android:layout_width="@dimen/dimen_71dp"
+            android:layout_height="@dimen/dimen_35dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/header_btn_moi" />
+
+        <TextView
+            android:id="@+id/TextView01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="@string/moi"
+            android:layout_marginRight="@dimen/dimen_15dp"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/dimen_13dp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
 
 </RelativeLayout>
