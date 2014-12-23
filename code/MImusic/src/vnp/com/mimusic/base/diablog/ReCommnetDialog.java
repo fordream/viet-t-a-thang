@@ -28,6 +28,7 @@ public abstract class ReCommnetDialog extends BaseAdialog implements android.vie
 
 		findViewById(R.id.recomment_main).startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.abc_slide_in_top));
 
+		findViewById(R.id.recomment_main_background).setOnClickListener(null);
 		findViewById(R.id.recomment_icon_bottom).setOnClickListener(new View.OnClickListener() {
 
 			@Override

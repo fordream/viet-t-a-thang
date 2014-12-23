@@ -9,6 +9,7 @@ import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 /**
  * vnp.com.mimusic.view.HeaderView
@@ -31,7 +32,7 @@ public class ReCommentView extends LinearLayout {
 
 	private void init() {
 		((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.recomment, this);
-		findViewById(R.id.recomment_main).setOnClickListener(null);
+		findViewById(R.id.recomment_main_background).setOnClickListener(null);
 
 		findViewById(R.id.recomment_icon_bottom).setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -41,6 +42,13 @@ public class ReCommentView extends LinearLayout {
 
 		});
 
+		findViewById(R.id.recomment_icon_bottom_open).setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				start();
+			}
+		});
 		findViewById(R.id.recomment_close).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -78,6 +86,7 @@ public class ReCommentView extends LinearLayout {
 
 			@Override
 			public void onAnimationEnd(Animation animation) {
+				findViewById(R.id.recomment_main_background).setVisibility(View.GONE);
 				findViewById(R.id.recomment_main).setVisibility(View.GONE);
 			}
 		});
@@ -85,6 +94,8 @@ public class ReCommentView extends LinearLayout {
 	}
 
 	public void start() {
+		findViewById(R.id.recomment_main_background).setVisibility(View.VISIBLE);
+		findViewById(R.id.recomment_main).setVisibility(View.VISIBLE);
 		findViewById(R.id.recomment_main).startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.abc_slide_in_top));
 	}
 }
