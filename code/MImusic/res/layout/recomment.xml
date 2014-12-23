@@ -4,13 +4,19 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <ImageView
+    <LinearLayout
         android:id="@+id/recomment_icon_bottom_open"
         android:layout_width="@dimen/dimen_40dp"
-        android:layout_height="@dimen/dimen_20dp"
+        android:layout_height="@dimen/dimen_40dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/recomment_bottom" />
+        android:layout_centerHorizontal="true" >
+
+        <ImageView
+            android:layout_width="@dimen/dimen_40dp"
+            android:layout_height="@dimen/dimen_13dp"
+            android:src="@drawable/recomment_bottom_top" >
+        </ImageView>
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/recomment_main_background"
