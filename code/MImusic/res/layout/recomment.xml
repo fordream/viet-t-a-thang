@@ -8,7 +8,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_70dp"
+        android:layout_height="@dimen/dimen_60dp"
         android:background="#003333"
         android:padding="@dimen/dimen_10dp" >
 
@@ -23,8 +23,6 @@
                 android:id="@+id/recomment_dialog_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/dimen_3dp"
-                android:layout_marginTop="@dimen/dimen_3dp"
                 android:text="2014/10/22 6PM"
                 android:textColor="#666666"
                 android:textSize="@dimen/dimen_12dp" />
@@ -37,7 +35,7 @@
                 android:layout_marginTop="@dimen/dimen_5dp"
                 android:text="Recomment"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/dimen_15dp"
+                android:textSize="@dimen/dimen_13dp"
                 android:textStyle="bold" />
         </LinearLayout>
 
