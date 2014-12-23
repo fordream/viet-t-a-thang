@@ -23,7 +23,6 @@
                 android:id="@+id/home_item_right_control_2"
                 android:layout_width="@dimen/dimen_40dp"
                 android:layout_height="@dimen/dimen_48dp"
-                android:background="@drawable/home_controller_img_2"
                 android:scaleType="fitXY"
                 android:src="@drawable/xml_btn2" />
         </LinearLayout>

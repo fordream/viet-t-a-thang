@@ -28,7 +28,6 @@ public abstract class HomeAdapter extends ArrayAdapter<ContentValues> {
 
 			@Override
 			public void onClick(View v) {
-
 				if (!((ContentValues) getItem(position)).getAsBoolean("dangky")){
 					moiDVChoNhieuNguoi();
 				}

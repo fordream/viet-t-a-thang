@@ -39,7 +39,7 @@ public abstract class DichVuAdapter extends CursorAdapter {
 		TextView home_item_right_control_1_tv = (TextView) convertView.findViewById(R.id.home_item_right_control_1_tv);
 
 		home_item_right_control_1_tv.setText(isDangKy ? R.string.dangdung : R.string.dangky);
-		home_item_right_control_1_tv.setTextColor(resources.getColor(R.color.c657180));
+		home_item_right_control_1_tv.setTextColor(resources.getColor(R.color.c475055));
 
 		((TextView) convertView.findViewById(R.id.home_item_right_control_2_tv)).setTextColor(resources.getColor(R.color.a73444));
 

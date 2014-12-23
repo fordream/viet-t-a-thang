@@ -9,7 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_35dp"
         android:background="@drawable/tinkhac_bg"
-        android:gravity="center_vertical" >
+        android:gravity="center_vertical"
+        android:visibility="gone" >
 
         <View
             android:layout_width="@dimen/dimen_5dp"
@@ -45,10 +46,10 @@
             android:orientation="vertical" >
 
             <LinearLayout
-                android:gravity="center"
                 android:id="@+id/home_item_right_control_1"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_48dp"
+                android:gravity="center"
                 android:orientation="vertical"
                 android:scaleType="fitXY"
                 android:src="@drawable/xml_btn2" >
@@ -126,8 +127,10 @@
                 android:layout_height="wrap_content"
                 android:singleLine="true"
                 android:text="ten dich vu"
-                android:textColor="#336666"
-                android:textSize="@dimen/dimen_14dp" />
+                android:layout_marginBottom="@dimen/dimen_5dp"
+                android:textColor="#475055"
+                android:textSize="@dimen/dimen_15dp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/home_item_tv_link"
@@ -145,11 +148,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
-                android:lines="3"
-                android:maxLines="3"
-                android:text="mo ta dich vu"
-                android:textColor="#333333"
-                android:textSize="@dimen/dimen_13dp" />
+                android:lineSpacingExtra="@dimen/dimen_2dp"
+                android:lines="2"
+                android:maxLines="2"
+                android:text="mo ta dich vu  mo ta dich vu mo ta dich vu  mo ta dich vu mo ta dich vu  mo ta dich vu mo ta dich vu  mo ta dich vu mo ta dich vu  mo ta dich vu"
+                android:textColor="#353f45"
+                android:textSize="@dimen/dimen_12dp" />
         </LinearLayout>
     </RelativeLayout>
 
