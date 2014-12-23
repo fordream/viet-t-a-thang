@@ -34,7 +34,7 @@
 
             <TextView
                 android:id="@+id/menu_right_item_tv_name"
-                android:layout_width="127dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
                 android:text="Dịch vụ Imuzik"
