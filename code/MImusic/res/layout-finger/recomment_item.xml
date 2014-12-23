@@ -11,12 +11,11 @@
         android:orientation="horizontal" >
 
         <LinearLayout
-            
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_45dp"
             android:layout_centerVertical="true"
-            android:orientation="vertical"
             android:gravity="center"
+            android:orientation="vertical"
             android:paddingLeft="@dimen/dimen_10dp"
             android:paddingRight="@dimen/dimen_10dp" >
 
@@ -26,18 +25,41 @@
                 android:layout_height="wrap_content"
                 android:singleLine="true"
                 android:text="Hoàng hải Nam"
-                android:textColor="#336666"
+                android:textColor="#475055"
                 android:textSize="@dimen/dimen_13dp" />
 
-            <TextView
-                android:id="@+id/home_item_tv_content"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_5dp"
-                android:ellipsize="end"
-                android:text="01674537880"
-                android:textColor="#336666"
-                android:textSize="@dimen/dimen_10dp" />
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/home_item_tv_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_5dp"
+                    android:ellipsize="end"
+                    android:text="imusizk | "
+                    android:textColor="#4e5253"
+                    android:textSize="@dimen/dimen_10dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_5dp"
+                    android:ellipsize="end"
+                    android:text="imusizk "
+                    android:textColor="#a73444"
+                    android:textSize="@dimen/dimen_10dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_5dp"
+                    android:ellipsize="end"
+                    android:text="| imusizk"
+                    android:textColor="#4e5253"
+                    android:textSize="@dimen/dimen_10dp" />
+            </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
 
