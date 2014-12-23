@@ -98,16 +98,42 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 					getTabHost().setCurrentTab(1);
 				} else if (position == 1) {
 					// lich su ban hang
-					getTabHost().setCurrentTab(2);
+					// getTabHost().setCurrentTab(2);
+					Intent intent = new Intent(BaseMusicSlideMenuActivity.this, RootMenuActivity.class);
+					Bundle extras = new Bundle();
+					extras.putString("type", Conts.LICHSUBANHANG);
+					intent.putExtras(extras);
+					startActivity(intent);
+					overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_slide_left_out);
 				} else if (position == 2) {
 					// Quy dinh ban hang
-					getTabHost().setCurrentTab(3);
+					// getTabHost().setCurrentTab(3);
+					Intent intent = new Intent(BaseMusicSlideMenuActivity.this, RootMenuActivity.class);
+					Bundle extras = new Bundle();
+					extras.putString("type", Conts.QUYDINHBANHANG);
+					intent.putExtras(extras);
+					startActivity(intent);
+					overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_slide_left_out);
 				} else if (position == 3) {
 					// huong dan ban hang
-					getTabHost().setCurrentTab(4);
+					// getTabHost().setCurrentTab(4);
+					Intent intent = new Intent(BaseMusicSlideMenuActivity.this, RootMenuActivity.class);
+					Bundle extras = new Bundle();
+					extras.putString("type", Conts.HUONGDANBANHANG);
+					intent.putExtras(extras);
+					startActivity(intent);
+					overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_slide_left_out);
 				} else {
 					// chinh sua thong tin
-					getTabHost().setCurrentTab(6);
+					// getTabHost().setCurrentTab(6);
+					//
+					Intent intent = new Intent(BaseMusicSlideMenuActivity.this, RootMenuActivity.class);
+					Bundle extras = new Bundle();
+					extras.putString("type", Conts.INFOR);
+					intent.putExtras(extras);
+					startActivity(intent);
+					overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_slide_left_out);
+
 				}
 			}
 		});

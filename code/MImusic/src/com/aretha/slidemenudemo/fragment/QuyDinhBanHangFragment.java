@@ -4,6 +4,7 @@ import vnp.com.db.DichVu;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.adapter.QuyDinhBanHangAdapter;
+import vnp.com.mimusic.view.HeaderView;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -23,6 +24,20 @@ public class QuyDinhBanHangFragment extends Fragment implements OnItemClickListe
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.quydinhbanhang, null);
+
+		HeaderView header = (HeaderView) view.findViewById(R.id.quydinhbanhang_header);
+		header.setTextHeader(R.string.quydinhbanhang);
+		header.showButton(true, false);
+		header.setButtonLeftImage(true, R.drawable.btn_back);
+		header.findViewById(R.id.header_btn_left).setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				getActivity().finish();
+				getActivity().overridePendingTransition(R.anim.abc_slide_left_in, R.anim.abc_slide_right_out);
+
+			}
+		});
 		ListView dichvu_list = (ListView) view.findViewById(R.id.quydinhbanhang_list);
 		dichvu_list.setOnItemClickListener(this);
 		Cursor cursor = getActivity().getContentResolver().query(DichVu.CONTENT_URI, null, null, null, null);

@@ -13,6 +13,12 @@
         android:orientation="vertical"
         android:paddingBottom="@dimen/dimen_20dp" >
 
+        <vnp.com.mimusic.view.HeaderView
+            android:id="@+id/infor_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+        </vnp.com.mimusic.view.HeaderView>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_150dp"
@@ -142,7 +148,6 @@
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/dimen_10dp"
                 android:textStyle="bold" />
-
         </RelativeLayout>
     </LinearLayout>
 
