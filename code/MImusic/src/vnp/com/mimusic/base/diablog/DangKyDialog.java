@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class DangKyDialog extends BaseAdialog implements android.view.View.OnClickListener {
@@ -30,33 +31,35 @@ public class DangKyDialog extends BaseAdialog implements android.view.View.OnCli
 		((TextView) findViewById(R.id.dangky_dialog_name)).setText(contentValues.getAsString("name"));
 		((TextView) findViewById(R.id.dangky_dialog_content)).setText(contentValues.getAsString("content"));
 
+		String btn_right = contentValues.getAsString("btn_right");
+		if (btn_right != null && !btn_right.trim().equals("")) {
+			((Button) findViewById(R.id.dangky_dialog_register)).setText(btn_right);
+		}
 		findViewById(R.id.dangky_dialog_cancel).setOnClickListener(this);
 		findViewById(R.id.dangky_dialog_register).setOnClickListener(this);
 	}
-	
+
 	public void mDismiss() {
 		Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.abc_slide_out_bottom);
 		animation.setAnimationListener(new AnimationListener() {
-			
+
 			@Override
 			public void onAnimationStart(Animation animation) {
-				
+
 			}
-			
+
 			@Override
 			public void onAnimationRepeat(Animation animation) {
-				
+
 			}
-			
+
 			@Override
 			public void onAnimationEnd(Animation animation) {
 				DangKyDialog.this.dismiss();
 			}
 		});
 		findViewById(R.id.dangky_dialog_main).startAnimation(animation);
-		
-		
-		
+
 	}
 
 	public DangKyDialog(Context context, ContentValues contentValues) {
@@ -75,7 +78,12 @@ public class DangKyDialog extends BaseAdialog implements android.view.View.OnCli
 			mDismiss();
 		} else if (v.getId() == R.id.dangky_dialog_register) {
 			// call to server
-			mDismiss();
+			mOpen();
+			// mDismiss();
 		}
+	}
+
+	public void mOpen() {
+		mDismiss();
 	}
 }

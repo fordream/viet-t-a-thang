@@ -2,12 +2,14 @@ package vnp.com.mimusic.main;
 
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
+import vnp.com.mimusic.base.diablog.DangKyDialog;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.view.MenuLeftView;
 import vnp.com.mimusic.view.MenuRightView;
 import vnp.com.mimusic.view.TabView;
 import android.app.Activity;
 import android.app.TabActivity;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,10 +18,12 @@ import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
+import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabSpec;
+import android.widget.Toast;
 
 import com.aretha.slidemenu.ISlideMenuListener;
 import com.aretha.slidemenu.SlideMenu;
@@ -253,7 +257,23 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 	}
 
 	public void finish(boolean b) {
-		finish();
-		overridePendingTransition(R.anim.abc_slide_left_in, R.anim.abc_slide_right_out);
+		// Toast.makeText(this, "out", Toast.LENGTH_SHORT).show();
+		ContentValues contentValues = new ContentValues();
+		contentValues.put("btn_right", getString(R.string.dongy));
+		contentValues.put("name", getString(R.string.banmuondongugndung));
+		contentValues.put("content", getString(R.string.close_ungdung_comfirm));
+		DangKyDialog dangKyDialog = new DangKyDialog(this, contentValues) {
+			@Override
+			public void mOpen() {
+				super.mOpen();
+				finish();
+				overridePendingTransition(R.anim.abc_slide_left_in, R.anim.abc_slide_right_out);
+			}
+		};
+		dangKyDialog.show();
+
+		// finish();
+		// overridePendingTransition(R.anim.abc_slide_left_in,
+		// R.anim.abc_slide_right_out);
 	}
 }
