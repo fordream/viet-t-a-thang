@@ -14,6 +14,8 @@ import android.widget.TextView;
  * @author teemo
  * 
  */
+
+//vnp.com.mimusic.view.BangXepHangHeaderView
 public class BangXepHangHeaderView extends LinearLayout {
 
 	public BangXepHangHeaderView(Context context) {

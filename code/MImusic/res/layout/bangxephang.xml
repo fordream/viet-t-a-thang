@@ -5,18 +5,20 @@
     android:background="@drawable/bangxephang_list_bg"
     android:orientation="vertical" >
 
-    <!--         android:cacheColorHint="@android:color/transparent"
-        android:listSelector="@drawable/xml_list_selection" -->
+    <vnp.com.mimusic.view.BangXepHangHeaderView
+         android:id="@+id/bangxephang_bangxephangheader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </vnp.com.mimusic.view.BangXepHangHeaderView>
+
     <vnp.com.mimusic.view.MusicListView
-        android:paddingTop="@dimen/dimen_5dp"
-        android:paddingBottom="@dimen/dimen_5dp"
         android:id="@+id/bangxephang_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         android:divider="@drawable/tranfer"
         android:dividerHeight="@dimen/dimen_5dp"
-         >
+        android:paddingBottom="@dimen/dimen_5dp"
+        android:paddingTop="@dimen/dimen_5dp" >
     </vnp.com.mimusic.view.MusicListView>
 
 </LinearLayout>

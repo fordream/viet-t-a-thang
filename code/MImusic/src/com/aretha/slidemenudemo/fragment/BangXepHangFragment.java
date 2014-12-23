@@ -24,7 +24,10 @@ public class BangXepHangFragment extends Fragment implements OnItemClickListener
 		View view = inflater.inflate(R.layout.bangxephang, null);
 		ListView bangxephang_list = (ListView) view.findViewById(R.id.bangxephang_list);
 
-		bangxephang_list.addHeaderView(new BangXepHangHeaderView(getActivity()));
+		BangXepHangHeaderView bangxephang_bangxephangheader = (BangXepHangHeaderView) view.findViewById(R.id.bangxephang_bangxephangheader);
+		
+		// bangxephang_list.addHeaderView(new
+		// BangXepHangHeaderView(getActivity()));
 		bangxephang_list.setOnItemClickListener(this);
 		bangxephang_list.setAdapter(new BangXepHangAdaper(getActivity(), new String[] { "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a" }));
 		return view;
