@@ -3,6 +3,7 @@ package vnp.com.mimusic.main;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.base.diablog.DangKyDialog;
+import vnp.com.mimusic.base.diablog.ReCommnetDialog;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.view.MenuLeftView;
 import vnp.com.mimusic.view.MenuRightView;
@@ -13,6 +14,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
@@ -46,7 +48,6 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 		overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_slide_left_out);
 		setContentView(R.layout.mactivity_slidemenu);
 
@@ -190,6 +191,14 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 			public void onSlideOffsetChange(float offsetPercent) {
 			}
 		});
+
+		new Handler().postDelayed(new Runnable() {
+
+			@Override
+			public void run() {
+				new ReCommnetDialog(BaseMusicSlideMenuActivity.this).show();
+			}
+		}, 3000);
 
 	}
 
