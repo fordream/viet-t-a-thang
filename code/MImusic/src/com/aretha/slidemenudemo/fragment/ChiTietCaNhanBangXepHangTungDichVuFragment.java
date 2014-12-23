@@ -35,13 +35,6 @@ public class ChiTietCaNhanBangXepHangTungDichVuFragment extends Fragment impleme
 			}
 		});
 
-		view.findViewById(R.id.chitietcanhanbangxephang_tracuu).setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				(((RootMenuActivity) getActivity())).gotoChiTietCaNhanDichVu();
-			}
-		});
 		return view;
 	}
 
