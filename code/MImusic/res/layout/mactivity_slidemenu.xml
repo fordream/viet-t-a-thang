@@ -1,75 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.aretha.slidemenu.SlideMenu xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/slideMenu"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <FrameLayout
-        xmlns:slidemenu="http://schemas.android.com/apk/res-auto"
-        android:layout_width="@dimen/dimen_250dp"
-        android:layout_height="match_parent"
-        slidemenu:layout_role="primaryMenu" >
-
-        <vnp.com.mimusic.view.MenuLeftView
-            android:id="@+id/mactivity_slidemenu_menuleft"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-        </vnp.com.mimusic.view.MenuLeftView>
-    </FrameLayout>
-
-    <FrameLayout
-        xmlns:slidemenu="http://schemas.android.com/apk/res-auto"
+    <com.aretha.slidemenu.SlideMenu
+        android:id="@+id/slideMenu"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        slidemenu:layout_role="content"
-        android:background="#ffffff"
-        android:orientation="vertical" >
+        android:layout_height="match_parent" >
 
-        <TabHost
-            android:id="@android:id/tabhost"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent" >
+        <FrameLayout
+            xmlns:slidemenu="http://schemas.android.com/apk/res-auto"
+            android:layout_width="@dimen/dimen_250dp"
+            android:layout_height="match_parent"
+            slidemenu:layout_role="primaryMenu" >
 
-            <RelativeLayout
+            <vnp.com.mimusic.view.MenuLeftView
+                android:id="@+id/mactivity_slidemenu_menuleft"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+            </vnp.com.mimusic.view.MenuLeftView>
+        </FrameLayout>
+
+        <FrameLayout
+            xmlns:slidemenu="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            slidemenu:layout_role="content"
+            android:background="#ffffff"
+            android:orientation="vertical" >
+
+            <TabHost
+                android:id="@android:id/tabhost"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:orientation="vertical" >
+                android:layout_height="fill_parent" >
 
-                <TabWidget
-                    android:id="@android:id/tabs"
-                    android:layout_width="fill_parent"
-                    android:layout_height="@dimen/dimen_0dp" />
-
-                <FrameLayout
-                    android:id="@android:id/tabcontent"
+                <RelativeLayout
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:layout_marginBottom="@dimen/dimen_50dp"
-                    android:layout_marginTop="@dimen/dimen_45dp" />
+                    android:orientation="vertical" >
 
-                <vnp.com.mimusic.view.TabView
-                    android:id="@+id/mactivityslide_menu_tabview"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
-                </vnp.com.mimusic.view.TabView>
-            </RelativeLayout>
-        </TabHost>
-    </FrameLayout>
+                    <TabWidget
+                        android:id="@android:id/tabs"
+                        android:layout_width="fill_parent"
+                        android:layout_height="@dimen/dimen_0dp" />
+
+                    <FrameLayout
+                        android:id="@android:id/tabcontent"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_marginBottom="@dimen/dimen_50dp"
+                        android:layout_marginTop="@dimen/dimen_45dp" />
+
+                    <vnp.com.mimusic.view.TabView
+                        android:id="@+id/mactivityslide_menu_tabview"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" >
+                    </vnp.com.mimusic.view.TabView>
+                </RelativeLayout>
+            </TabHost>
+        </FrameLayout>
+
+        <FrameLayout
+            xmlns:slidemenu="http://schemas.android.com/apk/res-auto"
+            android:layout_width="@dimen/dimen_250dp"
+            android:layout_height="match_parent"
+            slidemenu:layout_role="secondaryMenu"
+            android:background="@android:color/white"
+            android:orientation="vertical"
+            android:scaleType="center" >
+
+            <vnp.com.mimusic.view.MenuRightView
+                android:id="@+id/mactivity_menu_right"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+            </vnp.com.mimusic.view.MenuRightView>
+        </FrameLayout>
+    </com.aretha.slidemenu.SlideMenu>
 
     <FrameLayout
-        xmlns:slidemenu="http://schemas.android.com/apk/res-auto"
-        android:layout_width="@dimen/dimen_250dp"
-        android:layout_height="match_parent"
-        slidemenu:layout_role="secondaryMenu"
-        android:background="@android:color/white"
-        android:orientation="vertical"
-        android:scaleType="center" >
-
-        <vnp.com.mimusic.view.MenuRightView
-            android:id="@+id/mactivity_menu_right"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-        </vnp.com.mimusic.view.MenuRightView>
+        android:id="@+id/activity_slidemenu_recomment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
     </FrameLayout>
 
-</com.aretha.slidemenu.SlideMenu>
+</RelativeLayout>

@@ -7,6 +7,7 @@ import vnp.com.mimusic.base.diablog.ReCommnetDialog;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.view.MenuLeftView;
 import vnp.com.mimusic.view.MenuRightView;
+import vnp.com.mimusic.view.ReCommentView;
 import vnp.com.mimusic.view.TabView;
 import android.app.Activity;
 import android.app.TabActivity;
@@ -16,10 +17,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TabHost;
@@ -158,7 +161,6 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 				getSlideMenu().postDelayed(new Runnable() {
 					@Override
 					public void run() {
-
 						Intent intent = new Intent(BaseMusicSlideMenuActivity.this, RootMenuActivity.class);
 						intent.putExtra("type", Conts.NHIEUDICHVU);
 						startActivity(intent);
@@ -196,22 +198,29 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 
 			@Override
 			public void run() {
-				new ReCommnetDialog(BaseMusicSlideMenuActivity.this) {
-					public void openDichvuDetail() {
-						Intent intent = new Intent(BaseMusicSlideMenuActivity.this, RootMenuActivity.class);
-						intent.putExtra("type", Conts.CHITIETDICHVU);
-						startActivity(intent);
-						overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_slide_left_out);
-					};
-
-					@Override
-					public void openMoiContact() {
-						Intent intent = new Intent(BaseMusicSlideMenuActivity.this, RootMenuActivity.class);
-						intent.putExtra("type", Conts.NHIEUDICHVU);
-						startActivity(intent);
-						overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_slide_left_out);
-					}
-				}.show();
+				ReCommentView commentView = new ReCommentView(BaseMusicSlideMenuActivity.this);
+				((FrameLayout) findViewById(R.id.activity_slidemenu_recomment)).addView(commentView);
+				commentView.start();
+				// new ReCommnetDialog(BaseMusicSlideMenuActivity.this) {
+				// public void openDichvuDetail() {
+				// Intent intent = new Intent(BaseMusicSlideMenuActivity.this,
+				// RootMenuActivity.class);
+				// intent.putExtra("type", Conts.CHITIETDICHVU);
+				// startActivity(intent);
+				// overridePendingTransition(R.anim.abc_slide_right_in,
+				// R.anim.abc_slide_left_out);
+				// };
+				//
+				// @Override
+				// public void openMoiContact() {
+				// Intent intent = new Intent(BaseMusicSlideMenuActivity.this,
+				// RootMenuActivity.class);
+				// intent.putExtra("type", Conts.NHIEUDICHVU);
+				// startActivity(intent);
+				// overridePendingTransition(R.anim.abc_slide_right_in,
+				// R.anim.abc_slide_left_out);
+				// }
+				// }.show();
 			}
 		}, 3000);
 

@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.aretha.slidemenu.SlideMenu xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/slideMenu"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" />
+    android:layout_height="match_parent" >
+
+    <com.aretha.slidemenu.SlideMenu
+        android:id="@+id/slideMenu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <FrameLayout
+        android:id="@+id/activity_slidemenu_recomment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+    </FrameLayout>
+
+</RelativeLayout>
