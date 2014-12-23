@@ -196,7 +196,22 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 
 			@Override
 			public void run() {
-				new ReCommnetDialog(BaseMusicSlideMenuActivity.this).show();
+				new ReCommnetDialog(BaseMusicSlideMenuActivity.this) {
+					public void openDichvuDetail() {
+						Intent intent = new Intent(BaseMusicSlideMenuActivity.this, RootMenuActivity.class);
+						intent.putExtra("type", Conts.CHITIETDICHVU);
+						startActivity(intent);
+						overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_slide_left_out);
+					};
+
+					@Override
+					public void openMoiContact() {
+						Intent intent = new Intent(BaseMusicSlideMenuActivity.this, RootMenuActivity.class);
+						intent.putExtra("type", Conts.NHIEUDICHVU);
+						startActivity(intent);
+						overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_slide_left_out);
+					}
+				}.show();
 			}
 		}, 3000);
 

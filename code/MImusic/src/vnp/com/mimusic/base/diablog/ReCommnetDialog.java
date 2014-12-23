@@ -2,18 +2,17 @@ package vnp.com.mimusic.base.diablog;
 
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.base.BaseAdialog;
-import android.content.ContentValues;
+import vnp.com.mimusic.view.RecommentItemView;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
-public class ReCommnetDialog extends BaseAdialog implements android.view.View.OnClickListener {
+public abstract class ReCommnetDialog extends BaseAdialog implements android.view.View.OnClickListener {
 
 	public ReCommnetDialog(Context context, int theme) {
 		super(context, theme);
@@ -29,13 +28,22 @@ public class ReCommnetDialog extends BaseAdialog implements android.view.View.On
 
 		findViewById(R.id.recomment_main).startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.abc_slide_in_bottom));
 		LinearLayout recomment_list = (LinearLayout) findViewById(R.id.recomment_list);
-		
-		
+		for (int i = 0; i < 4; i++) {
+			RecommentItemView recommentItemView = new RecommentItemView(getContext());
+			recomment_list.addView(recommentItemView);
+
+			recommentItemView.setOnClickListener(new RecommentItemOnClick());
+		}
+
 		findViewById(R.id.recomment_close).setOnClickListener(this);
-		// findViewById(R.id.dangky_dialog_register).setOnClickListener(this);
+
+		findViewById(R.id.recomment_dv_1).setOnClickListener(this);
+		findViewById(R.id.recomment_dv_2).setOnClickListener(this);
+		findViewById(R.id.recomment_dv_3).setOnClickListener(this);
+		findViewById(R.id.recomment_dv_4).setOnClickListener(this);
 	}
 
-	public void mDismiss() {
+	public void mDismiss(final int index) {
 		Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.abc_slide_out_bottom);
 		animation.setAnimationListener(new AnimationListener() {
 
@@ -52,11 +60,22 @@ public class ReCommnetDialog extends BaseAdialog implements android.view.View.On
 			@Override
 			public void onAnimationEnd(Animation animation) {
 				ReCommnetDialog.this.dismiss();
+				if (index == 0) {
+
+				} else if (index == 1) {
+					openDichvuDetail();
+				} else if (index == 2) {
+					openMoiContact();
+				}
 			}
 		});
 		findViewById(R.id.recomment_main).startAnimation(animation);
 
 	}
+
+	public abstract void openDichvuDetail();
+
+	public abstract void openMoiContact();
 
 	@Override
 	public int getLayout() {
@@ -66,11 +85,23 @@ public class ReCommnetDialog extends BaseAdialog implements android.view.View.On
 	@Override
 	public void onClick(View v) {
 		if (v.getId() == R.id.recomment_close) {
-			mDismiss();
+			mDismiss(0);
+		} else if (v.getId() == R.id.recomment_dv_1) {
+			mDismiss(1);
+		} else if (v.getId() == R.id.recomment_dv_2) {
+			mDismiss(1);
+		} else if (v.getId() == R.id.recomment_dv_3) {
+			mDismiss(1);
+		} else if (v.getId() == R.id.recomment_dv_4) {
+			mDismiss(1);
 		}
 	}
 
-	public void mOpen() {
-		mDismiss();
+	private class RecommentItemOnClick implements View.OnClickListener {
+
+		@Override
+		public void onClick(View v) {
+			mDismiss(2);
+		}
 	}
 }
