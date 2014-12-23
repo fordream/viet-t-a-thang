@@ -27,7 +27,7 @@ import android.widget.TextView;
 
 //vnp.com.mimusic.view.MenuRightView
 public class MenuRightView extends LinearLayout {
-	private vnp.com.mimusic.view.MenuRightDetailView menu_right_detail_view;
+//private vnp.com.mimusic.view.MenuRightDetailView menu_right_detail_view;
 
 	public MenuRightView(Context context) {
 		super(context);
@@ -47,7 +47,7 @@ public class MenuRightView extends LinearLayout {
 
 	private void init() {
 		((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.menu_right, this);
-		menu_right_detail_view = (vnp.com.mimusic.view.MenuRightDetailView) findViewById(R.id.menu_right_detail_view);
+		//menu_right_detail_view = (vnp.com.mimusic.view.MenuRightDetailView) findViewById(R.id.menu_right_detail_view);
 	}
 
 	public void initData() {
@@ -68,8 +68,8 @@ public class MenuRightView extends LinearLayout {
 		menu_right_list.setAdapter(new MenuRightAdaper(getContext(), list) {
 			@Override
 			public void openMoi(ContentValues contentValues) {
-				menu_right_detail_view.visibility(View.VISIBLE);
-				menu_right_detail_view.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.abc_slide_right_in));
+				//menu_right_detail_view.visibility(View.VISIBLE);
+				//menu_right_detail_view.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.abc_slide_right_in));
 			}
 		});
 
@@ -90,12 +90,12 @@ public class MenuRightView extends LinearLayout {
 	}
 
 	public boolean needBack() {
-		if (menu_right_detail_view.getVisibility() == View.VISIBLE) {
-			menu_right_detail_view.close();
-			return true;
-		} else {
+		//if (menu_right_detail_view.getVisibility() == View.VISIBLE) {
+		//	menu_right_detail_view.close();
+		//	return true;
+		//} else {
 			return false;
-		}
+		//}
 
 	}
 }
