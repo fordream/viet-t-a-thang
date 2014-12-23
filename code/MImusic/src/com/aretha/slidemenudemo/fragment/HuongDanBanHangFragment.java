@@ -27,9 +27,14 @@ public class HuongDanBanHangFragment extends Fragment implements OnItemClickList
 
 			@Override
 			public void onClick(View v) {
-				getActivity().finish();
-				getActivity().overridePendingTransition(R.anim.abc_slide_left_in, R.anim.abc_slide_right_out);
-
+				getActivity().onBackPressed();
+//				boolean isAdd = getArguments().getBoolean("addfragment");
+//				if (isAdd) {
+//					getActivity().onBackPressed();
+//				} else {
+//					getActivity().finish();
+//					getActivity().overridePendingTransition(R.anim.abc_slide_left_in, R.anim.abc_slide_right_out);
+//				}
 			}
 		});
 		return view;

@@ -170,10 +170,11 @@ public class RootMenuActivity extends FragmentActivity {
 	public void gotoMoiDvChoNhieuNguoiFragment() {
 		changeFragemt(R.id.root_main_fragment, new MoiDvChoNhieuNguoiFragment(), true);
 
-//		Intent intent = new Intent(this, RootMenuActivity.class);
-//		intent.putExtra("type", Conts.MOIDICHVUCHONHIEUNGUOI);
-//		getParent().startActivity(intent);
-//		getParent().overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_slide_left_out);
+		// Intent intent = new Intent(this, RootMenuActivity.class);
+		// intent.putExtra("type", Conts.MOIDICHVUCHONHIEUNGUOI);
+		// getParent().startActivity(intent);
+		// getParent().overridePendingTransition(R.anim.abc_slide_right_in,
+		// R.anim.abc_slide_left_out);
 	}
 
 	public void gotoSendDvChoNhieuNguoi(boolean isEmail) {
@@ -201,5 +202,13 @@ public class RootMenuActivity extends FragmentActivity {
 		chitiettintuc.setArguments(bundle);
 		changeFragemt(R.id.root_main_fragment, chitiettintuc, true);
 
+	}
+
+	public void gotoHuongDanBanHang() {
+		Bundle bundle = new Bundle();
+		HuongDanBanHangFragment chitiettintuc = new HuongDanBanHangFragment();
+		bundle.putBoolean("addfragment", true);
+		chitiettintuc.setArguments(bundle);
+		changeFragemt(R.id.root_main_fragment, chitiettintuc, true);
 	}
 }

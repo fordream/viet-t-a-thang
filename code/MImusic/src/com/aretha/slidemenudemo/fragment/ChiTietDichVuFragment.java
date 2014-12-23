@@ -42,7 +42,8 @@ public class ChiTietDichVuFragment extends Fragment implements View.OnClickListe
 			public void onClick(View v) {
 				// Huong dan ban hang
 				// TODO
-				Toast.makeText(v.getContext(), "huong dan ban hang", Toast.LENGTH_SHORT).show();
+//				Toast.makeText(v.getContext(), "huong dan ban hang", Toast.LENGTH_SHORT).show();
+				(((RootMenuActivity) getActivity())).gotoHuongDanBanHang();
 			}
 		});
 
