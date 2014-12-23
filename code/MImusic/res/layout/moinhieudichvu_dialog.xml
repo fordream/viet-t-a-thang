@@ -98,7 +98,7 @@
             <Button
                 android:id="@+id/moinhieudichvu_dialog_chonloimoi"
                 android:layout_width="@dimen/dimen_140dp"
-                android:layout_height="@dimen/dimen_30dp"
+                android:layout_height="@dimen/dimen_35dp"
                 android:layout_marginRight="@dimen/dimen_10dp"
                 android:background="@drawable/xml_btn_dangky"
                 android:text="@string/chonloimoi"
@@ -108,7 +108,7 @@
             <Button
                 android:id="@+id/moinhieudichvu_dialog_moi"
                 android:layout_width="@dimen/dimen_140dp"
-                android:layout_height="@dimen/dimen_30dp"
+                android:layout_height="@dimen/dimen_35dp"
                 android:background="@drawable/xml_btn_infor"
                 android:text="@string/moi"
                 android:textColor="@android:color/white"
