@@ -21,7 +21,7 @@ public class ChonlistContactItemView extends LinearLayout {
 	}
 
 	private void init() {
-		((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.moidanhba_item, this);
+		((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.chonlistcontact_item, this);
 	}
 
 }

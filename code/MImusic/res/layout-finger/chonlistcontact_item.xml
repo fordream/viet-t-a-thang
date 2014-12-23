@@ -36,7 +36,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:singleLine="true"
-                    android:text="ten dich vu"
+                    android:text="Hoàng Hải Nam"
                     android:textColor="#333333"
                     android:textSize="@dimen/dimen_14dp" />
 

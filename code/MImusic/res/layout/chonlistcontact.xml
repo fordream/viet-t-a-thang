@@ -69,11 +69,12 @@
                 android:layout_height="@dimen/dimen_30dp"
                 android:layout_marginRight="@dimen/dimen_10dp"
                 android:background="@drawable/xml_btn_infor"
-                android:text="@string/chontatca"
+                android:text="@string/chon"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/dimen_13dp" />
 
             <Button
+                android:visibility="gone"
                 android:id="@+id/moidichvuchonhieunguoi_moi"
                 android:layout_width="@dimen/dimen_140dp"
                 android:layout_height="@dimen/dimen_30dp"
