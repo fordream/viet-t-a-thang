@@ -100,7 +100,7 @@
                 android:layout_width="@dimen/dimen_140dp"
                 android:layout_height="@dimen/dimen_30dp"
                 android:layout_marginRight="@dimen/dimen_10dp"
-                android:background="@drawable/xml_btn_infor"
+                android:background="@drawable/xml_btn_dangky"
                 android:text="@string/chonloimoi"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/dimen_13dp" />
@@ -109,7 +109,7 @@
                 android:id="@+id/moinhieudichvu_dialog_moi"
                 android:layout_width="@dimen/dimen_140dp"
                 android:layout_height="@dimen/dimen_30dp"
-                android:background="@drawable/xml_btn_dangky"
+                android:background="@drawable/xml_btn_infor"
                 android:text="@string/moi"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/dimen_13dp" />
