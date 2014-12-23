@@ -27,16 +27,22 @@ public abstract class ReCommnetDialog extends BaseAdialog implements android.vie
 		super.onCreate(savedInstanceState);
 
 		findViewById(R.id.recomment_main).startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.abc_slide_in_top));
+
+		findViewById(R.id.recomment_icon_bottom).setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				mDismiss(0);
+			}
+		});
 		LinearLayout recomment_list = (LinearLayout) findViewById(R.id.recomment_list);
 		for (int i = 0; i < 4; i++) {
 			RecommentItemView recommentItemView = new RecommentItemView(getContext());
 			recomment_list.addView(recommentItemView);
-
 			recommentItemView.setOnClickListener(new RecommentItemOnClick());
 		}
 
 		findViewById(R.id.recomment_close).setOnClickListener(this);
-
 		findViewById(R.id.recomment_dv_1).setOnClickListener(this);
 		findViewById(R.id.recomment_dv_2).setOnClickListener(this);
 		findViewById(R.id.recomment_dv_3).setOnClickListener(this);
