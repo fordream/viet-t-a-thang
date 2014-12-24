@@ -20,6 +20,7 @@ public class User {
 	public static final String PASSWORD = "password";
 	public static final String STATUS = "status";
 	public static final String NAME = "name";
+	public static final String NAME_CONTACT = "name_contact";
 	public static final String EMAIL = "email";
 	public static final String AVATAR = "avatar";
 	public static final String LISTIDDVSUDUNG = "listiddvsudung";
@@ -33,7 +34,7 @@ public class User {
 		builder.append("(");
 		builder.append(_ID).append(" INTEGER PRIMARY KEY AUTOINCREMENT").append(",");
 		String[] colums = new String[] {//
-		USER, PASSWORD, STATUS, ID, NAME, EMAIL, AVATAR, LISTIDDVSUDUNG, SOLUONG, DOANHTHU, LISTIDUSERDAMOI //
+		USER, PASSWORD, STATUS, ID, NAME, NAME_CONTACT, EMAIL, AVATAR, LISTIDDVSUDUNG, SOLUONG, DOANHTHU, LISTIDUSERDAMOI //
 		};//
 			// builder.append(USER).append(" TEXT NOT NULL").append(",");
 			// builder.append(LISTIDDV).append(" TEXT NOT NULL");

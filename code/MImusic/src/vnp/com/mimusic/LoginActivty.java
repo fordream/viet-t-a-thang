@@ -21,7 +21,7 @@ public class LoginActivty extends Activity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
-
+		((VApplication) getApplication()).dongbodanhba();
 		String selection = User.STATUS + "='1'";
 		Cursor cursor = getContentResolver().query(User.CONTENT_URI, null, selection, null, null);
 		if (cursor != null && cursor.getCount() >= 1) {
@@ -29,11 +29,9 @@ public class LoginActivty extends Activity implements OnClickListener {
 			gotoHome();
 		} else {
 			overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_slide_left_out);
-			addDichVu();
 
 			setContentView(R.layout.activity_login);
 			findViewById(R.id.activity_login_btn).setOnClickListener(this);
-
 			HeaderView header = (HeaderView) findViewById(R.id.activity_login_header);
 			header.setTextHeader(R.string.dangnhap);
 			header.showButton(false, false);
@@ -62,6 +60,7 @@ public class LoginActivty extends Activity implements OnClickListener {
 
 			if (_id > 0) {
 				// add dich vu
+				addDichVu();
 				gotoHome();
 			} else {
 				Toast.makeText(this, "login fail", Toast.LENGTH_SHORT).show();
@@ -76,20 +75,20 @@ public class LoginActivty extends Activity implements OnClickListener {
 		String icon = "http://ecx.images-amazon.com/images/I/719CZqP48hL._SY300_.png";
 		String linkFullContent = "http://searchenginewatch.com/sew/how-to/2340758/what-type-of-content-should-you-create-long-or-short";
 		String name = "IMusic";
-		String shortContent = "So, going forward, which form of content should you focus your content creation energy on: short or long, or perhaps a mix? If you go for a mix, then at what ratio? Let's look at some factors you need to consider that will help you make this decision.";
+		String shortContent = "Website nhạc trực tuyến của tập đoàn viễn thông quân đội,Website nhạc trực tuyến của tập đoàn viễn thông quân đội,Website nhạc trực tuyến của tập đoàn viễn thông quân đội,Website nhạc trực tuyến của tập đoàn viễn thông quân đội ";
 		String url = "http://imusic.vn";
 
-		addDichVu("1", icon, linkFullContent, name + "1", shortContent, url);
-		addDichVu("2", icon, linkFullContent, name + "2", shortContent, url);
-		addDichVu("3", icon, linkFullContent, name + "3", shortContent, url);
-		addDichVu("4", icon, linkFullContent, name + "4", shortContent, url);
-		addDichVu("5", icon, linkFullContent, name + "5", shortContent, url);
-		addDichVu("6", icon, linkFullContent, name + "6", shortContent, url);
-		addDichVu("7", icon, linkFullContent, name + "7", shortContent, url);
-		addDichVu("8", icon, linkFullContent, name + "8", shortContent, url);
-		addDichVu("9", icon, linkFullContent, name + "9", shortContent, url);
-		addDichVu("10", icon, linkFullContent, name + "10", shortContent, url);
-		addDichVu("11", icon, linkFullContent, name + "11", shortContent, url);
+		addDichVu("1", icon, linkFullContent, "Dịch vụ IMusic", shortContent, url);
+		addDichVu("2", icon, linkFullContent, "Dịch vụ mobileTV", shortContent, url);
+		addDichVu("3", icon, linkFullContent, "Dịch vụ OMEGA Book", shortContent, url);
+		addDichVu("4", icon, linkFullContent, "Dịch vụ ORA", shortContent, url);
+		addDichVu("5", icon, linkFullContent, "Dịch vụ chăm sóc trẻ", shortContent, url);
+		addDichVu("6", icon, linkFullContent, "Dịch Vụ Cho người già", shortContent, url);
+		addDichVu("7", icon, linkFullContent, "Dịch vụ trẻ", shortContent, url);
+		addDichVu("8", icon, linkFullContent, "Dịch vụ vì nhân dân", shortContent, url);
+		addDichVu("9", icon, linkFullContent, "Dịch vụ nghe đài", shortContent, url);
+		addDichVu("10", icon, linkFullContent, "Dịch vụ tìm thông tin", shortContent, url);
+		addDichVu("11", icon, linkFullContent, "Dịch vụ thám hiểm", shortContent, url);
 	}
 
 	private void addDichVu(String isSystem, String icon, String linkFullContent, String name, String shortContent, String url) {
