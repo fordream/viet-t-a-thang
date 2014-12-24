@@ -1,16 +1,14 @@
 package vnp.com.mimusic.base.diablog;
 
-import com.vnp.core.view.wheel.AdapterWheel;
-import com.vnp.core.view.wheel.WheelView;
-import com.vnp.core.view.wheel.WheelViewAdapter;
+import java.util.Calendar;
 
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.base.BaseAdialog;
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.DataSetObserver;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +18,14 @@ import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
+import com.vnp.core.view.wheel.WheelView;
+import com.vnp.core.view.wheel.WheelView.OnWheelChangedListener;
+import com.vnp.core.view.wheel.WheelViewAdapter;
+
 public abstract class DateDialog extends BaseAdialog implements android.view.View.OnClickListener {
+	private int getYear() {
+		return Calendar.getInstance().get(Calendar.YEAR);
+	}
 
 	public DateDialog(Context context, int theme) {
 		super(context, theme);
@@ -38,6 +43,7 @@ public abstract class DateDialog extends BaseAdialog implements android.view.Vie
 		date_wheelview_year = (WheelView) findViewById(R.id.date_wheelview_year);
 		date_wheelview_month = (WheelView) findViewById(R.id.date_wheelview_month);
 		date_wheelview_date = (WheelView) findViewById(R.id.date_wheelview_date);
+
 		WheelViewAdapter adapterWheel = new WheelViewAdapter() {
 
 			@Override
@@ -52,7 +58,7 @@ public abstract class DateDialog extends BaseAdialog implements android.view.Vie
 
 			@Override
 			public int getItemsCount() {
-				return 10;
+				return 30;
 			}
 
 			@Override
@@ -64,7 +70,8 @@ public abstract class DateDialog extends BaseAdialog implements android.view.Vie
 
 				LayoutParams layoutParams = new LayoutParams(LayoutParams.FILL_PARENT, (int) parent.getContext().getResources().getDimension(R.dimen.dimen_50dp));
 				convertView.setLayoutParams(layoutParams);
-				((TextView) convertView).setText(index + "");
+
+				((TextView) convertView).setText((getYear() - index) + "");
 				((TextView) convertView).setGravity(Gravity.CENTER);
 				((TextView) convertView).setTextSize(parent.getContext().getResources().getDimension(R.dimen.dimen_13dp));
 				((TextView) convertView).setTextColor(Color.WHITE);
@@ -119,7 +126,7 @@ public abstract class DateDialog extends BaseAdialog implements android.view.Vie
 				return null;
 			}
 		});
-
+		showDate(1, getYear());
 		findViewById(R.id.date_dialog_main).startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.abc_slide_in_bottom));
 		findViewById(R.id.date_close).setOnClickListener(new View.OnClickListener() {
 
@@ -136,6 +143,34 @@ public abstract class DateDialog extends BaseAdialog implements android.view.Vie
 				mDismiss(true);
 			}
 		});
+
+		date_wheelview_month.addChangingListener(new OnWheelChangedListener() {
+
+			@Override
+			public void onChanged(WheelView wheel, int oldValue, int newValue) {
+				showDate(date_wheelview_month.getCurrentItem() + 1, getYear() - date_wheelview_year.getCurrentItem());
+			}
+		});
+
+		date_wheelview_year.addChangingListener(new OnWheelChangedListener() {
+
+			@Override
+			public void onChanged(WheelView wheel, int oldValue, int newValue) {
+				showDate(date_wheelview_month.getCurrentItem() + 1, getYear() - date_wheelview_year.getCurrentItem());
+			}
+		});
+	}
+
+	private void showDate(int month, int year) {
+
+		Log.e("MONTH", year + " : " + month);
+		int curent = date_wheelview_date.getCurrentItem();
+		DateWheelViewAdapter dateWheelViewAdapter = new DateWheelViewAdapter(month, year);
+		date_wheelview_date.setViewAdapter(dateWheelViewAdapter);
+
+		if (curent >= dateWheelViewAdapter.getItemsCount()) {
+			date_wheelview_date.setCurrentItem(dateWheelViewAdapter.getItemsCount() - 1);
+		}
 	}
 
 	public void mDismiss(final boolean isSendData) {
@@ -173,6 +208,59 @@ public abstract class DateDialog extends BaseAdialog implements android.view.Vie
 
 	@Override
 	public void onClick(View v) {
+	}
+
+	private class DateWheelViewAdapter implements WheelViewAdapter {
+		private int month = 1;
+		private int year;
+
+		public DateWheelViewAdapter(int month, int year) {
+			this.year = year;
+			this.month = month;
+		}
+
+		@Override
+		public int getItemsCount() {
+			if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
+				return 31;
+			} else if (month == 4 || month == 6 || month == 9 || month == 11) {
+				return 30;
+			}
+
+			return year % 4 == 0 ? 29 : 28;
+		}
+
+		@Override
+		public View getItem(int index, View convertView, ViewGroup parent) {
+			if (convertView == null) {
+				convertView = new TextView(parent.getContext());
+			}
+
+			LayoutParams layoutParams = new LayoutParams(LayoutParams.FILL_PARENT, (int) parent.getContext().getResources().getDimension(R.dimen.dimen_50dp));
+			convertView.setLayoutParams(layoutParams);
+			((TextView) convertView).setText((index + 1) + "");
+			((TextView) convertView).setGravity(Gravity.CENTER);
+			((TextView) convertView).setTextSize(parent.getContext().getResources().getDimension(R.dimen.dimen_13dp));
+			((TextView) convertView).setTextColor(Color.WHITE);
+
+			return convertView;
+		}
+
+		@Override
+		public View getEmptyItem(View convertView, ViewGroup parent) {
+			return null;
+		}
+
+		@Override
+		public void registerDataSetObserver(DataSetObserver observer) {
+
+		}
+
+		@Override
+		public void unregisterDataSetObserver(DataSetObserver observer) {
+
+		}
+
 	}
 
 }
