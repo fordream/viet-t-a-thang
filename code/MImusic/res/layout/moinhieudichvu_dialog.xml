@@ -25,13 +25,12 @@
         android:padding="@dimen/dimen_10dp" >
 
         <EditText
-            android:id="@+id/moidichvuchonhieunguoi_number"
+            android:id="@+id/moinhieudichvu_dialog_search"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_35dp"
             android:background="@drawable/menu_right_edit"
             android:gravity="center_vertical"
             android:hint="@string/timkiemdichvu"
-            android:inputType="phone"
             android:paddingLeft="@dimen/dimen_15dp"
             android:singleLine="true"
             android:textColor="#336666"
@@ -42,7 +41,7 @@
             android:id="@+id/moidichvuchonhieunguoi_add"
             android:layout_width="@dimen/dimen_35dp"
             android:layout_height="@dimen/dimen_35dp"
-            android:layout_alignRight="@+id/moidichvuchonhieunguoi_number"
+            android:layout_alignRight="@+id/moinhieudichvu_dialog_search"
             android:layout_marginLeft="@dimen/dimen_5dp"
             android:background="@drawable/tranfer"
             android:padding="@dimen/dimen_5dp"

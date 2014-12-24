@@ -10,22 +10,25 @@ import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
 public class MoiNhieuDichVuFragment extends Fragment implements android.view.View.OnClickListener {
 	private LinearLayout moinhieudichvu_dialog_list_hor;
 	private MoiNhieuDichVuAdapter adapter;
+	private EditText moinhieudichvu_dialog_search;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.moinhieudichvu_dialog, null);
-
+		moinhieudichvu_dialog_search = (EditText) view.findViewById(R.id.moinhieudichvu_dialog_search);
 		moinhieudichvu_dialog_list_hor = (LinearLayout) view.findViewById(R.id.moinhieudichvu_dialog_list_hor);
-
 		HeaderView maumoi_headerview = (HeaderView) view.findViewById(R.id.moinhieudichvu_dialog_headerview);
 		maumoi_headerview.setTextHeader(R.string.moi);
 		maumoi_headerview.setButtonLeftImage(true, R.drawable.btn_back);
@@ -50,6 +53,7 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 		String where = String.format("%s = '%s'", User._ID, getArguments().getString(User._ID));
 		Cursor cursor = getActivity().getContentResolver().query(User.CONTENT_URI, null, where, null, null);
 		if (cursor != null && cursor.getCount() >= 1) {
+			cursor.moveToNext();
 			MenuRightItemView moinhieudichvu_dialog_menurightitem = (MenuRightItemView) view.findViewById(R.id.moinhieudichvu_dialog_menurightitem);
 			moinhieudichvu_dialog_menurightitem.initData(cursor, "");
 		}
@@ -60,13 +64,32 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 
 		ListView maumoi_list = (ListView) view.findViewById(R.id.moinhieudichvu_dialog_list);
 		Cursor cursorDV = getActivity().getContentResolver().query(DichVu.CONTENT_URI, null, null, null, null);
+		moinhieudichvu_dialog_search.addTextChangedListener(new TextWatcher() {
 
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				adapter.setTextSearch(moinhieudichvu_dialog_search.getText().toString().trim());
+				adapter.notifyDataSetChanged();
+			}
+		});
 		maumoi_list.setAdapter(adapter = new MoiNhieuDichVuAdapter(getActivity(), cursorDV) {
 
 			@Override
 			public void addOrRemove(final String _id, boolean isAdd) {
 				if (isAdd) {
 					final MoiNhieuDichVuAddItemView addItemView = new MoiNhieuDichVuAddItemView(getActivity());
+					addItemView.setMId(_id);
+
 					moinhieudichvu_dialog_list_hor.addView(addItemView);
 					addItemView.findViewById(R.id.x).setOnClickListener(new View.OnClickListener() {
 						@Override
@@ -76,6 +99,14 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 							adapter.notifyDataSetChanged();
 						}
 					});
+				} else {
+					for (int i = 0; i < moinhieudichvu_dialog_list_hor.getChildCount(); i++) {
+						MoiNhieuDichVuAddItemView child = ((MoiNhieuDichVuAddItemView) moinhieudichvu_dialog_list_hor.getChildAt(i));
+						if (child.getmId().equals(_id)) {
+							moinhieudichvu_dialog_list_hor.removeView(child);
+							break;
+						}
+					}
 				}
 			}
 
@@ -99,6 +130,16 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 			// moinhieudichvu_dialog_list_hor.removeView(MoiNhieuDichVuAddItemView.this);
 			// }
 			// });
+		}
+
+		private String mId = "";
+
+		public String getmId() {
+			return mId;
+		}
+
+		public void setMId(String _id) {
+			mId = _id;
 		}
 
 	}
