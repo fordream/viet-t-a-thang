@@ -2,6 +2,7 @@ package com.aretha.slidemenudemo.fragment;
 
 import vnp.com.db.User;
 import vnp.com.mimusic.R;
+import vnp.com.mimusic.base.diablog.DateDialog;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.view.HeaderView;
 import android.app.Activity;
@@ -31,10 +32,11 @@ public class InforFragment extends Fragment implements OnItemClickListener, View
 		super.onActivityCreated(savedInstanceState);
 	}
 
-	private ImageView menu_left_img_cover, menu_left_img_avatar;
+	private ImageView menu_left_img_cover, menu_left_img_avatar, infor_cover_click_change;
 	private TextView menu_left_tv_name;
 	private Button activity_login_btn;
-	private EditText infor_name, infor_bidanh, infor_ngaysinh, infor_diachi;
+	private EditText infor_name, infor_bidanh, infor_diachi;
+	private TextView infor_ngaysinh;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -51,14 +53,14 @@ public class InforFragment extends Fragment implements OnItemClickListener, View
 				getActivity().overridePendingTransition(R.anim.abc_slide_left_in, R.anim.abc_slide_right_out);
 			}
 		});
-
+		infor_cover_click_change = (ImageView) view.findViewById(R.id.infor_cover_click_change);
 		menu_left_img_cover = (ImageView) view.findViewById(R.id.menu_left_img_cover);
 		menu_left_img_avatar = (ImageView) view.findViewById(R.id.menu_left_img_avatar);
 		menu_left_tv_name = (TextView) view.findViewById(R.id.menu_left_tv_name);
 		activity_login_btn = (Button) view.findViewById(R.id.activity_login_btn);
 		infor_name = (EditText) view.findViewById(R.id.infor_name);
 		infor_bidanh = (EditText) view.findViewById(R.id.infor_didanh);
-		infor_ngaysinh = (EditText) view.findViewById(R.id.infor_ngaysinh);
+		infor_ngaysinh = (TextView) view.findViewById(R.id.infor_ngaysinh);
 		infor_diachi = (EditText) view.findViewById(R.id.infor_address);
 
 		/**
@@ -67,8 +69,9 @@ public class InforFragment extends Fragment implements OnItemClickListener, View
 
 		showData();
 		activity_login_btn.setOnClickListener(this);
-		menu_left_img_cover.setOnClickListener(this);
+		infor_cover_click_change.setOnClickListener(this);
 		menu_left_img_avatar.setOnClickListener(this);
+		infor_ngaysinh.setOnClickListener(this);
 		return view;
 	}
 
@@ -78,6 +81,9 @@ public class InforFragment extends Fragment implements OnItemClickListener, View
 			cursor.moveToNext();
 			menu_left_tv_name.setText(String.format("%s(%s)", Conts.getName(cursor), cursor.getString(cursor.getColumnIndex(User.USER))));
 			infor_name.setText(Conts.getName(cursor));
+			infor_bidanh.setText(cursor.getString(cursor.getColumnIndex(User.BIDANH)));
+			infor_diachi.setText(cursor.getString(cursor.getColumnIndex(User.DIACHI)));
+			infor_ngaysinh.setText(cursor.getString(cursor.getColumnIndex(User.NGAYSINH)));
 
 			String cover = cursor.getString(cursor.getColumnIndex(User.COVER));
 
@@ -87,6 +93,7 @@ public class InforFragment extends Fragment implements OnItemClickListener, View
 				Bitmap bitmap = BitmapFactory.decodeFile(cover, options);
 				menu_left_img_cover.setImageBitmap(bitmap);
 			}
+
 			String avatar = cursor.getString(cursor.getColumnIndex(User.AVATAR));
 
 			if (!Conts.isBlank(avatar)) {
@@ -108,7 +115,6 @@ public class InforFragment extends Fragment implements OnItemClickListener, View
 
 		if (requestCode == 100 && resultCode == Activity.RESULT_OK) {
 			String path = Conts.getPath(getActivity(), data.getData());
-
 			if (path != null) {
 				ContentValues contentValues = new ContentValues();
 				contentValues.put(User.COVER, path);
@@ -149,10 +155,16 @@ public class InforFragment extends Fragment implements OnItemClickListener, View
 
 	@Override
 	public void onClick(View v) {
-		if (v.equals(menu_left_img_avatar)) {
+		if (v.equals(infor_ngaysinh)) {
+			new DateDialog(getActivity()) {
+				@Override
+				public void sendData(String date, String month, String year) {
+
+				}
+			}.show();
+		} else if (v.equals(menu_left_img_avatar)) {
 			Builder builder = new Builder(getActivity());
 			builder.setItems(new String[] { "Camera", "Gallery" }, new DialogInterface.OnClickListener() {
-
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					if (which == 1) {
@@ -166,7 +178,7 @@ public class InforFragment extends Fragment implements OnItemClickListener, View
 				}
 			});
 			builder.show();
-		} else if (v.equals(menu_left_img_cover)) {
+		} else if (v.equals(infor_cover_click_change)) {
 			Builder builder = new Builder(getActivity());
 			builder.setItems(new String[] { "Camera", "Gallery" }, new DialogInterface.OnClickListener() {
 
@@ -191,6 +203,9 @@ public class InforFragment extends Fragment implements OnItemClickListener, View
 			} else {
 				ContentValues contentValues = new ContentValues();
 				contentValues.put(User.NAME, name);
+				contentValues.put(User.BIDANH, infor_bidanh.getText().toString());
+				contentValues.put(User.NGAYSINH, infor_ngaysinh.getText().toString());
+				contentValues.put(User.DIACHI, infor_diachi.getText().toString());
 				int index = getActivity().getContentResolver().update(User.CONTENT_URI, contentValues, String.format("%s = '1'", User.STATUS), null);
 
 				if (index > 0) {

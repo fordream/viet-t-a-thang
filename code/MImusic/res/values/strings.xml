@@ -19,7 +19,9 @@
     <string name="tintuc">Tin tức</string>
     <string name="dexuatchoban">Đề xuất cho bạn</string>
     <string name="chitietcanhanbangxephang">Chi tiết cá nhân bảng xếp hạng</string>
-
+    <string name="bidanh">Bí danh</string>
+    <string name="ngaysinh">Ngày sinh</string>
+    <string name="chonngaysinh">Chọn ngày sinh</string>
     <!--  -->
     <string name="sogiaodichthanhcongtrongthang">Số giao dịch thành công trong tháng</string>
     <string name="sogiaodichthanhcong">Số giao dịch thành công</string>
@@ -30,6 +32,7 @@
     <string name="sothuebaonemoi">Số thuê bao nên mời</string>
     <string name="baocaochitiettaikhoan">Báo cáo chi tiết tài khoản</string>
     <string name="timkiemdichvu">Tìm kiếm dịch vụ</string>
+    <string name="diachi">Địa chỉ</string>
     <!--  -->
     <string name="bancannhapthongtin">Bạn cần nhập thông tin</string>
     <string name="ten">Tên</string>
