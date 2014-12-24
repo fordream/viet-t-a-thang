@@ -59,7 +59,6 @@ public class LoginActivty extends Activity implements OnClickListener {
 			int _id = Integer.parseInt(uri.getPathSegments().get(1));
 
 			if (_id > 0) {
-				// add dich vu
 				addDichVu();
 				gotoHome();
 			} else {

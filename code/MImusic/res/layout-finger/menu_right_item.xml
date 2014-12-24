@@ -5,51 +5,58 @@
     android:orientation="vertical" >
 
     <LinearLayout
+        android:id="@+id/menurightitem_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dimen_10dp"
-        android:gravity="center" >
-
-        <ImageView
-            android:id="@+id/menu_right_item_img_icon"
-            android:layout_width="@dimen/dimen_60dp"
-            android:layout_height="@dimen/dimen_60dp"
-            android:layout_marginRight="@dimen/dimen_5dp"
-            android:background="@drawable/bangxephang_avatar_example" />
+        android:orientation="vertical" >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:orientation="vertical"
-            android:paddingLeft="@dimen/dimen_0dp"
-            android:paddingRight="@dimen/dimen_3dp" >
+            android:layout_margin="@dimen/dimen_10dp"
+            android:gravity="center" >
 
-            <TextView
-                android:id="@+id/menu_right_item_tv_name"
+            <ImageView
+                android:id="@+id/menu_right_item_img_icon"
+                android:layout_width="@dimen/dimen_60dp"
+                android:layout_height="@dimen/dimen_60dp"
+                android:layout_marginRight="@dimen/dimen_5dp"
+                android:background="@drawable/bangxephang_avatar_example" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:text="Trần Hữu Nhật Minh"
-                android:textColor="#333333"
-                android:textSize="@dimen/dimen_14dp"
-                android:textStyle="bold" />
+                android:layout_centerVertical="true"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/dimen_0dp"
+                android:paddingRight="@dimen/dimen_3dp" >
 
-            <TextView
-                android:id="@+id/menu_right_item_tv_link"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/dimen_3dp"
-                android:singleLine="true"
-                android:text="imuzik | imuzik | imuzik"
-                android:textColor="#333333"
-                android:textSize="@dimen/dimen_10dp" />
+                <TextView
+                    android:id="@+id/menu_right_item_tv_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="Trần Hữu Nhật Minh"
+                    android:textColor="#333333"
+                    android:textSize="@dimen/dimen_14dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/menu_right_item_tv_link"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dimen_3dp"
+                    android:singleLine="true"
+                    android:text="imuzik | imuzik | imuzik"
+                    android:textColor="#333333"
+                    android:textSize="@dimen/dimen_10dp" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="@color/f3f3f3" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/f3f3f3" />
+    </LinearLayout>
 
 </LinearLayout>

@@ -3,6 +3,7 @@
  */
 package vnp.com.mimusic.activity;
 
+import vnp.com.db.User;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.main.BaseMusicSlideMenuActivity;
 import vnp.com.mimusic.util.Conts;
@@ -72,7 +73,12 @@ public class RootMenuActivity extends FragmentActivity {
 		} else if (Conts.TINTUC.equals(type)) {
 			changeFragemt(R.id.root_main_fragment, new TinTucFragment());
 		} else if (Conts.NHIEUDICHVU.equals(type)) {
-			changeFragemt(R.id.root_main_fragment, new MoiNhieuDichVuFragment());
+			String _id = getIntent().getStringExtra(User._ID);
+			Bundle bundle = new Bundle();
+			bundle.putString(User._ID, _id);
+			MoiNhieuDichVuFragment moiNhieuDichVuFragment = new MoiNhieuDichVuFragment();
+			moiNhieuDichVuFragment.setArguments(bundle);
+			changeFragemt(R.id.root_main_fragment, moiNhieuDichVuFragment);
 		} else if (Conts.CHITIETTINTUC.equals(type)) {
 			changeFragemt(R.id.root_main_fragment, new ChiTietTintucFragment());
 		} else if (Conts.MOIDICHVUCHONHIEUNGUOI.equals(type)) {

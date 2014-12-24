@@ -1,5 +1,6 @@
 package vnp.com.mimusic.main;
 
+import vnp.com.db.User;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.base.diablog.DangKyDialog;
@@ -14,6 +15,7 @@ import android.app.TabActivity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -157,13 +159,18 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 		mactivity_menu_right.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+			public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+				Cursor cursor = (Cursor) arg0.getItemAtPosition(position);
+				final String _id = cursor.getString(cursor.getColumnIndex(User._ID));
+
 				getSlideMenu().close(true);
 				getSlideMenu().postDelayed(new Runnable() {
 					@Override
 					public void run() {
+
 						Intent intent = new Intent(BaseMusicSlideMenuActivity.this, RootMenuActivity.class);
 						intent.putExtra("type", Conts.NHIEUDICHVU);
+						intent.putExtra(User._ID, _id + "");
 						startActivity(intent);
 						overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_slide_left_out);
 					}
@@ -202,26 +209,6 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 				ReCommentView commentView = new ReCommentView(BaseMusicSlideMenuActivity.this);
 				((FrameLayout) findViewById(R.id.activity_slidemenu_recomment)).addView(commentView);
 				commentView.start();
-				// new ReCommnetDialog(BaseMusicSlideMenuActivity.this) {
-				// public void openDichvuDetail() {
-				// Intent intent = new Intent(BaseMusicSlideMenuActivity.this,
-				// RootMenuActivity.class);
-				// intent.putExtra("type", Conts.CHITIETDICHVU);
-				// startActivity(intent);
-				// overridePendingTransition(R.anim.abc_slide_right_in,
-				// R.anim.abc_slide_left_out);
-				// };
-				//
-				// @Override
-				// public void openMoiContact() {
-				// Intent intent = new Intent(BaseMusicSlideMenuActivity.this,
-				// RootMenuActivity.class);
-				// intent.putExtra("type", Conts.NHIEUDICHVU);
-				// startActivity(intent);
-				// overridePendingTransition(R.anim.abc_slide_right_in,
-				// R.anim.abc_slide_left_out);
-				// }
-				// }.show();
 			}
 		}, 3000);
 

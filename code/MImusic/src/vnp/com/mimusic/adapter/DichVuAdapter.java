@@ -29,6 +29,15 @@ public abstract class DichVuAdapter extends CursorAdapter {
 			convertView = new DichVuItemView(context);
 		}
 
+		/*
+		 * kiem tra xem co hien thi item nay khong
+		 */
+		String name = cursor.getString(cursor.getColumnIndex(DichVu.NAME));
+		convertView.findViewById(R.id.home_item_main).setVisibility(name.toUpperCase().contains(textSearch.toUpperCase()) ? View.VISIBLE : View.GONE);
+
+		/**
+		 * set data
+		 */
 		((DichVuItemView) convertView).setData(cursor);
 		int poistion = cursor.getPosition();
 		Resources resources = context.getResources();
@@ -106,4 +115,10 @@ public abstract class DichVuAdapter extends CursorAdapter {
 	}
 
 	public abstract void moiDVChoNhieuNguoi();
+
+	private String textSearch = "";
+
+	public void setTextSearch(String textSearch) {
+		this.textSearch = textSearch;
+	}
 }

@@ -35,7 +35,7 @@ public class VApplication extends Application {
 								if (name == null || name != null && name.trim().equals("")) {
 									name = phoneNo;
 								}
-								
+
 								// save to contact DB
 								ContentValues values = new ContentValues();
 								values.put(User.USER, phoneNo);
@@ -46,11 +46,10 @@ public class VApplication extends Application {
 								if (cursor != null && cursor.getCount() >= 1) {
 									cursor.close();
 									getContentResolver().update(User.CONTENT_URI, values, selection, null);
-									Log.e("dkm", String.format("update name : %s phone :%s", name, phoneNo));
 								} else {
 									cursor.close();
+									values.put(User.STATUS, "0");
 									getContentResolver().insert(User.CONTENT_URI, values);
-									Log.e("dkm", String.format("insert name : %s phone :%s", name, phoneNo));
 								}
 
 							}
