@@ -34,7 +34,7 @@ public class InforFragment extends Fragment implements OnItemClickListener, View
 	private ImageView menu_left_img_cover, menu_left_img_avatar;
 	private TextView menu_left_tv_name;
 	private Button activity_login_btn;
-	private EditText infor_name, infor_name_1, infor_email, infor_email_1;
+	private EditText infor_name, infor_bidanh, infor_ngaysinh, infor_diachi;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -57,9 +57,9 @@ public class InforFragment extends Fragment implements OnItemClickListener, View
 		menu_left_tv_name = (TextView) view.findViewById(R.id.menu_left_tv_name);
 		activity_login_btn = (Button) view.findViewById(R.id.activity_login_btn);
 		infor_name = (EditText) view.findViewById(R.id.infor_name);
-		infor_name_1 = (EditText) view.findViewById(R.id.infor_name_1);
-		infor_email = (EditText) view.findViewById(R.id.infor_email);
-		infor_email_1 = (EditText) view.findViewById(R.id.infor_email_1);
+		infor_bidanh = (EditText) view.findViewById(R.id.infor_didanh);
+		infor_ngaysinh = (EditText) view.findViewById(R.id.infor_ngaysinh);
+		infor_diachi = (EditText) view.findViewById(R.id.infor_address);
 
 		/**
 		 * get data
