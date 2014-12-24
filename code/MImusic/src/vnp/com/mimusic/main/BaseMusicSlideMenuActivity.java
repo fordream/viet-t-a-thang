@@ -16,6 +16,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -48,6 +50,12 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 			imm.hideSoftInputFromWindow(binder, 0);
 		} catch (Exception e) {
 		}
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		((MenuLeftView) findViewById(R.id.mactivity_slidemenu_menuleft)).showData();
 	}
 
 	@Override

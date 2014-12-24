@@ -3,14 +3,10 @@ package vnp.com.mimusic.util;
 import vnp.com.db.User;
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.AvoidXfermode.Mode;
 import android.graphics.Bitmap;
-import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.PorterDuffXfermode;
+import android.graphics.Path;
 import android.graphics.Rect;
-import android.graphics.RectF;
 import android.net.Uri;
 import android.provider.MediaStore;
 
@@ -66,23 +62,33 @@ public class Conts {
 	}
 
 	public static Bitmap getRoundedCornerBitmap(Bitmap bitmap) {
-		Bitmap output = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Config.ARGB_8888);
-		Canvas canvas = new Canvas(output);
+		bitmap = cropSquare(bitmap);
+		bitmap = getRoundedShape(bitmap);
+		return bitmap;
+	}
 
-		final int color = 0xff424242;
-		final Paint paint = new Paint();
-		int width = Math.min(bitmap.getWidth(), bitmap.getHeight());
-		final Rect rect = new Rect(bitmap.getWidth() / 2 - width / 2, bitmap.getHeight() / 2 - width / 2, bitmap.getWidth() / 2 + width / 2, bitmap.getHeight() / 2 + width / 2);
-		final RectF rectF = new RectF(rect);
-		final float roundPx = width / 2;
+	public static Bitmap cropSquare(Bitmap bitmap) {
+		int value = Math.min(bitmap.getHeight(), bitmap.getWidth());
+		return Bitmap.createBitmap(bitmap, (bitmap.getWidth() - value) / 2, (bitmap.getHeight() - value) / 2, value, value);
+	}
 
-		paint.setAntiAlias(true);
-		canvas.drawARGB(0, 0, 0, 0);
-		paint.setColor(color);
-		canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
+	public static Bitmap getRoundedShape(Bitmap scaleBitmapImage) {
+		int targetWidth = scaleBitmapImage.getWidth();
+		int targetHeight = scaleBitmapImage.getHeight();
+		Bitmap targetBitmap = Bitmap.createBitmap(targetWidth, targetHeight, Bitmap.Config.ARGB_8888);
 
-		canvas.drawBitmap(bitmap, rect, rect, paint);
+		Canvas canvas = new Canvas(targetBitmap);
 
-		return output;
+		Path path = new Path();
+
+		path.addCircle(((float) targetWidth - 1) / 2, ((float) targetHeight - 1) / 2, (Math.min(((float) targetWidth), ((float) targetHeight)) / 2), Path.Direction.CCW);
+
+		canvas.clipPath(path);
+
+		Bitmap sourceBitmap = scaleBitmapImage;
+
+		canvas.drawBitmap(sourceBitmap, new Rect(0, 0, sourceBitmap.getWidth(), sourceBitmap.getHeight()), new Rect(0, 0, targetWidth, targetHeight), null);
+
+		return targetBitmap;
 	}
 }
