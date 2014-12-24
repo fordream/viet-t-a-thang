@@ -27,6 +27,7 @@ public class User {
 	public static final String SOLUONG = "soluong";
 	public static final String DOANHTHU = "doanhthu";
 	public static final String LISTIDUSERDAMOI = "listiduserdamoi";
+	public static final String COVER = "COVER";
 
 	public static final String CREATE_DB_TABLE() {
 		StringBuilder builder = new StringBuilder();
@@ -34,7 +35,7 @@ public class User {
 		builder.append("(");
 		builder.append(_ID).append(" INTEGER PRIMARY KEY AUTOINCREMENT").append(",");
 		String[] colums = new String[] {//
-		USER, PASSWORD, STATUS, ID, NAME, NAME_CONTACT, EMAIL, AVATAR, LISTIDDVSUDUNG, SOLUONG, DOANHTHU, LISTIDUSERDAMOI //
+		USER, PASSWORD, STATUS, COVER, ID, NAME, NAME_CONTACT, EMAIL, AVATAR, LISTIDDVSUDUNG, SOLUONG, DOANHTHU, LISTIDUSERDAMOI //
 		};//
 			// builder.append(USER).append(" TEXT NOT NULL").append(",");
 			// builder.append(LISTIDDV).append(" TEXT NOT NULL");

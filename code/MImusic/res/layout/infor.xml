@@ -28,7 +28,16 @@
                 android:id="@+id/menu_left_img_cover"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/bg_avatar_example" />
+                android:scaleType="centerCrop"
+                android:src="@drawable/bg_avatar_example" />
+
+            <vnp.com.mimusic.view.CustomImageView
+                android:id="@+id/menu_left_img_avatar"
+                android:layout_width="@dimen/dimen_110dp"
+                android:layout_height="@dimen/dimen_110dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/menu_left_img_avatar_bg"
@@ -37,14 +46,6 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:background="@drawable/avatar_bg" />
-
-            <ImageView
-                android:id="@+id/menu_left_img_avatar"
-                android:layout_width="@dimen/dimen_110dp"
-                android:layout_height="@dimen/dimen_110dp"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:background="@drawable/avatar_example" />
         </RelativeLayout>
 
         <TextView
@@ -59,7 +60,7 @@
             android:textSize="@dimen/dimen_13dp" />
 
         <EditText
-            android:id="@+id/EditText03"
+            android:id="@+id/infor_name"
             android:layout_width="@dimen/dimen_200dp"
             android:layout_height="@dimen/dimen_35dp"
             android:layout_marginBottom="@dimen/dimen_10dp"
@@ -74,7 +75,7 @@
             android:textSize="@dimen/dimen_13dp" />
 
         <EditText
-            android:id="@+id/EditText02"
+            android:id="@+id/infor_email"
             android:layout_width="@dimen/dimen_200dp"
             android:layout_height="@dimen/dimen_35dp"
             android:layout_marginBottom="@dimen/dimen_10dp"
@@ -88,7 +89,7 @@
             android:textSize="@dimen/dimen_13dp" />
 
         <EditText
-            android:id="@+id/EditText01"
+            android:id="@+id/infor_name_1"
             android:layout_width="@dimen/dimen_200dp"
             android:layout_height="@dimen/dimen_35dp"
             android:layout_marginBottom="@dimen/dimen_10dp"
@@ -102,7 +103,7 @@
             android:textSize="@dimen/dimen_13dp" />
 
         <EditText
-            android:id="@+id/activity_login_number_phone"
+            android:id="@+id/infor_email_1"
             android:layout_width="@dimen/dimen_200dp"
             android:layout_height="@dimen/dimen_35dp"
             android:layout_marginBottom="@dimen/dimen_10dp"

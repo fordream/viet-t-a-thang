@@ -31,6 +31,7 @@
     <string name="baocaochitiettaikhoan">Báo cáo chi tiết tài khoản</string>
     <string name="timkiemdichvu">Tìm kiếm dịch vụ</string>
     <!--  -->
+    <string name="bancannhapthongtin">Bạn cần nhập thông tin</string>
     <string name="ten">Tên</string>
     <string name="email">Email</string>
     <string name="luthaydoi">Lưu thay đổi</string>
@@ -61,7 +62,10 @@
     <string name="thuongtinnguoidung">Chỉnh sửa thông tin</string>
     <string name="orther">Other</string>
     <string name="tinhnangdichvu">Tính năng dịch vụ</string>
-    <string name="tinhnangdichvuexample">        1.Website nhặc trực tuyến của tập đoản viễn thông quân đội viettel, các bài hát hot nhất, mới nhất , kết nối với các nhạc sĩ tên tuổi nhất...
+    <string name="updatethanhcong">Cập nhật thành công</string>
+    <string name="updatethatbai">Cập nhật thất bại</string>
+    <string name="chonanh">Chọn ảnh</string>
+    <string name="tinhnangdichvuexample">1.Website nhặc trực tuyến của tập đoản viễn thông quân đội viettel, các bài hát hot nhất, mới nhất , kết nối với các nhạc sĩ tên tuổi nhất...
          \n\n2.Website nhặc trực tuyến của tập đoản viễn thông quân đội viettel, các bài hát hot nhất, mới nhất , kết nối với các nhạc sĩ tên tuổi nhất...
          \n\n3.Website nhặc trực tuyến của tập đoản viễn thông quân đội viettel, các bài hát hot nhất, mới nhất , kết nối với các nhạc sĩ tên tuổi nhất...
          \n\n4.Website nhặc trực tuyến của tập đoản viễn thông quân đội viettel, các bài hát hot nhất, mới nhất , kết nối với các nhạc sĩ tên tuổi nhất...
@@ -82,6 +86,8 @@
     <string name="dongy">Đồng ý</string>
     <string name="bangxephang_no_data">Xin lỗi quý khách hàng!\n\nHiện tại KÊNH BÁN VAS không có bảng xếp hạng doanh thu nào. Chúng tôi sẽ cập nhật lại sau.</string>
     <string name="tatca">Tất cả</string>
+    <string name="khongthelayduocduongdan">Không thể lấy được đường dẫn file ảnh</string>
+
     <color name="bangxephang_header_activr">#a73444</color>
     <color name="bangxephang_header_un_active">#475055</color>
     <color name="f3f3f3">#f3f3f3</color>
@@ -90,6 +96,5 @@
     <color name="e7e9ec">#e7e9ec</color>
     <color name="c657180">#657180</color>
     <color name="c475055">#475055</color>
-    
 
 </resources>
