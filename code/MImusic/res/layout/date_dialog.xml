@@ -58,7 +58,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_160dp"
+            android:layout_height="@dimen/dimen_200dp"
             android:weightSum="3" >
 
             <RelativeLayout
@@ -67,7 +67,7 @@
                 android:layout_weight="1" >
 
                 <com.vnp.core.view.wheel.WheelView
-                    android:id="@+id/wheelView1"
+                    android:id="@+id/date_wheelview_date"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </RelativeLayout>
@@ -78,7 +78,7 @@
                 android:layout_weight="1" >
 
                 <com.vnp.core.view.wheel.WheelView
-                    android:id="@+id/WheelView01"
+                    android:id="@+id/date_wheelview_month"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_alignParentLeft="true"
@@ -98,7 +98,7 @@
                 android:layout_weight="1" >
 
                 <com.vnp.core.view.wheel.WheelView
-                    android:id="@+id/WheelView02"
+                    android:id="@+id/date_wheelview_year"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_alignParentLeft="true"

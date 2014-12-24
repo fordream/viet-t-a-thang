@@ -588,9 +588,9 @@ public class WheelView extends View {
 
 		if (viewAdapter != null && viewAdapter.getItemsCount() > 0) {
 			updateView();
-
-			drawItems(canvas);
 			drawCenterRect(canvas);
+			drawItems(canvas);
+			
 		}
 
 		drawShadows(canvas);
@@ -606,7 +606,6 @@ public class WheelView extends View {
 		int height = (int) (1.5 * getItemHeight());
 		topShadow.setBounds(0, 0, getWidth(), height);
 		topShadow.draw(canvas);
-
 		bottomShadow.setBounds(0, getHeight() - height, getWidth(), getHeight());
 		bottomShadow.draw(canvas);
 	}

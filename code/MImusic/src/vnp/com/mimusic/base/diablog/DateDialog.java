@@ -1,14 +1,24 @@
 package vnp.com.mimusic.base.diablog;
 
+import com.vnp.core.view.wheel.AdapterWheel;
+import com.vnp.core.view.wheel.WheelView;
+import com.vnp.core.view.wheel.WheelViewAdapter;
+
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.base.BaseAdialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.DataSetObserver;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
+import android.widget.TextView;
 
 public abstract class DateDialog extends BaseAdialog implements android.view.View.OnClickListener {
 
@@ -20,9 +30,96 @@ public abstract class DateDialog extends BaseAdialog implements android.view.Vie
 		super(context);
 	}
 
+	private WheelView date_wheelview_year, date_wheelview_month, date_wheelview_date;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		date_wheelview_year = (WheelView) findViewById(R.id.date_wheelview_year);
+		date_wheelview_month = (WheelView) findViewById(R.id.date_wheelview_month);
+		date_wheelview_date = (WheelView) findViewById(R.id.date_wheelview_date);
+		WheelViewAdapter adapterWheel = new WheelViewAdapter() {
+
+			@Override
+			public void unregisterDataSetObserver(DataSetObserver observer) {
+
+			}
+
+			@Override
+			public void registerDataSetObserver(DataSetObserver observer) {
+
+			}
+
+			@Override
+			public int getItemsCount() {
+				return 10;
+			}
+
+			@Override
+			public View getItem(int index, View convertView, ViewGroup parent) {
+
+				if (convertView == null) {
+					convertView = new TextView(parent.getContext());
+				}
+
+				LayoutParams layoutParams = new LayoutParams(LayoutParams.FILL_PARENT, (int) parent.getContext().getResources().getDimension(R.dimen.dimen_50dp));
+				convertView.setLayoutParams(layoutParams);
+				((TextView) convertView).setText(index + "");
+				((TextView) convertView).setGravity(Gravity.CENTER);
+				((TextView) convertView).setTextSize(parent.getContext().getResources().getDimension(R.dimen.dimen_13dp));
+				((TextView) convertView).setTextColor(Color.WHITE);
+
+				return convertView;
+			}
+
+			@Override
+			public View getEmptyItem(View convertView, ViewGroup parent) {
+				return null;
+			}
+		};
+
+		date_wheelview_year.setViewAdapter(adapterWheel);
+
+		date_wheelview_month.setViewAdapter(new WheelViewAdapter() {
+
+			@Override
+			public void unregisterDataSetObserver(DataSetObserver observer) {
+
+			}
+
+			@Override
+			public void registerDataSetObserver(DataSetObserver observer) {
+
+			}
+
+			@Override
+			public int getItemsCount() {
+				return 12;
+			}
+
+			@Override
+			public View getItem(int index, View convertView, ViewGroup parent) {
+
+				if (convertView == null) {
+					convertView = new TextView(parent.getContext());
+				}
+
+				LayoutParams layoutParams = new LayoutParams(LayoutParams.FILL_PARENT, (int) parent.getContext().getResources().getDimension(R.dimen.dimen_50dp));
+				convertView.setLayoutParams(layoutParams);
+				((TextView) convertView).setText((index + 1) + "");
+				((TextView) convertView).setGravity(Gravity.CENTER);
+				((TextView) convertView).setTextSize(parent.getContext().getResources().getDimension(R.dimen.dimen_13dp));
+				((TextView) convertView).setTextColor(Color.WHITE);
+
+				return convertView;
+			}
+
+			@Override
+			public View getEmptyItem(View convertView, ViewGroup parent) {
+				return null;
+			}
+		});
+
 		findViewById(R.id.date_dialog_main).startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.abc_slide_in_bottom));
 		findViewById(R.id.date_close).setOnClickListener(new View.OnClickListener() {
 
