@@ -1,6 +1,7 @@
 package vnp.com.mimusic.util;
 
 import vnp.com.db.User;
+import vnp.com.mimusic.base.VTAnimationListener;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -9,6 +10,11 @@ import android.graphics.Path;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.util.Log;
+import android.view.View;
+import android.view.View.OnFocusChangeListener;
+import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
 
 public class Conts {
 	public final static String HOME = "home";
@@ -91,4 +97,26 @@ public class Conts {
 
 		return targetBitmap;
 	}
+
+	// public static void setOnClickListener(final View view, final
+	// View.OnClickListener onClickListener) {
+	//
+	// view.setOnClickListener(new View.OnClickListener() {
+	// @Override
+	// public void onClick(View v) {
+	// ScaleAnimation scaleAnimation = new ScaleAnimation(1f, 0.6f, 1f, 0.6f,
+	// v.getWidth() / 2, v.getHeight() / 2);
+	// scaleAnimation.setDuration(100);
+	// scaleAnimation.setAnimationListener(new VTAnimationListener() {
+	// @Override
+	// public void onAnimationEnd(Animation animation) {
+	// super.onAnimationEnd(animation);
+	// onClickListener.onClick(view);
+	// }
+	// });
+	//
+	// view.startAnimation(scaleAnimation);
+	// }
+	// });
+	// }
 }

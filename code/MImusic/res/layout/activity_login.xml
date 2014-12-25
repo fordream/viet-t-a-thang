@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -6,60 +6,81 @@
     android:gravity="center"
     android:orientation="vertical" >
 
-    <vnp.com.mimusic.view.HeaderView
-        android:id="@+id/activity_login_header"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-    </vnp.com.mimusic.view.HeaderView>
-
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:id="@+id/activity_login_splash"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:gravity="center"
         android:orientation="vertical" >
 
-        <EditText
-            android:id="@+id/activity_login_number_phone"
-            android:layout_width="@dimen/dimen_200dp"
-            android:layout_height="@dimen/dimen_35dp"
-            android:layout_marginBottom="@dimen/dimen_10dp"
-            android:background="@drawable/menu_right_edit"
-            android:ems="10"
-            android:hint="phone"
-            android:inputType="number"
-            android:paddingLeft="@dimen/dimen_10dp"
-            android:paddingRight="@dimen/dimen_10dp"
-            android:singleLine="true"
-            android:textSize="@dimen/dimen_13dp" >
-
-            <requestFocus />
-        </EditText>
-
-        <EditText
-            android:id="@+id/activity_login_password"
-            android:layout_width="@dimen/dimen_200dp"
-            android:layout_height="@dimen/dimen_35dp"
-            android:layout_marginBottom="@dimen/dimen_10dp"
-            android:background="@drawable/menu_right_edit"
-            android:ems="10"
-            android:hint="password"
-            android:inputType="textPassword"
-            android:paddingLeft="@dimen/dimen_10dp"
-            android:paddingRight="@dimen/dimen_10dp"
-            android:singleLine="true"
-            android:textSize="@dimen/dimen_13dp" />
-
-        <Button
-            android:id="@+id/activity_login_btn"
-            android:layout_width="@dimen/dimen_200dp"
-            android:layout_height="@dimen/dimen_40dp"
-            android:background="@drawable/xml_btn_infor"
-            android:paddingLeft="@dimen/dimen_10dp"
-            android:paddingRight="@dimen/dimen_10dp"
-            android:singleLine="true"
-            android:text="@string/dangnhap"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/dimen_13dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/kenhbanvas"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/dimen_30dp" />
     </LinearLayout>
 
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/activity_login_main"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:visibility="invisible" >
+
+        <vnp.com.mimusic.view.HeaderView
+            android:id="@+id/activity_login_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+        </vnp.com.mimusic.view.HeaderView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <EditText
+                android:id="@+id/activity_login_number_phone"
+                android:layout_width="@dimen/dimen_200dp"
+                android:layout_height="@dimen/dimen_35dp"
+                android:layout_marginBottom="@dimen/dimen_10dp"
+                android:background="@drawable/menu_right_edit"
+                android:ems="10"
+                android:hint="phone"
+                android:inputType="number"
+                android:paddingLeft="@dimen/dimen_10dp"
+                android:paddingRight="@dimen/dimen_10dp"
+                android:singleLine="true"
+                android:textSize="@dimen/dimen_13dp" />
+
+            <EditText
+                android:id="@+id/activity_login_password"
+                android:layout_width="@dimen/dimen_200dp"
+                android:layout_height="@dimen/dimen_35dp"
+                android:layout_marginBottom="@dimen/dimen_10dp"
+                android:background="@drawable/menu_right_edit"
+                android:ems="10"
+                android:hint="password"
+                android:inputType="textPassword"
+                android:paddingLeft="@dimen/dimen_10dp"
+                android:paddingRight="@dimen/dimen_10dp"
+                android:singleLine="true"
+                android:textSize="@dimen/dimen_13dp" />
+
+            <vnp.com.mimusic.view.BaseButton
+                android:id="@+id/activity_login_btn"
+                android:layout_width="@dimen/dimen_200dp"
+                android:layout_height="@dimen/dimen_40dp"
+                android:background="@drawable/infor_button"
+                android:paddingLeft="@dimen/dimen_10dp"
+                android:paddingRight="@dimen/dimen_10dp"
+                android:singleLine="true"
+                android:text="@string/dangnhap"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/dimen_13dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

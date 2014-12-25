@@ -2,7 +2,9 @@ package vnp.com.mimusic;
 
 import vnp.com.db.DichVu;
 import vnp.com.db.User;
+import vnp.com.mimusic.base.VTAnimationListener;
 import vnp.com.mimusic.main.BaseMusicSlideMenuActivity;
+import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.view.HeaderView;
 import android.app.Activity;
 import android.content.ContentValues;
@@ -12,6 +14,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,23 +23,34 @@ public class LoginActivty extends Activity implements OnClickListener {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-
 		super.onCreate(savedInstanceState);
 		((VApplication) getApplication()).dongbodanhba();
-		String selection = User.STATUS + "='1'";
-		Cursor cursor = getContentResolver().query(User.CONTENT_URI, null, selection, null, null);
-		if (cursor != null && cursor.getCount() >= 1) {
-			cursor.close();
-			gotoHome();
-		} else {
-			overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_slide_left_out);
 
-			setContentView(R.layout.activity_login);
-			findViewById(R.id.activity_login_btn).setOnClickListener(this);
-			HeaderView header = (HeaderView) findViewById(R.id.activity_login_header);
-			header.setTextHeader(R.string.dangnhap);
-			header.showButton(false, false);
-		}
+		setContentView(R.layout.activity_login);
+		overridePendingTransition(R.anim.abc_nothing_0, R.anim.abc_nothing_0);
+
+		findViewById(R.id.activity_login_btn).setOnClickListener(this);
+		HeaderView header = (HeaderView) findViewById(R.id.activity_login_header);
+		header.setTextHeader(R.string.dangnhap);
+		header.showButton(false, false);
+
+		final AlphaAnimation alphaAnimation = new AlphaAnimation(0f, 1f);
+		alphaAnimation.setDuration(500);
+		alphaAnimation.setAnimationListener(new VTAnimationListener() {
+			@Override
+			public void onAnimationEnd(Animation animation) {
+				super.onAnimationEnd(animation);
+				String selection = User.STATUS + "='1'";
+				Cursor cursor = getContentResolver().query(User.CONTENT_URI, null, selection, null, null);
+				if (cursor != null && cursor.getCount() >= 1) {
+					cursor.close();
+					gotoHome();
+				} else {
+					findViewById(R.id.activity_login_main).setVisibility(View.VISIBLE);
+				}
+			}
+		});
+		findViewById(R.id.activity_login_splash).startAnimation(alphaAnimation);
 	}
 
 	private void gotoHome() {
