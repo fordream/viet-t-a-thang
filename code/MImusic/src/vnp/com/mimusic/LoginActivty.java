@@ -5,6 +5,7 @@ import vnp.com.db.User;
 import vnp.com.mimusic.base.VTAnimationListener;
 import vnp.com.mimusic.main.BaseMusicSlideMenuActivity;
 import vnp.com.mimusic.util.Conts;
+import vnp.com.mimusic.util.VTAnimationUtils;
 import vnp.com.mimusic.view.HeaderView;
 import vnp.com.mimusic.view.add.OnTouchAnimation;
 import android.app.Activity;
@@ -32,7 +33,7 @@ public class LoginActivty extends Activity implements OnClickListener {
 
 		findViewById(R.id.activity_login_btn).setOnClickListener(this);
 		findViewById(R.id.activity_login_btn).setOnTouchListener(new OnTouchAnimation());
-		
+
 		HeaderView header = (HeaderView) findViewById(R.id.activity_login_header);
 		header.setTextHeader(R.string.dangnhap);
 		header.showButton(false, false);
@@ -84,6 +85,13 @@ public class LoginActivty extends Activity implements OnClickListener {
 			}
 
 		} else {
+			if (Conts.isBlank(numberPhone)) {
+				VTAnimationUtils.animationErrorEditText(findViewById(R.id.activity_login_number_phone));
+			}
+
+			if (Conts.isBlank(password)) {
+				VTAnimationUtils.animationErrorEditText(findViewById(R.id.activity_login_password));
+			}
 			Toast.makeText(this, "input password and number phone", Toast.LENGTH_SHORT).show();
 		}
 	}
