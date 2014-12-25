@@ -100,12 +100,26 @@
         <LinearLayout
             android:id="@+id/moidichvuchonhieunguoi_bottom"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_45dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:background="#dfdfdf"
             android:gravity="center"
             android:orientation="horizontal" >
+<HorizontalScrollView
+            android:id="@+id/horizontalScrollView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/f3f3f3" >
 
+            <LinearLayout
+                android:id="@+id/moinhieudichvu_dialog_list_hor"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal" >
+            </LinearLayout>
+        </HorizontalScrollView>
+<!--  
             <Button
                 android:id="@+id/moidichvuchonhieunguoi_chonloimoi"
                 android:layout_width="@dimen/dimen_140dp"
@@ -123,7 +137,7 @@
                 android:background="@drawable/xml_btn_infor"
                 android:text="@string/moi"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/dimen_13dp" />
+                android:textSize="@dimen/dimen_13dp" />-->
         </LinearLayout>
     </RelativeLayout>
 

@@ -215,11 +215,19 @@ public class RootMenuActivity extends FragmentActivity {
 	}
 
 	public void gotoLoiMoi() {
-		Bundle bundle = new Bundle();
-		MauMoiFragment chitiettintuc = new MauMoiFragment();
-		chitiettintuc.setArguments(bundle);
-		changeFragemt(R.id.root_main_fragment, chitiettintuc, true);
+		// Bundle bundle = new Bundle();
+		// MauMoiFragment chitiettintuc = new MauMoiFragment();
+		// chitiettintuc.setArguments(bundle);
+		// changeFragemt(R.id.root_main_fragment, chitiettintuc, true);
 
+		FragmentManager fragmentManager = getSupportFragmentManager();
+		android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
+		MauMoiFragment mauMoiFragment = new MauMoiFragment();
+		transaction.setCustomAnimations(R.anim.abc_slide_in_top, R.anim.abc_slide_in_top, R.anim.abc_slide_out_top, R.anim.abc_slide_out_top);
+		transaction.add(R.id.root_main_fragment, mauMoiFragment, "" + System.currentTimeMillis());
+		transaction.addToBackStack(null);
+
+		transaction.commit();
 	}
 
 	public void gotoHuongDanBanHang() {

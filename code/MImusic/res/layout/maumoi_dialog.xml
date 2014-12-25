@@ -3,7 +3,7 @@
     android:id="@+id/maumoi_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="@drawable/bg_dialog"
     android:orientation="vertical" >
 
     <vnp.com.mimusic.view.HeaderView
@@ -14,12 +14,13 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="@dimen/dimen_300dp" >
 
         <vnp.com.mimusic.view.MusicListView
             android:id="@+id/maumoi_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent"
+            android:background="@android:color/white" >
         </vnp.com.mimusic.view.MusicListView>
 
         <LinearLayout
