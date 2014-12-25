@@ -6,25 +6,37 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
 
 public class OnTouchAnimation implements OnTouchListener {
 	private Animation a_normal, a_selected, a_current;
 
 	public OnTouchAnimation() {
-		a_normal = new AlphaAnimation(1, 1f);
-		a_normal.setDuration(0);
-		a_normal.setFillAfter(true);
 
-		a_selected = new AlphaAnimation(0.5f, 0.5f);
-		a_selected.setDuration(0);
-		a_selected.setFillAfter(true);
-
-		a_current = a_normal;
 	}
 
 	@SuppressLint("ClickableViewAccessibility")
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
+
+		/**
+		 */
+		// a_normal = new AlphaAnimation(1, 1f);
+		if (a_normal == null) {
+			a_normal = new ScaleAnimation(1, 1, 1, 1, v.getWidth() / 2, v.getHeight() / 2);
+			a_normal.setDuration(0);
+			a_normal.setFillAfter(true);
+		}
+		// a_selected = new AlphaAnimation(0.5f, 0.5f);
+		if (a_selected == null) {
+			a_selected = new ScaleAnimation(0.9f, 0.9f, 0.9f, 0.9f, v.getWidth() / 2, v.getHeight() / 2);
+			a_selected.setDuration(0);
+			a_selected.setFillAfter(true);
+		}
+		if (a_current == null) {
+			a_current = a_normal;
+		}
+
 		if (event.getAction() == MotionEvent.ACTION_DOWN) {
 			a_current = a_selected;
 			v.startAnimation(a_current);
@@ -47,10 +59,10 @@ public class OnTouchAnimation implements OnTouchListener {
 					v.startAnimation(a_current);
 				}
 			} else {
-				if (a_current.equals(a_normal)) {
-					a_current = a_selected;
-					v.startAnimation(a_current);
-				}
+				// if (a_current.equals(a_normal)) {
+				// a_current = a_selected;
+				// v.startAnimation(a_current);
+				// }
 			}
 		}
 		return false;

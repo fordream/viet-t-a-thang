@@ -73,7 +73,7 @@
                 android:id="@+id/activity_login_btn"
                 android:layout_width="@dimen/dimen_200dp"
                 android:layout_height="@dimen/dimen_40dp"
-                android:background="@drawable/infor_button"
+                android:background="@drawable/xml_btn_infor"
                 android:paddingLeft="@dimen/dimen_10dp"
                 android:paddingRight="@dimen/dimen_10dp"
                 android:singleLine="true"

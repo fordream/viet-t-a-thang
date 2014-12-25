@@ -6,6 +6,7 @@ import vnp.com.mimusic.base.VTAnimationListener;
 import vnp.com.mimusic.main.BaseMusicSlideMenuActivity;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.view.HeaderView;
+import vnp.com.mimusic.view.add.OnTouchAnimation;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -30,6 +31,8 @@ public class LoginActivty extends Activity implements OnClickListener {
 		overridePendingTransition(R.anim.abc_nothing_0, R.anim.abc_nothing_0);
 
 		findViewById(R.id.activity_login_btn).setOnClickListener(this);
+		findViewById(R.id.activity_login_btn).setOnTouchListener(new OnTouchAnimation());
+		
 		HeaderView header = (HeaderView) findViewById(R.id.activity_login_header);
 		header.setTextHeader(R.string.dangnhap);
 		header.showButton(false, false);
