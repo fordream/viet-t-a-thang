@@ -65,24 +65,24 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		ResClientCallBack resClientCallBack = new ResClientCallBack() {
-
-			@Override
-			public void onCallBack(Object object) {
-				RestClient restClient = (RestClient) object;
-				Toast.makeText(BaseMusicSlideMenuActivity.this, restClient.getResponseCode() + "" + restClient.getResponse(), Toast.LENGTH_SHORT).show();
-			}
-
-			@Override
-			public String getUrl() {
-				return "http://192.168.174.51:8088/api.php/signin";
-			}
-		};
-
-		resClientCallBack.addParam("u", "1674537885");
-		resClientCallBack.addParam("p", "1674537885");
-
-		new ExeCallBack().executeAsynCallBack(resClientCallBack);
+//		ResClientCallBack resClientCallBack = new ResClientCallBack() {
+//
+//			@Override
+//			public void onCallBack(Object object) {
+//				RestClient restClient = (RestClient) object;
+//				Toast.makeText(BaseMusicSlideMenuActivity.this, restClient.getResponseCode() + "" + restClient.getResponse(), Toast.LENGTH_SHORT).show();
+//			}
+//
+//			@Override
+//			public String getUrl() {
+//				return "http://192.168.174.51:8088/api.php/signin";
+//			}
+//		};
+//
+//		resClientCallBack.addParam("u", "1674537885");
+//		resClientCallBack.addParam("p", "1674537885");
+//
+//		new ExeCallBack().executeAsynCallBack(resClientCallBack);
 
 		overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_slide_left_out);
 		setContentView(R.layout.mactivity_slidemenu);

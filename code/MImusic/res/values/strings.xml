@@ -90,6 +90,8 @@
     <string name="bangxephang_no_data">Xin lỗi quý khách hàng!\n\nHiện tại KÊNH BÁN VAS không có bảng xếp hạng doanh thu nào. Chúng tôi sẽ cập nhật lại sau.</string>
     <string name="tatca">Tất cả</string>
     <string name="khongthelayduocduongdan">Không thể lấy được đường dẫn file ảnh</string>
+    <string name="soluong">Số lượng</string>
+    <string name="doanhthu">Doanh thu</string>
 
     <color name="bangxephang_header_activr">#a73444</color>
     <color name="bangxephang_header_un_active">#475055</color>
@@ -99,7 +101,6 @@
     <color name="e7e9ec">#e7e9ec</color>
     <color name="c657180">#657180</color>
     <color name="c475055">#475055</color>
-    
     <color name="cwheelcolor">#993333</color>
 
 </resources>

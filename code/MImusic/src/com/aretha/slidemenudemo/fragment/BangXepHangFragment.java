@@ -63,6 +63,9 @@ public class BangXepHangFragment extends Fragment implements OnItemClickListener
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		(((RootMenuActivity) getActivity())).gotoChiTietCaNhanBangXepHang(parent, view, position, id);
+		// (((RootMenuActivity)
+		// getActivity())).gotoChiTietCaNhanBangXepHang(parent, view, position,
+		// id);
+		(((RootMenuActivity) getActivity())).gotoChiTietCaNhanTungDichVu1(parent, view, position, id);
 	}
 }

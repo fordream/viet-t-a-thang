@@ -33,6 +33,7 @@ public class Conts {
 	public static final String MOIDICHVUCHONHIEUNGUOI = "MOIDICHVUCHONHIEUNGUOI";
 	public static final String CHITIETDICHVU = "CHITIETDICHVU";
 	public static final String CHITIETCANHANBANGXEPHANG = "CHITIETCANHANBANGXEPHANG";
+	public static final String CHITIETCANHANBANGXEPHANGTUNGDICHVU = "CHITIETCANHANBANGXEPHANGTUNGDICHVU";
 
 	public static String getName(Cursor cursor) {
 		String name = cursor.getString(cursor.getColumnIndex(User.NAME));

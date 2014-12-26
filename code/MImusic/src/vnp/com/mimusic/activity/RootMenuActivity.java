@@ -87,6 +87,8 @@ public class RootMenuActivity extends FragmentActivity {
 			changeFragemt(R.id.root_main_fragment, new ChiTietDichVuFragment());
 		} else if (Conts.CHITIETCANHANBANGXEPHANG.equals(type)) {
 			changeFragemt(R.id.root_main_fragment, new ChiTietCaNhanBangXepHangFragment());
+		} else if (Conts.CHITIETCANHANBANGXEPHANGTUNGDICHVU.equals(type)) {
+			changeFragemt(R.id.root_main_fragment, new ChiTietCaNhanBangXepHangTungDichVuFragment());
 		}
 
 	}
@@ -165,6 +167,15 @@ public class RootMenuActivity extends FragmentActivity {
 	public void gotoChiTietCaNhanTungDichVu(AdapterView<?> parent, View view, int position, long id) {
 		changeFragemt(R.id.root_main_fragment, new ChiTietCaNhanBangXepHangTungDichVuFragment(), true);
 
+	}
+
+	public void gotoChiTietCaNhanTungDichVu1(AdapterView<?> parent, View view, int position, long id) {
+		// changeFragemt(R.id.root_main_fragment, new
+		// ChiTietCaNhanBangXepHangTungDichVuFragment(), true);
+		Intent intent = new Intent(this, RootMenuActivity.class);
+		intent.putExtra("type", Conts.CHITIETCANHANBANGXEPHANGTUNGDICHVU);
+		getParent().startActivity(intent);
+		getParent().overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_slide_left_out);
 	}
 
 	public void gotoChiTietDichVu(AdapterView<?> parent, View view, int position, long id) {
