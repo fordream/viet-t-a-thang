@@ -8,11 +8,12 @@
     android:padding="@dimen/dimen_10dp" >
 
     <TextView
+        android:id="@+id/no_data_message"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/bangxephang_no_data"
         android:textColor="#353f45"
+        android:lineSpacingExtra="10dp"
         android:textSize="@dimen/dimen_13dp" />
 
 </LinearLayout>

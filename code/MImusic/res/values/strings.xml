@@ -87,7 +87,8 @@
     <string name="banmuondongugndung">Bạn muốn đóng ứng dụng</string>
     <string name="close_ungdung_comfirm">Click vào Đồng ý để đóng ứng dụng.</string>
     <string name="dongy">Đồng ý</string>
-    <string name="bangxephang_no_data">Xin lỗi quý khách hàng!\n\nHiện tại KÊNH BÁN VAS không có bảng xếp hạng doanh thu nào. Chúng tôi sẽ cập nhật lại sau.</string>
+    <string name="bangxephang_doanh_thu_no_data">Xin lỗi quý khách hàng!\nHiện tại KÊNH BÁN VAS không có bảng xếp hạng doanh thu nào. Chúng tôi sẽ cập nhật lại sau.</string>
+    <string name="bangxephang_so_luong_no_data">Xin lỗi quý khách hàng!\nHiện tại KÊNH BÁN VAS không có bảng xếp hạng số lượng nào. Chúng tôi sẽ cập nhật lại sau.</string>
     <string name="tatca">Tất cả</string>
     <string name="khongthelayduocduongdan">Không thể lấy được đường dẫn file ảnh</string>
     <string name="soluong">Số lượng</string>
