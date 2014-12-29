@@ -44,6 +44,7 @@
             android:id="@+id/maumoi_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_above="@+id/moidichvuchonhieunguoi_bottom"
             android:background="@android:color/white" >
         </vnp.com.mimusic.view.MusicListView>
 
@@ -53,7 +54,7 @@
             android:layout_height="@dimen/dimen_45dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
-    
+            android:background="@android:color/white"
             android:gravity="center"
             android:orientation="horizontal" >
 
