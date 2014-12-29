@@ -24,6 +24,14 @@ public class MauMoiFragment extends Fragment implements android.view.View.OnClic
 				getActivity().onBackPressed();
 			}
 		});
+
+		view.findViewById(R.id.recomment_icon_bottom).setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				getActivity().onBackPressed();
+			}
+		});
 		return view;
 	}
 
