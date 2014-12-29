@@ -49,8 +49,8 @@ public class InforFragment extends Fragment implements OnItemClickListener, View
 		header.findViewById(R.id.header_btn_left).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				getActivity().finish();
-				getActivity().overridePendingTransition(R.anim.abc_slide_left_in, R.anim.abc_slide_right_out);
+				getActivity().onBackPressed();
+//				getActivity().overridePendingTransition(R.anim.abc_slide_left_in, R.anim.abc_slide_right_out);
 			}
 		});
 		infor_cover_click_change = (ImageView) view.findViewById(R.id.infor_cover_click_change);
