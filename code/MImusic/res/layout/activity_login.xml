@@ -106,6 +106,7 @@
                         android:textSize="@dimen/dimen_13dp" />
 
                     <LinearLayout
+                        android:layout_marginBottom="@dimen/dimen_10dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
