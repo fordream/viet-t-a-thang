@@ -69,6 +69,7 @@
     <string name="updatethatbai">Cập nhật thất bại</string>
     <string name="chonanh">Chọn ảnh</string>
     <string name="giacuoc">Giá cước</string>
+    <string name="matkhau">Mật khẩu</string>
     <string name="thoigiantrave">Thời gian trả về</string>
     <string name="tinhnangdichvuexample">1.Website nhặc trực tuyến của tập đoản viễn thông quân đội viettel, các bài hát hot nhất, mới nhất , kết nối với các nhạc sĩ tên tuổi nhất...
          \n\n2.Website nhặc trực tuyến của tập đoản viễn thông quân đội viettel, các bài hát hot nhất, mới nhất , kết nối với các nhạc sĩ tên tuổi nhất...
@@ -81,6 +82,7 @@
     <string name="sodienthoaikhachhang">Số điện thoại khách hàng</string>
     <string name="danhba">Danh bạ</string>
     <string name="thoigianban">Thời gian bán</string>
+    <string name="soantin">Soạn tin</string>
     <string name="tu">Từ</string>
     <string name="den">Đến</string>
     <string name="trangthai">Trạng thái</string>

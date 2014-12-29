@@ -21,66 +21,121 @@
             android:textSize="@dimen/dimen_30dp" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/activity_login_main"
+    <ScrollView
+        android:id="@+id/scrollView1"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:background="@android:color/white"
-        android:orientation="vertical"
-        android:visibility="invisible" >
-
-        <vnp.com.mimusic.view.HeaderView
-            android:id="@+id/activity_login_header"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-        </vnp.com.mimusic.view.HeaderView>
+        android:layout_height="match_parent" >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
             android:orientation="vertical" >
 
-            <EditText
-                android:id="@+id/activity_login_number_phone"
-                android:layout_width="@dimen/dimen_200dp"
-                android:layout_height="@dimen/dimen_35dp"
-                android:layout_marginBottom="@dimen/dimen_10dp"
-                android:background="@drawable/menu_right_edit"
-                android:ems="10"
-                android:hint="phone"
-                android:inputType="number"
-                android:paddingLeft="@dimen/dimen_10dp"
-                android:paddingRight="@dimen/dimen_10dp"
-                android:singleLine="true"
-                android:textSize="@dimen/dimen_13dp" />
+            <LinearLayout
+                android:id="@+id/activity_login_main"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"
+                android:orientation="vertical"
+                android:visibility="visible" >
 
-            <EditText
-                android:id="@+id/activity_login_password"
-                android:layout_width="@dimen/dimen_200dp"
-                android:layout_height="@dimen/dimen_35dp"
-                android:layout_marginBottom="@dimen/dimen_10dp"
-                android:background="@drawable/menu_right_edit"
-                android:ems="10"
-                android:hint="password"
-                android:inputType="textPassword"
-                android:paddingLeft="@dimen/dimen_10dp"
-                android:paddingRight="@dimen/dimen_10dp"
-                android:singleLine="true"
-                android:textSize="@dimen/dimen_13dp" />
+                <vnp.com.mimusic.view.HeaderView
+                    android:id="@+id/activity_login_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+                </vnp.com.mimusic.view.HeaderView>
 
-            <Button
-                android:id="@+id/activity_login_btn"
-                android:layout_width="@dimen/dimen_200dp"
-                android:layout_height="@dimen/dimen_40dp"
-                android:background="@drawable/xml_btn_infor"
-                android:paddingLeft="@dimen/dimen_10dp"
-                android:paddingRight="@dimen/dimen_10dp"
-                android:singleLine="true"
-                android:text="@string/dangnhap"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/dimen_13dp" />
+                <ImageView
+                    android:id="@+id/imageView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dimen_186dp"
+                    android:background="@drawable/login_header" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:layout_width="@dimen/dimen_200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/dimen_5dp"
+                        android:layout_marginTop="@dimen/dimen_20dp"
+                        android:text="@string/nhapsodienthoai"
+                        android:textColor="#336666"
+                        android:textSize="@dimen/dimen_14dp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/activity_login_number_phone"
+                        android:layout_width="@dimen/dimen_200dp"
+                        android:layout_height="@dimen/dimen_35dp"
+                        android:layout_marginBottom="@dimen/dimen_10dp"
+                        android:background="@drawable/menu_right_edit"
+                        android:ems="10"
+                        android:hint="phone"
+                        android:inputType="number"
+                        android:paddingLeft="@dimen/dimen_10dp"
+                        android:paddingRight="@dimen/dimen_10dp"
+                        android:singleLine="true"
+                        android:textSize="@dimen/dimen_13dp" />
+
+                    <TextView
+                        android:layout_width="@dimen/dimen_200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/dimen_5dp"
+                        android:layout_marginTop="@dimen/dimen_20dp"
+                        android:text="@string/matkhau"
+                        android:textColor="#336666"
+                        android:textSize="@dimen/dimen_14dp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/activity_login_password"
+                        android:layout_width="@dimen/dimen_200dp"
+                        android:layout_height="@dimen/dimen_35dp"
+                        android:layout_marginBottom="@dimen/dimen_10dp"
+                        android:background="@drawable/menu_right_edit"
+                        android:ems="10"
+                        android:hint="password"
+                        android:inputType="textPassword"
+                        android:paddingLeft="@dimen/dimen_10dp"
+                        android:paddingRight="@dimen/dimen_10dp"
+                        android:singleLine="true"
+                        android:textSize="@dimen/dimen_13dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingLeft="@dimen/dimen_10dp"
+                        android:paddingRight="@dimen/dimen_10dp" >
+
+                        <Button
+                            android:id="@+id/activity_login_soantin"
+                            android:layout_width="@dimen/dimen_90dp"
+                            android:layout_height="@dimen/dimen_35dp"
+                            android:layout_marginRight="@dimen/dimen_20dp"
+                            android:background="@drawable/xml_btn_dangky"
+                            android:singleLine="true"
+                            android:text="@string/soantin"
+                            android:textColor="@android:color/white"
+                            android:textSize="@dimen/dimen_13dp" />
+
+                        <Button
+                            android:id="@+id/activity_login_btn"
+                            android:layout_width="@dimen/dimen_90dp"
+                            android:layout_height="@dimen/dimen_35dp"
+                            android:background="@drawable/xml_btn_infor"
+                            android:singleLine="true"
+                            android:text="@string/dangnhap"
+                            android:textColor="@android:color/white"
+                            android:textSize="@dimen/dimen_13dp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>
