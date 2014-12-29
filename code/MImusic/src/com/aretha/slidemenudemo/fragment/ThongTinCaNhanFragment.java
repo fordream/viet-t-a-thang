@@ -5,6 +5,10 @@ import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.view.HeaderView;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -19,6 +23,27 @@ public class ThongTinCaNhanFragment extends Fragment implements OnItemClickListe
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+
+		getActivity().registerReceiver(update, new IntentFilter("updateprofile"));
+	}
+
+	private BroadcastReceiver update = new BroadcastReceiver() {
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			showData(getView());
+		}
+	};
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		getActivity().unregisterReceiver(update);
 	}
 
 	@Override
@@ -61,7 +86,7 @@ public class ThongTinCaNhanFragment extends Fragment implements OnItemClickListe
 			((TextView) view.findViewById(R.id.text_sogiaodichthanhcongtrongthang)).setText(getText(cursor.getString(cursor.getColumnIndex(User.SOGIAODICHTHANHCONGTRONGTHANG))));
 			((TextView) view.findViewById(R.id.text_sogiaodichthanhcong)).setText(getText(cursor.getString(cursor.getColumnIndex(User.SOGIAODICHTHANHCONG))));
 			((TextView) view.findViewById(R.id.text_sotienhoahongtrongthang)).setText(getText(cursor.getString(cursor.getColumnIndex(User.SOTIENHOAHONGTRONGTHANG))) + getString(R.string.vnd));
-			((TextView) view.findViewById(R.id.text_sotienhoahong)).setText(getText(cursor.getString(cursor.getColumnIndex(User.SOTIENHOAHONG)))+ getString(R.string.vnd));
+			((TextView) view.findViewById(R.id.text_sotienhoahong)).setText(getText(cursor.getString(cursor.getColumnIndex(User.SOTIENHOAHONG))) + getString(R.string.vnd));
 
 			cursor.close();
 		}
