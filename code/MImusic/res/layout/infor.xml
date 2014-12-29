@@ -70,12 +70,21 @@
             android:textColor="#333333"
             android:textSize="@dimen/dimen_13dp" />
 
+        <TextView
+            android:layout_width="@dimen/dimen_200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_5dp"
+            android:layout_marginTop="@dimen/dimen_20dp"
+            android:text="@string/hoten"
+            android:textColor="#336666"
+            android:textSize="@dimen/dimen_14dp"
+            android:textStyle="bold" />
+
         <EditText
             android:id="@+id/infor_name"
             android:layout_width="@dimen/dimen_200dp"
             android:layout_height="@dimen/dimen_35dp"
             android:layout_marginBottom="@dimen/dimen_10dp"
-            android:layout_marginTop="@dimen/dimen_20dp"
             android:background="@drawable/menu_right_edit"
             android:hint="@string/ten"
             android:paddingLeft="@dimen/dimen_10dp"
@@ -84,6 +93,16 @@
             android:textColor="#333333"
             android:textColorHint="#999999"
             android:textSize="@dimen/dimen_13dp" />
+
+        <TextView
+            android:layout_width="@dimen/dimen_200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_5dp"
+            android:layout_marginTop="@dimen/dimen_5dp"
+            android:text="@string/bidanh"
+            android:textColor="#336666"
+            android:textSize="@dimen/dimen_14dp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/infor_didanh"
@@ -98,6 +117,16 @@
             android:textColor="#333333"
             android:textColorHint="#999999"
             android:textSize="@dimen/dimen_13dp" />
+
+        <TextView
+            android:layout_width="@dimen/dimen_200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_5dp"
+            android:layout_marginTop="@dimen/dimen_5dp"
+            android:text="@string/ngaysinh"
+            android:textColor="#336666"
+            android:textSize="@dimen/dimen_14dp"
+            android:textStyle="bold" />
 
         <RelativeLayout
             android:layout_width="@dimen/dimen_200dp"
@@ -123,10 +152,20 @@
                 android:layout_height="@dimen/dimen_35dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:scaleType="fitXY"
                 android:padding="@dimen/dimen_10dp"
+                android:scaleType="fitXY"
                 android:src="@drawable/infor_date" />
         </RelativeLayout>
+
+        <TextView
+            android:layout_width="@dimen/dimen_200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_5dp"
+            android:layout_marginTop="@dimen/dimen_5dp"
+            android:text="@string/diachi"
+            android:textColor="#336666"
+            android:textSize="@dimen/dimen_14dp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/infor_address"
