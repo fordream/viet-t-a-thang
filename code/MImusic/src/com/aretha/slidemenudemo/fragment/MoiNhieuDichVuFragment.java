@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class MoiNhieuDichVuFragment extends Fragment implements android.view.View.OnClickListener {
 	private LinearLayout moinhieudichvu_dialog_list_hor;
@@ -27,6 +28,8 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.moinhieudichvu_dialog, null);
+		
+		
 		moinhieudichvu_dialog_search = (EditText) view.findViewById(R.id.moinhieudichvu_dialog_search);
 		moinhieudichvu_dialog_list_hor = (LinearLayout) view.findViewById(R.id.moinhieudichvu_dialog_list_hor);
 		HeaderView maumoi_headerview = (HeaderView) view.findViewById(R.id.moinhieudichvu_dialog_headerview);

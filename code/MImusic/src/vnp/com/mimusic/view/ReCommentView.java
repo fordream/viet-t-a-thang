@@ -18,7 +18,12 @@ import android.widget.Toast;
  * 
  */
 
-public class ReCommentView extends LinearLayout {
+public abstract class ReCommentView extends LinearLayout {
+	public abstract void addContact();
+
+	public abstract void addDv();
+
+	private LinearLayout recommnet_list_dv_banchay;
 
 	public ReCommentView(Context context) {
 		super(context);
@@ -32,7 +37,9 @@ public class ReCommentView extends LinearLayout {
 
 	private void init() {
 		((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.recomment, this);
+
 		findViewById(R.id.recomment_main_background).setOnClickListener(null);
+		recommnet_list_dv_banchay = (LinearLayout) findViewById(R.id.recommnet_list_dv_banchay);
 
 		findViewById(R.id.recomment_icon_bottom).setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -55,20 +62,40 @@ public class ReCommentView extends LinearLayout {
 				close();
 			}
 		});
+
 		LinearLayout recomment_list = (LinearLayout) findViewById(R.id.recomment_list);
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < 5; i++) {
 			RecommentItemView recommentItemView = new RecommentItemView(getContext());
+			recommentItemView.setOnClickListener(new View.OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					close();
+					addContact();
+				}
+			});
 			recomment_list.addView(recommentItemView);
-			recommentItemView.setOnClickListener(new RecommentItemOnClick());
+			//recommentItemView.setOnClickListener(new RecommentItemOnClick());
 		}
+
+		for (int i = 0; i < 5; i++) {
+			// add
+			RecommentItemDvBanChayView banChayView = new RecommentItemDvBanChayView(getContext());
+		
+			banChayView.setBackgroud(i);
+			banChayView.setOnClickListener(new View.OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					close();
+					addDv();
+				}
+			});
+			recommnet_list_dv_banchay.addView(banChayView);
+		}
+
 	}
 
-	private class RecommentItemOnClick implements View.OnClickListener {
-
-		@Override
-		public void onClick(View v) {
-		}
-	}
 
 	private void close() {
 		Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.abc_slide_out_top);

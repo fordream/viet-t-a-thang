@@ -102,7 +102,22 @@
             android:layout_height="1px"
             android:background="#e4e4e4" />
 
+        <HorizontalScrollView
+            android:id="@+id/horizontalScrollView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white" >
+
+            <LinearLayout
+                android:id="@+id/recommnet_list_dv_banchay"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal" >
+            </LinearLayout>
+        </HorizontalScrollView>
+
         <LinearLayout
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_100dp"
             android:weightSum="4" >
@@ -256,13 +271,19 @@
             android:layout_height="1px"
             android:background="#e4e4e4" />
 
-        <LinearLayout
-            android:id="@+id/recomment_list"
+        <ScrollView
+            android:id="@+id/scrollView1"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_200dp"
-            android:background="@android:color/white"
-            android:orientation="vertical" >
-        </LinearLayout>
+            android:background="@android:color/white" >
+
+            <LinearLayout
+                android:id="@+id/recomment_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
+            </LinearLayout>
+        </ScrollView>
 
         <RelativeLayout
             android:layout_width="match_parent"

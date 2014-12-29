@@ -237,7 +237,26 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 
 			@Override
 			public void run() {
-				ReCommentView commentView = new ReCommentView(BaseMusicSlideMenuActivity.this);
+				ReCommentView commentView = new ReCommentView(BaseMusicSlideMenuActivity.this){
+					@Override
+					public void addContact() {
+						Intent intent = new Intent(BaseMusicSlideMenuActivity.this, RootMenuActivity.class);
+						intent.putExtra("type", Conts.NHIEUDICHVU);
+						intent.putExtra(User._ID, 1 + "");
+						startActivity(intent);
+						overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_slide_left_out);	
+					}
+					
+					@Override
+					public void addDv() {
+						Intent intent = new Intent(BaseMusicSlideMenuActivity.this, RootMenuActivity.class);
+						Bundle extras = new Bundle();
+						extras.putString("type", Conts.MOIDICHVUCHONHIEUNGUOI);
+						intent.putExtras(extras);
+						startActivity(intent);
+						overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_slide_left_out);
+					}
+				};
 				((FrameLayout) findViewById(R.id.activity_slidemenu_recomment)).addView(commentView);
 				commentView.start();
 			}
