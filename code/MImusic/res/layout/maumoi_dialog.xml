@@ -6,11 +6,36 @@
     android:background="@drawable/bg_dialog"
     android:orientation="vertical" >
 
-    <vnp.com.mimusic.view.HeaderView
-        android:id="@+id/maumoi_headerview"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
-    </vnp.com.mimusic.view.HeaderView>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_60dp"
+        android:background="#2e3d51" >
+
+        <ImageButton
+            android:id="@+id/header_btn_left"
+            android:layout_width="@dimen/dimen_45dp"
+            android:layout_height="@dimen/dimen_45dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/xml_btn2"
+            android:padding="@dimen/dimen_8dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/recomment_close" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:padding="@dimen/dimen_10dp"
+            android:paddingLeft="@dimen/dimen_5dp"
+            android:text="@string/chonloimoi"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/dimen_14dp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -37,7 +62,7 @@
                 android:id="@+id/moinhieudichvu_dialog_moi"
                 android:layout_width="@dimen/dimen_140dp"
                 android:layout_height="@dimen/dimen_30dp"
-                android:background="@drawable/xml_btn_dangky"
+                android:background="@drawable/xml_btn_infor"
                 android:text="@string/moi"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/dimen_13dp" />
