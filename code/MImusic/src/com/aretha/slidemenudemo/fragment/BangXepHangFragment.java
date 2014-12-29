@@ -43,22 +43,27 @@ public class BangXepHangFragment extends Fragment implements OnItemClickListener
 		callData(true);
 		return view;
 	}
-	
+
 	private void callData(boolean b) {
-		//remove header no data when check or not check so luong radio
+		// remove header no data when check or not check so luong radio
 		try {
 			bangxephang_list.removeHeaderView(header_nodata);
-		} catch (Exception exception) {}
-		//get data for list
+		} catch (Exception exception) {
+		}
+		// get data for list
 		if (b) {
 			items = new String[0];
 		} else {
 			items = new String[] { "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a" };
 		}
-		//header no data
-		LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-		header_nodata = inflater.inflate(R.layout.bangxephang_nodata, null);
-		//	set custom font for message
+		// header no data
+		// TODO can than crash em
+		if (header_nodata == null) {
+			LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+			header_nodata = inflater.inflate(R.layout.bangxephang_nodata, null);
+		}
+
+		// set custom font for message
 		TextView noDataMessage = (TextView) header_nodata.findViewById(R.id.no_data_message);
 		if (b) {
 			noDataMessage.setText(getResources().getString(R.string.bangxephang_so_luong_no_data));
@@ -68,11 +73,13 @@ public class BangXepHangFragment extends Fragment implements OnItemClickListener
 		Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Regular.ttf");
 		noDataMessage.setTypeface(typeface);
 		BangXepHangAdaper adaper = new BangXepHangAdaper(getActivity(), items);
-		//set data for listview
+		// set data for listview
+		bangxephang_list.setAdapter(null);
 		if (items.length > 0) {
 			bangxephang_list.setOnItemClickListener(this);
 			bangxephang_list.setAdapter(adaper);
 		} else {
+
 			bangxephang_list.addHeaderView(header_nodata);
 			bangxephang_list.setAdapter(adaper);
 		}
