@@ -40,6 +40,7 @@
                 android:visibility="visible" >
 
                 <vnp.com.mimusic.view.HeaderView
+                    android:visibility="gone"
                     android:id="@+id/activity_login_header"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" >
@@ -71,7 +72,7 @@
                         android:id="@+id/activity_login_number_phone"
                         android:layout_width="@dimen/dimen_200dp"
                         android:layout_height="@dimen/dimen_35dp"
-                        android:layout_marginBottom="@dimen/dimen_10dp"
+                        android:layout_marginBottom="@dimen/dimen_5dp"
                         android:background="@drawable/menu_right_edit"
                         android:ems="10"
                         android:hint="phone"
@@ -85,7 +86,7 @@
                         android:layout_width="@dimen/dimen_200dp"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/dimen_5dp"
-                        android:layout_marginTop="@dimen/dimen_20dp"
+                        android:layout_marginTop="@dimen/dimen_10dp"
                         android:text="@string/matkhau"
                         android:textColor="#336666"
                         android:textSize="@dimen/dimen_14dp"
@@ -106,6 +107,7 @@
                         android:textSize="@dimen/dimen_13dp" />
 
                     <LinearLayout
+                        android:layout_marginTop="@dimen/dimen_10dp"
                         android:layout_marginBottom="@dimen/dimen_10dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -115,9 +117,9 @@
 
                         <Button
                             android:id="@+id/activity_login_soantin"
-                            android:layout_width="@dimen/dimen_90dp"
+                            android:layout_width="@dimen/dimen_95dp"
                             android:layout_height="@dimen/dimen_35dp"
-                            android:layout_marginRight="@dimen/dimen_20dp"
+                            android:layout_marginRight="@dimen/dimen_10dp"
                             android:background="@drawable/xml_btn_dangky"
                             android:singleLine="true"
                             android:text="@string/soantin"
@@ -126,7 +128,7 @@
 
                         <Button
                             android:id="@+id/activity_login_btn"
-                            android:layout_width="@dimen/dimen_90dp"
+                            android:layout_width="@dimen/dimen_95dp"
                             android:layout_height="@dimen/dimen_35dp"
                             android:background="@drawable/xml_btn_infor"
                             android:singleLine="true"
