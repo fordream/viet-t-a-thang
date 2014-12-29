@@ -34,7 +34,7 @@ public class HomeItemView extends LinearLayout {
 		findViewById(R.id.home_item_main).setBackgroundColor(getResources().getColor(poistion % 2 == 0 ? android.R.color.white : R.color.f3f3f3));
 		findViewById(R.id.home_item_img_icon).setBackgroundColor(getResources().getColor(poistion % 2 == 1 ? android.R.color.white : R.color.f3f3f3));
 
-		boolean isDangKy = contentValues.getAsBoolean("dangky");
+		final boolean isDangKy = contentValues.getAsBoolean("dangky");
 		int mColor = getResources().getColor(isDangKy ? R.color.c475055 : (poistion == 0 ? android.R.color.white : R.color.c475055));
 		TextView home_item_right_control_1_tv = (TextView) findViewById(R.id.home_item_right_control_1_tv);
 
@@ -84,8 +84,10 @@ public class HomeItemView extends LinearLayout {
 		home_item_right_control_1.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				DangKyDialog dangKyDialog = new DangKyDialog(v.getContext(), contentValues);
-				dangKyDialog.show();
+				if (!isDangKy) {
+					DangKyDialog dangKyDialog = new DangKyDialog(v.getContext(), contentValues);
+					dangKyDialog.show();
+				}
 			}
 		});
 

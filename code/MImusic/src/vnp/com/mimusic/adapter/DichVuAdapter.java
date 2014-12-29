@@ -44,7 +44,7 @@ public abstract class DichVuAdapter extends CursorAdapter {
 		convertView.findViewById(R.id.home_item_main).setBackgroundColor(resources.getColor(poistion % 2 == 0 ? android.R.color.white : R.color.f3f3f3));
 		convertView.findViewById(R.id.home_item_img_icon).setBackgroundColor(resources.getColor(poistion % 2 == 1 ? android.R.color.white : R.color.f3f3f3));
 
-		boolean isDangKy = new Random().nextBoolean();
+		final boolean isDangKy = new Random().nextBoolean();
 		TextView home_item_right_control_1_tv = (TextView) convertView.findViewById(R.id.home_item_right_control_1_tv);
 
 		home_item_right_control_1_tv.setText(isDangKy ? R.string.dangdung : R.string.dangky);
@@ -89,7 +89,8 @@ public abstract class DichVuAdapter extends CursorAdapter {
 
 			@Override
 			public void onClick(View v) {
-				new DangKyDialog(v.getContext(), values).show();
+				if (!isDangKy)
+					new DangKyDialog(v.getContext(), values).show();
 			}
 		});
 
