@@ -37,6 +37,7 @@ public class DichVuFragment extends Fragment implements OnItemClickListener, Vie
 			dichvu_list.setAdapter(adapter = new DichVuAdapter(getActivity(), cursor) {
 				@Override
 				public void moiDVChoNhieuNguoi() {
+					(((RootMenuActivity) getActivity())).gotoMoiDvChoNhieuNguoi();
 				}
 			});
 		}
