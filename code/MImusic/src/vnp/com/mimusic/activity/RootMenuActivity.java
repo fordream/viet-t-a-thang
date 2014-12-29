@@ -35,6 +35,7 @@ import com.aretha.slidemenudemo.fragment.MoiDvChoNhieuNguoiFragment;
 import com.aretha.slidemenudemo.fragment.MoiNhieuDichVuFragment;
 import com.aretha.slidemenudemo.fragment.QuyDinhBanHangFragment;
 import com.aretha.slidemenudemo.fragment.SearchFragment;
+import com.aretha.slidemenudemo.fragment.ThongTinCaNhanFragment;
 import com.aretha.slidemenudemo.fragment.TinTucFragment;
 
 /**
@@ -68,8 +69,8 @@ public class RootMenuActivity extends FragmentActivity {
 			changeFragemt(R.id.root_main_fragment, new QuyDinhBanHangFragment());
 		} else if (Conts.TIMKIEM.equals(type)) {
 			changeFragemt(R.id.root_main_fragment, new SearchFragment());
-		} else if (Conts.INFOR.equals(type)) {
-			changeFragemt(R.id.root_main_fragment, new InforFragment());
+		} else if (Conts.THONGTINCANHAN.equals(type)) {
+			changeFragemt(R.id.root_main_fragment, new ThongTinCaNhanFragment());
 		} else if (Conts.TINTUC.equals(type)) {
 			changeFragemt(R.id.root_main_fragment, new TinTucFragment());
 		} else if (Conts.NHIEUDICHVU.equals(type)) {
@@ -244,6 +245,14 @@ public class RootMenuActivity extends FragmentActivity {
 	public void gotoHuongDanBanHang() {
 		Bundle bundle = new Bundle();
 		HuongDanBanHangFragment chitiettintuc = new HuongDanBanHangFragment();
+		bundle.putBoolean("addfragment", true);
+		chitiettintuc.setArguments(bundle);
+		changeFragemt(R.id.root_main_fragment, chitiettintuc, true);
+	}
+
+	public void gotoChinhsuaThongTinCaNhan() {
+		Bundle bundle = new Bundle();
+		InforFragment chitiettintuc = new InforFragment();
 		bundle.putBoolean("addfragment", true);
 		chitiettintuc.setArguments(bundle);
 		changeFragemt(R.id.root_main_fragment, chitiettintuc, true);

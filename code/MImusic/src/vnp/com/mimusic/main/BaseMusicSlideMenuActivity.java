@@ -118,7 +118,7 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 				Conts.QUYDINHBANHANG,//
 				Conts.HUONGDANBANHANG,//
 				Conts.DICHVU,//
-				Conts.INFOR,//
+				Conts.THONGTINCANHAN,//
 				Conts.TIMKIEM,//
 				Conts.ORTHER, //
 				Conts.TINTUC };//
@@ -171,7 +171,7 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 					//
 					Intent intent = new Intent(BaseMusicSlideMenuActivity.this, RootMenuActivity.class);
 					Bundle extras = new Bundle();
-					extras.putString("type", Conts.INFOR);
+					extras.putString("type", Conts.THONGTINCANHAN);
 					intent.putExtras(extras);
 					startActivity(intent);
 					overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_slide_left_out);

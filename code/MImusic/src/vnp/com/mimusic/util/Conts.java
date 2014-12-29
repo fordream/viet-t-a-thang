@@ -25,7 +25,7 @@ public class Conts {
 	public final static String DICHVU = "dichvu";
 	public final static String TIMKIEM = "timkiem";
 	public final static String ORTHER = "other";
-	public static final String INFOR = "infor";
+	public static final String THONGTINCANHAN = "THONGTINCANHAN";
 	public static final String TINTUC = "tintuc";
 
 	public static final String NHIEUDICHVU = "NHIEUDICHVU";
