@@ -159,16 +159,9 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 				else if (position == 2) {
 					// huong dan ban hang
 					
-//					Intent intent = new Intent(BaseMusicSlideMenuActivity.this, RootMenuActivity.class);
-//					Bundle extras = new Bundle();
-//					extras.putString("type", Conts.QUYDINHBANHANG);
-//					intent.putExtras(extras);
-//					startActivity(intent);
-//					overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_slide_left_out);
-					
 					Intent intent = new Intent(BaseMusicSlideMenuActivity.this, RootMenuActivity.class);
 					Bundle extras = new Bundle();
-					extras.putString("type", Conts.QUYDINHBANHANG);
+					extras.putString("type", Conts.HUONGDANBANHANG);
 					intent.putExtras(extras);
 					startActivity(intent);
 					overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_slide_left_out);
