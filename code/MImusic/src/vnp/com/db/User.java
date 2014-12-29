@@ -29,6 +29,11 @@ public class User {
 	public static final String LISTIDUSERDAMOI = "listiduserdamoi";
 	public static final String COVER = "COVER";
 
+	public static final String SOGIAODICHTHANHCONGTRONGTHANG = "SOGIAODICHTHANHCONGTRONGTHANG";
+	public static final String SOGIAODICHTHANHCONG = "SOGIAODICHTHANHCONG";
+	public static final String SOTIENHOAHONGTRONGTHANG = "SOTIENHOAHONGTRONGTHANG";
+	public static final String SOTIENHOAHONG = "SOTIENHOAHONG";
+
 	public static final String NGAYSINH = "NGAYSINH";
 	public static final String BIDANH = "BIDANH";
 	public static final String DIACHI = "DIACHI";
@@ -39,7 +44,8 @@ public class User {
 		builder.append("(");
 		builder.append(_ID).append(" INTEGER PRIMARY KEY AUTOINCREMENT").append(",");
 		String[] colums = new String[] {//
-		USER, PASSWORD, STATUS, COVER, ID, BIDANH, NGAYSINH, DIACHI, NAME, NAME_CONTACT, EMAIL, AVATAR, LISTIDDVSUDUNG, SOLUONG, DOANHTHU, LISTIDUSERDAMOI //
+		SOGIAODICHTHANHCONGTRONGTHANG, SOGIAODICHTHANHCONG, SOTIENHOAHONGTRONGTHANG, SOTIENHOAHONG, USER, PASSWORD, STATUS, COVER, ID, BIDANH, NGAYSINH, DIACHI, NAME, NAME_CONTACT, EMAIL, AVATAR,
+				LISTIDDVSUDUNG, SOLUONG, DOANHTHU, LISTIDUSERDAMOI //
 		};//
 			// builder.append(USER).append(" TEXT NOT NULL").append(",");
 			// builder.append(LISTIDDV).append(" TEXT NOT NULL");

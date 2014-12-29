@@ -95,6 +95,7 @@
     <string name="doanhthu">Doanh thu</string>
     <string name="thongtincanhan">Thông tin cá nhân</string>
     <string name="hoten">Họ tên</string>
+    <string name="vnd">VNĐ</string>
     <string name="giaodich">Giao dịch</string>
 
     <color name="bangxephang_header_activr">#a73444</color>
