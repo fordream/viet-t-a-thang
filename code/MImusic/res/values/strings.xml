@@ -4,10 +4,10 @@
     <string name="app_name">MImusic</string>
 
     <!-- new for content -->
+    <!-- <item>Quy định bán hàng</item> -->
     <string-array name="menuleft_list">
         <item>Bảng xếp hạng</item>
         <item>Lịch sử bán hàng</item>
-        <item>Quy định bán hàng</item>
         <item>Hướng dẫn bán hàng</item>
         <item>Chỉnh sửa thông tin</item>
     </string-array>

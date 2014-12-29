@@ -22,8 +22,9 @@
     </LinearLayout>
 
     <ScrollView
-        android:id="@+id/scrollView1"
+        android:id="@+id/activity_login_main"
         android:layout_width="wrap_content"
+        android:visibility="gone"
         android:layout_height="match_parent" >
 
         <LinearLayout
@@ -32,7 +33,6 @@
             android:orientation="vertical" >
 
             <LinearLayout
-                android:id="@+id/activity_login_main"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="@android:color/white"
