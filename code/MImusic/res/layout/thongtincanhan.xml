@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="@drawable/thongtincanhan_bg"
     android:gravity="center"
     android:orientation="vertical" >
 
@@ -10,22 +10,304 @@
         android:id="@+id/activity_login_main"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:background="@android:color/white"
+        android:background="@drawable/thongtincanhan_bg"
         android:orientation="vertical"
         android:visibility="visible" >
 
-        <vnp.com.mimusic.view.HeaderView
-            android:id="@+id/activity_login_header"
+        <ScrollView
+            android:id="@+id/scrollView1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-        </vnp.com.mimusic.view.HeaderView>
+            android:layout_height="match_parent" >
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical" >
-        </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
+
+                <vnp.com.mimusic.view.HeaderView
+                    android:id="@+id/activity_login_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+                </vnp.com.mimusic.view.HeaderView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/dimen_10dp" >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/thongtincanhan_top"
+                        android:orientation="vertical"
+                        android:padding="@dimen/dimen_5dp" >
+
+                        <TextView
+                            android:id="@+id/textView1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="@dimen/dimen_5dp"
+                            android:text="@string/thongtincanhan"
+                            android:textColor="#336666"
+                            android:textSize="@dimen/dimen_14dp"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/dimen_5dp"
+                            android:layout_marginTop="@dimen/dimen_5dp"
+                            android:gravity="center"
+                            android:padding="@dimen/dimen_5dp" >
+
+                            <TextView
+                                android:layout_width="@dimen/dimen_80dp"
+                                android:layout_height="wrap_content"
+                                android:text="@string/hoten"
+                                android:textColor="#336666"
+                                android:textSize="@dimen/dimen_14dp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/hoten"
+                                android:textColor="#336666"
+                                android:textSize="@dimen/dimen_14dp" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1px"
+                            android:background="@drawable/thongtincanhan_bg" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/dimen_5dp"
+                            android:layout_marginTop="@dimen/dimen_5dp"
+                            android:gravity="center"
+                            android:padding="@dimen/dimen_5dp" >
+
+                            <TextView
+                                android:layout_width="@dimen/dimen_80dp"
+                                android:layout_height="wrap_content"
+                                android:text="@string/bidanh"
+                                android:textColor="#336666"
+                                android:textSize="@dimen/dimen_14dp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/hoten"
+                                android:textColor="#336666"
+                                android:textSize="@dimen/dimen_14dp" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1px"
+                            android:background="@drawable/thongtincanhan_bg" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/dimen_5dp"
+                            android:layout_marginTop="@dimen/dimen_5dp"
+                            android:gravity="center"
+                            android:padding="@dimen/dimen_5dp" >
+
+                            <TextView
+                                android:layout_width="@dimen/dimen_80dp"
+                                android:layout_height="wrap_content"
+                                android:text="@string/ngaysinh"
+                                android:textColor="#336666"
+                                android:textSize="@dimen/dimen_14dp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/hoten"
+                                android:textColor="#336666"
+                                android:textSize="@dimen/dimen_14dp" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1px"
+                            android:background="@drawable/thongtincanhan_bg" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/dimen_5dp"
+                            android:layout_marginTop="@dimen/dimen_5dp"
+                            android:gravity="center"
+                            android:padding="@dimen/dimen_5dp" >
+
+                            <TextView
+                                android:layout_width="@dimen/dimen_80dp"
+                                android:layout_height="wrap_content"
+                                android:text="@string/diachi"
+                                android:textColor="#336666"
+                                android:textSize="@dimen/dimen_14dp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/hoten"
+                                android:textColor="#336666"
+                                android:textSize="@dimen/dimen_14dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/home_item_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_35dp"
+                    android:layout_marginTop="@dimen/dimen_10dp"
+                    android:background="@drawable/tinkhac_bg"
+                    android:gravity="center_vertical"
+                    android:visibility="visible" >
+
+                    <View
+                        android:layout_width="@dimen/dimen_5dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/home_item_header_img" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="@dimen/dimen_5dp"
+                        android:singleLine="true"
+                        android:text="@string/giaodich"
+                        android:textColor="#336666"
+                        android:textSize="@dimen/dimen_13dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:orientation="vertical" >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_45dp" >
+
+                        <TextView
+                            android:id="@+id/bangxephang_item_soluong"
+                            android:layout_width="@dimen/dimen_200dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="@dimen/dimen_5dp"
+                            android:text="@string/sogiaodichthanhcongtrongthang"
+                            android:textColor="#333333"
+                            android:textSize="@dimen/dimen_14dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:paddingLeft="@dimen/dimen_5dp"
+                            android:text="100"
+                            android:textColor="#333333"
+                            android:textSize="@dimen/dimen_14dp" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:background="@drawable/thongtincanhan_bg" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_45dp" >
+
+                        <TextView
+                            android:layout_width="@dimen/dimen_200dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="@dimen/dimen_5dp"
+                            android:text="@string/sogiaodichthanhcong"
+                            android:textColor="#333333"
+                            android:textSize="@dimen/dimen_14dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:paddingLeft="@dimen/dimen_5dp"
+                            android:text="100"
+                            android:textColor="#333333"
+                            android:textSize="@dimen/dimen_14dp" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:background="@drawable/thongtincanhan_bg" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_45dp" >
+
+                        <TextView
+                            android:layout_width="@dimen/dimen_200dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="@dimen/dimen_5dp"
+                            android:text="@string/sotienhoahongtrongthang"
+                            android:textColor="#333333"
+                            android:textSize="@dimen/dimen_14dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:paddingLeft="@dimen/dimen_5dp"
+                            android:text="100"
+                            android:textColor="#333333"
+                            android:textSize="@dimen/dimen_14dp" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:background="@drawable/thongtincanhan_bg" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_45dp" >
+
+                        <TextView
+                            android:layout_width="@dimen/dimen_200dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="@dimen/dimen_5dp"
+                            android:text="@string/sotienhoahong"
+                            android:textColor="#333333"
+                            android:textSize="@dimen/dimen_14dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:paddingLeft="@dimen/dimen_5dp"
+                            android:text="100"
+                            android:textColor="#333333"
+                            android:textSize="@dimen/dimen_14dp" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:background="@drawable/thongtincanhan_bg" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
     </LinearLayout>
 
 </RelativeLayout>
