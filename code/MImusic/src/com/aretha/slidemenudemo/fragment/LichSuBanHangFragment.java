@@ -29,9 +29,6 @@ public class LichSuBanHangFragment extends Fragment implements OnItemClickListen
 			@Override
 			public void onClick(View v) {
 				getActivity().onBackPressed();
-				// getActivity().finish();
-				// getActivity().overridePendingTransition(R.anim.abc_slide_left_in,
-				// R.anim.abc_slide_right_out);
 
 			}
 		});
