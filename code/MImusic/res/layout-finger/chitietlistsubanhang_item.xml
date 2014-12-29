@@ -186,11 +186,6 @@
                     android:textColor="#336666"
                     android:textSize="@dimen/dimen_14dp" />
             </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="@drawable/thongtincanhan_bg" />
         </LinearLayout>
     </LinearLayout>
 
