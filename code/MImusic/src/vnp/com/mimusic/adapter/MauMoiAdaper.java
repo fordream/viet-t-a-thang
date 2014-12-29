@@ -39,6 +39,15 @@ public class MauMoiAdaper extends ArrayAdapter<String> {
 			}
 		});
 
+		convertView.findViewById(R.id.maumoi_item_main).setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				mPosition = position;
+				notifyDataSetChanged();
+			}
+		});
+
 		return convertView;
 	}
 }

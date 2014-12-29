@@ -30,6 +30,8 @@ public abstract class MoiNhieuDichVuAdapter extends CursorAdapter {
 			listSelect.add(_id);
 			addOrRemove(_id, true);
 		}
+
+		notifyDataSetChanged();
 	}
 
 	public MoiNhieuDichVuAdapter(Context context, Cursor c) {
@@ -54,6 +56,14 @@ public abstract class MoiNhieuDichVuAdapter extends CursorAdapter {
 				add(_id);
 			}
 		});
+
+		convertView.findViewById(R.id.moinhieudichvu_item_main).setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				add(_id);
+			}
+		});
 	}
 
 	@Override
@@ -61,7 +71,7 @@ public abstract class MoiNhieuDichVuAdapter extends CursorAdapter {
 		return new MoiNhieuDichVuItemView(context);
 	}
 
-//	public abstract void moiDVChoNhieuNguoi();
+	// public abstract void moiDVChoNhieuNguoi();
 
 	private String textSearch = "";
 

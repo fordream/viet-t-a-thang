@@ -31,6 +31,8 @@ public abstract class MoiDvChoNhieuNguoiAdaper extends CursorAdapter {
 			listSelect.add(_id);
 			addOrRemove(_id, true);
 		}
+		
+		notifyDataSetChanged();
 	}
 
 	public MoiDvChoNhieuNguoiAdaper(Context context, Cursor c) {
@@ -51,9 +53,16 @@ public abstract class MoiDvChoNhieuNguoiAdaper extends CursorAdapter {
 		final String _id = cursor.getString(cursor.getColumnIndex(User._ID));
 		menu_right_detail_checkbox.setChecked(listSelect.contains(_id));
 		menu_right_detail_checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				add(_id);
+			}
+		});
+
+		convertView.findViewById(R.id.menurightitem_main).setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
 				add(_id);
 			}
 		});
