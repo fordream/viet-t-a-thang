@@ -1,0 +1,19 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <vnp.com.mimusic.view.HeaderView
+        android:id="@+id/activity_login_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </vnp.com.mimusic.view.HeaderView>
+    <vnp.com.mimusic.view.MusicListView
+        android:id="@+id/home_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="#333333"
+        android:dividerHeight="1px" >
+    </vnp.com.mimusic.view.MusicListView>
+</LinearLayout>

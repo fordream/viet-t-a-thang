@@ -231,6 +231,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/btn_lichsubanhang"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_35dp"
                 android:layout_marginTop="@dimen/dimen_20dp"
@@ -238,7 +239,7 @@
                 android:gravity="center" >
 
                 <TextView
-                    android:id="@+id/TextView07"
+                    
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"

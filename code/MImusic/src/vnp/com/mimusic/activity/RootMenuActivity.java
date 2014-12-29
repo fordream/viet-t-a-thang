@@ -23,6 +23,7 @@ import com.aretha.slidemenudemo.fragment.ChiTietCaNhanBangXepHangFragment;
 import com.aretha.slidemenudemo.fragment.ChiTietCaNhanBangXepHangTungDichVuFragment;
 import com.aretha.slidemenudemo.fragment.ChiTietCaNhanDichVuFragment;
 import com.aretha.slidemenudemo.fragment.ChiTietDichVuFragment;
+import com.aretha.slidemenudemo.fragment.ChiTietListSuBanHangFragment;
 import com.aretha.slidemenudemo.fragment.ChiTietTintucFragment;
 import com.aretha.slidemenudemo.fragment.DichVuFragment;
 import com.aretha.slidemenudemo.fragment.GuiDvChoNhieuNguoiFragment;
@@ -90,8 +91,9 @@ public class RootMenuActivity extends FragmentActivity {
 			changeFragemt(R.id.root_main_fragment, new ChiTietCaNhanBangXepHangFragment());
 		} else if (Conts.CHITIETCANHANBANGXEPHANGTUNGDICHVU.equals(type)) {
 			changeFragemt(R.id.root_main_fragment, new ChiTietCaNhanBangXepHangTungDichVuFragment());
+		} else if (Conts.CHITTIETLICHSUBANHANG.equals(type)) {
+			changeFragemt(R.id.root_main_fragment, new ChiTietListSuBanHangFragment());
 		}
-
 	}
 
 	/**
@@ -256,6 +258,13 @@ public class RootMenuActivity extends FragmentActivity {
 		bundle.putBoolean("addfragment", true);
 		chitiettintuc.setArguments(bundle);
 		changeFragemt(R.id.root_main_fragment, chitiettintuc, true);
+	}
+
+	public void gotoChiTietLichSuBanHang() {
+		Intent intent = new Intent(this, RootMenuActivity.class);
+		intent.putExtra("type", Conts.CHITTIETLICHSUBANHANG);
+		getParent().startActivity(intent);
+		getParent().overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_slide_left_out);
 	}
 
 }
