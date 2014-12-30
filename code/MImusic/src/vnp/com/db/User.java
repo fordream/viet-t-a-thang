@@ -38,14 +38,18 @@ public class User {
 	public static final String BIDANH = "BIDANH";
 	public static final String DIACHI = "DIACHI";
 
+	public static final String TOKEN = "token";
+	public static final String KEYREFRESH = "keyRefresh";
+
 	public static final String CREATE_DB_TABLE() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("CREATE TABLE ").append(USER_TABLE_NAME);
 		builder.append("(");
 		builder.append(_ID).append(" INTEGER PRIMARY KEY AUTOINCREMENT").append(",");
 		String[] colums = new String[] {//
-		SOGIAODICHTHANHCONGTRONGTHANG, SOGIAODICHTHANHCONG, SOTIENHOAHONGTRONGTHANG, SOTIENHOAHONG, USER, PASSWORD, STATUS, COVER, ID, BIDANH, NGAYSINH, DIACHI, NAME, NAME_CONTACT, EMAIL, AVATAR,
-				LISTIDDVSUDUNG, SOLUONG, DOANHTHU, LISTIDUSERDAMOI //
+		TOKEN, KEYREFRESH, SOGIAODICHTHANHCONGTRONGTHANG, SOGIAODICHTHANHCONG, SOTIENHOAHONGTRONGTHANG//
+				, SOTIENHOAHONG, USER, PASSWORD, STATUS, COVER, ID, BIDANH, NGAYSINH, DIACHI, NAME, NAME_CONTACT,//
+				EMAIL, AVATAR, LISTIDDVSUDUNG, SOLUONG, DOANHTHU, LISTIDUSERDAMOI //
 		};//
 			// builder.append(USER).append(" TEXT NOT NULL").append(",");
 			// builder.append(LISTIDDV).append(" TEXT NOT NULL");

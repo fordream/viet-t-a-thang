@@ -1,10 +1,15 @@
 package vnp.com.mimusic;
 
+import vnp.com.api.CallBack;
+import vnp.com.api.ExeCallBack;
+import vnp.com.api.ResClientCallBack;
+import vnp.com.api.RestClient;
 import vnp.com.db.DichVu;
 import vnp.com.db.User;
 import vnp.com.mimusic.base.VTAnimationListener;
 import vnp.com.mimusic.main.BaseMusicSlideMenuActivity;
 import vnp.com.mimusic.util.Conts;
+import vnp.com.mimusic.util.LogUtils;
 import vnp.com.mimusic.util.VTAnimationUtils;
 import vnp.com.mimusic.view.HeaderView;
 import vnp.com.mimusic.view.add.OnTouchAnimation;
@@ -69,6 +74,24 @@ public class LoginActivty extends Activity implements OnClickListener {
 		String password = ((TextView) findViewById(R.id.activity_login_password)).getText().toString();
 
 		if (!numberPhone.trim().equals("") && !password.trim().equals("")) {
+
+//			ResClientCallBack back = new ResClientCallBack() {
+//
+//				@Override
+//				public void onCallBack(Object object) {
+//					RestClient restClient = (RestClient) object;
+//					
+//					LogUtils.e("ALO", String.format("%s %s %s", restClient.getResponseCode(),restClient.getErrorMessage() , restClient.getResponse() ));
+//				}
+//
+//				@Override
+//				public String getUrl() {
+//					return Conts.SERVER + "authenticate";
+//				}
+//			};
+//
+//			new ExeCallBack().executeAsynCallBack(back);
+			
 			ContentValues values = new ContentValues();
 			values.put(User.USER, numberPhone);
 			values.put(User.PASSWORD, password);
