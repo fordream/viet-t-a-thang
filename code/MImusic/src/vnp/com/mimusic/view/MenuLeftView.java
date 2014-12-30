@@ -70,23 +70,26 @@ public class MenuLeftView extends LinearLayout {
 
 			String cover = cursor.getString(cursor.getColumnIndex(User.COVER));
 
-			if (!Conts.isBlank(cover)) {
-				BitmapFactory.Options options = new BitmapFactory.Options();
-				options.inPreferredConfig = Bitmap.Config.ARGB_8888;
-				Bitmap bitmap = BitmapFactory.decodeFile(cover, options);
-				menu_left_img_cover.setImageBitmap(bitmap);
-			}
+			Conts.showImage(cover, menu_left_img_cover, 0);
+			// if (!Conts.isBlank(cover)) {
+			// BitmapFactory.Options options = new BitmapFactory.Options();
+			// options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+			// Bitmap bitmap = BitmapFactory.decodeFile(cover, options);
+			// menu_left_img_cover.setImageBitmap(bitmap);
+			// }
 			String avatar = cursor.getString(cursor.getColumnIndex(User.AVATAR));
+			Conts.showImage(avatar, menu_left_img_avatar, R.drawable.no_avatar);
 
-			if (!Conts.isBlank(avatar)) {
-				BitmapFactory.Options options = new BitmapFactory.Options();
-				options.inPreferredConfig = Bitmap.Config.ARGB_8888;
-				Bitmap bitmap = BitmapFactory.decodeFile(avatar, options);
-				menu_left_img_avatar.setImageBitmap(bitmap);
-			} else {
-				menu_left_img_avatar.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.no_avatar));
-
-			}
+			// if (!Conts.isBlank(avatar)) {
+			// BitmapFactory.Options options = new BitmapFactory.Options();
+			// options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+			// Bitmap bitmap = BitmapFactory.decodeFile(avatar, options);
+			// menu_left_img_avatar.setImageBitmap(bitmap);
+			// } else {
+			// menu_left_img_avatar.setImageBitmap(BitmapFactory.decodeResource(getResources(),
+			// R.drawable.no_avatar));
+			//
+			// }
 			cursor.close();
 		}
 	}

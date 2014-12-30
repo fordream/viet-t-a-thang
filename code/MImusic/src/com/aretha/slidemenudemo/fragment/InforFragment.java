@@ -1,5 +1,9 @@
 package com.aretha.slidemenudemo.fragment;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+
 import vnp.com.db.User;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.base.diablog.DateDialog;
@@ -14,9 +18,10 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -89,25 +94,11 @@ public class InforFragment extends Fragment implements OnItemClickListener, View
 			infor_ngaysinh.setText(cursor.getString(cursor.getColumnIndex(User.NGAYSINH)));
 
 			String cover = cursor.getString(cursor.getColumnIndex(User.COVER));
-			LogUtils.e("URI", cover + " cover");
-			if (!Conts.isBlank(cover)) {
-				BitmapFactory.Options options = new BitmapFactory.Options();
-				options.inPreferredConfig = Bitmap.Config.ARGB_8888;
-				Bitmap bitmap = BitmapFactory.decodeFile(cover, options);
-				menu_left_img_cover.setImageBitmap(bitmap);
-			}
+			Conts.showImage(cover, menu_left_img_cover, 0);
 
 			String avatar = cursor.getString(cursor.getColumnIndex(User.AVATAR));
-			LogUtils.e("URI", avatar + " avatar");
-			if (!Conts.isBlank(avatar)) {
-				BitmapFactory.Options options = new BitmapFactory.Options();
-				options.inPreferredConfig = Bitmap.Config.ARGB_8888;
-				Bitmap bitmap = BitmapFactory.decodeFile(avatar, options);
-				menu_left_img_avatar.setImageBitmap(bitmap);
-			} else {
-				menu_left_img_avatar.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.no_avatar));
+			Conts.showImage(avatar, menu_left_img_avatar, R.drawable.no_avatar);
 
-			}
 			cursor.close();
 		}
 	}
@@ -117,8 +108,9 @@ public class InforFragment extends Fragment implements OnItemClickListener, View
 		super.onActivityResult(requestCode, resultCode, data);
 
 		if (requestCode == 100 && resultCode == Activity.RESULT_OK) {
-			String path = Conts.getPath(getActivity(), data.getData());
+			// String path = Conts.getPath(getActivity(), data.getData());
 
+			String path = data.getData().toString();
 			if (path != null) {
 				ContentValues contentValues = new ContentValues();
 				contentValues.put(User.COVER, path);
@@ -134,9 +126,25 @@ public class InforFragment extends Fragment implements OnItemClickListener, View
 				Toast.makeText(getActivity(), getActivity().getString(R.string.khongthelayduocduongdan), Toast.LENGTH_SHORT).show();
 			}
 		} else if (requestCode == 101 && resultCode == Activity.RESULT_OK) {
-			Bitmap photo = (Bitmap) data.getExtras().get("data");
+			String path = this.path.toString();
+			if (path != null) {
+				ContentValues contentValues = new ContentValues();
+				contentValues.put(User.COVER, path);
+				int index = getActivity().getContentResolver().update(User.CONTENT_URI, contentValues, String.format("%s = '1'", User.STATUS), null);
+
+				if (index > 0) {
+					Toast.makeText(getActivity(), getActivity().getString(R.string.updatethanhcong), Toast.LENGTH_SHORT).show();
+					showData();
+				} else {
+					Toast.makeText(getActivity(), getActivity().getString(R.string.updatethatbai), Toast.LENGTH_SHORT).show();
+				}
+			} else {
+				Toast.makeText(getActivity(), getActivity().getString(R.string.khongthelayduocduongdan), Toast.LENGTH_SHORT).show();
+			}
+
 		} else if (requestCode == 102 && resultCode == Activity.RESULT_OK) {
-			String path = Conts.getPath(getActivity(), data.getData());
+			// String path = Conts.getPath(getActivity(), data.getData());
+			String path = data.getData().toString();
 			if (path != null) {
 				ContentValues contentValues = new ContentValues();
 				contentValues.put(User.AVATAR, path);
@@ -152,10 +160,25 @@ public class InforFragment extends Fragment implements OnItemClickListener, View
 				Toast.makeText(getActivity(), getActivity().getString(R.string.khongthelayduocduongdan), Toast.LENGTH_SHORT).show();
 			}
 		} else if (requestCode == 103 && resultCode == Activity.RESULT_OK) {
-			// avatar
-			Bitmap photo = (Bitmap) data.getExtras().get("data");
+			String path = this.path.toString();
+			if (path != null) {
+				ContentValues contentValues = new ContentValues();
+				contentValues.put(User.AVATAR, path);
+				int index = getActivity().getContentResolver().update(User.CONTENT_URI, contentValues, String.format("%s = '1'", User.STATUS), null);
+
+				if (index > 0) {
+					Toast.makeText(getActivity(), getActivity().getString(R.string.updatethanhcong), Toast.LENGTH_SHORT).show();
+					showData();
+				} else {
+					Toast.makeText(getActivity(), getActivity().getString(R.string.updatethatbai), Toast.LENGTH_SHORT).show();
+				}
+			} else {
+				Toast.makeText(getActivity(), getActivity().getString(R.string.khongthelayduocduongdan), Toast.LENGTH_SHORT).show();
+			}
 		}
 	}
+
+	private Uri path;
 
 	@Override
 	public void onClick(View v) {
@@ -175,9 +198,15 @@ public class InforFragment extends Fragment implements OnItemClickListener, View
 						Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
 						intent.setType("image/*");
 						startActivityForResult(Intent.createChooser(intent, getActivity().getString(R.string.chonanh)), 102);
+
 					} else {
 						Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+
+						path = Uri.fromFile(new File(Environment.getExternalStorageDirectory(), "tmp_avatar_" + System.currentTimeMillis() + ".jpg"));
+						cameraIntent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, path);
+						cameraIntent.putExtra("return-data", true);
 						startActivityForResult(cameraIntent, 103);
+
 					}
 				}
 			});
@@ -189,11 +218,13 @@ public class InforFragment extends Fragment implements OnItemClickListener, View
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					if (which == 1) {
-						Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-						intent.setType("image/*");
-						startActivityForResult(Intent.createChooser(intent, getActivity().getString(R.string.chonanh)), 100);
+						Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+						startActivityForResult(i, 100);
 					} else {
 						Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+						path = Uri.fromFile(new File(Environment.getExternalStorageDirectory(), "tmp_avatar_" + System.currentTimeMillis() + ".jpg"));
+						cameraIntent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, path);
+						cameraIntent.putExtra("return-data", true);
 						startActivityForResult(cameraIntent, 101);
 					}
 				}

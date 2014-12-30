@@ -1,20 +1,19 @@
 package vnp.com.mimusic.util;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import vnp.com.db.User;
-import vnp.com.mimusic.base.VTAnimationListener;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Path;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.provider.MediaStore;
-import android.util.Log;
-import android.view.View;
-import android.view.View.OnFocusChangeListener;
-import android.view.animation.Animation;
-import android.view.animation.ScaleAnimation;
+import android.widget.ImageView;
 
 public class Conts {
 	public final static String HOME = "home";
@@ -103,25 +102,31 @@ public class Conts {
 		return targetBitmap;
 	}
 
-	// public static void setOnClickListener(final View view, final
-	// View.OnClickListener onClickListener) {
-	//
-	// view.setOnClickListener(new View.OnClickListener() {
-	// @Override
-	// public void onClick(View v) {
-	// ScaleAnimation scaleAnimation = new ScaleAnimation(1f, 0.6f, 1f, 0.6f,
-	// v.getWidth() / 2, v.getHeight() / 2);
-	// scaleAnimation.setDuration(100);
-	// scaleAnimation.setAnimationListener(new VTAnimationListener() {
-	// @Override
-	// public void onAnimationEnd(Animation animation) {
-	// super.onAnimationEnd(animation);
-	// onClickListener.onClick(view);
-	// }
-	// });
-	//
-	// view.startAnimation(scaleAnimation);
-	// }
-	// });
-	// }
+	public static void showImage(String path, ImageView img, int no_image) {
+		Bitmap bitmap = null;
+		LogUtils.e("PATH1", path + "");
+		if (path != null && path.contains("file://")) {
+			path = path.substring(path.indexOf("file://") + 7, path.length());
+			BitmapFactory.Options options = new BitmapFactory.Options();
+			options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+			bitmap = BitmapFactory.decodeFile(path, options);
+
+		}
+
+		if (path != null && path.contains("content://")) {
+			try {
+				bitmap = MediaStore.Images.Media.getBitmap(img.getContext().getContentResolver(), Uri.parse(path));
+			} catch (Exception e) {
+			}
+		}
+
+		if (bitmap == null && no_image != 0) {
+			bitmap = BitmapFactory.decodeResource(img.getContext().getResources(), no_image);
+		}
+
+		if (bitmap != null) {
+			img.setImageBitmap(bitmap);
+		}
+	}
+
 }
