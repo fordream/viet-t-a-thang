@@ -55,16 +55,19 @@ public class Conts {
 	}
 
 	public static String getPath(Context context, Uri uri) {
+
 		if (uri == null) {
 			return null;
 		}
 
 		String[] projection = { MediaStore.Images.Media.DATA };
 		Cursor cursor = context.getContentResolver().query(uri, projection, null, null, null);
+
 		if (cursor != null) {
 			int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
 			cursor.moveToFirst();
-			return cursor.getString(column_index);
+			String path = cursor.getString(column_index);
+			return path == null ? uri.getPath() : path;
 		}
 		return uri.getPath();
 	}

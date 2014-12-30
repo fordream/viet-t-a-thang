@@ -24,7 +24,7 @@
     <ScrollView
         android:id="@+id/activity_login_main"
         android:layout_width="fill_parent"
-        android:visibility="visible"
+        android:visibility="gone"
         android:layout_height="match_parent" >
 
         <LinearLayout

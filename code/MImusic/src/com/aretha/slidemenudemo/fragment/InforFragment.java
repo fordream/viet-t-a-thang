@@ -4,6 +4,7 @@ import vnp.com.db.User;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.base.diablog.DateDialog;
 import vnp.com.mimusic.util.Conts;
+import vnp.com.mimusic.util.LogUtils;
 import vnp.com.mimusic.view.HeaderView;
 import android.app.Activity;
 import android.app.AlertDialog.Builder;
@@ -15,6 +16,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,7 +52,8 @@ public class InforFragment extends Fragment implements OnItemClickListener, View
 			@Override
 			public void onClick(View v) {
 				getActivity().onBackPressed();
-//				getActivity().overridePendingTransition(R.anim.abc_slide_left_in, R.anim.abc_slide_right_out);
+				// getActivity().overridePendingTransition(R.anim.abc_slide_left_in,
+				// R.anim.abc_slide_right_out);
 			}
 		});
 		infor_cover_click_change = (ImageView) view.findViewById(R.id.infor_cover_click_change);
@@ -86,7 +89,7 @@ public class InforFragment extends Fragment implements OnItemClickListener, View
 			infor_ngaysinh.setText(cursor.getString(cursor.getColumnIndex(User.NGAYSINH)));
 
 			String cover = cursor.getString(cursor.getColumnIndex(User.COVER));
-
+			LogUtils.e("URI", cover + " cover");
 			if (!Conts.isBlank(cover)) {
 				BitmapFactory.Options options = new BitmapFactory.Options();
 				options.inPreferredConfig = Bitmap.Config.ARGB_8888;
@@ -95,7 +98,7 @@ public class InforFragment extends Fragment implements OnItemClickListener, View
 			}
 
 			String avatar = cursor.getString(cursor.getColumnIndex(User.AVATAR));
-
+			LogUtils.e("URI", avatar + " avatar");
 			if (!Conts.isBlank(avatar)) {
 				BitmapFactory.Options options = new BitmapFactory.Options();
 				options.inPreferredConfig = Bitmap.Config.ARGB_8888;
@@ -115,6 +118,7 @@ public class InforFragment extends Fragment implements OnItemClickListener, View
 
 		if (requestCode == 100 && resultCode == Activity.RESULT_OK) {
 			String path = Conts.getPath(getActivity(), data.getData());
+
 			if (path != null) {
 				ContentValues contentValues = new ContentValues();
 				contentValues.put(User.COVER, path);
