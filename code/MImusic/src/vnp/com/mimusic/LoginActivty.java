@@ -7,6 +7,7 @@ import vnp.com.api.CallBack;
 import vnp.com.api.ExeCallBack;
 import vnp.com.api.ResClientCallBack;
 import vnp.com.api.RestClient;
+import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.DichVu;
 import vnp.com.db.User;
 import vnp.com.mimusic.base.VTAnimationListener;
@@ -63,6 +64,7 @@ public class LoginActivty extends Activity implements OnClickListener {
 			}
 		});
 		findViewById(R.id.activity_login_splash).startAnimation(alphaAnimation);
+
 	}
 
 	private void gotoHome() {
@@ -80,6 +82,11 @@ public class LoginActivty extends Activity implements OnClickListener {
 
 			ResClientCallBack back = new ResClientCallBack() {
 				@Override
+				public RequestMethod getMedthod() {
+					return RequestMethod.POST;
+				}
+
+				@Override
 				public void onCallBack(Object object) {
 					RestClient restClient = (RestClient) object;
 
@@ -93,7 +100,6 @@ public class LoginActivty extends Activity implements OnClickListener {
 							String token = jsonObject.getString("token");
 							String keyRefresh = jsonObject.getString("keyRefresh");
 							String phone_number = jsonObject.getString("phone");
-
 							ContentValues values = new ContentValues();
 							values.put(User.USER, phone_number);
 							values.put(User.PASSWORD, "");
@@ -108,6 +114,7 @@ public class LoginActivty extends Activity implements OnClickListener {
 								addDichVu();
 								gotoHome();
 							}
+
 						} else {
 							Toast.makeText(LoginActivty.this, message, Toast.LENGTH_SHORT).show();
 						}
@@ -121,29 +128,32 @@ public class LoginActivty extends Activity implements OnClickListener {
 
 				@Override
 				public String getUrl() {
-					return Conts.SERVER + "authenticate";
+					// return Conts.SERVER + "authenticate";
+					return Conts.SERVER + "signin";
+
 				}
 			};
-
+			back.addParam("u", numberPhone);
+			back.addParam("p", password);
 			new ExeCallBack().executeAsynCallBack(back);
-
-			ContentValues values = new ContentValues();
-			values.put(User.USER, "phone_number");
-			values.put(User.PASSWORD, "");
-			values.put(User.TOKEN, "token");
-			values.put(User.KEYREFRESH, "keyRefresh");
-			values.put(User.STATUS, "1");
-
-			Uri uri = getContentResolver().insert(User.CONTENT_URI, values);
-
-			int _id = Integer.parseInt(uri.getPathSegments().get(1));
-
-			if (_id > 0) {
-				addDichVu();
-				gotoHome();
-			} else {
-				Toast.makeText(this, "login fail", Toast.LENGTH_SHORT).show();
-			}
+			//
+			// ContentValues values = new ContentValues();
+			// values.put(User.USER, "phone_number");
+			// values.put(User.PASSWORD, "");
+			// values.put(User.TOKEN, "token");
+			// values.put(User.KEYREFRESH, "keyRefresh");
+			// values.put(User.STATUS, "1");
+			//
+			// Uri uri = getContentResolver().insert(User.CONTENT_URI, values);
+			//
+			// int _id = Integer.parseInt(uri.getPathSegments().get(1));
+			//
+			// if (_id > 0) {
+			// addDichVu();
+			// gotoHome();
+			// } else {
+			// Toast.makeText(this, "login fail", Toast.LENGTH_SHORT).show();
+			// }
 
 		} else {
 			if (Conts.isBlank(numberPhone)) {
