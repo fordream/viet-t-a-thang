@@ -85,13 +85,16 @@ public class LoginActivty extends Activity implements OnClickListener {
 					RestClient restClient = (RestClient) object;
 
 					try {
+						LogUtils.e("AAA", restClient.getResponse());
 						JSONObject jsonObject = new JSONObject(restClient.getResponse());
 						String errorCode = jsonObject.getString("errorCode");
-						String token = jsonObject.getString("token");
-						String keyRefresh = jsonObject.getString("keyRefresh");
-						String phone_number = jsonObject.getString("phone");
 
+						String message = jsonObject.getString("message");
 						if ("0".equals(errorCode)) {
+							String token = jsonObject.getString("token");
+							String keyRefresh = jsonObject.getString("keyRefresh");
+							String phone_number = jsonObject.getString("phone");
+							
 							ContentValues values = new ContentValues();
 							values.put(User.USER, phone_number);
 							values.put(User.PASSWORD, "");
@@ -105,21 +108,16 @@ public class LoginActivty extends Activity implements OnClickListener {
 							if (_id > 0) {
 								addDichVu();
 								gotoHome();
-							} else {
-								// Toast.makeText(this, "login fail",
-								// Toast.LENGTH_SHORT).show();
-							}
+							} 
 						} else {
-							Toast.makeText(LoginActivty.this, "login fail", Toast.LENGTH_SHORT).show();
+							Toast.makeText(LoginActivty.this, message, Toast.LENGTH_SHORT).show();
 						}
 					} catch (JSONException e) {
 						e.printStackTrace();
+						LogUtils.e("AAA", e.getMessage());
 						Toast.makeText(LoginActivty.this, "login fail", Toast.LENGTH_SHORT).show();
 					}
 
-					// LogUtils.e("ALO", String.format("%s %s %s",
-					// restClient.getResponseCode(),
-					// restClient.getErrorMessage(), restClient.getResponse()));
 				}
 
 				@Override
