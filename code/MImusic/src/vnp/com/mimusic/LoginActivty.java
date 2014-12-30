@@ -79,7 +79,6 @@ public class LoginActivty extends Activity implements OnClickListener {
 		if (!numberPhone.trim().equals("") && !password.trim().equals("")) {
 
 			ResClientCallBack back = new ResClientCallBack() {
-
 				@Override
 				public void onCallBack(Object object) {
 					RestClient restClient = (RestClient) object;
@@ -137,12 +136,6 @@ public class LoginActivty extends Activity implements OnClickListener {
 
 			Uri uri = getContentResolver().insert(User.CONTENT_URI, values);
 
-			// ContentValues values = new ContentValues();
-			// values.put(User.USER, numberPhone);
-			// values.put(User.PASSWORD, password);
-			// values.put(User.STATUS, "1");
-			//
-			// Uri uri = getContentResolver().insert(User.CONTENT_URI, values);
 			int _id = Integer.parseInt(uri.getPathSegments().get(1));
 
 			if (_id > 0) {

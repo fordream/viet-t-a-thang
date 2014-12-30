@@ -13,24 +13,22 @@
         android:gravity="center"
         android:orientation="vertical" >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/kenhbanvas"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/dimen_30dp" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_186dp"
+            android:background="@drawable/login_header" />
     </LinearLayout>
 
     <ScrollView
         android:id="@+id/activity_login_main"
         android:layout_width="fill_parent"
-        android:visibility="gone"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:visibility="gone" >
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:gravity="center"
             android:layout_height="match_parent"
+            android:gravity="center"
             android:orientation="vertical" >
 
             <LinearLayout
@@ -41,10 +39,10 @@
                 android:visibility="visible" >
 
                 <vnp.com.mimusic.view.HeaderView
-                    android:visibility="gone"
                     android:id="@+id/activity_login_header"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" >
                 </vnp.com.mimusic.view.HeaderView>
 
                 <ImageView
@@ -59,6 +57,48 @@
                     android:gravity="center"
                     android:orientation="vertical" >
 
+                    <vnp.com.mimusic.view.VTTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_20dp"
+                        android:gravity="center"
+                        android:text="@string/banchuacomatkhau"
+                        android:textColor="#336666"
+                        android:textSize="@dimen/dimen_13dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center" >
+
+                        <vnp.com.mimusic.view.VTTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="MK"
+                            android:textColor="#336666"
+                            android:textSize="@dimen/dimen_13dp"
+                            android:textStyle="bold" />
+
+                        <vnp.com.mimusic.view.VTTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:paddingLeft="@dimen/dimen_2dp"
+                            android:paddingRight="@dimen/dimen_2dp"
+                            android:text="@string/gui1"
+                            android:textColor="#336666"
+                            android:textSize="@dimen/dimen_13dp" />
+
+                        <vnp.com.mimusic.view.VTTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="567"
+                            android:textColor="#a73444"
+                            android:textSize="@dimen/dimen_13dp" />
+                    </LinearLayout>
+
                     <TextView
                         android:layout_width="@dimen/dimen_200dp"
                         android:layout_height="wrap_content"
@@ -66,7 +106,7 @@
                         android:layout_marginTop="@dimen/dimen_20dp"
                         android:text="@string/nhapsodienthoai"
                         android:textColor="#336666"
-                        android:textSize="@dimen/dimen_14dp"
+                        android:textSize="@dimen/dimen_13dp"
                         android:textStyle="bold" />
 
                     <EditText
@@ -90,7 +130,7 @@
                         android:layout_marginTop="@dimen/dimen_10dp"
                         android:text="@string/matkhau"
                         android:textColor="#336666"
-                        android:textSize="@dimen/dimen_14dp"
+                        android:textSize="@dimen/dimen_13dp"
                         android:textStyle="bold" />
 
                     <EditText
@@ -108,10 +148,10 @@
                         android:textSize="@dimen/dimen_13dp" />
 
                     <LinearLayout
-                        android:layout_marginTop="@dimen/dimen_10dp"
-                        android:layout_marginBottom="@dimen/dimen_10dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/dimen_10dp"
+                        android:layout_marginTop="@dimen/dimen_10dp"
                         android:gravity="center"
                         android:paddingLeft="@dimen/dimen_10dp"
                         android:paddingRight="@dimen/dimen_10dp" >
@@ -119,7 +159,7 @@
                         <Button
                             android:id="@+id/activity_login_soantin"
                             android:layout_width="@dimen/dimen_95dp"
-                            android:layout_height="@dimen/dimen_35dp"
+                            android:layout_height="@dimen/dimen_30dp"
                             android:layout_marginRight="@dimen/dimen_10dp"
                             android:background="@drawable/xml_btn_dangky"
                             android:singleLine="true"
@@ -130,7 +170,7 @@
                         <Button
                             android:id="@+id/activity_login_btn"
                             android:layout_width="@dimen/dimen_95dp"
-                            android:layout_height="@dimen/dimen_35dp"
+                            android:layout_height="@dimen/dimen_30dp"
                             android:background="@drawable/xml_btn_infor"
                             android:singleLine="true"
                             android:text="@string/dangnhap"
