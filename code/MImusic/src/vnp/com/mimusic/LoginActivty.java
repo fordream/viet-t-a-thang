@@ -94,7 +94,7 @@ public class LoginActivty extends Activity implements OnClickListener {
 							String token = jsonObject.getString("token");
 							String keyRefresh = jsonObject.getString("keyRefresh");
 							String phone_number = jsonObject.getString("phone");
-							
+
 							ContentValues values = new ContentValues();
 							values.put(User.USER, phone_number);
 							values.put(User.PASSWORD, "");
@@ -108,11 +108,11 @@ public class LoginActivty extends Activity implements OnClickListener {
 							if (_id > 0) {
 								addDichVu();
 								gotoHome();
-							} 
+							}
 						} else {
 							Toast.makeText(LoginActivty.this, message, Toast.LENGTH_SHORT).show();
 						}
-					} catch (JSONException e) {
+					} catch (Exception e) {
 						e.printStackTrace();
 						LogUtils.e("AAA", e.getMessage());
 						Toast.makeText(LoginActivty.this, "login fail", Toast.LENGTH_SHORT).show();
@@ -128,20 +128,29 @@ public class LoginActivty extends Activity implements OnClickListener {
 
 			new ExeCallBack().executeAsynCallBack(back);
 
+			ContentValues values = new ContentValues();
+			values.put(User.USER, "phone_number");
+			values.put(User.PASSWORD, "");
+			values.put(User.TOKEN, "token");
+			values.put(User.KEYREFRESH, "keyRefresh");
+			values.put(User.STATUS, "1");
+
+			Uri uri = getContentResolver().insert(User.CONTENT_URI, values);
+
 			// ContentValues values = new ContentValues();
 			// values.put(User.USER, numberPhone);
 			// values.put(User.PASSWORD, password);
 			// values.put(User.STATUS, "1");
 			//
 			// Uri uri = getContentResolver().insert(User.CONTENT_URI, values);
-			// int _id = Integer.parseInt(uri.getPathSegments().get(1));
-			//
-			// if (_id > 0) {
-			// addDichVu();
-			// gotoHome();
-			// } else {
-			// Toast.makeText(this, "login fail", Toast.LENGTH_SHORT).show();
-			// }
+			int _id = Integer.parseInt(uri.getPathSegments().get(1));
+
+			if (_id > 0) {
+				addDichVu();
+				gotoHome();
+			} else {
+				Toast.makeText(this, "login fail", Toast.LENGTH_SHORT).show();
+			}
 
 		} else {
 			if (Conts.isBlank(numberPhone)) {
