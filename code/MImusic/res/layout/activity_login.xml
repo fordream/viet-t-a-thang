@@ -23,17 +23,18 @@
 
     <ScrollView
         android:id="@+id/activity_login_main"
-        android:layout_width="wrap_content"
-        android:visibility="gone"
+        android:layout_width="fill_parent"
+        android:visibility="visible"
         android:layout_height="match_parent" >
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:gravity="center"
             android:layout_height="match_parent"
             android:orientation="vertical" >
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@android:color/white"
                 android:orientation="vertical"
@@ -48,7 +49,7 @@
 
                 <ImageView
                     android:id="@+id/imageView1"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen_186dp"
                     android:background="@drawable/login_header" />
 
