@@ -1,8 +1,5 @@
 package vnp.com.mimusic.util;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
 import vnp.com.db.User;
 import android.content.Context;
 import android.database.Cursor;
@@ -16,6 +13,8 @@ import android.provider.MediaStore;
 import android.widget.ImageView;
 
 public class Conts {
+
+	public final static String SERVER = "http://125.235.40.85/api.php/";
 	public final static String HOME = "home";
 	public final static String BANGXEPHANG = "bangxephang";
 	public final static String LICHSUBANHANG = "lichsubanhang";
