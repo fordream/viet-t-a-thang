@@ -23,8 +23,6 @@ public class ChiTietCaNhanBangXepHangTungDichVuFragment extends Fragment impleme
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.chitietcanhanbangxephangtungdichvu, null);
-
-		view.findViewById(R.id.bangxephangitemview).findViewById(R.id.bangxephang_block_soluong).setVisibility(View.GONE);
 		
 		HeaderView chitiettintuc_headerview = (HeaderView) view.findViewById(R.id.chitietcanhanbangxephangtungdichvu_header);
 		chitiettintuc_headerview.setTextHeader(R.string.chitietcanhanbangxephang);
