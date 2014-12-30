@@ -1,5 +1,8 @@
 package vnp.com.mimusic;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import vnp.com.api.CallBack;
 import vnp.com.api.ExeCallBack;
 import vnp.com.api.ResClientCallBack;
@@ -75,37 +78,72 @@ public class LoginActivty extends Activity implements OnClickListener {
 
 		if (!numberPhone.trim().equals("") && !password.trim().equals("")) {
 
-//			ResClientCallBack back = new ResClientCallBack() {
-//
-//				@Override
-//				public void onCallBack(Object object) {
-//					RestClient restClient = (RestClient) object;
-//					
-//					LogUtils.e("ALO", String.format("%s %s %s", restClient.getResponseCode(),restClient.getErrorMessage() , restClient.getResponse() ));
-//				}
-//
-//				@Override
-//				public String getUrl() {
-//					return Conts.SERVER + "authenticate";
-//				}
-//			};
-//
-//			new ExeCallBack().executeAsynCallBack(back);
-			
-			ContentValues values = new ContentValues();
-			values.put(User.USER, numberPhone);
-			values.put(User.PASSWORD, password);
-			values.put(User.STATUS, "1");
+			ResClientCallBack back = new ResClientCallBack() {
 
-			Uri uri = getContentResolver().insert(User.CONTENT_URI, values);
-			int _id = Integer.parseInt(uri.getPathSegments().get(1));
+				@Override
+				public void onCallBack(Object object) {
+					RestClient restClient = (RestClient) object;
 
-			if (_id > 0) {
-				addDichVu();
-				gotoHome();
-			} else {
-				Toast.makeText(this, "login fail", Toast.LENGTH_SHORT).show();
-			}
+					try {
+						JSONObject jsonObject = new JSONObject(restClient.getResponse());
+						String errorCode = jsonObject.getString("errorCode");
+						String token = jsonObject.getString("token");
+						String keyRefresh = jsonObject.getString("keyRefresh");
+						String phone_number = jsonObject.getString("phone");
+
+						if ("0".equals(errorCode)) {
+							ContentValues values = new ContentValues();
+							values.put(User.USER, phone_number);
+							values.put(User.PASSWORD, "");
+							values.put(User.TOKEN, token);
+							values.put(User.KEYREFRESH, keyRefresh);
+							values.put(User.STATUS, "1");
+
+							Uri uri = getContentResolver().insert(User.CONTENT_URI, values);
+							int _id = Integer.parseInt(uri.getPathSegments().get(1));
+
+							if (_id > 0) {
+								addDichVu();
+								gotoHome();
+							} else {
+								// Toast.makeText(this, "login fail",
+								// Toast.LENGTH_SHORT).show();
+							}
+						} else {
+							Toast.makeText(LoginActivty.this, "login fail", Toast.LENGTH_SHORT).show();
+						}
+					} catch (JSONException e) {
+						e.printStackTrace();
+						Toast.makeText(LoginActivty.this, "login fail", Toast.LENGTH_SHORT).show();
+					}
+
+					// LogUtils.e("ALO", String.format("%s %s %s",
+					// restClient.getResponseCode(),
+					// restClient.getErrorMessage(), restClient.getResponse()));
+				}
+
+				@Override
+				public String getUrl() {
+					return Conts.SERVER + "authenticate";
+				}
+			};
+
+			new ExeCallBack().executeAsynCallBack(back);
+
+			// ContentValues values = new ContentValues();
+			// values.put(User.USER, numberPhone);
+			// values.put(User.PASSWORD, password);
+			// values.put(User.STATUS, "1");
+			//
+			// Uri uri = getContentResolver().insert(User.CONTENT_URI, values);
+			// int _id = Integer.parseInt(uri.getPathSegments().get(1));
+			//
+			// if (_id > 0) {
+			// addDichVu();
+			// gotoHome();
+			// } else {
+			// Toast.makeText(this, "login fail", Toast.LENGTH_SHORT).show();
+			// }
 
 		} else {
 			if (Conts.isBlank(numberPhone)) {
