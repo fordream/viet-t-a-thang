@@ -85,7 +85,6 @@ public class LoginActivty extends Activity implements OnClickListener {
 					RestClient restClient = (RestClient) object;
 
 					try {
-						LogUtils.e("AAA", restClient.getResponse());
 						JSONObject jsonObject = new JSONObject(restClient.getResponse());
 						String errorCode = jsonObject.getString("errorCode");
 
@@ -114,7 +113,6 @@ public class LoginActivty extends Activity implements OnClickListener {
 						}
 					} catch (JSONException e) {
 						e.printStackTrace();
-						LogUtils.e("AAA", e.getMessage());
 						Toast.makeText(LoginActivty.this, "login fail", Toast.LENGTH_SHORT).show();
 					}
 
