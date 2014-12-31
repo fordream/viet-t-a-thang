@@ -160,7 +160,7 @@ public class RootMenuActivity extends FragmentActivity {
 		Intent intent = new Intent(this, RootMenuActivity.class);
 		intent.putExtra("type", Conts.CHITIETCANHANBANGXEPHANG);
 		getParent().startActivity(intent);
-		getParent().overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_slide_left_out);
+		overridePendingTransitionStartActivity();
 	}
 
 	public void gotoChiTietCaNhanDichVu() {
@@ -178,7 +178,7 @@ public class RootMenuActivity extends FragmentActivity {
 		Intent intent = new Intent(this, RootMenuActivity.class);
 		intent.putExtra("type", Conts.CHITIETCANHANBANGXEPHANGTUNGDICHVU);
 		getParent().startActivity(intent);
-		getParent().overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_slide_left_out);
+		overridePendingTransitionStartActivity();
 	}
 
 	public void gotoChiTietDichVu(AdapterView<?> parent, View view, int position, long id) {
@@ -186,27 +186,20 @@ public class RootMenuActivity extends FragmentActivity {
 		Intent intent = new Intent(this, RootMenuActivity.class);
 		intent.putExtra("type", Conts.CHITIETDICHVU);
 		getParent().startActivity(intent);
-		getParent().overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_slide_left_out);
+		overridePendingTransitionStartActivity();
 	}
 
 	public void gotoMoiDvChoNhieuNguoi() {
-		// changeFragemt(R.id.root_main_fragment, new
-		// MoiDvChoNhieuNguoiFragment(), true);
 
 		Intent intent = new Intent(this, RootMenuActivity.class);
 		intent.putExtra("type", Conts.MOIDICHVUCHONHIEUNGUOI);
 		getParent().startActivity(intent);
-		getParent().overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_slide_left_out);
+		overridePendingTransitionStartActivity();
 	}
 
 	public void gotoMoiDvChoNhieuNguoiFragment() {
 		changeFragemt(R.id.root_main_fragment, new MoiDvChoNhieuNguoiFragment(), true);
 
-		// Intent intent = new Intent(this, RootMenuActivity.class);
-		// intent.putExtra("type", Conts.MOIDICHVUCHONHIEUNGUOI);
-		// getParent().startActivity(intent);
-		// getParent().overridePendingTransition(R.anim.abc_slide_right_in,
-		// R.anim.abc_slide_left_out);
 	}
 
 	public void gotoSendDvChoNhieuNguoi(boolean isEmail) {
@@ -218,21 +211,13 @@ public class RootMenuActivity extends FragmentActivity {
 	}
 
 	public void gotoChiTietTinTuc(AdapterView<?> parent, View view, int position, long id) {
-		// Bundle bundle = new Bundle();
-		// ChiTietTintucFragment chitiettintuc = new ChiTietTintucFragment();
-		// chitiettintuc.setArguments(bundle);
-		// changeFragemt(R.id.root_main_fragment, chitiettintuc, true);
 		Intent intent = new Intent(this, RootMenuActivity.class);
 		intent.putExtra("type", Conts.CHITIETTINTUC);
 		getParent().startActivity(intent);
-		getParent().overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_slide_left_out);
+		overridePendingTransitionStartActivity();
 	}
 
 	public void gotoLoiMoi() {
-		// Bundle bundle = new Bundle();
-		// MauMoiFragment chitiettintuc = new MauMoiFragment();
-		// chitiettintuc.setArguments(bundle);
-		// changeFragemt(R.id.root_main_fragment, chitiettintuc, true);
 
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -267,11 +252,10 @@ public class RootMenuActivity extends FragmentActivity {
 		chitiettintuc.setArguments(bundle);
 		changeFragemt(R.id.root_main_fragment, chitiettintuc, true);
 
-		// Intent intent = new Intent(this, RootMenuActivity.class);
-		// intent.putExtra("type", Conts.CHITTIETLICHSUBANHANG);
-		// getParent().startActivity(intent);
-		// getParent().overridePendingTransition(R.anim.abc_slide_right_in,
-		// R.anim.abc_slide_left_out);
 	}
 
+	private void overridePendingTransitionStartActivity() {
+		getParent().overridePendingTransition(R.anim.abc_scale_in, R.anim.abc_nothing);
+
+	}
 }

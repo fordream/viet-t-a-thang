@@ -88,7 +88,6 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 				TabView mactivityslide_menu_tabview = (TabView) findViewById(R.id.mactivityslide_menu_tabview);
 				mactivityslide_menu_tabview.setTextHeader(menus[getTabHost().getCurrentTab()]);
 				mactivityslide_menu_tabview.updateTab(menus[getTabHost().getCurrentTab()]);
-				// TODO
 			}
 		});
 
@@ -129,19 +128,10 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 					extras.putString("type", Conts.LICHSUBANHANG);
 					intent.putExtras(extras);
 					startActivity(intent);
-					overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_slide_left_out);
-				}
-				// else if (position == 2) {
-				// Intent intent = new Intent(BaseMusicSlideMenuActivity.this,
-				// RootMenuActivity.class);
-				// Bundle extras = new Bundle();
-				// extras.putString("type", Conts.QUYDINHBANHANG);
-				// intent.putExtras(extras);
-				// startActivity(intent);
-				// overridePendingTransition(R.anim.abc_slide_right_in,
-				// R.anim.abc_slide_left_out);
-				// }
-				else if (position == 2) {
+					// overridePendingTransition(R.anim.abc_slide_right_in,
+					// R.anim.abc_slide_left_out);
+					overridePendingTransitionStartActivity();
+				} else if (position == 2) {
 					// huong dan ban hang
 
 					Intent intent = new Intent(BaseMusicSlideMenuActivity.this, RootMenuActivity.class);
@@ -149,7 +139,9 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 					extras.putString("type", Conts.HUONGDANBANHANG);
 					intent.putExtras(extras);
 					startActivity(intent);
-					overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_slide_left_out);
+					overridePendingTransitionStartActivity();
+					// overridePendingTransition(R.anim.abc_slide_right_in,
+					// R.anim.abc_slide_left_out);
 				} else {
 					// chinh sua thong tin
 					// getTabHost().setCurrentTab(6);
@@ -159,7 +151,9 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 					extras.putString("type", Conts.THONGTINCANHAN);
 					intent.putExtras(extras);
 					startActivity(intent);
-					overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_slide_left_out);
+					overridePendingTransitionStartActivity();
+					// overridePendingTransition(R.anim.abc_slide_right_in,
+					// R.anim.abc_slide_left_out);
 
 				}
 			}
@@ -188,7 +182,9 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 						intent.putExtra("type", Conts.NHIEUDICHVU);
 						intent.putExtra(User._ID, _id + "");
 						startActivity(intent);
-						overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_slide_left_out);
+						// overridePendingTransition(R.anim.abc_slide_right_in,
+						// R.anim.abc_slide_left_out);
+						overridePendingTransitionStartActivity();
 					}
 				}, 100);
 			}
@@ -229,7 +225,7 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 						intent.putExtra("type", Conts.NHIEUDICHVU);
 						intent.putExtra(User._ID, 1 + "");
 						startActivity(intent);
-						overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_slide_left_out);
+						overridePendingTransitionStartActivity();
 					}
 
 					@Override
@@ -239,7 +235,7 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 						extras.putString("type", Conts.MOIDICHVUCHONHIEUNGUOI);
 						intent.putExtras(extras);
 						startActivity(intent);
-						overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_slide_left_out);
+						overridePendingTransitionStartActivity();
 					}
 				};
 				((FrameLayout) findViewById(R.id.activity_slidemenu_recomment)).addView(commentView);
@@ -327,5 +323,10 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 			}
 		};
 		dangKyDialog.show();
+	}
+
+	private void overridePendingTransitionStartActivity() {
+		overridePendingTransition(R.anim.abc_scale_in, R.anim.abc_nothing);
+
 	}
 }
