@@ -327,9 +327,5 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 			}
 		};
 		dangKyDialog.show();
-
-		// finish();
-		// overridePendingTransition(R.anim.abc_slide_left_in,
-		// R.anim.abc_slide_right_out);
 	}
 }

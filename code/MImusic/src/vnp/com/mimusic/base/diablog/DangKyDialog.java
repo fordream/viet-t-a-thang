@@ -40,7 +40,7 @@ public class DangKyDialog extends BaseAdialog implements android.view.View.OnCli
 	}
 
 	public void mDismiss() {
-		Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.abc_scale_in);
+		Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.abc_scale_out);
 		animation.setAnimationListener(new AnimationListener() {
 
 			@Override
