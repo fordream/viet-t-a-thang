@@ -214,6 +214,9 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 			}
 		});
 
+		/**
+		 * recommnet
+		 */
 		new Handler().postDelayed(new Runnable() {
 
 			@Override
