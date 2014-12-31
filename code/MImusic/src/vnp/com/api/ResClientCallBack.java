@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import vnp.com.mimusic.util.LogUtils;
+import vnp.com.mimusic.util.Conts;
 
 public abstract class ResClientCallBack extends CallBack {
 	private Map<String, String> maps = new HashMap<String, String>();
@@ -14,14 +14,14 @@ public abstract class ResClientCallBack extends CallBack {
 	}
 
 	public RestClient.RequestMethod getMedthod() {
-		return RestClient.RequestMethod.GET;
+		return RestClient.RequestMethod.POST;
 	}
 
-	public abstract String getUrl();
+	public abstract String getApiName();
 
 	@Override
 	public Object execute() {
-		RestClient client = new RestClient(getUrl());
+		RestClient client = new RestClient(Conts.SERVER + getApiName());
 		Set<String> set = maps.keySet();
 		for (String key : set) {
 			client.addParam(key, maps.get(key));
@@ -32,5 +32,24 @@ public abstract class ResClientCallBack extends CallBack {
 		}
 
 		return client;
+	}
+
+	@Override
+	public void onCallBack(Object object) {
+		RestClient client = (RestClient) object;
+		if (client.getResponseCode() == 200) {
+			onSuccess(client.getResponse());
+		} else {
+			onError(client.getErrorMessage());
+
+		}
+	}
+
+	public void onError(String errorMessage) {
+
+	}
+
+	public void onSuccess(String response) {
+
 	}
 }

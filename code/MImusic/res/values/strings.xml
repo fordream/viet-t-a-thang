@@ -11,7 +11,8 @@
         <item>Hướng dẫn bán hàng</item>
         <item>Chỉnh sửa thông tin</item>
     </string-array>
-
+ <string name="loading">Loading ...</string>
+    
     <string name="trangchu">Trang chủ</string>
     <string name="dichvu">Dịch vụ</string>
     <string name="bangxephang">Bảng xếp hạng</string>

@@ -1,5 +1,6 @@
 package vnp.com.api;
 
+import vnp.com.mimusic.util.BynalProgressDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 
@@ -20,8 +21,7 @@ public class ExeCallBackOption {
 	 * @param dialog
 	 *            if not null, will use it
 	 */
-	public ExeCallBackOption(Context context, boolean showDialog,
-			int strResDialog, ProgressDialog dialog) {
+	public ExeCallBackOption(Context context, boolean showDialog, int strResDialog, ProgressDialog dialog) {
 		this.context = context;
 		this.showDialog = showDialog;
 		this.strResDialog = strResDialog;
@@ -44,11 +44,12 @@ public class ExeCallBackOption {
 						progressDialog = mConfig;
 						progressDialog.show();
 					} else {
-						progressDialog = ProgressDialog.show(context, null,
-								context.getString(strResDialog));
+						progressDialog = new BynalProgressDialog(context);
+						progressDialog.show();
 					}
 				}
 			}
 		}
 	}
+
 }

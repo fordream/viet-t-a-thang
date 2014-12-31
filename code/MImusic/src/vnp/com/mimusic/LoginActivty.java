@@ -1,9 +1,7 @@
 package vnp.com.mimusic;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import vnp.com.api.CallBack;
 import vnp.com.api.ExeCallBack;
 import vnp.com.api.ResClientCallBack;
 import vnp.com.api.RestClient;
@@ -127,10 +125,8 @@ public class LoginActivty extends Activity implements OnClickListener {
 				}
 
 				@Override
-				public String getUrl() {
-					// return Conts.SERVER + "authenticate";
-					return Conts.SERVER + "signin";
-
+				public String getApiName() {
+					return "signin";
 				}
 			};
 			back.addParam("u", numberPhone);
