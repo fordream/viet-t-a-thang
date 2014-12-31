@@ -129,7 +129,7 @@ public class RootMenuActivity extends FragmentActivity {
 				((BaseMusicSlideMenuActivity) getParent()).finish(true);
 			} catch (Exception exception) {
 				finish();
-				overridePendingTransition(R.anim.abc_slide_left_in, R.anim.abc_slide_right_out);
+				overridePendingTransition(R.anim.abc_nothing, R.anim.abc_scale_out);
 			}
 		} else {
 			super.onBackPressed();
@@ -145,7 +145,7 @@ public class RootMenuActivity extends FragmentActivity {
 		android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
 
 		if (haveAnimation) {
-			transaction.setCustomAnimations(R.anim.abc_slide_right_in, R.anim.abc_slide_right_in, R.anim.abc_slide_right_out, R.anim.abc_slide_right_out);
+			transaction.setCustomAnimations(R.anim.abc_scale_in, R.anim.abc_scale_in, R.anim.abc_scale_out, R.anim.abc_scale_out);
 		}
 		transaction.add(res, fragment, "" + System.currentTimeMillis());
 		transaction.addToBackStack(null);
@@ -154,9 +154,6 @@ public class RootMenuActivity extends FragmentActivity {
 	}
 
 	public void gotoChiTietCaNhanBangXepHang(AdapterView<?> parent, View view, int position, long id) {
-		// changeFragemt(R.id.root_main_fragment, new
-		// ChiTietCaNhanBangXepHangFragment(), true);
-
 		Intent intent = new Intent(this, RootMenuActivity.class);
 		intent.putExtra("type", Conts.CHITIETCANHANBANGXEPHANG);
 		getParent().startActivity(intent);
@@ -169,12 +166,9 @@ public class RootMenuActivity extends FragmentActivity {
 
 	public void gotoChiTietCaNhanTungDichVu(AdapterView<?> parent, View view, int position, long id) {
 		changeFragemt(R.id.root_main_fragment, new ChiTietCaNhanBangXepHangTungDichVuFragment(), true);
-
 	}
 
 	public void gotoChiTietCaNhanTungDichVu1(AdapterView<?> parent, View view, int position, long id) {
-		// changeFragemt(R.id.root_main_fragment, new
-		// ChiTietCaNhanBangXepHangTungDichVuFragment(), true);
 		Intent intent = new Intent(this, RootMenuActivity.class);
 		intent.putExtra("type", Conts.CHITIETCANHANBANGXEPHANGTUNGDICHVU);
 		getParent().startActivity(intent);
@@ -256,6 +250,5 @@ public class RootMenuActivity extends FragmentActivity {
 
 	private void overridePendingTransitionStartActivity() {
 		getParent().overridePendingTransition(R.anim.abc_scale_in, R.anim.abc_nothing);
-
 	}
 }
