@@ -69,7 +69,8 @@ public class LoginActivty extends Activity implements OnClickListener {
 	private void gotoHome() {
 		startActivity(new Intent(this, BaseMusicSlideMenuActivity.class));
 		finish();
-		overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_slide_left_out);
+		overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_nothing);
+//		overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_top);
 	}
 
 	@Override

@@ -27,7 +27,7 @@ public class DangKyDialog extends BaseAdialog implements android.view.View.OnCli
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		findViewById(R.id.dangky_dialog_main).startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.abc_slide_in_bottom));
+		findViewById(R.id.dangky_dialog_main).startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.abc_scale_in));
 		((TextView) findViewById(R.id.dangky_dialog_name)).setText(contentValues.getAsString("name"));
 		((TextView) findViewById(R.id.dangky_dialog_content)).setText(contentValues.getAsString("content"));
 
@@ -40,7 +40,7 @@ public class DangKyDialog extends BaseAdialog implements android.view.View.OnCli
 	}
 
 	public void mDismiss() {
-		Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.abc_slide_out_bottom);
+		Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.abc_scale_in);
 		animation.setAnimationListener(new AnimationListener() {
 
 			@Override

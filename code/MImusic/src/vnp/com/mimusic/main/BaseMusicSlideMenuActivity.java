@@ -65,7 +65,9 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_slide_left_out);
+		// overridePendingTransition(R.anim.abc_slide_right_in,
+		// R.anim.abc_slide_left_out);
+
 		setContentView(R.layout.mactivity_slidemenu);
 
 		getTabHost().setOnTabChangedListener(new OnTabChangeListener() {
@@ -321,7 +323,7 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 			public void mOpen() {
 				super.mOpen();
 				finish();
-				overridePendingTransition(R.anim.abc_slide_left_in, R.anim.abc_slide_right_out);
+				overridePendingTransition(R.anim.abc_nothing, R.anim.abc_slide_out_bottom);
 			}
 		};
 		dangKyDialog.show();
