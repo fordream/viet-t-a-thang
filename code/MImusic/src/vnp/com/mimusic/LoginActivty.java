@@ -3,6 +3,7 @@ package vnp.com.mimusic;
 import org.json.JSONObject;
 
 import vnp.com.api.ExeCallBack;
+import vnp.com.api.ExeCallBackOption;
 import vnp.com.api.ResClientCallBack;
 import vnp.com.api.RestClient;
 import vnp.com.api.RestClient.RequestMethod;
@@ -89,7 +90,6 @@ public class LoginActivty extends Activity implements OnClickListener {
 					RestClient restClient = (RestClient) object;
 
 					try {
-						LogUtils.e("AAA", restClient.getResponse());
 						JSONObject jsonObject = new JSONObject(restClient.getResponse());
 						String errorCode = jsonObject.getString("errorCode");
 
@@ -118,7 +118,6 @@ public class LoginActivty extends Activity implements OnClickListener {
 						}
 					} catch (Exception e) {
 						e.printStackTrace();
-						LogUtils.e("AAA", e.getMessage());
 						Toast.makeText(LoginActivty.this, "login fail", Toast.LENGTH_SHORT).show();
 					}
 
@@ -131,7 +130,9 @@ public class LoginActivty extends Activity implements OnClickListener {
 			};
 			back.addParam("u", numberPhone);
 			back.addParam("p", password);
-			new ExeCallBack().executeAsynCallBack(back);
+			ExeCallBack exeCallBack = new ExeCallBack();
+			exeCallBack.setExeCallBackOption(new ExeCallBackOption(this, true, R.string.loading, null));
+			exeCallBack.executeAsynCallBack(back);
 			//
 			// ContentValues values = new ContentValues();
 			// values.put(User.USER, "phone_number");
