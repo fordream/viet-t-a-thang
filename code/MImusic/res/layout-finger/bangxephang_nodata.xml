@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="#353f45"
-        android:lineSpacingExtra="10dp"
+        android:lineSpacingExtra="@dimen/dimen_10dp"
         android:textSize="@dimen/dimen_13dp" />
 
 </LinearLayout>

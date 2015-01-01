@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
@@ -23,6 +24,14 @@ public class ChiTietCaNhanBangXepHangTungDichVuFragment extends Fragment impleme
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.chitietcanhanbangxephangtungdichvu, null);
+		//change design BangXepHang item view
+		BangXepHangItemView bXHItemView = (BangXepHangItemView) view.findViewById(R.id.bangxephangitemview);
+		LinearLayout blockLayout = (LinearLayout) bXHItemView.findViewById(R.id.bangxephang_block);
+		blockLayout.setVisibility(View.GONE);
+		LinearLayout soLuongLayout = (LinearLayout) bXHItemView.findViewById(R.id.bxhSoLuongLayout);
+		soLuongLayout.setVisibility(View.VISIBLE);
+		LinearLayout doanhThuLayout = (LinearLayout) bXHItemView.findViewById(R.id.bxhDoanhThuLayout);
+		doanhThuLayout.setVisibility(View.VISIBLE);
 		
 		HeaderView chitiettintuc_headerview = (HeaderView) view.findViewById(R.id.chitietcanhanbangxephangtungdichvu_header);
 		chitiettintuc_headerview.setTextHeader(R.string.chitietcanhanbangxephang);

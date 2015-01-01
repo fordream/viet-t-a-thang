@@ -79,7 +79,7 @@ public class BangXepHangFragment extends Fragment implements OnItemClickListener
 			bangxephang_list.setOnItemClickListener(this);
 			bangxephang_list.setAdapter(adaper);
 		} else {
-
+			bangxephang_list.setOnItemClickListener(null);
 			bangxephang_list.addHeaderView(header_nodata);
 			bangxephang_list.setAdapter(adaper);
 		}
