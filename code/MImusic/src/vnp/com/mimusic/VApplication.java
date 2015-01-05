@@ -1,10 +1,17 @@
 package vnp.com.mimusic;
 
+import org.json.JSONObject;
+
+import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.User;
+import vnp.com.mimusic.util.Conts;
+import vnp.com.mimusic.util.Conts.IContsCallBack;
 import android.app.Application;
 import android.content.ContentResolver;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
+import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
 
@@ -60,6 +67,30 @@ public class VApplication extends Application {
 					isRunDongBo = false;
 				}
 			}).start();
+		}
+	}
+
+	public static final String KEY = "KEY";
+	public static final String METHOD = "METHOD";
+
+	public void callApi(Intent intent) {
+		if (intent != null) {
+			Conts.execute((RequestMethod) intent.getSerializableExtra(METHOD), intent.getStringExtra(KEY), this, new Bundle(), new IContsCallBack() {
+				@Override
+				public void onSuscess(JSONObject response) {
+
+				}
+
+				@Override
+				public void onError(String message) {
+
+				}
+
+				@Override
+				public void onError() {
+
+				}
+			});
 		}
 	}
 }

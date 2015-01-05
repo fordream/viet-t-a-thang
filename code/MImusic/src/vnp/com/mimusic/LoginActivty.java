@@ -4,6 +4,7 @@ import org.json.JSONObject;
 
 import vnp.com.api.ExeCallBack;
 import vnp.com.api.ExeCallBackOption;
+import vnp.com.api.MImusicService;
 import vnp.com.api.ResClientCallBack;
 import vnp.com.api.RestClient;
 import vnp.com.api.RestClient.RequestMethod;
@@ -70,7 +71,6 @@ public class LoginActivty extends Activity implements OnClickListener {
 		startActivity(new Intent(this, BaseMusicSlideMenuActivity.class));
 		finish();
 		overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_nothing);
-//		overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_top);
 	}
 
 	@Override
@@ -110,7 +110,11 @@ public class LoginActivty extends Activity implements OnClickListener {
 							int _id = Integer.parseInt(uri.getPathSegments().get(1));
 
 							if (_id > 0) {
-								addDichVu();
+								// addDichVu();
+
+								Intent intent = new Intent(MImusicService.ACTION);
+								intent.putExtra(MImusicService.KEY, "utilitiServices");
+								intent.putExtra(MImusicService.METHOD, RequestMethod.GET);
 								gotoHome();
 							}
 
