@@ -1,5 +1,8 @@
 package vnp.com.api;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.json.JSONObject;
 
 import vnp.com.api.RestClient.RequestMethod;
@@ -13,6 +16,7 @@ import android.os.IBinder;
 public class MImusicService extends Service {
 	public static final String ACTION = "vnp.com.api.MImusicService";
 	public static final String KEY = "KEY";
+	public static final String VALUE = "VALUE";
 	public static final String METHOD = "METHOD";
 
 	public MImusicService() {
@@ -24,8 +28,20 @@ public class MImusicService extends Service {
 		return null;
 	}
 
+	private List<String> listCallBack = new ArrayList<String>();
+
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
+
+		if ("add".equals(intent.getStringExtra(KEY))) {
+			if (!listCallBack.contains(intent.getStringExtra(VALUE))) {
+				listCallBack.add(intent.getStringExtra(VALUE));
+			}
+		} else if ("remove".equals(intent.getStringExtra(KEY))) {
+			if (listCallBack.contains(intent.getStringExtra(VALUE))) {
+				listCallBack.remove(intent.getStringExtra(VALUE));
+			}
+		}
 		callApi(intent);
 		return super.onStartCommand(intent, flags, startId);
 	}
