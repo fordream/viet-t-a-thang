@@ -3,6 +3,9 @@
  */
 package vnp.com.mimusic.activity;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import vnp.com.db.User;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.main.BaseMusicSlideMenuActivity;
@@ -82,7 +85,11 @@ public class RootMenuActivity extends FragmentActivity {
 			moiNhieuDichVuFragment.setArguments(bundle);
 			changeFragemt(R.id.root_main_fragment, moiNhieuDichVuFragment);
 		} else if (Conts.CHITIETTINTUC.equals(type)) {
-			changeFragemt(R.id.root_main_fragment, new ChiTietTintucFragment());
+			ChiTietTintucFragment chiTietTintucFragment = new ChiTietTintucFragment();
+			Bundle args = new Bundle();
+			args.putString("id", getIntent().getStringExtra("id") + "");
+			chiTietTintucFragment.setArguments(args);
+			changeFragemt(R.id.root_main_fragment, chiTietTintucFragment);
 		} else if (Conts.MOIDICHVUCHONHIEUNGUOI.equals(type)) {
 			changeFragemt(R.id.root_main_fragment, new MoiDvChoNhieuNguoiFragment());
 		} else if (Conts.CHITIETDICHVU.equals(type)) {
@@ -205,8 +212,13 @@ public class RootMenuActivity extends FragmentActivity {
 	}
 
 	public void gotoChiTietTinTuc(AdapterView<?> parent, View view, int position, long id) {
+		JSONObject data = (JSONObject) parent.getItemAtPosition(position);
 		Intent intent = new Intent(this, RootMenuActivity.class);
 		intent.putExtra("type", Conts.CHITIETTINTUC);
+		try {
+			intent.putExtra("id", data.getString("id"));
+		} catch (JSONException e) {
+		}
 		getParent().startActivity(intent);
 		overridePendingTransitionStartActivity();
 	}

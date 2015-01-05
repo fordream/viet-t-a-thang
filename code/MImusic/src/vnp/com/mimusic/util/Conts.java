@@ -1,6 +1,16 @@
 package vnp.com.mimusic.util;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import vnp.com.api.ExeCallBack;
+import vnp.com.api.ExeCallBackOption;
+import vnp.com.api.ResClientCallBack;
+import vnp.com.api.RestClient;
+import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.User;
+import vnp.com.mimusic.R;
+import vnp.com.mimusic.adapter.TintucAdaper;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -9,9 +19,11 @@ import android.graphics.Canvas;
 import android.graphics.Path;
 import android.graphics.Rect;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.FragmentActivity;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class Conts {
 
@@ -144,4 +156,52 @@ public class Conts {
 		return token;
 	}
 
+	public static void execute(final RequestMethod requestMethod, final String api, final Context activity, Bundle bundles, final IContsCallBack contsCallBack) {
+		ResClientCallBack resClientCallBack = new ResClientCallBack() {
+
+			@Override
+			public String getApiName() {
+				return api;
+			}
+
+			@Override
+			public void onCallBack(Object object) {
+				super.onCallBack(object);
+
+				RestClient restClient = (RestClient) object;
+				try {
+					JSONObject jsonObject = new JSONObject(restClient.getResponse());
+					String errorCode = jsonObject.getString("errorCode");
+					String message = jsonObject.getString("message");
+					if ("0".equals(errorCode)) {
+						contsCallBack.onSuscess(jsonObject);
+					} else {
+						contsCallBack.onError(message);
+					}
+				} catch (Exception exception) {
+					contsCallBack.onError();
+				}
+
+			}
+
+			@Override
+			public RequestMethod getMedthod() {
+				return requestMethod;
+			}
+		};
+
+		resClientCallBack.addParam("token", Conts.getToken(activity));
+		ExeCallBack exeCallBack = new ExeCallBack();
+		exeCallBack.setExeCallBackOption(new ExeCallBackOption(activity, true, R.string.loading, null));
+		exeCallBack.executeAsynCallBack(resClientCallBack);
+	}
+
+	public interface IContsCallBack {
+
+		public void onError();
+
+		public void onError(String message);
+
+		public void onSuscess(JSONObject response);
+	}
 }

@@ -40,9 +40,6 @@ public class TinTucFragment extends Fragment implements OnItemClickListener, Vie
 		View view = inflater.inflate(R.layout.tintuc, null);
 		final ListView bangxephang_list = (ListView) view.findViewById(R.id.tintuc_list);
 		bangxephang_list.setOnItemClickListener(this);
-		// bangxephang_list.setAdapter(new TintucAdaper(getActivity(), new
-		// String[] { "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a",
-		// "a", "a", "a", "a", "a" }));
 
 		bangxephang_list.setAdapter(new TintucAdaper(getActivity(), new JSONArray()));
 		ResClientCallBack resClientCallBack = new ResClientCallBack() {
@@ -66,8 +63,6 @@ public class TinTucFragment extends Fragment implements OnItemClickListener, Vie
 						JSONArray jsonArray = jsonObject.getJSONArray("data");
 						((TintucAdaper) bangxephang_list.getAdapter()).setJSOnArray(jsonArray);
 						((TintucAdaper) bangxephang_list.getAdapter()).notifyDataSetChanged();
-						// bangxephang_list.setAdapter(new
-						// TintucAdaper(getActivity(), jsonArray));
 					} else {
 						Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
 					}
