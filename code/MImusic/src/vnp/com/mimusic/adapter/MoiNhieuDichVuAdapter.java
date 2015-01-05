@@ -45,7 +45,7 @@ public abstract class MoiNhieuDichVuAdapter extends CursorAdapter {
 		}
 
 		final String _id = cursor.getString(cursor.getColumnIndex(DichVu._ID));
-		String name = cursor.getString(cursor.getColumnIndex(DichVu.NAME));
+		String name = cursor.getString(cursor.getColumnIndex(DichVu.service_name));
 		convertView.findViewById(R.id.moinhieudichvu_item_main).setVisibility(name.toUpperCase().contains(textSearch.toUpperCase()) ? View.VISIBLE : View.GONE);
 		((MoiNhieuDichVuItemView) convertView).moinhieudichvu_item_tv_name.setText(name);
 		((MoiNhieuDichVuItemView) convertView).moinhieudichvu_item_checkbox.setOnCheckedChangeListener(null);

@@ -15,12 +15,13 @@ public class DichVu {
 	public static final String DICHVU_TABLE_NAME = "dichvus";
 
 	public static final String _ID = "_id";
-	public static final String ICON = "icon";
 	public static final String ID = "id";
-	public static final String NAME = "name";
-	public static final String URL = "url";
-	public static final String SHORTCONTENT = "shortcontent";
-	public static final String LINK_FULL_CONTENT = "link_full_content";
+	public static final String service_name = "service_name";
+	public static final String service_icon = "service_icon";
+	public static final String service_code = "service_code";
+	public static final String service_content = "service_content";
+	public static final String service_price = "service_price";
+	public static final String service_status = "service_status";
 
 	public static final String CREATE_DB_TABLE() {
 		StringBuilder builder = new StringBuilder();
@@ -28,7 +29,7 @@ public class DichVu {
 		builder.append("(");
 		builder.append(_ID).append(" INTEGER PRIMARY KEY AUTOINCREMENT").append(",");
 		String[] colums = new String[] {//
-		ICON, ID, NAME, SHORTCONTENT, LINK_FULL_CONTENT, URL //
+		ID, service_name, service_icon, service_code, service_content, service_price, service_status //
 		};//
 
 		for (int i = 0; i < colums.length; i++) {

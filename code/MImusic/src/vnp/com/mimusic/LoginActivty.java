@@ -56,11 +56,16 @@ public class LoginActivty extends Activity implements OnClickListener {
 				String selection = User.STATUS + "='1'";
 				Cursor cursor = getContentResolver().query(User.CONTENT_URI, null, selection, null, null);
 				if (cursor != null && cursor.getCount() >= 1) {
+					cursor.moveToNext();
+					((TextView) findViewById(R.id.activity_login_number_phone)).setText(cursor.getString(cursor.getColumnIndex(User.USER)));
+					((TextView) findViewById(R.id.activity_login_password)).setText(cursor.getString(cursor.getColumnIndex(User.PASSWORD)));
 					cursor.close();
 					gotoHome();
 				} else {
 					findViewById(R.id.activity_login_main).setVisibility(View.VISIBLE);
 				}
+
+				// findViewById(R.id.activity_login_main).setVisibility(View.VISIBLE);
 			}
 		});
 		findViewById(R.id.activity_login_splash).startAnimation(alphaAnimation);
@@ -76,7 +81,7 @@ public class LoginActivty extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		String numberPhone = ((TextView) findViewById(R.id.activity_login_number_phone)).getText().toString();
-		String password = ((TextView) findViewById(R.id.activity_login_password)).getText().toString();
+		final String password = ((TextView) findViewById(R.id.activity_login_password)).getText().toString();
 
 		if (!numberPhone.trim().equals("") && !password.trim().equals("")) {
 
@@ -101,7 +106,7 @@ public class LoginActivty extends Activity implements OnClickListener {
 							String phone_number = jsonObject.getString("phone");
 							ContentValues values = new ContentValues();
 							values.put(User.USER, phone_number);
-							values.put(User.PASSWORD, "");
+							values.put(User.PASSWORD, password);
 							values.put(User.TOKEN, token);
 							values.put(User.KEYREFRESH, keyRefresh);
 							values.put(User.STATUS, "1");
@@ -110,10 +115,6 @@ public class LoginActivty extends Activity implements OnClickListener {
 							int _id = Integer.parseInt(uri.getPathSegments().get(1));
 
 							if (_id > 0) {
-								// addDichVu();
-								//Intent intent = new Intent(MImusicService.ACTION);
-								//intent.putExtra(MImusicService.KEY, "utilitiServices");
-								//intent.putExtra(MImusicService.METHOD, RequestMethod.GET);
 								gotoHome();
 							}
 
@@ -137,24 +138,6 @@ public class LoginActivty extends Activity implements OnClickListener {
 			ExeCallBack exeCallBack = new ExeCallBack();
 			exeCallBack.setExeCallBackOption(new ExeCallBackOption(this, true, R.string.loading, null));
 			exeCallBack.executeAsynCallBack(back);
-			//
-			// ContentValues values = new ContentValues();
-			// values.put(User.USER, "phone_number");
-			// values.put(User.PASSWORD, "");
-			// values.put(User.TOKEN, "token");
-			// values.put(User.KEYREFRESH, "keyRefresh");
-			// values.put(User.STATUS, "1");
-			//
-			// Uri uri = getContentResolver().insert(User.CONTENT_URI, values);
-			//
-			// int _id = Integer.parseInt(uri.getPathSegments().get(1));
-			//
-			// if (_id > 0) {
-			// addDichVu();
-			// gotoHome();
-			// } else {
-			// Toast.makeText(this, "login fail", Toast.LENGTH_SHORT).show();
-			// }
 
 		} else {
 			if (Conts.isBlank(numberPhone)) {
@@ -168,42 +151,57 @@ public class LoginActivty extends Activity implements OnClickListener {
 		}
 	}
 
-	private void addDichVu() {
-		String icon = "http://ecx.images-amazon.com/images/I/719CZqP48hL._SY300_.png";
-		String linkFullContent = "http://searchenginewatch.com/sew/how-to/2340758/what-type-of-content-should-you-create-long-or-short";
-		String name = "IMusic";
-		String shortContent = "Website nhạc trực tuyến của tập đoàn viễn thông quân đội,Website nhạc trực tuyến của tập đoàn viễn thông quân đội,Website nhạc trực tuyến của tập đoàn viễn thông quân đội,Website nhạc trực tuyến của tập đoàn viễn thông quân đội ";
-		String url = "http://imusic.vn";
+	// private void addDichVu() {
+	// String icon =
+	// "http://ecx.images-amazon.com/images/I/719CZqP48hL._SY300_.png";
+	// String linkFullContent =
+	// "http://searchenginewatch.com/sew/how-to/2340758/what-type-of-content-should-you-create-long-or-short";
+	// String name = "IMusic";
+	// String shortContent =
+	// "Website nhạc trực tuyến của tập đoàn viễn thông quân đội,Website nhạc trực tuyến của tập đoàn viễn thông quân đội,Website nhạc trực tuyến của tập đoàn viễn thông quân đội,Website nhạc trực tuyến của tập đoàn viễn thông quân đội ";
+	// String url = "http://imusic.vn";
+	//
+	// addDichVu("1", icon, linkFullContent, "Dịch vụ IMusic", shortContent,
+	// url);
+	// addDichVu("2", icon, linkFullContent, "Dịch vụ mobileTV", shortContent,
+	// url);
+	// addDichVu("3", icon, linkFullContent, "Dịch vụ OMEGA Book", shortContent,
+	// url);
+	// addDichVu("4", icon, linkFullContent, "Dịch vụ ORA", shortContent, url);
+	// addDichVu("5", icon, linkFullContent, "Dịch vụ chăm sóc trẻ",
+	// shortContent, url);
+	// addDichVu("6", icon, linkFullContent, "Dịch Vụ Cho người già",
+	// shortContent, url);
+	// addDichVu("7", icon, linkFullContent, "Dịch vụ trẻ", shortContent, url);
+	// addDichVu("8", icon, linkFullContent, "Dịch vụ vì nhân dân",
+	// shortContent, url);
+	// addDichVu("9", icon, linkFullContent, "Dịch vụ nghe đài", shortContent,
+	// url);
+	// addDichVu("10", icon, linkFullContent, "Dịch vụ tìm thông tin",
+	// shortContent, url);
+	// addDichVu("11", icon, linkFullContent, "Dịch vụ thám hiểm", shortContent,
+	// url);
+	// }
 
-		addDichVu("1", icon, linkFullContent, "Dịch vụ IMusic", shortContent, url);
-		addDichVu("2", icon, linkFullContent, "Dịch vụ mobileTV", shortContent, url);
-		addDichVu("3", icon, linkFullContent, "Dịch vụ OMEGA Book", shortContent, url);
-		addDichVu("4", icon, linkFullContent, "Dịch vụ ORA", shortContent, url);
-		addDichVu("5", icon, linkFullContent, "Dịch vụ chăm sóc trẻ", shortContent, url);
-		addDichVu("6", icon, linkFullContent, "Dịch Vụ Cho người già", shortContent, url);
-		addDichVu("7", icon, linkFullContent, "Dịch vụ trẻ", shortContent, url);
-		addDichVu("8", icon, linkFullContent, "Dịch vụ vì nhân dân", shortContent, url);
-		addDichVu("9", icon, linkFullContent, "Dịch vụ nghe đài", shortContent, url);
-		addDichVu("10", icon, linkFullContent, "Dịch vụ tìm thông tin", shortContent, url);
-		addDichVu("11", icon, linkFullContent, "Dịch vụ thám hiểm", shortContent, url);
-	}
-
-	private void addDichVu(String isSystem, String icon, String linkFullContent, String name, String shortContent, String url) {
-		ContentValues contentValues = new ContentValues();
-		contentValues.put(DichVu.ICON, icon);
-		contentValues.put(DichVu.ID, isSystem);
-		contentValues.put(DichVu.LINK_FULL_CONTENT, linkFullContent);
-		contentValues.put(DichVu.NAME, name);
-		contentValues.put(DichVu.SHORTCONTENT, shortContent);
-		contentValues.put(DichVu.URL, url);
-		String selection = String.format("%s='%s'", DichVu.ID, isSystem);
-		Cursor cursor = getContentResolver().query(DichVu.CONTENT_URI, null, selection, null, null);
-
-		if (cursor != null && cursor.getCount() >= 1) {
-			cursor.close();
-			getContentResolver().update(DichVu.CONTENT_URI, contentValues, selection, null);
-		} else {
-			getContentResolver().insert(DichVu.CONTENT_URI, contentValues);
-		}
-	}
+	// private void addDichVu(String isSystem, String icon, String
+	// linkFullContent, String name, String shortContent, String url) {
+	// ContentValues contentValues = new ContentValues();
+	// contentValues.put(DichVu.ICON, icon);
+	// contentValues.put(DichVu.ID, isSystem);
+	// contentValues.put(DichVu.LINK_FULL_CONTENT, linkFullContent);
+	// contentValues.put(DichVu.NAME, name);
+	// contentValues.put(DichVu.SHORTCONTENT, shortContent);
+	// contentValues.put(DichVu.URL, url);
+	// String selection = String.format("%s='%s'", DichVu.ID, isSystem);
+	// Cursor cursor = getContentResolver().query(DichVu.CONTENT_URI, null,
+	// selection, null, null);
+	//
+	// if (cursor != null && cursor.getCount() >= 1) {
+	// cursor.close();
+	// getContentResolver().update(DichVu.CONTENT_URI, contentValues, selection,
+	// null);
+	// } else {
+	// getContentResolver().insert(DichVu.CONTENT_URI, contentValues);
+	// }
+	// }
 }

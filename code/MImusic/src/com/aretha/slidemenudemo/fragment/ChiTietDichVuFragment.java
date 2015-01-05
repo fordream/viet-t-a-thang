@@ -1,18 +1,23 @@
 package com.aretha.slidemenudemo.fragment;
 
+import org.json.JSONObject;
+
+import vnp.com.api.RestClient.RequestMethod;
+import vnp.com.db.DichVu;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.base.diablog.DangKyDialog;
+import vnp.com.mimusic.util.Conts;
+import vnp.com.mimusic.util.Conts.IContsCallBack;
 import vnp.com.mimusic.view.ChiTietDichVuNoFeatureView;
 import vnp.com.mimusic.view.HeaderView;
 import android.content.ContentValues;
-import android.content.DialogInterface.OnClickListener;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 public class ChiTietDichVuFragment extends Fragment implements View.OnClickListener {
 	@Override
@@ -40,32 +45,59 @@ public class ChiTietDichVuFragment extends Fragment implements View.OnClickListe
 
 			@Override
 			public void onClick(View v) {
-				// Huong dan ban hang
-				// TODO
-//				Toast.makeText(v.getContext(), "huong dan ban hang", Toast.LENGTH_SHORT).show();
 				(((RootMenuActivity) getActivity())).gotoHuongDanBanHang();
 			}
 		});
 
 		ChiTietDichVuNoFeatureView chitietdichvu_chitietdichvunofeatureview = (ChiTietDichVuNoFeatureView) view.findViewById(R.id.chitietdichvu_chitietdichvunofeatureview);
+		String id = getArguments().getString(DichVu.ID);
+		String selection = DichVu.ID + "='" + id + "'";
+		final Cursor cursor = getActivity().getContentResolver().query(DichVu.CONTENT_URI, null, selection, null, null);
+		if (cursor != null && cursor.getCount() >= 1) {
+			cursor.moveToNext();
+			chitietdichvu_chitietdichvunofeatureview.setData(cursor);
+			final ContentValues values = new ContentValues();
+			values.put(DichVu.ID, id);
+			values.put("name", cursor.getString(cursor.getColumnIndex(DichVu.service_name)));
+			values.put("content", cursor.getString(cursor.getColumnIndex(DichVu.service_content)));
 
-		chitietdichvu_chitietdichvunofeatureview.findViewById(R.id.chitietdichvu_no_feature_dangky).setOnClickListener(new View.OnClickListener() {
+			chitietdichvu_chitietdichvunofeatureview.findViewById(R.id.chitietdichvu_no_feature_dangky).setOnClickListener(new View.OnClickListener() {
 
+				@Override
+				public void onClick(View v) {
+					new DangKyDialog(v.getContext(), values).show();
+				}
+			});
+
+			chitietdichvu_chitietdichvunofeatureview.findViewById(R.id.chitietdichvu_no_feature_moi).setOnClickListener(new View.OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					(((RootMenuActivity) getActivity())).gotoMoiDvChoNhieuNguoiFragment();
+				}
+			});
+			cursor.close();
+		}
+		Bundle bundles = new Bundle();
+		bundles.putString("service_code", id);
+		Conts.execute(RequestMethod.GET, "utilitiServiceDetail", getActivity(), bundles, new IContsCallBack() {
+			
 			@Override
-			public void onClick(View v) {
-				ContentValues values = new ContentValues();
-				values.put("name", "Dịch vụ Imuzik");
-				values.put("content", "Website nhặc trực tuyến của tập đoản viễn thông quân đội viettel, các bài hát hot nhất, mới nhất , kết nối với các nhạc sĩ tên tuổi nhất...");
-				new DangKyDialog(v.getContext(), values).show();
+			public void onSuscess(JSONObject response) {
+				
+			}
+			
+			@Override
+			public void onError(String message) {
+				
+			}
+			
+			@Override
+			public void onError() {
+				
 			}
 		});
-		chitietdichvu_chitietdichvunofeatureview.findViewById(R.id.chitietdichvu_no_feature_moi).setOnClickListener(new View.OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				(((RootMenuActivity) getActivity())).gotoMoiDvChoNhieuNguoiFragment();
-			}
-		});
 		return view;
 	}
 

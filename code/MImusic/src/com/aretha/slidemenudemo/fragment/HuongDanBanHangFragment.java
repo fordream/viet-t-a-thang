@@ -32,9 +32,7 @@ public class HuongDanBanHangFragment extends Fragment implements OnItemClickList
 
 			@Override
 			public void onClick(View v) {
-				getActivity().finish();
-				getActivity().overridePendingTransition(R.anim.abc_slide_left_in, R.anim.abc_slide_right_out);
-
+				getActivity().onBackPressed();
 			}
 		});
 		ListView dichvu_list = (ListView) view.findViewById(R.id.quydinhbanhang_list);

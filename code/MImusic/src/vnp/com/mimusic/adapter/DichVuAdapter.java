@@ -5,6 +5,7 @@ import java.util.Random;
 import vnp.com.db.DichVu;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.base.diablog.DangKyDialog;
+import vnp.com.mimusic.util.ImageLoaderUtils;
 import vnp.com.mimusic.view.DichVuItemView;
 import android.content.ContentValues;
 import android.content.Context;
@@ -32,7 +33,7 @@ public abstract class DichVuAdapter extends CursorAdapter {
 		/*
 		 * kiem tra xem co hien thi item nay khong
 		 */
-		String name = cursor.getString(cursor.getColumnIndex(DichVu.NAME));
+		String name = cursor.getString(cursor.getColumnIndex(DichVu.service_name));
 		convertView.findViewById(R.id.home_item_main).setVisibility(name.toUpperCase().contains(textSearch.toUpperCase()) ? View.VISIBLE : View.GONE);
 
 		/**
@@ -44,7 +45,7 @@ public abstract class DichVuAdapter extends CursorAdapter {
 		convertView.findViewById(R.id.home_item_main).setBackgroundColor(resources.getColor(poistion % 2 == 0 ? android.R.color.white : R.color.f3f3f3));
 		convertView.findViewById(R.id.home_item_img_icon).setBackgroundColor(resources.getColor(poistion % 2 == 1 ? android.R.color.white : R.color.f3f3f3));
 
-		final boolean isDangKy = new Random().nextBoolean();
+		final boolean isDangKy = "0".equals(cursor.getString(cursor.getColumnIndex(DichVu.service_status)));
 		TextView home_item_right_control_1_tv = (TextView) convertView.findViewById(R.id.home_item_right_control_1_tv);
 
 		home_item_right_control_1_tv.setText(isDangKy ? R.string.dangdung : R.string.dangky);
@@ -75,16 +76,17 @@ public abstract class DichVuAdapter extends CursorAdapter {
 		TextView home_item_tv_name = (TextView) convertView.findViewById(R.id.home_item_tv_name);
 		TextView home_item_tv_link = (TextView) convertView.findViewById(R.id.home_item_tv_link);
 		TextView home_item_tv_content = (TextView) convertView.findViewById(R.id.home_item_tv_content);
+		home_item_tv_name.setText(cursor.getString(cursor.getColumnIndex(DichVu.service_name)));
+		home_item_tv_content.setText(cursor.getString(cursor.getColumnIndex(DichVu.service_content)));
 
-		// home_item_img_icon.setBackgroundResource(R.drawable.icon_imusiz);
+		home_item_img_icon.setImageResource(R.drawable.no_avatar);
+		// show image
+		String service_icon = cursor.getString(cursor.getColumnIndex(DichVu.service_icon)) + "";
 
-		home_item_tv_name.setText(cursor.getString(cursor.getColumnIndex(DichVu.NAME)));
-		home_item_tv_link.setText(cursor.getString(cursor.getColumnIndex(DichVu.URL)));
-		home_item_tv_content.setText(cursor.getString(cursor.getColumnIndex(DichVu.SHORTCONTENT)));
-
+		ImageLoaderUtils.getInstance(context).DisplayImage(service_icon, home_item_img_icon);
 		final ContentValues values = new ContentValues();
-		values.put("name", cursor.getString(cursor.getColumnIndex(DichVu.NAME)));
-		values.put("content", cursor.getString(cursor.getColumnIndex(DichVu.SHORTCONTENT)));
+		values.put("name", cursor.getString(cursor.getColumnIndex(DichVu.service_name)));
+		values.put("content", cursor.getString(cursor.getColumnIndex(DichVu.service_content)));
 		home_item_right_control_1.setOnClickListener(new View.OnClickListener() {
 
 			@Override

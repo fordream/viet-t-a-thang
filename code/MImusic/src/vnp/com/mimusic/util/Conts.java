@@ -170,6 +170,7 @@ public class Conts {
 
 				RestClient restClient = (RestClient) object;
 				try {
+					LogUtils.e("restClient.getResponse()", restClient.getResponse());
 					JSONObject jsonObject = new JSONObject(restClient.getResponse());
 					String errorCode = jsonObject.getString("errorCode");
 					String message = jsonObject.getString("message");
@@ -203,5 +204,9 @@ public class Conts {
 		public void onError(String message);
 
 		public void onSuscess(JSONObject response);
+	}
+
+	public static void toast(Context activity, String message) {
+		Toast.makeText(activity, message + "", Toast.LENGTH_SHORT).show();
 	}
 }

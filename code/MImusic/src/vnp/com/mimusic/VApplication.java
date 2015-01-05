@@ -70,27 +70,27 @@ public class VApplication extends Application {
 		}
 	}
 
-	public static final String KEY = "KEY";
-	public static final String METHOD = "METHOD";
-
-	public void callApi(Intent intent) {
-		if (intent != null) {
-			Conts.execute((RequestMethod) intent.getSerializableExtra(METHOD), intent.getStringExtra(KEY), this, new Bundle(), new IContsCallBack() {
-				@Override
-				public void onSuscess(JSONObject response) {
-
-				}
-
-				@Override
-				public void onError(String message) {
-
-				}
-
-				@Override
-				public void onError() {
-
-				}
-			});
-		}
-	}
+//	public static final String KEY = "KEY";
+//	public static final String METHOD = "METHOD";
+//
+//	public void callApi(Intent intent) {
+//		if (intent != null) {
+//			Conts.execute((RequestMethod) intent.getSerializableExtra(METHOD), intent.getStringExtra(KEY), this, new Bundle(), new IContsCallBack() {
+//				@Override
+//				public void onSuscess(JSONObject response) {
+//
+//				}
+//
+//				@Override
+//				public void onError(String message) {
+//
+//				}
+//
+//				@Override
+//				public void onError() {
+//
+//				}
+//			});
+//		}
+//	}
 }

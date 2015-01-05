@@ -6,6 +6,7 @@ package vnp.com.mimusic.activity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import vnp.com.db.DichVu;
 import vnp.com.db.User;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.main.BaseMusicSlideMenuActivity;
@@ -13,6 +14,7 @@ import vnp.com.mimusic.util.Conts;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -93,7 +95,12 @@ public class RootMenuActivity extends FragmentActivity {
 		} else if (Conts.MOIDICHVUCHONHIEUNGUOI.equals(type)) {
 			changeFragemt(R.id.root_main_fragment, new MoiDvChoNhieuNguoiFragment());
 		} else if (Conts.CHITIETDICHVU.equals(type)) {
-			changeFragemt(R.id.root_main_fragment, new ChiTietDichVuFragment());
+
+			ChiTietDichVuFragment chiTietTintucFragment = new ChiTietDichVuFragment();
+			Bundle args = new Bundle();
+			args.putString("id", getIntent().getStringExtra(DichVu.ID) + "");
+			chiTietTintucFragment.setArguments(args);
+			changeFragemt(R.id.root_main_fragment, chiTietTintucFragment);
 		} else if (Conts.CHITIETCANHANBANGXEPHANG.equals(type)) {
 			changeFragemt(R.id.root_main_fragment, new ChiTietCaNhanBangXepHangFragment());
 		} else if (Conts.CHITIETCANHANBANGXEPHANGTUNGDICHVU.equals(type)) {
@@ -186,6 +193,8 @@ public class RootMenuActivity extends FragmentActivity {
 
 		Intent intent = new Intent(this, RootMenuActivity.class);
 		intent.putExtra("type", Conts.CHITIETDICHVU);
+		Cursor cursor = (Cursor) parent.getItemAtPosition(position);
+		intent.putExtra("id", cursor.getString(cursor.getColumnIndex(DichVu.ID)));
 		getParent().startActivity(intent);
 		overridePendingTransitionStartActivity();
 	}
