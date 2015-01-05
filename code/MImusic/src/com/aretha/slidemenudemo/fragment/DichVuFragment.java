@@ -32,7 +32,6 @@ public class DichVuFragment extends Fragment implements OnItemClickListener, Vie
 		ListView dichvu_list = (ListView) view.findViewById(R.id.dichvu_list);
 		dichvu_list.setOnItemClickListener(this);
 		Cursor cursor = getActivity().getContentResolver().query(DichVu.CONTENT_URI, null, null, null, null);
-
 		if (cursor != null) {
 			dichvu_list.setAdapter(adapter = new DichVuAdapter(getActivity(), cursor) {
 				@Override

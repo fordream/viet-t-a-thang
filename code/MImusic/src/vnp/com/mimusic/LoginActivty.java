@@ -111,10 +111,9 @@ public class LoginActivty extends Activity implements OnClickListener {
 
 							if (_id > 0) {
 								// addDichVu();
-
-								Intent intent = new Intent(MImusicService.ACTION);
-								intent.putExtra(MImusicService.KEY, "utilitiServices");
-								intent.putExtra(MImusicService.METHOD, RequestMethod.GET);
+								//Intent intent = new Intent(MImusicService.ACTION);
+								//intent.putExtra(MImusicService.KEY, "utilitiServices");
+								//intent.putExtra(MImusicService.METHOD, RequestMethod.GET);
 								gotoHome();
 							}
 
