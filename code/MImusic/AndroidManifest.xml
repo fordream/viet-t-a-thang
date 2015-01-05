@@ -25,7 +25,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="LoginActivty"
-            android:label="@string/app_name" android:screenOrientation="portrait">
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,17 +35,25 @@
         </activity>
         <activity
             android:name=".main.BaseMusicSlideMenuActivity"
-            android:windowSoftInputMode="adjustPan" android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
             android:name="vnp.com.mimusic.activity.RootMenuActivity"
-            android:windowSoftInputMode="adjustPan" android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
         </activity>
 
         <provider
             android:name="vnp.com.db.DBProvider"
             android:authorities="vnp.com.mimusic.db.DBProvider" >
         </provider>
+
+        <service android:name="vnp.com.api.MImusicService" >
+            <intent-filter>
+                <action android:name="vnp.com.api.MImusicService" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

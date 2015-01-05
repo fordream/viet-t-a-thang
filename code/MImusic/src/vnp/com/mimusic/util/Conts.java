@@ -10,6 +10,7 @@ import android.graphics.Path;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.v4.app.FragmentActivity;
 import android.widget.ImageView;
 
 public class Conts {
@@ -126,6 +127,21 @@ public class Conts {
 		if (bitmap != null) {
 			img.setImageBitmap(bitmap);
 		}
+	}
+
+	public static String getToken(Context activity) {
+		String token = null;
+		String selection = User.STATUS + "='1'";
+		Cursor cursor = activity.getContentResolver().query(User.CONTENT_URI, null, selection, null, null);
+		if (cursor != null && cursor.getCount() >= 1) {
+			cursor.moveToNext();
+			token = cursor.getString(cursor.getColumnIndex(User.TOKEN));
+		}
+
+		if (cursor != null) {
+			cursor.close();
+		}
+		return token;
 	}
 
 }
