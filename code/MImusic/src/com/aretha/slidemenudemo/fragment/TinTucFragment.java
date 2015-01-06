@@ -47,6 +47,7 @@ public class TinTucFragment extends BaseFragment implements OnItemClickListener,
 				} catch (Exception exception) {
 
 				}
+				Conts.showView(loadingView1, false);
 			}
 
 			@Override

@@ -19,7 +19,7 @@ public class LoadingView extends LinearLayout {
 
 	private void init() {
 		try {
-			((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.loading, this);
+			((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.loadingview, this);
 			findViewById(R.id.loading_main).setOnClickListener(null);
 		} catch (Exception exception) {
 

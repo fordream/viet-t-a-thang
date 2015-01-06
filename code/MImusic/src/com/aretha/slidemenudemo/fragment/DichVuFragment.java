@@ -13,6 +13,7 @@ import vnp.com.mimusic.main.BaseMusicSlideMenuActivity;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
 import vnp.com.mimusic.util.LogUtils;
+import vnp.com.mimusic.view.LoadingView;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -47,24 +48,24 @@ public class DichVuFragment extends Fragment implements OnItemClickListener, Vie
 	}
 
 	private ListView dichvu_list;
+	private LoadingView loadingView1;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.dichvu, null);
+		loadingView1 = (LoadingView) view.findViewById(R.id.loadingView1);
 		dichvu_list = (ListView) view.findViewById(R.id.dichvu_list);
 		dichvu_list.setOnItemClickListener(this);
 		Bundle bundle = new Bundle();
-		// bundle.putString("page", "1");
-		// bundle.putString("max_per_page", "100");
-		// callSHowData();
 		Conts.executeNoProgressBar(RequestMethod.GET, "utilitiServices", getActivity(), bundle, new IContsCallBack() {
 			@Override
 			public void onStart() {
-				// TODO Auto-generated method stub
-				
+				Conts.showView(loadingView1, true);
 			}
+
 			@Override
 			public void onSuscess(JSONObject response) {
+				Conts.showView(loadingView1, false);
 				try {
 					JSONArray jsonArray = response.getJSONArray("data");
 					for (int i = 0; i < jsonArray.length(); i++) {
@@ -96,11 +97,13 @@ public class DichVuFragment extends Fragment implements OnItemClickListener, Vie
 
 			@Override
 			public void onError(String message) {
+				Conts.showView(loadingView1, false);
 				Conts.toast(getActivity(), message);
 			}
 
 			@Override
 			public void onError() {
+				Conts.showView(loadingView1, false);
 				Conts.toast(getActivity(), "onError");
 			}
 		});
