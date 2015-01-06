@@ -43,9 +43,10 @@ public class ChiTietDichVuNoFeatureView extends LinearLayout {
 		ImageView home_item_img_icon = (ImageView) findViewById(R.id.home_item_img_icon);
 		TextView home_item_tv_name = (TextView) findViewById(R.id.home_item_tv_name);
 		TextView chitietdichvu_no_feature_gia_1 = (TextView) findViewById(R.id.chitietdichvu_no_feature_gia_1);
+		TextView chitietdichvu_no_feature_gia_2 = (TextView) findViewById(R.id.chitietdichvu_no_feature_gia_2);
 		home_item_tv_name.setText(cursor.getString(cursor.getColumnIndex(DichVu.service_name)));
 		chitietdichvu_no_feature_gia_1.setText(cursor.getString(cursor.getColumnIndex(DichVu.service_price)));
-
+		chitietdichvu_no_feature_gia_2.setText(cursor.getString(cursor.getColumnIndex(DichVu.service_price)));
 		home_item_img_icon.setImageResource(R.drawable.no_avatar);
 		// show image
 		String service_icon = cursor.getString(cursor.getColumnIndex(DichVu.service_icon)) + "";

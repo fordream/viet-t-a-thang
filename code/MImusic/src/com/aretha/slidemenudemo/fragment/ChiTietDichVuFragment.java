@@ -62,7 +62,7 @@ public class ChiTietDichVuFragment extends BaseFragment implements View.OnClickL
 
 		ChiTietDichVuNoFeatureView chitietdichvu_chitietdichvunofeatureview = (ChiTietDichVuNoFeatureView) view.findViewById(R.id.chitietdichvu_chitietdichvunofeatureview);
 
-		String id = getArguments().getString(DichVu.ID);
+		final String id = getArguments().getString(DichVu.ID);
 		String service_code = "";
 		String selection = DichVu.ID + "='" + id + "'";
 		final Cursor cursor = getActivity().getContentResolver().query(DichVu.CONTENT_URI, null, selection, null, null);
@@ -88,7 +88,7 @@ public class ChiTietDichVuFragment extends BaseFragment implements View.OnClickL
 
 				@Override
 				public void onClick(View v) {
-					(((RootMenuActivity) getActivity())).gotoMoiDvChoNhieuNguoiFragment();
+					(((RootMenuActivity) getActivity())).gotoMoiDvChoNhieuNguoiFragment(id);
 				}
 			});
 			cursor.close();

@@ -1,12 +1,15 @@
 package com.aretha.slidemenudemo.fragment;
 
+import vnp.com.db.DichVu;
 import vnp.com.db.User;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.adapter.MoiDvChoNhieuNguoiAdaper;
+import vnp.com.mimusic.base.diablog.DangKyDialog;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.view.ChiTietDichVuNoFeatureView;
 import vnp.com.mimusic.view.HeaderView;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -38,7 +41,6 @@ public class MoiDvChoNhieuNguoiFragment extends Fragment implements OnItemClickL
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.moidichvuchonhieunguoi, null);
 		moinhieudichvu_dialog_list_hor = (LinearLayout) view.findViewById(R.id.moinhieudichvu_dialog_list_hor);
-
 		moidichvuchonhieunguoi_number = (EditText) view.findViewById(R.id.moidichvuchonhieunguoi_number);
 		moidichvuchonhieunguoi_number.addTextChangedListener(new TextWatcher() {
 
@@ -65,13 +67,10 @@ public class MoiDvChoNhieuNguoiFragment extends Fragment implements OnItemClickL
 		chitiettintuc_headerview.setButtonRightImage(false, R.drawable.btn_back);
 		chitiettintuc_headerview.setButtonMoi(true);
 		chitiettintuc_headerview.findViewById(R.id.header_btn_right_moi).setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View v) {
-
 				gotoLoiMoi();
 			}
-
 		});
 		chitiettintuc_headerview.findViewById(R.id.header_btn_left).setOnClickListener(new OnClickListener() {
 			@Override
@@ -82,7 +81,24 @@ public class MoiDvChoNhieuNguoiFragment extends Fragment implements OnItemClickL
 
 		ListView moi_list = (ListView) view.findViewById(R.id.moidichvuchonhieunguoi_list);
 
+		/**
+		 * show data
+		 */
 		ChiTietDichVuNoFeatureView header = (ChiTietDichVuNoFeatureView) view.findViewById(R.id.moidichvuchonhieunguoi_chiteitdichvunofeatureview);
+
+		final String id = getArguments().getString(DichVu.ID);
+		String service_code = "";
+		String selection = DichVu.ID + "='" + id + "'";
+		final Cursor mcursor = getActivity().getContentResolver().query(DichVu.CONTENT_URI, null, selection, null, null);
+
+		if (mcursor != null && mcursor.getCount() >= 1) {
+			mcursor.moveToNext();
+			service_code = mcursor.getString(mcursor.getColumnIndex(DichVu.service_code));
+			header.setData(mcursor);
+
+			mcursor.close();
+		}
+
 		header.setBackground(android.R.color.white);
 		header.useValue2(true);
 		header.setOnClickListener(null);

@@ -48,7 +48,7 @@ public class HomeFragment extends Fragment implements OnItemClickListener, View.
 		menu_left_list.setAdapter(new HomeAdapter(getActivity(), objects) {
 			@Override
 			public void moiDVChoNhieuNguoi() {
-				(((RootMenuActivity) getActivity())).gotoMoiDvChoNhieuNguoi();
+				(((RootMenuActivity) getActivity())).gotoMoiDvChoNhieuNguoi("");
 			}
 		});
 

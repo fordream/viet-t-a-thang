@@ -19,7 +19,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -93,9 +92,12 @@ public class RootMenuActivity extends FragmentActivity {
 			chiTietTintucFragment.setArguments(args);
 			changeFragemt(R.id.root_main_fragment, chiTietTintucFragment);
 		} else if (Conts.MOIDICHVUCHONHIEUNGUOI.equals(type)) {
-			changeFragemt(R.id.root_main_fragment, new MoiDvChoNhieuNguoiFragment());
+			MoiDvChoNhieuNguoiFragment chiTietTintucFragment = new MoiDvChoNhieuNguoiFragment();
+			Bundle args = new Bundle();
+			args.putString("id", getIntent().getStringExtra("id") + "");
+			chiTietTintucFragment.setArguments(args);
+			changeFragemt(R.id.root_main_fragment, chiTietTintucFragment);
 		} else if (Conts.CHITIETDICHVU.equals(type)) {
-
 			ChiTietDichVuFragment chiTietTintucFragment = new ChiTietDichVuFragment();
 			Bundle args = new Bundle();
 			args.putString("id", getIntent().getStringExtra(DichVu.ID) + "");
@@ -199,16 +201,20 @@ public class RootMenuActivity extends FragmentActivity {
 		overridePendingTransitionStartActivity();
 	}
 
-	public void gotoMoiDvChoNhieuNguoi() {
-
+	public void gotoMoiDvChoNhieuNguoi(String id) {
 		Intent intent = new Intent(this, RootMenuActivity.class);
 		intent.putExtra("type", Conts.MOIDICHVUCHONHIEUNGUOI);
+		intent.putExtra("id", id);
 		getParent().startActivity(intent);
 		overridePendingTransitionStartActivity();
 	}
 
-	public void gotoMoiDvChoNhieuNguoiFragment() {
-		changeFragemt(R.id.root_main_fragment, new MoiDvChoNhieuNguoiFragment(), true);
+	public void gotoMoiDvChoNhieuNguoiFragment(String id) {
+		MoiDvChoNhieuNguoiFragment choNhieuNguoiFragment = new MoiDvChoNhieuNguoiFragment();
+		Bundle args = new Bundle();
+		args.putString("id", id);
+		choNhieuNguoiFragment.setArguments(args);
+		changeFragemt(R.id.root_main_fragment, choNhieuNguoiFragment, true);
 
 	}
 
