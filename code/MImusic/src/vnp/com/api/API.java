@@ -20,15 +20,15 @@ public class API {
 	/**
 	 * API_R005: Chi tiết dịch vụ
 	 */
-	public static final String API_R005 = "utilitiServiceDetail";
+	public static final String API_R005 = "utilitiServiceDetail";// OKIE
 	/**
 	 * API_R006: Thông tin cá nhân
 	 */
-	public static final String API_R006 = "userInfor";
+	public static final String API_R006 = "userInfor"; // OKIE
 	/**
 	 * API_R007: Cập nhật thông tin -
 	 */
-	public static final String API_R007 = "editUserInfor";
+	public static final String API_R007 = "editUserInfor"; // OKIE
 	/**
 	 * API_R008: Lịch sử giao dịch
 	 */
