@@ -57,8 +57,6 @@ public class InforFragment extends Fragment implements OnItemClickListener, View
 			@Override
 			public void onClick(View v) {
 				getActivity().onBackPressed();
-				// getActivity().overridePendingTransition(R.anim.abc_slide_left_in,
-				// R.anim.abc_slide_right_out);
 			}
 		});
 		infor_cover_click_change = (ImageView) view.findViewById(R.id.infor_cover_click_change);
@@ -89,9 +87,9 @@ public class InforFragment extends Fragment implements OnItemClickListener, View
 			cursor.moveToNext();
 			menu_left_tv_name.setText(String.format("%s(%s)", Conts.getName(cursor), cursor.getString(cursor.getColumnIndex(User.USER))));
 			infor_name.setText(Conts.getName(cursor));
-			infor_bidanh.setText(cursor.getString(cursor.getColumnIndex(User.BIDANH)));
-			infor_diachi.setText(cursor.getString(cursor.getColumnIndex(User.DIACHI)));
-			infor_ngaysinh.setText(cursor.getString(cursor.getColumnIndex(User.NGAYSINH)));
+			infor_bidanh.setText(cursor.getString(cursor.getColumnIndex(User.nickname)));
+			infor_diachi.setText(cursor.getString(cursor.getColumnIndex(User.address)));
+			infor_ngaysinh.setText(cursor.getString(cursor.getColumnIndex(User.birthday)));
 
 			String cover = cursor.getString(cursor.getColumnIndex(User.COVER));
 			Conts.showImage(cover, menu_left_img_cover, 0);
@@ -108,8 +106,6 @@ public class InforFragment extends Fragment implements OnItemClickListener, View
 		super.onActivityResult(requestCode, resultCode, data);
 
 		if (requestCode == 100 && resultCode == Activity.RESULT_OK) {
-			// String path = Conts.getPath(getActivity(), data.getData());
-
 			String path = data.getData().toString();
 			if (path != null) {
 				ContentValues contentValues = new ContentValues();
@@ -131,7 +127,6 @@ public class InforFragment extends Fragment implements OnItemClickListener, View
 				ContentValues contentValues = new ContentValues();
 				contentValues.put(User.COVER, path);
 				int index = getActivity().getContentResolver().update(User.CONTENT_URI, contentValues, String.format("%s = '1'", User.STATUS), null);
-
 				if (index > 0) {
 					Toast.makeText(getActivity(), getActivity().getString(R.string.updatethanhcong), Toast.LENGTH_SHORT).show();
 					showData();
@@ -143,7 +138,6 @@ public class InforFragment extends Fragment implements OnItemClickListener, View
 			}
 
 		} else if (requestCode == 102 && resultCode == Activity.RESULT_OK) {
-			// String path = Conts.getPath(getActivity(), data.getData());
 			String path = data.getData().toString();
 			if (path != null) {
 				ContentValues contentValues = new ContentValues();
@@ -183,10 +177,10 @@ public class InforFragment extends Fragment implements OnItemClickListener, View
 	@Override
 	public void onClick(View v) {
 		if (v.equals(infor_ngaysinh)) {
-			new DateDialog(getActivity()) {
+			new DateDialog(getActivity(), infor_ngaysinh.getText().toString()) {
 				@Override
 				public void sendData(String date, String month, String year) {
-
+					infor_ngaysinh.setText(String.format("%s/%s/%s", date, month, year));
 				}
 			}.show();
 		} else if (v.equals(menu_left_img_avatar)) {
@@ -238,9 +232,9 @@ public class InforFragment extends Fragment implements OnItemClickListener, View
 			} else {
 				ContentValues contentValues = new ContentValues();
 				contentValues.put(User.NAME, name);
-				contentValues.put(User.BIDANH, infor_bidanh.getText().toString());
-				contentValues.put(User.NGAYSINH, infor_ngaysinh.getText().toString());
-				contentValues.put(User.DIACHI, infor_diachi.getText().toString());
+				contentValues.put(User.nickname, infor_bidanh.getText().toString());
+				contentValues.put(User.birthday, infor_ngaysinh.getText().toString());
+				contentValues.put(User.address, infor_diachi.getText().toString());
 				int index = getActivity().getContentResolver().update(User.CONTENT_URI, contentValues, String.format("%s = '1'", User.STATUS), null);
 
 				if (index > 0) {

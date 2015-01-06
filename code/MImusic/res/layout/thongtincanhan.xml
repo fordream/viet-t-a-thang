@@ -359,4 +359,10 @@
         </ScrollView>
     </LinearLayout>
 
+    <vnp.com.mimusic.view.LoadingView
+        android:id="@+id/loadingView1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+    </vnp.com.mimusic.view.LoadingView>
+
 </RelativeLayout>

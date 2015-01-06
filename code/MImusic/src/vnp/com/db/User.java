@@ -17,6 +17,7 @@ public class User {
 	public static final String _ID = "_id";
 	public static final String ID = "id";
 	public static final String USER = "user";
+
 	public static final String PASSWORD = "password";
 	public static final String STATUS = "status";
 	public static final String NAME = "name";
@@ -29,17 +30,25 @@ public class User {
 	public static final String LISTIDUSERDAMOI = "listiduserdamoi";
 	public static final String COVER = "COVER";
 
-	public static final String SOGIAODICHTHANHCONGTRONGTHANG = "SOGIAODICHTHANHCONGTRONGTHANG";
-	public static final String SOGIAODICHTHANHCONG = "SOGIAODICHTHANHCONG";
-	public static final String SOTIENHOAHONGTRONGTHANG = "SOTIENHOAHONGTRONGTHANG";
-	public static final String SOTIENHOAHONG = "SOTIENHOAHONG";
+	// public static final String SOGIAODICHTHANHCONGTRONGTHANG =
+	// "SOGIAODICHTHANHCONGTRONGTHANG";
+	// public static final String SOGIAODICHTHANHCONG = "SOGIAODICHTHANHCONG";
+	// public static final String SOTIENHOAHONGTRONGTHANG =
+	// "SOTIENHOAHONGTRONGTHANG";
+	// public static final String SOTIENHOAHONG = "SOTIENHOAHONG";
 
-	public static final String NGAYSINH = "NGAYSINH";
-	public static final String BIDANH = "BIDANH";
-	public static final String DIACHI = "DIACHI";
+	public static final String birthday = "birthday";
+	public static final String address = "address";
 
 	public static final String TOKEN = "token";
 	public static final String KEYREFRESH = "keyRefresh";
+
+	public static final String nickname = "nickname";
+	public static final String fullname = "fullname";
+	public static final String exchange_number = "exchange_number";
+	public static final String exchange_number_month = "exchange_number_month";
+	public static final String poundage = "poundage";
+	public static final String poundage_month = "poundage_month";
 
 	public static final String CREATE_DB_TABLE() {
 		StringBuilder builder = new StringBuilder();
@@ -47,8 +56,9 @@ public class User {
 		builder.append("(");
 		builder.append(_ID).append(" INTEGER PRIMARY KEY AUTOINCREMENT").append(",");
 		String[] colums = new String[] {//
-		TOKEN, KEYREFRESH, SOGIAODICHTHANHCONGTRONGTHANG, SOGIAODICHTHANHCONG, SOTIENHOAHONGTRONGTHANG//
-				, SOTIENHOAHONG, USER, PASSWORD, STATUS, COVER, ID, BIDANH, NGAYSINH, DIACHI, NAME, NAME_CONTACT,//
+		nickname, fullname, exchange_number, exchange_number_month, poundage, poundage_month, TOKEN, KEYREFRESH,
+
+		USER, PASSWORD, STATUS, COVER, ID, birthday, address, NAME, NAME_CONTACT,//
 				EMAIL, AVATAR, LISTIDDVSUDUNG, SOLUONG, DOANHTHU, LISTIDUSERDAMOI //
 		};//
 			// builder.append(USER).append(" TEXT NOT NULL").append(",");

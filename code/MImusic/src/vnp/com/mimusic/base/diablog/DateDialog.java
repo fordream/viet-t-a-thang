@@ -1,13 +1,16 @@
 package vnp.com.mimusic.base.diablog;
 
 import java.util.Calendar;
+import java.util.StringTokenizer;
 
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.base.BaseAdialog;
+import vnp.com.mimusic.util.Conts;
 import android.content.Context;
 import android.database.DataSetObserver;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -35,6 +38,13 @@ public abstract class DateDialog extends BaseAdialog implements android.view.Vie
 		super(context);
 	}
 
+	private String date;
+
+	public DateDialog(Context context, String date) {
+		super(context);
+		this.date = date;
+	}
+
 	private WheelView date_wheelview_year, date_wheelview_month, date_wheelview_date;
 
 	@Override
@@ -58,7 +68,7 @@ public abstract class DateDialog extends BaseAdialog implements android.view.Vie
 
 			@Override
 			public int getItemsCount() {
-				return 30;
+				return 100;
 			}
 
 			@Override
@@ -143,7 +153,20 @@ public abstract class DateDialog extends BaseAdialog implements android.view.Vie
 				mDismiss(true);
 			}
 		});
+		try {
+			if (!Conts.isBlank(date)) {
+				StringTokenizer stringTokenizer = new StringTokenizer(date, "/");
+				String day = stringTokenizer.nextToken();
+				String month = stringTokenizer.nextToken();
+				String year = stringTokenizer.nextToken();
 
+				date_wheelview_month.setCurrentItem(Integer.parseInt(month) - 1);
+				date_wheelview_date.setCurrentItem(Integer.parseInt(day) - 1);
+				date_wheelview_year.setCurrentItem(getYear() - Integer.parseInt(year));
+			}
+		} catch (Exception exception) {
+
+		}
 		date_wheelview_month.addChangingListener(new OnWheelChangedListener() {
 
 			@Override
@@ -159,11 +182,11 @@ public abstract class DateDialog extends BaseAdialog implements android.view.Vie
 				showDate(date_wheelview_month.getCurrentItem() + 1, getYear() - date_wheelview_year.getCurrentItem());
 			}
 		});
+
 	}
 
 	private void showDate(int month, int year) {
 
-		Log.e("MONTH", year + " : " + month);
 		int curent = date_wheelview_date.getCurrentItem();
 		DateWheelViewAdapter dateWheelViewAdapter = new DateWheelViewAdapter(month, year);
 		date_wheelview_date.setViewAdapter(dateWheelViewAdapter);

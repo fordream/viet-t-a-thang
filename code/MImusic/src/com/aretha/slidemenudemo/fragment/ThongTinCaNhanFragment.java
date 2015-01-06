@@ -1,26 +1,34 @@
 package com.aretha.slidemenudemo.fragment;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import vnp.com.api.API;
+import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.User;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.util.Conts;
+import vnp.com.mimusic.util.LogUtils;
+import vnp.com.mimusic.util.Conts.IContsCallBack;
 import vnp.com.mimusic.view.HeaderView;
+import vnp.com.mimusic.view.LoadingView;
 import android.content.BroadcastReceiver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-public class ThongTinCaNhanFragment extends Fragment implements OnItemClickListener, View.OnClickListener {
+public class ThongTinCaNhanFragment extends BaseFragment implements OnItemClickListener, View.OnClickListener {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
@@ -46,10 +54,15 @@ public class ThongTinCaNhanFragment extends Fragment implements OnItemClickListe
 		super.onPause();
 		getActivity().unregisterReceiver(update);
 	}
+
 	private ImageView menu_left_img_cover, menu_left_img_avatar;
+	private LoadingView loadingView;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.thongtincanhan, null);
+		final View view = inflater.inflate(R.layout.thongtincanhan, null);
+		loadingView = (LoadingView) view.findViewById(R.id.loadingView1);
+
 		menu_left_img_cover = (ImageView) view.findViewById(R.id.menu_left_img_cover);
 		menu_left_img_avatar = (ImageView) view.findViewById(R.id.menu_left_img_avatar);
 		HeaderView headerView = (HeaderView) view.findViewById(R.id.activity_login_header);
@@ -71,6 +84,48 @@ public class ThongTinCaNhanFragment extends Fragment implements OnItemClickListe
 			}
 		});
 		showData(view);
+		getmImusicService().execute(RequestMethod.GET, API.API_R006, new Bundle(), new IContsCallBack() {
+
+			@Override
+			public void onSuscess(JSONObject response) {
+				Conts.showView(loadingView, false);
+
+//				ContentValues contentValues = new ContentValues();
+//				try {
+//					contentValues.put(User.address, response.getString(User.address));
+//					contentValues.put(User.ID, response.getString(User.ID));
+//					contentValues.put(User.exchange_number, response.getString(User.exchange_number));
+//					contentValues.put(User.exchange_number_month, response.getString(User.exchange_number_month));
+//					contentValues.put(User.fullname, response.getString(User.fullname));
+//					contentValues.put(User.nickname, response.getString(User.nickname));
+//					contentValues.put(User.poundage, response.getString(User.poundage));
+//					contentValues.put(User.poundage_month, response.getString(User.poundage_month));
+//					contentValues.put(User.birthday, response.getString(User.birthday));
+//
+//					getActivity().getContentResolver().update(User.CONTENT_URI, contentValues, String.format("%s=='1'", User.STATUS), null);
+//				} catch (JSONException e) {
+//				}
+				showData(view);
+			}
+
+			@Override
+			public void onStart() {
+				Conts.showView(loadingView, true);
+			}
+
+			@Override
+			public void onError(String message) {
+				Conts.toast(getActivity(), message);
+				Conts.showView(loadingView, false);
+			}
+
+			@Override
+			public void onError() {
+				Conts.toast(getActivity(), "onError");
+				Conts.showView(loadingView, false);
+			}
+		});
+
 		return view;
 	}
 
@@ -82,14 +137,13 @@ public class ThongTinCaNhanFragment extends Fragment implements OnItemClickListe
 			cursor.moveToNext();
 
 			((TextView) view.findViewById(R.id.text_name)).setText(Conts.getName(cursor));
-			((TextView) view.findViewById(R.id.text_bidanh)).setText(cursor.getString(cursor.getColumnIndex(User.BIDANH)));
-			((TextView) view.findViewById(R.id.text_ngaysinh)).setText(cursor.getString(cursor.getColumnIndex(User.NGAYSINH)));
-			((TextView) view.findViewById(R.id.text_diachi)).setText(cursor.getString(cursor.getColumnIndex(User.DIACHI)));
-
-			((TextView) view.findViewById(R.id.text_sogiaodichthanhcongtrongthang)).setText(getText(cursor.getString(cursor.getColumnIndex(User.SOGIAODICHTHANHCONGTRONGTHANG))));
-			((TextView) view.findViewById(R.id.text_sogiaodichthanhcong)).setText(getText(cursor.getString(cursor.getColumnIndex(User.SOGIAODICHTHANHCONG))));
-			((TextView) view.findViewById(R.id.text_sotienhoahongtrongthang)).setText(getText(cursor.getString(cursor.getColumnIndex(User.SOTIENHOAHONGTRONGTHANG))) + getString(R.string.vnd));
-			((TextView) view.findViewById(R.id.text_sotienhoahong)).setText(getText(cursor.getString(cursor.getColumnIndex(User.SOTIENHOAHONG))) + getString(R.string.vnd));
+			((TextView) view.findViewById(R.id.text_bidanh)).setText(cursor.getString(cursor.getColumnIndex(User.nickname)));
+			((TextView) view.findViewById(R.id.text_ngaysinh)).setText(cursor.getString(cursor.getColumnIndex(User.birthday)));
+			((TextView) view.findViewById(R.id.text_diachi)).setText(cursor.getString(cursor.getColumnIndex(User.address)));
+			((TextView) view.findViewById(R.id.text_sogiaodichthanhcongtrongthang)).setText(getText(cursor.getString(cursor.getColumnIndex(User.exchange_number_month))));
+			((TextView) view.findViewById(R.id.text_sogiaodichthanhcong)).setText(getText(cursor.getString(cursor.getColumnIndex(User.exchange_number))));
+			((TextView) view.findViewById(R.id.text_sotienhoahongtrongthang)).setText(getText(cursor.getString(cursor.getColumnIndex(User.poundage_month))) + getString(R.string.vnd));
+			((TextView) view.findViewById(R.id.text_sotienhoahong)).setText(getText(cursor.getString(cursor.getColumnIndex(User.poundage))) + getString(R.string.vnd));
 			String cover = cursor.getString(cursor.getColumnIndex(User.COVER));
 			Conts.showImage(cover, menu_left_img_cover, 0);
 
