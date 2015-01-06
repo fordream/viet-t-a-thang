@@ -69,7 +69,7 @@ public class MoiDvChoNhieuNguoiFragment extends Fragment implements OnItemClickL
 		chitiettintuc_headerview.findViewById(R.id.header_btn_right_moi).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				gotoLoiMoi();
+				gotoLoiMoi(getArguments().getString(DichVu.ID));
 			}
 		});
 		chitiettintuc_headerview.findViewById(R.id.header_btn_left).setOnClickListener(new OnClickListener() {
@@ -147,8 +147,8 @@ public class MoiDvChoNhieuNguoiFragment extends Fragment implements OnItemClickL
 	public void onClick(View v) {
 	}
 
-	private void gotoLoiMoi() {
-		(((RootMenuActivity) getActivity())).gotoLoiMoi();
+	private void gotoLoiMoi(String id) {
+		(((RootMenuActivity) getActivity())).gotoLoiMoi(id);
 	}
 
 	@Override

@@ -238,11 +238,14 @@ public class RootMenuActivity extends FragmentActivity {
 		overridePendingTransitionStartActivity();
 	}
 
-	public void gotoLoiMoi() {
+	public void gotoLoiMoi(String id) {
 
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
 		MauMoiFragment mauMoiFragment = new MauMoiFragment();
+		Bundle args = new Bundle();
+		args.putString("id", id);
+		mauMoiFragment.setArguments(args);
 		transaction.setCustomAnimations(R.anim.abc_slide_in_top, R.anim.abc_slide_in_top, R.anim.abc_slide_out_top, R.anim.abc_slide_out_top);
 		transaction.add(R.id.root_main_fragment, mauMoiFragment, "" + System.currentTimeMillis());
 		transaction.addToBackStack(null);
