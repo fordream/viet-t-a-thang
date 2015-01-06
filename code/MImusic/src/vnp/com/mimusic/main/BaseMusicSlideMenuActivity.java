@@ -1,41 +1,31 @@
 package vnp.com.mimusic.main;
 
-import vnp.com.api.ExeCallBack;
-import vnp.com.api.ResClientCallBack;
-import vnp.com.api.RestClient;
+import org.json.JSONObject;
+
+import vnp.com.api.API;
+import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.User;
 import vnp.com.mimusic.R;
+import vnp.com.mimusic.VApplication;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.base.diablog.DangKyDialog;
-import vnp.com.mimusic.base.diablog.ReCommnetDialog;
 import vnp.com.mimusic.util.Conts;
+import vnp.com.mimusic.util.Conts.IContsCallBack;
 import vnp.com.mimusic.view.MenuLeftView;
 import vnp.com.mimusic.view.MenuRightView;
-import vnp.com.mimusic.view.ReCommentView;
 import vnp.com.mimusic.view.TabView;
-import android.app.Activity;
 import android.app.TabActivity;
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.IBinder;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.FrameLayout;
-import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabSpec;
-import android.widget.Toast;
 
 import com.aretha.slidemenu.ISlideMenuListener;
 import com.aretha.slidemenu.SlideMenu;
@@ -206,34 +196,63 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 		/**
 		 * recommnet
 		 */
-		new Handler().postDelayed(new Runnable() {
+		// new Handler().postDelayed(new Runnable() {
+		//
+		// @Override
+		// public void run() {
+		// ReCommentView commentView = new
+		// ReCommentView(BaseMusicSlideMenuActivity.this) {
+		// @Override
+		// public void addContact() {
+		// Intent intent = new Intent(BaseMusicSlideMenuActivity.this,
+		// RootMenuActivity.class);
+		// intent.putExtra("type", Conts.NHIEUDICHVU);
+		// intent.putExtra(User._ID, 1 + "");
+		// startActivity(intent);
+		// overridePendingTransitionStartActivity();
+		// }
+		//
+		// @Override
+		// public void addDv() {
+		// Intent intent = new Intent(BaseMusicSlideMenuActivity.this,
+		// RootMenuActivity.class);
+		// Bundle extras = new Bundle();
+		// extras.putString("type", Conts.MOIDICHVUCHONHIEUNGUOI);
+		// intent.putExtras(extras);
+		// startActivity(intent);
+		// overridePendingTransitionStartActivity();
+		// }
+		// };
+		// ((FrameLayout)
+		// findViewById(R.id.activity_slidemenu_recomment)).addView(commentView);
+		// commentView.start();
+		// }
+		// }, 3000);
+
+		Bundle bundle = new Bundle();
+		bundle.putString("service_code", "CS");
+		((VApplication) getApplication()).getmImusicService().execute(RequestMethod.GET, API.API_R022, bundle, new IContsCallBack() {
 
 			@Override
-			public void run() {
-				ReCommentView commentView = new ReCommentView(BaseMusicSlideMenuActivity.this) {
-					@Override
-					public void addContact() {
-						Intent intent = new Intent(BaseMusicSlideMenuActivity.this, RootMenuActivity.class);
-						intent.putExtra("type", Conts.NHIEUDICHVU);
-						intent.putExtra(User._ID, 1 + "");
-						startActivity(intent);
-						overridePendingTransitionStartActivity();
-					}
+			public void onSuscess(JSONObject response) {
 
-					@Override
-					public void addDv() {
-						Intent intent = new Intent(BaseMusicSlideMenuActivity.this, RootMenuActivity.class);
-						Bundle extras = new Bundle();
-						extras.putString("type", Conts.MOIDICHVUCHONHIEUNGUOI);
-						intent.putExtras(extras);
-						startActivity(intent);
-						overridePendingTransitionStartActivity();
-					}
-				};
-				((FrameLayout) findViewById(R.id.activity_slidemenu_recomment)).addView(commentView);
-				commentView.start();
 			}
-		}, 3000);
+
+			@Override
+			public void onStart() {
+
+			}
+
+			@Override
+			public void onError(String message) {
+
+			}
+
+			@Override
+			public void onError() {
+
+			}
+		});
 
 	}
 

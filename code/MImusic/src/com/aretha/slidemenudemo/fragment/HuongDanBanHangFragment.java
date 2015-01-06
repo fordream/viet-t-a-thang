@@ -1,20 +1,26 @@
 package com.aretha.slidemenudemo.fragment;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import vnp.com.api.API;
+import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.DichVu;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.adapter.QuyDinhBanHangAdapter;
+import vnp.com.mimusic.util.Conts;
+import vnp.com.mimusic.util.Conts.IContsCallBack;
 import vnp.com.mimusic.view.HeaderView;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
 
-public class HuongDanBanHangFragment extends Fragment implements OnItemClickListener, View.OnClickListener {
+public class HuongDanBanHangFragment extends BaseFragment implements OnItemClickListener, View.OnClickListener {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
@@ -37,10 +43,41 @@ public class HuongDanBanHangFragment extends Fragment implements OnItemClickList
 		});
 		ListView dichvu_list = (ListView) view.findViewById(R.id.quydinhbanhang_list);
 		dichvu_list.setOnItemClickListener(this);
-		Cursor cursor = getActivity().getContentResolver().query(DichVu.CONTENT_URI, null, null, null, null);
-		if (cursor != null) {
-			dichvu_list.setAdapter(new QuyDinhBanHangAdapter(getActivity(), cursor));
-		}
+
+		Bundle bundle = new Bundle();
+		bundle.putString("type", 4 + "");
+		getmImusicService().execute(RequestMethod.GET, API.API_R010, bundle, new IContsCallBack() {
+
+			@Override
+			public void onSuscess(JSONObject response) {
+				try {
+					String guide_text = response.getString("guide_text");
+				} catch (JSONException e) {
+				}
+			}
+
+			@Override
+			public void onStart() {
+
+			}
+
+			@Override
+			public void onError(String message) {
+				Conts.toast(getActivity(), message);
+			}
+
+			@Override
+			public void onError() {
+				Conts.toast(getActivity(), "onError");
+			}
+		});
+		// Cursor cursor =
+		// getActivity().getContentResolver().query(DichVu.CONTENT_URI, null,
+		// null, null, null);
+		// if (cursor != null) {
+		// dichvu_list.setAdapter(new QuyDinhBanHangAdapter(getActivity(),
+		// cursor));
+		// }
 
 		return view;
 	}

@@ -4,11 +4,11 @@ public class API {
 	/**
 	 * API_R001: Đăng nhập qua 3G
 	 */
-	public static final String API_R001 = "authenticate";
+	public static final String API_R001 = "authenticate"; // OK
 	/**
 	 * API_R002: Đăng nhập qua wifi
 	 */
-	public static final String API_R002 = "signin";
+	public static final String API_R002 = "signin";// OK
 	/**
 	 * API_R003: Danh sách nội dung dịch vụ
 	 */
@@ -16,7 +16,7 @@ public class API {
 	/**
 	 * API_R004: Danh sách dịch vụ tiện ích -
 	 */
-	public static final String API_R004 = "utilitiServices";
+	public static final String API_R004 = "utilitiServices"; // OK
 	/**
 	 * API_R005: Chi tiết dịch vụ
 	 */
@@ -40,7 +40,7 @@ public class API {
 	/**
 	 * API_R010: Hướng dẫn bán hàng -
 	 */
-	public static final String API_R010 = "guideline";
+	public static final String API_R010 = "guideline"; // 404
 	/**
 	 * API_R011: Đồng bộ danh bạ lên
 	 */
@@ -92,29 +92,29 @@ public class API {
 	/**
 	 * API_R023: Thay đổi Avatar
 	 */
-	public static final String API_R023 = "changeAvatar";
+	public static final String API_R023 = "changeAvatar";// 405
 	/**
 	 * API_R024: Danh sách BXH
 	 */
-	public static final String API_R024 = "ranking";
+	public static final String API_R024 = "ranking"; // 405
 	/**
 	 * API_R025: Chi tiết BXH
 	 */
-	public static final String API_R025 = "ranking";
+	public static final String API_R025 = "ranking";// 405
 	/**
 	 * API_R026: Dịch vụ gợi ý
 	 */
-	public static final String API_R026 = "recommend";
+	public static final String API_R026 = "recommend";// 405
 	/**
 	 * API_R027: Danh sách tin tức
 	 */
-	public static final String API_R027 = "news";
+	public static final String API_R027 = "news";// 405
 	/**
 	 * API_R028: Chi tiết tin tức
 	 */
-	public static final String API_R028 = "newsDetail";
+	public static final String API_R028 = "newsDetail";// 405
 	/**
 	 * API_R029: Tin tức liên quan
 	 */
-	public static final String API_R029 = "relatedNews";
+	public static final String API_R029 = "relatedNews";// 405
 }
