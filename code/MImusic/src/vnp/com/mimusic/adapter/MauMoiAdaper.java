@@ -1,5 +1,9 @@
 package vnp.com.mimusic.adapter;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.view.MauMoiItemView;
 import android.content.Context;
@@ -9,10 +13,27 @@ import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 
-public class MauMoiAdaper extends ArrayAdapter<String> {
+public class MauMoiAdaper extends ArrayAdapter<JSONObject> {
+	private JSONArray array;
 
-	public MauMoiAdaper(Context context, String[] objects) {
+	public MauMoiAdaper(Context context, JSONObject[] objects, JSONArray array) {
 		super(context, 0, objects);
+		this.array = array;
+	}
+
+	@Override
+	public int getCount() {
+		return array.length();
+	}
+
+	@Override
+	public JSONObject getItem(int position) {
+		try {
+			return array.getJSONObject(position);
+		} catch (JSONException e) {
+		}
+
+		return null;
 	}
 
 	private int mPosition = 0;
@@ -26,6 +47,8 @@ public class MauMoiAdaper extends ArrayAdapter<String> {
 
 		((MauMoiItemView) convertView).setBackgroundItemColor(position);
 
+		JSONObject jsonObject = getItem(position);
+		((MauMoiItemView) convertView).setData(jsonObject);
 		final RadioButton maumoi_item_checkbox = (RadioButton) convertView.findViewById(R.id.maumoi_item_checkbox);
 		maumoi_item_checkbox.setOnCheckedChangeListener(null);
 		maumoi_item_checkbox.setChecked(mPosition == position);

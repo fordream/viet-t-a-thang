@@ -1,5 +1,7 @@
 package com.aretha.slidemenudemo.fragment;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import vnp.com.api.API;
@@ -24,7 +26,7 @@ public class MauMoiFragment extends BaseFragment implements android.view.View.On
 		View view = inflater.inflate(R.layout.maumoi_dialog, null);
 		loading = view.findViewById(R.id.loadingView1);
 		view.setOnClickListener(null);
-		ListView maumoi_list = (ListView) view.findViewById(R.id.maumoi_list);
+		final ListView maumoi_list = (ListView) view.findViewById(R.id.maumoi_list);
 		// maumoi_list.setAdapter(new MauMoiAdaper(getActivity(), new String[] {
 		// "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a",
 		// "a", "a" }));
@@ -62,6 +64,13 @@ public class MauMoiFragment extends BaseFragment implements android.view.View.On
 
 			@Override
 			public void onSuscess(JSONObject response) {
+				try {
+					JSONArray array = response.getJSONArray("data");
+					MauMoiAdaper adaper = new MauMoiAdaper(getActivity(), new JSONObject[] {},array);
+					maumoi_list.setAdapter(adaper);
+
+				} catch (JSONException e) {
+				}
 				Conts.showView(loading, false);
 			}
 
