@@ -10,6 +10,7 @@ import vnp.com.api.RestClient;
 import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.DichVu;
 import vnp.com.db.User;
+import vnp.com.mimusic.VApplication.IServiceConfig;
 import vnp.com.mimusic.base.VTAnimationListener;
 import vnp.com.mimusic.main.BaseMusicSlideMenuActivity;
 import vnp.com.mimusic.util.Conts;
@@ -53,29 +54,43 @@ public class LoginActivty extends Activity implements OnClickListener {
 			@Override
 			public void onAnimationEnd(Animation animation) {
 				super.onAnimationEnd(animation);
-				String selection = User.STATUS + "='1'";
-				Cursor cursor = getContentResolver().query(User.CONTENT_URI, null, selection, null, null);
-				if (cursor != null && cursor.getCount() >= 1) {
-					cursor.moveToNext();
-					((TextView) findViewById(R.id.activity_login_number_phone)).setText(cursor.getString(cursor.getColumnIndex(User.USER)));
-					((TextView) findViewById(R.id.activity_login_password)).setText(cursor.getString(cursor.getColumnIndex(User.PASSWORD)));
-					cursor.close();
-					gotoHome();
-				} else {
-					findViewById(R.id.activity_login_main).setVisibility(View.VISIBLE);
-				}
-
-				// findViewById(R.id.activity_login_main).setVisibility(View.VISIBLE);
+				((VApplication) getApplication()).init(config);
 			}
 		});
+		
 		findViewById(R.id.activity_login_splash).startAnimation(alphaAnimation);
-
 	}
+
+	private IServiceConfig config = new IServiceConfig() {
+		@Override
+		public void onServiceDisconnected() {
+
+		}
+
+		@Override
+		public void onServiceConnected() {
+			callInitSetting();
+		}
+	};
 
 	private void gotoHome() {
 		startActivity(new Intent(this, BaseMusicSlideMenuActivity.class));
 		finish();
 		overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_nothing);
+	}
+
+	private void callInitSetting() {
+		String selection = User.STATUS + "='1'";
+		Cursor cursor = getContentResolver().query(User.CONTENT_URI, null, selection, null, null);
+		if (cursor != null && cursor.getCount() >= 1) {
+			cursor.moveToNext();
+			((TextView) findViewById(R.id.activity_login_number_phone)).setText(cursor.getString(cursor.getColumnIndex(User.USER)));
+			((TextView) findViewById(R.id.activity_login_password)).setText(cursor.getString(cursor.getColumnIndex(User.PASSWORD)));
+			cursor.close();
+			gotoHome();
+		} else {
+			findViewById(R.id.activity_login_main).setVisibility(View.VISIBLE);
+		}
 	}
 
 	@Override

@@ -1,19 +1,17 @@
 package vnp.com.mimusic;
 
-import org.json.JSONObject;
-
-import vnp.com.api.RestClient.RequestMethod;
+import vnp.com.api.MImusicBin;
+import vnp.com.api.MImusicService;
 import vnp.com.db.User;
-import vnp.com.mimusic.util.Conts;
-import vnp.com.mimusic.util.Conts.IContsCallBack;
 import android.app.Application;
+import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.database.Cursor;
-import android.os.Bundle;
+import android.os.IBinder;
 import android.provider.ContactsContract;
-import android.util.Log;
 
 public class VApplication extends Application {
 
@@ -22,6 +20,46 @@ public class VApplication extends Application {
 		super.onCreate();
 	}
 
+	/**
+	 * service config
+	 */
+	private MImusicService mImusicService;
+
+	public MImusicService getmImusicService() {
+		return mImusicService;
+	}
+
+	public void init(final IServiceConfig config) {
+		if (mImusicService == null) {
+			Intent service = new Intent(MImusicService.ACTION);
+			bindService(service, new ServiceConnection() {
+
+				@Override
+				public void onServiceDisconnected(ComponentName name) {
+					mImusicService = null;
+					config.onServiceDisconnected();
+				}
+
+				@Override
+				public void onServiceConnected(ComponentName name, IBinder service) {
+					mImusicService = ((MImusicBin) service).getService();
+					config.onServiceConnected();
+				}
+			}, BIND_AUTO_CREATE);
+		} else {
+			config.onServiceConnected();
+		}
+	}
+
+	public interface IServiceConfig {
+		public void onServiceConnected();
+
+		public void onServiceDisconnected();
+	}
+
+	/**
+	 * use dongbo danhba
+	 */
 	private boolean isRunDongBo = false;
 
 	public void dongbodanhba() {
@@ -70,27 +108,28 @@ public class VApplication extends Application {
 		}
 	}
 
-//	public static final String KEY = "KEY";
-//	public static final String METHOD = "METHOD";
-//
-//	public void callApi(Intent intent) {
-//		if (intent != null) {
-//			Conts.execute((RequestMethod) intent.getSerializableExtra(METHOD), intent.getStringExtra(KEY), this, new Bundle(), new IContsCallBack() {
-//				@Override
-//				public void onSuscess(JSONObject response) {
-//
-//				}
-//
-//				@Override
-//				public void onError(String message) {
-//
-//				}
-//
-//				@Override
-//				public void onError() {
-//
-//				}
-//			});
-//		}
-//	}
+	// public static final String KEY = "KEY";
+	// public static final String METHOD = "METHOD";
+	//
+	// public void callApi(Intent intent) {
+	// if (intent != null) {
+	// Conts.execute((RequestMethod) intent.getSerializableExtra(METHOD),
+	// intent.getStringExtra(KEY), this, new Bundle(), new IContsCallBack() {
+	// @Override
+	// public void onSuscess(JSONObject response) {
+	//
+	// }
+	//
+	// @Override
+	// public void onError(String message) {
+	//
+	// }
+	//
+	// @Override
+	// public void onError() {
+	//
+	// }
+	// });
+	// }
+	// }
 }

@@ -14,6 +14,8 @@ import android.os.Bundle;
 import android.os.IBinder;
 
 public class MImusicService extends Service {
+
+	private MImusicBin mImusicBin;
 	public static final String ACTION = "vnp.com.api.MImusicService";
 	public static final String KEY = "KEY";
 	public static final String VALUE = "VALUE";
@@ -24,8 +26,14 @@ public class MImusicService extends Service {
 	}
 
 	@Override
+	public void onCreate() {
+		super.onCreate();
+		mImusicBin = new MImusicBin(this);
+	}
+
+	@Override
 	public IBinder onBind(Intent arg0) {
-		return null;
+		return mImusicBin;
 	}
 
 	private List<String> listCallBack = new ArrayList<String>();
