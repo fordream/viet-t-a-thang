@@ -4,17 +4,13 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import vnp.com.api.API;
-import vnp.com.api.ExeCallBack;
-import vnp.com.api.ExeCallBackOption;
-import vnp.com.api.ResClientCallBack;
-import vnp.com.api.RestClient;
 import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.adapter.TintucAdaper;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
-import vnp.com.mimusic.util.LogUtils;
+import vnp.com.mimusic.view.LoadingView;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +18,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-import android.widget.Toast;
 
 public class TinTucFragment extends BaseFragment implements OnItemClickListener, View.OnClickListener {
 	@Override
@@ -30,9 +25,12 @@ public class TinTucFragment extends BaseFragment implements OnItemClickListener,
 		super.onActivityCreated(savedInstanceState);
 	}
 
+	private LoadingView loadingView1;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.tintuc, null);
+		loadingView1 = (LoadingView) view.findViewById(R.id.loadingView1);
 		final ListView bangxephang_list = (ListView) view.findViewById(R.id.tintuc_list);
 		bangxephang_list.setOnItemClickListener(this);
 
@@ -53,16 +51,18 @@ public class TinTucFragment extends BaseFragment implements OnItemClickListener,
 
 			@Override
 			public void onStart() {
-
+				Conts.showView(loadingView1, true);
 			}
 
 			@Override
 			public void onError(String message) {
+				Conts.showView(loadingView1, false);
 				Conts.toast(getActivity(), message);
 			}
 
 			@Override
 			public void onError() {
+				Conts.showView(loadingView1, false);
 				Conts.toast(getActivity(), "check network");
 			}
 		});

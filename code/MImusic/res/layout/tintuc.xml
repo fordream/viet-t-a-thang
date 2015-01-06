@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bangxephang_list_bg"
@@ -11,4 +11,10 @@
         android:layout_height="match_parent" >
     </vnp.com.mimusic.view.MusicListView>
 
-</LinearLayout>
+    <vnp.com.mimusic.view.LoadingView
+        android:id="@+id/loadingView1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+    </vnp.com.mimusic.view.LoadingView>
+
+</RelativeLayout>
