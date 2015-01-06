@@ -10,6 +10,7 @@ import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
 import vnp.com.mimusic.util.VTAnimationUtils;
 import vnp.com.mimusic.view.HeaderView;
+import vnp.com.mimusic.view.LoadingView;
 import vnp.com.mimusic.view.add.OnTouchAnimation;
 import android.app.Activity;
 import android.content.Intent;
@@ -19,19 +20,18 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class LoginActivty extends Activity implements OnClickListener {
-	private ProgressBar progressBar1;
+	private LoadingView progressBar1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		((VApplication) getApplication()).dongbodanhba();
 		setContentView(R.layout.activity_login);
-		progressBar1 = (ProgressBar) findViewById(R.id.progressBar1);
+		progressBar1 = (LoadingView) findViewById(R.id.loadingView1);
 		Conts.showView(progressBar1, false);
 		overridePendingTransition(R.anim.abc_nothing_0, R.anim.abc_nothing_0);
 

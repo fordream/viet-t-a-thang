@@ -147,12 +147,6 @@
                         android:singleLine="true"
                         android:textSize="@dimen/dimen_13dp" />
 
-                    <ProgressBar
-                        android:id="@+id/progressBar1"
-                        style="?android:attr/progressBarStyleSmall"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -187,5 +181,12 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+
+    <vnp.com.mimusic.view.LoadingView
+        android:id="@+id/loadingView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone" >
+    </vnp.com.mimusic.view.LoadingView>
 
 </RelativeLayout>
