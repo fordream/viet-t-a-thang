@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView;
 
@@ -45,10 +46,12 @@ public class ThongTinCaNhanFragment extends Fragment implements OnItemClickListe
 		super.onPause();
 		getActivity().unregisterReceiver(update);
 	}
-
+	private ImageView menu_left_img_cover, menu_left_img_avatar;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.thongtincanhan, null);
+		menu_left_img_cover = (ImageView) view.findViewById(R.id.menu_left_img_cover);
+		menu_left_img_avatar = (ImageView) view.findViewById(R.id.menu_left_img_avatar);
 		HeaderView headerView = (HeaderView) view.findViewById(R.id.activity_login_header);
 		headerView.setTextHeader(R.string.thongtincanhan);
 		headerView.setButtonLeftImage(true, R.drawable.btn_back);
@@ -87,7 +90,11 @@ public class ThongTinCaNhanFragment extends Fragment implements OnItemClickListe
 			((TextView) view.findViewById(R.id.text_sogiaodichthanhcong)).setText(getText(cursor.getString(cursor.getColumnIndex(User.SOGIAODICHTHANHCONG))));
 			((TextView) view.findViewById(R.id.text_sotienhoahongtrongthang)).setText(getText(cursor.getString(cursor.getColumnIndex(User.SOTIENHOAHONGTRONGTHANG))) + getString(R.string.vnd));
 			((TextView) view.findViewById(R.id.text_sotienhoahong)).setText(getText(cursor.getString(cursor.getColumnIndex(User.SOTIENHOAHONG))) + getString(R.string.vnd));
+			String cover = cursor.getString(cursor.getColumnIndex(User.COVER));
+			Conts.showImage(cover, menu_left_img_cover, 0);
 
+			String avatar = cursor.getString(cursor.getColumnIndex(User.AVATAR));
+			Conts.showImage(avatar, menu_left_img_avatar, R.drawable.no_avatar);
 			cursor.close();
 		}
 	}
