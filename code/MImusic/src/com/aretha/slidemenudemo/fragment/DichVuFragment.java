@@ -57,7 +57,12 @@ public class DichVuFragment extends Fragment implements OnItemClickListener, Vie
 		// bundle.putString("page", "1");
 		// bundle.putString("max_per_page", "100");
 		// callSHowData();
-		Conts.execute(RequestMethod.GET, "utilitiServices", getActivity(), bundle, new IContsCallBack() {
+		Conts.executeNoProgressBar(RequestMethod.GET, "utilitiServices", getActivity(), bundle, new IContsCallBack() {
+			@Override
+			public void onStart() {
+				// TODO Auto-generated method stub
+				
+			}
 			@Override
 			public void onSuscess(JSONObject response) {
 				try {
@@ -142,7 +147,7 @@ public class DichVuFragment extends Fragment implements OnItemClickListener, Vie
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		BaseMusicSlideMenuActivity.hiddenKeyBoard(getActivity());
+		Conts.hiddenKeyBoard(getActivity());
 		(((RootMenuActivity) getActivity())).gotoChiTietDichVu(parent, view, position, id);
 	}
 }

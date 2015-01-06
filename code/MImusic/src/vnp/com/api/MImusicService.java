@@ -6,12 +6,19 @@ import java.util.List;
 import org.json.JSONObject;
 
 import vnp.com.api.RestClient.RequestMethod;
+import vnp.com.db.User;
+import vnp.com.mimusic.LoginActivty;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
 import android.app.Service;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.text.GetChars;
+import android.widget.Toast;
 
 public class MImusicService extends Service {
 
@@ -50,29 +57,67 @@ public class MImusicService extends Service {
 				listCallBack.remove(intent.getStringExtra(VALUE));
 			}
 		}
-		callApi(intent);
 		return super.onStartCommand(intent, flags, startId);
 	}
 
-	private void callApi(Intent intent) {
-		if (intent != null) {
-			Conts.execute((RequestMethod) intent.getSerializableExtra(METHOD), intent.getStringExtra(KEY), this, new Bundle(), new IContsCallBack() {
-				@Override
-				public void onSuscess(JSONObject response) {
+	/**
+	 * 
+	 * @param is3G
+	 * @param u
+	 * @param p
+	 * @param contsCallBack
+	 */
+	public void login(boolean is3G, final String u, final String p, final IContsCallBack contsCallBack) {
+		ContentValues contentValues = new ContentValues();
+		contentValues.put(User.STATUS, "0");
+		getContentResolver().update(User.CONTENT_URI, contentValues, null, null);
+		Bundle bundle = new Bundle();
+		bundle.putString("u", u);
+		bundle.putString("p", p);
+		Conts.executeNoProgressBar(is3G ? RequestMethod.GET : RequestMethod.POST, is3G ? "authenticate" : "signin", this, bundle, new IContsCallBack() {
+			@Override
+			public void onStart() {
+				contsCallBack.onStart();
+			}
 
+			@Override
+			public void onSuscess(JSONObject jsonObject) {
+				try {
+					String token = jsonObject.getString("token");
+					String keyRefresh = jsonObject.getString("keyRefresh");
+					String phone_number = jsonObject.getString("phone");
+					ContentValues values = new ContentValues();
+					values.put(User.USER, phone_number);
+					values.put(User.PASSWORD, p);
+					values.put(User.TOKEN, token);
+					values.put(User.KEYREFRESH, keyRefresh);
+					values.put(User.STATUS, "1");
+
+					String selection = String.format("%s='%s'", User.USER, phone_number);
+					Cursor cursor = getContentResolver().query(User.CONTENT_URI, null, selection, null, null);
+
+					boolean isUpdate = cursor != null && cursor.getCount() >= 1;
+					cursor.close();
+
+					if (isUpdate) {
+						getContentResolver().update(User.CONTENT_URI, values, selection, null);
+					} else {
+						getContentResolver().insert(User.CONTENT_URI, values);
+					}
+				} catch (Exception e) {
 				}
+				contsCallBack.onSuscess(jsonObject);
+			}
 
-				@Override
-				public void onError(String message) {
+			@Override
+			public void onError(String message) {
+				contsCallBack.onError(message);
+			}
 
-				}
-
-				@Override
-				public void onError() {
-
-				}
-			});
-		}
+			@Override
+			public void onError() {
+				contsCallBack.onError();
+			}
+		});
 	}
-
 }

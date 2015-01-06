@@ -2,43 +2,37 @@ package vnp.com.mimusic;
 
 import org.json.JSONObject;
 
-import vnp.com.api.ExeCallBack;
-import vnp.com.api.ExeCallBackOption;
-import vnp.com.api.MImusicService;
-import vnp.com.api.ResClientCallBack;
-import vnp.com.api.RestClient;
-import vnp.com.api.RestClient.RequestMethod;
-import vnp.com.db.DichVu;
 import vnp.com.db.User;
 import vnp.com.mimusic.VApplication.IServiceConfig;
 import vnp.com.mimusic.base.VTAnimationListener;
 import vnp.com.mimusic.main.BaseMusicSlideMenuActivity;
 import vnp.com.mimusic.util.Conts;
-import vnp.com.mimusic.util.LogUtils;
+import vnp.com.mimusic.util.Conts.IContsCallBack;
 import vnp.com.mimusic.util.VTAnimationUtils;
 import vnp.com.mimusic.view.HeaderView;
 import vnp.com.mimusic.view.add.OnTouchAnimation;
 import android.app.Activity;
-import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class LoginActivty extends Activity implements OnClickListener {
+	private ProgressBar progressBar1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		((VApplication) getApplication()).dongbodanhba();
-
 		setContentView(R.layout.activity_login);
+		progressBar1 = (ProgressBar) findViewById(R.id.progressBar1);
+		Conts.showView(progressBar1, false);
 		overridePendingTransition(R.anim.abc_nothing_0, R.anim.abc_nothing_0);
 
 		findViewById(R.id.activity_login_btn).setOnClickListener(this);
@@ -57,7 +51,7 @@ public class LoginActivty extends Activity implements OnClickListener {
 				((VApplication) getApplication()).init(config);
 			}
 		});
-		
+
 		findViewById(R.id.activity_login_splash).startAnimation(alphaAnimation);
 	}
 
@@ -87,10 +81,11 @@ public class LoginActivty extends Activity implements OnClickListener {
 			((TextView) findViewById(R.id.activity_login_number_phone)).setText(cursor.getString(cursor.getColumnIndex(User.USER)));
 			((TextView) findViewById(R.id.activity_login_password)).setText(cursor.getString(cursor.getColumnIndex(User.PASSWORD)));
 			cursor.close();
-			gotoHome();
+			// gotoHome();
 		} else {
-			findViewById(R.id.activity_login_main).setVisibility(View.VISIBLE);
+			// findViewById(R.id.activity_login_main).setVisibility(View.VISIBLE);
 		}
+		findViewById(R.id.activity_login_main).setVisibility(View.VISIBLE);
 	}
 
 	@Override
@@ -100,59 +95,45 @@ public class LoginActivty extends Activity implements OnClickListener {
 
 		if (!numberPhone.trim().equals("") && !password.trim().equals("")) {
 
-			ResClientCallBack back = new ResClientCallBack() {
+			((VApplication) getApplication()).getmImusicService().login(false, numberPhone, password, new IContsCallBack() {
+
 				@Override
-				public RequestMethod getMedthod() {
-					return RequestMethod.POST;
+				public void onStart() {
+					Conts.showView(progressBar1, true);
+					Conts.disableView(new View[] { //
+
+					findViewById(R.id.activity_login_number_phone), //
+							findViewById(R.id.activity_login_password), //
+							findViewById(R.id.activity_login_btn) });//
+					Conts.hiddenKeyBoard(LoginActivty.this);
 				}
 
 				@Override
-				public void onCallBack(Object object) {
-					RestClient restClient = (RestClient) object;
-
-					try {
-						JSONObject jsonObject = new JSONObject(restClient.getResponse());
-						String errorCode = jsonObject.getString("errorCode");
-
-						String message = jsonObject.getString("message");
-						if ("0".equals(errorCode)) {
-							String token = jsonObject.getString("token");
-							String keyRefresh = jsonObject.getString("keyRefresh");
-							String phone_number = jsonObject.getString("phone");
-							ContentValues values = new ContentValues();
-							values.put(User.USER, phone_number);
-							values.put(User.PASSWORD, password);
-							values.put(User.TOKEN, token);
-							values.put(User.KEYREFRESH, keyRefresh);
-							values.put(User.STATUS, "1");
-
-							Uri uri = getContentResolver().insert(User.CONTENT_URI, values);
-							int _id = Integer.parseInt(uri.getPathSegments().get(1));
-
-							if (_id > 0) {
-								gotoHome();
-							}
-
-						} else {
-							Toast.makeText(LoginActivty.this, message, Toast.LENGTH_SHORT).show();
-						}
-					} catch (Exception e) {
-						e.printStackTrace();
-						Toast.makeText(LoginActivty.this, "login fail", Toast.LENGTH_SHORT).show();
-					}
-
+				public void onSuscess(JSONObject response) {
+					gotoHome();
 				}
 
 				@Override
-				public String getApiName() {
-					return "signin";
+				public void onError(String message) {
+					Toast.makeText(LoginActivty.this, message, Toast.LENGTH_SHORT).show();
+					Conts.showView(progressBar1, false);
+					Conts.enableView(new View[] { //
+					findViewById(R.id.activity_login_number_phone), //
+							findViewById(R.id.activity_login_password), //
+							findViewById(R.id.activity_login_btn) });//
 				}
-			};
-			back.addParam("u", numberPhone);
-			back.addParam("p", password);
-			ExeCallBack exeCallBack = new ExeCallBack();
-			exeCallBack.setExeCallBackOption(new ExeCallBackOption(this, true, R.string.loading, null));
-			exeCallBack.executeAsynCallBack(back);
+
+				@Override
+				public void onError() {
+
+					Toast.makeText(LoginActivty.this, "please check network", Toast.LENGTH_SHORT).show();
+					Conts.showView(progressBar1, false);
+					Conts.enableView(new View[] { //
+					findViewById(R.id.activity_login_number_phone), //
+							findViewById(R.id.activity_login_password), //
+							findViewById(R.id.activity_login_btn) });//
+				}
+			});
 
 		} else {
 			if (Conts.isBlank(numberPhone)) {
@@ -165,58 +146,4 @@ public class LoginActivty extends Activity implements OnClickListener {
 			Toast.makeText(this, "input password and number phone", Toast.LENGTH_SHORT).show();
 		}
 	}
-
-	// private void addDichVu() {
-	// String icon =
-	// "http://ecx.images-amazon.com/images/I/719CZqP48hL._SY300_.png";
-	// String linkFullContent =
-	// "http://searchenginewatch.com/sew/how-to/2340758/what-type-of-content-should-you-create-long-or-short";
-	// String name = "IMusic";
-	// String shortContent =
-	// "Website nhạc trực tuyến của tập đoàn viễn thông quân đội,Website nhạc trực tuyến của tập đoàn viễn thông quân đội,Website nhạc trực tuyến của tập đoàn viễn thông quân đội,Website nhạc trực tuyến của tập đoàn viễn thông quân đội ";
-	// String url = "http://imusic.vn";
-	//
-	// addDichVu("1", icon, linkFullContent, "Dịch vụ IMusic", shortContent,
-	// url);
-	// addDichVu("2", icon, linkFullContent, "Dịch vụ mobileTV", shortContent,
-	// url);
-	// addDichVu("3", icon, linkFullContent, "Dịch vụ OMEGA Book", shortContent,
-	// url);
-	// addDichVu("4", icon, linkFullContent, "Dịch vụ ORA", shortContent, url);
-	// addDichVu("5", icon, linkFullContent, "Dịch vụ chăm sóc trẻ",
-	// shortContent, url);
-	// addDichVu("6", icon, linkFullContent, "Dịch Vụ Cho người già",
-	// shortContent, url);
-	// addDichVu("7", icon, linkFullContent, "Dịch vụ trẻ", shortContent, url);
-	// addDichVu("8", icon, linkFullContent, "Dịch vụ vì nhân dân",
-	// shortContent, url);
-	// addDichVu("9", icon, linkFullContent, "Dịch vụ nghe đài", shortContent,
-	// url);
-	// addDichVu("10", icon, linkFullContent, "Dịch vụ tìm thông tin",
-	// shortContent, url);
-	// addDichVu("11", icon, linkFullContent, "Dịch vụ thám hiểm", shortContent,
-	// url);
-	// }
-
-	// private void addDichVu(String isSystem, String icon, String
-	// linkFullContent, String name, String shortContent, String url) {
-	// ContentValues contentValues = new ContentValues();
-	// contentValues.put(DichVu.ICON, icon);
-	// contentValues.put(DichVu.ID, isSystem);
-	// contentValues.put(DichVu.LINK_FULL_CONTENT, linkFullContent);
-	// contentValues.put(DichVu.NAME, name);
-	// contentValues.put(DichVu.SHORTCONTENT, shortContent);
-	// contentValues.put(DichVu.URL, url);
-	// String selection = String.format("%s='%s'", DichVu.ID, isSystem);
-	// Cursor cursor = getContentResolver().query(DichVu.CONTENT_URI, null,
-	// selection, null, null);
-	//
-	// if (cursor != null && cursor.getCount() >= 1) {
-	// cursor.close();
-	// getContentResolver().update(DichVu.CONTENT_URI, contentValues, selection,
-	// null);
-	// } else {
-	// getContentResolver().insert(DichVu.CONTENT_URI, contentValues);
-	// }
-	// }
 }

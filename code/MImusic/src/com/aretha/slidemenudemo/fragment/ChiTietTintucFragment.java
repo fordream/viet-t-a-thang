@@ -63,7 +63,12 @@ public class ChiTietTintucFragment extends Fragment implements OnItemClickListen
 
 	private void callApi(Bundle arguments) {
 		chitiet_tintuc_tintuckhac_list.removeAllViews();
-		Conts.execute(RequestMethod.POST, "newsDetail", getActivity(), arguments, new IContsCallBack() {
+		Conts.executeNoProgressBar(RequestMethod.POST, "newsDetail", getActivity(), arguments, new IContsCallBack() {
+			@Override
+			public void onStart() {
+				// TODO Auto-generated method stub
+
+			}
 
 			@Override
 			public void onError() {
@@ -87,7 +92,12 @@ public class ChiTietTintucFragment extends Fragment implements OnItemClickListen
 			}
 		});
 
-		Conts.execute(RequestMethod.POST, "relatedNews", getActivity(), arguments, new IContsCallBack() {
+		Conts.executeNoProgressBar(RequestMethod.POST, "relatedNews", getActivity(), arguments, new IContsCallBack() {
+			@Override
+			public void onStart() {
+				// TODO Auto-generated method stub
+
+			}
 
 			@Override
 			public void onError() {

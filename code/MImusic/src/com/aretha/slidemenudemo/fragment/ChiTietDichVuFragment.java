@@ -80,7 +80,7 @@ public class ChiTietDichVuFragment extends Fragment implements View.OnClickListe
 		}
 		Bundle bundles = new Bundle();
 		bundles.putString("service_code", id);
-		Conts.execute(RequestMethod.GET, "utilitiServiceDetail", getActivity(), bundles, new IContsCallBack() {
+		Conts.executeNoProgressBar(RequestMethod.GET, "utilitiServiceDetail", getActivity(), bundles, new IContsCallBack() {
 			
 			@Override
 			public void onSuscess(JSONObject response) {
@@ -94,6 +94,12 @@ public class ChiTietDichVuFragment extends Fragment implements View.OnClickListe
 			
 			@Override
 			public void onError() {
+				
+			}
+
+			@Override
+			public void onStart() {
+				// TODO Auto-generated method stub
 				
 			}
 		});

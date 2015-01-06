@@ -1,5 +1,7 @@
 package vnp.com.mimusic.util;
 
+import java.util.Set;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -11,6 +13,7 @@ import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.User;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.adapter.TintucAdaper;
+import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -20,9 +23,13 @@ import android.graphics.Path;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.provider.MediaStore;
 import android.support.v4.app.FragmentActivity;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 public class Conts {
@@ -156,7 +163,8 @@ public class Conts {
 		return token;
 	}
 
-	public static void execute(final RequestMethod requestMethod, final String api, final Context activity, Bundle bundles, final IContsCallBack contsCallBack) {
+	public static void executeNoProgressBar(final RequestMethod requestMethod, final String api, final Context activity, Bundle bundles, final IContsCallBack contsCallBack) {
+		contsCallBack.onStart();
 		ResClientCallBack resClientCallBack = new ResClientCallBack() {
 
 			@Override
@@ -192,12 +200,18 @@ public class Conts {
 		};
 
 		resClientCallBack.addParam("token", Conts.getToken(activity));
+
+		Set<String> keys = bundles.keySet();
+		for (String key : keys) {
+			resClientCallBack.addParam(key, bundles.getString(key));
+		}
 		ExeCallBack exeCallBack = new ExeCallBack();
-		exeCallBack.setExeCallBackOption(new ExeCallBackOption(activity, true, R.string.loading, null));
+		exeCallBack.setExeCallBackOption(new ExeCallBackOption(activity, false, R.string.loading, null));
 		exeCallBack.executeAsynCallBack(resClientCallBack);
 	}
 
 	public interface IContsCallBack {
+		public void onStart();
 
 		public void onError();
 
@@ -208,5 +222,30 @@ public class Conts {
 
 	public static void toast(Context activity, String message) {
 		Toast.makeText(activity, message + "", Toast.LENGTH_SHORT).show();
+	}
+
+	public static void hiddenKeyBoard(Activity context) {
+		try {
+			InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+			IBinder binder = context.getCurrentFocus().getWindowToken();
+			imm.hideSoftInputFromWindow(binder, 0);
+		} catch (Exception e) {
+		}
+	}
+
+	public static void disableView(View view[]) {
+		for (View v : view) {
+			v.setEnabled(false);
+		}
+	}
+
+	public static void enableView(View view[]) {
+		for (View v : view) {
+			v.setEnabled(true);
+		}
+	}
+
+	public static void showView(View progressBar1, boolean b) {
+		progressBar1.setVisibility(b ? View.VISIBLE : View.GONE);
 	}
 }

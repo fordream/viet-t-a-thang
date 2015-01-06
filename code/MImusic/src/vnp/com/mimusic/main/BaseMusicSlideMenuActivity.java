@@ -44,17 +44,6 @@ import com.aretha.slidemenu.SlideMenu.OnSlideStateChangeListener;
 public class BaseMusicSlideMenuActivity extends TabActivity {
 	private SlideMenu mSlideMenu;
 
-	public static void hiddenKeyBoard(Activity activity) {
-		try {
-			String service = Context.INPUT_METHOD_SERVICE;
-			InputMethodManager imm = null;
-			imm = (InputMethodManager) activity.getSystemService(service);
-			IBinder binder = activity.getCurrentFocus().getWindowToken();
-			imm.hideSoftInputFromWindow(binder, 0);
-		} catch (Exception e) {
-		}
-	}
-
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -206,7 +195,7 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 			@Override
 			public void onSlideStateChange(int slideState) {
 				Log.e("onSlideStateChange", slideState + "");
-				hiddenKeyBoard(BaseMusicSlideMenuActivity.this);
+				Conts.hiddenKeyBoard(BaseMusicSlideMenuActivity.this);
 			}
 
 			@Override
