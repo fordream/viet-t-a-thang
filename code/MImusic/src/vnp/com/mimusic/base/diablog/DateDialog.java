@@ -214,7 +214,10 @@ public abstract class DateDialog extends BaseAdialog implements android.view.Vie
 			public void onAnimationEnd(Animation animation) {
 				DateDialog.this.dismiss();
 				if (isSendData) {
-					sendData("", "", "");
+					sendData(
+							((date_wheelview_date.getCurrentItem() + 1) < 10? "0" :"" )+(date_wheelview_date.getCurrentItem() + 1) + "",
+							((date_wheelview_month.getCurrentItem() + 1) < 10? "0" :"" )+(date_wheelview_month.getCurrentItem() +1) +"", 
+							(getYear() -date_wheelview_year.getCurrentItem()) + "");
 				}
 			}
 		});

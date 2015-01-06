@@ -1,27 +1,28 @@
 package com.aretha.slidemenudemo.fragment;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import vnp.com.api.API;
+import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.User;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.base.diablog.DateDialog;
 import vnp.com.mimusic.util.Conts;
-import vnp.com.mimusic.util.LogUtils;
+import vnp.com.mimusic.util.Conts.IContsCallBack;
 import vnp.com.mimusic.view.HeaderView;
+import vnp.com.mimusic.view.LoadingView;
 import android.app.Activity;
 import android.app.AlertDialog.Builder;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +34,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class InforFragment extends Fragment implements OnItemClickListener, View.OnClickListener {
+public class InforFragment extends BaseFragment implements OnItemClickListener, View.OnClickListener {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
@@ -45,10 +46,14 @@ public class InforFragment extends Fragment implements OnItemClickListener, View
 	private EditText infor_name, infor_bidanh, infor_diachi;
 	private TextView infor_ngaysinh;
 
+	private LoadingView loadingView;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.infor, null);
 
+		loadingView = (LoadingView) view.findViewById(R.id.loadingView1);
+		Conts.showView(loadingView, false);
 		HeaderView header = (HeaderView) view.findViewById(R.id.infor_header);
 		header.setTextHeader(R.string.thuongtinnguoidung);
 		header.showButton(true, false);
@@ -225,25 +230,42 @@ public class InforFragment extends Fragment implements OnItemClickListener, View
 			});
 			builder.show();
 		} else if (v.equals(activity_login_btn)) {
-			String name = infor_name.getText().toString().trim();
-			if (name.equals("")) {
-				// Toat
-				Toast.makeText(getActivity(), getActivity().getString(R.string.bancannhapthongtin), Toast.LENGTH_SHORT).show();
-			} else {
-				ContentValues contentValues = new ContentValues();
-				contentValues.put(User.NAME, name);
-				contentValues.put(User.nickname, infor_bidanh.getText().toString());
-				contentValues.put(User.birthday, infor_ngaysinh.getText().toString());
-				contentValues.put(User.address, infor_diachi.getText().toString());
-				int index = getActivity().getContentResolver().update(User.CONTENT_URI, contentValues, String.format("%s = '1'", User.STATUS), null);
+			Bundle bundle = new Bundle();
+			bundle.putString("birthday", infor_ngaysinh.getText().toString());
+			bundle.putString("address", infor_diachi.getText().toString());
+			bundle.putString("nickname", infor_bidanh.getText().toString());
+			bundle.putString("fullname", infor_name.getText().toString());
+			// fullname
 
-				if (index > 0) {
-					Toast.makeText(getActivity(), getActivity().getString(R.string.updatethanhcong), Toast.LENGTH_SHORT).show();
+			getmImusicService().execute(RequestMethod.POST, API.API_R007, bundle, new IContsCallBack() {
+
+				@Override
+				public void onSuscess(JSONObject response) {
+					try {
+						Conts.toast(getActivity(), response.getString("message"));
+					} catch (JSONException e) {
+					}
+					Conts.showView(loadingView, false);
 					showData();
-				} else {
-					Toast.makeText(getActivity(), getActivity().getString(R.string.updatethatbai), Toast.LENGTH_SHORT).show();
 				}
-			}
+
+				@Override
+				public void onStart() {
+					Conts.showView(loadingView, true);
+				}
+
+				@Override
+				public void onError(String message) {
+					Conts.toast(getActivity(), message);
+					Conts.showView(loadingView, false);
+				}
+
+				@Override
+				public void onError() {
+					Conts.showView(loadingView, false);
+					Conts.toast(getActivity(), "onError");
+				}
+			});
 		}
 	}
 

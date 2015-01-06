@@ -2,6 +2,7 @@ package vnp.com.api;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -117,7 +118,7 @@ public class MImusicService extends Service {
 		});
 	}
 
-	public void execute(final RequestMethod requestMethod, final String api, Bundle bundle, final IContsCallBack contsCallBack) {
+	public void execute(final RequestMethod requestMethod, final String api, final Bundle bundle, final IContsCallBack contsCallBack) {
 
 		Conts.executeNoProgressBar(requestMethod, api, this, bundle, new IContsCallBack() {
 			@Override
@@ -129,6 +130,8 @@ public class MImusicService extends Service {
 			public void onSuscess(JSONObject response) {
 				if (API.API_R006.equals(api)) {
 					updateInFor(response);
+				} else if (API.API_R007.equals(api)) {
+					updateInFor(bundle);
 				}
 				contsCallBack.onSuscess(response);
 			}
@@ -143,6 +146,15 @@ public class MImusicService extends Service {
 				contsCallBack.onError();
 			}
 		});
+	}
+
+	protected void updateInFor(Bundle bundle) {
+		ContentValues contentValues = new ContentValues();
+		Set<String> keys = bundle.keySet();
+		for (String key : keys) {
+			contentValues.put(key, bundle.getString(key));
+		}
+		getContentResolver().update(User.CONTENT_URI, contentValues, String.format("%s=='1'", User.STATUS), null);
 	}
 
 	/**

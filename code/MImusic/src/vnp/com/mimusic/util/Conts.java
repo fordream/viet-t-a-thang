@@ -55,7 +55,7 @@ public class Conts {
 	public static final String CHITTIETLICHSUBANHANG = "CHITTIETLICHSUBANHANG";
 
 	public static String getName(Cursor cursor) {
-		String name = cursor.getString(cursor.getColumnIndex(User.NAME));
+		String name = cursor.getString(cursor.getColumnIndex(User.fullname));
 
 		if (name == null || name != null && name.trim().equals("")) {
 			name = cursor.getString(cursor.getColumnIndex(User.NAME_CONTACT));
