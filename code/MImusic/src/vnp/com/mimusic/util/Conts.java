@@ -1,9 +1,7 @@
 package vnp.com.mimusic.util;
 
-import java.util.Iterator;
 import java.util.Set;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import vnp.com.api.ExeCallBack;
@@ -13,7 +11,6 @@ import vnp.com.api.RestClient;
 import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.User;
 import vnp.com.mimusic.R;
-import vnp.com.mimusic.adapter.TintucAdaper;
 import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
@@ -22,15 +19,14 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Path;
 import android.graphics.Rect;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.MediaStore;
-import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 public class Conts {
@@ -258,5 +254,16 @@ public class Conts {
 
 	public static void showView(View progressBar1, boolean b) {
 		progressBar1.setVisibility(b ? View.VISIBLE : View.GONE);
+	}
+
+	public static boolean is3GConnected(Context context) {
+		ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+		// For 3G check
+		return manager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).isConnectedOrConnecting();
+	}
+
+	public static boolean isWifiConnected(Context context) {
+		ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+		return manager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnectedOrConnecting();
 	}
 }
