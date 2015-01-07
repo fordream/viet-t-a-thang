@@ -26,24 +26,28 @@ public class TinTucFragment extends BaseFragment implements OnItemClickListener,
 	}
 
 	private LoadingView loadingView1;
+	vnp.com.mimusic.view.MusicListView bangxephang_list;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.tintuc, null);
 		loadingView1 = (LoadingView) view.findViewById(R.id.loadingView1);
-		final ListView bangxephang_list = (ListView) view.findViewById(R.id.tintuc_list);
+		bangxephang_list = (vnp.com.mimusic.view.MusicListView) view.findViewById(R.id.tintuc_list);
 		bangxephang_list.setOnItemClickListener(this);
 
 		bangxephang_list.setAdapter(new TintucAdaper(getActivity(), new JSONArray()));
 
 		getmImusicService().execute(RequestMethod.POST, API.API_R027, new Bundle(), new IContsCallBack() {
-
 			@Override
 			public void onSuscess(JSONObject response) {
 				try {
 					JSONArray jsonArray = response.getJSONArray("data");
 					((TintucAdaper) bangxephang_list.getAdapter()).setJSOnArray(jsonArray);
 					((TintucAdaper) bangxephang_list.getAdapter()).notifyDataSetChanged();
+
+					if (jsonArray.length() == 0) {
+						bangxephang_list.setTextNoData(true, R.string.nodata);
+					}
 				} catch (Exception exception) {
 
 				}
@@ -63,8 +67,7 @@ public class TinTucFragment extends BaseFragment implements OnItemClickListener,
 
 			@Override
 			public void onError() {
-				Conts.showView(loadingView1, false);
-				Conts.toast(getActivity(), "check network");
+				onError("check network");
 			}
 		});
 		return view;
