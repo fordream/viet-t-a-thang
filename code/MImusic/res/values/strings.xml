@@ -113,6 +113,8 @@
         <item>thất bại</item>
     </string-array>
 
+    <string name="daaddsdt">Bạn đã thêm số điện thoại này rồi, vui lòng nhập số điện thoại khác.</string>
+    <string name="format_check_sdt">Bạn cần kiểm tra lại số điện thoại (%s).\nSố điện thoại phải là số viettel và có 10 hoặc 11 số.</string>
     <string name="noappsendmessage">Không tìm thấy trình gửi tin nhắn.</string>
     <string name="thanhcong">Thành công</string>
     <string name="thatbai">Thất bại</string>
@@ -133,5 +135,6 @@
     <color name="red_purple">#9f1f31</color>
 
     <string name="nodata">Không có dữ liệu</string>
+    <string name="dong">Đóng</string>
 
 </resources>

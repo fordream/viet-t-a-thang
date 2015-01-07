@@ -1,5 +1,7 @@
 package com.aretha.slidemenudemo.fragment;
 
+import java.util.List;
+
 import vnp.com.db.DichVu;
 import vnp.com.db.User;
 import vnp.com.mimusic.R;
@@ -13,7 +15,9 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -27,6 +31,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
 
 public class MoiDvChoNhieuNguoiFragment extends Fragment implements OnItemClickListener, View.OnClickListener {
 	@Override
@@ -36,15 +41,29 @@ public class MoiDvChoNhieuNguoiFragment extends Fragment implements OnItemClickL
 
 	private LinearLayout moinhieudichvu_dialog_list_hor;
 	private EditText moidichvuchonhieunguoi_number;
-	MoiDvChoNhieuNguoiAdaper adaper;
+	private MoiDvChoNhieuNguoiAdaper adaper;
 
 	private View moidichvuchonhieunguoi_add_plus;
 	private CheckBox moidichvuchonhieunguoi_contact;
+
+	private OnClickListener moidichvuchonhieunguoi_add_plusOnCLick = new OnClickListener() {
+		@Override
+		public void onClick(View v) {
+			String moidichvuchonhieunguoi_numberText = moidichvuchonhieunguoi_number.getText().toString();
+			if (Conts.isVietTelNUmber(moidichvuchonhieunguoi_numberText, getActivity())) {
+				adaper.addSdt(moidichvuchonhieunguoi_numberText, getActivity());
+			} else {
+				Conts.toast(getActivity(), String.format(getString(R.string.format_check_sdt), moidichvuchonhieunguoi_numberText));
+			}
+		}
+	};
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.moidichvuchonhieunguoi, null);
 		moidichvuchonhieunguoi_add_plus = view.findViewById(R.id.moidichvuchonhieunguoi_add_plus);
+
+		moidichvuchonhieunguoi_add_plus.setOnClickListener(moidichvuchonhieunguoi_add_plusOnCLick);
 		moidichvuchonhieunguoi_contact = (CheckBox) view.findViewById(R.id.moidichvuchonhieunguoi_contact);
 		moidichvuchonhieunguoi_contact.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			@Override
@@ -52,14 +71,28 @@ public class MoiDvChoNhieuNguoiFragment extends Fragment implements OnItemClickL
 				moidichvuchonhieunguoi_add_plus.setVisibility(moidichvuchonhieunguoi_contact.isChecked() ? View.VISIBLE : View.GONE);
 				moidichvuchonhieunguoi_number.setHint(moidichvuchonhieunguoi_contact.isChecked() ? R.string.nhapsodienthoai : R.string.timkiemdanhba);
 				moidichvuchonhieunguoi_number.setText("");
-
 				adaper.setTextSearch("");
 				adaper.notifyDataSetChanged();
+
+				moidichvuchonhieunguoi_number.setInputType(moidichvuchonhieunguoi_contact.isChecked() ? InputType.TYPE_CLASS_PHONE : InputType.TYPE_CLASS_TEXT);
 			}
 		});
 
 		moinhieudichvu_dialog_list_hor = (LinearLayout) view.findViewById(R.id.moinhieudichvu_dialog_list_hor);
 		moidichvuchonhieunguoi_number = (EditText) view.findViewById(R.id.moidichvuchonhieunguoi_number);
+
+		// moidichvuchonhieunguoi_number ime
+		moidichvuchonhieunguoi_number.setOnEditorActionListener(new OnEditorActionListener() {
+
+			@Override
+			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+				if (actionId == KeyEvent.KEYCODE_ENDCALL || event == null || KeyEvent.KEYCODE_CALL == actionId) {
+					Conts.hiddenKeyBoard(getActivity());
+					moidichvuchonhieunguoi_add_plusOnCLick.onClick(null);
+				}
+				return false;
+			}
+		});
 		moidichvuchonhieunguoi_number.addTextChangedListener(new TextWatcher() {
 
 			@Override
@@ -156,6 +189,25 @@ public class MoiDvChoNhieuNguoiFragment extends Fragment implements OnItemClickL
 					}
 				}
 			}
+
+			@Override
+			public void addOrRemoveSdt(boolean isAdd, final String sdt) {
+				if (isAdd) {
+					final MoiNhieuSDTAddItemView addItemView = new MoiNhieuSDTAddItemView(getActivity());
+					addItemView.setMId(sdt);
+
+					moinhieudichvu_dialog_list_hor.addView(addItemView);
+
+					addItemView.findViewById(R.id.x).setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							moinhieudichvu_dialog_list_hor.removeView(addItemView);
+							adaper.remove(sdt);
+							adaper.notifyDataSetChanged();
+						}
+					});
+				}
+			}
 		};
 
 		moi_list.setAdapter(adaper);
@@ -194,6 +246,8 @@ public class MoiDvChoNhieuNguoiFragment extends Fragment implements OnItemClickL
 
 			if (cursor != null && cursor.moveToNext()) {
 				((TextView) findViewById(R.id.moinhieudichvu_item_tv_name)).setText(Conts.getName(cursor));
+			} else {
+				((TextView) findViewById(R.id.moinhieudichvu_item_tv_name)).setText(_id);
 			}
 		}
 	}

@@ -28,6 +28,7 @@ public class ChiTietDichVuFragment extends BaseFragment implements View.OnClickL
 		super.onActivityCreated(savedInstanceState);
 	}
 
+	private String service_guide = "";
 	private LoadingView loadingView;
 
 	private void update(String service_content) {
@@ -56,7 +57,20 @@ public class ChiTietDichVuFragment extends BaseFragment implements View.OnClickL
 
 			@Override
 			public void onClick(View v) {
-				(((RootMenuActivity) getActivity())).gotoHuongDanBanHang();
+
+				if (Conts.isBlank(service_guide)) {
+					service_guide = getActivity().getString(R.string.nodata);
+				}
+
+				ContentValues contentValues = new ContentValues();
+				contentValues.put("btn_right", getString(R.string.dong));
+				contentValues.put("btn_left_close", true);
+				contentValues.put("name", getString(R.string.huongdanbanhang));
+				contentValues.put("content", service_guide);
+				DangKyDialog dangKyDialog = new DangKyDialog(getActivity(), contentValues);
+				dangKyDialog.show();
+				// TODO
+				// (((RootMenuActivity) getActivity())).gotoHuongDanBanHang();
 			}
 		});
 
@@ -82,7 +96,7 @@ public class ChiTietDichVuFragment extends BaseFragment implements View.OnClickL
 
 				@Override
 				public void onClick(View v) {
-					new DangKyDialog(v.getContext(), values){
+					new DangKyDialog(v.getContext(), values) {
 						@Override
 						public void updateUiDangKy() {
 							super.updateUiDangKy();
@@ -110,6 +124,7 @@ public class ChiTietDichVuFragment extends BaseFragment implements View.OnClickL
 			public void onSuscess(JSONObject response) {
 				try {
 					final String service_content = response.getString("service_content");
+					service_guide = response.getString("service_guide");
 					update(service_content);
 				} catch (JSONException e) {
 				}

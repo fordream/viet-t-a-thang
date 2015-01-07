@@ -48,14 +48,13 @@
                 android:background="@drawable/menu_right_edit"
                 android:gravity="center_vertical"
                 android:hint="@string/timkiemdanhba"
-                android:inputType="phone"
                 android:paddingLeft="@dimen/dimen_15dp"
                 android:singleLine="true"
                 android:textColor="#336666"
                 android:textSize="@dimen/dimen_14dp"
+                android:imeOptions="actionDone"
                 android:textStyle="bold" >
 
-                <requestFocus />
             </EditText>
 
             <ImageView

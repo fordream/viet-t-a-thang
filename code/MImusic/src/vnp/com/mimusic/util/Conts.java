@@ -24,6 +24,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.MediaStore;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
@@ -228,7 +229,11 @@ public class Conts {
 	}
 
 	public static void toast(Context activity, String message) {
-		Toast.makeText(activity, message + "", Toast.LENGTH_SHORT).show();
+		try {
+			Toast.makeText(activity, message + "", Toast.LENGTH_SHORT).show();
+		} catch (Exception exception) {
+
+		}
 	}
 
 	public static void hiddenKeyBoard(Activity context) {
@@ -265,5 +270,19 @@ public class Conts {
 	public static boolean isWifiConnected(Context context) {
 		ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 		return manager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnectedOrConnecting();
+	}
+
+	public static boolean isVietTelNUmber(String moidichvuchonhieunguoi_numberText, FragmentActivity activity) {
+
+		while (moidichvuchonhieunguoi_numberText.startsWith("0")) {
+			moidichvuchonhieunguoi_numberText = moidichvuchonhieunguoi_numberText.substring(1, moidichvuchonhieunguoi_numberText.length());
+		}
+
+		int length = moidichvuchonhieunguoi_numberText.trim().length();
+		if (moidichvuchonhieunguoi_numberText.startsWith("84")) {
+			return length == 12 || length == 11;
+		}
+
+		return length == 9 || length == 10;
 	}
 }

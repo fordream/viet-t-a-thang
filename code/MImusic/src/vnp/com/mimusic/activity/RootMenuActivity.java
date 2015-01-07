@@ -134,6 +134,7 @@ public class RootMenuActivity extends FragmentActivity {
 
 	@Override
 	public void onBackPressed() {
+		Conts.hiddenKeyBoard(getActivity());
 		sendBroadcast(new Intent("updateprofile"));
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		int count = fragmentManager.getBackStackEntryCount();
