@@ -1,5 +1,6 @@
 package vnp.com.mimusic.util;
 
+import java.util.Iterator;
 import java.util.Set;
 
 import org.json.JSONArray;
@@ -185,6 +186,16 @@ public class Conts {
 					if ("0".equals(errorCode)) {
 						contsCallBack.onSuscess(jsonObject);
 					} else {
+						try {
+							JSONObject errorMessage = jsonObject.getJSONObject("errorMessage");
+							java.util.Iterator<String> iterator = errorMessage.keys();
+							while (iterator.hasNext()) {
+								String key = iterator.next();
+								message += "\n" + errorMessage.getString(key);
+							}
+						} catch (Exception exception) {
+
+						}
 						contsCallBack.onError(message);
 					}
 				} catch (Exception exception) {

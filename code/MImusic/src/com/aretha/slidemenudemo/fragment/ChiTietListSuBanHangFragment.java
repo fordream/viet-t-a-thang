@@ -22,7 +22,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 public class ChiTietListSuBanHangFragment extends BaseFragment implements OnItemClickListener, View.OnClickListener {
-	private ListView home_list;
+	private vnp.com.mimusic.view.MusicListView home_list;
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
@@ -30,7 +30,6 @@ public class ChiTietListSuBanHangFragment extends BaseFragment implements OnItem
 	}
 
 	private LoadingView loadingView;
-	private HeaderListTextView headerListTextView;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -47,10 +46,7 @@ public class ChiTietListSuBanHangFragment extends BaseFragment implements OnItem
 				getActivity().onBackPressed();
 			}
 		});
-		headerListTextView = new HeaderListTextView(getActivity());
-		headerListTextView.setText(false, null);
-		home_list = (ListView) view.findViewById(R.id.home_list);
-		home_list.addHeaderView(headerListTextView);
+		home_list = (vnp.com.mimusic.view.MusicListView) view.findViewById(R.id.home_list);
 		getmImusicService().execute(RequestMethod.GET, API.API_R008, getArguments(), new IContsCallBack() {
 			@Override
 			public void onSuscess(JSONObject response) {
@@ -58,7 +54,7 @@ public class ChiTietListSuBanHangFragment extends BaseFragment implements OnItem
 					JSONArray data = response.getJSONArray("data");
 					home_list.setAdapter(new ChiTietListSuBanHangAdaper(getActivity(), new JSONObject[] {}, data));
 					if (data.length() == 0) {
-						headerListTextView.setText(true, R.string.nodata);
+						home_list.setTextNoData(true, R.string.nodata);
 					}
 				} catch (JSONException e) {
 				}
@@ -77,14 +73,12 @@ public class ChiTietListSuBanHangFragment extends BaseFragment implements OnItem
 				Conts.toast(getActivity(), message);
 
 				home_list.setAdapter(new ChiTietListSuBanHangAdaper(getActivity(), new JSONObject[] {}, new JSONArray()));
-				headerListTextView.setText(true, message);
+				home_list.setTextNoData(true, message);
 			}
 
 			@Override
 			public void onError() {
 				onError("onError");
-				// Conts.showView(loadingView, false);
-				// Conts.toast(getActivity(), "onError");
 			}
 		});
 

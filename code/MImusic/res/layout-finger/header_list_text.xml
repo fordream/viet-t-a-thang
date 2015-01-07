@@ -4,13 +4,15 @@
     android:layout_height="wrap_content"
     android:orientation="vertical" >
 
-    <TextView
+    <vnp.com.mimusic.view.VTTextView
         android:id="@+id/header_list_text_tv"
+        android:padding="@dimen/dimen_10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:padding="@dimen/dimen_10dp"
-        android:textColor="#353f45"
+        android:textColor="#ff3333"
+        android:textStyle="bold"
+         android:lineSpacingExtra="@dimen/dimen_2dp"
         android:textSize="@dimen/dimen_13dp" />
 
 </LinearLayout>

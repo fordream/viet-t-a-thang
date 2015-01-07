@@ -14,7 +14,7 @@ import android.widget.TextView;
  * 
  */
 public class HeaderListTextView extends LinearLayout {
-	private TextView header_list_text_tv;
+	private TextView no_data_message;
 
 	public HeaderListTextView(Context context) {
 		super(context);
@@ -27,8 +27,8 @@ public class HeaderListTextView extends LinearLayout {
 	}
 
 	private void init() {
-		((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.header_list_text, this);
-		header_list_text_tv = (TextView) findViewById(R.id.header_list_text_tv);
+		((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.bangxephang_nodata, this);
+		no_data_message = (TextView) findViewById(R.id.no_data_message);
 	}
 
 	/**
@@ -37,8 +37,8 @@ public class HeaderListTextView extends LinearLayout {
 	 * @param text
 	 */
 	public void setText(boolean needShow, String text) {
-		header_list_text_tv.setText(text);
-		header_list_text_tv.setVisibility(needShow ? VISIBLE : GONE);
+		no_data_message.setText(text);
+		no_data_message.setVisibility(needShow ? VISIBLE : GONE);
 	}
 
 	/**
@@ -47,7 +47,7 @@ public class HeaderListTextView extends LinearLayout {
 	 * @param text
 	 */
 	public void setText(boolean needShow, int text) {
-		header_list_text_tv.setText(text);
-		header_list_text_tv.setVisibility(needShow ? VISIBLE : GONE);
+		no_data_message.setText(text);
+		no_data_message.setVisibility(needShow ? VISIBLE : GONE);
 	}
 }
