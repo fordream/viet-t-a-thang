@@ -165,7 +165,8 @@ public class Conts {
 	}
 
 	public static void executeNoProgressBar(final RequestMethod requestMethod, final String api, final Context activity, Bundle bundles, final IContsCallBack contsCallBack) {
-		contsCallBack.onStart();
+		if (contsCallBack != null)
+			contsCallBack.onStart();
 		ResClientCallBack resClientCallBack = new ResClientCallBack() {
 
 			@Override
@@ -188,7 +189,8 @@ public class Conts {
 					String errorCode = jsonObject.getString("errorCode");
 					message = jsonObject.getString("message");
 					if ("0".equals(errorCode)) {
-						contsCallBack.onSuscess(jsonObject);
+						if (contsCallBack != null)
+							contsCallBack.onSuscess(jsonObject);
 					} else {
 						try {
 							JSONObject errorMessage = jsonObject.getJSONObject("errorMessage");
@@ -216,11 +218,12 @@ public class Conts {
 						} catch (Exception exception) {
 
 						}
-
-						contsCallBack.onError(message);
+						if (contsCallBack != null)
+							contsCallBack.onError(message);
 					}
 				} catch (Exception exception) {
-					contsCallBack.onError();
+					if (contsCallBack != null)
+						contsCallBack.onError();
 				}
 
 			}

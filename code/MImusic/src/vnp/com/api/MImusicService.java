@@ -76,7 +76,8 @@ public class MImusicService extends Service {
 		Conts.executeNoProgressBar(is3G ? RequestMethod.GET : RequestMethod.POST, is3G ? API.API_R001 : API.API_R002, this, bundle, new IContsCallBack() {
 			@Override
 			public void onStart() {
-				contsCallBack.onStart();
+				if (contsCallBack != null)
+					contsCallBack.onStart();
 			}
 
 			@Override
@@ -104,19 +105,29 @@ public class MImusicService extends Service {
 					}
 				} catch (Exception e) {
 				}
-				contsCallBack.onSuscess(jsonObject);
+
+				callDongBoDanhBa(contsCallBack, true);
+				if (contsCallBack != null)
+					contsCallBack.onSuscess(jsonObject);
+				// TODO
 			}
 
 			@Override
 			public void onError(String message) {
-				contsCallBack.onError(message);
+				if (contsCallBack != null)
+					contsCallBack.onError(message);
 			}
 
 			@Override
 			public void onError() {
-				contsCallBack.onError();
+				if (contsCallBack != null)
+					contsCallBack.onError();
 			}
 		});
+	}
+
+	protected void callDongBoDanhBa(IContsCallBack contsCallBack, boolean isLoginCall) {
+
 	}
 
 	public void execute(final RequestMethod requestMethod, final String api, final Bundle bundle, final IContsCallBack contsCallBack) {
