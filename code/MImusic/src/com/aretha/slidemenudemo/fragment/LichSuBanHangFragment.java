@@ -1,10 +1,13 @@
 package com.aretha.slidemenudemo.fragment;
 
 import vnp.com.db.DichVu;
+import vnp.com.db.User;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
+import vnp.com.mimusic.base.diablog.ChonSoDienThoaiDialog;
 import vnp.com.mimusic.base.diablog.DateDialog;
 import vnp.com.mimusic.base.diablog.DichVuDialog;
+import vnp.com.mimusic.base.diablog.LSBHDateDialog;
 import vnp.com.mimusic.base.diablog.TrangThaiDialog;
 import vnp.com.mimusic.view.HeaderView;
 import android.content.ContentValues;
@@ -14,8 +17,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.TextView;
 
 public class LichSuBanHangFragment extends Fragment implements OnItemClickListener, View.OnClickListener {
 	@Override
@@ -43,7 +46,8 @@ public class LichSuBanHangFragment extends Fragment implements OnItemClickListen
 
 			@Override
 			public void onClick(View v) {
-				(((RootMenuActivity) getActivity())).gotoChiTietLichSuBanHang();
+				gotoChiTietLichSuBanHang();
+
 			}
 		});
 
@@ -59,14 +63,25 @@ public class LichSuBanHangFragment extends Fragment implements OnItemClickListen
 
 		lsbt_trangthai = (TextView) view.findViewById(R.id.lsbt_trangthai);
 		lsbt_trangthai.setOnClickListener(l);
-
+		lsbh_sdt = (TextView) view.findViewById(R.id.lsbh_sdt);
 		updateTrangThai();
 		lsbt_dichvu.setText(getActivity().getString(R.string.tatca));
-
+		lsbh_sdt.setText(getActivity().getString(R.string.tatca));
 		return view;
 	}
 
-	private TextView lsbt_trangthai, lsbt_tu, lsbt_den, lsbt_dichvu;
+	protected void gotoChiTietLichSuBanHang() {
+
+		Bundle bundle = new Bundle();
+		bundle.putString("from", lsbt_tu.getText().toString());
+		bundle.putString("to", lsbt_den.getText().toString());
+		bundle.putString("service", idDv);
+		bundle.putString("status", indexTrangThai == 0 ? "" : ("" + indexTrangThai));
+		bundle.putString("customer", phoneContact);
+		(((RootMenuActivity) getActivity())).gotoChiTietLichSuBanHang(bundle);
+	}
+
+	private TextView lsbt_trangthai, lsbt_tu, lsbt_den, lsbt_dichvu, lsbh_sdt;
 
 	private View.OnClickListener l = new View.OnClickListener() {
 		@Override
@@ -86,6 +101,7 @@ public class LichSuBanHangFragment extends Fragment implements OnItemClickListen
 	};
 	private int indexTrangThai = 0;
 	private String idDv = "";
+	private String phoneContact = "";
 
 	private void showDichvu() {
 		new DichVuDialog(getActivity(), idDv) {
@@ -98,11 +114,17 @@ public class LichSuBanHangFragment extends Fragment implements OnItemClickListen
 	}
 
 	private void showDanhBa() {
-
+		new ChonSoDienThoaiDialog(getActivity(), phoneContact) {
+			@Override
+			public void sendData(ContentValues index) {
+				phoneContact = index.getAsString(User.USER);
+				lsbh_sdt.setText(index.getAsString(User.NAME_CONTACT));
+			}
+		}.show();
 	}
 
 	private void showTuDialog() {
-		new DateDialog(getActivity(), lsbt_tu.getText().toString()) {
+		new LSBHDateDialog(getActivity(), lsbt_tu.getText().toString()) {
 
 			@Override
 			public void sendData(String date, String month, String year) {
@@ -112,7 +134,7 @@ public class LichSuBanHangFragment extends Fragment implements OnItemClickListen
 	}
 
 	private void showDenDialog() {
-		new DateDialog(getActivity(), lsbt_den.getText().toString()) {
+		new LSBHDateDialog(getActivity(), lsbt_den.getText().toString()) {
 			@Override
 			public void sendData(String date, String month, String year) {
 				lsbt_den.setText(String.format("%s/%s/%s", date, month, year));

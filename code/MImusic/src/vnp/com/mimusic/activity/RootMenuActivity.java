@@ -269,13 +269,10 @@ public class RootMenuActivity extends FragmentActivity {
 		changeFragemt(R.id.root_main_fragment, chitiettintuc, true);
 	}
 
-	public void gotoChiTietLichSuBanHang() {
-
-		Bundle bundle = new Bundle();
+	public void gotoChiTietLichSuBanHang(Bundle bundle) {
 		ChiTietListSuBanHangFragment chitiettintuc = new ChiTietListSuBanHangFragment();
 		chitiettintuc.setArguments(bundle);
 		changeFragemt(R.id.root_main_fragment, chitiettintuc, true);
-
 	}
 
 	private void overridePendingTransitionStartActivity() {

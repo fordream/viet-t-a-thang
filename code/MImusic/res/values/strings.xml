@@ -113,8 +113,10 @@
     </string-array>
 
     <string name="chontrangthai">Chọn trạng thái</string>
-    
+    <string name="chonsdt">Chọn số điện thoại</string>
     <string name="chondichvu">Chọn dịch vụ</string>
+    <string name="chonngay">Chọn ngày</string>
+
     <color name="bangxephang_header_activr">#a73444</color>
     <color name="bangxephang_header_un_active">#475055</color>
     <color name="f3f3f3">#f3f3f3</color>
