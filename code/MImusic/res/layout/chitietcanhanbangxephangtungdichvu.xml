@@ -78,7 +78,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:gravity="center"
+                            android:gravity="right|center_vertical"
                             android:paddingLeft="@dimen/dimen_5dp"
                             android:textStyle="bold"
                             android:text="100"
@@ -106,7 +106,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:gravity="center"
+                            android:gravity="right|center_vertical"
                             android:paddingLeft="@dimen/dimen_5dp"
                             android:textStyle="bold"
                             android:text="100"
@@ -135,7 +135,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:gravity="center"
+                            android:gravity="right|center_vertical"
                             android:paddingLeft="@dimen/dimen_5dp"
                             android:textStyle="bold"
                             android:text="100 VNĐ"
@@ -164,7 +164,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:gravity="center"
+                            android:gravity="right|center_vertical"
                             android:paddingLeft="@dimen/dimen_5dp"
                             android:textStyle="bold"
                             android:text="100 VNĐ"
