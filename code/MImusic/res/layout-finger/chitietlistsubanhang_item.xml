@@ -18,32 +18,46 @@
             android:orientation="vertical"
             android:padding="@dimen/dimen_5dp" >
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/dimen_5dp"
-                android:layout_marginTop="@dimen/dimen_5dp"
-                android:gravity="center" >
+                android:layout_marginTop="@dimen/dimen_5dp" >
 
-                <TextView
+                <ImageView
+                    android:id="@+id/imageView1"
+                    android:layout_width="@dimen/dimen_50dp"
+                    android:layout_height="@dimen/dimen_50dp"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/no_avatar" />
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="@dimen/dimen_5dp"
-                    android:text="@string/sodienthoaikhachhang"
-                    android:textColor="#336666"
-                    android:textSize="@dimen/dimen_14dp"
-                    android:textStyle="bold" />
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:orientation="vertical" >
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="right"
-                    android:paddingLeft="@dimen/dimen_5dp"
-                    android:text="01674537886"
-                    android:textColor="#336666"
-                    android:textSize="@dimen/dimen_14dp"
-                    android:textStyle="bold" />
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="@dimen/dimen_5dp"
+                        android:text="@string/sodienthoaikhachhang"
+                        android:textColor="#336666"
+                        android:textSize="@dimen/dimen_14dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:paddingLeft="@dimen/dimen_5dp"
+                        android:text="01674537886"
+                        android:textColor="#336666"
+                        android:textSize="@dimen/dimen_14dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+            </RelativeLayout>
 
             <View
                 android:layout_width="match_parent"
@@ -96,10 +110,10 @@
                     android:textSize="@dimen/dimen_14dp" />
 
                 <TextView
-                    android:gravity="right"
                     android:id="@+id/text_bidanh"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="right"
                     android:text="1000VNĐ"
                     android:textColor="#336666"
                     android:textSize="@dimen/dimen_14dp" />
@@ -125,10 +139,11 @@
                     android:textColor="#336666"
                     android:textSize="@dimen/dimen_14dp" />
 
-                <TextView android:gravity="right"
+                <TextView
                     android:id="@+id/text_ngaysinh"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="right"
                     android:text="2014/12/12"
                     android:textColor="#336666"
                     android:textSize="@dimen/dimen_14dp" />
@@ -154,10 +169,11 @@
                     android:textColor="#336666"
                     android:textSize="@dimen/dimen_14dp" />
 
-                <TextView android:gravity="right"
+                <TextView
                     android:id="@+id/text_diachi"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="right"
                     android:text="2014/12/12"
                     android:textColor="#336666"
                     android:textSize="@dimen/dimen_14dp" />
@@ -171,9 +187,10 @@
                 android:gravity="center"
                 android:padding="@dimen/dimen_5dp" >
 
-                <TextView android:gravity="right"
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:gravity="right"
                     android:text="@string/trangthai"
                     android:textColor="#336666"
                     android:textSize="@dimen/dimen_14dp" />
@@ -181,8 +198,8 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Thành công"
                     android:gravity="right"
+                    android:text="Thành công"
                     android:textColor="#336666"
                     android:textSize="@dimen/dimen_14dp" />
             </LinearLayout>

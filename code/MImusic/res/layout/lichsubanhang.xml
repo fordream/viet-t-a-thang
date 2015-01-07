@@ -41,6 +41,7 @@
                 android:gravity="center" >
 
                 <LinearLayout
+                    android:id="@+id/lsbh_open_danhba"
                     android:layout_width="@dimen/dimen_100dp"
                     android:layout_height="@dimen/dimen_30dp"
                     android:background="@drawable/xml_btn_infor"
@@ -66,12 +67,13 @@
                         android:textStyle="bold" />
                 </LinearLayout>
 
-                <EditText
-                    android:id="@+id/activity_login_number_phone"
+                <TextView
+                    android:id="@+id/lsbh_sdt"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen_30dp"
                     android:layout_marginLeft="@dimen/dimen_15dp"
                     android:background="@drawable/menu_right_edit"
+                    android:gravity="center"
                     android:hint="@string/nhapsodienthoai"
                     android:inputType="number"
                     android:paddingLeft="@dimen/dimen_10dp"
@@ -100,7 +102,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/dimen_5dp"
-                    android:layout_marginTop="@dimen/dimen_10dp" >
+                    android:layout_marginTop="@dimen/dimen_10dp"
+                    android:gravity="center" >
 
                     <TextView
                         android:id="@+id/TextView04"
@@ -111,25 +114,40 @@
                         android:textColor="#475055"
                         android:textSize="@dimen/dimen_14dp" />
 
-                    <EditText
-                        android:id="@+id/EditText02"
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dimen_30dp"
-                        android:layout_marginLeft="@dimen/dimen_15dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/menu_right_edit"
-                        android:ems="10"
-                        android:inputType="number"
-                        android:paddingLeft="@dimen/dimen_10dp"
-                        android:paddingRight="@dimen/dimen_10dp"
-                        android:singleLine="true"
-                        android:textSize="@dimen/dimen_13dp" />
+                        android:layout_marginLeft="@dimen/dimen_15dp" >
+
+                        <TextView
+                            android:id="@+id/lsbt_tu"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dimen_35dp"
+                            android:background="@drawable/menu_right_edit"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="@dimen/dimen_10dp"
+                            android:paddingRight="@dimen/dimen_10dp"
+                            android:singleLine="true"
+                            android:textColor="#333333"
+                            android:textColorHint="#999999"
+                            android:textSize="@dimen/dimen_13dp" />
+
+                        <ImageView
+                            android:layout_width="@dimen/dimen_30dp"
+                            android:layout_height="@dimen/dimen_30dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:padding="@dimen/dimen_10dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/infor_date" />
+                    </RelativeLayout>
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimen_10dp" >
+                    android:layout_marginTop="@dimen/dimen_10dp"
+                    android:gravity="center" >
 
                     <TextView
                         android:id="@+id/TextView03"
@@ -140,19 +158,33 @@
                         android:textColor="#475055"
                         android:textSize="@dimen/dimen_14dp" />
 
-                    <EditText
-                        android:id="@+id/EditText01"
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dimen_30dp"
-                        android:layout_marginLeft="@dimen/dimen_15dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/menu_right_edit"
-                        android:ems="10"
-                        android:inputType="number"
-                        android:paddingLeft="@dimen/dimen_10dp"
-                        android:paddingRight="@dimen/dimen_10dp"
-                        android:singleLine="true"
-                        android:textSize="@dimen/dimen_13dp" />
+                        android:layout_marginLeft="@dimen/dimen_15dp" >
+
+                        <TextView
+                            android:id="@+id/lsbt_den"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dimen_35dp"
+                            android:background="@drawable/menu_right_edit"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="@dimen/dimen_10dp"
+                            android:paddingRight="@dimen/dimen_10dp"
+                            android:singleLine="true"
+                            android:textColor="#333333"
+                            android:textColorHint="#999999"
+                            android:textSize="@dimen/dimen_13dp" />
+
+                        <ImageView
+                            android:layout_width="@dimen/dimen_30dp"
+                            android:layout_height="@dimen/dimen_30dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:padding="@dimen/dimen_10dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/infor_date" />
+                    </RelativeLayout>
                 </LinearLayout>
             </LinearLayout>
 
@@ -178,76 +210,105 @@
                     android:layout_marginBottom="@dimen/dimen_5dp"
                     android:layout_marginTop="@dimen/dimen_10dp" >
 
-                    <EditText
-                        android:id="@+id/EditText03"
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/dimen_30dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/menu_right_edit"
-                        android:ems="10"
-                        android:inputType="number"
-                        android:paddingLeft="@dimen/dimen_10dp"
-                        android:paddingRight="@dimen/dimen_10dp"
-                        android:singleLine="true"
-                        android:textSize="@dimen/dimen_13dp" />
+                        android:layout_height="@dimen/dimen_30dp" >
+
+                        <TextView
+                            android:id="@+id/lsbt_dichvu"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dimen_35dp"
+                            android:background="@drawable/menu_right_edit"
+                            android:gravity="center_vertical"
+                            android:hint="@string/dichvu"
+                            android:paddingLeft="@dimen/dimen_10dp"
+                            android:paddingRight="@dimen/dimen_10dp"
+                            android:singleLine="true"
+                            android:textColor="#333333"
+                            android:textColorHint="#999999"
+                            android:textSize="@dimen/dimen_13dp" />
+
+                        <ImageView
+                            android:layout_width="@dimen/dimen_30dp"
+                            android:layout_height="@dimen/dimen_30dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:padding="@dimen/dimen_10dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/infor_date" />
+                    </RelativeLayout>
                 </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_20dp"
-                android:orientation="vertical" >
-
-                <TextView
-                    android:id="@+id/TextView05"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:singleLine="true"
-                    android:text="@string/trangthai"
-                    android:textColor="#475055"
-                    android:textSize="@dimen/dimen_14dp"
-                    android:textStyle="bold" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/dimen_5dp"
-                    android:layout_marginTop="@dimen/dimen_10dp" >
+                    android:layout_marginTop="@dimen/dimen_20dp"
+                    android:orientation="vertical" >
 
-                    <EditText
-                        android:id="@+id/EditText04"
+                    <TextView
+                        android:id="@+id/TextView05"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/dimen_30dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/menu_right_edit"
-                        android:ems="10"
-                        android:inputType="number"
-                        android:paddingLeft="@dimen/dimen_10dp"
-                        android:paddingRight="@dimen/dimen_10dp"
+                        android:layout_height="wrap_content"
                         android:singleLine="true"
-                        android:textSize="@dimen/dimen_13dp" />
+                        android:text="@string/trangthai"
+                        android:textColor="#475055"
+                        android:textSize="@dimen/dimen_14dp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/dimen_5dp"
+                        android:layout_marginTop="@dimen/dimen_10dp" >
+
+                        <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_30dp" >
+
+                        <TextView
+                            android:id="@+id/lsbt_trangthai"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dimen_35dp"
+                            android:background="@drawable/menu_right_edit"
+                            android:gravity="center_vertical"
+                            android:hint="@string/trangthai"
+                            android:paddingLeft="@dimen/dimen_10dp"
+                            android:paddingRight="@dimen/dimen_10dp"
+                            android:singleLine="true"
+                            android:textColor="#333333"
+                            android:textColorHint="#999999"
+                            android:textSize="@dimen/dimen_13dp" />
+
+                        <ImageView
+                            android:layout_width="@dimen/dimen_30dp"
+                            android:layout_height="@dimen/dimen_30dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:padding="@dimen/dimen_10dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/infor_date" />
+                    </RelativeLayout>
+                    </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/btn_lichsubanhang"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_35dp"
-                android:layout_marginTop="@dimen/dimen_20dp"
-                android:background="@drawable/xml_btn_infor"
-                android:gravity="center" >
-
-                <TextView
-                    
+                <LinearLayout
+                    android:id="@+id/btn_lichsubanhang"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:singleLine="true"
-                    android:text="@string/tracuu"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/dimen_14dp"
-                    android:textStyle="bold" />
+                    android:layout_height="@dimen/dimen_35dp"
+                    android:layout_marginTop="@dimen/dimen_20dp"
+                    android:background="@drawable/xml_btn_infor"
+                    android:gravity="center" >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:singleLine="true"
+                        android:text="@string/tracuu"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/dimen_14dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

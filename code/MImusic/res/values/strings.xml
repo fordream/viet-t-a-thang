@@ -11,8 +11,8 @@
         <item>Hướng dẫn bán hàng</item>
         <item>Chỉnh sửa thông tin</item>
     </string-array>
- <string name="loading">Loading ...</string>
-    
+
+    <string name="loading">Loading ...</string>
     <string name="trangchu">Trang chủ</string>
     <string name="dichvu">Dịch vụ</string>
     <string name="bangxephang">Bảng xếp hạng</string>
@@ -106,6 +106,15 @@
     <string name="banchuacomatkhau">Bạn chưa có hoặc quên mật khẩu!\nVui lòng soạn tin nhắn(miến phí)</string>
     <string name="gui1">gửi</string>
 
+    <string-array name="ltrangthai">
+        <item>tất cả</item>
+        <item>thành công</item>
+        <item>thất bại</item>
+    </string-array>
+
+    <string name="chontrangthai">Chọn trạng thái</string>
+    
+    <string name="chondichvu">Chọn dịch vụ</string>
     <color name="bangxephang_header_activr">#a73444</color>
     <color name="bangxephang_header_un_active">#475055</color>
     <color name="f3f3f3">#f3f3f3</color>

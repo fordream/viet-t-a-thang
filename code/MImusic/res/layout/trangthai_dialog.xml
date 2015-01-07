@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_dialog"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/date_dialog_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#ccffff"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_50dp" >
+
+            <TextView
+                android:id="@+id/date_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="@string/chontrangthai"
+                android:textColor="#336666"
+                android:textSize="@dimen/dimen_15dp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/date_close"
+                android:layout_width="@dimen/dimen_50dp"
+                android:layout_height="@dimen/dimen_50dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/xml_btn2"
+                android:padding="@dimen/dimen_9dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/date_close" />
+
+            <ImageButton
+                android:id="@+id/date_done"
+                android:layout_width="@dimen/dimen_50dp"
+                android:layout_height="@dimen/dimen_50dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/xml_btn2"
+                android:padding="@dimen/dimen_9dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/date_done" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#cccccc" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_200dp" >
+
+            <RelativeLayout
+                android:layout_width="@dimen/dimen_1dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" >
+
+                <com.vnp.core.view.wheel.WheelView
+                    android:id="@+id/date_wheelview_year"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true" />
+
+                <View
+                    android:layout_width="1px"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:background="#cccccc" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>
