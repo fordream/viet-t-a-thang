@@ -24,9 +24,22 @@ import android.widget.ListView;
 
 public class MauMoiFragment extends BaseFragment implements android.view.View.OnClickListener {
 	private View loading;
-	private String customers;
-	private String service_code = "";
 	private MauMoiAdaper adaper;
+	private boolean type = false;
+	private String id, customers, sdt, service_code, service_codes;
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		type = getArguments().getBoolean("type");
+		id = getArguments().getString("id");
+		customers = getArguments().getString("customers");
+		sdt = getArguments().getString("sdt");
+		service_code = getArguments().getString("service_code");
+		service_codes = getArguments().getString("service_codes");
+
+		LogUtils.e("service_codes", service_codes + "");
+	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -58,20 +71,15 @@ public class MauMoiFragment extends BaseFragment implements android.view.View.On
 			}
 		});
 
-		final String id = getArguments().getString(DichVu.ID);
-		customers = getArguments().getString("customers");
-
-		LogUtils.e("customers", customers);
-
-		String selection = DichVu.ID + "='" + id + "'";
-		final Cursor mcursor = getActivity().getContentResolver().query(DichVu.CONTENT_URI, null, selection, null, null);
-
-		if (mcursor != null && mcursor.getCount() >= 1) {
-			mcursor.moveToNext();
-			service_code = mcursor.getString(mcursor.getColumnIndex(DichVu.service_code));
-			mcursor.close();
+		if (!type) {
+			String selection = DichVu.ID + "='" + id + "'";
+			final Cursor mcursor = getActivity().getContentResolver().query(DichVu.CONTENT_URI, null, selection, null, null);
+			if (mcursor != null && mcursor.getCount() >= 1) {
+				mcursor.moveToNext();
+				service_code = mcursor.getString(mcursor.getColumnIndex(DichVu.service_code));
+				mcursor.close();
+			}
 		}
-
 		Bundle bundle = new Bundle();
 		bundle.putString("service_code", service_code);
 		getmImusicService().execute(RequestMethod.GET, API.API_R022, bundle, new IContsCallBack() {
@@ -110,10 +118,16 @@ public class MauMoiFragment extends BaseFragment implements android.view.View.On
 
 	protected void moi() {
 		Bundle bundle = new Bundle();
-		bundle.putString("service_code", service_code);
-		bundle.putString("customers", customers);
-		bundle.putString("template_id", adaper != null ? adaper.getTemplate_id() : "");
-		getmImusicService().execute(RequestMethod.POST, API.API_R015, bundle, new IContsCallBack() {
+
+		if (!type) {
+			bundle.putString("service_code", service_code);
+			bundle.putString("customers", customers);
+		} else {
+			bundle.putString("customers", sdt);
+			bundle.putString("service_code", service_codes);
+		}
+
+		getmImusicService().execute(RequestMethod.POST, !type ? API.API_R015 : API.API_R016, bundle, new IContsCallBack() {
 			ProgressDialog dialog;
 
 			@Override

@@ -3,7 +3,9 @@ package com.aretha.slidemenudemo.fragment;
 import vnp.com.db.DichVu;
 import vnp.com.db.User;
 import vnp.com.mimusic.R;
+import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.adapter.MoiNhieuDichVuAdapter;
+import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.ImageLoaderUtils;
 import vnp.com.mimusic.view.HeaderView;
 import vnp.com.mimusic.view.MenuRightItemView;
@@ -26,6 +28,7 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 	private LinearLayout moinhieudichvu_dialog_list_hor;
 	private MoiNhieuDichVuAdapter adapter;
 	private EditText moinhieudichvu_dialog_search;
+	private String sdt = "";
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -43,6 +46,26 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 			@Override
 			public void onClick(View v) {
 
+				int size = adapter.getListSelect().size();
+
+				if (size == 0 || size >= 5) {
+					Conts.toast(getActivity(), getString(R.string.validatesodichvu));
+					return;
+				}
+				// TODO
+				String service_codes = "";
+				for (String _id : adapter.getListSelect()) {
+					String service_code = adapter.getService_code(_id);
+					if (!Conts.isBlank(service_code)) {
+						if (Conts.isBlank(service_codes)) {
+							service_codes = service_code;
+						} else {
+							service_codes = String.format("%s,%s", service_codes, service_code);
+						}
+					}
+				}
+
+				(((RootMenuActivity) getActivity())).gotoLoiMoi(sdt,adapter.getService_code(adapter.getListSelect().get(0)), service_codes);
 			}
 		});
 
@@ -58,6 +81,9 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 		Cursor cursor = getActivity().getContentResolver().query(User.CONTENT_URI, null, where, null, null);
 		if (cursor != null && cursor.getCount() >= 1) {
 			cursor.moveToNext();
+
+			sdt = cursor.getString(cursor.getColumnIndex(User.USER));
+
 			MenuRightItemView moinhieudichvu_dialog_menurightitem = (MenuRightItemView) view.findViewById(R.id.moinhieudichvu_dialog_menurightitem);
 			moinhieudichvu_dialog_menurightitem.initData(cursor, "");
 		}

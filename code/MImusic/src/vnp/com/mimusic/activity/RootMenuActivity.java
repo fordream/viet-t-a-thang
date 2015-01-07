@@ -251,14 +251,52 @@ public class RootMenuActivity extends FragmentActivity {
 		overridePendingTransitionStartActivity();
 	}
 
+	/**
+	 * type false : moi dich vu cho nhieu nguoi
+	 * 
+	 * @param id
+	 * @param customers
+	 */
 	public void gotoLoiMoi(String id, String customers) {
 
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
 		MauMoiFragment mauMoiFragment = new MauMoiFragment();
+
 		Bundle args = new Bundle();
+		args.putBoolean("type", false);
 		args.putString("id", id);
 		args.putString("customers", customers);
+
+		args.putString("sdt", "");
+		args.putString("service_code", "");
+		args.putString("service_codes", "");
+		mauMoiFragment.setArguments(args);
+		transaction.setCustomAnimations(R.anim.abc_slide_in_top, R.anim.abc_slide_in_top, R.anim.abc_slide_out_top, R.anim.abc_slide_out_top);
+		transaction.add(R.id.root_main_fragment, mauMoiFragment, "" + System.currentTimeMillis());
+		transaction.addToBackStack(null);
+
+		transaction.commit();
+	}
+
+	/**
+	 * type true : moi nhieu dich vu cho 1 nguoi
+	 * 
+	 * @param sdt
+	 * @param service_code
+	 * @param service_codes
+	 */
+	public void gotoLoiMoi(String sdt, String service_code, String service_codes) {
+		FragmentManager fragmentManager = getSupportFragmentManager();
+		android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
+		MauMoiFragment mauMoiFragment = new MauMoiFragment();
+		Bundle args = new Bundle();
+		args.putBoolean("type", true);
+		args.putString("id", "");
+		args.putString("customers", "");
+		args.putString("sdt", sdt);
+		args.putString("service_code", service_code);
+		args.putString("service_codes", service_codes);
 		mauMoiFragment.setArguments(args);
 		transaction.setCustomAnimations(R.anim.abc_slide_in_top, R.anim.abc_slide_in_top, R.anim.abc_slide_out_top, R.anim.abc_slide_out_top);
 		transaction.add(R.id.root_main_fragment, mauMoiFragment, "" + System.currentTimeMillis());
@@ -306,4 +344,5 @@ public class RootMenuActivity extends FragmentActivity {
 		finish();
 		overridePendingTransition(R.anim.abc_scale_in, R.anim.abc_nothing);
 	}
+
 }

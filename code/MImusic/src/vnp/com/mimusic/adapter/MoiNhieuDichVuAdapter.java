@@ -1,7 +1,9 @@
 package vnp.com.mimusic.adapter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import vnp.com.db.DichVu;
 import vnp.com.mimusic.R;
@@ -18,13 +20,18 @@ import android.widget.ImageView;
 public abstract class MoiNhieuDichVuAdapter extends CursorAdapter {
 	private List<String> listSelect = new ArrayList<String>();
 
+	public List<String> getListSelect() {
+		return listSelect;
+	}
+
 	public abstract void addOrRemove(String _id, boolean isAdd, String icon);
 
 	public void remove(String _id) {
 		listSelect.remove(_id);
 	}
 
-	private void add(String _id, String icon) {
+	private void add(String _id, String icon, String cs) {
+		map.put(_id, cs);
 		if (listSelect.contains(_id)) {
 			listSelect.remove(_id);
 			addOrRemove(_id, false, icon);
@@ -47,6 +54,7 @@ public abstract class MoiNhieuDichVuAdapter extends CursorAdapter {
 		}
 		ImageView moinhieudichvu_item_icon = (ImageView) convertView.findViewById(R.id.moinhieudichvu_item_icon);
 		final String _id = cursor.getString(cursor.getColumnIndex(DichVu._ID));
+		final String cs = cursor.getString(cursor.getColumnIndex(DichVu.service_code));
 		String name = cursor.getString(cursor.getColumnIndex(DichVu.service_name));
 		moinhieudichvu_item_icon.setImageResource(R.drawable.no_avatar);
 		// show image
@@ -60,7 +68,7 @@ public abstract class MoiNhieuDichVuAdapter extends CursorAdapter {
 		((MoiNhieuDichVuItemView) convertView).moinhieudichvu_item_checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				add(_id, service_icon);
+				add(_id, service_icon, cs);
 			}
 		});
 
@@ -68,7 +76,7 @@ public abstract class MoiNhieuDichVuAdapter extends CursorAdapter {
 
 			@Override
 			public void onClick(View v) {
-				add(_id, service_icon);
+				add(_id, service_icon, cs);
 			}
 		});
 	}
@@ -84,5 +92,11 @@ public abstract class MoiNhieuDichVuAdapter extends CursorAdapter {
 
 	public void setTextSearch(String textSearch) {
 		this.textSearch = textSearch;
+	}
+
+	private Map<String, String> map = new HashMap<String, String>();
+
+	public String getService_code(String _id) {
+		return map.get(_id);
 	}
 }
