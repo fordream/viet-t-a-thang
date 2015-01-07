@@ -32,6 +32,7 @@ import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
+import vnp.com.mimusic.util.LogUtils;
 import android.util.Log;
 
 public class RestClient {
@@ -85,8 +86,7 @@ public class RestClient {
 			if (!params.isEmpty()) {
 				combinedParams += "?";
 				for (NameValuePair p : params) {
-					String paramString = p.getName() + "="
-							+ URLEncoder.encode(p.getValue(), "UTF-8");
+					String paramString = p.getName() + "=" + URLEncoder.encode(p.getValue(), "UTF-8");
 					if (combinedParams.length() > 1) {
 						combinedParams += "&" + paramString;
 					} else {
@@ -96,7 +96,7 @@ public class RestClient {
 			}
 
 			HttpGet request = new HttpGet(url + combinedParams);
-
+			LogUtils.e("URL", url + combinedParams);
 			// add headers
 			for (NameValuePair h : headers) {
 				request.addHeader(h.getName(), h.getValue());
@@ -187,17 +187,13 @@ public class RestClient {
 
 		for (NameValuePair p : params) {
 			if (p.getName().equals("user[avatar]")) {
-				partEntity.addPart(p.getName(),
-						new FileBody(new File(p.getValue()), "image/jpeg"));
+				partEntity.addPart(p.getName(), new FileBody(new File(p.getValue()), "image/jpeg"));
 			} else if (p.getName().equals("file")) {
-				partEntity.addPart(p.getName(),
-						new FileBody(new File(p.getValue()), "image/jpeg"));
+				partEntity.addPart(p.getName(), new FileBody(new File(p.getValue()), "image/jpeg"));
 			} else if (p.getName().equals("user[cover]")) {
-				partEntity.addPart(p.getName(),
-						new FileBody(new File(p.getValue()), "image/jpeg"));
+				partEntity.addPart(p.getName(), new FileBody(new File(p.getValue()), "image/jpeg"));
 			} else if (p.getName().equals("post[url]")) {
-				partEntity.addPart(p.getName(),
-						new FileBody(new File(p.getValue()), "image/jpeg"));
+				partEntity.addPart(p.getName(), new FileBody(new File(p.getValue()), "image/jpeg"));
 			} else {
 				partEntity.addPart(p.getName(), new StringBody(p.getValue()));
 			}
@@ -244,20 +240,15 @@ public class RestClient {
 
 		for (NameValuePair p : params) {
 			if (p.getName().equals("user[avatar]")) {
-				partEntity.addPart(p.getName(),
-						new FileBody(new File(p.getValue()), "image/jpeg"));
+				partEntity.addPart(p.getName(), new FileBody(new File(p.getValue()), "image/jpeg"));
 			} else if (p.getName().equals("file")) {
-				partEntity.addPart(p.getName(),
-						new FileBody(new File(p.getValue()), "image/jpeg"));
+				partEntity.addPart(p.getName(), new FileBody(new File(p.getValue()), "image/jpeg"));
 			} else if (p.getName().equals("image")) {
-				partEntity.addPart(p.getName(),
-						new FileBody(new File(p.getValue()), "image/jpeg"));
+				partEntity.addPart(p.getName(), new FileBody(new File(p.getValue()), "image/jpeg"));
 			} else if (p.getName().equals("user[cover]")) {
-				partEntity.addPart(p.getName(),
-						new FileBody(new File(p.getValue()), "image/jpeg"));
+				partEntity.addPart(p.getName(), new FileBody(new File(p.getValue()), "image/jpeg"));
 			} else if (p.getName().equals("post[url]")) {
-				partEntity.addPart(p.getName(),
-						new FileBody(new File(p.getValue()), "image/jpeg"));
+				partEntity.addPart(p.getName(), new FileBody(new File(p.getValue()), "image/jpeg"));
 			} else {
 				partEntity.addPart(p.getName(), new StringBody(p.getValue()));
 			}
@@ -288,8 +279,7 @@ public class RestClient {
 
 	}
 
-	public void exeDownloadFile(RequestInfo requestInfo,
-			final IDownloadUploadFileCallBack downloadUploadFileCallBack) {
+	public void exeDownloadFile(RequestInfo requestInfo, final IDownloadUploadFileCallBack downloadUploadFileCallBack) {
 
 		if (downloadUploadFileCallBack != null) {
 			downloadUploadFileCallBack.start();
@@ -303,8 +293,7 @@ public class RestClient {
 
 		if (!mDirectory.exists()) {
 			if (downloadUploadFileCallBack != null) {
-				downloadUploadFileCallBack
-						.error(IDownloadUploadFileCallBack.STATUS_CREATE_FILE_FOLDER_FAIL);
+				downloadUploadFileCallBack.error(IDownloadUploadFileCallBack.STATUS_CREATE_FILE_FOLDER_FAIL);
 			}
 
 			return;
@@ -330,10 +319,8 @@ public class RestClient {
 			if (typeData.contains("text/plain")) {
 
 			} else {
-				fileSize = Long.parseLong(urlConnection
-						.getHeaderField("content-length"));
-				String getDateModifier = urlConnection
-						.getHeaderField("last-modified");
+				fileSize = Long.parseLong(urlConnection.getHeaderField("content-length"));
+				String getDateModifier = urlConnection.getHeaderField("last-modified");
 
 				if (downloadUploadFileCallBack != null) {
 
@@ -369,8 +356,7 @@ public class RestClient {
 		if (fileSize == 0 || mFile.length() < fileSize && fileSize != 0) {
 			mFile.delete();
 			if (downloadUploadFileCallBack != null) {
-				downloadUploadFileCallBack
-						.error(IDownloadUploadFileCallBack.STATUS_DOWNLOAD_UPLOAD_FAIL);
+				downloadUploadFileCallBack.error(IDownloadUploadFileCallBack.STATUS_DOWNLOAD_UPLOAD_FAIL);
 			}
 		} else {
 			if (downloadUploadFileCallBack != null) {

@@ -29,7 +29,7 @@ public class LoginActivty extends Activity implements OnClickListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		((VApplication) getApplication()).dongbodanhba();
+		//((VApplication) getApplication()).dongbodanhba();
 		setContentView(R.layout.activity_login);
 		progressBar1 = (LoadingView) findViewById(R.id.loadingView1);
 		Conts.showView(progressBar1, false);

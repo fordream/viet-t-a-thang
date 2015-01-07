@@ -90,21 +90,6 @@ public class ThongTinCaNhanFragment extends BaseFragment implements OnItemClickL
 			public void onSuscess(JSONObject response) {
 				Conts.showView(loadingView, false);
 
-//				ContentValues contentValues = new ContentValues();
-//				try {
-//					contentValues.put(User.address, response.getString(User.address));
-//					contentValues.put(User.ID, response.getString(User.ID));
-//					contentValues.put(User.exchange_number, response.getString(User.exchange_number));
-//					contentValues.put(User.exchange_number_month, response.getString(User.exchange_number_month));
-//					contentValues.put(User.fullname, response.getString(User.fullname));
-//					contentValues.put(User.nickname, response.getString(User.nickname));
-//					contentValues.put(User.poundage, response.getString(User.poundage));
-//					contentValues.put(User.poundage_month, response.getString(User.poundage_month));
-//					contentValues.put(User.birthday, response.getString(User.birthday));
-//
-//					getActivity().getContentResolver().update(User.CONTENT_URI, contentValues, String.format("%s=='1'", User.STATUS), null);
-//				} catch (JSONException e) {
-//				}
 				showData(view);
 			}
 

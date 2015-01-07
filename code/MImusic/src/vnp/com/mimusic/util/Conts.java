@@ -3,6 +3,7 @@ package vnp.com.mimusic.util;
 import java.util.Set;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import vnp.com.api.ExeCallBack;
@@ -179,12 +180,11 @@ public class Conts {
 				super.onCallBack(object);
 				String message = "";
 				RestClient restClient = (RestClient) object;
-				// if(restClient.getResponseCode() ==){
-				//
-				// }
 
 				try {
-					LogUtils.e("restClient.getResponse()", restClient.getResponseCode() + " : " + restClient.getResponse());
+					// LogUtils.e("restClient.getResponse()",
+					// restClient.getResponseCode() + " : " +
+					// restClient.getResponse());
 					JSONObject jsonObject = new JSONObject(restClient.getResponse());
 					String errorCode = jsonObject.getString("errorCode");
 					message = jsonObject.getString("message");
@@ -234,14 +234,14 @@ public class Conts {
 			}
 		};
 
-		resClientCallBack.addParam("token", Conts.getToken(activity));
-
+		// resClientCallBack.addParam("token", Conts.getToken(activity));
+		bundles.putString("token", Conts.getToken(activity));
 		Set<String> keys = bundles.keySet();
 		for (String key : keys) {
 			resClientCallBack.addParam(key, bundles.getString(key));
-
 			LogUtils.e("para", key + " : " + bundles.getString(key));
 		}
+
 		ExeCallBack exeCallBack = new ExeCallBack();
 		exeCallBack.setExeCallBackOption(new ExeCallBackOption(activity, false, R.string.loading, null));
 		exeCallBack.executeAsynCallBack(resClientCallBack);
@@ -343,5 +343,28 @@ public class Conts {
 
 	public interface DialogCallBack {
 		public void callback(Object object);
+	}
+
+	public static String getString(JSONObject jsonObject, String string) {
+		try {
+			return jsonObject.getString(string);
+		} catch (JSONException e) {
+			return null;
+		}
+	}
+
+	public static boolean haveContact(String phone, Context context) {
+		Cursor cursor = context.getContentResolver().query(User.CONTENT_URI, null, String.format("%s='%s'", User.USER, phone), null, null);
+
+		if (cursor != null && cursor.getCount() > 0) {
+			cursor.close();
+			return true;
+		}
+
+		if (cursor != null) {
+			cursor.close();
+		}
+
+		return false;
 	}
 }

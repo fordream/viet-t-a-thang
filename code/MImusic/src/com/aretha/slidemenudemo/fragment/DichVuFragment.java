@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import vnp.com.api.API;
 import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.DichVu;
 import vnp.com.mimusic.R;
@@ -28,7 +29,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ListView;
 
-public class DichVuFragment extends Fragment implements OnItemClickListener, View.OnClickListener {
+public class DichVuFragment extends BaseFragment implements OnItemClickListener, View.OnClickListener {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
@@ -57,7 +58,8 @@ public class DichVuFragment extends Fragment implements OnItemClickListener, Vie
 		dichvu_list = (ListView) view.findViewById(R.id.dichvu_list);
 		dichvu_list.setOnItemClickListener(this);
 		Bundle bundle = new Bundle();
-		Conts.executeNoProgressBar(RequestMethod.GET, "utilitiServices", getActivity(), bundle, new IContsCallBack() {
+
+		getmImusicService().execute(RequestMethod.GET, API.API_R004, bundle, new IContsCallBack() {
 			@Override
 			public void onStart() {
 				Conts.showView(loadingView1, true);
@@ -66,31 +68,31 @@ public class DichVuFragment extends Fragment implements OnItemClickListener, Vie
 			@Override
 			public void onSuscess(JSONObject response) {
 				Conts.showView(loadingView1, false);
-				try {
-					JSONArray jsonArray = response.getJSONArray("data");
-					for (int i = 0; i < jsonArray.length(); i++) {
-						JSONObject jsonObject = jsonArray.getJSONObject(i);
-						ContentValues contentValues = new ContentValues();
-						contentValues.put(DichVu.ID, jsonObject.getString(DichVu.ID));
-						contentValues.put(DichVu.service_name, jsonObject.getString(DichVu.service_name));
-						contentValues.put(DichVu.service_code, jsonObject.getString(DichVu.service_code));
-						contentValues.put(DichVu.service_icon, jsonObject.getString(DichVu.service_icon));
-						contentValues.put(DichVu.service_content, jsonObject.getString(DichVu.service_content));
-						contentValues.put(DichVu.service_price, jsonObject.getString(DichVu.service_price));
-						contentValues.put(DichVu.service_status, jsonObject.getString(DichVu.service_status));
-
-						String selection = String.format("%s='%s'", DichVu.ID, jsonObject.getString(DichVu.ID));
-						Cursor cursor = getActivity().getContentResolver().query(DichVu.CONTENT_URI, null, selection, null, null);
-
-						if (cursor != null && cursor.getCount() >= 1) {
-							cursor.close();
-							getActivity().getContentResolver().update(DichVu.CONTENT_URI, contentValues, selection, null);
-						} else {
-							getActivity().getContentResolver().insert(DichVu.CONTENT_URI, contentValues);
-						}
-					}
-				} catch (JSONException e) {
-				}
+//				try {
+//					JSONArray jsonArray = response.getJSONArray("data");
+//					for (int i = 0; i < jsonArray.length(); i++) {
+//						JSONObject jsonObject = jsonArray.getJSONObject(i);
+//						ContentValues contentValues = new ContentValues();
+//						contentValues.put(DichVu.ID, jsonObject.getString(DichVu.ID));
+//						contentValues.put(DichVu.service_name, jsonObject.getString(DichVu.service_name));
+//						contentValues.put(DichVu.service_code, jsonObject.getString(DichVu.service_code));
+//						contentValues.put(DichVu.service_icon, jsonObject.getString(DichVu.service_icon));
+//						contentValues.put(DichVu.service_content, jsonObject.getString(DichVu.service_content));
+//						contentValues.put(DichVu.service_price, jsonObject.getString(DichVu.service_price));
+//						contentValues.put(DichVu.service_status, jsonObject.getString(DichVu.service_status));
+//
+//						String selection = String.format("%s='%s'", DichVu.ID, jsonObject.getString(DichVu.ID));
+//						Cursor cursor = getActivity().getContentResolver().query(DichVu.CONTENT_URI, null, selection, null, null);
+//
+//						if (cursor != null && cursor.getCount() >= 1) {
+//							cursor.close();
+//							getActivity().getContentResolver().update(DichVu.CONTENT_URI, contentValues, selection, null);
+//						} else {
+//							getActivity().getContentResolver().insert(DichVu.CONTENT_URI, contentValues);
+//						}
+//					}
+//				} catch (JSONException e) {
+//				}
 				callSHowData();
 			}
 

@@ -1,9 +1,12 @@
 package vnp.com.api;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -11,13 +14,17 @@ import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.DichVu;
 import vnp.com.db.User;
 import vnp.com.mimusic.util.Conts;
+import vnp.com.mimusic.util.LogUtils;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
 import android.app.Service;
+import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.provider.ContactsContract;
 
 public class MImusicService extends Service {
 
@@ -105,10 +112,11 @@ public class MImusicService extends Service {
 					}
 				} catch (Exception e) {
 				}
+				callUpdateData();
 
-				callDongBoDanhBa(contsCallBack, true);
 				if (contsCallBack != null)
 					contsCallBack.onSuscess(jsonObject);
+
 				// TODO
 			}
 
@@ -126,8 +134,173 @@ public class MImusicService extends Service {
 		});
 	}
 
-	protected void callDongBoDanhBa(IContsCallBack contsCallBack, boolean isLoginCall) {
+	private void callUpdateData() {
+		/**
+		 * get list dich vu
+		 */
+		execute(RequestMethod.GET, API.API_R004, new Bundle(), null);
+		/**
+		 * get infor
+		 */
+		execute(RequestMethod.GET, API.API_R006, new Bundle(), new IContsCallBack() {
 
+			@Override
+			public void onSuscess(JSONObject response) {
+				sendBroadcast(new Intent("broadcastReceivermactivity_slidemenu_menuleft"));
+			}
+
+			@Override
+			public void onStart() {
+
+			}
+
+			@Override
+			public void onError(String message) {
+
+			}
+
+			@Override
+			public void onError() {
+
+			}
+		});
+
+		callDongBoDanhBaLen(new IContsCallBack() {
+
+			@Override
+			public void onSuscess(JSONObject response) {
+
+			}
+
+			@Override
+			public void onStart() {
+
+			}
+
+			@Override
+			public void onError(String message) {
+
+			}
+
+			@Override
+			public void onError() {
+
+			}
+		});
+	}
+
+	public void callDongBoDanhBaLen(final IContsCallBack contsCallBack) {
+
+		if (contsCallBack != null) {
+			contsCallBack.onStart();
+		}
+		new AsyncTask<String, String, StringBuilder>() {
+			List<String> listSdt = new ArrayList<String>();
+
+			@Override
+			protected StringBuilder doInBackground(String... params) {
+				StringBuilder conttacts = new StringBuilder();
+				ContentResolver cr = getContentResolver();
+				Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
+				while (cur != null && cur.moveToNext()) {
+					String id = cur.getString(cur.getColumnIndex(ContactsContract.Contacts._ID));
+					String name = cur.getString(cur.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+					if (Integer.parseInt(cur.getString(cur.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))) > 0) {
+						Cursor pCur = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?", new String[] { id }, null);
+						while (pCur.moveToNext()) {
+							String phoneNo = pCur.getString(pCur.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+							if (!Conts.isBlank(phoneNo)) {
+								phoneNo = phoneNo.replace(" ", "");
+							}
+							if (Conts.isBlank(name)) {
+								name = phoneNo;
+							}
+
+							if (!Conts.isBlank(phoneNo)) {
+								listSdt.add(phoneNo);
+								if (conttacts.length() == 0) {
+									conttacts.append(String.format("{\"phone\":\"%s\",\"name\":\"%s\"}", phoneNo, name));
+								} else {
+									conttacts.append(String.format(",{\"phone\":\"%s\",\"name\":\"%s\"}", phoneNo, name));
+								}
+							}
+						}
+
+						pCur.close();
+					}
+				}
+				return conttacts;
+			}
+
+			protected void onPostExecute(StringBuilder result) {
+				if (result.length() == 0) {
+					dongboDanhBaXuong(contsCallBack, listSdt);
+				} else {
+					Bundle bundle = new Bundle();
+					bundle.putString("contacts", String.format("[%s]", result.toString()));
+					MImusicService.this.execute(RequestMethod.POST, API.API_R011, bundle, new IContsCallBack() {
+						@Override
+						public void onSuscess(JSONObject response) {
+							startDongBoDAnhBaXuong();
+						}
+
+						@Override
+						public void onStart() {
+						}
+
+						@Override
+						public void onError(String message) {
+							startDongBoDAnhBaXuong();
+						}
+
+						@Override
+						public void onError() {
+							startDongBoDAnhBaXuong();
+						}
+
+						private void startDongBoDAnhBaXuong() {
+							dongboDanhBaXuong(contsCallBack, listSdt);
+						}
+					});
+				}
+			};
+		}.execute("");
+
+	}
+
+	public void dongboDanhBaXuong(final IContsCallBack contsCallBack, final List<String> numbers) {
+
+		String number = numbers.get(0);
+		numbers.remove(0);
+		Bundle bundle = new Bundle();
+		bundle.putString("phonenumber", number);
+		execute(RequestMethod.GET, API.API_R012, bundle, new IContsCallBack() {
+
+			@Override
+			public void onSuscess(JSONObject response) {
+				sendBroadcast(new Intent("dongbodanhba"));
+				contsCallBack.onSuscess(response);
+			}
+
+			@Override
+			public void onStart() {
+
+			}
+
+			@Override
+			public void onError(String message) {
+				if (contsCallBack != null) {
+					contsCallBack.onError(message);
+				}
+			}
+
+			@Override
+			public void onError() {
+				if (contsCallBack != null) {
+					contsCallBack.onError();
+				}
+			}
+		});
 	}
 
 	public void execute(final RequestMethod requestMethod, final String api, final Bundle bundle, final IContsCallBack contsCallBack) {
@@ -135,7 +308,8 @@ public class MImusicService extends Service {
 		Conts.executeNoProgressBar(requestMethod, api, this, bundle, new IContsCallBack() {
 			@Override
 			public void onStart() {
-				contsCallBack.onStart();
+				if (contsCallBack != null)
+					contsCallBack.onStart();
 			}
 
 			@Override
@@ -146,21 +320,84 @@ public class MImusicService extends Service {
 					updateInFor(bundle);
 				} else if (API.API_R017.equals(api)) {
 					updateDichVuDangKy(bundle);
+				} else if (API.API_R004.equals(api)) {
+					updateDichVu(response);
+				} else if (API.API_R012.equals(api)) {
+					updateDongBoXuong(response);
 				}
 
-				contsCallBack.onSuscess(response);
+				if (contsCallBack != null)
+					contsCallBack.onSuscess(response);
 			}
 
 			@Override
 			public void onError(String message) {
-				contsCallBack.onError(message);
+				if (contsCallBack != null)
+					contsCallBack.onError(message);
 			}
 
 			@Override
 			public void onError() {
-				contsCallBack.onError();
+				if (contsCallBack != null)
+					contsCallBack.onError();
 			}
 		});
+	}
+
+	private void updateDongBoXuong(JSONObject response) {
+		try {
+			JSONArray array = response.getJSONArray("data");
+			for (int i = 0; i < array.length(); i++) {
+				JSONObject jsonObject = array.getJSONObject(i);
+				String phone = Conts.getString(jsonObject, "phone");
+				String name = Conts.getString(jsonObject, "name");
+
+				ContentValues contentValues = new ContentValues();
+				contentValues.put(User.USER, phone);
+				contentValues.put(User.NAME_CONTACT, name);
+				contentValues.put(User.STATUS, "0");
+				if (Conts.haveContact(phone, this)) {
+					getContentResolver().update(User.CONTENT_URI, contentValues, String.format("%s = '%s'", User.USER, phone), null);
+				} else {
+					getContentResolver().insert(User.CONTENT_URI, contentValues);
+				}
+
+				if (jsonObject.has("services")) {
+					JSONArray services = jsonObject.getJSONArray("services");
+					// id,service_name,service_code,service_icon
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void updateDichVu(JSONObject response) {
+		try {
+			JSONArray jsonArray = response.getJSONArray("data");
+			for (int i = 0; i < jsonArray.length(); i++) {
+				JSONObject jsonObject = jsonArray.getJSONObject(i);
+				ContentValues contentValues = new ContentValues();
+				contentValues.put(DichVu.ID, jsonObject.getString(DichVu.ID));
+				contentValues.put(DichVu.service_name, jsonObject.getString(DichVu.service_name));
+				contentValues.put(DichVu.service_code, jsonObject.getString(DichVu.service_code));
+				contentValues.put(DichVu.service_icon, jsonObject.getString(DichVu.service_icon));
+				contentValues.put(DichVu.service_content, jsonObject.getString(DichVu.service_content));
+				contentValues.put(DichVu.service_price, jsonObject.getString(DichVu.service_price));
+				contentValues.put(DichVu.service_status, jsonObject.getString(DichVu.service_status));
+
+				String selection = String.format("%s='%s'", DichVu.ID, jsonObject.getString(DichVu.ID));
+				Cursor cursor = getContentResolver().query(DichVu.CONTENT_URI, null, selection, null, null);
+
+				if (cursor != null && cursor.getCount() >= 1) {
+					cursor.close();
+					getContentResolver().update(DichVu.CONTENT_URI, contentValues, selection, null);
+				} else {
+					getContentResolver().insert(DichVu.CONTENT_URI, contentValues);
+				}
+			}
+		} catch (JSONException e) {
+		}
 	}
 
 	protected void updateDichVuDangKy(Bundle bundle) {

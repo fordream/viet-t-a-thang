@@ -95,15 +95,15 @@ public class MenuRightView extends LinearLayout {
 				mOnItemClickListener.onItemClick(arg0, arg1, arg2, arg3);
 			}
 		});
-		menu_right_img_search.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				// String txt = menu_right_editext.getText().toString();
-				// refresh list
-
-				initData();
-			}
-		});
+//		menu_right_img_search.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				// String txt = menu_right_editext.getText().toString();
+//				// refresh list
+//
+//				initData();
+//			}
+//		});
 	}
 
 	public boolean needBack() {

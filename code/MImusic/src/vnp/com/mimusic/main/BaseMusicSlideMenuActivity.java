@@ -14,13 +14,18 @@ import vnp.com.mimusic.util.Conts.IContsCallBack;
 import vnp.com.mimusic.view.MenuLeftView;
 import vnp.com.mimusic.view.MenuRightView;
 import vnp.com.mimusic.view.TabView;
+import android.app.ProgressDialog;
 import android.app.TabActivity;
+import android.content.BroadcastReceiver;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TabHost;
@@ -37,15 +42,36 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		registerReceiver(broadcastReceiver, new IntentFilter("broadcastReceivermactivity_slidemenu_menuleft"));
+		registerReceiver(broadcastReceiverDongBoDanhBa, new IntentFilter("dongbodanhba"));
 		((MenuLeftView) findViewById(R.id.mactivity_slidemenu_menuleft)).showData();
 	}
 
 	@Override
+	protected void onPause() {
+		super.onPause();
+		unregisterReceiver(broadcastReceiver);
+		unregisterReceiver(broadcastReceiverDongBoDanhBa);
+	}
+
+	private BroadcastReceiver broadcastReceiverDongBoDanhBa = new BroadcastReceiver() {
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			((MenuRightView) findViewById(R.id.mactivity_menu_right)).initData();
+		}
+	};
+	private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			((MenuLeftView) findViewById(R.id.mactivity_slidemenu_menuleft)).showData();
+		}
+	};
+
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		// overridePendingTransition(R.anim.abc_slide_right_in,
-		// R.anim.abc_slide_left_out);
 
 		setContentView(R.layout.mactivity_slidemenu);
 
@@ -145,6 +171,42 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 		// Menu Right
 		final MenuRightView mactivity_menu_right = (MenuRightView) findViewById(R.id.mactivity_menu_right);
 		mactivity_menu_right.initData();
+
+		mactivity_menu_right.findViewById(R.id.menu_right_img_search).setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				((VApplication) getApplication()).getmImusicService().callDongBoDanhBaLen(new IContsCallBack() {
+					private ProgressDialog progressDialog;
+
+					@Override
+					public void onSuscess(JSONObject response) {
+						if (progressDialog != null) {
+							progressDialog.dismiss();
+						}
+					}
+
+					@Override
+					public void onStart() {
+						if (progressDialog == null) {
+							progressDialog = ProgressDialog.show(BaseMusicSlideMenuActivity.this, null, getString(R.string.loading));
+						}
+					}
+
+					@Override
+					public void onError(String message) {
+						if (progressDialog != null) {
+							progressDialog.dismiss();
+						}
+					}
+
+					@Override
+					public void onError() {
+						onError("");
+					}
+				});
+			}
+		});
 		mactivity_menu_right.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
