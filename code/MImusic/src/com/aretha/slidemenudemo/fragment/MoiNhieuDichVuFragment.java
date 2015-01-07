@@ -48,7 +48,7 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 
 				int size = adapter.getListSelect().size();
 
-				if (size == 0 || size >= 5) {
+				if (size == 0 || size > 5) {
 					Conts.toast(getActivity(), getString(R.string.validatesodichvu));
 					return;
 				}
