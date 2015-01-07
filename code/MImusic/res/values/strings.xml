@@ -112,6 +112,8 @@
         <item>thất bại</item>
     </string-array>
 
+    <string name="thanhcong">Thành công</string>
+    <string name="thatbai">Thất bại</string>
     <string name="chontrangthai">Chọn trạng thái</string>
     <string name="chonsdt">Chọn số điện thoại</string>
     <string name="chondichvu">Chọn dịch vụ</string>
