@@ -87,13 +87,18 @@ public abstract class DichVuAdapter extends CursorAdapter {
 		ImageLoaderUtils.getInstance(context).DisplayImage(service_icon, home_item_img_icon);
 		final ContentValues values = new ContentValues();
 		values.put("name", cursor.getString(cursor.getColumnIndex(DichVu.service_name)));
+		values.put(DichVu.service_code, cursor.getString(cursor.getColumnIndex(DichVu.service_code)));
 		values.put("content", cursor.getString(cursor.getColumnIndex(DichVu.service_content)));
+		values.put(DichVu.ID, cursor.getString(cursor.getColumnIndex(DichVu.ID)));
+		values.put("type", "dangky");
 		home_item_right_control_1.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				if (!isDangKy)
-					new DangKyDialog(v.getContext(), values).show();
+				if (!isDangKy) {
+					dangKy(values);
+
+				}
 			}
 		});
 
@@ -112,6 +117,8 @@ public abstract class DichVuAdapter extends CursorAdapter {
 		});
 
 	}
+
+	public abstract void dangKy(ContentValues values);
 
 	@Override
 	public View newView(Context context, Cursor cursor, ViewGroup parent) {

@@ -54,4 +54,8 @@ public class ChiTietDichVuNoFeatureView extends LinearLayout {
 
 		findViewById(R.id.chitietdichvu_no_feature_dangky).setVisibility(isDangKy ? View.INVISIBLE : View.VISIBLE);
 	}
+
+	public void hiddenChitietdichvu_no_feature_dangky() {
+		findViewById(R.id.chitietdichvu_no_feature_dangky).setVisibility(View.INVISIBLE);
+	}
 }

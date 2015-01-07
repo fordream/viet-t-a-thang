@@ -21,6 +21,10 @@ public class DichVu {
 	public static final String service_code = "service_code";
 	public static final String service_content = "service_content";
 	public static final String service_price = "service_price";
+	/**
+	 * 0 is dang ky
+	 * 1 chua dang ky
+	 */
 	public static final String service_status = "service_status";
 
 	public static final String CREATE_DB_TABLE() {

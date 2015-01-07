@@ -9,7 +9,7 @@ import vnp.com.db.DichVu;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.adapter.DichVuAdapter;
-import vnp.com.mimusic.main.BaseMusicSlideMenuActivity;
+import vnp.com.mimusic.base.diablog.DangKyDialog;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
 import vnp.com.mimusic.util.LogUtils;
@@ -90,7 +90,6 @@ public class DichVuFragment extends Fragment implements OnItemClickListener, Vie
 						}
 					}
 				} catch (JSONException e) {
-					LogUtils.e("AAA", e);
 				}
 				callSHowData();
 			}
@@ -139,6 +138,15 @@ public class DichVuFragment extends Fragment implements OnItemClickListener, Vie
 				@Override
 				public void moiDVChoNhieuNguoi(String id) {
 					(((RootMenuActivity) getActivity())).gotoMoiDvChoNhieuNguoi(id);
+				}
+
+				@Override
+				public void dangKy(ContentValues values) {
+					new DangKyDialog(getActivity(), values) {
+						public void updateUiDangKy() {
+							callSHowData();
+						};
+					}.show();
 				}
 			});
 		}

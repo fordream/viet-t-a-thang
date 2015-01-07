@@ -60,7 +60,7 @@ public class ChiTietDichVuFragment extends BaseFragment implements View.OnClickL
 			}
 		});
 
-		ChiTietDichVuNoFeatureView chitietdichvu_chitietdichvunofeatureview = (ChiTietDichVuNoFeatureView) view.findViewById(R.id.chitietdichvu_chitietdichvunofeatureview);
+		final ChiTietDichVuNoFeatureView chitietdichvu_chitietdichvunofeatureview = (ChiTietDichVuNoFeatureView) view.findViewById(R.id.chitietdichvu_chitietdichvunofeatureview);
 
 		final String id = getArguments().getString(DichVu.ID);
 		String service_code = "";
@@ -73,6 +73,8 @@ public class ChiTietDichVuFragment extends BaseFragment implements View.OnClickL
 			chitietdichvu_chitietdichvunofeatureview.setData(cursor);
 			final ContentValues values = new ContentValues();
 			values.put(DichVu.ID, id);
+			values.put("type", "dangky");
+			values.put(DichVu.service_code, cursor.getString(cursor.getColumnIndex(DichVu.service_code)));
 			values.put("name", cursor.getString(cursor.getColumnIndex(DichVu.service_name)));
 			values.put("content", cursor.getString(cursor.getColumnIndex(DichVu.service_content)));
 
@@ -80,7 +82,13 @@ public class ChiTietDichVuFragment extends BaseFragment implements View.OnClickL
 
 				@Override
 				public void onClick(View v) {
-					new DangKyDialog(v.getContext(), values).show();
+					new DangKyDialog(v.getContext(), values){
+						@Override
+						public void updateUiDangKy() {
+							super.updateUiDangKy();
+							chitietdichvu_chitietdichvunofeatureview.hiddenChitietdichvu_no_feature_dangky();
+						}
+					}.show();
 				}
 			});
 

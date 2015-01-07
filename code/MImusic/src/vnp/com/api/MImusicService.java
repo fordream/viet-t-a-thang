@@ -8,6 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import vnp.com.api.RestClient.RequestMethod;
+import vnp.com.db.DichVu;
 import vnp.com.db.User;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
@@ -132,7 +133,10 @@ public class MImusicService extends Service {
 					updateInFor(response);
 				} else if (API.API_R007.equals(api)) {
 					updateInFor(bundle);
+				} else if (API.API_R017.equals(api)) {
+					updateDichVuDangKy(bundle);
 				}
+
 				contsCallBack.onSuscess(response);
 			}
 
@@ -146,6 +150,13 @@ public class MImusicService extends Service {
 				contsCallBack.onError();
 			}
 		});
+	}
+
+	protected void updateDichVuDangKy(Bundle bundle) {
+		String cs = bundle.getString(DichVu.service_code);
+		ContentValues contentValues = new ContentValues();
+		contentValues.put(DichVu.service_status, "0");
+		getContentResolver().update(DichVu.CONTENT_URI, contentValues, String.format("%s=='%s'", DichVu.service_code, cs), null);
 	}
 
 	protected void updateInFor(Bundle bundle) {

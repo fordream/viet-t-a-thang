@@ -1,7 +1,16 @@
 package vnp.com.mimusic.base.diablog;
 
+import org.json.JSONObject;
+
+import vnp.com.api.API;
+import vnp.com.api.RestClient.RequestMethod;
+import vnp.com.db.DichVu;
 import vnp.com.mimusic.R;
+import vnp.com.mimusic.VApplication;
 import vnp.com.mimusic.base.BaseAdialog;
+import vnp.com.mimusic.util.Conts;
+import vnp.com.mimusic.util.Conts.IContsCallBack;
+import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.os.Bundle;
@@ -14,10 +23,7 @@ import android.widget.TextView;
 
 public class DangKyDialog extends BaseAdialog implements android.view.View.OnClickListener {
 	private ContentValues contentValues;
-
-	public DangKyDialog(Context context, int theme) {
-		super(context, theme);
-	}
+	private String type = "";
 
 	public DangKyDialog(Context context) {
 		super(context);
@@ -32,6 +38,7 @@ public class DangKyDialog extends BaseAdialog implements android.view.View.OnCli
 		((TextView) findViewById(R.id.dangky_dialog_content)).setText(contentValues.getAsString("content"));
 
 		String btn_right = contentValues.getAsString("btn_right");
+		type = contentValues.getAsString("type");
 		if (btn_right != null && !btn_right.trim().equals("")) {
 			((Button) findViewById(R.id.dangky_dialog_register)).setText(btn_right);
 		}
@@ -83,7 +90,44 @@ public class DangKyDialog extends BaseAdialog implements android.view.View.OnCli
 		}
 	}
 
+	private ProgressDialog progressDialog;
+
 	public void mOpen() {
-		mDismiss();
+		if ("dangky".equals(type)) {
+			Bundle bundle = new Bundle();
+			bundle.putString(DichVu.service_code, contentValues.getAsString(DichVu.service_code));
+
+			((VApplication) getmContext().getApplicationContext()).getmImusicService().execute(RequestMethod.POST, API.API_R017, bundle, new IContsCallBack() {
+
+				@Override
+				public void onSuscess(JSONObject response) {
+					progressDialog.dismiss();
+					updateUiDangKy();
+				}
+
+				@Override
+				public void onStart() {
+					progressDialog = ProgressDialog.show(getContext(), null, getContext().getString(R.string.loading));
+				}
+
+				@Override
+				public void onError(String message) {
+					Conts.toast(getContext(), message);
+					progressDialog.dismiss();
+				}
+
+				@Override
+				public void onError() {
+					onError("onError");
+				}
+			});
+		} else {
+			mDismiss();
+		}
 	}
+
+	public void updateUiDangKy() {
+
+	}
+
 }
