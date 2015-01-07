@@ -18,26 +18,26 @@ public class TintucAdaper extends ArrayAdapter<JSONObject> {
 		super(context, 0, new JSONObject[] {});
 		this.jsonArray = jsonArray;
 
-		if (jsonArray.length() == 0) {
-			JSONObject jsonObject = new JSONObject();
-			// "id":"12454",
-			// "title":"Tiêu đề tin tức",
-			// "header":"Nội dung tóm tắt",
-			// "image":"/image.png",
-			// "public_time":"12h12 12/12/2014",
-			// "type":1
-			try {
-				jsonObject.put("id", "12454");
-				jsonObject.put("title", "Tiêu đề tin tức");
-				jsonObject.put("header", "Nội dung tóm tắt");
-				jsonObject.put("image", "/image.png");
-				jsonObject.put("public_time", "12h12 12/12/2014");
-				jsonObject.put("type", "1");
-			} catch (JSONException e) {
-			}
-
-			jsonArray.put(jsonObject);
-		}
+//		if (jsonArray.length() == 0) {
+//			JSONObject jsonObject = new JSONObject();
+//			// "id":"12454",
+//			// "title":"Tiêu đề tin tức",
+//			// "header":"Nội dung tóm tắt",
+//			// "image":"/image.png",
+//			// "public_time":"12h12 12/12/2014",
+//			// "type":1
+//			try {
+//				jsonObject.put("id", "12454");
+//				jsonObject.put("title", "Tiêu đề tin tức");
+//				jsonObject.put("header", "Nội dung tóm tắt");
+//				jsonObject.put("image", "/image.png");
+//				jsonObject.put("public_time", "12h12 12/12/2014");
+//				jsonObject.put("type", "1");
+//			} catch (JSONException e) {
+//			}
+//
+//			jsonArray.put(jsonObject);
+//		}
 	}
 
 	@Override

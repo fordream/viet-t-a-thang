@@ -37,9 +37,10 @@ public class TinTucFragment extends BaseFragment implements OnItemClickListener,
 
 		bangxephang_list.setAdapter(new TintucAdaper(getActivity(), new JSONArray()));
 
-		getmImusicService().execute(RequestMethod.POST, API.API_R027, new Bundle(), new IContsCallBack() {
+		getmImusicService().execute(RequestMethod.GET, API.API_R027, new Bundle(), new IContsCallBack() {
 			@Override
 			public void onSuscess(JSONObject response) {
+				bangxephang_list.setText(false, "");
 				try {
 					JSONArray jsonArray = response.getJSONArray("data");
 					((TintucAdaper) bangxephang_list.getAdapter()).setJSOnArray(jsonArray);
@@ -62,7 +63,8 @@ public class TinTucFragment extends BaseFragment implements OnItemClickListener,
 			@Override
 			public void onError(String message) {
 				Conts.showView(loadingView1, false);
-				Conts.toast(getActivity(), message);
+				// Conts.toast(getActivity(), message);
+				bangxephang_list.setTextNoData(true, message);
 			}
 
 			@Override
