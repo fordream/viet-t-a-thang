@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:id="@+id/activity_login_main"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <vnp.com.mimusic.view.HeaderView
+                android:id="@+id/quydinhbanhang_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+            </vnp.com.mimusic.view.HeaderView>
+
+            <vnp.com.mimusic.view.VTTextView
+                android:id="@+id/huongdanbanhangofdichvu_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dimen_10dp"
+                android:textColor="#336666"
+                android:textSize="@dimen/dimen_13dp" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

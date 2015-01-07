@@ -33,6 +33,7 @@ import com.aretha.slidemenudemo.fragment.DichVuFragment;
 import com.aretha.slidemenudemo.fragment.GuiDvChoNhieuNguoiFragment;
 import com.aretha.slidemenudemo.fragment.HomeFragment;
 import com.aretha.slidemenudemo.fragment.HuongDanBanHangFragment;
+import com.aretha.slidemenudemo.fragment.HuongDanBanHangOfDichVuFragment;
 import com.aretha.slidemenudemo.fragment.InforFragment;
 import com.aretha.slidemenudemo.fragment.LichSuBanHangFragment;
 import com.aretha.slidemenudemo.fragment.MauMoiFragment;
@@ -259,6 +260,15 @@ public class RootMenuActivity extends FragmentActivity {
 		Bundle bundle = new Bundle();
 		HuongDanBanHangFragment chitiettintuc = new HuongDanBanHangFragment();
 		bundle.putBoolean("addfragment", true);
+		chitiettintuc.setArguments(bundle);
+		changeFragemt(R.id.root_main_fragment, chitiettintuc, true);
+	}
+
+	public void gotoHuongDanBanHangOfDichVh(String service_guide) {
+		Bundle bundle = new Bundle();
+		HuongDanBanHangOfDichVuFragment chitiettintuc = new HuongDanBanHangOfDichVuFragment();
+		bundle.putBoolean("addfragment", true);
+		bundle.putString("service_guide", service_guide);
 		chitiettintuc.setArguments(bundle);
 		changeFragemt(R.id.root_main_fragment, chitiettintuc, true);
 	}

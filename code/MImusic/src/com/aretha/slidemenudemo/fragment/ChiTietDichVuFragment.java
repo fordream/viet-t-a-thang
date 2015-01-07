@@ -62,15 +62,14 @@ public class ChiTietDichVuFragment extends BaseFragment implements View.OnClickL
 					service_guide = getActivity().getString(R.string.nodata);
 				}
 
-				ContentValues contentValues = new ContentValues();
-				contentValues.put("btn_right", getString(R.string.dong));
-				contentValues.put("btn_left_close", true);
-				contentValues.put("name", getString(R.string.huongdanbanhang));
-				contentValues.put("content", service_guide);
-				DangKyDialog dangKyDialog = new DangKyDialog(getActivity(), contentValues);
-				dangKyDialog.show();
-				// TODO
-				// (((RootMenuActivity) getActivity())).gotoHuongDanBanHang();
+//				ContentValues contentValues = new ContentValues();
+//				contentValues.put("btn_right", getString(R.string.dong));
+//				contentValues.put("btn_left_close", true);
+//				contentValues.put("name", getString(R.string.huongdanbanhang));
+//				contentValues.put("content", service_guide);
+//				DangKyDialog dangKyDialog = new DangKyDialog(getActivity(), contentValues);
+//				dangKyDialog.show();
+				(((RootMenuActivity) getActivity())).gotoHuongDanBanHangOfDichVh(service_guide);
 			}
 		});
 
