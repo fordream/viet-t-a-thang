@@ -12,6 +12,7 @@ import vnp.com.mimusic.adapter.HomeAdapter;
 import vnp.com.mimusic.view.HeaderView;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -26,6 +27,8 @@ public class HomeFragment extends Fragment implements OnItemClickListener, View.
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 	}
+
+	private HomeAdapter adapter;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -43,40 +46,24 @@ public class HomeFragment extends Fragment implements OnItemClickListener, View.
 		ListView menu_left_list = (ListView) view.findViewById(R.id.home_list);
 		menu_left_list.addHeaderView(home_header);
 		menu_left_list.setOnItemClickListener(this);
-		List<ContentValues> objects = new ArrayList<ContentValues>();
-		addBlock(R.string.khuyenmai, objects);
-		addBlock(R.string.recoment, objects);
+		Cursor cursor = getActivity().getContentResolver().query(DichVu.CONTENT_URI, null, null, null, null);
+		if (cursor != null) {
+			adapter = new HomeAdapter(getActivity(), cursor) {
 
-		menu_left_list.setAdapter(new HomeAdapter(getActivity(), objects) {
-			@Override
-			public void moiDVChoNhieuNguoi(ContentValues contentValues) {
-				(((RootMenuActivity) getActivity())).gotoMoiDvChoNhieuNguoi(contentValues.getAsString(DichVu.ID));
-			}
+				@Override
+				public void updateUI() {
 
-			@Override
-			public void updateUI() {
+				}
 
-			}
-		});
+				@Override
+				public void moiDVChoNhieuNguoi(ContentValues contentValues) {
+					(((RootMenuActivity) getActivity())).gotoMoiDvChoNhieuNguoi(contentValues.getAsString(DichVu.ID));
+				}
+			};
+			menu_left_list.setAdapter(adapter);
+		}
 
 		return view;
-	}
-
-	private void addBlock(int recoment, List<ContentValues> objects) {
-
-		for (int i = 0; i < 10; i++) {
-			ContentValues contentValues = new ContentValues();
-			contentValues.put("type", "dangky");
-			contentValues.put(DichVu.ID, "109");
-			contentValues.put("dangky", new Random().nextBoolean());
-			contentValues.put("icon", "icon");
-			contentValues.put("name", "Dịch vụ Imusiz " + i);
-			contentValues.put("link", "http://imusiz.vn/" + i);
-			contentValues
-					.put("content",
-							"Website nhạc trực tuyến lớn nhất VN, đầy đủ album, video clip tất cả các thể loại, cập nhật liên tục bài hát mới, ca khúc hot, MV chất lượng cao, cài đặt nhạc chờ, nhạc chuông hay nhất hiện nay. ... Infinite F · Zing Music Awards 2014 ");
-			objects.add(contentValues);
-		}
 	}
 
 	@Override

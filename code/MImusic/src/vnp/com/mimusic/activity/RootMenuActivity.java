@@ -208,8 +208,8 @@ public class RootMenuActivity extends FragmentActivity {
 
 		Intent intent = new Intent(this, RootMenuActivity.class);
 		intent.putExtra("type", Conts.CHITIETDICHVU);
-		ContentValues cursor = (ContentValues) parent.getItemAtPosition(position);
-		intent.putExtra("id", cursor.getAsString(User.ID));
+		Cursor cursor = (Cursor) parent.getItemAtPosition(position);
+		intent.putExtra("id", cursor.getString(cursor.getColumnIndex(DichVu.ID)));
 		getParent().startActivity(intent);
 		overridePendingTransitionStartActivity();
 	}

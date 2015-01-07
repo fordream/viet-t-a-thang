@@ -1,10 +1,7 @@
 package vnp.com.mimusic.adapter;
 
-import java.util.Random;
-
 import vnp.com.db.DichVu;
 import vnp.com.mimusic.R;
-import vnp.com.mimusic.base.diablog.DangKyDialog;
 import vnp.com.mimusic.util.ImageLoaderUtils;
 import vnp.com.mimusic.view.DichVuItemView;
 import android.content.ContentValues;
@@ -12,8 +9,8 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;

@@ -1,7 +1,5 @@
 package com.aretha.slidemenudemo.fragment;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import vnp.com.api.API;
@@ -13,12 +11,10 @@ import vnp.com.mimusic.adapter.DichVuAdapter;
 import vnp.com.mimusic.base.diablog.DangKyDialog;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
-import vnp.com.mimusic.util.LogUtils;
 import vnp.com.mimusic.view.LoadingView;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -68,31 +64,6 @@ public class DichVuFragment extends BaseFragment implements OnItemClickListener,
 			@Override
 			public void onSuscess(JSONObject response) {
 				Conts.showView(loadingView1, false);
-//				try {
-//					JSONArray jsonArray = response.getJSONArray("data");
-//					for (int i = 0; i < jsonArray.length(); i++) {
-//						JSONObject jsonObject = jsonArray.getJSONObject(i);
-//						ContentValues contentValues = new ContentValues();
-//						contentValues.put(DichVu.ID, jsonObject.getString(DichVu.ID));
-//						contentValues.put(DichVu.service_name, jsonObject.getString(DichVu.service_name));
-//						contentValues.put(DichVu.service_code, jsonObject.getString(DichVu.service_code));
-//						contentValues.put(DichVu.service_icon, jsonObject.getString(DichVu.service_icon));
-//						contentValues.put(DichVu.service_content, jsonObject.getString(DichVu.service_content));
-//						contentValues.put(DichVu.service_price, jsonObject.getString(DichVu.service_price));
-//						contentValues.put(DichVu.service_status, jsonObject.getString(DichVu.service_status));
-//
-//						String selection = String.format("%s='%s'", DichVu.ID, jsonObject.getString(DichVu.ID));
-//						Cursor cursor = getActivity().getContentResolver().query(DichVu.CONTENT_URI, null, selection, null, null);
-//
-//						if (cursor != null && cursor.getCount() >= 1) {
-//							cursor.close();
-//							getActivity().getContentResolver().update(DichVu.CONTENT_URI, contentValues, selection, null);
-//						} else {
-//							getActivity().getContentResolver().insert(DichVu.CONTENT_URI, contentValues);
-//						}
-//					}
-//				} catch (JSONException e) {
-//				}
 				callSHowData();
 			}
 
