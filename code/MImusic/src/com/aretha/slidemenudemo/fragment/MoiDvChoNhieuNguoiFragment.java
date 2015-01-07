@@ -220,7 +220,37 @@ public class MoiDvChoNhieuNguoiFragment extends Fragment implements OnItemClickL
 	}
 
 	private void gotoLoiMoi(String id) {
-		(((RootMenuActivity) getActivity())).gotoLoiMoi(id);
+
+		int count = adaper.getListAdd().size() + adaper.getListSeList().size();
+		if (count == 0 || count > 5) {
+			Conts.toast(getActivity(), getString(R.string.validateaddnguoi));
+			return;
+		}
+
+		// TODO
+		String customers = "";
+		for (String _id : adaper.getListSeList()) {
+			String user = adaper.getUserFrom_ID(_id);
+			if (!Conts.isBlank(user)) {
+				if (customers.endsWith("\"")) {
+					customers = String.format("%s,\"%s\"", customers, user);
+				} else {
+					customers = String.format("\"%s\"", user);
+				}
+			}
+		}
+
+		for (String user : adaper.getListAdd()) {
+			if (!Conts.isBlank(user)) {
+				if (customers.endsWith("\"")) {
+					customers = String.format("%s,\"%s\"", customers, user);
+				} else {
+					customers = String.format("\"%s\"", user);
+				}
+			}
+		}
+		customers = String.format("{%s}", customers);
+		(((RootMenuActivity) getActivity())).gotoLoiMoi(id, customers);
 	}
 
 	@Override

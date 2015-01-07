@@ -8,9 +8,13 @@ import vnp.com.api.API;
 import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.DichVu;
 import vnp.com.mimusic.R;
+import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.adapter.MauMoiAdaper;
 import vnp.com.mimusic.util.Conts;
+import vnp.com.mimusic.util.Conts.DialogCallBack;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
+import vnp.com.mimusic.util.LogUtils;
+import android.app.ProgressDialog;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -20,6 +24,9 @@ import android.widget.ListView;
 
 public class MauMoiFragment extends BaseFragment implements android.view.View.OnClickListener {
 	private View loading;
+	private String customers;
+	private String service_code = "";
+	private MauMoiAdaper adaper;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -27,10 +34,14 @@ public class MauMoiFragment extends BaseFragment implements android.view.View.On
 		loading = view.findViewById(R.id.loadingView1);
 		view.setOnClickListener(null);
 		final ListView maumoi_list = (ListView) view.findViewById(R.id.maumoi_list);
-		// maumoi_list.setAdapter(new MauMoiAdaper(getActivity(), new String[] {
-		// "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a",
-		// "a", "a" }));
 
+		view.findViewById(R.id.moinhieudichvu_dialog_moi).setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				moi();
+			}
+		});
 		view.findViewById(R.id.header_btn_left).setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -48,7 +59,10 @@ public class MauMoiFragment extends BaseFragment implements android.view.View.On
 		});
 
 		final String id = getArguments().getString(DichVu.ID);
-		String service_code = "";
+		customers = getArguments().getString("customers");
+
+		LogUtils.e("customers", customers);
+
 		String selection = DichVu.ID + "='" + id + "'";
 		final Cursor mcursor = getActivity().getContentResolver().query(DichVu.CONTENT_URI, null, selection, null, null);
 
@@ -66,7 +80,7 @@ public class MauMoiFragment extends BaseFragment implements android.view.View.On
 			public void onSuscess(JSONObject response) {
 				try {
 					JSONArray array = response.getJSONArray("data");
-					MauMoiAdaper adaper = new MauMoiAdaper(getActivity(), new JSONObject[] {},array);
+					adaper = new MauMoiAdaper(getActivity(), new JSONObject[] {}, array);
 					maumoi_list.setAdapter(adaper);
 
 				} catch (JSONException e) {
@@ -92,6 +106,54 @@ public class MauMoiFragment extends BaseFragment implements android.view.View.On
 			}
 		});
 		return view;
+	}
+
+	protected void moi() {
+		Bundle bundle = new Bundle();
+		bundle.putString("service_code", service_code);
+		bundle.putString("customers", customers);
+		bundle.putString("template_id", adaper != null ? adaper.getTemplate_id() : "");
+		getmImusicService().execute(RequestMethod.POST, API.API_R015, bundle, new IContsCallBack() {
+			ProgressDialog dialog;
+
+			@Override
+			public void onSuscess(JSONObject response) {
+				String message = "";
+				try {
+					message = response.getString("message");
+				} catch (JSONException e1) {
+				}
+
+				if (Conts.isBlank(message)) {
+					message = getActivity().getString(R.string.success_moi);
+				} else {
+					message = String.format("%s\n%s", message, getActivity().getString(R.string.success_moi));
+				}
+				Conts.showDialogDongYCallBack(getActivity(), message, new DialogCallBack() {
+					@Override
+					public void callback(Object object) {
+						((RootMenuActivity) getActivity()).closeActivity();
+					}
+				});
+			}
+
+			@Override
+			public void onStart() {
+				dialog = ProgressDialog.show(getActivity(), null, getActivity().getString(R.string.loading));
+			}
+
+			@Override
+			public void onError(String message) {
+				Conts.showDialogThongbao(getActivity(), message);
+				dialog.dismiss();
+			}
+
+			@Override
+			public void onError() {
+				onError("onError");
+				dialog.dismiss();
+			}
+		});
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package vnp.com.mimusic;
 import vnp.com.api.MImusicBin;
 import vnp.com.api.MImusicService;
 import vnp.com.db.User;
+import vnp.com.mimusic.util.Conts;
 import android.app.Application;
 import android.content.ComponentName;
 import android.content.ContentResolver;
@@ -77,6 +78,9 @@ public class VApplication extends Application {
 							Cursor pCur = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?", new String[] { id }, null);
 							while (pCur.moveToNext()) {
 								String phoneNo = pCur.getString(pCur.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+								if (!Conts.isBlank(phoneNo)) {
+									phoneNo = phoneNo.replace(" ", "");
+								}
 								if (name == null || name != null && name.trim().equals("")) {
 									name = phoneNo;
 								}
@@ -96,7 +100,6 @@ public class VApplication extends Application {
 									values.put(User.STATUS, "0");
 									getContentResolver().insert(User.CONTENT_URI, values);
 								}
-
 							}
 							pCur.close();
 						}

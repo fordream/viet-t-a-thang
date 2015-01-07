@@ -2,6 +2,7 @@ package vnp.com.mimusic.util;
 
 import java.util.Set;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import vnp.com.api.ExeCallBack;
@@ -11,7 +12,9 @@ import vnp.com.api.RestClient;
 import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.User;
 import vnp.com.mimusic.R;
+import vnp.com.mimusic.base.diablog.DangKyDialog;
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -173,13 +176,17 @@ public class Conts {
 			@Override
 			public void onCallBack(Object object) {
 				super.onCallBack(object);
-
+				String message = "";
 				RestClient restClient = (RestClient) object;
+				// if(restClient.getResponseCode() ==){
+				//
+				// }
+
 				try {
-					LogUtils.e("restClient.getResponse()", restClient.getResponse());
+					LogUtils.e("restClient.getResponse()", restClient.getResponseCode() + " : " + restClient.getResponse());
 					JSONObject jsonObject = new JSONObject(restClient.getResponse());
 					String errorCode = jsonObject.getString("errorCode");
-					String message = jsonObject.getString("message");
+					message = jsonObject.getString("message");
 					if ("0".equals(errorCode)) {
 						contsCallBack.onSuscess(jsonObject);
 					} else {
@@ -193,6 +200,23 @@ public class Conts {
 						} catch (Exception exception) {
 
 						}
+
+						try {
+							JSONArray errorMessage = jsonObject.getJSONArray("customers_fail");
+							String mNewData = "";
+							for (int i = 0; i < errorMessage.length(); i++) {
+								String newData = errorMessage.get(i).toString();
+								mNewData += "" + newData;
+							}
+
+							if (!Conts.isBlank(mNewData)) {
+								mNewData = mNewData.replace("{", "").replace("}", "").replace("\"\"", " , ").replace("\"", "");
+								message += "\n" + String.format(activity.getString(R.string.danhsachsodienthoaikhongthemoi), mNewData);
+							}
+						} catch (Exception exception) {
+
+						}
+
 						contsCallBack.onError(message);
 					}
 				} catch (Exception exception) {
@@ -212,6 +236,8 @@ public class Conts {
 		Set<String> keys = bundles.keySet();
 		for (String key : keys) {
 			resClientCallBack.addParam(key, bundles.getString(key));
+
+			LogUtils.e("para", key + " : " + bundles.getString(key));
 		}
 		ExeCallBack exeCallBack = new ExeCallBack();
 		exeCallBack.setExeCallBackOption(new ExeCallBackOption(activity, false, R.string.loading, null));
@@ -284,5 +310,35 @@ public class Conts {
 		}
 
 		return length == 9 || length == 10;
+	}
+
+	public static void showDialogThongbao(Context context, String message) {
+		ContentValues contentValues = new ContentValues();
+		contentValues.put("btn_right", context.getString(R.string.dong));
+		contentValues.put("btn_left_close", true);
+		contentValues.put("name", context.getString(R.string.thongbao));
+		contentValues.put("content", message);
+		DangKyDialog dangKyDialog = new DangKyDialog(context, contentValues);
+		dangKyDialog.show();
+	}
+
+	public static void showDialogDongYCallBack(Context context, String message, final DialogCallBack dialogCallBack) {
+		ContentValues contentValues = new ContentValues();
+		contentValues.put("btn_right", context.getString(R.string.dongy));
+		contentValues.put("btn_left_close", true);
+		contentValues.put("name", context.getString(R.string.thongbao));
+		contentValues.put("content", message);
+		DangKyDialog dangKyDialog = new DangKyDialog(context, contentValues) {
+			@Override
+			public void mOpen() {
+				super.mOpen();
+				dialogCallBack.callback(null);
+			}
+		};
+		dangKyDialog.show();
+	}
+
+	public interface DialogCallBack {
+		public void callback(Object object);
 	}
 }

@@ -73,4 +73,12 @@ public class MauMoiAdaper extends ArrayAdapter<JSONObject> {
 
 		return convertView;
 	}
+
+	public String getTemplate_id() {
+		try {
+			return array.getJSONObject(mPosition).getString("id");
+		} catch (JSONException e) {
+			return "";
+		}
+	}
 }

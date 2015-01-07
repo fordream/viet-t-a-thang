@@ -239,13 +239,14 @@ public class RootMenuActivity extends FragmentActivity {
 		overridePendingTransitionStartActivity();
 	}
 
-	public void gotoLoiMoi(String id) {
+	public void gotoLoiMoi(String id, String customers) {
 
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
 		MauMoiFragment mauMoiFragment = new MauMoiFragment();
 		Bundle args = new Bundle();
 		args.putString("id", id);
+		args.putString("customers", customers);
 		mauMoiFragment.setArguments(args);
 		transaction.setCustomAnimations(R.anim.abc_slide_in_top, R.anim.abc_slide_in_top, R.anim.abc_slide_out_top, R.anim.abc_slide_out_top);
 		transaction.add(R.id.root_main_fragment, mauMoiFragment, "" + System.currentTimeMillis());
@@ -278,5 +279,10 @@ public class RootMenuActivity extends FragmentActivity {
 
 	private void overridePendingTransitionStartActivity() {
 		getParent().overridePendingTransition(R.anim.abc_scale_in, R.anim.abc_nothing);
+	}
+
+	public void closeActivity() {
+		finish();
+		overridePendingTransition(R.anim.abc_scale_in, R.anim.abc_nothing);
 	}
 }

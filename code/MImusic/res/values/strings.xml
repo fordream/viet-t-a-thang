@@ -122,6 +122,7 @@
     <string name="chonsdt">Chọn số điện thoại</string>
     <string name="chondichvu">Chọn dịch vụ</string>
     <string name="chonngay">Chọn ngày</string>
+    <string name="danhsachsodienthoaikhongthemoi">Bạn không thể mời các số điện thoại sau (%s).</string>
 
     <color name="bangxephang_header_activr">#a73444</color>
     <color name="bangxephang_header_un_active">#475055</color>
@@ -136,5 +137,8 @@
 
     <string name="nodata">Không có dữ liệu</string>
     <string name="dong">Đóng</string>
+    <string name="thongbao">Thông báo</string>
+    <string name="validateaddnguoi">Bạn chỉ có thể mời 1 đến 5 người bạn 1 lần.</string>
+    <string name="success_moi">Bạn đã mới thành công, bạn chọn \"Đồng ý\" để đóng màn hình mời.</string>
 
 </resources>
