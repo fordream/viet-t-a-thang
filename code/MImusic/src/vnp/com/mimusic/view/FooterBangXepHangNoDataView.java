@@ -29,6 +29,7 @@ public class FooterBangXepHangNoDataView extends LinearLayout {
 	private void init() {
 		((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.bangxephang_nodata, this);
 		no_data_message = (TextView) findViewById(R.id.no_data_message);
+		findViewById(R.id.chitietdichvu_no_feature_main).setOnClickListener(null);
 	}
 
 	/**
@@ -38,7 +39,7 @@ public class FooterBangXepHangNoDataView extends LinearLayout {
 	 */
 	public void setText(boolean needShow, String text) {
 		no_data_message.setText(text);
-		no_data_message.setVisibility(needShow ? VISIBLE : GONE);
+		findViewById(R.id.chitietdichvu_no_feature_main).setVisibility(needShow ? VISIBLE : GONE);
 	}
 
 	/**
@@ -48,6 +49,6 @@ public class FooterBangXepHangNoDataView extends LinearLayout {
 	 */
 	public void setText(boolean needShow, int text) {
 		no_data_message.setText(text);
-		no_data_message.setVisibility(needShow ? VISIBLE : GONE);
+		findViewById(R.id.chitietdichvu_no_feature_main).setVisibility(needShow ? VISIBLE : GONE);
 	}
 }
