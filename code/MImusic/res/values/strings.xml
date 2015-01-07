@@ -112,6 +112,7 @@
         <item>thất bại</item>
     </string-array>
 
+    <string name="noappsendmessage">Không tìm thấy trình gửi tin nhắn.</string>
     <string name="thanhcong">Thành công</string>
     <string name="thatbai">Thất bại</string>
     <string name="chontrangthai">Chọn trạng thái</string>

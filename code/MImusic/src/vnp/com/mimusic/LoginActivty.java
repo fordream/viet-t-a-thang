@@ -38,6 +38,8 @@ public class LoginActivty extends Activity implements OnClickListener {
 		findViewById(R.id.activity_login_btn).setOnClickListener(this);
 		findViewById(R.id.activity_login_btn).setOnTouchListener(new OnTouchAnimation());
 
+		findViewById(R.id.activity_login_soantin).setOnClickListener(this);
+		findViewById(R.id.activity_login_soantin).setOnTouchListener(new OnTouchAnimation());
 		HeaderView header = (HeaderView) findViewById(R.id.activity_login_header);
 		header.setTextHeader(R.string.dangnhap);
 		header.showButton(false, false);
@@ -136,6 +138,19 @@ public class LoginActivty extends Activity implements OnClickListener {
 
 	@Override
 	public void onClick(View v) {
+		if (v.getId() == R.id.activity_login_soantin) {
+
+			try {
+				Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+				sendIntent.putExtra("sms_body", "MK");
+				sendIntent.setType("vnd.android-dir/mms-sms");
+				sendIntent.putExtra("address", "567");
+				startActivity(sendIntent);
+			} catch (Exception exception) {
+				Conts.toast(this, getString(R.string.noappsendmessage));
+			}
+			return;
+		}
 		String numberPhone = ((TextView) findViewById(R.id.activity_login_number_phone)).getText().toString();
 		final String password = ((TextView) findViewById(R.id.activity_login_password)).getText().toString();
 
