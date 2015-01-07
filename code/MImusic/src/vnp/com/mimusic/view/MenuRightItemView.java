@@ -71,6 +71,7 @@ public class MenuRightItemView extends LinearLayout {
 		} else {
 			menu_right_item_img_icon.setBackgroundResource(R.drawable.no_avatar);
 		}
-		// menu_right_item_img_icon.setBackgroundResource(R.drawable.bangxephang_avatar_example);
+
+		String dvDaSuDung = cursor.getString(cursor.getColumnIndex(User.LISTIDDVSUDUNG));
 	}
 }

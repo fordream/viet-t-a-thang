@@ -356,15 +356,28 @@ public class MImusicService extends Service {
 				contentValues.put(User.USER, phone);
 				contentValues.put(User.NAME_CONTACT, name);
 				contentValues.put(User.STATUS, "0");
+
+				String service_codes = "";
+				if (jsonObject.has("services")) {
+					JSONArray services = jsonObject.getJSONArray("services");
+
+					for (int in = 0; in < services.length(); in++) {
+						// id,service_name,service_code,service_icon
+						String service_code = services.getJSONObject(in).getString("service_code");
+						if (Conts.isBlank(service_codes)) {
+							service_codes = service_code;
+						} else {
+							service_codes = service_codes + "," + service_code;
+						}
+					}
+				}
+
+				contentValues.put(User.LISTIDDVSUDUNG, service_codes);
+
 				if (Conts.haveContact(phone, this)) {
 					getContentResolver().update(User.CONTENT_URI, contentValues, String.format("%s = '%s'", User.USER, phone), null);
 				} else {
 					getContentResolver().insert(User.CONTENT_URI, contentValues);
-				}
-
-				if (jsonObject.has("services")) {
-					JSONArray services = jsonObject.getJSONArray("services");
-					// id,service_name,service_code,service_icon
 				}
 			}
 		} catch (Exception e) {
@@ -372,11 +385,24 @@ public class MImusicService extends Service {
 		}
 	}
 
+	private Map<String, String> mapDichVu = new HashMap<String, String>();
+
+	public String getNameDichVuFromServiceCode(String service_code) {
+		if (Conts.isBlank(service_code)) {
+			return "";
+		}
+		return mapDichVu.get(service_code) + "";
+	}
+
 	private void updateDichVu(JSONObject response) {
 		try {
 			JSONArray jsonArray = response.getJSONArray("data");
 			for (int i = 0; i < jsonArray.length(); i++) {
 				JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+				mapDichVu.remove(jsonObject.getString(DichVu.service_code));
+				mapDichVu.put(jsonObject.getString(DichVu.service_code), jsonObject.getString(DichVu.service_name));
+
 				ContentValues contentValues = new ContentValues();
 				contentValues.put(DichVu.ID, jsonObject.getString(DichVu.ID));
 				contentValues.put(DichVu.service_name, jsonObject.getString(DichVu.service_name));

@@ -30,13 +30,6 @@ public class User {
 	public static final String LISTIDUSERDAMOI = "listiduserdamoi";
 	public static final String COVER = "COVER";
 
-	// public static final String SOGIAODICHTHANHCONGTRONGTHANG =
-	// "SOGIAODICHTHANHCONGTRONGTHANG";
-	// public static final String SOGIAODICHTHANHCONG = "SOGIAODICHTHANHCONG";
-	// public static final String SOTIENHOAHONGTRONGTHANG =
-	// "SOTIENHOAHONGTRONGTHANG";
-	// public static final String SOTIENHOAHONG = "SOTIENHOAHONG";
-
 	public static final String birthday = "birthday";
 	public static final String address = "address";
 
