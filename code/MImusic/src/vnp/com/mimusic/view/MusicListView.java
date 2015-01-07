@@ -9,7 +9,7 @@ import android.widget.ListView;
 
 //vnp.com.mimusic.view.MusicListView
 public class MusicListView extends ListView {
-	private HeaderListTextView headerListTextView;
+	private FooterBangXepHangNoDataView headerListTextView;
 
 	public MusicListView(Context context) {
 		super(context);
@@ -35,7 +35,7 @@ public class MusicListView extends ListView {
 		} catch (Exception exception) {
 
 		}
-		headerListTextView = new HeaderListTextView(getContext());
+		headerListTextView = new FooterBangXepHangNoDataView(getContext());
 		headerListTextView.setText(false, null);
 		addFooterView(headerListTextView);
 	}

@@ -10,7 +10,7 @@ import vnp.com.mimusic.R;
 import vnp.com.mimusic.adapter.ChiTietListSuBanHangAdaper;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
-import vnp.com.mimusic.view.HeaderListTextView;
+import vnp.com.mimusic.view.FooterBangXepHangNoDataView;
 import vnp.com.mimusic.view.HeaderView;
 import vnp.com.mimusic.view.LoadingView;
 import android.os.Bundle;

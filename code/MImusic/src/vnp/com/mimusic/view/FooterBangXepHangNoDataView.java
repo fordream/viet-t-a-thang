@@ -13,15 +13,15 @@ import android.widget.TextView;
  * @author teemo
  * 
  */
-public class HeaderListTextView extends LinearLayout {
+public class FooterBangXepHangNoDataView extends LinearLayout {
 	private TextView no_data_message;
 
-	public HeaderListTextView(Context context) {
+	public FooterBangXepHangNoDataView(Context context) {
 		super(context);
 		init();
 	}
 
-	public HeaderListTextView(Context context, AttributeSet attrs) {
+	public FooterBangXepHangNoDataView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		init();
 	}
