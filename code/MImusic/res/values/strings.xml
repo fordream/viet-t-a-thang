@@ -130,4 +130,6 @@
     <color name="cwheelcolor">#993333</color>
     <color name="red_purple">#9f1f31</color>
 
+    <string name="nodata">Không có dữ liệu</string>
+
 </resources>

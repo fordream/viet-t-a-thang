@@ -32,7 +32,7 @@ public class API {
 	/**
 	 * API_R008: Lịch sử giao dịch
 	 */
-	public static final String API_R008 = "historySale";
+	public static final String API_R008 = "historySale"; // OKIE
 	/**
 	 * API_R009: Báo cáo chi tiết
 	 */

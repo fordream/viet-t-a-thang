@@ -10,6 +10,7 @@ import vnp.com.mimusic.R;
 import vnp.com.mimusic.adapter.ChiTietListSuBanHangAdaper;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
+import vnp.com.mimusic.view.HeaderListTextView;
 import vnp.com.mimusic.view.HeaderView;
 import vnp.com.mimusic.view.LoadingView;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ public class ChiTietListSuBanHangFragment extends BaseFragment implements OnItem
 	}
 
 	private LoadingView loadingView;
+	private HeaderListTextView headerListTextView;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -45,15 +47,19 @@ public class ChiTietListSuBanHangFragment extends BaseFragment implements OnItem
 				getActivity().onBackPressed();
 			}
 		});
-
+		headerListTextView = new HeaderListTextView(getActivity());
+		headerListTextView.setText(false, null);
 		home_list = (ListView) view.findViewById(R.id.home_list);
-
+		home_list.addHeaderView(headerListTextView);
 		getmImusicService().execute(RequestMethod.GET, API.API_R008, getArguments(), new IContsCallBack() {
 			@Override
 			public void onSuscess(JSONObject response) {
 				try {
 					JSONArray data = response.getJSONArray("data");
 					home_list.setAdapter(new ChiTietListSuBanHangAdaper(getActivity(), new JSONObject[] {}, data));
+					if (data.length() == 0) {
+						headerListTextView.setText(true, R.string.nodata);
+					}
 				} catch (JSONException e) {
 				}
 
@@ -69,17 +75,18 @@ public class ChiTietListSuBanHangFragment extends BaseFragment implements OnItem
 			public void onError(String message) {
 				Conts.showView(loadingView, false);
 				Conts.toast(getActivity(), message);
+
+				home_list.setAdapter(new ChiTietListSuBanHangAdaper(getActivity(), new JSONObject[] {}, new JSONArray()));
+				headerListTextView.setText(true, message);
 			}
 
 			@Override
 			public void onError() {
-				Conts.showView(loadingView, false);
-				Conts.toast(getActivity(), "onError");
+				onError("onError");
+				// Conts.showView(loadingView, false);
+				// Conts.toast(getActivity(), "onError");
 			}
 		});
-		// home_list.setAdapter(new ChiTietListSuBanHangAdaper(getActivity(),
-		// new
-		// String[]{"a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a",}));
 
 		return view;
 	}
