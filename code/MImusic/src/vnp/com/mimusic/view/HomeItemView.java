@@ -60,10 +60,12 @@ public class HomeItemView extends LinearLayout {
 
 		findViewById(R.id.home_item_right_control).setBackgroundColor(color);
 
-		boolean type = contentValues.getAsBoolean("type");
+		// boolean type = contentValues.getAsBoolean("type");
 
-		findViewById(R.id.home_item_header).setVisibility(type ? View.VISIBLE : View.GONE);
-		findViewById(R.id.home_item_main).setVisibility(!type ? View.VISIBLE : View.GONE);
+		// findViewById(R.id.home_item_header).setVisibility(type ? View.VISIBLE
+		// : View.GONE);
+		// (R.id.home_item_main).setVisibility(!type ? View.VISIBLE :
+		// View.GONE);
 
 		ImageView home_item_img_icon = (ImageView) findViewById(R.id.home_item_img_icon);
 		View home_item_right_control_1 = (View) findViewById(R.id.home_item_right_control_1);
@@ -81,22 +83,12 @@ public class HomeItemView extends LinearLayout {
 		home_item_tv_link.setText(contentValues.getAsString("link"));
 		home_item_tv_content.setText(contentValues.getAsString("content"));
 
-		home_item_right_control_1.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (!isDangKy) {
-					DangKyDialog dangKyDialog = new DangKyDialog(v.getContext(), contentValues);
-					dangKyDialog.show();
-				}
-			}
-		});
-
-		home_item_right_control_2.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-
-			}
-		});
+//		home_item_right_control_2.setOnClickListener(new OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//
+//			}
+//		});
 	}
 }

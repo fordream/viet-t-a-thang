@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import vnp.com.db.DichVu;
+import vnp.com.db.User;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.adapter.HomeAdapter;
@@ -47,8 +49,13 @@ public class HomeFragment extends Fragment implements OnItemClickListener, View.
 
 		menu_left_list.setAdapter(new HomeAdapter(getActivity(), objects) {
 			@Override
-			public void moiDVChoNhieuNguoi() {
-				(((RootMenuActivity) getActivity())).gotoMoiDvChoNhieuNguoi("");
+			public void moiDVChoNhieuNguoi(ContentValues contentValues) {
+				(((RootMenuActivity) getActivity())).gotoMoiDvChoNhieuNguoi(contentValues.getAsString(DichVu.ID));
+			}
+
+			@Override
+			public void updateUI() {
+
 			}
 		});
 
@@ -59,8 +66,8 @@ public class HomeFragment extends Fragment implements OnItemClickListener, View.
 
 		for (int i = 0; i < 10; i++) {
 			ContentValues contentValues = new ContentValues();
-			contentValues.put("type", false);
-
+			contentValues.put("type", "dangky");
+			contentValues.put(DichVu.ID, "109");
 			contentValues.put("dangky", new Random().nextBoolean());
 			contentValues.put("icon", "icon");
 			contentValues.put("name", "Dịch vụ Imusiz " + i);
@@ -79,7 +86,6 @@ public class HomeFragment extends Fragment implements OnItemClickListener, View.
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-		(((RootMenuActivity) getActivity())).gotoChiTietDichVu(parent, view, position, id);
+		(((RootMenuActivity) getActivity())).gotoChiTietDichVuFromHome(parent, view, position, id);
 	}
 }

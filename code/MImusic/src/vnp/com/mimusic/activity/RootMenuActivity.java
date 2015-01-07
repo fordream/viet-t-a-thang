@@ -12,6 +12,7 @@ import vnp.com.mimusic.R;
 import vnp.com.mimusic.main.BaseMusicSlideMenuActivity;
 import vnp.com.mimusic.util.Conts;
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -199,6 +200,16 @@ public class RootMenuActivity extends FragmentActivity {
 		intent.putExtra("type", Conts.CHITIETDICHVU);
 		Cursor cursor = (Cursor) parent.getItemAtPosition(position);
 		intent.putExtra("id", cursor.getString(cursor.getColumnIndex(DichVu.ID)));
+		getParent().startActivity(intent);
+		overridePendingTransitionStartActivity();
+	}
+
+	public void gotoChiTietDichVuFromHome(AdapterView<?> parent, View view, int position, long id) {
+
+		Intent intent = new Intent(this, RootMenuActivity.class);
+		intent.putExtra("type", Conts.CHITIETDICHVU);
+		ContentValues cursor = (ContentValues) parent.getItemAtPosition(position);
+		intent.putExtra("id", cursor.getAsString(User.ID));
 		getParent().startActivity(intent);
 		overridePendingTransitionStartActivity();
 	}

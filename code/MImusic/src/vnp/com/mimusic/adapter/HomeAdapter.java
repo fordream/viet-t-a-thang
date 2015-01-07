@@ -3,6 +3,7 @@ package vnp.com.mimusic.adapter;
 import java.util.List;
 
 import vnp.com.mimusic.R;
+import vnp.com.mimusic.base.diablog.DangKyDialog;
 import vnp.com.mimusic.view.HomeItemView;
 import android.content.ContentValues;
 import android.content.Context;
@@ -24,19 +25,35 @@ public abstract class HomeAdapter extends ArrayAdapter<ContentValues> {
 
 		((HomeItemView) convertView).setData(getItem(position), position);
 
+		final ContentValues contentValues = getItem(position);
+		convertView.findViewById(R.id.home_item_right_control_1).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				DangKyDialog dangKyDialog = new DangKyDialog(v.getContext(), contentValues) {
+					@Override
+					public void updateUiDangKy() {
+						super.updateUiDangKy();
+
+						updateUI();
+					}
+				};
+				dangKyDialog.show();
+			}
+		});
+
 		convertView.findViewById(R.id.home_item_right_control_2).setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				//if (!((ContentValues) getItem(position)).getAsBoolean("dangky")){
-					moiDVChoNhieuNguoi();
-				//}
+				moiDVChoNhieuNguoi(contentValues);
 			}
 		});
 
 		return convertView;
 	}
 
-	public abstract void moiDVChoNhieuNguoi();
+	public abstract void updateUI();
+
+	public abstract void moiDVChoNhieuNguoi(ContentValues contentValues);
 
 }
