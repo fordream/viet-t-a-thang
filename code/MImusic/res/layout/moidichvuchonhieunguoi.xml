@@ -25,37 +25,54 @@
         android:gravity="center"
         android:padding="@dimen/dimen_10dp" >
 
-        <Button
+        <CheckBox
             android:id="@+id/moidichvuchonhieunguoi_contact"
-            android:layout_width="@dimen/dimen_100dp"
+            android:layout_width="@dimen/dimen_35dp"
             android:layout_height="@dimen/dimen_35dp"
             android:layout_marginLeft="@dimen/dimen_5dp"
             android:layout_marginRight="@dimen/dimen_5dp"
-            android:background="@drawable/xml_btn_infor"
-            android:text="@string/timnhieuhon"
+            android:background="@drawable/moidnhieudichvu_selected"
+            android:button="@null"
             android:textColor="@android:color/white"
             android:textSize="@dimen/dimen_13dp" />
 
-        <EditText
-            android:id="@+id/moidichvuchonhieunguoi_number"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_35dp"
-            android:layout_marginLeft="@dimen/dimen_5dp"
-            android:background="@drawable/menu_right_edit"
-            android:gravity="center_vertical"
-            android:hint="@string/nhapsodienthoai"
-            android:inputType="phone"
-            android:paddingLeft="@dimen/dimen_15dp"
-            android:singleLine="true"
-            android:textColor="#336666"
-            android:textSize="@dimen/dimen_14dp"
-            android:textStyle="bold" />
+            android:layout_height="@dimen/dimen_35dp" >
+
+            <EditText
+                android:id="@+id/moidichvuchonhieunguoi_number"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_35dp"
+                android:layout_marginLeft="@dimen/dimen_5dp"
+                android:background="@drawable/menu_right_edit"
+                android:gravity="center_vertical"
+                android:hint="@string/timkiemdanhba"
+                android:inputType="phone"
+                android:paddingLeft="@dimen/dimen_15dp"
+                android:singleLine="true"
+                android:textColor="#336666"
+                android:textSize="@dimen/dimen_14dp"
+                android:textStyle="bold" >
+
+                <requestFocus />
+            </EditText>
+
+            <ImageView
+                android:id="@+id/moidichvuchonhieunguoi_add_plus"
+                android:visibility="gone"
+                android:layout_width="@dimen/dimen_35dp"
+                android:layout_height="@dimen/dimen_35dp"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/moinhieudichvu_add_plus" />
+
+        </RelativeLayout>
     </LinearLayout>
 
     <View
-        android:background="@color/c657180"
         android:layout_width="match_parent"
-        android:layout_height="1px" />
+        android:layout_height="1px"
+        android:background="@color/c657180" />
 
     <LinearLayout
         android:id="@+id/home_item_header"
@@ -105,21 +122,22 @@
             android:background="#dfdfdf"
             android:gravity="center"
             android:orientation="horizontal" >
-<HorizontalScrollView
-            android:id="@+id/horizontalScrollView1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:background="@color/f3f3f3" >
 
-            <LinearLayout
-                android:id="@+id/moinhieudichvu_dialog_list_hor"
+            <HorizontalScrollView
+                android:id="@+id/horizontalScrollView1"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal" >
-            </LinearLayout>
-        </HorizontalScrollView>
-<!--  
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="@color/f3f3f3" >
+
+                <LinearLayout
+                    android:id="@+id/moinhieudichvu_dialog_list_hor"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal" >
+                </LinearLayout>
+            </HorizontalScrollView>
+            <!--
             <Button
                 android:id="@+id/moidichvuchonhieunguoi_chonloimoi"
                 android:layout_width="@dimen/dimen_140dp"
@@ -137,7 +155,7 @@
                 android:background="@drawable/xml_btn_infor"
                 android:text="@string/moi"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/dimen_13dp" />-->
+                android:textSize="@dimen/dimen_13dp" />            -->
         </LinearLayout>
     </RelativeLayout>
 

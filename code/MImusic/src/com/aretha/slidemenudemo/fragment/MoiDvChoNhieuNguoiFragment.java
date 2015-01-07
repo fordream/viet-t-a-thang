@@ -20,6 +20,9 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -35,9 +38,26 @@ public class MoiDvChoNhieuNguoiFragment extends Fragment implements OnItemClickL
 	private EditText moidichvuchonhieunguoi_number;
 	MoiDvChoNhieuNguoiAdaper adaper;
 
+	private View moidichvuchonhieunguoi_add_plus;
+	private CheckBox moidichvuchonhieunguoi_contact;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.moidichvuchonhieunguoi, null);
+		moidichvuchonhieunguoi_add_plus = view.findViewById(R.id.moidichvuchonhieunguoi_add_plus);
+		moidichvuchonhieunguoi_contact = (CheckBox) view.findViewById(R.id.moidichvuchonhieunguoi_contact);
+		moidichvuchonhieunguoi_contact.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				moidichvuchonhieunguoi_add_plus.setVisibility(moidichvuchonhieunguoi_contact.isChecked() ? View.VISIBLE : View.GONE);
+				moidichvuchonhieunguoi_number.setHint(moidichvuchonhieunguoi_contact.isChecked() ? R.string.nhapsodienthoai : R.string.timkiemdanhba);
+				moidichvuchonhieunguoi_number.setText("");
+
+				adaper.setTextSearch("");
+				adaper.notifyDataSetChanged();
+			}
+		});
+
 		moinhieudichvu_dialog_list_hor = (LinearLayout) view.findViewById(R.id.moinhieudichvu_dialog_list_hor);
 		moidichvuchonhieunguoi_number = (EditText) view.findViewById(R.id.moidichvuchonhieunguoi_number);
 		moidichvuchonhieunguoi_number.addTextChangedListener(new TextWatcher() {
@@ -54,8 +74,10 @@ public class MoiDvChoNhieuNguoiFragment extends Fragment implements OnItemClickL
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				adaper.setTextSearch(moidichvuchonhieunguoi_number.getText().toString().trim());
-				adaper.notifyDataSetChanged();
+				if (!moidichvuchonhieunguoi_contact.isChecked()) {
+					adaper.setTextSearch(moidichvuchonhieunguoi_number.getText().toString().trim());
+					adaper.notifyDataSetChanged();
+				}
 			}
 		});
 
