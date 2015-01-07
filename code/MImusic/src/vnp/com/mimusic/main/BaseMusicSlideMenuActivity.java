@@ -45,6 +45,7 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 		registerReceiver(broadcastReceiver, new IntentFilter("broadcastReceivermactivity_slidemenu_menuleft"));
 		registerReceiver(broadcastReceiverDongBoDanhBa, new IntentFilter("dongbodanhba"));
 		((MenuLeftView) findViewById(R.id.mactivity_slidemenu_menuleft)).showData();
+		// ((MenuRightView) findViewById(R.id.mactivity_menu_right)).initData();
 	}
 
 	@Override
@@ -223,8 +224,6 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 						intent.putExtra("type", Conts.NHIEUDICHVU);
 						intent.putExtra(User._ID, _id + "");
 						startActivity(intent);
-						// overridePendingTransition(R.anim.abc_slide_right_in,
-						// R.anim.abc_slide_left_out);
 						overridePendingTransitionStartActivity();
 					}
 				}, 100);

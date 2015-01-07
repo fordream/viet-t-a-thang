@@ -4,6 +4,7 @@ import vnp.com.db.DichVu;
 import vnp.com.db.User;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.adapter.MoiNhieuDichVuAdapter;
+import vnp.com.mimusic.util.ImageLoaderUtils;
 import vnp.com.mimusic.view.HeaderView;
 import vnp.com.mimusic.view.MenuRightItemView;
 import android.content.Context;
@@ -16,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -28,8 +30,7 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.moinhieudichvu_dialog, null);
-		
-		
+
 		moinhieudichvu_dialog_search = (EditText) view.findViewById(R.id.moinhieudichvu_dialog_search);
 		moinhieudichvu_dialog_list_hor = (LinearLayout) view.findViewById(R.id.moinhieudichvu_dialog_list_hor);
 		HeaderView maumoi_headerview = (HeaderView) view.findViewById(R.id.moinhieudichvu_dialog_headerview);
@@ -88,12 +89,14 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 		maumoi_list.setAdapter(adapter = new MoiNhieuDichVuAdapter(getActivity(), cursorDV) {
 
 			@Override
-			public void addOrRemove(final String _id, boolean isAdd) {
+			public void addOrRemove(final String _id, boolean isAdd, String icon) {
 				if (isAdd) {
 					final MoiNhieuDichVuAddItemView addItemView = new MoiNhieuDichVuAddItemView(getActivity());
-					addItemView.setMId(_id);
-
 					moinhieudichvu_dialog_list_hor.addView(addItemView);
+
+					addItemView.setMId(_id);
+					addItemView.setIcon(icon);
+
 					addItemView.findViewById(R.id.x).setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
@@ -123,16 +126,17 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 	}
 
 	private class MoiNhieuDichVuAddItemView extends LinearLayout {
+
 		public MoiNhieuDichVuAddItemView(Context context) {
 			super(context);
 			((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.moinhieudichvu_add_item, this);
-			// findViewById(R.id.x).setOnClickListener(new
-			// View.OnClickListener() {
-			// @Override
-			// public void onClick(View v) {
-			// moinhieudichvu_dialog_list_hor.removeView(MoiNhieuDichVuAddItemView.this);
-			// }
-			// });
+		}
+
+		public void setIcon(String icon) {
+			ImageView moinhieudichvu_img_icon = (ImageView) findViewById(R.id.imageView1);
+			moinhieudichvu_img_icon.setImageResource(R.drawable.no_avatar);
+			ImageLoaderUtils.getInstance(getActivity()).DisplayImage(icon, moinhieudichvu_img_icon);
+
 		}
 
 		private String mId = "";
