@@ -50,11 +50,13 @@ public class ChiTietListSuBanHangFragment extends BaseFragment implements OnItem
 		getmImusicService().execute(RequestMethod.GET, API.API_R008, getArguments(), new IContsCallBack() {
 			@Override
 			public void onSuscess(JSONObject response) {
+				home_list.setText(false, R.string.nodata);
 				try {
 					JSONArray data = response.getJSONArray("data");
-					home_list.setAdapter(new ChiTietListSuBanHangAdaper(getActivity(), new JSONObject[] {}, data));
 					if (data.length() == 0) {
 						home_list.setTextNoData(true, R.string.nodata);
+					} else {
+						home_list.setAdapter(new ChiTietListSuBanHangAdaper(getActivity(), new JSONObject[] {}, data));
 					}
 				} catch (JSONException e) {
 				}
@@ -70,9 +72,6 @@ public class ChiTietListSuBanHangFragment extends BaseFragment implements OnItem
 			@Override
 			public void onError(String message) {
 				Conts.showView(loadingView, false);
-				Conts.toast(getActivity(), message);
-
-				home_list.setAdapter(new ChiTietListSuBanHangAdaper(getActivity(), new JSONObject[] {}, new JSONArray()));
 				home_list.setTextNoData(true, message);
 			}
 
