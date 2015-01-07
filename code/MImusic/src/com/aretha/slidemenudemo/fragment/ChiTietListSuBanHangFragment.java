@@ -1,10 +1,13 @@
 package com.aretha.slidemenudemo.fragment;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import vnp.com.api.API;
 import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.mimusic.R;
+import vnp.com.mimusic.adapter.ChiTietListSuBanHangAdaper;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
 import vnp.com.mimusic.view.HeaderView;
@@ -48,6 +51,12 @@ public class ChiTietListSuBanHangFragment extends BaseFragment implements OnItem
 		getmImusicService().execute(RequestMethod.GET, API.API_R008, getArguments(), new IContsCallBack() {
 			@Override
 			public void onSuscess(JSONObject response) {
+				try {
+					JSONArray data = response.getJSONArray("data");
+					home_list.setAdapter(new ChiTietListSuBanHangAdaper(getActivity(), new JSONObject[] {}, data));
+				} catch (JSONException e) {
+				}
+
 				Conts.showView(loadingView, false);
 			}
 
