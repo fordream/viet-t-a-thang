@@ -1,5 +1,7 @@
 package vnp.com.mimusic.util;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.Set;
 
 import org.json.JSONArray;
@@ -28,6 +30,7 @@ import android.graphics.Rect;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.IBinder;
 import android.provider.MediaStore;
 import android.support.v4.app.FragmentActivity;
@@ -37,7 +40,6 @@ import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class Conts {
@@ -173,7 +175,7 @@ public class Conts {
 	public static void executeNoProgressBar(final RequestMethod requestMethod, final String api, final MImusicService activity, Bundle bundles, final IContsCallBack contsCallBack) {
 		if (contsCallBack != null)
 			contsCallBack.onStart();
-		ResClientCallBack resClientCallBack = new ResClientCallBack() {
+		ResClientCallBack resClientCallBack = new ResClientCallBack(activity) {
 
 			@Override
 			public String getApiName() {
@@ -229,7 +231,6 @@ public class Conts {
 							contsCallBack.onError(message);
 					}
 				} catch (Exception exception) {
-					// LogUtils.e("exception", exception);
 					if (contsCallBack != null)
 						contsCallBack.onError();
 				}
@@ -239,6 +240,7 @@ public class Conts {
 			}
 
 			private void checkToken(int responseCode, String errorCode) {
+
 				if (!API.API_R013.equals(getApiName())) {
 					if (responseCode == 440 || responseCode == -1 || "440".equals(errorCode) || "-1".equals(errorCode)) {
 						activity.refreshToken(null);
@@ -259,7 +261,7 @@ public class Conts {
 		Set<String> keys = bundles.keySet();
 		for (String key : keys) {
 			resClientCallBack.addParam(key, bundles.getString(key));
-			LogUtils.e("para", key + " : " + bundles.getString(key));
+			// LogUtils.e("para", key + " : " + bundles.getString(key));
 		}
 
 		ExeCallBack exeCallBack = new ExeCallBack();
@@ -444,4 +446,32 @@ public class Conts {
 		view.startAnimation(animation);
 
 	}
+
+	public static File getFileFromPath(Context context, String path) {
+
+		if (path != null && path.contains("file://")) {
+			path = path.substring(path.indexOf("file://") + 7, path.length());
+			return new File(path);
+		}
+
+		if (path != null && path.contains("content://")) {
+			try {
+				Bitmap bm = BitmapFactory.decodeStream(context.getContentResolver().openInputStream(Uri.parse(path)));
+
+				File file = new File(Environment.getExternalStorageDirectory() + "/temp.png");
+				FileOutputStream fOut = new FileOutputStream(file);
+				bm.compress(Bitmap.CompressFormat.PNG, 85, fOut);
+				fOut.flush();
+				fOut.close();
+
+				return new File(Environment.getExternalStorageDirectory() + "/temp.png");
+			} catch (Exception e) {
+				
+				LogUtils.e("CHECK", e);
+			}
+		}
+
+		return new File(path);
+	}
+
 }

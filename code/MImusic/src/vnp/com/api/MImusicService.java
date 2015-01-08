@@ -472,7 +472,7 @@ public class MImusicService extends Service {
 	 * @param response
 	 */
 
-	public void updateInFor(JSONObject response) {
+	private void updateInFor(JSONObject response) {
 		ContentValues contentValues = new ContentValues();
 		try {
 			contentValues.put(User.address, response.getString(User.address));
@@ -490,9 +490,7 @@ public class MImusicService extends Service {
 	}
 
 	private void updateReGetToken(JSONObject response) {
-		// TODO Auto-generated method stub
 
-		LogUtils.e("response", response.toString());
 		// {"message":"Refresh token success","errorCode":0,"phone":null,"keyRefresh":"1E5571EE-CEF5-483A-50DF-20A6A1D57489","token":"57D4A6E1-B325-A2D6-3CC1-036C6730D1A3"}
 		ContentValues contentValues = new ContentValues();
 		try {
@@ -505,12 +503,15 @@ public class MImusicService extends Service {
 	}
 
 	public void refreshToken(final IContsCallBack iContsCallBack) {
-		// TODO
 		Bundle bundle = new Bundle();
 		bundle.putString("key", Conts.getRefreshToken(this));
 		bundle.putString(User.KEYREFRESH, Conts.getRefreshToken(this));
 		execute(RequestMethod.GET, API.API_R013, bundle, iContsCallBack);
+	}
 
-		//
+	public void executeUpdateAvatar(String path, final IContsCallBack iContsCallBack) {
+		Bundle bundle = new Bundle();
+		bundle.putString("images", path);
+		execute(RequestMethod.POST, API.API_R023, bundle, iContsCallBack);
 	}
 }

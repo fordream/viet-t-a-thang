@@ -16,6 +16,7 @@ import vnp.com.mimusic.view.HeaderView;
 import vnp.com.mimusic.view.LoadingView;
 import android.app.Activity;
 import android.app.AlertDialog.Builder;
+import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -144,36 +145,50 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 
 		} else if (requestCode == 102 && resultCode == Activity.RESULT_OK) {
 			String path = data.getData().toString();
-			if (path != null) {
-				ContentValues contentValues = new ContentValues();
-				contentValues.put(User.AVATAR, path);
-				int index = getActivity().getContentResolver().update(User.CONTENT_URI, contentValues, String.format("%s = '1'", User.STATUS), null);
-
-				if (index > 0) {
-					Toast.makeText(getActivity(), getActivity().getString(R.string.updatethanhcong), Toast.LENGTH_SHORT).show();
-					showData();
-				} else {
-					Toast.makeText(getActivity(), getActivity().getString(R.string.updatethatbai), Toast.LENGTH_SHORT).show();
-				}
-			} else {
-				Toast.makeText(getActivity(), getActivity().getString(R.string.khongthelayduocduongdan), Toast.LENGTH_SHORT).show();
-			}
+			uploadAvatar(path);
 		} else if (requestCode == 103 && resultCode == Activity.RESULT_OK) {
 			String path = this.path.toString();
-			if (path != null) {
-				ContentValues contentValues = new ContentValues();
-				contentValues.put(User.AVATAR, path);
-				int index = getActivity().getContentResolver().update(User.CONTENT_URI, contentValues, String.format("%s = '1'", User.STATUS), null);
+			uploadAvatar(path);
+		}
+	}
 
-				if (index > 0) {
-					Toast.makeText(getActivity(), getActivity().getString(R.string.updatethanhcong), Toast.LENGTH_SHORT).show();
-					showData();
-				} else {
-					Toast.makeText(getActivity(), getActivity().getString(R.string.updatethatbai), Toast.LENGTH_SHORT).show();
+	private void uploadAvatar(String path) {
+		if (!Conts.isBlank(path)) {
+			// ContentValues contentValues = new ContentValues();
+			// contentValues.put(User.AVATAR, path);
+
+			getmImusicService().executeUpdateAvatar(path, new IContsCallBack() {
+				ProgressDialog progressDialog;
+
+				@Override
+				public void onStart() {
+					if (progressDialog == null)
+						progressDialog = ProgressDialog.show(getActivity(), null, getActivity().getString(R.string.loading));
 				}
-			} else {
-				Toast.makeText(getActivity(), getActivity().getString(R.string.khongthelayduocduongdan), Toast.LENGTH_SHORT).show();
-			}
+
+				@Override
+				public void onError() {
+					onError("onError");
+				}
+
+				@Override
+				public void onError(String message) {
+					Conts.showDialogThongbao(getActivity(), message);
+					if (progressDialog != null) {
+						progressDialog.dismiss();
+					}
+				}
+
+				@Override
+				public void onSuscess(JSONObject response) {
+					Conts.showDialogThongbao(getActivity(), response.toString());
+					if (progressDialog != null) {
+						progressDialog.dismiss();
+					}
+				}
+			});
+		} else {
+			Conts.showDialogThongbao(getActivity(), getActivity().getString(R.string.khongthelayduocduongdan));
 		}
 	}
 

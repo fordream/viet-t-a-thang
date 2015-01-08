@@ -32,7 +32,9 @@ import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
+import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.LogUtils;
+import android.content.Context;
 import android.util.Log;
 
 public class RestClient {
@@ -174,7 +176,7 @@ public class RestClient {
 		}
 	}
 
-	public void executeUploadFile() throws Exception {
+	public void executeUploadFile(Context context) throws Exception {
 		HttpClient client = new DefaultHttpClient();
 		HttpPut request = new HttpPut(url);
 		MultipartEntity partEntity = new MultipartEntity();
@@ -193,6 +195,8 @@ public class RestClient {
 				partEntity.addPart(p.getName(), new FileBody(new File(p.getValue()), "image/jpeg"));
 			} else if (p.getName().equals("post[url]")) {
 				partEntity.addPart(p.getName(), new FileBody(new File(p.getValue()), "image/jpeg"));
+			} else if (p.getName().equals("images")) {
+				partEntity.addPart(p.getName(), new FileBody(Conts.getFileFromPath(context,p.getValue()), "image/jpeg"));
 			} else {
 				partEntity.addPart(p.getName(), new StringBody(p.getValue()));
 			}
@@ -200,7 +204,6 @@ public class RestClient {
 
 		request.setEntity(partEntity);
 		try {
-
 			httpResponse = client.execute(request);
 			responseCode = httpResponse.getStatusLine().getStatusCode();
 			message = httpResponse.getStatusLine().getReasonPhrase();
@@ -211,14 +214,10 @@ public class RestClient {
 				response = EntityUtils.toString(entity);
 			}
 
-		} catch (ClientProtocolException e) {
-			Log.e("ERRRRO", "x", e);
+		} catch (Exception e) {
 			client.getConnectionManager().shutdown();
 			e.printStackTrace();
-		} catch (IOException e) {
-			client.getConnectionManager().shutdown();
-			e.printStackTrace();
-			Log.e("ERRRRO", "x", e);
+			LogUtils.e("ABC", e);
 		}
 
 	}

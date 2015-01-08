@@ -4,9 +4,16 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import android.content.Context;
 import vnp.com.mimusic.util.Conts;
 
 public abstract class ResClientCallBack extends CallBack {
+	private Context context;
+
+	public ResClientCallBack(Context context) {
+		this.context = context;
+	}
+
 	private Map<String, String> maps = new HashMap<String, String>();
 
 	public final void addParam(String name, String value) {
@@ -27,7 +34,11 @@ public abstract class ResClientCallBack extends CallBack {
 			client.addParam(key, maps.get(key));
 		}
 		try {
-			client.execute(getMedthod());
+			if (getApiName().equals(API.API_R023)) {
+				client.executeUploadFile(context);
+			} else {
+				client.execute(getMedthod());
+			}
 		} catch (Exception e) {
 		}
 

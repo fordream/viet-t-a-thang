@@ -23,12 +23,10 @@ public class APICaller {
 		context = mContext;
 	}
 
-	public void callApi(final String api, boolean useDialog,
-			final ICallbackAPI callbackAPI, Map<String, String> sendData) {
+	public void callApi(final String api, boolean useDialog, final ICallbackAPI callbackAPI, Map<String, String> sendData) {
 		ExeCallBack exeCallBack = new ExeCallBack();
-		exeCallBack.setExeCallBackOption(new ExeCallBackOption(context,
-				useDialog, R.string.loading, null));
-		ResClientCallBack callBack = new ResClientCallBack() {
+		exeCallBack.setExeCallBackOption(new ExeCallBackOption(context, useDialog, R.string.loading, null));
+		ResClientCallBack callBack = new ResClientCallBack(context) {
 
 			@Override
 			public String getApiName() {
