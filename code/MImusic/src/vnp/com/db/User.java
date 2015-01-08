@@ -25,6 +25,7 @@ public class User {
 	public static final String EMAIL = "email";
 	public static final String AVATAR = "avatar";
 	public static final String LISTIDDVSUDUNG = "listiddvsudung";
+	public static final String LISTIDTENDVSUDUNG = "LISTIDTENDVSUDUNG";
 	public static final String SOLUONG = "soluong";
 	public static final String DOANHTHU = "doanhthu";
 	public static final String LISTIDUSERDAMOI = "listiduserdamoi";
@@ -52,11 +53,8 @@ public class User {
 		nickname, fullname, exchange_number, exchange_number_month, poundage, poundage_month, TOKEN, KEYREFRESH,
 
 		USER, PASSWORD, STATUS, COVER, ID, birthday, address, NAME, NAME_CONTACT,//
-				EMAIL, AVATAR, LISTIDDVSUDUNG, SOLUONG, DOANHTHU, LISTIDUSERDAMOI //
-		};//
-			// builder.append(USER).append(" TEXT NOT NULL").append(",");
-			// builder.append(LISTIDDV).append(" TEXT NOT NULL");
-
+				EMAIL, AVATAR, LISTIDDVSUDUNG, SOLUONG, DOANHTHU, LISTIDUSERDAMOI, LISTIDTENDVSUDUNG //
+		};
 		for (int i = 0; i < colums.length; i++) {
 			if (i < colums.length - 1) {
 				builder.append(colums[i]).append(" TEXT  ").append(",");

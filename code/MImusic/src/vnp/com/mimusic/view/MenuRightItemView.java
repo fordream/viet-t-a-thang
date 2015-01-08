@@ -1,10 +1,13 @@
 package vnp.com.mimusic.view;
 
+import java.util.StringTokenizer;
+
 import vnp.com.db.User;
 import vnp.com.mimusic.R;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.text.Html;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -73,6 +76,11 @@ public class MenuRightItemView extends LinearLayout {
 		}
 
 		String dvDaSuDung = cursor.getString(cursor.getColumnIndex(User.LISTIDDVSUDUNG));
+
+		StringTokenizer stringTokenizer = new StringTokenizer(dvDaSuDung, ",");
+		
+		menu_right_item_tv_link.setText(Html.fromHtml(cursor.getString(cursor.getColumnIndex(User.LISTIDTENDVSUDUNG))));
+
 	}
 
 	public void showFooter() {

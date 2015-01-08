@@ -62,7 +62,6 @@ public class MenuRightView extends LinearLayout {
 		String where = String.format("%s = '0'", User.STATUS);
 		Cursor cursor = getContext().getContentResolver().query(User.CONTENT_URI, null, where, null, null);
 		adaper = new MenuRightAdaper(getContext(), cursor) {
-
 			@Override
 			public void openMoi(ContentValues contentValues) {
 

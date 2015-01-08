@@ -271,10 +271,10 @@ public class MImusicService extends Service {
 
 	public void dongboDanhBaXuong(final IContsCallBack contsCallBack, final List<String> numbers) {
 
-		//String number = numbers.get(0);
-		//numbers.remove(0);
+		// String number = numbers.get(0);
+		// numbers.remove(0);
 		Bundle bundle = new Bundle();
-		//bundle.putString("phonenumber", number);
+		// bundle.putString("phonenumber", number);
 		execute(RequestMethod.GET, API.API_R012, bundle, new IContsCallBack() {
 
 			@Override
@@ -361,7 +361,7 @@ public class MImusicService extends Service {
 	}
 
 	private void updateDongBoXuong(JSONObject response) {
-
+		LogUtils.e("updateDongBoXuong", response.toString());
 		try {
 			String user = Conts.getUser(MImusicService.this);
 			JSONArray array = response.getJSONArray("data");
@@ -376,22 +376,32 @@ public class MImusicService extends Service {
 				contentValues.put(User.STATUS, user.equals(phone) ? "1" : "0");
 
 				String service_codes = "";
+				String service_codes_name = "";
 				if (jsonObject.has("services")) {
 					JSONArray services = jsonObject.getJSONArray("services");
 
+					String format = "%s";
 					for (int in = 0; in < services.length(); in++) {
 						// id,service_name,service_code,service_icon
 						String service_code = services.getJSONObject(in).getString("service_code");
 						if (Conts.isBlank(service_codes)) {
 							service_codes = service_code;
+							service_codes_name = String.format(format,services.getJSONObject(in).getString(DichVu.service_name));
 						} else {
 							service_codes = service_codes + "," + service_code;
+							service_codes_name = service_codes_name + " | " +String.format(format, services.getJSONObject(in).getString(DichVu.service_name));
+						}
+						
+						if("%s".equals(format)){
+							format = "<font color='red'>%s</font>";
+						}else{
+							format = "%s";
 						}
 					}
 				}
 
 				contentValues.put(User.LISTIDDVSUDUNG, service_codes);
-
+				contentValues.put(User.LISTIDTENDVSUDUNG, service_codes_name);
 				if (Conts.haveContact(phone, this)) {
 					getContentResolver().update(User.CONTENT_URI, contentValues, String.format("%s = '%s'", User.USER, phone), null);
 				} else {
@@ -511,7 +521,7 @@ public class MImusicService extends Service {
 
 	public void executeUpdateAvatar(String path, final IContsCallBack iContsCallBack) {
 		Bundle bundle = new Bundle();
-		bundle.putString("images", "c3Nzcw==");//path
+		bundle.putString("images", "c3Nzcw==");// path
 		execute(RequestMethod.POST, API.API_R023, bundle, iContsCallBack);
 	}
 }
