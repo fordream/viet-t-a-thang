@@ -314,24 +314,36 @@ public class MImusicService extends Service {
 			}
 
 			@Override
-			public void onSuscess(JSONObject response) {
-				if (API.API_R006.equals(api)) {
-					updateInFor(response);
-				} else if (API.API_R007.equals(api)) {
-					updateInFor(bundle);
-				} else if (API.API_R017.equals(api)) {
-					updateDichVuDangKy(bundle);
-				} else if (API.API_R004.equals(api)) {
-					updateDichVu(response);
-				} else if (API.API_R012.equals(api)) {
-					updateDongBoXuong(response);
-				} else if (API.API_R013.equals(api)) {
-					updateReGetToken(response);
-					callUpdateData();
-				}
+			public void onSuscess(final JSONObject response) {
+				new AsyncTask<String, String, String>() {
+					@Override
+					protected String doInBackground(String... params) {
+						if (API.API_R006.equals(api)) {
+							updateInFor(response);
+						} else if (API.API_R007.equals(api)) {
+							updateInFor(bundle);
+						} else if (API.API_R017.equals(api)) {
+							updateDichVuDangKy(bundle);
+						} else if (API.API_R004.equals(api)) {
+							updateDichVu(response);
+						} else if (API.API_R012.equals(api)) {
+							updateDongBoXuong(response);
+						} else if (API.API_R013.equals(api)) {
+							updateReGetToken(response);
+						}
+						return null;
+					}
 
-				if (contsCallBack != null)
-					contsCallBack.onSuscess(response);
+					protected void onPostExecute(String result) {
+						if (contsCallBack != null)
+							contsCallBack.onSuscess(response);
+
+						if (API.API_R013.equals(api)) {
+							callUpdateData();
+						}
+					};
+				}.execute("");
+
 			}
 
 			@Override
@@ -498,7 +510,7 @@ public class MImusicService extends Service {
 		bundle.putString("key", Conts.getRefreshToken(this));
 		bundle.putString(User.KEYREFRESH, Conts.getRefreshToken(this));
 		execute(RequestMethod.GET, API.API_R013, bundle, iContsCallBack);
-		
-//		
+
+		//
 	}
 }
