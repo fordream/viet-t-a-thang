@@ -271,10 +271,10 @@ public class MImusicService extends Service {
 
 	public void dongboDanhBaXuong(final IContsCallBack contsCallBack, final List<String> numbers) {
 
-		String number = numbers.get(0);
-		numbers.remove(0);
+		//String number = numbers.get(0);
+		//numbers.remove(0);
 		Bundle bundle = new Bundle();
-		bundle.putString("phonenumber", number);
+		//bundle.putString("phonenumber", number);
 		execute(RequestMethod.GET, API.API_R012, bundle, new IContsCallBack() {
 
 			@Override

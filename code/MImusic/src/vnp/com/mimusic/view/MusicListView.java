@@ -1,6 +1,7 @@
 package vnp.com.mimusic.view;
 
 import vnp.com.mimusic.R;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.AttributeSet;
@@ -26,6 +27,7 @@ public class MusicListView extends ListView {
 		init();
 	}
 
+	@SuppressLint("NewApi")
 	private void init() {
 		try {
 			setCacheColorHint(Color.TRANSPARENT);
@@ -35,6 +37,7 @@ public class MusicListView extends ListView {
 		} catch (Exception exception) {
 
 		}
+		setOverScrollMode(android.view.View.OVER_SCROLL_NEVER);
 		headerListTextView = new FooterBangXepHangNoDataView(getContext());
 		headerListTextView.setText(false, null);
 		addFooterView(headerListTextView);

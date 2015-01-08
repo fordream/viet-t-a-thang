@@ -46,6 +46,7 @@ public class MoiDvChoNhieuNguoiFragment extends Fragment implements OnItemClickL
 		super.onActivityCreated(savedInstanceState);
 	}
 
+	ListView moi_list;
 	private View main_mm;
 	private LinearLayout moinhieudichvu_dialog_list_hor;
 	private EditText moidichvuchonhieunguoi_number;
@@ -143,7 +144,7 @@ public class MoiDvChoNhieuNguoiFragment extends Fragment implements OnItemClickL
 			}
 		});
 
-		ListView moi_list = (ListView) view.findViewById(R.id.moidichvuchonhieunguoi_list);
+		moi_list = (ListView) view.findViewById(R.id.moidichvuchonhieunguoi_list);
 
 		/**
 		 * show data
@@ -302,7 +303,6 @@ public class MoiDvChoNhieuNguoiFragment extends Fragment implements OnItemClickL
 	private void monScroll() {
 		int top = headerOfList.getTop();
 		int heightt = header.getHeight();
-
 		int next = 0;
 		if (top < 0) {
 			if (top + heightt <= 0) {
