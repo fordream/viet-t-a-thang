@@ -118,7 +118,7 @@ public class MauMoiFragment extends BaseFragment implements android.view.View.On
 
 	protected void moi() {
 		Bundle bundle = new Bundle();
-
+		bundle.putString("template_id", adaper.getTemplate_id());
 		if (!type) {
 			bundle.putString("service_code", service_code);
 			bundle.putString("customers", customers);
@@ -149,23 +149,26 @@ public class MauMoiFragment extends BaseFragment implements android.view.View.On
 						((RootMenuActivity) getActivity()).closeActivity();
 					}
 				});
+				if (dialog != null)
+					dialog.dismiss();
 			}
 
 			@Override
 			public void onStart() {
-				dialog = ProgressDialog.show(getActivity(), null, getActivity().getString(R.string.loading));
+				if (dialog == null)
+					dialog = ProgressDialog.show(getActivity(), null, getActivity().getString(R.string.loading));
 			}
 
 			@Override
 			public void onError(String message) {
 				Conts.showDialogThongbao(getActivity(), message);
-				dialog.dismiss();
+				if (dialog != null)
+					dialog.dismiss();
 			}
 
 			@Override
 			public void onError() {
 				onError("onError");
-				dialog.dismiss();
 			}
 		});
 	}

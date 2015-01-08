@@ -259,7 +259,7 @@ public class Conts {
 		Set<String> keys = bundles.keySet();
 		for (String key : keys) {
 			resClientCallBack.addParam(key, bundles.getString(key));
-			// LogUtils.e("para", key + " : " + bundles.getString(key));
+			LogUtils.e("para", key + " : " + bundles.getString(key));
 		}
 
 		ExeCallBack exeCallBack = new ExeCallBack();
@@ -351,6 +351,8 @@ public class Conts {
 		contentValues.put("btn_left_close", true);
 		contentValues.put("name", context.getString(R.string.thongbao));
 		contentValues.put("content", message);
+		contentValues.put("type", "x");
+
 		DangKyDialog dangKyDialog = new DangKyDialog(context, contentValues) {
 			@Override
 			public void mOpen() {
