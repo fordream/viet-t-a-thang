@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import vnp.com.api.API;
 import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.util.Conts;
@@ -22,7 +23,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ChiTietTintucFragment extends Fragment implements OnItemClickListener, View.OnClickListener {
+public class ChiTietTintucFragment extends BaseFragment implements OnItemClickListener, View.OnClickListener {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
@@ -63,10 +64,9 @@ public class ChiTietTintucFragment extends Fragment implements OnItemClickListen
 
 	private void callApi(Bundle arguments) {
 		chitiet_tintuc_tintuckhac_list.removeAllViews();
-		Conts.executeNoProgressBar(RequestMethod.POST, "newsDetail", getActivity(), arguments, new IContsCallBack() {
+		getmImusicService().execute(RequestMethod.POST, API.API_R028, arguments, new IContsCallBack() {
 			@Override
 			public void onStart() {
-				// TODO Auto-generated method stub
 
 			}
 
@@ -92,10 +92,9 @@ public class ChiTietTintucFragment extends Fragment implements OnItemClickListen
 			}
 		});
 
-		Conts.executeNoProgressBar(RequestMethod.POST, "relatedNews", getActivity(), arguments, new IContsCallBack() {
+		getmImusicService().execute(RequestMethod.POST, API.API_R029, arguments, new IContsCallBack() {
 			@Override
 			public void onStart() {
-				// TODO Auto-generated method stub
 
 			}
 

@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import vnp.com.api.ExeCallBack;
 import vnp.com.api.ExeCallBackOption;
+import vnp.com.api.MImusicService;
 import vnp.com.api.ResClientCallBack;
 import vnp.com.api.RestClient;
 import vnp.com.api.RestClient.RequestMethod;
@@ -165,7 +166,7 @@ public class Conts {
 		return token;
 	}
 
-	public static void executeNoProgressBar(final RequestMethod requestMethod, final String api, final Context activity, Bundle bundles, final IContsCallBack contsCallBack) {
+	public static void executeNoProgressBar(final RequestMethod requestMethod, final String api, final MImusicService activity, Bundle bundles, final IContsCallBack contsCallBack) {
 		if (contsCallBack != null)
 			contsCallBack.onStart();
 		ResClientCallBack resClientCallBack = new ResClientCallBack() {
