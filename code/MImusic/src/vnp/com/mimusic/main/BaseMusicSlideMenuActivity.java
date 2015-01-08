@@ -23,6 +23,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -386,12 +387,19 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 		contentValues.put("btn_right", getString(R.string.dongy));
 		contentValues.put("name", getString(R.string.banmuondongugndung));
 		contentValues.put("content", getString(R.string.close_ungdung_comfirm));
-		DangKyDialog dangKyDialog = new DangKyDialog(this, contentValues) {
+		final DangKyDialog dangKyDialog = new DangKyDialog(this, contentValues) {
 			@Override
 			public void mOpen() {
 				super.mOpen();
-				finish();
-				overridePendingTransition(R.anim.abc_nothing, R.anim.abc_slide_out_bottom);
+				dismiss();
+				new Handler().postDelayed(new Runnable() {
+
+					@Override
+					public void run() {
+						finish();
+						overridePendingTransition(R.anim.abc_nothing, R.anim.abc_slide_out_bottom);
+					}
+				}, 100);
 			}
 		};
 		dangKyDialog.show();
