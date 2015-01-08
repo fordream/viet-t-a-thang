@@ -134,6 +134,7 @@
     <color name="c475055">#475055</color>
     <color name="cwheelcolor">#993333</color>
     <color name="red_purple">#9f1f31</color>
+    <color name="cccccc">#cccccc</color>
 
     <string name="nodata">Không có dữ liệu</string>
     <string name="dong">Đóng</string>

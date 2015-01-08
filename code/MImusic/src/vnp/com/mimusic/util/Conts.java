@@ -32,6 +32,9 @@ import android.os.IBinder;
 import android.provider.MediaStore;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
+import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -226,7 +229,7 @@ public class Conts {
 							contsCallBack.onError(message);
 					}
 				} catch (Exception exception) {
-					//LogUtils.e("exception", exception);
+					// LogUtils.e("exception", exception);
 					if (contsCallBack != null)
 						contsCallBack.onError();
 				}
@@ -256,7 +259,7 @@ public class Conts {
 		Set<String> keys = bundles.keySet();
 		for (String key : keys) {
 			resClientCallBack.addParam(key, bundles.getString(key));
-			//LogUtils.e("para", key + " : " + bundles.getString(key));
+			// LogUtils.e("para", key + " : " + bundles.getString(key));
 		}
 
 		ExeCallBack exeCallBack = new ExeCallBack();
@@ -427,5 +430,16 @@ public class Conts {
 			cursor.close();
 		}
 		return token;
+	}
+
+	public static void addViewScale(View view) {
+		view.startAnimation(AnimationUtils.loadAnimation(view.getContext(), R.anim.abc_scale_in));
+	}
+
+	public static void removeViewScale(View view, AnimationListener animationListener) {
+		Animation animation = AnimationUtils.loadAnimation(view.getContext(), R.anim.abc_scale_out);
+		animation.setAnimationListener(animationListener);
+		view.startAnimation(animation);
+
 	}
 }

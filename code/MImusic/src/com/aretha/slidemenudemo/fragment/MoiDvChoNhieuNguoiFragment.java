@@ -1,7 +1,5 @@
 package com.aretha.slidemenudemo.fragment;
 
-import java.util.List;
-
 import vnp.com.db.DichVu;
 import vnp.com.db.User;
 import vnp.com.mimusic.R;
@@ -22,6 +20,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.CheckBox;
@@ -170,20 +170,54 @@ public class MoiDvChoNhieuNguoiFragment extends Fragment implements OnItemClickL
 					addItemView.setMId(_id);
 
 					moinhieudichvu_dialog_list_hor.addView(addItemView);
-
+					Conts.addViewScale(addItemView);
 					addItemView.findViewById(R.id.x).setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
-							moinhieudichvu_dialog_list_hor.removeView(addItemView);
+
+							Conts.removeViewScale(addItemView, new AnimationListener() {
+
+								@Override
+								public void onAnimationStart(Animation animation) {
+
+								}
+
+								@Override
+								public void onAnimationRepeat(Animation animation) {
+
+								}
+
+								@Override
+								public void onAnimationEnd(Animation animation) {
+									moinhieudichvu_dialog_list_hor.removeView(addItemView);
+								}
+							});
 							adaper.remove(_id);
 							adaper.notifyDataSetChanged();
 						}
 					});
 				} else {
 					for (int i = 0; i < moinhieudichvu_dialog_list_hor.getChildCount(); i++) {
-						MoiNhieuSDTAddItemView child = ((MoiNhieuSDTAddItemView) moinhieudichvu_dialog_list_hor.getChildAt(i));
+						final MoiNhieuSDTAddItemView child = ((MoiNhieuSDTAddItemView) moinhieudichvu_dialog_list_hor.getChildAt(i));
 						if (child.getmId().equals(_id)) {
-							moinhieudichvu_dialog_list_hor.removeView(child);
+
+							Conts.removeViewScale(child, new AnimationListener() {
+
+								@Override
+								public void onAnimationStart(Animation animation) {
+
+								}
+
+								@Override
+								public void onAnimationRepeat(Animation animation) {
+
+								}
+
+								@Override
+								public void onAnimationEnd(Animation animation) {
+									moinhieudichvu_dialog_list_hor.removeView(child);
+								}
+							});
 							break;
 						}
 					}
@@ -201,7 +235,24 @@ public class MoiDvChoNhieuNguoiFragment extends Fragment implements OnItemClickL
 					addItemView.findViewById(R.id.x).setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
-							moinhieudichvu_dialog_list_hor.removeView(addItemView);
+
+							Conts.removeViewScale(addItemView, new AnimationListener() {
+
+								@Override
+								public void onAnimationStart(Animation animation) {
+
+								}
+
+								@Override
+								public void onAnimationRepeat(Animation animation) {
+
+								}
+
+								@Override
+								public void onAnimationEnd(Animation animation) {
+									moinhieudichvu_dialog_list_hor.removeView(addItemView);
+								}
+							});
 							adaper.remove(sdt);
 							adaper.notifyDataSetChanged();
 						}

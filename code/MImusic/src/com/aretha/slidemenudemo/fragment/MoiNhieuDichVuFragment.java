@@ -18,11 +18,12 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.Toast;
 
 public class MoiNhieuDichVuFragment extends Fragment implements android.view.View.OnClickListener {
 	private LinearLayout moinhieudichvu_dialog_list_hor;
@@ -65,7 +66,7 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 					}
 				}
 
-				(((RootMenuActivity) getActivity())).gotoLoiMoi(sdt,adapter.getService_code(adapter.getListSelect().get(0)), service_codes);
+				(((RootMenuActivity) getActivity())).gotoLoiMoi(sdt, adapter.getService_code(adapter.getListSelect().get(0)), service_codes);
 			}
 		});
 
@@ -119,23 +120,57 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 				if (isAdd) {
 					final MoiNhieuDichVuAddItemView addItemView = new MoiNhieuDichVuAddItemView(getActivity());
 					moinhieudichvu_dialog_list_hor.addView(addItemView);
-
+					Conts.addViewScale(addItemView);
 					addItemView.setMId(_id);
 					addItemView.setIcon(icon);
 
 					addItemView.findViewById(R.id.x).setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
-							moinhieudichvu_dialog_list_hor.removeView(addItemView);
+
+							Conts.removeViewScale(addItemView, new AnimationListener() {
+
+								@Override
+								public void onAnimationStart(Animation animation) {
+
+								}
+
+								@Override
+								public void onAnimationRepeat(Animation animation) {
+
+								}
+
+								@Override
+								public void onAnimationEnd(Animation animation) {
+									moinhieudichvu_dialog_list_hor.removeView(addItemView);
+								}
+							});
 							adapter.remove(_id);
 							adapter.notifyDataSetChanged();
 						}
 					});
 				} else {
 					for (int i = 0; i < moinhieudichvu_dialog_list_hor.getChildCount(); i++) {
-						MoiNhieuDichVuAddItemView child = ((MoiNhieuDichVuAddItemView) moinhieudichvu_dialog_list_hor.getChildAt(i));
+						final MoiNhieuDichVuAddItemView child = ((MoiNhieuDichVuAddItemView) moinhieudichvu_dialog_list_hor.getChildAt(i));
 						if (child.getmId().equals(_id)) {
-							moinhieudichvu_dialog_list_hor.removeView(child);
+
+							Conts.removeViewScale(child, new AnimationListener() {
+								@Override
+								public void onAnimationStart(Animation animation) {
+
+								}
+
+								@Override
+								public void onAnimationRepeat(Animation animation) {
+
+								}
+
+								@Override
+								public void onAnimationEnd(Animation animation) {
+									moinhieudichvu_dialog_list_hor.removeView(child);
+
+								}
+							});
 							break;
 						}
 					}
