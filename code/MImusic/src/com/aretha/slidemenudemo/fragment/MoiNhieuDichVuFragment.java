@@ -20,23 +20,31 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
+import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 public class MoiNhieuDichVuFragment extends Fragment implements android.view.View.OnClickListener {
 	private LinearLayout moinhieudichvu_dialog_list_hor;
 	private MoiNhieuDichVuAdapter adapter;
 	private EditText moinhieudichvu_dialog_search;
 	private String sdt = "";
+	private View main_mm;
+	private MenuRightItemView moinhieudichvu_dialog_menurightitem, menuRightItemViewheader;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.moinhieudichvu_dialog, null);
-
+		main_mm = (view.findViewById(R.id.main_mm));
+		menuRightItemViewheader = new MenuRightItemView(getActivity());
+		menuRightItemViewheader.showFooter();
 		moinhieudichvu_dialog_search = (EditText) view.findViewById(R.id.moinhieudichvu_dialog_search);
 		moinhieudichvu_dialog_list_hor = (LinearLayout) view.findViewById(R.id.moinhieudichvu_dialog_list_hor);
+
 		HeaderView maumoi_headerview = (HeaderView) view.findViewById(R.id.moinhieudichvu_dialog_headerview);
 		maumoi_headerview.setTextHeader(R.string.moi);
 		maumoi_headerview.setButtonLeftImage(true, R.drawable.btn_back);
@@ -85,8 +93,10 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 
 			sdt = cursor.getString(cursor.getColumnIndex(User.USER));
 
-			MenuRightItemView moinhieudichvu_dialog_menurightitem = (MenuRightItemView) view.findViewById(R.id.moinhieudichvu_dialog_menurightitem);
+			moinhieudichvu_dialog_menurightitem = (MenuRightItemView) view.findViewById(R.id.moinhieudichvu_dialog_menurightitem);
 			moinhieudichvu_dialog_menurightitem.initData(cursor, "");
+
+			menuRightItemViewheader.initData(cursor, "");
 		}
 
 		if (cursor != null) {
@@ -94,6 +104,8 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 		}
 
 		ListView maumoi_list = (ListView) view.findViewById(R.id.moinhieudichvu_dialog_list);
+		maumoi_list.addHeaderView(menuRightItemViewheader);
+
 		Cursor cursorDV = getActivity().getContentResolver().query(DichVu.CONTENT_URI, null, null, null, null);
 		moinhieudichvu_dialog_search.addTextChangedListener(new TextWatcher() {
 
@@ -178,8 +190,48 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 			}
 
 		});
+		maumoi_list.setOnScrollListener(new OnScrollListener() {
 
+			@Override
+			public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+			}
+
+			@Override
+			public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+				mOnScroll();
+			}
+		});
 		return view;
+	}
+
+	int currentTop = 0;
+
+	protected void mOnScroll() {
+
+		int top = menuRightItemViewheader.getTop();
+		int heightt = moinhieudichvu_dialog_menurightitem.getHeight();
+
+		int next = 0;
+		if (top < 0) {
+			if (top + heightt <= 0) {
+				next = -heightt;
+			} else {
+				next = top;
+			}
+		} else if (top > 0) {
+			next = 0;
+		}
+
+		// TranslateAnimation animation = new TranslateAnimation(0, 0,
+		// currentTop, next);
+		// animation.setFillAfter(false);
+		// animation.setFillEnabled(false);
+		currentTop = next;
+		// main_mm.startAnimation(animation);
+		RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) main_mm.getLayoutParams();
+		params.setMargins(0, next, 0, 0);
+		main_mm.setLayoutParams(params);
 	}
 
 	@Override

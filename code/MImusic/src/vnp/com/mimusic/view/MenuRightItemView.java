@@ -74,4 +74,8 @@ public class MenuRightItemView extends LinearLayout {
 
 		String dvDaSuDung = cursor.getString(cursor.getColumnIndex(User.LISTIDDVSUDUNG));
 	}
+
+	public void showFooter() {
+		findViewById(R.id.menurightitem_main_main).setVisibility(VISIBLE);
+	}
 }

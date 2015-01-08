@@ -59,4 +59,12 @@
             android:background="@color/f3f3f3" />
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/menurightitem_main_main"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_55dp"
+        android:orientation="horizontal"
+        android:visibility="gone" >
+    </LinearLayout>
+
 </LinearLayout>
