@@ -12,7 +12,7 @@ public class API {
 	/**
 	 * API_R003: Danh sách nội dung dịch vụ
 	 */
-	public static final String API_R003 = "contentService";
+	public static final String API_R003 = "contentService"; // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 	/**
 	 * API_R004: Danh sách dịch vụ tiện ích -
 	 */
@@ -36,43 +36,44 @@ public class API {
 	/**
 	 * API_R009: Báo cáo chi tiết
 	 */
-	public static final String API_R009 = "report";
+	public static final String API_R009 = "report"; // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 	/**
 	 * API_R010: Hướng dẫn bán hàng -
 	 */
 	public static final String API_R010 = "guideline"; // 404
+														// //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 	/**
 	 * API_R011: Đồng bộ danh bạ lên
 	 */
-	public static final String API_R011 = "pushContact";
+	public static final String API_R011 = "pushContact";// OKIE
 	/**
 	 * API_R012: Đồng bộ danh bạ xuống
 	 */
-	public static final String API_R012 = "syncContact";
+	public static final String API_R012 = "syncContact";// OKIE
 	/**
 	 * API_R013: Lấy lại token -
 	 */
-	public static final String API_R013 = "retoken";
+	public static final String API_R013 = "retoken";// OKIE
 	/**
 	 * API_R014: Tặng nội dung
 	 */
-	public static final String API_R014 = "presentContent";
+	public static final String API_R014 = "presentContent"; // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 	/**
 	 * API_R015: Mời theo dịch vụ
 	 */
-	public static final String API_R015 = "inviteService";
+	public static final String API_R015 = "inviteService"; // OKIE
 	/**
 	 * API_R016: Mời theo theo thuê bao
 	 */
-	public static final String API_R016 = "inviteSubcriber";
+	public static final String API_R016 = "inviteSubcriber"; // OKIE
 	/**
 	 * API_R017: Đăng ký dịch vụ
 	 */
-	public static final String API_R017 = "registryService";
+	public static final String API_R017 = "registryService"; // OKIE
 	/**
 	 * API_R018: Tải nội dung dịch vụ
 	 */
-	public static final String API_R018 = "buyContent";
+	public static final String API_R018 = "buyContent"; // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 	/**
 	 * API_R019: Kiểm tra điều kiện thuê bao
 	 */
@@ -84,11 +85,11 @@ public class API {
 	/**
 	 * API_R021: Mời sử dụng app
 	 */
-	public static final String API_R021 = "inviteApp";
+	public static final String API_R021 = "inviteApp"; // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 	/**
 	 * API_R022: Danh sách mẫu tin nhắn
 	 */
-	public static final String API_R022 = "getSMSTemplate";
+	public static final String API_R022 = "getSMSTemplate"; // OKIE
 	/**
 	 * API_R023: Thay đổi Avatar
 	 */

@@ -25,7 +25,18 @@
                 android:singleLine="true"
                 android:text="Điều khoản 1"
                 android:textColor="#475055"
-                android:textSize="@dimen/dimen_15dp" />
+                android:textSize="@dimen/dimen_15dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/home_item_tv_name_dv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text="Điều khoản 1"
+                android:textColor="#475055"
+                android:textSize="@dimen/dimen_15dp"
+                android:textStyle="bold" />
 
             <vnp.com.mimusic.view.VTTextView
                 android:id="@+id/home_item_tv_content"
@@ -35,7 +46,7 @@
                 android:ellipsize="end"
                 android:text="Thuê bao xxx mời bạn sử đụng dịch vụ DV All Blocking. Để sử đụng dịch vụ.Thuê bao xxx mời bạn sử đụng dịch vụ DV All Blocking. Để sử đụng dịch vụ.Thuê bao xxx mời bạn sử đụng dịch vụ DV All Blocking. Để sử đụng dịch vụ.Thuê bao xxx mời bạn sử đụng dịch vụ DV All Blocking. Để sử đụng dịch vụ"
                 android:textColor="#475055"
-                android:textSize="@dimen/dimen_13dp" />
+                android:textSize="@dimen/dimen_11dp" />
         </LinearLayout>
     </RelativeLayout>
 

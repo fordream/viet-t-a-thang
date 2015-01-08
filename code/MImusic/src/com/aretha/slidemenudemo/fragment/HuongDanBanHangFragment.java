@@ -5,10 +5,14 @@ import org.json.JSONObject;
 
 import vnp.com.api.API;
 import vnp.com.api.RestClient.RequestMethod;
+import vnp.com.db.DichVu;
 import vnp.com.mimusic.R;
+import vnp.com.mimusic.adapter.HuongDanBanHangAdapter;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
 import vnp.com.mimusic.view.HeaderView;
 import vnp.com.mimusic.view.MusicListView;
+import android.content.ContentValues;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +26,7 @@ public class HuongDanBanHangFragment extends BaseFragment implements OnItemClick
 		super.onActivityCreated(savedInstanceState);
 	}
 
-	MusicListView dichvu_list;
+	private MusicListView dichvu_list;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -41,35 +45,38 @@ public class HuongDanBanHangFragment extends BaseFragment implements OnItemClick
 			}
 		});
 
-		Bundle bundle = new Bundle();
-		bundle.putString("type", 4 + "");
-		getmImusicService().execute(RequestMethod.GET, API.API_R010, bundle, new IContsCallBack() {
-
-			@Override
-			public void onSuscess(JSONObject response) {
-				String guide_text = getString(R.string.nodata);
-				try {
-					guide_text = response.getString("guide_text");
-				} catch (JSONException e) {
-				}
-				dichvu_list.setTextNoData(true, guide_text);
-			}
-
-			@Override
-			public void onStart() {
-
-			}
-
-			@Override
-			public void onError(String message) {
-				dichvu_list.setTextNoData(true, message);
-			}
-
-			@Override
-			public void onError() {
-				onError("onError");
-			}
-		});
+		Cursor cursor = getActivity().getContentResolver().query(DichVu.CONTENT_URI, null, null, null, null);
+		dichvu_list.setAdapter(new HuongDanBanHangAdapter(getActivity(), cursor));
+		
+//		Bundle bundle = new Bundle();
+//		bundle.putString("type", 4 + "");
+//		getmImusicService().execute(RequestMethod.GET, API.API_R010, bundle, new IContsCallBack() {
+//
+//			@Override
+//			public void onSuscess(JSONObject response) {
+//				String guide_text = getString(R.string.nodata);
+//				try {
+//					guide_text = response.getString("guide_text");
+//				} catch (JSONException e) {
+//				}
+//				dichvu_list.setTextNoData(true, guide_text);
+//			}
+//
+//			@Override
+//			public void onStart() {
+//
+//			}
+//
+//			@Override
+//			public void onError(String message) {
+//				dichvu_list.setTextNoData(true, message);
+//			}
+//
+//			@Override
+//			public void onError() {
+//				onError("onError");
+//			}
+//		});
 
 		return view;
 	}
