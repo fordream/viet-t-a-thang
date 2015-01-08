@@ -95,7 +95,8 @@ public class MImusicService extends Service {
 					String phone_number = jsonObject.getString("phone");
 					ContentValues values = new ContentValues();
 					values.put(User.USER, phone_number);
-					values.put(User.PASSWORD, p);
+					if (!Conts.isBlank(p))
+						values.put(User.PASSWORD, p);
 					values.put(User.TOKEN, token);
 					values.put(User.KEYREFRESH, keyRefresh);
 					values.put(User.STATUS, "1");
@@ -324,6 +325,8 @@ public class MImusicService extends Service {
 					updateDichVu(response);
 				} else if (API.API_R012.equals(api)) {
 					updateDongBoXuong(response);
+				} else if (API.API_R013.equals(api)) {
+					updateReGetToken(response);
 				}
 
 				if (contsCallBack != null)
@@ -342,6 +345,11 @@ public class MImusicService extends Service {
 					contsCallBack.onError();
 			}
 		});
+	}
+
+	private void updateReGetToken(JSONObject response) {
+		// TODO Auto-generated method stub
+
 	}
 
 	private void updateDongBoXuong(JSONObject response) {
@@ -463,5 +471,11 @@ public class MImusicService extends Service {
 			getContentResolver().update(User.CONTENT_URI, contentValues, String.format("%s=='1'", User.STATUS), null);
 		} catch (JSONException e) {
 		}
+	}
+
+	public void refreshToken(IContsCallBack iContsCallBack) {
+		Bundle bundle = new Bundle();
+		bundle.putString("key", Conts.getToken(this));
+		execute(RequestMethod.GET, API.API_R013, bundle, iContsCallBack);
 	}
 }

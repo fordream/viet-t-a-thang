@@ -2,6 +2,7 @@ package vnp.com.mimusic;
 
 import org.json.JSONObject;
 
+import vnp.com.api.MImusicService;
 import vnp.com.db.User;
 import vnp.com.mimusic.VApplication.IServiceConfig;
 import vnp.com.mimusic.base.VTAnimationListener;
@@ -26,10 +27,14 @@ import android.widget.Toast;
 public class LoginActivty extends Activity implements OnClickListener {
 	private LoadingView progressBar1;
 
+	private MImusicService getService() {
+		return ((VApplication) getApplication()).getmImusicService();
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//((VApplication) getApplication()).dongbodanhba();
+		// ((VApplication) getApplication()).dongbodanhba();
 		setContentView(R.layout.activity_login);
 		progressBar1 = (LoadingView) findViewById(R.id.loadingView1);
 		Conts.showView(progressBar1, false);
@@ -67,9 +72,6 @@ public class LoginActivty extends Activity implements OnClickListener {
 		@Override
 		public void onServiceConnected() {
 			callInitSetting();
-			if (Conts.is3GConnected(LoginActivty.this)) {
-				login(true, "", "");
-			}
 		}
 	};
 
@@ -88,8 +90,50 @@ public class LoginActivty extends Activity implements OnClickListener {
 			((TextView) findViewById(R.id.activity_login_password)).setText(cursor.getString(cursor.getColumnIndex(User.PASSWORD)));
 			cursor.close();
 			// gotoHome();
+			
+			getService().refreshToken(new IContsCallBack() {
+				@Override
+				public void onStart() {
+					Conts.showView(progressBar1, true);
+					Conts.disableView(new View[] { //
+
+					findViewById(R.id.activity_login_number_phone), //
+							findViewById(R.id.activity_login_password), //
+							findViewById(R.id.activity_login_btn) });//
+					Conts.hiddenKeyBoard(LoginActivty.this);
+				}
+
+				@Override
+				public void onSuscess(JSONObject response) {
+					gotoHome();
+				}
+
+				@Override
+				public void onError(String message) {
+					Toast.makeText(LoginActivty.this, message, Toast.LENGTH_SHORT).show();
+					Conts.showView(progressBar1, false);
+					Conts.enableView(new View[] { //
+					findViewById(R.id.activity_login_number_phone), //
+							findViewById(R.id.activity_login_password), //
+							findViewById(R.id.activity_login_btn) });//
+				}
+
+				@Override
+				public void onError() {
+					onError("onError");
+//					Toast.makeText(LoginActivty.this, "please check network", Toast.LENGTH_SHORT).show();
+//					Conts.showView(progressBar1, false);
+//					Conts.enableView(new View[] { //
+//					findViewById(R.id.activity_login_number_phone), //
+//							findViewById(R.id.activity_login_password), //
+//							findViewById(R.id.activity_login_btn) });//
+				}
+				
+			});
 		} else {
-			// findViewById(R.id.activity_login_main).setVisibility(View.VISIBLE);
+			if (Conts.is3GConnected(LoginActivty.this)) {
+				login(true, "", "");
+			}
 		}
 		findViewById(R.id.activity_login_main).setVisibility(View.VISIBLE);
 	}
@@ -125,13 +169,13 @@ public class LoginActivty extends Activity implements OnClickListener {
 
 			@Override
 			public void onError() {
-
-				Toast.makeText(LoginActivty.this, "please check network", Toast.LENGTH_SHORT).show();
-				Conts.showView(progressBar1, false);
-				Conts.enableView(new View[] { //
-				findViewById(R.id.activity_login_number_phone), //
-						findViewById(R.id.activity_login_password), //
-						findViewById(R.id.activity_login_btn) });//
+				onError("onError");
+//				Toast.makeText(LoginActivty.this, "please check network", Toast.LENGTH_SHORT).show();
+//				Conts.showView(progressBar1, false);
+//				Conts.enableView(new View[] { //
+//				findViewById(R.id.activity_login_number_phone), //
+//						findViewById(R.id.activity_login_password), //
+//						findViewById(R.id.activity_login_btn) });//
 			}
 		});
 	}
