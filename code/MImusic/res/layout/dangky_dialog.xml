@@ -6,86 +6,92 @@
     android:gravity="center"
     android:orientation="vertical" >
 
-    <LinearLayout
-        android:id="@+id/dangky_dialog_main"
-        android:layout_width="@dimen/dimen_250dp"
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/dimen_30dp"
-        android:layout_marginTop="@dimen/dimen_30dp"
-        android:background="@drawable/bg_dangky"
-        android:orientation="vertical" >
+        android:layout_marginTop="@dimen/dimen_30dp" >
 
-        <TextView
-            android:id="@+id/dangky_dialog_name"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:id="@+id/dangky_dialog_main"
+            android:layout_width="@dimen/dimen_250dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dimen_3dp"
-            android:layout_marginTop="@dimen/dimen_3dp"
-            android:gravity="center"
-            android:maxLines="2"
-            android:text="Dang ky dich vu"
-            android:textColor="#336666"
-            android:textSize="@dimen/dimen_14dp"
-            android:textStyle="bold" />
+            android:background="@drawable/bg_dangky"
+            android:orientation="vertical" >
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="#cccccc" />
+            <TextView
+                android:id="@+id/dangky_dialog_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dimen_3dp"
+                android:layout_marginTop="@dimen/dimen_3dp"
+                android:gravity="center"
+                android:maxLines="2"
+                android:text="Dang ky dich vu"
+                android:textColor="#336666"
+                android:textSize="@dimen/dimen_14dp"
+                android:textStyle="bold" />
 
-        <ScrollView
-            android:id="@+id/scrollView1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#cccccc" />
+
+            <ScrollView
+                android:id="@+id/scrollView1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical" >
+
+                    <vnp.com.mimusic.view.VTTextView
+                        android:id="@+id/dangky_dialog_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:padding="@dimen/dimen_10dp"
+                        android:text="Dang ky dich vu"
+                        android:textColor="#333333"
+                        android:textSize="@dimen/dimen_12dp" />
+                </LinearLayout>
+            </ScrollView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#cccccc" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical" >
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dimen_3dp"
+                android:layout_marginTop="@dimen/dimen_3dp"
+                android:gravity="center" >
 
-                <TextView
-                    android:id="@+id/dangky_dialog_content"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:padding="@dimen/dimen_10dp"
-                    android:text="Dang ky dich vu"
-                    android:textColor="#333333"
+                <Button
+                    android:id="@+id/dangky_dialog_cancel"
+                    android:layout_width="@dimen/dimen_80dp"
+                    android:layout_height="@dimen/dimen_30dp"
+                    android:layout_marginRight="@dimen/dimen_10dp"
+                    android:background="@drawable/xml_btn_infor"
+                    android:text="@string/huy"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/dimen_13dp" />
+
+                <Button
+                    android:id="@+id/dangky_dialog_register"
+                    android:layout_width="@dimen/dimen_80dp"
+                    android:layout_height="@dimen/dimen_30dp"
+                    android:background="@drawable/xml_btn_dangky"
+                    android:text="@string/dangky"
+                    android:textColor="@android:color/white"
                     android:textSize="@dimen/dimen_13dp" />
             </LinearLayout>
-        </ScrollView>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="#cccccc" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dimen_3dp"
-            android:layout_marginTop="@dimen/dimen_3dp"
-            android:gravity="center" >
-
-            <Button
-                android:id="@+id/dangky_dialog_cancel"
-                android:layout_width="@dimen/dimen_80dp"
-                android:layout_height="@dimen/dimen_30dp"
-                android:layout_marginRight="@dimen/dimen_10dp"
-                android:background="@drawable/xml_btn_infor"
-                android:text="@string/huy"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/dimen_13dp" />
-
-            <Button
-                android:id="@+id/dangky_dialog_register"
-                android:layout_width="@dimen/dimen_80dp"
-                android:layout_height="@dimen/dimen_30dp"
-                android:background="@drawable/xml_btn_dangky"
-                android:text="@string/dangky"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/dimen_13dp" />
         </LinearLayout>
-    </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

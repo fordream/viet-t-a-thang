@@ -46,13 +46,13 @@
                     android:textStyle="bold" />
                 <!-- android:text="@string/tinhnangdichvuexample" -->
 
-                <TextView
+                <vnp.com.mimusic.view.VTTextView
                     android:id="@+id/mchitiet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/dimen_13sp"
                     android:textColor="#475055"
-                    android:textSize="@dimen/dimen_14dp" />
+                    android:textSize="@dimen/dimen_12dp" />
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

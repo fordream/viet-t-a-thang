@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dimen_10dp"
                 android:textColor="#336666"
-                android:textSize="@dimen/dimen_13dp" />
+                android:textSize="@dimen/dimen_12dp" />
         </LinearLayout>
     </ScrollView>
 
