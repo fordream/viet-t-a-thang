@@ -257,7 +257,7 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 				@Override
 				public void onSuscess(JSONObject response) {
 					try {
-						Conts.toast(getActivity(), response.getString("message"));
+						Conts.showDialogThongbao(getActivity(), response.getString("message"));
 					} catch (JSONException e) {
 					}
 					Conts.showView(loadingView, false);
@@ -273,12 +273,13 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 				public void onError(String message) {
 					Conts.toast(getActivity(), message);
 					Conts.showView(loadingView, false);
+
+					Conts.showDialogThongbao(getActivity(), message);
 				}
 
 				@Override
 				public void onError() {
-					Conts.showView(loadingView, false);
-					Conts.toast(getActivity(), "onError");
+					onError("");
 				}
 			});
 		}
