@@ -141,5 +141,7 @@
     <string name="validateaddnguoi">Bạn chỉ có thể mời 1 đến 5 người bạn 1 lần.</string>
     <string name="success_moi">Bạn đã mới thành công, bạn chọn \"Đồng ý\" để đóng màn hình mời.</string>
     <string name="validatesodichvu">Bạn chỉ có thể mời từ 1 đến 5 dịch vụ cùng lúc.</string>
+    
+    <string name="default_error">{\"errorCode\":10000,\"message\":\"Không thể kết nối đến server, bạn cần kiểm tra lại kết nối wifi hoặc 3G.\"}</string>
 
 </resources>

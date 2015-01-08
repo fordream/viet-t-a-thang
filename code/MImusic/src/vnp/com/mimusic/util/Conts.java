@@ -6,6 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import vnp.com.api.API;
 import vnp.com.api.ExeCallBack;
 import vnp.com.api.ExeCallBackOption;
 import vnp.com.api.MImusicService;
@@ -183,10 +184,12 @@ public class Conts {
 				RestClient restClient = (RestClient) object;
 
 				try {
-					// LogUtils.e("restClient.getResponse()",
-					// restClient.getResponseCode() + " : " +
-					// restClient.getResponse());
-					JSONObject jsonObject = new JSONObject(restClient.getResponse());
+					String response = restClient.getResponse();
+
+					if (Conts.isBlank(response)) {
+						response = activity.getString(R.string.default_error);
+					}
+					JSONObject jsonObject = new JSONObject(response);
 					String errorCode = jsonObject.getString("errorCode");
 					message = jsonObject.getString("message");
 					if ("0".equals(errorCode)) {
@@ -223,6 +226,7 @@ public class Conts {
 							contsCallBack.onError(message);
 					}
 				} catch (Exception exception) {
+					LogUtils.e("exception", exception);
 					if (contsCallBack != null)
 						contsCallBack.onError();
 				}
@@ -235,12 +239,14 @@ public class Conts {
 			}
 		};
 
-		// resClientCallBack.addParam("token", Conts.getToken(activity));
-		bundles.putString("token", Conts.getToken(activity));
+		if (!API.API_R013.equals(resClientCallBack.getApiName())) {
+			bundles.putString("token", Conts.getToken(activity));
+		}
+
 		Set<String> keys = bundles.keySet();
 		for (String key : keys) {
 			resClientCallBack.addParam(key, bundles.getString(key));
-			// LogUtils.e("para", key + " : " + bundles.getString(key));
+			LogUtils.e("para", key + " : " + bundles.getString(key));
 		}
 
 		ExeCallBack exeCallBack = new ExeCallBack();

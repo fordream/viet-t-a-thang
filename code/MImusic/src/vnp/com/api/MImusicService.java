@@ -454,6 +454,7 @@ public class MImusicService extends Service {
 		for (String key : keys) {
 			contentValues.put(key, bundle.getString(key));
 		}
+		
 		getContentResolver().update(User.CONTENT_URI, contentValues, String.format("%s=='1'", User.STATUS), null);
 	}
 
@@ -487,6 +488,8 @@ public class MImusicService extends Service {
 		// Conts.getRefreshToken(this));
 		// LogUtils.e("Conts.getRefreshToken(this)", Conts.getToken(this));
 		bundle.putString("key", Conts.getRefreshToken(this));
+		bundle.putString(User.KEYREFRESH, Conts.getRefreshToken(this));
+		
 		execute(RequestMethod.GET, API.API_R013, bundle, iContsCallBack);
 	}
 }
