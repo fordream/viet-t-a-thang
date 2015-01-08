@@ -13,6 +13,17 @@ import android.net.Uri;
 public class DBProvider extends ContentProvider {
 	public static final String PROVIDER_NAME = "vnp.com.mimusic.db.DBProvider";
 
+	private void openDB() {
+		//closeDB();
+		db = new DBDatabaseHelper(getContext()).getWritableDatabase();
+	}
+
+	private void closeDB() {
+		if (db != null) {
+			db.close();
+		}
+	}
+
 	public DBProvider() {
 		super();
 	}
@@ -23,7 +34,7 @@ public class DBProvider extends ContentProvider {
 
 	@Override
 	public boolean onCreate() {
-		db = new DBDatabaseHelper(getContext()).getWritableDatabase();
+		openDB();
 
 		if (uriMatcher == null) {
 			uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
@@ -38,6 +49,7 @@ public class DBProvider extends ContentProvider {
 
 	@Override
 	public Uri insert(Uri uri, ContentValues values) {
+		//openDB();
 		int match = uriMatcher.match(uri);
 		Uri _uri = User.insert(match, db, uri, values);
 
@@ -60,6 +72,7 @@ public class DBProvider extends ContentProvider {
 
 	@Override
 	public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+		//openDB();
 		int match = uriMatcher.match(uri);
 		Cursor c = User.query(match, db, uri, projection, selection, selectionArgs, sortOrder);
 
@@ -89,6 +102,7 @@ public class DBProvider extends ContentProvider {
 
 	@Override
 	public int delete(Uri uri, String selection, String[] selectionArgs) {
+		//openDB();
 		int count = 0;
 		int match = uriMatcher.match(uri);
 
@@ -116,6 +130,7 @@ public class DBProvider extends ContentProvider {
 
 	@Override
 	public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
+		//openDB();
 		int count = 0;
 
 		int match = uriMatcher.match(uri);
