@@ -88,45 +88,50 @@ public class LoginActivty extends Activity implements OnClickListener {
 			cursor.moveToNext();
 			((TextView) findViewById(R.id.activity_login_number_phone)).setText(cursor.getString(cursor.getColumnIndex(User.USER)));
 			((TextView) findViewById(R.id.activity_login_password)).setText(cursor.getString(cursor.getColumnIndex(User.PASSWORD)));
-			cursor.close();
+
 			// gotoHome();
-			
-//			getService().refreshToken(new IContsCallBack() {
-//				@Override
-//				public void onStart() {
-//					Conts.showView(progressBar1, true);
-//					Conts.disableView(new View[] { //
-//
-//					findViewById(R.id.activity_login_number_phone), //
-//							findViewById(R.id.activity_login_password), //
-//							findViewById(R.id.activity_login_btn) });//
-//					Conts.hiddenKeyBoard(LoginActivty.this);
-//				}
-//
-//				@Override
-//				public void onSuscess(JSONObject response) {
-//					gotoHome();
-//				}
-//
-//				@Override
-//				public void onError(String message) {
-//					Toast.makeText(LoginActivty.this, message, Toast.LENGTH_SHORT).show();
-//					Conts.showView(progressBar1, false);
-//					Conts.enableView(new View[] { //
-//					findViewById(R.id.activity_login_number_phone), //
-//							findViewById(R.id.activity_login_password), //
-//							findViewById(R.id.activity_login_btn) });//
-//				}
-//
-//				@Override
-//				public void onError() {
-//					onError("onError");
-//				}
-//			});
+
+			// getService().refreshToken(new IContsCallBack() {
+			// @Override
+			// public void onStart() {
+			// Conts.showView(progressBar1, true);
+			// Conts.disableView(new View[] { //
+			//
+			// findViewById(R.id.activity_login_number_phone), //
+			// findViewById(R.id.activity_login_password), //
+			// findViewById(R.id.activity_login_btn) });//
+			// Conts.hiddenKeyBoard(LoginActivty.this);
+			// }
+			//
+			// @Override
+			// public void onSuscess(JSONObject response) {
+			// gotoHome();
+			// }
+			//
+			// @Override
+			// public void onError(String message) {
+			// Toast.makeText(LoginActivty.this, message,
+			// Toast.LENGTH_SHORT).show();
+			// Conts.showView(progressBar1, false);
+			// Conts.enableView(new View[] { //
+			// findViewById(R.id.activity_login_number_phone), //
+			// findViewById(R.id.activity_login_password), //
+			// findViewById(R.id.activity_login_btn) });//
+			// }
+			//
+			// @Override
+			// public void onError() {
+			// onError("onError");
+			// }
+			// });
 		} else {
 			if (Conts.is3GConnected(LoginActivty.this)) {
 				login(true, "", "");
 			}
+		}
+
+		if (cursor != null) {
+			cursor.close();
 		}
 		findViewById(R.id.activity_login_main).setVisibility(View.VISIBLE);
 	}
@@ -163,12 +168,13 @@ public class LoginActivty extends Activity implements OnClickListener {
 			@Override
 			public void onError() {
 				onError("onError");
-//				Toast.makeText(LoginActivty.this, "please check network", Toast.LENGTH_SHORT).show();
-//				Conts.showView(progressBar1, false);
-//				Conts.enableView(new View[] { //
-//				findViewById(R.id.activity_login_number_phone), //
-//						findViewById(R.id.activity_login_password), //
-//						findViewById(R.id.activity_login_btn) });//
+				// Toast.makeText(LoginActivty.this, "please check network",
+				// Toast.LENGTH_SHORT).show();
+				// Conts.showView(progressBar1, false);
+				// Conts.enableView(new View[] { //
+				// findViewById(R.id.activity_login_number_phone), //
+				// findViewById(R.id.activity_login_password), //
+				// findViewById(R.id.activity_login_btn) });//
 			}
 		});
 	}
