@@ -84,8 +84,14 @@ public abstract class MoiDvChoNhieuNguoiAdaper extends CursorAdapter {
 		notifyDataSetChanged();
 	}
 
-	public MoiDvChoNhieuNguoiAdaper(Context context, Cursor c) {
+	private String service_code;
+
+	public MoiDvChoNhieuNguoiAdaper(Context context, Cursor c, String service_code) {
 		super(context, c);
+		this.service_code = service_code;
+		if (Conts.isBlank(service_code)) {
+			this.service_code = "";
+		}
 	}
 
 	@Override
@@ -94,7 +100,7 @@ public abstract class MoiDvChoNhieuNguoiAdaper extends CursorAdapter {
 			convertView = new MoiDvChoNhieuNguoiItemView(context);
 		}
 
-		((MoiDvChoNhieuNguoiItemView) convertView).initData(cursor, textSearch);
+		((MoiDvChoNhieuNguoiItemView) convertView).initData(cursor, textSearch,service_code);
 
 		CheckBox menu_right_detail_checkbox = (CheckBox) ((MoiDvChoNhieuNguoiItemView) convertView).findViewById(R.id.menu_right_detail_checkbox);
 		menu_right_detail_checkbox.setOnCheckedChangeListener(null);

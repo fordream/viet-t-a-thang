@@ -2,6 +2,7 @@ package vnp.com.mimusic.view;
 
 import vnp.com.db.User;
 import vnp.com.mimusic.R;
+import vnp.com.mimusic.util.Conts;
 import android.content.Context;
 import android.database.Cursor;
 import android.util.AttributeSet;
@@ -27,7 +28,7 @@ public class MoiDvChoNhieuNguoiItemView extends LinearLayout {
 		((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.moidvchonhieunguoi_item, this);
 	}
 
-	public void initData(Cursor cursor, String textSearch) {
+	public void initData(Cursor cursor, String textSearch, String service_code) {
 		String name = "";
 		if (cursor.getString(cursor.getColumnIndex(User.NAME)) != null) {
 			name = cursor.getString(cursor.getColumnIndex(User.NAME));
@@ -46,8 +47,16 @@ public class MoiDvChoNhieuNguoiItemView extends LinearLayout {
 		if (name == null)
 			name = "";
 
-		findViewById(R.id.menurightitem_main).setVisibility(name.toUpperCase().contains(textSearch.toUpperCase()) ? View.VISIBLE : View.GONE);
-		
+		View main = findViewById(R.id.menurightitem_main);
+		main.setVisibility(name.toUpperCase().contains(textSearch.toUpperCase()) ? View.VISIBLE : View.GONE);
+		boolean needShow = Conts.contains(name, textSearch);
+
+		if (!Conts.contains(cursor.getString(cursor.getColumnIndex(User.LISTIDDVSUDUNG)), service_code)) {
+			needShow = false;
+		}
+
+		main.setVisibility(needShow ? View.VISIBLE : View.GONE);
+
 		((TextView) findViewById(R.id.menu_right_item_tv_name)).setText(name);
 		String avatar = cursor.getString(cursor.getColumnIndex(User.AVATAR));
 		if (avatar == null) {
@@ -55,9 +64,7 @@ public class MoiDvChoNhieuNguoiItemView extends LinearLayout {
 		} else {
 			((ImageView) findViewById(R.id.menu_right_item_img_icon)).setBackgroundResource(R.drawable.no_avatar);
 		}
-		
-		
-		
+
 		// menu_right_item_img_icon.setBackgroundResource(R.drawable.bangxephang_avatar_example);
 	}
 }

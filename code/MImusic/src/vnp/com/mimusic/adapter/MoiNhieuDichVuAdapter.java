@@ -7,6 +7,7 @@ import java.util.Map;
 
 import vnp.com.db.DichVu;
 import vnp.com.mimusic.R;
+import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.ImageLoaderUtils;
 import vnp.com.mimusic.view.MoiNhieuDichVuItemView;
 import android.content.Context;
@@ -43,8 +44,14 @@ public abstract class MoiNhieuDichVuAdapter extends CursorAdapter {
 		notifyDataSetChanged();
 	}
 
-	public MoiNhieuDichVuAdapter(Context context, Cursor c) {
+	private String lISTIDDVSUDUNG;
+
+	public MoiNhieuDichVuAdapter(Context context, Cursor c, String lISTIDDVSUDUNG) {
 		super(context, c, true);
+		this.lISTIDDVSUDUNG = lISTIDDVSUDUNG;
+		if (Conts.isBlank(lISTIDDVSUDUNG)) {
+			lISTIDDVSUDUNG = "";
+		}
 	}
 
 	@Override
@@ -61,7 +68,17 @@ public abstract class MoiNhieuDichVuAdapter extends CursorAdapter {
 		final String service_icon = cursor.getString(cursor.getColumnIndex(DichVu.service_icon)) + "";
 
 		ImageLoaderUtils.getInstance(context).DisplayImage(service_icon, moinhieudichvu_item_icon);
-		convertView.findViewById(R.id.moinhieudichvu_item_main).setVisibility(name.toUpperCase().contains(textSearch.toUpperCase()) ? View.VISIBLE : View.GONE);
+
+		String service_code = cursor.getString(cursor.getColumnIndex(DichVu.service_code));
+		View main = convertView.findViewById(R.id.moinhieudichvu_item_main);
+
+		boolean needShow = Conts.contains(name, textSearch);
+		if (!Conts.contains(lISTIDDVSUDUNG, service_code)) {
+			needShow = false;
+		}
+
+		main.setVisibility(needShow ? View.VISIBLE : View.GONE);
+
 		((MoiNhieuDichVuItemView) convertView).moinhieudichvu_item_tv_name.setText(name);
 		((MoiNhieuDichVuItemView) convertView).moinhieudichvu_item_checkbox.setOnCheckedChangeListener(null);
 		((MoiNhieuDichVuItemView) convertView).moinhieudichvu_item_checkbox.setChecked(listSelect.contains(_id));
@@ -85,8 +102,6 @@ public abstract class MoiNhieuDichVuAdapter extends CursorAdapter {
 	public View newView(Context context, Cursor cursor, ViewGroup parent) {
 		return new MoiNhieuDichVuItemView(context);
 	}
-
-	// public abstract void moiDVChoNhieuNguoi();
 
 	private String textSearch = "";
 

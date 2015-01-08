@@ -63,6 +63,7 @@ public class Conts {
 	public static final String CHITIETCANHANBANGXEPHANG = "CHITIETCANHANBANGXEPHANG";
 	public static final String CHITIETCANHANBANGXEPHANGTUNGDICHVU = "CHITIETCANHANBANGXEPHANGTUNGDICHVU";
 	public static final String CHITTIETLICHSUBANHANG = "CHITTIETLICHSUBANHANG";
+	public static final boolean ISLISTCHUASUDUNG = true;
 
 	public static String getName(Cursor cursor) {
 		String name = cursor.getString(cursor.getColumnIndex(User.fullname));
@@ -466,12 +467,16 @@ public class Conts {
 
 				return new File(Environment.getExternalStorageDirectory() + "/temp.png");
 			} catch (Exception e) {
-				
+
 				LogUtils.e("CHECK", e);
 			}
 		}
 
 		return new File(path);
+	}
+
+	public static boolean contains(String full, String con) {
+		return full.toLowerCase().trim().contains(con.toLowerCase().trim());
 	}
 
 }

@@ -77,7 +77,6 @@ public class MenuRightItemView extends LinearLayout {
 
 		String dvDaSuDung = cursor.getString(cursor.getColumnIndex(User.LISTIDDVSUDUNG));
 
-		StringTokenizer stringTokenizer = new StringTokenizer(dvDaSuDung, ",");
 		
 		menu_right_item_tv_link.setText(Html.fromHtml(cursor.getString(cursor.getColumnIndex(User.LISTIDTENDVSUDUNG))));
 

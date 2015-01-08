@@ -35,6 +35,7 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 	private String sdt = "";
 	private View main_mm;
 	private MenuRightItemView moinhieudichvu_dialog_menurightitem, menuRightItemViewheader;
+	private String LISTIDDVSUDUNG = "";
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -90,7 +91,7 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 		Cursor cursor = getActivity().getContentResolver().query(User.CONTENT_URI, null, where, null, null);
 		if (cursor != null && cursor.getCount() >= 1) {
 			cursor.moveToNext();
-
+			LISTIDDVSUDUNG = cursor.getString(cursor.getColumnIndex(User.LISTIDDVSUDUNG));
 			sdt = cursor.getString(cursor.getColumnIndex(User.USER));
 
 			moinhieudichvu_dialog_menurightitem = (MenuRightItemView) view.findViewById(R.id.moinhieudichvu_dialog_menurightitem);
@@ -125,7 +126,7 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 				adapter.notifyDataSetChanged();
 			}
 		});
-		maumoi_list.setAdapter(adapter = new MoiNhieuDichVuAdapter(getActivity(), cursorDV) {
+		maumoi_list.setAdapter(adapter = new MoiNhieuDichVuAdapter(getActivity(), cursorDV,LISTIDDVSUDUNG ) {
 
 			@Override
 			public void addOrRemove(final String _id, boolean isAdd, String icon) {
@@ -208,7 +209,6 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 	int currentTop = 0;
 
 	protected void mOnScroll() {
-
 		int top = menuRightItemViewheader.getTop();
 		int heightt = moinhieudichvu_dialog_menurightitem.getHeight();
 
@@ -223,12 +223,7 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 			next = top;
 		}
 
-		// TranslateAnimation animation = new TranslateAnimation(0, 0,
-		// currentTop, next);
-		// animation.setFillAfter(false);
-		// animation.setFillEnabled(false);
 		currentTop = next;
-		// main_mm.startAnimation(animation);
 		RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) main_mm.getLayoutParams();
 		params.setMargins(0, next, 0, 0);
 		main_mm.setLayoutParams(params);

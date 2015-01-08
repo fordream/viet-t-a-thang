@@ -46,12 +46,12 @@ public class MoiDvChoNhieuNguoiFragment extends Fragment implements OnItemClickL
 		super.onActivityCreated(savedInstanceState);
 	}
 
-	ListView moi_list;
+	private ListView moi_list;
 	private View main_mm;
 	private LinearLayout moinhieudichvu_dialog_list_hor;
 	private EditText moidichvuchonhieunguoi_number;
 	private MoiDvChoNhieuNguoiAdaper adaper;
-
+	private String service_code = "";
 	private View moidichvuchonhieunguoi_add_plus;
 	private CheckBox moidichvuchonhieunguoi_contact;
 
@@ -155,13 +155,13 @@ public class MoiDvChoNhieuNguoiFragment extends Fragment implements OnItemClickL
 		moi_list.addHeaderView(headerOfList);
 
 		final String id = getArguments().getString(DichVu.ID);
-		String service_code = "";
 		String selection = DichVu.ID + "='" + id + "'";
 		final Cursor mcursor = getActivity().getContentResolver().query(DichVu.CONTENT_URI, null, selection, null, null);
 
 		if (mcursor != null && mcursor.getCount() >= 1) {
 			mcursor.moveToNext();
 			service_code = mcursor.getString(mcursor.getColumnIndex(DichVu.service_code));
+
 			header.setData(mcursor);
 			headerOfList.setData(mcursor);
 			mcursor.close();
@@ -181,7 +181,7 @@ public class MoiDvChoNhieuNguoiFragment extends Fragment implements OnItemClickL
 		moi_list.setOnItemClickListener(this);
 
 		Cursor cursor = getActivity().getContentResolver().query(User.CONTENT_URI, null, String.format("%s ='0'", User.STATUS), null, null);
-		adaper = new MoiDvChoNhieuNguoiAdaper(getActivity(), cursor) {
+		adaper = new MoiDvChoNhieuNguoiAdaper(getActivity(), cursor,service_code) {
 
 			@Override
 			public void addOrRemove(final String _id, boolean isAdd) {
@@ -331,7 +331,6 @@ public class MoiDvChoNhieuNguoiFragment extends Fragment implements OnItemClickL
 			return;
 		}
 
-		// TODO
 		String customers = "";
 		for (String _id : adaper.getListSeList()) {
 			String user = adaper.getUserFrom_ID(_id);
