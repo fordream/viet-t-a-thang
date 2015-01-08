@@ -23,7 +23,8 @@
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/dimen_5dp"
-                android:background="@drawable/bangxephang_avatar_example" />
+                android:scaleType="fitXY"
+                android:src="@drawable/no_avatar" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
