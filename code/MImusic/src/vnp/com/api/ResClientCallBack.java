@@ -34,11 +34,11 @@ public abstract class ResClientCallBack extends CallBack {
 			client.addParam(key, maps.get(key));
 		}
 		try {
-			if (getApiName().equals(API.API_R023)) {
-				client.executeUploadFile(context);
-			} else {
+//			if (getApiName().equals(API.API_R023)) {
+//				client.executeUploadFile(context, false);
+//			} else {
 				client.execute(getMedthod());
-			}
+//			}
 		} catch (Exception e) {
 		}
 

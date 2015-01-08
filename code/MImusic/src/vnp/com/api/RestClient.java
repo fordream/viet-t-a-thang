@@ -176,27 +176,25 @@ public class RestClient {
 		}
 	}
 
-	public void executeUploadFile(Context context) throws Exception {
-		HttpClient client = new DefaultHttpClient();
-		HttpPut request = new HttpPut(url);
+	public void executeUploadFile(Context context, boolean isPOST) throws Exception {
+		final HttpParams httpParams = new BasicHttpParams();
+		HttpConnectionParams.setConnectionTimeout(httpParams, 10000);
+		HttpClient client = new DefaultHttpClient(httpParams);
+		// HttpPut request = new HttpPut(url);
+//		client.getParams().setIntParameter("http.connection.timeout", 15 * 1000);
+		HttpEntityEnclosingRequestBase request = new HttpPost(url);
+		if (!isPOST) {
+			request = new HttpPut(url);
+		}
 		MultipartEntity partEntity = new MultipartEntity();
 
-		HttpResponse httpResponse;
 		for (NameValuePair h : headers) {
 			request.addHeader(h.getName(), h.getValue());
 		}
 
 		for (NameValuePair p : params) {
-			if (p.getName().equals("user[avatar]")) {
-				partEntity.addPart(p.getName(), new FileBody(new File(p.getValue()), "image/jpeg"));
-			} else if (p.getName().equals("file")) {
-				partEntity.addPart(p.getName(), new FileBody(new File(p.getValue()), "image/jpeg"));
-			} else if (p.getName().equals("user[cover]")) {
-				partEntity.addPart(p.getName(), new FileBody(new File(p.getValue()), "image/jpeg"));
-			} else if (p.getName().equals("post[url]")) {
-				partEntity.addPart(p.getName(), new FileBody(new File(p.getValue()), "image/jpeg"));
-			} else if (p.getName().equals("images")) {
-				partEntity.addPart(p.getName(), new FileBody(Conts.getFileFromPath(context,p.getValue()), "image/jpeg"));
+			if (p.getName().equals("images")) {
+				partEntity.addPart(p.getName(), new FileBody(Conts.getFileFromPath(context, p.getValue()), "image/jpeg"));
 			} else {
 				partEntity.addPart(p.getName(), new StringBody(p.getValue()));
 			}
@@ -204,7 +202,7 @@ public class RestClient {
 
 		request.setEntity(partEntity);
 		try {
-			httpResponse = client.execute(request);
+			HttpResponse httpResponse = client.execute(request);
 			responseCode = httpResponse.getStatusLine().getStatusCode();
 			message = httpResponse.getStatusLine().getReasonPhrase();
 
@@ -219,63 +217,67 @@ public class RestClient {
 			e.printStackTrace();
 			LogUtils.e("ABC", e);
 		}
-
 	}
 
-	public void executeUploadFile(boolean isPost) throws Exception {
-		HttpClient client = new DefaultHttpClient();
-		HttpEntityEnclosingRequestBase request = new HttpPut(url);
-
-		if (isPost) {
-			request = new HttpPost(url);
-		}
-		MultipartEntity partEntity = new MultipartEntity();
-
-		HttpResponse httpResponse;
-		for (NameValuePair h : headers) {
-			request.addHeader(h.getName(), h.getValue());
-		}
-
-		for (NameValuePair p : params) {
-			if (p.getName().equals("user[avatar]")) {
-				partEntity.addPart(p.getName(), new FileBody(new File(p.getValue()), "image/jpeg"));
-			} else if (p.getName().equals("file")) {
-				partEntity.addPart(p.getName(), new FileBody(new File(p.getValue()), "image/jpeg"));
-			} else if (p.getName().equals("image")) {
-				partEntity.addPart(p.getName(), new FileBody(new File(p.getValue()), "image/jpeg"));
-			} else if (p.getName().equals("user[cover]")) {
-				partEntity.addPart(p.getName(), new FileBody(new File(p.getValue()), "image/jpeg"));
-			} else if (p.getName().equals("post[url]")) {
-				partEntity.addPart(p.getName(), new FileBody(new File(p.getValue()), "image/jpeg"));
-			} else {
-				partEntity.addPart(p.getName(), new StringBody(p.getValue()));
-			}
-		}
-
-		request.setEntity(partEntity);
-		try {
-
-			httpResponse = client.execute(request);
-			responseCode = httpResponse.getStatusLine().getStatusCode();
-			message = httpResponse.getStatusLine().getReasonPhrase();
-
-			HttpEntity entity = httpResponse.getEntity();
-
-			if (entity != null) {
-				response = EntityUtils.toString(entity);
-			}
-
-		} catch (ClientProtocolException e) {
-			Log.e("ERRRRO", "x", e);
-			client.getConnectionManager().shutdown();
-			e.printStackTrace();
-		} catch (IOException e) {
-			client.getConnectionManager().shutdown();
-			e.printStackTrace();
-			Log.e("ERRRRO", "x", e);
-		}
-
-	}
+	// public void executeUploadFile(boolean isPost) throws Exception {
+	// HttpClient client = new DefaultHttpClient();
+	// HttpEntityEnclosingRequestBase request = new HttpPut(url);
+	//
+	// if (isPost) {
+	// request = new HttpPost(url);
+	// }
+	// MultipartEntity partEntity = new MultipartEntity();
+	//
+	// HttpResponse httpResponse;
+	// for (NameValuePair h : headers) {
+	// request.addHeader(h.getName(), h.getValue());
+	// }
+	//
+	// for (NameValuePair p : params) {
+	// if (p.getName().equals("user[avatar]")) {
+	// partEntity.addPart(p.getName(), new FileBody(new File(p.getValue()),
+	// "image/jpeg"));
+	// } else if (p.getName().equals("file")) {
+	// partEntity.addPart(p.getName(), new FileBody(new File(p.getValue()),
+	// "image/jpeg"));
+	// } else if (p.getName().equals("image")) {
+	// partEntity.addPart(p.getName(), new FileBody(new File(p.getValue()),
+	// "image/jpeg"));
+	// } else if (p.getName().equals("user[cover]")) {
+	// partEntity.addPart(p.getName(), new FileBody(new File(p.getValue()),
+	// "image/jpeg"));
+	// } else if (p.getName().equals("post[url]")) {
+	// partEntity.addPart(p.getName(), new FileBody(new File(p.getValue()),
+	// "image/jpeg"));
+	// } else {
+	// partEntity.addPart(p.getName(), new StringBody(p.getValue()));
+	// }
+	// }
+	//
+	// request.setEntity(partEntity);
+	// try {
+	//
+	// httpResponse = client.execute(request);
+	// responseCode = httpResponse.getStatusLine().getStatusCode();
+	// message = httpResponse.getStatusLine().getReasonPhrase();
+	//
+	// HttpEntity entity = httpResponse.getEntity();
+	//
+	// if (entity != null) {
+	// response = EntityUtils.toString(entity);
+	// }
+	//
+	// } catch (ClientProtocolException e) {
+	// Log.e("ERRRRO", "x", e);
+	// client.getConnectionManager().shutdown();
+	// e.printStackTrace();
+	// } catch (IOException e) {
+	// client.getConnectionManager().shutdown();
+	// e.printStackTrace();
+	// Log.e("ERRRRO", "x", e);
+	// }
+	//
+	// }
 
 	public void exeDownloadFile(RequestInfo requestInfo, final IDownloadUploadFileCallBack downloadUploadFileCallBack) {
 
