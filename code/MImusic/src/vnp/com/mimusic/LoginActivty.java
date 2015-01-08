@@ -82,56 +82,46 @@ public class LoginActivty extends Activity implements OnClickListener {
 	}
 
 	private void callInitSetting() {
-		String selection = User.STATUS + "='1'";
-		Cursor cursor = getContentResolver().query(User.CONTENT_URI, null, selection, null, null);
-		if (cursor != null && cursor.getCount() >= 1) {
-			cursor.moveToNext();
-			((TextView) findViewById(R.id.activity_login_number_phone)).setText(cursor.getString(cursor.getColumnIndex(User.USER)));
-			((TextView) findViewById(R.id.activity_login_password)).setText(cursor.getString(cursor.getColumnIndex(User.PASSWORD)));
+		((TextView) findViewById(R.id.activity_login_number_phone)).setText(Conts.getUser(this));
+		((TextView) findViewById(R.id.activity_login_password)).setText(Conts.getPassword(this));
 
-			// gotoHome();
-
-			// getService().refreshToken(new IContsCallBack() {
-			// @Override
-			// public void onStart() {
-			// Conts.showView(progressBar1, true);
-			// Conts.disableView(new View[] { //
-			//
-			// findViewById(R.id.activity_login_number_phone), //
-			// findViewById(R.id.activity_login_password), //
-			// findViewById(R.id.activity_login_btn) });//
-			// Conts.hiddenKeyBoard(LoginActivty.this);
-			// }
-			//
-			// @Override
-			// public void onSuscess(JSONObject response) {
-			// gotoHome();
-			// }
-			//
-			// @Override
-			// public void onError(String message) {
-			// Toast.makeText(LoginActivty.this, message,
-			// Toast.LENGTH_SHORT).show();
-			// Conts.showView(progressBar1, false);
-			// Conts.enableView(new View[] { //
-			// findViewById(R.id.activity_login_number_phone), //
-			// findViewById(R.id.activity_login_password), //
-			// findViewById(R.id.activity_login_btn) });//
-			// }
-			//
-			// @Override
-			// public void onError() {
-			// onError("onError");
-			// }
-			// });
-		} else {
+		if (Conts.isBlank(Conts.getUser(this))) {
 			if (Conts.is3GConnected(LoginActivty.this)) {
 				login(true, "", "");
 			}
-		}
+		} else {
+			getService().refreshToken(new IContsCallBack() {
+				@Override
+				public void onStart() {
+					Conts.showView(progressBar1, true);
+					Conts.disableView(new View[] { //
 
-		if (cursor != null) {
-			cursor.close();
+					findViewById(R.id.activity_login_number_phone), //
+							findViewById(R.id.activity_login_password), //
+							findViewById(R.id.activity_login_btn) });//
+					Conts.hiddenKeyBoard(LoginActivty.this);
+				}
+
+				@Override
+				public void onSuscess(JSONObject response) {
+					gotoHome();
+				}
+
+				@Override
+				public void onError(String message) {
+					Toast.makeText(LoginActivty.this, message, Toast.LENGTH_SHORT).show();
+					Conts.showView(progressBar1, false);
+					Conts.enableView(new View[] { //
+					findViewById(R.id.activity_login_number_phone), //
+							findViewById(R.id.activity_login_password), //
+							findViewById(R.id.activity_login_btn) });//
+				}
+
+				@Override
+				public void onError() {
+					onError("onError");
+				}
+			});
 		}
 		findViewById(R.id.activity_login_main).setVisibility(View.VISIBLE);
 	}

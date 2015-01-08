@@ -32,6 +32,7 @@ import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class Conts {
@@ -365,5 +366,49 @@ public class Conts {
 		}
 
 		return false;
+	}
+
+	public static String getUser(Context context) {
+		String user = "";
+		Cursor cursor = context.getContentResolver().query(User.CONTENT_URI, null, User.STATUS + "='1'", null, null);
+		if (cursor != null && cursor.getCount() >= 1) {
+			cursor.moveToNext();
+			user = cursor.getString(cursor.getColumnIndex(User.USER));
+		}
+
+		if (cursor != null) {
+			cursor.close();
+		}
+		return user;
+	}
+
+	public static String getPassword(Context context) {
+		String user = "";
+		Cursor cursor = context.getContentResolver().query(User.CONTENT_URI, null, User.STATUS + "='1'", null, null);
+		if (cursor != null && cursor.getCount() >= 1) {
+			cursor.moveToNext();
+			user = cursor.getString(cursor.getColumnIndex(User.PASSWORD));
+		}
+
+		if (cursor != null) {
+			cursor.close();
+		}
+		return user;
+
+	}
+
+	public static String getRefreshToken(Context context) {
+		String token = null;
+		String selection = User.STATUS + "='1'";
+		Cursor cursor = context.getContentResolver().query(User.CONTENT_URI, null, selection, null, null);
+		if (cursor != null && cursor.getCount() >= 1) {
+			cursor.moveToNext();
+			token = cursor.getString(cursor.getColumnIndex(User.KEYREFRESH));
+		}
+
+		if (cursor != null) {
+			cursor.close();
+		}
+		return token;
 	}
 }

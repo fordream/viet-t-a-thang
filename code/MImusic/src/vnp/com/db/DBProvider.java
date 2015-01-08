@@ -34,7 +34,7 @@ public class DBProvider extends ContentProvider {
 
 	@Override
 	public boolean onCreate() {
-		openDB();
+		db = new DBDatabaseHelper(getContext()).getWritableDatabase();
 
 		if (uriMatcher == null) {
 			uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);

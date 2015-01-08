@@ -353,7 +353,9 @@ public class MImusicService extends Service {
 	}
 
 	private void updateDongBoXuong(JSONObject response) {
+
 		try {
+			String user = Conts.getUser(MImusicService.this);
 			JSONArray array = response.getJSONArray("data");
 			for (int i = 0; i < array.length(); i++) {
 				JSONObject jsonObject = array.getJSONObject(i);
@@ -363,7 +365,7 @@ public class MImusicService extends Service {
 				ContentValues contentValues = new ContentValues();
 				contentValues.put(User.USER, phone);
 				contentValues.put(User.NAME_CONTACT, name);
-				contentValues.put(User.STATUS, "0");
+				contentValues.put(User.STATUS, user.equals(phone) ? "1" : "0");
 
 				String service_codes = "";
 				if (jsonObject.has("services")) {
@@ -423,8 +425,13 @@ public class MImusicService extends Service {
 				String selection = String.format("%s='%s'", DichVu.ID, jsonObject.getString(DichVu.ID));
 				Cursor cursor = getContentResolver().query(DichVu.CONTENT_URI, null, selection, null, null);
 
-				if (cursor != null && cursor.getCount() >= 1) {
+				boolean isUpdate = cursor != null && cursor.getCount() >= 1;
+
+				if (cursor != null) {
 					cursor.close();
+				}
+
+				if (isUpdate) {
 					getContentResolver().update(DichVu.CONTENT_URI, contentValues, selection, null);
 				} else {
 					getContentResolver().insert(DichVu.CONTENT_URI, contentValues);
@@ -474,8 +481,12 @@ public class MImusicService extends Service {
 	}
 
 	public void refreshToken(IContsCallBack iContsCallBack) {
+		// TODO
 		Bundle bundle = new Bundle();
-		bundle.putString("key", Conts.getToken(this));
+		// LogUtils.e("Conts.getRefreshToken(this)",
+		// Conts.getRefreshToken(this));
+		// LogUtils.e("Conts.getRefreshToken(this)", Conts.getToken(this));
+		bundle.putString("key", Conts.getRefreshToken(this));
 		execute(RequestMethod.GET, API.API_R013, bundle, iContsCallBack);
 	}
 }
