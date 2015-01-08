@@ -26,6 +26,7 @@ public class BangXepHangFragment extends BaseFragment implements OnItemClickList
 	private View view;
 	private String text = "";
 	private boolean successRequest = false;
+	private String type;
 	
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
@@ -53,7 +54,6 @@ public class BangXepHangFragment extends BaseFragment implements OnItemClickList
 
 	private void callData(boolean b) {
 		bangxephang_list.setText(false, "");
-		String type;
 		if (b) {
 			text = getResources().getString(R.string.bangxephang_so_luong_no_data);
 			type = "2";// theo so luong
@@ -75,6 +75,7 @@ public class BangXepHangFragment extends BaseFragment implements OnItemClickList
 					successRequest = true;
 					try {
 						JSONArray jsonArray = response.getJSONArray("data");
+						((BangXepHangAdaper) bangxephang_list.getAdapter()).setType(type);
 						((BangXepHangAdaper) bangxephang_list.getAdapter()).setJSOnArray(jsonArray);
 						((BangXepHangAdaper) bangxephang_list.getAdapter()).notifyDataSetChanged();
 

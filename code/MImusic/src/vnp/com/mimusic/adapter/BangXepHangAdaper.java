@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 
 public class BangXepHangAdaper extends ArrayAdapter<JSONObject> {
 	private JSONArray jsonArray;
+	private String type ="1";
 
 	public BangXepHangAdaper(Context context, JSONArray jA) {
 		super(context, 0, new JSONObject[] {});
@@ -28,6 +29,7 @@ public class BangXepHangAdaper extends ArrayAdapter<JSONObject> {
 		try {
 			JSONObject jo = jsonArray.getJSONObject(position);
 			jo.put("position", position);
+			jo.put("type", type);
 			return jo;
 		} catch (JSONException e) {
 		}
@@ -49,5 +51,9 @@ public class BangXepHangAdaper extends ArrayAdapter<JSONObject> {
 
 	public void setJSOnArray(JSONArray jA) {
 		this.jsonArray = jA;
+	}
+	
+	public void setType(String t) {
+		type = t;
 	}
 }

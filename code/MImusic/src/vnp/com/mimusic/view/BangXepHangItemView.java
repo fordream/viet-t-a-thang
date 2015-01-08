@@ -26,7 +26,13 @@ public class BangXepHangItemView extends LinearLayout {
 	private void init() {
 		((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.bangxephang_item, this);
 	}
-	
+
+	//id: của định danh của BXH
+    //nickname(String): nickname của dealer
+    //msisdn: số điện thoại của dealer
+    //avatar: ảnh đại diện của dealer
+    //quantity: số lượng đăng ký
+    //commission: hoa hồng được nhận (doanh thu)
 	public void setData(JSONObject item) {
 		TextView bxhItemSTT = (TextView) findViewById(R.id.bangxephang_item_tv_stt);
 		ImageView bxhItemImage = (ImageView) findViewById(R.id.bangxephang_item_img_icon);
@@ -36,7 +42,13 @@ public class BangXepHangItemView extends LinearLayout {
 		try {
 			bxhItemSTT.setText(item.getString("position"));
 			bxhItemName.setText(item.getString("nickname"));
-			bxhItemValue.setText(item.getString("quantity"));
+			if (!item.isNull("type")) {
+				if (item.get("type").equals("1")) {
+					bxhItemValue.setText(item.getString("commission"));
+				} else if (item.get("type").equals("2")) {
+					bxhItemValue.setText(item.getString("quantity"));
+				}
+			}
 		} catch (JSONException e) {
 		}
 
