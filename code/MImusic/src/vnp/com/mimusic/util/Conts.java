@@ -438,12 +438,15 @@ public class Conts {
 	}
 
 	public static void addViewScale(View view) {
-		view.startAnimation(AnimationUtils.loadAnimation(view.getContext(), R.anim.abc_scale_in));
+		Animation animation = AnimationUtils.loadAnimation(view.getContext(), R.anim.abc_scale_in);
+		animation.setDuration(50);
+		view.startAnimation(animation);
 	}
 
 	public static void removeViewScale(View view, AnimationListener animationListener) {
 		Animation animation = AnimationUtils.loadAnimation(view.getContext(), R.anim.abc_scale_out);
 		animation.setAnimationListener(animationListener);
+		animation.setDuration(50);
 		view.startAnimation(animation);
 
 	}
