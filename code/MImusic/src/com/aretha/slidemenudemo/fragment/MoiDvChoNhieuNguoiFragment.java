@@ -6,6 +6,7 @@ import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.adapter.MoiDvChoNhieuNguoiAdaper;
 import vnp.com.mimusic.util.Conts;
+import vnp.com.mimusic.util.LogUtils;
 import vnp.com.mimusic.view.ChiTietDichVuNoFeatureView;
 import vnp.com.mimusic.view.HeaderView;
 import android.content.Context;
@@ -20,8 +21,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
+import android.view.animation.Transformation;
+import android.view.animation.TranslateAnimation;
+import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.CheckBox;
@@ -30,6 +36,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
@@ -39,6 +46,7 @@ public class MoiDvChoNhieuNguoiFragment extends Fragment implements OnItemClickL
 		super.onActivityCreated(savedInstanceState);
 	}
 
+	private View main_mm;
 	private LinearLayout moinhieudichvu_dialog_list_hor;
 	private EditText moidichvuchonhieunguoi_number;
 	private MoiDvChoNhieuNguoiAdaper adaper;
@@ -57,10 +65,13 @@ public class MoiDvChoNhieuNguoiFragment extends Fragment implements OnItemClickL
 			}
 		}
 	};
+	private ChiTietDichVuNoFeatureView headerOfList;
+	private ChiTietDichVuNoFeatureView header;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.moidichvuchonhieunguoi, null);
+		main_mm = view.findViewById(R.id.main_mm);
 		moidichvuchonhieunguoi_add_plus = view.findViewById(R.id.moidichvuchonhieunguoi_add_plus);
 
 		moidichvuchonhieunguoi_add_plus.setOnClickListener(moidichvuchonhieunguoi_add_plusOnCLick);
@@ -137,7 +148,10 @@ public class MoiDvChoNhieuNguoiFragment extends Fragment implements OnItemClickL
 		/**
 		 * show data
 		 */
-		ChiTietDichVuNoFeatureView header = (ChiTietDichVuNoFeatureView) view.findViewById(R.id.moidichvuchonhieunguoi_chiteitdichvunofeatureview);
+		header = (ChiTietDichVuNoFeatureView) view.findViewById(R.id.moidichvuchonhieunguoi_chiteitdichvunofeatureview);
+		headerOfList = new ChiTietDichVuNoFeatureView(getActivity());
+		headerOfList.showFooter();
+		moi_list.addHeaderView(headerOfList);
 
 		final String id = getArguments().getString(DichVu.ID);
 		String service_code = "";
@@ -148,9 +162,14 @@ public class MoiDvChoNhieuNguoiFragment extends Fragment implements OnItemClickL
 			mcursor.moveToNext();
 			service_code = mcursor.getString(mcursor.getColumnIndex(DichVu.service_code));
 			header.setData(mcursor);
-
+			headerOfList.setData(mcursor);
 			mcursor.close();
 		}
+		headerOfList.setBackground(android.R.color.white);
+		headerOfList.useValue2(true);
+		headerOfList.setOnClickListener(null);
+		headerOfList.findViewById(R.id.chitietdichvu_no_feature_dangky).setVisibility(View.INVISIBLE);
+		headerOfList.findViewById(R.id.chitietdichvu_no_feature_moi).setVisibility(View.INVISIBLE);
 
 		header.setBackground(android.R.color.white);
 		header.useValue2(true);
@@ -262,8 +281,48 @@ public class MoiDvChoNhieuNguoiFragment extends Fragment implements OnItemClickL
 		};
 
 		moi_list.setAdapter(adaper);
+		moi_list.setOnScrollListener(new OnScrollListener() {
 
+			@Override
+			public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+			}
+
+			@Override
+			public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+				monScroll();
+			}
+
+		});
 		return view;
+	}
+
+	int currentTop = 0;
+
+	private void monScroll() {
+		int top = headerOfList.getTop();
+		int heightt = header.getHeight();
+
+		int next = 0;
+		if (top < 0) {
+			if (top + heightt <= 0) {
+				next = -heightt;
+			} else {
+				next = top;
+			}
+		} else if (top > 0) {
+			next = 0;
+		}
+
+		// TranslateAnimation animation = new TranslateAnimation(0, 0,
+		// currentTop, next);
+		// animation.setFillAfter(false);
+		// animation.setFillEnabled(false);
+		currentTop = next;
+		// main_mm.startAnimation(animation);
+		RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) main_mm.getLayoutParams();
+		params.setMargins(0, next, 0, 0);
+		main_mm.setLayoutParams(params);
 	}
 
 	@Override
@@ -332,4 +391,5 @@ public class MoiDvChoNhieuNguoiFragment extends Fragment implements OnItemClickL
 			}
 		}
 	}
+
 }

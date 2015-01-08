@@ -58,4 +58,8 @@ public class ChiTietDichVuNoFeatureView extends LinearLayout {
 	public void hiddenChitietdichvu_no_feature_dangky() {
 		findViewById(R.id.chitietdichvu_no_feature_dangky).setVisibility(View.INVISIBLE);
 	}
+
+	public void showFooter() {
+		findViewById(R.id.chitietdichvu_no_feature_main_footer).setVisibility(View.VISIBLE);
+	}
 }
