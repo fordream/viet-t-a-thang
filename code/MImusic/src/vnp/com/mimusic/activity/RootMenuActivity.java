@@ -188,8 +188,13 @@ public class RootMenuActivity extends FragmentActivity {
 	}
 
 	public void gotoChiTietCaNhanTungDichVu1(AdapterView<?> parent, View view, int position, long id) {
+		JSONObject jo = (JSONObject) parent.getItemAtPosition(position);
 		Intent intent = new Intent(this, RootMenuActivity.class);
 		intent.putExtra("type", Conts.CHITIETCANHANBANGXEPHANGTUNGDICHVU);
+		try {
+			intent.putExtra("ranking_id", jo.getString("id"));
+		} catch (JSONException je) {
+		}
 		getParent().startActivity(intent);
 		overridePendingTransitionStartActivity();
 	}
