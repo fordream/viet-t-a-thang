@@ -26,7 +26,14 @@
                 android:layout_height="match_parent"
                 android:layout_above="@+id/horizontalScrollView1"
                 android:divider="#333333"
-                android:dividerHeight="1px" >
+                android:dividerHeight="1px"
+                android:fadeScrollbars="false"
+                android:scrollX="0px"
+                android:scrollY="0px"
+                android:scrollbarSize="0px"
+                android:scrollbarStyle="outsideOverlay"
+                android:scrollbarThumbHorizontal="@drawable/tranfer"
+                android:scrollbarThumbVertical="@drawable/tranfer" >
             </vnp.com.mimusic.view.MusicListView>
 
             <HorizontalScrollView
@@ -54,8 +61,8 @@
             <vnp.com.mimusic.view.MenuRightItemView
                 android:id="@+id/moinhieudichvu_dialog_menurightitem"
                 android:layout_width="match_parent"
-                android:visibility="invisible"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content"
+                android:visibility="invisible" >
             </vnp.com.mimusic.view.MenuRightItemView>
 
             <RelativeLayout
@@ -65,7 +72,7 @@
                 android:background="@drawable/tinkhac_bg"
                 android:gravity="center"
                 android:paddingLeft="@dimen/dimen_10dp"
-               android:paddingRight="@dimen/dimen_10dp" >
+                android:paddingRight="@dimen/dimen_10dp" >
 
                 <EditText
                     android:id="@+id/moinhieudichvu_dialog_search"
@@ -92,7 +99,6 @@
                     android:src="@drawable/menu_right_search" />
             </RelativeLayout>
         </LinearLayout>
-
     </RelativeLayout>
 
 </LinearLayout>

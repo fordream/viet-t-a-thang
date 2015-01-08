@@ -220,7 +220,7 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 				next = top;
 			}
 		} else if (top > 0) {
-			next = 0;
+			next = top;
 		}
 
 		// TranslateAnimation animation = new TranslateAnimation(0, 0,

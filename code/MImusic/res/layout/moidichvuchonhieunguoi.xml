@@ -26,7 +26,14 @@
                 android:layout_above="@+id/moidichvuchonhieunguoi_bottom"
                 android:background="@color/f3f3f3"
                 android:divider="#333333"
-                android:dividerHeight="1px" >
+                android:dividerHeight="1px"
+                android:fadeScrollbars="false"
+                android:scrollX="0px"
+                android:scrollY="0px"
+                android:scrollbarSize="0px"
+                android:scrollbarStyle="outsideOverlay"
+                android:scrollbarThumbHorizontal="@drawable/tranfer"
+                android:scrollbarThumbVertical="@drawable/tranfer" >
             </vnp.com.mimusic.view.MusicListView>
 
             <LinearLayout
@@ -62,10 +69,10 @@
             android:orientation="vertical" >
 
             <vnp.com.mimusic.view.ChiTietDichVuNoFeatureView
-                android:visibility="invisible"
                 android:id="@+id/moidichvuchonhieunguoi_chiteitdichvunofeatureview"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content"
+                android:visibility="invisible" >
             </vnp.com.mimusic.view.ChiTietDichVuNoFeatureView>
 
             <LinearLayout
@@ -122,7 +129,6 @@
                 android:layout_height="1px"
                 android:background="@color/c657180" />
         </LinearLayout>
-
     </RelativeLayout>
 
     <LinearLayout

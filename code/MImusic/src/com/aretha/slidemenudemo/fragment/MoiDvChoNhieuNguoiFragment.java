@@ -311,15 +311,9 @@ public class MoiDvChoNhieuNguoiFragment extends Fragment implements OnItemClickL
 				next = top;
 			}
 		} else if (top > 0) {
-			next = 0;
+			next = top;
 		}
-
-		// TranslateAnimation animation = new TranslateAnimation(0, 0,
-		// currentTop, next);
-		// animation.setFillAfter(false);
-		// animation.setFillEnabled(false);
 		currentTop = next;
-		// main_mm.startAnimation(animation);
 		RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) main_mm.getLayoutParams();
 		params.setMargins(0, next, 0, 0);
 		main_mm.setLayoutParams(params);
