@@ -125,7 +125,6 @@ public class Conts {
 
 	public static void showImage(String path, ImageView img, int no_image) {
 		Bitmap bitmap = null;
-		LogUtils.e("PATH1", path + "");
 		if (path != null && path.contains("file://")) {
 			path = path.substring(path.indexOf("file://") + 7, path.length());
 			BitmapFactory.Options options = new BitmapFactory.Options();
@@ -239,7 +238,7 @@ public class Conts {
 		Set<String> keys = bundles.keySet();
 		for (String key : keys) {
 			resClientCallBack.addParam(key, bundles.getString(key));
-			LogUtils.e("para", key + " : " + bundles.getString(key));
+			// LogUtils.e("para", key + " : " + bundles.getString(key));
 		}
 
 		ExeCallBack exeCallBack = new ExeCallBack();

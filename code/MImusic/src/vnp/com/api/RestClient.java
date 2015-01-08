@@ -96,7 +96,6 @@ public class RestClient {
 			}
 
 			HttpGet request = new HttpGet(url + combinedParams);
-			LogUtils.e("URL", url + combinedParams);
 			// add headers
 			for (NameValuePair h : headers) {
 				request.addHeader(h.getName(), h.getValue());
