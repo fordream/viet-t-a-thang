@@ -292,12 +292,11 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 		// }, 3000);
 
 		Bundle bundle = new Bundle();
-		bundle.putString("service_code", "CS");
-		((VApplication) getApplication()).getmImusicService().execute(RequestMethod.GET, API.API_R022, bundle, new IContsCallBack() {
+		((VApplication) getApplication()).getmImusicService().execute(RequestMethod.GET, API.API_R026, bundle, new IContsCallBack() {
 
 			@Override
 			public void onSuscess(JSONObject response) {
-
+				//Conts.showDialogThongbao(BaseMusicSlideMenuActivity.this, response.toString());
 			}
 
 			@Override
@@ -307,12 +306,12 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 
 			@Override
 			public void onError(String message) {
-
+				//Conts.showDialogThongbao(BaseMusicSlideMenuActivity.this, message);
 			}
 
 			@Override
 			public void onError() {
-
+				onError("error");
 			}
 		});
 
