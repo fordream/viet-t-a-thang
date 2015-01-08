@@ -327,6 +327,7 @@ public class MImusicService extends Service {
 					updateDongBoXuong(response);
 				} else if (API.API_R013.equals(api)) {
 					updateReGetToken(response);
+					callUpdateData();
 				}
 
 				if (contsCallBack != null)
@@ -345,11 +346,6 @@ public class MImusicService extends Service {
 					contsCallBack.onError();
 			}
 		});
-	}
-
-	private void updateReGetToken(JSONObject response) {
-		// TODO Auto-generated method stub
-
 	}
 
 	private void updateDongBoXuong(JSONObject response) {
@@ -454,7 +450,7 @@ public class MImusicService extends Service {
 		for (String key : keys) {
 			contentValues.put(key, bundle.getString(key));
 		}
-		
+
 		getContentResolver().update(User.CONTENT_URI, contentValues, String.format("%s=='1'", User.STATUS), null);
 	}
 
@@ -481,15 +477,28 @@ public class MImusicService extends Service {
 		}
 	}
 
-	public void refreshToken(IContsCallBack iContsCallBack) {
+	private void updateReGetToken(JSONObject response) {
+		// TODO Auto-generated method stub
+
+		LogUtils.e("response", response.toString());
+		// {"message":"Refresh token success","errorCode":0,"phone":null,"keyRefresh":"1E5571EE-CEF5-483A-50DF-20A6A1D57489","token":"57D4A6E1-B325-A2D6-3CC1-036C6730D1A3"}
+		ContentValues contentValues = new ContentValues();
+		try {
+			contentValues.put(User.KEYREFRESH, response.getString(User.KEYREFRESH));
+			contentValues.put(User.TOKEN, response.getString(User.TOKEN));
+			getContentResolver().update(User.CONTENT_URI, contentValues, String.format("%s=='1'", User.STATUS), null);
+		} catch (JSONException e) {
+		}
+
+	}
+
+	public void refreshToken(final IContsCallBack iContsCallBack) {
 		// TODO
 		Bundle bundle = new Bundle();
-		// LogUtils.e("Conts.getRefreshToken(this)",
-		// Conts.getRefreshToken(this));
-		// LogUtils.e("Conts.getRefreshToken(this)", Conts.getToken(this));
 		bundle.putString("key", Conts.getRefreshToken(this));
 		bundle.putString(User.KEYREFRESH, Conts.getRefreshToken(this));
-		
 		execute(RequestMethod.GET, API.API_R013, bundle, iContsCallBack);
+		
+//		
 	}
 }

@@ -181,16 +181,16 @@ public class Conts {
 			public void onCallBack(Object object) {
 				super.onCallBack(object);
 				String message = "";
+				String errorCode = "";
 				RestClient restClient = (RestClient) object;
-
+				String response = restClient.getResponse();
 				try {
-					String response = restClient.getResponse();
 
 					if (Conts.isBlank(response)) {
 						response = activity.getString(R.string.default_error);
 					}
 					JSONObject jsonObject = new JSONObject(response);
-					String errorCode = jsonObject.getString("errorCode");
+					errorCode = jsonObject.getString("errorCode");
 					message = jsonObject.getString("message");
 					if ("0".equals(errorCode)) {
 						if (contsCallBack != null)
@@ -226,11 +226,21 @@ public class Conts {
 							contsCallBack.onError(message);
 					}
 				} catch (Exception exception) {
-					LogUtils.e("exception", exception);
+					//LogUtils.e("exception", exception);
 					if (contsCallBack != null)
 						contsCallBack.onError();
 				}
 
+				checkToken(restClient.getResponseCode(), errorCode);
+
+			}
+
+			private void checkToken(int responseCode, String errorCode) {
+				if (!API.API_R013.equals(getApiName())) {
+					if (responseCode == 440 || responseCode == -1 || "440".equals(errorCode) || "-1".equals(errorCode)) {
+						activity.refreshToken(null);
+					}
+				}
 			}
 
 			@Override
@@ -246,7 +256,7 @@ public class Conts {
 		Set<String> keys = bundles.keySet();
 		for (String key : keys) {
 			resClientCallBack.addParam(key, bundles.getString(key));
-			LogUtils.e("para", key + " : " + bundles.getString(key));
+			//LogUtils.e("para", key + " : " + bundles.getString(key));
 		}
 
 		ExeCallBack exeCallBack = new ExeCallBack();
