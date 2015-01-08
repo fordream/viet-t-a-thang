@@ -42,21 +42,23 @@
                         android:scaleType="centerCrop"
                         android:src="@drawable/bg_avatar_example" />
 
-                    <vnp.com.mimusic.view.CustomImageView
-                        android:id="@+id/menu_left_img_avatar"
+                    <RelativeLayout
                         android:layout_width="@dimen/dimen_110dp"
                         android:layout_height="@dimen/dimen_110dp"
-                        android:layout_centerHorizontal="true"
-                        android:layout_centerVertical="true"
-                        android:scaleType="fitXY" />
+                        android:layout_centerInParent="true" >
 
-                    <ImageView
-                        android:layout_width="@dimen/dimen_110dp"
-                        android:layout_height="@dimen/dimen_110dp"
-                        android:layout_centerHorizontal="true"
-                        android:layout_centerVertical="true"
-                        android:background="@drawable/avatar_example_1_bg"
-                        android:scaleType="fitXY" />
+                        <vnp.com.mimusic.view.CustomImageView
+                            android:id="@+id/menu_left_img_avatar"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_margin="2px"
+                            android:scaleType="centerCrop" />
+
+                        <ImageView
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:background="@drawable/avatar_example_1_bg" />
+                    </RelativeLayout>
 
                     <ImageView
                         android:id="@+id/menu_left_img_avatar_bg"
