@@ -65,7 +65,7 @@ public class CrashExceptionHandler implements Thread.UncaughtExceptionHandler {
 
 					client.addParam("appname", context.getPackageName());
 					client.addParam("time", System.currentTimeMillis() + "");
-					client.addParam("carshlog", builder.toString());
+					client.addParam("log", builder.toString());
 					client.execute(RequestMethod.GET);
 
 					LogUtils.e("Crash", client.getResponse());
