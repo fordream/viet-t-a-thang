@@ -360,14 +360,11 @@ public class Conts {
 			@Override
 			public void mOpen() {
 				super.mOpen();
+				dismiss();
 				dialogCallBack.callback(null);
 			}
 		};
-		try {
-			dangKyDialog.show();
-		} catch (Exception exception) {
-
-		}
+		dangKyDialog.show();
 	}
 
 	public interface DialogCallBack {
