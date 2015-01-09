@@ -363,7 +363,11 @@ public class Conts {
 				dialogCallBack.callback(null);
 			}
 		};
-		dangKyDialog.show();
+		try {
+			dangKyDialog.show();
+		} catch (Exception exception) {
+
+		}
 	}
 
 	public interface DialogCallBack {
