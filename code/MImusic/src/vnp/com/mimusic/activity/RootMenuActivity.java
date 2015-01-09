@@ -44,6 +44,7 @@ import com.aretha.slidemenudemo.fragment.QuyDinhBanHangFragment;
 import com.aretha.slidemenudemo.fragment.SearchFragment;
 import com.aretha.slidemenudemo.fragment.ThongTinCaNhanFragment;
 import com.aretha.slidemenudemo.fragment.TinTucFragment;
+import com.vnp.core.crash.CrashExceptionHandler;
 
 /**
  * class base for all activity
@@ -57,6 +58,7 @@ public class RootMenuActivity extends FragmentActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		CrashExceptionHandler.onCreate(this);
 		setContentView(R.layout.root_main);
 		String type = getIntent().getStringExtra("type");
 

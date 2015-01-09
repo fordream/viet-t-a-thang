@@ -36,6 +36,7 @@ import android.widget.TabHost.TabSpec;
 import com.aretha.slidemenu.ISlideMenuListener;
 import com.aretha.slidemenu.SlideMenu;
 import com.aretha.slidemenu.SlideMenu.OnSlideStateChangeListener;
+import com.vnp.core.crash.CrashExceptionHandler;
 
 public class BaseMusicSlideMenuActivity extends TabActivity {
 	private SlideMenu mSlideMenu;
@@ -74,9 +75,8 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 		setContentView(R.layout.mactivity_slidemenu);
-
+		CrashExceptionHandler.onCreate(this);
 		getTabHost().setOnTabChangedListener(new OnTabChangeListener() {
 			@Override
 			public void onTabChanged(String tabId) {
@@ -296,7 +296,8 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 
 			@Override
 			public void onSuscess(JSONObject response) {
-				//Conts.showDialogThongbao(BaseMusicSlideMenuActivity.this, response.toString());
+				// Conts.showDialogThongbao(BaseMusicSlideMenuActivity.this,
+				// response.toString());
 			}
 
 			@Override
@@ -306,7 +307,8 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 
 			@Override
 			public void onError(String message) {
-				//Conts.showDialogThongbao(BaseMusicSlideMenuActivity.this, message);
+				// Conts.showDialogThongbao(BaseMusicSlideMenuActivity.this,
+				// message);
 			}
 
 			@Override

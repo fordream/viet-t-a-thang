@@ -482,4 +482,7 @@ public class Conts {
 		return full.toLowerCase().trim().contains(con.toLowerCase().trim());
 	}
 
+	public static boolean havenewWork(Context loginActivty) {
+		return is3GConnected(loginActivty) || isWifiConnected(loginActivty);
+	}
 }

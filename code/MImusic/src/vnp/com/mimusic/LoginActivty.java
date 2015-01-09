@@ -2,6 +2,8 @@ package vnp.com.mimusic;
 
 import org.json.JSONObject;
 
+import com.vnp.core.crash.CrashExceptionHandler;
+
 import vnp.com.api.MImusicService;
 import vnp.com.db.User;
 import vnp.com.mimusic.VApplication.IServiceConfig;
@@ -34,6 +36,10 @@ public class LoginActivty extends Activity implements OnClickListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		CrashExceptionHandler.sendCrash(this);
+		
+		CrashExceptionHandler.onCreate(this);
 		// ((VApplication) getApplication()).dongbodanhba();
 		setContentView(R.layout.activity_login);
 		progressBar1 = (LoadingView) findViewById(R.id.loadingView1);
