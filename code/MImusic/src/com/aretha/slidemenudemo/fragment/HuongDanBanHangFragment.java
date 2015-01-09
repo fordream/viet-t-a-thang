@@ -45,38 +45,38 @@ public class HuongDanBanHangFragment extends BaseFragment implements OnItemClick
 			}
 		});
 
-		Cursor cursor = getActivity().getContentResolver().query(DichVu.CONTENT_URI, null, null, null, null);
-		dichvu_list.setAdapter(new HuongDanBanHangAdapter(getActivity(), cursor));
+		//Cursor cursor = getActivity().getContentResolver().query(DichVu.CONTENT_URI, null, null, null, null);
+		//dichvu_list.setAdapter(new HuongDanBanHangAdapter(getActivity(), cursor));
 		
-//		Bundle bundle = new Bundle();
-//		bundle.putString("type", 4 + "");
-//		getmImusicService().execute(RequestMethod.GET, API.API_R010, bundle, new IContsCallBack() {
-//
-//			@Override
-//			public void onSuscess(JSONObject response) {
-//				String guide_text = getString(R.string.nodata);
-//				try {
-//					guide_text = response.getString("guide_text");
-//				} catch (JSONException e) {
-//				}
-//				dichvu_list.setTextNoData(true, guide_text);
-//			}
-//
-//			@Override
-//			public void onStart() {
-//
-//			}
-//
-//			@Override
-//			public void onError(String message) {
-//				dichvu_list.setTextNoData(true, message);
-//			}
-//
-//			@Override
-//			public void onError() {
-//				onError("onError");
-//			}
-//		});
+		Bundle bundle = new Bundle();
+		bundle.putString("type", 4 + "");
+		getmImusicService().execute(RequestMethod.GET, API.API_R010, bundle, new IContsCallBack() {
+
+			@Override
+			public void onSuscess(JSONObject response) {
+				String guide_text = getString(R.string.nodata);
+				try {
+					guide_text = response.getString("guide_text");
+				} catch (JSONException e) {
+				}
+				dichvu_list.setTextNoData(true, guide_text);
+			}
+
+			@Override
+			public void onStart() {
+
+			}
+
+			@Override
+			public void onError(String message) {
+				dichvu_list.setTextNoData(true, message);
+			}
+
+			@Override
+			public void onError() {
+				onError("onError");
+			}
+		});
 
 		return view;
 	}
