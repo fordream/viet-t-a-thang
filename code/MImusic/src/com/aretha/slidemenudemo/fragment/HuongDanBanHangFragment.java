@@ -8,6 +8,7 @@ import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.DichVu;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.adapter.HuongDanBanHangAdapter;
+import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
 import vnp.com.mimusic.view.HeaderView;
 import vnp.com.mimusic.view.MusicListView;
@@ -27,10 +28,12 @@ public class HuongDanBanHangFragment extends BaseFragment implements OnItemClick
 	}
 
 	private MusicListView dichvu_list;
+	private View loadingView;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.huongdanbanhang, null);
+		loadingView = view.findViewById(R.id.loadingView1);
 		dichvu_list = (MusicListView) view.findViewById(R.id.quydinhbanhang_list);
 		dichvu_list.setOnItemClickListener(this);
 		HeaderView header = (HeaderView) view.findViewById(R.id.quydinhbanhang_header);
@@ -45,9 +48,12 @@ public class HuongDanBanHangFragment extends BaseFragment implements OnItemClick
 			}
 		});
 
-		//Cursor cursor = getActivity().getContentResolver().query(DichVu.CONTENT_URI, null, null, null, null);
-		//dichvu_list.setAdapter(new HuongDanBanHangAdapter(getActivity(), cursor));
-		
+		// Cursor cursor =
+		// getActivity().getContentResolver().query(DichVu.CONTENT_URI, null,
+		// null, null, null);
+		// dichvu_list.setAdapter(new HuongDanBanHangAdapter(getActivity(),
+		// cursor));
+
 		Bundle bundle = new Bundle();
 		bundle.putString("type", 4 + "");
 		getmImusicService().execute(RequestMethod.GET, API.API_R010, bundle, new IContsCallBack() {
@@ -60,16 +66,18 @@ public class HuongDanBanHangFragment extends BaseFragment implements OnItemClick
 				} catch (JSONException e) {
 				}
 				dichvu_list.setTextNoData(true, guide_text);
+				Conts.showView(loadingView, false);
 			}
 
 			@Override
 			public void onStart() {
-
+				Conts.showView(loadingView, true);
 			}
 
 			@Override
 			public void onError(String message) {
 				dichvu_list.setTextNoData(true, message);
+				Conts.showView(loadingView, false);
 			}
 
 			@Override
