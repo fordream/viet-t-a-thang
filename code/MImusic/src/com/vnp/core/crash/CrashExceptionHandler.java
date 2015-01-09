@@ -6,7 +6,15 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import vnp.com.api.CallBack;
+import vnp.com.api.ExeCallBack;
+import vnp.com.api.RestClient;
+import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.mimusic.util.Conts;
+import vnp.com.mimusic.util.LogUtils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -16,37 +24,60 @@ public class CrashExceptionHandler implements Thread.UncaughtExceptionHandler {
 		Thread.setDefaultUncaughtExceptionHandler(new CrashExceptionHandler(activity));
 	}
 
-	public static final void sendCrash(Context context) {
+	public static final void sendCrash(final Context context) {
 		if (!Conts.havenewWork(context)) {
 			return;
 		}
-		StringBuilder builder = new StringBuilder();
-		try {
-			BufferedReader reader = new BufferedReader(new InputStreamReader(context.openFileInput("stack.trace")));
-			String trace = null;
-			String line = null;
-			while ((line = reader.readLine()) != null) {
-				if (line != null) {
-					builder.append(line).append("\n");
+
+		CallBack callBack = new CallBack() {
+
+			@Override
+			public void onCallBack(Object object) {
+				RestClient client = (RestClient) object;
+
+				try {
+					JSONObject jsonObject = new JSONObject(client.getResponse());
+					if ("1".equals(jsonObject.getString("status"))) {
+						context.deleteFile("stack.trace");
+					}
+				} catch (Exception e) {
 				}
 			}
-		} catch (FileNotFoundException fnfe) {
-		} catch (IOException ioe) {
-		}
 
-		// Intent sendIntent = new Intent(Intent.ACTION_SEND);
-		// String subject = "Error report";
-		// String body = "Mail this to appdeveloper@gmail.com: " + "\n" +
-		// builder.toString() + "\n";
-		// sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[] {
-		// "vuongvantruong1987@gmail.com" });
-		// sendIntent.putExtra(Intent.EXTRA_TEXT, body);
-		// sendIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
-		// sendIntent.setType("message/rfc822");
-		// activity.startActivity(Intent.createChooser(sendIntent, "Title:"));
-		// activity.deleteFile("stack.trace");
+			@Override
+			public Object execute() {
+				RestClient client = new RestClient("http://vnpmanager.esy.es/api/crash.php");
+				try {
 
-		context.deleteFile("stack.trace");
+					StringBuilder builder = new StringBuilder();
+					try {
+						BufferedReader reader = new BufferedReader(new InputStreamReader(context.openFileInput("stack.trace")));
+						String trace = null;
+						String line = null;
+						while ((line = reader.readLine()) != null) {
+							if (line != null) {
+								builder.append(line).append("\n");
+							}
+						}
+					} catch (FileNotFoundException fnfe) {
+					} catch (IOException ioe) {
+					}
+
+					client.addParam("appname", context.getPackageName());
+					client.addParam("time", System.currentTimeMillis() + "");
+					client.addParam("carshlog", builder.toString());
+					client.execute(RequestMethod.GET);
+
+					LogUtils.e("Crash", client.getResponse());
+				} catch (Exception x) {
+					LogUtils.e("Crash", x);
+				}
+				return client;
+			}
+		};
+
+		new ExeCallBack().executeAsynCallBack(callBack);
+		// context.deleteFile("stack.trace");
 	}
 
 	private Thread.UncaughtExceptionHandler defaultUEH;
