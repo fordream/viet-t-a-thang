@@ -65,19 +65,14 @@ public class CrashExceptionHandler implements Thread.UncaughtExceptionHandler {
 					}
 
 					client.addParam("appname", context.getPackageName());
-					
+
 					Calendar calendar = Calendar.getInstance();
-					client.addParam("time", String.format("%s-%s-%s %s:%s"
-							,calendar.get(Calendar.YEAR)
-							,(calendar.get(Calendar.MONTH) + 1)
-							,calendar.get(Calendar.DATE)
-							,calendar.get(Calendar.HOUR_OF_DAY)
-							,calendar.get(Calendar.MINUTE)));
-					
-//					client.addParam("time", System.currentTimeMillis() + "");
+					client.addParam("time", String.format("%s-%s-%s %s:%s", calendar.get(Calendar.YEAR) + "", (calendar.get(Calendar.MONTH) + 1), calendar.get(Calendar.DATE),
+							calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE)));
+
 					client.addParam("log", builder.toString());
 
-//					if (builder.length() > 0)
+					if (builder.length() > 0)
 						client.execute(RequestMethod.GET);
 
 					LogUtils.e("Crash", client.getResponse());
