@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Calendar;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -64,10 +65,19 @@ public class CrashExceptionHandler implements Thread.UncaughtExceptionHandler {
 					}
 
 					client.addParam("appname", context.getPackageName());
-					client.addParam("time", System.currentTimeMillis() + "");
+					
+					Calendar calendar = Calendar.getInstance();
+					client.addParam("time", String.format("%s-%s-%s %s:%s"
+							,calendar.get(Calendar.YEAR)
+							,(calendar.get(Calendar.MONTH) + 1)
+							,calendar.get(Calendar.DATE)
+							,calendar.get(Calendar.HOUR_OF_DAY)
+							,calendar.get(Calendar.MINUTE)));
+					
+//					client.addParam("time", System.currentTimeMillis() + "");
 					client.addParam("log", builder.toString());
 
-					if (builder.length() > 0)
+//					if (builder.length() > 0)
 						client.execute(RequestMethod.GET);
 
 					LogUtils.e("Crash", client.getResponse());
