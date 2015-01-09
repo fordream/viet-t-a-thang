@@ -44,7 +44,7 @@ public class HomeFragment extends Fragment implements OnItemClickListener, View.
 		});
 
 		ListView menu_left_list = (ListView) view.findViewById(R.id.home_list);
-		menu_left_list.addHeaderView(home_header);
+		//menu_left_list.addHeaderView(home_header);
 		menu_left_list.setOnItemClickListener(this);
 		Cursor cursor = getActivity().getContentResolver().query(DichVu.CONTENT_URI, null, null, null, null);
 		if (cursor != null) {

@@ -8,7 +8,7 @@ public class LogUtils {
 	public static void e(String tag, String messgae) {
 		if (ENABLE) {
 			Log.e(tag, "-------------------Start----------------------");
-			Log.e(tag, messgae);
+			Log.e(tag, messgae + "");
 			Log.e(tag, "-------------------End----------------------");
 		}
 	}
