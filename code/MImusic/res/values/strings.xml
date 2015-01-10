@@ -12,6 +12,7 @@
         <item>Thông tin cá nhân</item>
     </string-array>
 
+    <string name="khonglayduocanh">Không thể lấy được file ảnh.</string>
     <string name="timkiemdanhba">Tìm kiếm danh bạ</string>
     <string name="loading">Loading ...</string>
     <string name="trangchu">Trang chủ</string>
@@ -143,6 +144,6 @@
     <string name="success_moi">Bạn đã mới thành công, bạn chọn \"Đồng ý\" để đóng màn hình mời.</string>
     <string name="validatesodichvu">Bạn chỉ có thể mời từ 1 đến 5 dịch vụ cùng lúc.</string>
     <string name="default_error">{\"errorCode\":10000,\"message\":\"Không thể kết nối đến server, bạn cần kiểm tra lại kết nối wifi hoặc 3G.\"}</string>
-    <string name="formatdieukhoan" formatted="false" >Điều khoản %s</string>
+    <string name="formatdieukhoan" formatted="false">Điều khoản %s</string>
 
 </resources>

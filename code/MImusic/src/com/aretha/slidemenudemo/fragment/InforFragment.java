@@ -110,7 +110,10 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-
+		if (data == null) {
+			Conts.showDialogThongbao(getActivity(), getActivity().getString(R.string.khonglayduocanh));
+			return;
+		}
 		if (requestCode == 100 && resultCode == Activity.RESULT_OK) {
 			String path = data.getData().toString();
 			if (path != null) {
@@ -154,9 +157,6 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 
 	private void uploadAvatar(String path) {
 		if (!Conts.isBlank(path)) {
-			// ContentValues contentValues = new ContentValues();
-			// contentValues.put(User.AVATAR, path);
-
 			getmImusicService().executeUpdateAvatar(path, new IContsCallBack() {
 				ProgressDialog progressDialog;
 
@@ -212,15 +212,12 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 						Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
 						intent.setType("image/*");
 						startActivityForResult(Intent.createChooser(intent, getActivity().getString(R.string.chonanh)), 102);
-
 					} else {
 						Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-
 						path = Uri.fromFile(new File(Environment.getExternalStorageDirectory(), "tmp_avatar_" + System.currentTimeMillis() + ".jpg"));
 						cameraIntent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, path);
 						cameraIntent.putExtra("return-data", true);
 						startActivityForResult(cameraIntent, 103);
-
 					}
 				}
 			});
@@ -273,7 +270,6 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 				public void onError(String message) {
 					Conts.toast(getActivity(), message);
 					Conts.showView(loadingView, false);
-
 					Conts.showDialogThongbao(getActivity(), message);
 				}
 
