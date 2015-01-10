@@ -37,6 +37,7 @@ public class CrashExceptionHandler implements Thread.UncaughtExceptionHandler {
 				RestClient client = (RestClient) object;
 
 				try {
+					LogUtils.e("AAAAA", client.getResponse());
 					JSONObject jsonObject = new JSONObject(client.getResponse());
 					if ("1".equals(jsonObject.getString("status"))) {
 						context.deleteFile("stack.trace");
@@ -73,7 +74,7 @@ public class CrashExceptionHandler implements Thread.UncaughtExceptionHandler {
 					client.addParam("log", builder.toString());
 
 					if (builder.length() > 0)
-						client.execute(RequestMethod.GET);
+						client.execute(RequestMethod.POST);
 
 					LogUtils.e("Crash", client.getResponse() + builder.length());
 				} catch (Exception x) {
