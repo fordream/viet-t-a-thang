@@ -1,5 +1,7 @@
 package com.aretha.slidemenudemo.fragment;
 
+import java.util.Calendar;
+
 import vnp.com.db.DichVu;
 import vnp.com.db.User;
 import vnp.com.mimusic.R;
@@ -9,6 +11,7 @@ import vnp.com.mimusic.base.diablog.DateDialog;
 import vnp.com.mimusic.base.diablog.DichVuDialog;
 import vnp.com.mimusic.base.diablog.LSBHDateDialog;
 import vnp.com.mimusic.base.diablog.TrangThaiDialog;
+import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.view.HeaderView;
 import android.content.ContentValues;
 import android.os.Bundle;
@@ -47,7 +50,6 @@ public class LichSuBanHangFragment extends Fragment implements OnItemClickListen
 			@Override
 			public void onClick(View v) {
 				gotoChiTietLichSuBanHang();
-
 			}
 		});
 
@@ -124,7 +126,16 @@ public class LichSuBanHangFragment extends Fragment implements OnItemClickListen
 	}
 
 	private void showTuDialog() {
-		new LSBHDateDialog(getActivity(), lsbt_tu.getText().toString()) {
+		String mdate = lsbt_tu.getText().toString();
+		if(Conts.isBlank(mdate)){
+			Calendar dateCalendar = Calendar.getInstance();
+			mdate = String.format("%s/%s/%s"
+					,((dateCalendar.get(Calendar.DATE)< 10 ? "0" :"")+ dateCalendar.get(Calendar.DATE) )+""
+					, (((dateCalendar.get(Calendar.MONTH) + 1)< 10 ? "0" :"")+(dateCalendar.get(Calendar.MONTH) + 1))+""
+					, dateCalendar.get(Calendar.YEAR) + "");
+			
+		}
+		new LSBHDateDialog(getActivity(), mdate) {
 
 			@Override
 			public void sendData(String date, String month, String year) {
@@ -134,7 +145,18 @@ public class LichSuBanHangFragment extends Fragment implements OnItemClickListen
 	}
 
 	private void showDenDialog() {
-		new LSBHDateDialog(getActivity(), lsbt_den.getText().toString()) {
+		String mdate =lsbt_den.getText().toString();
+		if(Conts.isBlank(mdate)){
+			Calendar dateCalendar = Calendar.getInstance();
+			mdate = String.format("%s/%s/%s"
+					,((dateCalendar.get(Calendar.DATE)< 10 ? "0" :"")+ dateCalendar.get(Calendar.DATE) )+""
+					, (((dateCalendar.get(Calendar.MONTH) + 1)< 10 ? "0" :"")+(dateCalendar.get(Calendar.MONTH) + 1))+""
+					, dateCalendar.get(Calendar.YEAR) + ""
+					);
+			
+			
+		}
+		new LSBHDateDialog(getActivity(), mdate) {
 			@Override
 			public void sendData(String date, String month, String year) {
 				lsbt_den.setText(String.format("%s/%s/%s", date, month, year));

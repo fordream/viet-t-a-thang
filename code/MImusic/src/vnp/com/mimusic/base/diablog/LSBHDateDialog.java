@@ -6,6 +6,7 @@ import java.util.StringTokenizer;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.base.BaseAdialog;
 import vnp.com.mimusic.util.Conts;
+import vnp.com.mimusic.util.LogUtils;
 import android.content.Context;
 import android.database.DataSetObserver;
 import android.graphics.Color;
@@ -81,7 +82,7 @@ public abstract class LSBHDateDialog extends BaseAdialog implements android.view
 				LayoutParams layoutParams = new LayoutParams(LayoutParams.FILL_PARENT, (int) parent.getContext().getResources().getDimension(R.dimen.dimen_50dp));
 				convertView.setLayoutParams(layoutParams);
 
-				((TextView) convertView).setText((getYear() - index) + "");
+				((TextView) convertView).setText((getYear() - 99 + index) + "");
 				((TextView) convertView).setGravity(Gravity.CENTER);
 				((TextView) convertView).setTextSize(parent.getContext().getResources().getDimension(R.dimen.dimen_13dp));
 				((TextView) convertView).setTextColor(Color.WHITE);
@@ -155,6 +156,7 @@ public abstract class LSBHDateDialog extends BaseAdialog implements android.view
 		});
 		try {
 			if (!Conts.isBlank(date)) {
+				LogUtils.e("date", date);
 				StringTokenizer stringTokenizer = new StringTokenizer(date, "/");
 				String day = stringTokenizer.nextToken();
 				String month = stringTokenizer.nextToken();
@@ -162,7 +164,7 @@ public abstract class LSBHDateDialog extends BaseAdialog implements android.view
 
 				date_wheelview_month.setCurrentItem(Integer.parseInt(month) - 1);
 				date_wheelview_date.setCurrentItem(Integer.parseInt(day) - 1);
-				date_wheelview_year.setCurrentItem(getYear() - Integer.parseInt(year));
+				date_wheelview_year.setCurrentItem(-getYear() + 99 + Integer.parseInt(year));
 			}
 		} catch (Exception exception) {
 
@@ -171,7 +173,7 @@ public abstract class LSBHDateDialog extends BaseAdialog implements android.view
 
 			@Override
 			public void onChanged(WheelView wheel, int oldValue, int newValue) {
-				showDate(date_wheelview_month.getCurrentItem() + 1, getYear() - date_wheelview_year.getCurrentItem());
+				showDate(date_wheelview_month.getCurrentItem() + 1, getYear() - 99 + date_wheelview_year.getCurrentItem());
 			}
 		});
 
@@ -179,14 +181,14 @@ public abstract class LSBHDateDialog extends BaseAdialog implements android.view
 
 			@Override
 			public void onChanged(WheelView wheel, int oldValue, int newValue) {
-				showDate(date_wheelview_month.getCurrentItem() + 1, getYear() - date_wheelview_year.getCurrentItem());
+				showDate(date_wheelview_month.getCurrentItem() + 1, getYear() - 99 + date_wheelview_year.getCurrentItem());
 			}
 		});
 
 	}
 
 	private void showDate(int month, int year) {
-
+		LogUtils.e("data-", year + "");
 		int curent = date_wheelview_date.getCurrentItem();
 		DateWheelViewAdapter dateWheelViewAdapter = new DateWheelViewAdapter(month, year);
 		date_wheelview_date.setViewAdapter(dateWheelViewAdapter);
@@ -214,10 +216,8 @@ public abstract class LSBHDateDialog extends BaseAdialog implements android.view
 			public void onAnimationEnd(Animation animation) {
 				LSBHDateDialog.this.dismiss();
 				if (isSendData) {
-					sendData(
-							((date_wheelview_date.getCurrentItem() + 1) < 10? "0" :"" )+(date_wheelview_date.getCurrentItem() + 1) + "",
-							((date_wheelview_month.getCurrentItem() + 1) < 10? "0" :"" )+(date_wheelview_month.getCurrentItem() +1) +"", 
-							(getYear() -date_wheelview_year.getCurrentItem()) + "");
+					sendData(((date_wheelview_date.getCurrentItem() + 1) < 10 ? "0" : "") + (date_wheelview_date.getCurrentItem() + 1) + "", ((date_wheelview_month.getCurrentItem() + 1) < 10 ? "0"
+							: "") + (date_wheelview_month.getCurrentItem() + 1) + "", (getYear() - 99 + date_wheelview_year.getCurrentItem()) + "");
 				}
 			}
 		});
