@@ -384,17 +384,17 @@ public class MImusicService extends Service {
 					int count = 0;
 					for (int in = 0; in < services.length(); in++) {
 						count++;
-						if (count > 3) {
-							break;
-						}
+
 						// id,service_name,service_code,service_icon
 						String service_code = services.getJSONObject(in).getString("service_code");
 						if (Conts.isBlank(service_codes)) {
 							service_codes = service_code;
-							service_codes_name = String.format(format, services.getJSONObject(in).getString(DichVu.service_name));
+							if (count <= 3)
+								service_codes_name = String.format(format, services.getJSONObject(in).getString(DichVu.service_name));
 						} else {
 							service_codes = service_codes + "," + service_code;
-							service_codes_name = service_codes_name + " | " + String.format(format, services.getJSONObject(in).getString(DichVu.service_name));
+							if (count <= 3)
+								service_codes_name = service_codes_name + " | " + String.format(format, services.getJSONObject(in).getString(DichVu.service_name));
 						}
 
 						if ("%s".equals(format)) {
