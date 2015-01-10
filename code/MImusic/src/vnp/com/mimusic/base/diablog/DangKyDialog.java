@@ -106,8 +106,7 @@ public class DangKyDialog extends BaseAdialog implements android.view.View.OnCli
 				@Override
 				public void onSuscess(JSONObject response) {
 					progressDialog.dismiss();
-
-					DangKyDialog.this.dismiss();
+					closePopUp();
 					updateUiDangKy();
 				}
 
@@ -130,6 +129,11 @@ public class DangKyDialog extends BaseAdialog implements android.view.View.OnCli
 		} else {
 			mDismiss();
 		}
+	}
+
+	private void closePopUp() {
+		mDismiss();
+
 	}
 
 	public void updateUiDangKy() {
