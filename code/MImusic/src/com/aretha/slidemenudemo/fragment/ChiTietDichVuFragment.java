@@ -32,8 +32,12 @@ public class ChiTietDichVuFragment extends BaseFragment implements View.OnClickL
 	private LoadingView loadingView;
 
 	private void update(String service_content) {
-		TextView textView = (TextView) getView().findViewById(R.id.mchitiet);
-		textView.setText(service_content);
+		try {
+			TextView textView = (TextView) getView().findViewById(R.id.mchitiet);
+			textView.setText(service_content);
+		} catch (Exception exception) {
+
+		}
 	}
 
 	@Override
@@ -62,13 +66,15 @@ public class ChiTietDichVuFragment extends BaseFragment implements View.OnClickL
 					service_guide = getActivity().getString(R.string.nodata);
 				}
 
-//				ContentValues contentValues = new ContentValues();
-//				contentValues.put("btn_right", getString(R.string.dong));
-//				contentValues.put("btn_left_close", true);
-//				contentValues.put("name", getString(R.string.huongdanbanhang));
-//				contentValues.put("content", service_guide);
-//				DangKyDialog dangKyDialog = new DangKyDialog(getActivity(), contentValues);
-//				dangKyDialog.show();
+				// ContentValues contentValues = new ContentValues();
+				// contentValues.put("btn_right", getString(R.string.dong));
+				// contentValues.put("btn_left_close", true);
+				// contentValues.put("name",
+				// getString(R.string.huongdanbanhang));
+				// contentValues.put("content", service_guide);
+				// DangKyDialog dangKyDialog = new DangKyDialog(getActivity(),
+				// contentValues);
+				// dangKyDialog.show();
 				(((RootMenuActivity) getActivity())).gotoHuongDanBanHangOfDichVh(service_guide);
 			}
 		});
