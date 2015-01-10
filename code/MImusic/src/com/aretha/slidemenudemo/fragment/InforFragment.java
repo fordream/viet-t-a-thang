@@ -110,10 +110,11 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		if (data == null) {
-			Conts.showDialogThongbao(getActivity(), getActivity().getString(R.string.khonglayduocanh));
-			return;
-		}
+		// if (data == null) {
+		// Conts.showDialogThongbao(getActivity(),
+		// getActivity().getString(R.string.khonglayduocanh));
+		// return;
+		// }
 		if (requestCode == 100 && resultCode == Activity.RESULT_OK) {
 			String path = data.getData().toString();
 			if (path != null) {
