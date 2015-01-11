@@ -67,7 +67,8 @@
                         android:textStyle="bold" />
                 </LinearLayout>
 
-                <EditText
+                <TextView
+                    android:gravity="center"
                     android:id="@+id/lsbh_sdt"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen_30dp"
