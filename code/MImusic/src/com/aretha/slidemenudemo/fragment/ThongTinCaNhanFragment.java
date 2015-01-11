@@ -115,26 +115,30 @@ public class ThongTinCaNhanFragment extends BaseFragment implements OnItemClickL
 	}
 
 	private void showData(View view) {
-		if (view == null)
-			view = getView();
-		Cursor cursor = getActivity().getContentResolver().query(User.CONTENT_URI, null, String.format("%s = '1'", User.STATUS), null, null);
-		if (cursor != null && cursor.getCount() >= 1) {
-			cursor.moveToNext();
+		try {
+			if (view == null)
+				view = getView();
+			Cursor cursor = getActivity().getContentResolver().query(User.CONTENT_URI, null, String.format("%s = '1'", User.STATUS), null, null);
+			if (cursor != null && cursor.getCount() >= 1) {
+				cursor.moveToNext();
 
-			((TextView) view.findViewById(R.id.text_name)).setText(Conts.getName(cursor));
-			((TextView) view.findViewById(R.id.text_bidanh)).setText(cursor.getString(cursor.getColumnIndex(User.nickname)));
-			((TextView) view.findViewById(R.id.text_ngaysinh)).setText(cursor.getString(cursor.getColumnIndex(User.birthday)));
-			((TextView) view.findViewById(R.id.text_diachi)).setText(cursor.getString(cursor.getColumnIndex(User.address)));
-			((TextView) view.findViewById(R.id.text_sogiaodichthanhcongtrongthang)).setText(getText(cursor.getString(cursor.getColumnIndex(User.exchange_number_month))));
-			((TextView) view.findViewById(R.id.text_sogiaodichthanhcong)).setText(getText(cursor.getString(cursor.getColumnIndex(User.exchange_number))));
-			((TextView) view.findViewById(R.id.text_sotienhoahongtrongthang)).setText(getText(cursor.getString(cursor.getColumnIndex(User.poundage_month))) + getString(R.string.vnd));
-			((TextView) view.findViewById(R.id.text_sotienhoahong)).setText(getText(cursor.getString(cursor.getColumnIndex(User.poundage))) + getString(R.string.vnd));
-			String cover = cursor.getString(cursor.getColumnIndex(User.COVER));
-			Conts.showImage(cover, menu_left_img_cover, 0);
+				((TextView) view.findViewById(R.id.text_name)).setText(Conts.getName(cursor));
+				((TextView) view.findViewById(R.id.text_bidanh)).setText(cursor.getString(cursor.getColumnIndex(User.nickname)));
+				((TextView) view.findViewById(R.id.text_ngaysinh)).setText(cursor.getString(cursor.getColumnIndex(User.birthday)));
+				((TextView) view.findViewById(R.id.text_diachi)).setText(cursor.getString(cursor.getColumnIndex(User.address)));
+				((TextView) view.findViewById(R.id.text_sogiaodichthanhcongtrongthang)).setText(getText(cursor.getString(cursor.getColumnIndex(User.exchange_number_month))));
+				((TextView) view.findViewById(R.id.text_sogiaodichthanhcong)).setText(getText(cursor.getString(cursor.getColumnIndex(User.exchange_number))));
+				((TextView) view.findViewById(R.id.text_sotienhoahongtrongthang)).setText(getText(cursor.getString(cursor.getColumnIndex(User.poundage_month))) + getString(R.string.vnd));
+				((TextView) view.findViewById(R.id.text_sotienhoahong)).setText(getText(cursor.getString(cursor.getColumnIndex(User.poundage))) + getString(R.string.vnd));
+				String cover = cursor.getString(cursor.getColumnIndex(User.COVER));
+				Conts.showImage(cover, menu_left_img_cover, 0);
 
-			String avatar = cursor.getString(cursor.getColumnIndex(User.AVATAR));
-			Conts.showImage(avatar, menu_left_img_avatar, R.drawable.no_avatar);
-			cursor.close();
+				String avatar = cursor.getString(cursor.getColumnIndex(User.AVATAR));
+				Conts.showImage(avatar, menu_left_img_avatar, R.drawable.no_avatar);
+				cursor.close();
+			}
+		} catch (Exception exception) {
+
 		}
 	}
 

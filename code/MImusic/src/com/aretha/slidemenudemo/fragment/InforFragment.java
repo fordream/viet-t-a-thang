@@ -148,9 +148,18 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 			}
 
 		} else if (requestCode == 102 && resultCode == Activity.RESULT_OK) {
+			if (path == null) {
+				Conts.showDialogThongbao(getActivity(), getActivity().getString(R.string.khonglayduocanh));
+				return;
+			}
 			String path = data.getData().toString();
 			uploadAvatar(path);
 		} else if (requestCode == 103 && resultCode == Activity.RESULT_OK) {
+
+			if (path == null) {
+				Conts.showDialogThongbao(getActivity(), getActivity().getString(R.string.khonglayduocanh));
+				return;
+			}
 			String path = this.path.toString();
 			uploadAvatar(path);
 		}

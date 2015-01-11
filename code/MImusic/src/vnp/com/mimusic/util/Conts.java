@@ -339,13 +339,16 @@ public class Conts {
 	}
 
 	public static void showDialogThongbao(Context context, String message) {
-		ContentValues contentValues = new ContentValues();
-		contentValues.put("btn_right", context.getString(R.string.dong));
-		contentValues.put("btn_left_close", true);
-		contentValues.put("name", context.getString(R.string.thongbao));
-		contentValues.put("content", message);
-		DangKyDialog dangKyDialog = new DangKyDialog(context, contentValues);
-		dangKyDialog.show();
+		try {
+			ContentValues contentValues = new ContentValues();
+			contentValues.put("btn_right", context.getString(R.string.dong));
+			contentValues.put("btn_left_close", true);
+			contentValues.put("name", context.getString(R.string.thongbao));
+			contentValues.put("content", message);
+			DangKyDialog dangKyDialog = new DangKyDialog(context, contentValues);
+			dangKyDialog.show();
+		} catch (Exception exception) {
+		}
 	}
 
 	public static void showDialogDongYCallBack(Context context, String message, final DialogCallBack dialogCallBack) {
