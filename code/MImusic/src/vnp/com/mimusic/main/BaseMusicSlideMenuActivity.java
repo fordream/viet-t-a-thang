@@ -13,6 +13,7 @@ import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
 import vnp.com.mimusic.view.MenuLeftView;
 import vnp.com.mimusic.view.MenuRightView;
+import vnp.com.mimusic.view.ReCommentView;
 import vnp.com.mimusic.view.TabView;
 import android.app.ProgressDialog;
 import android.app.TabActivity;
@@ -29,6 +30,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.FrameLayout;
 import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabSpec;
@@ -258,38 +260,34 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 		/**
 		 * recommnet
 		 */
-		// new Handler().postDelayed(new Runnable() {
-		//
-		// @Override
-		// public void run() {
-		// ReCommentView commentView = new
-		// ReCommentView(BaseMusicSlideMenuActivity.this) {
-		// @Override
-		// public void addContact() {
-		// Intent intent = new Intent(BaseMusicSlideMenuActivity.this,
-		// RootMenuActivity.class);
-		// intent.putExtra("type", Conts.NHIEUDICHVU);
-		// intent.putExtra(User._ID, 1 + "");
-		// startActivity(intent);
-		// overridePendingTransitionStartActivity();
-		// }
-		//
-		// @Override
-		// public void addDv() {
-		// Intent intent = new Intent(BaseMusicSlideMenuActivity.this,
-		// RootMenuActivity.class);
-		// Bundle extras = new Bundle();
-		// extras.putString("type", Conts.MOIDICHVUCHONHIEUNGUOI);
-		// intent.putExtras(extras);
-		// startActivity(intent);
-		// overridePendingTransitionStartActivity();
-		// }
-		// };
-		// ((FrameLayout)
-		// findViewById(R.id.activity_slidemenu_recomment)).addView(commentView);
-		// commentView.start();
-		// }
-		// }, 3000);
+		new Handler().postDelayed(new Runnable() {
+
+			@Override
+			public void run() {
+				ReCommentView commentView = new ReCommentView(BaseMusicSlideMenuActivity.this) {
+					@Override
+					public void addContact() {
+						Intent intent = new Intent(BaseMusicSlideMenuActivity.this, RootMenuActivity.class);
+						intent.putExtra("type", Conts.NHIEUDICHVU);
+						intent.putExtra(User._ID, 1 + "");
+						startActivity(intent);
+						overridePendingTransitionStartActivity();
+					}
+
+					@Override
+					public void addDv() {
+						Intent intent = new Intent(BaseMusicSlideMenuActivity.this, RootMenuActivity.class);
+						Bundle extras = new Bundle();
+						extras.putString("type", Conts.MOIDICHVUCHONHIEUNGUOI);
+						intent.putExtras(extras);
+						startActivity(intent);
+						overridePendingTransitionStartActivity();
+					}
+				};
+				((FrameLayout) findViewById(R.id.activity_slidemenu_recomment)).addView(commentView);
+				commentView.start();
+			}
+		}, 3000);
 
 		Bundle bundle = new Bundle();
 		((VApplication) getApplication()).getmImusicService().execute(RequestMethod.GET, API.API_R026, bundle, new IContsCallBack() {
