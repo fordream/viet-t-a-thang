@@ -50,7 +50,7 @@
                 android:singleLine="true"
                 android:text="10000"
                 android:textStyle="bold"
-                android:textColor="#99cccc"
+                android:textColor="#697585"
                 android:textSize="@dimen/dimen_13dp" />
         </LinearLayout>
         <LinearLayout
@@ -118,7 +118,7 @@
 	                android:layout_width="0dp"
 	                android:layout_weight="0.6"
 	                android:layout_height="wrap_content"
-	                android:text="100 VNĐ"
+	                android:text="100000 VNĐ"
 	                android:textColor="@color/red_purple"
 	                android:textSize="@dimen/dimen_14dp" />
 	        </LinearLayout>

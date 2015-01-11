@@ -20,6 +20,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -110,7 +111,9 @@ public class RootMenuActivity extends FragmentActivity {
 		} else if (Conts.CHITIETCANHANBANGXEPHANG.equals(type)) {
 			changeFragemt(R.id.root_main_fragment, new ChiTietCaNhanBangXepHangFragment());
 		} else if (Conts.CHITIETCANHANBANGXEPHANGTUNGDICHVU.equals(type)) {
-			changeFragemt(R.id.root_main_fragment, new ChiTietCaNhanBangXepHangTungDichVuFragment());
+			ChiTietCaNhanBangXepHangTungDichVuFragment chiTietCaNhanBangXepHangTungDichVuFragment = new ChiTietCaNhanBangXepHangTungDichVuFragment();
+			chiTietCaNhanBangXepHangTungDichVuFragment.setArguments(getIntent().getExtras());
+			changeFragemt(R.id.root_main_fragment, chiTietCaNhanBangXepHangTungDichVuFragment);
 		} else if (Conts.CHITTIETLICHSUBANHANG.equals(type)) {
 			changeFragemt(R.id.root_main_fragment, new ChiTietListSuBanHangFragment());
 		}
@@ -193,6 +196,7 @@ public class RootMenuActivity extends FragmentActivity {
 		JSONObject jo = (JSONObject) parent.getItemAtPosition(position);
 		Intent intent = new Intent(this, RootMenuActivity.class);
 		intent.putExtra("type", Conts.CHITIETCANHANBANGXEPHANGTUNGDICHVU);
+		intent.putExtra("stt", String.valueOf(position));
 		try {
 			intent.putExtra("ranking_id", jo.getString("id"));
 		} catch (JSONException je) {

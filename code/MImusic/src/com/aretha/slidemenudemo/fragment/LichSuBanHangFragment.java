@@ -68,7 +68,7 @@ public class LichSuBanHangFragment extends Fragment implements OnItemClickListen
 		lsbh_sdt = (TextView) view.findViewById(R.id.lsbh_sdt);
 		updateTrangThai();
 		lsbt_dichvu.setText(getActivity().getString(R.string.tatca));
-		lsbh_sdt.setText(getActivity().getString(R.string.tatca));
+//		lsbh_sdt.setText(getActivity().getString(R.string.tatca));
 		return view;
 	}
 

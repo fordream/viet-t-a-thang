@@ -15,9 +15,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class ChiTietCaNhanBangXepHangTungDichVuFragment extends BaseFragment implements View.OnClickListener {
+	private TextView soGDTrongThang, soGD, soHHTrongThang, soHH, bangxephangItemTvStt;
+	
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
@@ -47,7 +50,13 @@ public class ChiTietCaNhanBangXepHangTungDichVuFragment extends BaseFragment imp
 		});
 		
 		//get elements to set value when callAPI successfully
+		bangxephangItemTvStt = (TextView) bXHItemView.findViewById(R.id.bangxephang_item_tv_stt);
+		bangxephangItemTvStt.setText(getArguments().getString("stt"));
 		
+		soGDTrongThang = (TextView) view.findViewById(R.id.soGDTrongThang);
+		soGD = (TextView) view.findViewById(R.id.soGD);
+		soHHTrongThang = (TextView) view.findViewById(R.id.soHHTrongThang);
+		soHH = (TextView) view.findViewById(R.id.soHH);
 		
 		
 		callApi(getArguments());
@@ -70,12 +79,13 @@ public class ChiTietCaNhanBangXepHangTungDichVuFragment extends BaseFragment imp
 
 			@Override
 			public void onError(String message) {
+				Toast.makeText(getActivity(), "API không hoạt động", Toast.LENGTH_SHORT).show();
 				Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
 			}
 
 			@Override
 			public void onSuscess(JSONObject response) {
-//				errorCode(Integer): mã lỗi trả về
+	//				errorCode(Integer): mã lỗi trả về
 	//				0 - Thành công
 	//				1 - BXH không tồn tại
 	//				401 – Xác thực thất bại
@@ -105,7 +115,6 @@ public class ChiTietCaNhanBangXepHangTungDichVuFragment extends BaseFragment imp
 					String soGDThanhCong = response.getString("commission");
 					String soTienHoaHongTrongThang = response.getString("commission");
 					String soTienHoaHong = response.getString("commission");
-					Log.d("result", response.toString());
 					//set value for element of form
 				} catch (JSONException e) {
 				}
