@@ -286,7 +286,7 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 
 				@Override
 				public void onError() {
-					onError("");
+					onError("onError");
 				}
 			});
 		}

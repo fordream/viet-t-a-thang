@@ -71,12 +71,12 @@ public class ChiTietTintucFragment extends BaseFragment implements OnItemClickLi
 
 			@Override
 			public void onError() {
-				onError("");
+				onError("fail");
 			}
 
 			@Override
 			public void onError(String message) {
-				Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+				Conts.toast(getActivity(), message);
 				// home_item_right_control_2_tv.setText(message);
 			}
 
