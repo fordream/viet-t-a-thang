@@ -47,23 +47,22 @@ public class ChiTietTintucFragment extends BaseFragment implements OnItemClickLi
 		chitiettintuc_headerview.setButtonRightImage(false, R.drawable.btn_back);
 		chitiet_tintuc_tintuckhac_list = (LinearLayout) view.findViewById(R.id.chitiet_tintuc_tintuckhac_list);
 
-		// for (int i = 0; i < 10; i++) {
-		// chitiet_tintuc_tintuckhac_list.addView(new
-		// TinTucKhacItemView(getActivity()));
-		// }
+		for (int i = 0; i < 10; i++) {
+			chitiet_tintuc_tintuckhac_list.addView(new TinTucKhacItemView(getActivity()));
+		}
 
 		callApi(getArguments());
 		chitiettintuc_item_tv_name = (TextView) view.findViewById(R.id.chitiettintuc_item_tv_name);
 		chitiettintuc_item_tv_date = (TextView) view.findViewById(R.id.chitiettintuc_item_tv_date);
 		home_item_right_control_2_tv = (TextView) view.findViewById(R.id.home_item_right_control_2_tv);
-		chitiettintuc_item_tv_name.setText("");
-		chitiettintuc_item_tv_date.setText("");
-		home_item_right_control_2_tv.setText("");
+		// chitiettintuc_item_tv_name.setText("");
+		// chitiettintuc_item_tv_date.setText("");
+		// home_item_right_control_2_tv.setText("");
 		return view;
 	}
 
 	private void callApi(Bundle arguments) {
-		chitiet_tintuc_tintuckhac_list.removeAllViews();
+		//chitiet_tintuc_tintuckhac_list.removeAllViews();
 		execute(RequestMethod.POST, API.API_R028, arguments, new IContsCallBack() {
 			@Override
 			public void onStart() {
@@ -72,12 +71,13 @@ public class ChiTietTintucFragment extends BaseFragment implements OnItemClickLi
 
 			@Override
 			public void onError() {
-				Toast.makeText(getActivity(), "lost", Toast.LENGTH_SHORT).show();
+				onError("");
 			}
 
 			@Override
 			public void onError(String message) {
 				Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+				// home_item_right_control_2_tv.setText(message);
 			}
 
 			@Override
@@ -111,24 +111,24 @@ public class ChiTietTintucFragment extends BaseFragment implements OnItemClickLi
 				try {
 					JSONArray jsonArray = response.getJSONArray("data");
 
-					for (int i = 0; i < jsonArray.length(); i++) {
-						final JSONObject jsonObject = jsonArray.getJSONObject(i);
-						TinTucKhacItemView tucKhacItemView = new TinTucKhacItemView(getActivity());
-						chitiet_tintuc_tintuckhac_list.addView(tucKhacItemView);
-						tucKhacItemView.setData(jsonObject);
-						chitiet_tintuc_tintuckhac_list.setOnClickListener(new View.OnClickListener() {
-
-							@Override
-							public void onClick(View v) {
-								try {
-									getArguments().clear();
-									getArguments().putString("id", jsonObject.getString("id"));
-									callApi(getArguments());
-								} catch (JSONException e) {
-								}
-							}
-						});
-					}
+//					for (int i = 0; i < jsonArray.length(); i++) {
+//						final JSONObject jsonObject = jsonArray.getJSONObject(i);
+//						TinTucKhacItemView tucKhacItemView = new TinTucKhacItemView(getActivity());
+//						chitiet_tintuc_tintuckhac_list.addView(tucKhacItemView);
+//						tucKhacItemView.setData(jsonObject);
+//						chitiet_tintuc_tintuckhac_list.setOnClickListener(new View.OnClickListener() {
+//
+//							@Override
+//							public void onClick(View v) {
+//								try {
+//									getArguments().clear();
+//									getArguments().putString("id", jsonObject.getString("id"));
+//									callApi(getArguments());
+//								} catch (JSONException e) {
+//								}
+//							}
+//						});
+//					}
 
 				} catch (JSONException e) {
 				}

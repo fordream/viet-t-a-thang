@@ -64,7 +64,7 @@ public class TinTucFragment extends BaseFragment implements OnItemClickListener,
 			public void onError(String message) {
 				Conts.showView(loadingView1, false);
 				// Conts.toast(getActivity(), message);
-				bangxephang_list.setTextNoData(true, message);
+				bangxephang_list.setText(true, message);
 			}
 
 			@Override

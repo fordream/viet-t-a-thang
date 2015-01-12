@@ -8,6 +8,7 @@
     android:paddingTop="@dimen/dimen_25dp" >
 
     <ImageButton
+        android:visibility="gone"
         android:id="@+id/menu_footer_t"
         android:layout_width="@dimen/dimen_35dp"
         android:layout_height="@dimen/dimen_35dp"
@@ -35,6 +36,7 @@
         android:background="@drawable/xml_btn2"
         android:padding="@dimen/dimen_5dp"
         android:scaleType="fitXY"
+        android:visibility="gone"
         android:src="@drawable/t_1" />
 
     <ImageButton

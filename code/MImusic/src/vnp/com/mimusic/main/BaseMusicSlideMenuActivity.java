@@ -23,6 +23,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -121,6 +122,24 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 		// menu left
 
 		MenuLeftView mactivity_slidemenu_menuleft = (MenuLeftView) findViewById(R.id.mactivity_slidemenu_menuleft);
+		mactivity_slidemenu_menuleft.findViewById(R.id.menu_footer_f).setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				getSlideMenu().close(true);
+				Intent browserIntent = new Intent("android.intent.action.VIEW", Uri.parse("https://www.facebook.com/Idea.Sinhvu"));
+				startActivity(browserIntent);
+			}
+		});
+
+		mactivity_slidemenu_menuleft.findViewById(R.id.menu_footer_g).setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				getSlideMenu().close(true);
+			}
+		});
+
 		mactivity_slidemenu_menuleft.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
