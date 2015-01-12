@@ -65,7 +65,7 @@ public abstract class TrangThaiDialog extends BaseAdialog implements android.vie
 				((TextView) convertView).setText(array[index]);
 				((TextView) convertView).setGravity(Gravity.CENTER);
 				((TextView) convertView).setTextSize(parent.getContext().getResources().getDimension(R.dimen.dimen_13dp));
-				((TextView) convertView).setTextColor(Color.WHITE);
+				((TextView) convertView).setTextColor(Color.BLACK);
 
 				return convertView;
 			}

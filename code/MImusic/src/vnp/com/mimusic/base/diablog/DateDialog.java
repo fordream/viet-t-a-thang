@@ -84,7 +84,7 @@ public abstract class DateDialog extends BaseAdialog implements android.view.Vie
 				((TextView) convertView).setText((getYear() - index) + "");
 				((TextView) convertView).setGravity(Gravity.CENTER);
 				((TextView) convertView).setTextSize(parent.getContext().getResources().getDimension(R.dimen.dimen_13dp));
-				((TextView) convertView).setTextColor(Color.WHITE);
+				((TextView) convertView).setTextColor(Color.BLACK);
 
 				return convertView;
 			}
@@ -126,7 +126,7 @@ public abstract class DateDialog extends BaseAdialog implements android.view.Vie
 				((TextView) convertView).setText((index + 1) + "");
 				((TextView) convertView).setGravity(Gravity.CENTER);
 				((TextView) convertView).setTextSize(parent.getContext().getResources().getDimension(R.dimen.dimen_13dp));
-				((TextView) convertView).setTextColor(Color.WHITE);
+				((TextView) convertView).setTextColor(Color.BLACK);
 
 				return convertView;
 			}
@@ -267,7 +267,7 @@ public abstract class DateDialog extends BaseAdialog implements android.view.Vie
 			((TextView) convertView).setText((index + 1) + "");
 			((TextView) convertView).setGravity(Gravity.CENTER);
 			((TextView) convertView).setTextSize(parent.getContext().getResources().getDimension(R.dimen.dimen_13dp));
-			((TextView) convertView).setTextColor(Color.WHITE);
+			((TextView) convertView).setTextColor(Color.BLACK);
 
 			return convertView;
 		}
