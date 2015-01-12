@@ -133,7 +133,7 @@ public abstract class MoiDvChoNhieuNguoiAdaper extends CursorAdapter {
 	private String textSearch = "";
 
 	public void setTextSearch(String textSearh) {
-		Conts.toast(mContext, textSearh);
+		//Conts.toast(mContext, textSearh);
 		this.textSearch = textSearh;
 	}
 
