@@ -12,7 +12,6 @@ import vnp.com.mimusic.R;
 import vnp.com.mimusic.main.BaseMusicSlideMenuActivity;
 import vnp.com.mimusic.util.Conts;
 import android.app.Activity;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -20,7 +19,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -31,6 +29,7 @@ import com.aretha.slidemenudemo.fragment.ChiTietCaNhanDichVuFragment;
 import com.aretha.slidemenudemo.fragment.ChiTietDichVuFragment;
 import com.aretha.slidemenudemo.fragment.ChiTietListSuBanHangFragment;
 import com.aretha.slidemenudemo.fragment.ChiTietTintucFragment;
+import com.aretha.slidemenudemo.fragment.ChonSoDienThoaiFragment;
 import com.aretha.slidemenudemo.fragment.DichVuFragment;
 import com.aretha.slidemenudemo.fragment.GuiDvChoNhieuNguoiFragment;
 import com.aretha.slidemenudemo.fragment.HomeFragment;
@@ -116,6 +115,8 @@ public class RootMenuActivity extends FragmentActivity {
 			changeFragemt(R.id.root_main_fragment, chiTietCaNhanBangXepHangTungDichVuFragment);
 		} else if (Conts.CHITTIETLICHSUBANHANG.equals(type)) {
 			changeFragemt(R.id.root_main_fragment, new ChiTietListSuBanHangFragment());
+		} else if (Conts.CHONSODIENTHOAIFRAGMENT.equals(type)) {
+			changeFragemt(R.id.root_main_fragment, new ChonSoDienThoaiFragment());
 		}
 	}
 

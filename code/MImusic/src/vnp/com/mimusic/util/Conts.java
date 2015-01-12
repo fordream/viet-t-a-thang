@@ -64,6 +64,7 @@ public class Conts {
 	public static final String CHITIETCANHANBANGXEPHANGTUNGDICHVU = "CHITIETCANHANBANGXEPHANGTUNGDICHVU";
 	public static final String CHITTIETLICHSUBANHANG = "CHITTIETLICHSUBANHANG";
 	public static final boolean ISLISTCHUASUDUNG = true;
+	public static final String CHONSODIENTHOAIFRAGMENT = "CHONSODIENTHOAIFRAGMENT";
 
 	public static String getName(Cursor cursor) {
 		String name = cursor.getString(cursor.getColumnIndex(User.fullname));

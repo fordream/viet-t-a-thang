@@ -3,17 +3,15 @@ package com.aretha.slidemenudemo.fragment;
 import java.util.Calendar;
 
 import vnp.com.db.DichVu;
-import vnp.com.db.User;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
-import vnp.com.mimusic.base.diablog.ChonSoDienThoaiDialog;
-import vnp.com.mimusic.base.diablog.DateDialog;
 import vnp.com.mimusic.base.diablog.DichVuDialog;
 import vnp.com.mimusic.base.diablog.LSBHDateDialog;
 import vnp.com.mimusic.base.diablog.TrangThaiDialog;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.view.HeaderView;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -116,13 +114,18 @@ public class LichSuBanHangFragment extends Fragment implements OnItemClickListen
 	}
 
 	private void showDanhBa() {
-		new ChonSoDienThoaiDialog(getActivity(), phoneContact) {
-			@Override
-			public void sendData(ContentValues index) {
-				phoneContact = index.getAsString(User.USER);
-				lsbh_sdt.setText(index.getAsString(User.NAME_CONTACT));
-			}
-		}.show();
+		Intent intent = new Intent(getActivity(), RootMenuActivity.class);
+		intent.putExtra("type", Conts.CHONSODIENTHOAIFRAGMENT);
+		startActivity(intent);
+		//((RootMenuActivity)getActivity()).overridePendingTransitionStartActivity();
+		
+//		new ChonSoDienThoaiFragment(getActivity(), phoneContact) {
+//			@Override
+//			public void sendData(ContentValues index) {
+//				phoneContact = index.getAsString(User.USER);
+//				lsbh_sdt.setText(index.getAsString(User.NAME_CONTACT));
+//			}
+//		}.show();
 	}
 
 	private void showTuDialog() {
