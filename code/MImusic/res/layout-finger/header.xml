@@ -78,7 +78,7 @@
         android:scaleType="fitXY"
         android:visibility="gone" >
 
-        <ImageButton
+        <ImageView
             android:id="@+id/date_done"
             android:layout_width="@dimen/dimen_45dp"
             android:layout_height="@dimen/dimen_45dp"
