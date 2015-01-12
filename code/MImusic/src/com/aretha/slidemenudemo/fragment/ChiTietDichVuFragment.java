@@ -123,7 +123,7 @@ public class ChiTietDichVuFragment extends BaseFragment implements View.OnClickL
 
 		Bundle bundles = new Bundle();
 		bundles.putString("service_code", service_code);
-		getmImusicService().execute(RequestMethod.GET, API.API_R005, bundles, new IContsCallBack() {
+		execute(RequestMethod.GET, API.API_R005, bundles, new IContsCallBack() {
 
 			@Override
 			public void onSuscess(JSONObject response) {

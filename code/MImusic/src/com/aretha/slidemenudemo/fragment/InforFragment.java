@@ -167,7 +167,7 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 
 	private void uploadAvatar(String path) {
 		if (!Conts.isBlank(path)) {
-			getmImusicService().executeUpdateAvatar(path, new IContsCallBack() {
+			executeUpdateAvatar(path, new IContsCallBack() {
 				ProgressDialog progressDialog;
 
 				@Override
@@ -202,6 +202,7 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 		}
 	}
 
+	
 	private Uri path;
 
 	@Override
@@ -259,7 +260,7 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 			bundle.putString("fullname", infor_name.getText().toString());
 			// fullname
 
-			getmImusicService().execute(RequestMethod.POST, API.API_R007, bundle, new IContsCallBack() {
+			execute(RequestMethod.POST, API.API_R007, bundle, new IContsCallBack() {
 
 				@Override
 				public void onSuscess(JSONObject response) {

@@ -47,7 +47,7 @@ public class ChiTietListSuBanHangFragment extends BaseFragment implements OnItem
 			}
 		});
 		home_list = (vnp.com.mimusic.view.MusicListView) view.findViewById(R.id.home_list);
-		getmImusicService().execute(RequestMethod.GET, API.API_R008, getArguments(), new IContsCallBack() {
+		execute(RequestMethod.GET, API.API_R008, getArguments(), new IContsCallBack() {
 			@Override
 			public void onSuscess(JSONObject response) {
 				home_list.setText(false, R.string.nodata);

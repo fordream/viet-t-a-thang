@@ -64,7 +64,7 @@ public class ChiTietTintucFragment extends BaseFragment implements OnItemClickLi
 
 	private void callApi(Bundle arguments) {
 		chitiet_tintuc_tintuckhac_list.removeAllViews();
-		getmImusicService().execute(RequestMethod.POST, API.API_R028, arguments, new IContsCallBack() {
+		execute(RequestMethod.POST, API.API_R028, arguments, new IContsCallBack() {
 			@Override
 			public void onStart() {
 
@@ -92,7 +92,7 @@ public class ChiTietTintucFragment extends BaseFragment implements OnItemClickLi
 			}
 		});
 
-		getmImusicService().execute(RequestMethod.POST, API.API_R029, arguments, new IContsCallBack() {
+		execute(RequestMethod.POST, API.API_R029, arguments, new IContsCallBack() {
 			@Override
 			public void onStart() {
 

@@ -55,7 +55,7 @@ public class DichVuFragment extends BaseFragment implements OnItemClickListener,
 		dichvu_list.setOnItemClickListener(this);
 		Bundle bundle = new Bundle();
 
-		getmImusicService().execute(RequestMethod.GET, API.API_R004, bundle, new IContsCallBack() {
+		execute(RequestMethod.GET, API.API_R004, bundle, new IContsCallBack() {
 			@Override
 			public void onStart() {
 				Conts.showView(loadingView1, true);

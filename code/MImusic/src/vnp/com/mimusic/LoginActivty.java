@@ -29,9 +29,6 @@ import android.widget.Toast;
 public class LoginActivty extends Activity implements OnClickListener {
 	private LoadingView progressBar1;
 
-	private MImusicService getService() {
-		return ((VApplication) getApplication()).getmImusicService();
-	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +93,7 @@ public class LoginActivty extends Activity implements OnClickListener {
 				login(true, "", "");
 			}
 		} else {
-			getService().refreshToken(new IContsCallBack() {
+			((VApplication) getApplication()).refreshToken(new IContsCallBack() {
 				@Override
 				public void onStart() {
 					Conts.showView(progressBar1, true);
@@ -133,7 +130,7 @@ public class LoginActivty extends Activity implements OnClickListener {
 	}
 
 	private void login(boolean is3G, final String u, final String p) {
-		((VApplication) getApplication()).getmImusicService().login(false, u, p, new IContsCallBack() {
+		((VApplication) getApplication()).login(false, u, p, new IContsCallBack() {
 
 			@Override
 			public void onStart() {

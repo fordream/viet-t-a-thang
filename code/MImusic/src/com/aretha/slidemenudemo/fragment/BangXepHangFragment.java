@@ -30,7 +30,7 @@ public class BangXepHangFragment extends BaseFragment implements OnItemClickList
 	private String noDataText = "";
 	private boolean successRequest = false;
 	private String type = "";
-	
+
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
@@ -56,6 +56,7 @@ public class BangXepHangFragment extends BaseFragment implements OnItemClickList
 	}
 
 	boolean displaySoLuong = false;
+
 	private void callData(boolean b) {
 		displaySoLuong = b;
 		bangxephang_list.setText(false, "");
@@ -73,7 +74,7 @@ public class BangXepHangFragment extends BaseFragment implements OnItemClickList
 		Bundle bxhParamBundle = new Bundle();
 		bxhParamBundle.putString("type", type);
 		if (!successRequest) {
-			getmImusicService().execute(RequestMethod.GET, API.API_R024, bxhParamBundle, new IContsCallBack() {
+			execute(RequestMethod.GET, API.API_R024, bxhParamBundle, new IContsCallBack() {
 				@Override
 				public void onSuscess(JSONObject response) {
 					successRequest = true;
@@ -86,9 +87,7 @@ public class BangXepHangFragment extends BaseFragment implements OnItemClickList
 						((BangXepHangAdaper) bangxephang_list.getAdapter()).setJSOnArray(jsonArray);
 						((BangXepHangAdaper) bangxephang_list.getAdapter()).notifyDataSetChanged();
 
-						if (jsonArray.length() == 0 
-								&& displaySoLuong
-								) {
+						if (jsonArray.length() == 0 && displaySoLuong) {
 							bangxephang_list.setTextNoData(true, noDataText);
 						} else {
 							bangxephang_list.setOnItemClickListener(BangXepHangFragment.this);
@@ -117,9 +116,7 @@ public class BangXepHangFragment extends BaseFragment implements OnItemClickList
 						bangxephang_list.setAdapter(adapter);
 						adapter.notifyDataSetChanged();
 
-						if (jsonArray.length() == 0 
-								&& displaySoLuong
-								) {
+						if (jsonArray.length() == 0 && displaySoLuong) {
 							bangxephang_list.setTextNoData(true, noDataText);
 						} else {
 							bangxephang_list.setOnItemClickListener(BangXepHangFragment.this);
@@ -139,35 +136,35 @@ public class BangXepHangFragment extends BaseFragment implements OnItemClickList
 	}
 
 	private JSONArray sampleData() {
-		/////////sample data//////////////
-			JSONArray jsonArray = new JSONArray();
-			if (!displaySoLuong) {
-				try {
-					for (int i = 0; i < 10; i++) {
-						JSONObject jo = new JSONObject();
-						//id: của định danh của BXH
-					    //nickname(String): nickname của dealer
-					    //msisdn: số điện thoại của dealer
-					    //avatar: ảnh đại diện của dealer
-					    //quantity: số lượng đăng ký
-					    //commission: hoa hồng được nhận (doanh thu)
-						jo.put("id", i);
-						jo.put("nickname", "Anh");
-						jo.put("msisdn", "0985123456");
-						jo.put("avatar", R.drawable.bangxephang_avatar_example);
-						jo.put("quantity", "100");
-						jo.put("commission", "100000");
-						jsonArray.put(jo);
-					}
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+		// ///////sample data//////////////
+		JSONArray jsonArray = new JSONArray();
+		if (!displaySoLuong) {
+			try {
+				for (int i = 0; i < 10; i++) {
+					JSONObject jo = new JSONObject();
+					// id: của định danh của BXH
+					// nickname(String): nickname của dealer
+					// msisdn: số điện thoại của dealer
+					// avatar: ảnh đại diện của dealer
+					// quantity: số lượng đăng ký
+					// commission: hoa hồng được nhận (doanh thu)
+					jo.put("id", i);
+					jo.put("nickname", "Anh");
+					jo.put("msisdn", "0985123456");
+					jo.put("avatar", R.drawable.bangxephang_avatar_example);
+					jo.put("quantity", "100");
+					jo.put("commission", "100000");
+					jsonArray.put(jo);
 				}
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			return jsonArray;
-		/////////////////////////////////
+		}
+		return jsonArray;
+		// ///////////////////////////////
 	}
-	
+
 	@Override
 	public void onClick(View v) {
 	}

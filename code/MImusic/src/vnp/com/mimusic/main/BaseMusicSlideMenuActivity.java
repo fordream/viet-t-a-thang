@@ -180,7 +180,7 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 
 			@Override
 			public void onClick(View v) {
-				((VApplication) getApplication()).getmImusicService().callDongBoDanhBaLen(new IContsCallBack() {
+				((VApplication) getApplication()).callDongBoDanhBaLen(new IContsCallBack() {
 					private ProgressDialog progressDialog;
 
 					@Override
@@ -290,7 +290,7 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 		}, 3000);
 
 		Bundle bundle = new Bundle();
-		((VApplication) getApplication()).getmImusicService().execute(RequestMethod.GET, API.API_R026, bundle, new IContsCallBack() {
+		((VApplication) getApplication()).execute(RequestMethod.GET, API.API_R026, bundle, new IContsCallBack() {
 
 			@Override
 			public void onSuscess(JSONObject response) {

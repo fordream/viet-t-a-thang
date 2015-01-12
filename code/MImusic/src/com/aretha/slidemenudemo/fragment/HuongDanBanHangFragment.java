@@ -56,7 +56,7 @@ public class HuongDanBanHangFragment extends BaseFragment implements OnItemClick
 
 		Bundle bundle = new Bundle();
 		bundle.putString("type", 4 + "");
-		getmImusicService().execute(RequestMethod.GET, API.API_R010, bundle, new IContsCallBack() {
+		execute(RequestMethod.GET, API.API_R010, bundle, new IContsCallBack() {
 
 			@Override
 			public void onSuscess(JSONObject response) {

@@ -101,7 +101,7 @@ public class DangKyDialog extends BaseAdialog implements android.view.View.OnCli
 			Bundle bundle = new Bundle();
 			bundle.putString(DichVu.service_code, contentValues.getAsString(DichVu.service_code));
 
-			((VApplication) getmContext().getApplicationContext()).getmImusicService().execute(RequestMethod.POST, API.API_R017, bundle, new IContsCallBack() {
+			((VApplication) getmContext().getApplicationContext()).execute(RequestMethod.POST, API.API_R017, bundle, new IContsCallBack() {
 
 				@Override
 				public void onSuscess(JSONObject response) {

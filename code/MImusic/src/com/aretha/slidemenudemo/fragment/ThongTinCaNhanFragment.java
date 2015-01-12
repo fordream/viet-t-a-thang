@@ -84,7 +84,7 @@ public class ThongTinCaNhanFragment extends BaseFragment implements OnItemClickL
 			}
 		});
 		showData(view);
-		getmImusicService().execute(RequestMethod.GET, API.API_R006, new Bundle(), new IContsCallBack() {
+		execute(RequestMethod.GET, API.API_R006, new Bundle(), new IContsCallBack() {
 
 			@Override
 			public void onSuscess(JSONObject response) {

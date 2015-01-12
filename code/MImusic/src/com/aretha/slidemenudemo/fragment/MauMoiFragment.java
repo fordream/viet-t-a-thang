@@ -82,7 +82,7 @@ public class MauMoiFragment extends BaseFragment implements android.view.View.On
 		}
 		Bundle bundle = new Bundle();
 		bundle.putString("service_code", service_code);
-		getmImusicService().execute(RequestMethod.GET, API.API_R022, bundle, new IContsCallBack() {
+		execute(RequestMethod.GET, API.API_R022, bundle, new IContsCallBack() {
 
 			@Override
 			public void onSuscess(JSONObject response) {
@@ -127,7 +127,7 @@ public class MauMoiFragment extends BaseFragment implements android.view.View.On
 			bundle.putString("service_code", service_codes);
 		}
 
-		getmImusicService().execute(RequestMethod.POST, !type ? API.API_R015 : API.API_R016, bundle, new IContsCallBack() {
+		execute(RequestMethod.POST, !type ? API.API_R015 : API.API_R016, bundle, new IContsCallBack() {
 			ProgressDialog dialog;
 
 			@Override
