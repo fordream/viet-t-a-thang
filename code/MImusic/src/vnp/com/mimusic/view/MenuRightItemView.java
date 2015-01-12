@@ -47,38 +47,42 @@ public class MenuRightItemView extends LinearLayout {
 	}
 
 	public void initData(Cursor cursor, String textSearch) {
-		String name = "";
-		if (cursor.getString(cursor.getColumnIndex(User.NAME)) != null) {
-			name = cursor.getString(cursor.getColumnIndex(User.NAME));
-		}
-
-		if (cursor.getString(cursor.getColumnIndex(User.NAME_CONTACT)) != null) {
-			if (name == null || name != null && name.trim().equals("")) {
-				name = cursor.getString(cursor.getColumnIndex(User.NAME_CONTACT));
-			}
-		}
-
-		if (name == null || name != null && name.trim().equals("")) {
-			name = cursor.getString(cursor.getColumnIndex(User.USER));
-		}
-
-		if (name == null)
-			name = "";
-
-		menurightitem_main.setVisibility(name.toUpperCase().contains(textSearch.toUpperCase()) ? View.VISIBLE : View.GONE);
-		menu_right_item_tv_name.setText(name);
-
-		String avatar = cursor.getString(cursor.getColumnIndex(User.AVATAR));
-		if (avatar == null) {
-
-		} else {
-			menu_right_item_img_icon.setBackgroundResource(R.drawable.no_avatar);
-		}
-
-		String dvDaSuDung = cursor.getString(cursor.getColumnIndex(User.LISTIDDVSUDUNG));
 		try {
-			menu_right_item_tv_link.setText(Html.fromHtml(cursor.getString(cursor.getColumnIndex(User.LISTIDTENDVSUDUNG))));
+			String name = "";
+			if (cursor.getString(cursor.getColumnIndex(User.NAME)) != null) {
+				name = cursor.getString(cursor.getColumnIndex(User.NAME));
+			}
+
+			if (cursor.getString(cursor.getColumnIndex(User.NAME_CONTACT)) != null) {
+				if (name == null || name != null && name.trim().equals("")) {
+					name = cursor.getString(cursor.getColumnIndex(User.NAME_CONTACT));
+				}
+			}
+
+			if (name == null || name != null && name.trim().equals("")) {
+				name = cursor.getString(cursor.getColumnIndex(User.USER));
+			}
+
+			if (name == null)
+				name = "";
+
+			menurightitem_main.setVisibility(name.toUpperCase().contains(textSearch.toUpperCase()) ? View.VISIBLE : View.GONE);
+			menu_right_item_tv_name.setText(name);
+
+			String avatar = cursor.getString(cursor.getColumnIndex(User.AVATAR));
+			if (avatar == null) {
+
+			} else {
+				menu_right_item_img_icon.setBackgroundResource(R.drawable.no_avatar);
+			}
+
+			String dvDaSuDung = cursor.getString(cursor.getColumnIndex(User.LISTIDDVSUDUNG));
+			try {
+				menu_right_item_tv_link.setText(Html.fromHtml(cursor.getString(cursor.getColumnIndex(User.LISTIDTENDVSUDUNG))));
+			} catch (Exception exception) {
+			}
 		} catch (Exception exception) {
+
 		}
 
 	}

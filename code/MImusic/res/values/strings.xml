@@ -12,6 +12,7 @@
         <item>Thông tin cá nhân</item>
     </string-array>
 
+    <string name="noapi">Chưa có api</string>
     <string name="khonglayduocanh">Không thể lấy được file ảnh.</string>
     <string name="timkiemdanhba">Tìm kiếm danh bạ</string>
     <string name="loading">Loading ...</string>

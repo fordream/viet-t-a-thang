@@ -286,21 +286,26 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 				ReCommentView commentView = new ReCommentView(BaseMusicSlideMenuActivity.this) {
 					@Override
 					public void addContact() {
-						Intent intent = new Intent(BaseMusicSlideMenuActivity.this, RootMenuActivity.class);
-						intent.putExtra("type", Conts.NHIEUDICHVU);
-						intent.putExtra(User._ID, 1 + "");
-						startActivity(intent);
-						overridePendingTransitionStartActivity();
+//						Intent intent = new Intent(BaseMusicSlideMenuActivity.this, RootMenuActivity.class);
+//						intent.putExtra("type", Conts.NHIEUDICHVU);
+//						intent.putExtra(User._ID, 1 + "");
+//						startActivity(intent);
+//						overridePendingTransitionStartActivity();
+						Conts.showDialogThongbao(BaseMusicSlideMenuActivity.this, getString(R.string.noapi));
 					}
 
 					@Override
 					public void addDv() {
-						Intent intent = new Intent(BaseMusicSlideMenuActivity.this, RootMenuActivity.class);
-						Bundle extras = new Bundle();
-						extras.putString("type", Conts.MOIDICHVUCHONHIEUNGUOI);
-						intent.putExtras(extras);
-						startActivity(intent);
-						overridePendingTransitionStartActivity();
+//						Intent intent = new Intent(BaseMusicSlideMenuActivity.this, RootMenuActivity.class);
+//						Bundle extras = new Bundle();
+//						extras.putString("type", Conts.MOIDICHVUCHONHIEUNGUOI);
+//						intent.putExtras(extras);
+//						startActivity(intent);
+//						overridePendingTransitionStartActivity();
+						
+						
+						Conts.showDialogThongbao(BaseMusicSlideMenuActivity.this, getString(R.string.noapi));
+						
 					}
 				};
 				((FrameLayout) findViewById(R.id.activity_slidemenu_recomment)).addView(commentView);
