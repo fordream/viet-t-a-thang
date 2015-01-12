@@ -10,6 +10,7 @@ import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.adapter.HomeAdapter;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
+import vnp.com.mimusic.view.LoadingView;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -29,11 +30,12 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 
 	private HomeAdapter adapter;
 	ListView menu_left_list;
+	private LoadingView loadingView1;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.home, null);
-
+		loadingView1 = (LoadingView) view.findViewById(R.id.loadingView1);
 		View home_header = ((LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.home_header, null);
 		home_header.setOnClickListener(new View.OnClickListener() {
 
@@ -52,24 +54,27 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 		execute(RequestMethod.GET, API.API_R004, bundle, new IContsCallBack() {
 			@Override
 			public void onStart() {
+				Conts.showView(loadingView1, true);
 			}
 
 			@Override
 			public void onSuscess(JSONObject response) {
+				Conts.showView(loadingView1, false);
 				callSHowData();
 			}
 
 			@Override
 			public void onError(String message) {
+				Conts.showView(loadingView1, false);
 				Conts.toast(getActivity(), message);
 			}
 
 			@Override
 			public void onError() {
+				Conts.showView(loadingView1, false);
 				Conts.toast(getActivity(), "onError");
 			}
 		});
-
 		return view;
 	}
 

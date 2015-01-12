@@ -32,7 +32,7 @@ public class HuongDanBanHangOfDichVuFragment extends BaseFragment implements OnI
 		View view = inflater.inflate(R.layout.huongdanbanhangofdichvu, null);
 
 		HeaderView header = (HeaderView) view.findViewById(R.id.quydinhbanhang_header);
-		header.setTextHeader(R.string.huongdanbanhang);
+		header.setTextHeader(R.string.huongdandangky);
 		header.showButton(true, false);
 		header.setButtonLeftImage(true, R.drawable.btn_back);
 		header.findViewById(R.id.header_btn_left).setOnClickListener(new View.OnClickListener() {
