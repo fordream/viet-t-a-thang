@@ -64,8 +64,29 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/dimen_15dp"
             android:text="@string/moi"
-             android:textSize="@dimen/dimen_15dp"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/dimen_15dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/header_btn_right__done"
+        android:layout_width="@dimen/dimen_45dp"
+        android:layout_height="@dimen/dimen_45dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal"
+        android:scaleType="fitXY"
+        android:visibility="gone" >
+
+        <ImageButton
+            android:id="@+id/date_done"
+            android:layout_width="@dimen/dimen_45dp"
+            android:layout_height="@dimen/dimen_45dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/xml_btn2"
+            android:padding="@dimen/dimen_12dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/date_done" />
     </RelativeLayout>
 
 </RelativeLayout>

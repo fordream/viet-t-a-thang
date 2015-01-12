@@ -41,7 +41,8 @@ public class ChonSoDienThoaiFragment extends BaseFragment implements android.vie
 		chitietdichvu_headerview.setTextHeader(R.string.chonsdt);
 		chitietdichvu_headerview.setButtonLeftImage(true, R.drawable.btn_back);
 		chitietdichvu_headerview.setButtonRightImage(false, R.drawable.chititetdichvu_right);
-		chitietdichvu_headerview.findViewById(R.id.header_btn_left).setOnClickListener(new View.OnClickListener() {
+		chitietdichvu_headerview.findViewById(R.id.header_btn_right__done).setVisibility(View.VISIBLE);
+		chitietdichvu_headerview.findViewById(R.id.header_btn_right__done).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent();
@@ -56,6 +57,13 @@ public class ChonSoDienThoaiFragment extends BaseFragment implements android.vie
 					}
 				}
 				getActivity().setResult(Activity.RESULT_OK, intent);
+				getActivity().onBackPressed();
+			}
+		});
+
+		chitietdichvu_headerview.findViewById(R.id.header_btn_left).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
 				getActivity().onBackPressed();
 			}
 		});
