@@ -279,10 +279,10 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 		/**
 		 * recommnet
 		 */
-		new Handler().postDelayed(new Runnable() {
-
-			@Override
-			public void run() {
+//		new Handler().postDelayed(new Runnable() {
+//
+//			@Override
+//			public void run() {
 				ReCommentView commentView = new ReCommentView(BaseMusicSlideMenuActivity.this) {
 					@Override
 					public void addContact() {
@@ -305,8 +305,8 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 				};
 				((FrameLayout) findViewById(R.id.activity_slidemenu_recomment)).addView(commentView);
 				commentView.start();
-			}
-		}, 3000);
+//			}
+//		}, 3000);
 
 		Bundle bundle = new Bundle();
 		((VApplication) getApplication()).execute(RequestMethod.GET, API.API_R026, bundle, new IContsCallBack() {
