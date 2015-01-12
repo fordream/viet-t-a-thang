@@ -18,7 +18,9 @@ import java.util.concurrent.Executors;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.widget.ImageView;
 
 public class ImageLoader {
@@ -77,6 +79,21 @@ public class ImageLoader {
 				is.close();
 				os.close();
 				bitmap = decodeFile(f);
+				return bitmap;
+			} else if (url != null && url.startsWith("file://")) {
+				Bitmap bitmap = null;
+				url = url.substring(url.indexOf("file://") + 7, url.length());
+				BitmapFactory.Options options = new BitmapFactory.Options();
+				options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+				bitmap = BitmapFactory.decodeFile(url, options);
+
+				return bitmap;
+			} else if (url != null && url.startsWith("content://")) {
+				Bitmap bitmap = null;
+				try {
+					bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), Uri.parse(url));
+				} catch (Exception e) {
+				}
 				return bitmap;
 			} else {
 

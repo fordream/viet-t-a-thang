@@ -134,29 +134,36 @@ public class Conts {
 	}
 
 	public static void showImage(String path, ImageView img, int no_image) {
+
 		Bitmap bitmap = null;
-		if (path != null && path.contains("file://")) {
-			path = path.substring(path.indexOf("file://") + 7, path.length());
-			BitmapFactory.Options options = new BitmapFactory.Options();
-			options.inPreferredConfig = Bitmap.Config.ARGB_8888;
-			bitmap = BitmapFactory.decodeFile(path, options);
 
-		}
-
-		if (path != null && path.contains("content://")) {
-			try {
-				bitmap = MediaStore.Images.Media.getBitmap(img.getContext().getContentResolver(), Uri.parse(path));
-			} catch (Exception e) {
-			}
-		}
-
-		if (bitmap == null && no_image != 0) {
+		if (no_image != 0) {
 			bitmap = BitmapFactory.decodeResource(img.getContext().getResources(), no_image);
 		}
+		ImageLoaderUtils.getInstance(img.getContext()).DisplayImage(path, img, bitmap);
 
-		if (bitmap != null) {
-			img.setImageBitmap(bitmap);
-		}
+//		Bitmap bitmap = null;
+//		if (path != null && path.contains("file://")) {
+//			path = path.substring(path.indexOf("file://") + 7, path.length());
+//			BitmapFactory.Options options = new BitmapFactory.Options();
+//			options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+//			bitmap = BitmapFactory.decodeFile(path, options);
+//		}
+//
+//		if (path != null && path.contains("content://")) {
+//			try {
+//				bitmap = MediaStore.Images.Media.getBitmap(img.getContext().getContentResolver(), Uri.parse(path));
+//			} catch (Exception e) {
+//			}
+//		}
+//
+//		if (bitmap == null && no_image != 0) {
+//			bitmap = BitmapFactory.decodeResource(img.getContext().getResources(), no_image);
+//		}
+//
+//		if (bitmap != null) {
+//			img.setImageBitmap(bitmap);
+//		}
 	}
 
 	public static String getToken(Context activity) {
