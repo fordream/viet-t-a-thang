@@ -45,9 +45,9 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:visibility="gone"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_50dp" >
+            android:layout_height="@dimen/dimen_50dp"
+            android:visibility="gone" >
 
             <TextView
                 android:id="@+id/date_title"
@@ -88,9 +88,20 @@
             android:layout_height="1px"
             android:background="#cccccc" />
 
+        <vnp.com.mimusic.view.MusicListView
+            android:id="@+id/bangxephang_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@drawable/tranfer"
+            android:dividerHeight="0px"
+            android:paddingBottom="@dimen/dimen_5dp"
+            android:paddingTop="@dimen/dimen_5dp" >
+        </vnp.com.mimusic.view.MusicListView>
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent"
+            android:visibility="gone" >
 
             <RelativeLayout
                 android:layout_width="@dimen/dimen_1dp"
