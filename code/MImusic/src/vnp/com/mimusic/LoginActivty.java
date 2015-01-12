@@ -130,7 +130,7 @@ public class LoginActivty extends Activity implements OnClickListener {
 	}
 
 	private void login(boolean is3G, final String u, final String p) {
-		((VApplication) getApplication()).login(false, u, p, new IContsCallBack() {
+		((VApplication) getApplication()).login(is3G, u, p, new IContsCallBack() {
 
 			@Override
 			public void onStart() {
