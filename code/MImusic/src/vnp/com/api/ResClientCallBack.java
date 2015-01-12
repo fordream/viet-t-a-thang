@@ -6,6 +6,7 @@ import java.util.Set;
 
 import android.content.Context;
 import vnp.com.mimusic.util.Conts;
+import vnp.com.mimusic.util.LogUtils;
 
 public abstract class ResClientCallBack extends CallBack {
 	private Context context;
@@ -32,6 +33,8 @@ public abstract class ResClientCallBack extends CallBack {
 		Set<String> set = maps.keySet();
 		for (String key : set) {
 			client.addParam(key, maps.get(key));
+			
+			//LogUtils.e("key", key + " :" + maps.get(key));
 		}
 		try {
 //			if (getApiName().equals(API.API_R023)) {

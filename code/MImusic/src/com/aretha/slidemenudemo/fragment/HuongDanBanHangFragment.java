@@ -10,6 +10,7 @@ import vnp.com.mimusic.R;
 import vnp.com.mimusic.adapter.HuongDanBanHangAdapter;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
+import vnp.com.mimusic.util.LogUtils;
 import vnp.com.mimusic.view.HeaderView;
 import vnp.com.mimusic.view.MusicListView;
 import android.content.ContentValues;
@@ -60,6 +61,8 @@ public class HuongDanBanHangFragment extends BaseFragment implements OnItemClick
 
 			@Override
 			public void onSuscess(JSONObject response) {
+				
+				LogUtils.e("response", response.toString());
 				String guide_text = getString(R.string.nodata);
 				try {
 					guide_text = response.getString("guide_text");

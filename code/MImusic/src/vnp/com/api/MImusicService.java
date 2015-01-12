@@ -526,7 +526,7 @@ public class MImusicService extends Service {
 
 	public void executeUpdateAvatar(String path, final IContsCallBack iContsCallBack) {
 		Bundle bundle = new Bundle();
-		bundle.putString("images", "c3Nzcw==");// path
-		execute(RequestMethod.POST, API.API_R023, bundle, iContsCallBack);
+		bundle.putString("images", path);// path
+		execute(RequestMethod.GET, API.API_R023, bundle, iContsCallBack);
 	}
 }

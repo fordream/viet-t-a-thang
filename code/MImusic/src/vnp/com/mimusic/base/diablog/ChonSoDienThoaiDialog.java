@@ -8,6 +8,7 @@ import vnp.com.mimusic.R;
 import vnp.com.mimusic.base.BaseAdialog;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.ImageLoaderUtils;
+import vnp.com.mimusic.view.HeaderView;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -15,12 +16,15 @@ import android.database.DataSetObserver;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -65,58 +69,130 @@ public abstract class ChonSoDienThoaiDialog extends BaseAdialog implements andro
 
 		if (cursor != null)
 			cursor.close();
-		WheelViewAdapter adapterWheel = new WheelViewAdapter() {
 
-			@Override
-			public void unregisterDataSetObserver(DataSetObserver observer) {
+		// WheelViewAdapter adapterWheel = new WheelViewAdapter() {
+		//
+		// @Override
+		// public void unregisterDataSetObserver(DataSetObserver observer) {
+		//
+		// }
+		//
+		// @Override
+		// public void registerDataSetObserver(DataSetObserver observer) {
+		//
+		// }
+		//
+		// @Override
+		// public int getItemsCount() {
+		// return contentValues.size();
+		// }
+		//
+		// @Override
+		// public View getItem(int index, View convertView, ViewGroup parent) {
+		//
+		// if (convertView == null) {
+		// convertView = ((LayoutInflater)
+		// parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.chondichvu,
+		// null);
+		// }
+		// ImageView imageView = (ImageView)
+		// convertView.findViewById(R.id.imageView1);
+		// TextView date_title = (TextView)
+		// convertView.findViewById(R.id.date_title);
+		// ContentValues values = contentValues.get(index);
+		// date_title.setText(values.getAsString(User.NAME_CONTACT));
+		//
+		// String id = values.getAsString(User.USER);
+		//
+		// if (Conts.isBlank(id)) {
+		// imageView.setImageBitmap(null);
+		// } else {
+		// Bitmap bitmap = BitmapFactory.decodeResource(parent.getResources(),
+		// R.drawable.no_avatar);
+		// ImageLoaderUtils.getInstance(parent.getContext()).DisplayImage(values.getAsString(User.AVATAR),
+		// imageView, bitmap);
+		// }
+		// return convertView;
+		// }
+		//
+		// @Override
+		// public View getEmptyItem(View convertView, ViewGroup parent) {
+		// return null;
+		// }
+		// };
 
-			}
-
-			@Override
-			public void registerDataSetObserver(DataSetObserver observer) {
-
-			}
-
-			@Override
-			public int getItemsCount() {
-				return contentValues.size();
-			}
-
-			@Override
-			public View getItem(int index, View convertView, ViewGroup parent) {
-
-				if (convertView == null) {
-					convertView = ((LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.chondichvu, null);
-				}
-				ImageView imageView = (ImageView) convertView.findViewById(R.id.imageView1);
-				TextView date_title = (TextView) convertView.findViewById(R.id.date_title);
-				ContentValues values = contentValues.get(index);
-				date_title.setText(values.getAsString(User.NAME_CONTACT));
-
-				String id = values.getAsString(User.USER);
-
-				if (Conts.isBlank(id)) {
-					imageView.setImageBitmap(null);
-				} else {
-					Bitmap bitmap = BitmapFactory.decodeResource(parent.getResources(), R.drawable.no_avatar);
-					ImageLoaderUtils.getInstance(parent.getContext()).DisplayImage(values.getAsString(User.AVATAR), imageView, bitmap);
-				}
-				return convertView;
-			}
-
-			@Override
-			public View getEmptyItem(View convertView, ViewGroup parent) {
-				return null;
-			}
-		};
-
-		date_wheelview_year.setViewAdapter(adapterWheel);
+		date_wheelview_year.setViewAdapter(adapter);
 		date_wheelview_year.setCurrentItem(index);
 	}
+
+	private MAdapter adapter = new MAdapter();
+
+	private class MAdapter implements WheelViewAdapter {
+		@Override
+		public void unregisterDataSetObserver(DataSetObserver observer) {
+
+		}
+
+		@Override
+		public void registerDataSetObserver(DataSetObserver observer) {
+
+		}
+
+		@Override
+		public int getItemsCount() {
+			return contentValues.size();
+		}
+
+		@Override
+		public View getItem(int index, View convertView, ViewGroup parent) {
+
+			if (convertView == null) {
+				convertView = ((LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.chondichvu, null);
+			}
+			ImageView imageView = (ImageView) convertView.findViewById(R.id.imageView1);
+			TextView date_title = (TextView) convertView.findViewById(R.id.date_title);
+			ContentValues values = contentValues.get(index);
+			date_title.setText(values.getAsString(User.NAME_CONTACT));
+
+			String id = values.getAsString(User.USER);
+
+			if (Conts.isBlank(id)) {
+				imageView.setImageBitmap(null);
+			} else {
+				Bitmap bitmap = BitmapFactory.decodeResource(parent.getResources(), R.drawable.no_avatar);
+				ImageLoaderUtils.getInstance(parent.getContext()).DisplayImage(values.getAsString(User.AVATAR), imageView, bitmap);
+			}
+			return convertView;
+		}
+
+		@Override
+		public View getEmptyItem(View convertView, ViewGroup parent) {
+			return null;
+		}
+
+		public void setText(String string) {
+			// TODO Auto-generated method stub
+			
+		}
+	}
+
+	private EditText menu_right_editext;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		menu_right_editext = (EditText) findViewById(R.id.menu_right_editext);
+		HeaderView chitietdichvu_headerview = (HeaderView) findViewById(R.id.chitietdichvu_headerview);
+		chitietdichvu_headerview.setTextHeader(R.string.chonsdt);
+		chitietdichvu_headerview.setButtonLeftImage(true, R.drawable.btn_back);
+		chitietdichvu_headerview.setButtonRightImage(false, R.drawable.chititetdichvu_right);
+		chitietdichvu_headerview.findViewById(R.id.header_btn_left).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mDismiss(false);
+			}
+		});
+
 		date_wheelview_year = (WheelView) findViewById(R.id.date_wheelview_year);
 
 		findViewById(R.id.date_dialog_main).startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.abc_slide_in_bottom));
@@ -137,6 +213,24 @@ public abstract class ChonSoDienThoaiDialog extends BaseAdialog implements andro
 		});
 
 		callSHowData();
+
+		menu_right_editext.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				adapter.setText(menu_right_editext.getText().toString());
+			}
+		});
 	}
 
 	public void mDismiss(final boolean isSendData) {
