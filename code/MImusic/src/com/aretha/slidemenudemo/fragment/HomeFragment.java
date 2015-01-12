@@ -1,20 +1,19 @@
 package com.aretha.slidemenudemo.fragment;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import org.json.JSONObject;
 
+import vnp.com.api.API;
+import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.DichVu;
-import vnp.com.db.User;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.adapter.HomeAdapter;
-import vnp.com.mimusic.view.HeaderView;
+import vnp.com.mimusic.util.Conts;
+import vnp.com.mimusic.util.Conts.IContsCallBack;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,13 +21,14 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-public class HomeFragment extends Fragment implements OnItemClickListener, View.OnClickListener {
+public class HomeFragment extends BaseFragment implements OnItemClickListener, View.OnClickListener {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 	}
 
 	private HomeAdapter adapter;
+	ListView menu_left_list;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -43,9 +43,37 @@ public class HomeFragment extends Fragment implements OnItemClickListener, View.
 			}
 		});
 
-		ListView menu_left_list = (ListView) view.findViewById(R.id.home_list);
-		//menu_left_list.addHeaderView(home_header);
+		menu_left_list = (ListView) view.findViewById(R.id.home_list);
+		// menu_left_list.addHeaderView(home_header);
 		menu_left_list.setOnItemClickListener(this);
+
+		Bundle bundle = new Bundle();
+
+		execute(RequestMethod.GET, API.API_R004, bundle, new IContsCallBack() {
+			@Override
+			public void onStart() {
+			}
+
+			@Override
+			public void onSuscess(JSONObject response) {
+				callSHowData();
+			}
+
+			@Override
+			public void onError(String message) {
+				Conts.toast(getActivity(), message);
+			}
+
+			@Override
+			public void onError() {
+				Conts.toast(getActivity(), "onError");
+			}
+		});
+
+		return view;
+	}
+
+	protected void callSHowData() {
 		Cursor cursor = getActivity().getContentResolver().query(DichVu.CONTENT_URI, null, null, null, null);
 		if (cursor != null) {
 			adapter = new HomeAdapter(getActivity(), cursor) {
@@ -62,8 +90,6 @@ public class HomeFragment extends Fragment implements OnItemClickListener, View.
 			};
 			menu_left_list.setAdapter(adapter);
 		}
-
-		return view;
 	}
 
 	@Override
