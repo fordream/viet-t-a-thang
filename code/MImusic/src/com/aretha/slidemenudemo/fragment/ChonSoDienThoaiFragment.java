@@ -5,11 +5,14 @@ import java.util.List;
 
 import vnp.com.db.User;
 import vnp.com.mimusic.R;
+import vnp.com.mimusic.adapter.ChonSoDienThoaiAdaper;
 import vnp.com.mimusic.adapter.MoiDvChoNhieuNguoiAdaper;
 import vnp.com.mimusic.view.HeaderView;
 import vnp.com.mimusic.view.MusicListView;
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.text.Editable;
@@ -25,7 +28,7 @@ import android.widget.EditText;
 public class ChonSoDienThoaiFragment extends BaseFragment implements android.view.View.OnClickListener {
 
 	private vnp.com.mimusic.view.MusicListView bangxephang_list;
-	private MoiDvChoNhieuNguoiAdaper adaper;
+	private ChonSoDienThoaiAdaper adaper;
 	private View view;
 
 	@Override
@@ -41,6 +44,18 @@ public class ChonSoDienThoaiFragment extends BaseFragment implements android.vie
 		chitietdichvu_headerview.findViewById(R.id.header_btn_left).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				Intent intent = new Intent();
+				if (adaper != null) {
+					if (adaper.getIndex() < 0) {
+						intent.putExtra(User.NAME_CONTACT, getString(R.string.tatca));
+						intent.putExtra(User.USER, "");
+					} else {
+						Cursor cursor = (Cursor) adaper.getItem(adaper.getIndex());
+						intent.putExtra(User.NAME_CONTACT, cursor.getString(cursor.getColumnIndex(User.NAME_CONTACT)));
+						intent.putExtra(User.USER, cursor.getString(cursor.getColumnIndex(User.USER)));
+					}
+				}
+				getActivity().setResult(Activity.RESULT_OK, intent);
 				getActivity().onBackPressed();
 			}
 		});
@@ -61,7 +76,7 @@ public class ChonSoDienThoaiFragment extends BaseFragment implements android.vie
 			@Override
 			public void afterTextChanged(Editable s) {
 				try {
-					adaper.setTextSearch(menu_right_editext.toString());
+					adaper.setTextSearch(menu_right_editext.getText().toString());
 					adaper.notifyDataSetChanged();
 				} catch (Exception exception) {
 
@@ -76,22 +91,9 @@ public class ChonSoDienThoaiFragment extends BaseFragment implements android.vie
 		Cursor cursor = getActivity().getContentResolver().query(User.CONTENT_URI, null, where, null, null);
 
 		if (cursor != null) {
-			adaper = new MoiDvChoNhieuNguoiAdaper(getActivity(), cursor, "") {
-
-				@Override
-				public void addOrRemove(String _id, boolean isAdd) {
-
-				}
-
-				@Override
-				public void addOrRemoveSdt(boolean isAdd, String sdt) {
-
-				}
-
-			};
+			adaper = new ChonSoDienThoaiAdaper(getActivity(), cursor, "");
 			bangxephang_list.setAdapter(adaper);
 		}
-
 	}
 
 	private EditText menu_right_editext;

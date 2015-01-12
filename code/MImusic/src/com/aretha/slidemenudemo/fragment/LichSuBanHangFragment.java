@@ -3,6 +3,7 @@ package com.aretha.slidemenudemo.fragment;
 import java.util.Calendar;
 
 import vnp.com.db.DichVu;
+import vnp.com.db.User;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.base.diablog.DichVuDialog;
@@ -10,6 +11,7 @@ import vnp.com.mimusic.base.diablog.LSBHDateDialog;
 import vnp.com.mimusic.base.diablog.TrangThaiDialog;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.view.HeaderView;
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
@@ -116,30 +118,28 @@ public class LichSuBanHangFragment extends Fragment implements OnItemClickListen
 	private void showDanhBa() {
 		Intent intent = new Intent(getActivity(), RootMenuActivity.class);
 		intent.putExtra("type", Conts.CHONSODIENTHOAIFRAGMENT);
-		startActivity(intent);
-		//((RootMenuActivity)getActivity()).overridePendingTransitionStartActivity();
-		
-//		new ChonSoDienThoaiFragment(getActivity(), phoneContact) {
-//			@Override
-//			public void sendData(ContentValues index) {
-//				phoneContact = index.getAsString(User.USER);
-//				lsbh_sdt.setText(index.getAsString(User.NAME_CONTACT));
-//			}
-//		}.show();
+		startActivityForResult(intent, 2000);
+	}
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == 2000 && resultCode == Activity.RESULT_OK) {
+			phoneContact = data.getStringExtra(User.USER);
+			lsbh_sdt.setText(data.getStringExtra(User.NAME_CONTACT));
+		} else {
+
+		}
 	}
 
 	private void showTuDialog() {
 		String mdate = lsbt_tu.getText().toString();
-		if(Conts.isBlank(mdate)){
+		if (Conts.isBlank(mdate)) {
 			Calendar dateCalendar = Calendar.getInstance();
-			mdate = String.format("%s/%s/%s"
-					,((dateCalendar.get(Calendar.DATE)< 10 ? "0" :"")+ dateCalendar.get(Calendar.DATE) )+""
-					, (((dateCalendar.get(Calendar.MONTH) + 1)< 10 ? "0" :"")+(dateCalendar.get(Calendar.MONTH) + 1))+""
-					, dateCalendar.get(Calendar.YEAR) + "");
-			
+			mdate = String.format("%s/%s/%s", ((dateCalendar.get(Calendar.DATE) < 10 ? "0" : "") + dateCalendar.get(Calendar.DATE)) + "",
+					(((dateCalendar.get(Calendar.MONTH) + 1) < 10 ? "0" : "") + (dateCalendar.get(Calendar.MONTH) + 1)) + "", dateCalendar.get(Calendar.YEAR) + "");
 		}
 		new LSBHDateDialog(getActivity(), mdate) {
-
 			@Override
 			public void sendData(String date, String month, String year) {
 				lsbt_tu.setText(String.format("%s/%s/%s", date, month, year));
@@ -148,16 +148,12 @@ public class LichSuBanHangFragment extends Fragment implements OnItemClickListen
 	}
 
 	private void showDenDialog() {
-		String mdate =lsbt_den.getText().toString();
-		if(Conts.isBlank(mdate)){
+		String mdate = lsbt_den.getText().toString();
+		if (Conts.isBlank(mdate)) {
 			Calendar dateCalendar = Calendar.getInstance();
-			mdate = String.format("%s/%s/%s"
-					,((dateCalendar.get(Calendar.DATE)< 10 ? "0" :"")+ dateCalendar.get(Calendar.DATE) )+""
-					, (((dateCalendar.get(Calendar.MONTH) + 1)< 10 ? "0" :"")+(dateCalendar.get(Calendar.MONTH) + 1))+""
-					, dateCalendar.get(Calendar.YEAR) + ""
-					);
-			
-			
+			mdate = String.format("%s/%s/%s", ((dateCalendar.get(Calendar.DATE) < 10 ? "0" : "") + dateCalendar.get(Calendar.DATE)) + "",
+					(((dateCalendar.get(Calendar.MONTH) + 1) < 10 ? "0" : "") + (dateCalendar.get(Calendar.MONTH) + 1)) + "", dateCalendar.get(Calendar.YEAR) + "");
+
 		}
 		new LSBHDateDialog(getActivity(), mdate) {
 			@Override
