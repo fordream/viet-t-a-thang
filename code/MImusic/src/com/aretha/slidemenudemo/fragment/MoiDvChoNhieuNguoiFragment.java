@@ -127,7 +127,7 @@ public class MoiDvChoNhieuNguoiFragment extends Fragment implements OnItemClickL
 		});
 
 		HeaderView chitiettintuc_headerview = (HeaderView) view.findViewById(R.id.moidichvuchonhieunguoi_headerview);
-		chitiettintuc_headerview.setTextHeader(R.string.moidichvuchonhieunguoi);
+		chitiettintuc_headerview.setTextHeader(R.string.moi);
 		chitiettintuc_headerview.setButtonLeftImage(true, R.drawable.btn_back);
 		chitiettintuc_headerview.setButtonRightImage(false, R.drawable.btn_back);
 		chitiettintuc_headerview.setButtonMoi(true);
