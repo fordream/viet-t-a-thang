@@ -490,6 +490,8 @@ public class MImusicService extends Service {
 	private void updateInFor(JSONObject response) {
 		ContentValues contentValues = new ContentValues();
 		try {
+			
+			//LogUtils.e("response", response.toString());
 			contentValues.put(User.address, response.getString(User.address));
 			contentValues.put(User.ID, response.getString(User.ID));
 			contentValues.put(User.exchange_number, response.getString(User.exchange_number));
