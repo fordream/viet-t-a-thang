@@ -15,14 +15,14 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_186dp"
-            android:background="@drawable/login_header" />
+            android:layout_height="match_parent"
+            android:background="@drawable/splash" />
     </LinearLayout>
 
     <ScrollView
         android:id="@+id/activity_login_main"
         android:layout_width="fill_parent"
-        android:layout_height="match_parent"
+        android:layout_height="match_parent" android:background="@android:color/white"
         android:visibility="gone" >
 
         <LinearLayout
