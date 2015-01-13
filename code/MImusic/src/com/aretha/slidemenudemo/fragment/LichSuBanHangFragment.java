@@ -10,6 +10,7 @@ import vnp.com.mimusic.base.diablog.DichVuDialog;
 import vnp.com.mimusic.base.diablog.LSBHDateDialog;
 import vnp.com.mimusic.base.diablog.TrangThaiDialog;
 import vnp.com.mimusic.util.Conts;
+import vnp.com.mimusic.util.Conts.IShowDateDialog;
 import vnp.com.mimusic.view.HeaderView;
 import android.app.Activity;
 import android.content.ContentValues;
@@ -139,12 +140,20 @@ public class LichSuBanHangFragment extends Fragment implements OnItemClickListen
 			mdate = String.format("%s/%s/%s", ((dateCalendar.get(Calendar.DATE) < 10 ? "0" : "") + dateCalendar.get(Calendar.DATE)) + "",
 					(((dateCalendar.get(Calendar.MONTH) + 1) < 10 ? "0" : "") + (dateCalendar.get(Calendar.MONTH) + 1)) + "", dateCalendar.get(Calendar.YEAR) + "");
 		}
-		new LSBHDateDialog(getActivity(), mdate) {
+//		new LSBHDateDialog(getActivity(), mdate) {
+//			@Override
+//			public void sendData(String date, String month, String year) {
+//				lsbt_tu.setText(String.format("%s/%s/%s", date, month, year));
+//			}
+//		}.show();
+		
+		
+		Conts.showDateDialog(getActivity(), R.string.chonngay, mdate, new IShowDateDialog() {
 			@Override
-			public void sendData(String date, String month, String year) {
+			public void onSend(String year, String month, String date) {
 				lsbt_tu.setText(String.format("%s/%s/%s", date, month, year));
 			}
-		}.show();
+		});
 	}
 
 	private void showDenDialog() {
@@ -155,12 +164,13 @@ public class LichSuBanHangFragment extends Fragment implements OnItemClickListen
 					(((dateCalendar.get(Calendar.MONTH) + 1) < 10 ? "0" : "") + (dateCalendar.get(Calendar.MONTH) + 1)) + "", dateCalendar.get(Calendar.YEAR) + "");
 
 		}
-		new LSBHDateDialog(getActivity(), mdate) {
+
+		Conts.showDateDialog(getActivity(), R.string.chonngay, mdate, new IShowDateDialog() {
 			@Override
-			public void sendData(String date, String month, String year) {
+			public void onSend(String year, String month, String date) {
 				lsbt_den.setText(String.format("%s/%s/%s", date, month, year));
 			}
-		}.show();
+		});
 	}
 
 	@Override

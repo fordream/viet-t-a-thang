@@ -12,6 +12,7 @@
         <item>Thông tin cá nhân</item>
     </string-array>
 
+    <string name="boqua">Bỏ qua</string>
     <string name="huongdandangky">Hướng dẫn đăng ký</string>
     <string name="noapi">Chưa có api</string>
     <string name="khonglayduocanh">Không thể lấy được file ảnh.</string>

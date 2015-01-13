@@ -12,6 +12,7 @@ import vnp.com.mimusic.R;
 import vnp.com.mimusic.base.diablog.DateDialog;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
+import vnp.com.mimusic.util.Conts.IShowDateDialog;
 import vnp.com.mimusic.view.HeaderView;
 import vnp.com.mimusic.view.LoadingView;
 import android.app.Activity;
@@ -208,12 +209,20 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 	@Override
 	public void onClick(View v) {
 		if (v.equals(infor_ngaysinh)) {
-			new DateDialog(getActivity(), infor_ngaysinh.getText().toString()) {
+//			new DateDialog(getActivity(), infor_ngaysinh.getText().toString()) {
+//				@Override
+//				public void sendData(String date, String month, String year) {
+//					infor_ngaysinh.setText(String.format("%s/%s/%s", date, month, year));
+//				}
+//			}.show();
+			
+			
+			Conts.showDateDialog(getActivity(), R.string.chonngaysinh,  infor_ngaysinh.getText().toString(), new IShowDateDialog() {
 				@Override
-				public void sendData(String date, String month, String year) {
+				public void onSend(String year, String month, String date) {
 					infor_ngaysinh.setText(String.format("%s/%s/%s", date, month, year));
 				}
-			}.show();
+			});
 		} else if (v.equals(menu_left_img_avatar)) {
 			Builder builder = new Builder(getActivity());
 			builder.setItems(new String[] { "Camera", "Gallery" }, new DialogInterface.OnClickListener() {

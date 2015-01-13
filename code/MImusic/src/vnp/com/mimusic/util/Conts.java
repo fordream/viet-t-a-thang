@@ -3,6 +3,7 @@ package vnp.com.mimusic.util;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Set;
+import java.util.StringTokenizer;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,6 +20,7 @@ import vnp.com.db.User;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.base.diablog.DangKyDialog;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -35,10 +37,12 @@ import android.os.IBinder;
 import android.provider.MediaStore;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -142,28 +146,32 @@ public class Conts {
 		}
 		ImageLoaderUtils.getInstance(img.getContext()).DisplayImage(path, img, bitmap);
 
-//		Bitmap bitmap = null;
-//		if (path != null && path.contains("file://")) {
-//			path = path.substring(path.indexOf("file://") + 7, path.length());
-//			BitmapFactory.Options options = new BitmapFactory.Options();
-//			options.inPreferredConfig = Bitmap.Config.ARGB_8888;
-//			bitmap = BitmapFactory.decodeFile(path, options);
-//		}
-//
-//		if (path != null && path.contains("content://")) {
-//			try {
-//				bitmap = MediaStore.Images.Media.getBitmap(img.getContext().getContentResolver(), Uri.parse(path));
-//			} catch (Exception e) {
-//			}
-//		}
-//
-//		if (bitmap == null && no_image != 0) {
-//			bitmap = BitmapFactory.decodeResource(img.getContext().getResources(), no_image);
-//		}
-//
-//		if (bitmap != null) {
-//			img.setImageBitmap(bitmap);
-//		}
+		// Bitmap bitmap = null;
+		// if (path != null && path.contains("file://")) {
+		// path = path.substring(path.indexOf("file://") + 7, path.length());
+		// BitmapFactory.Options options = new BitmapFactory.Options();
+		// options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+		// bitmap = BitmapFactory.decodeFile(path, options);
+		// }
+		//
+		// if (path != null && path.contains("content://")) {
+		// try {
+		// bitmap =
+		// MediaStore.Images.Media.getBitmap(img.getContext().getContentResolver(),
+		// Uri.parse(path));
+		// } catch (Exception e) {
+		// }
+		// }
+		//
+		// if (bitmap == null && no_image != 0) {
+		// bitmap =
+		// BitmapFactory.decodeResource(img.getContext().getResources(),
+		// no_image);
+		// }
+		//
+		// if (bitmap != null) {
+		// img.setImageBitmap(bitmap);
+		// }
 	}
 
 	public static String getToken(Context activity) {
@@ -496,5 +504,48 @@ public class Conts {
 
 	public static boolean havenewWork(Context loginActivty) {
 		return is3GConnected(loginActivty) || isWifiConnected(loginActivty);
+	}
+
+	public interface IShowDateDialog {
+		public void onSend(String year, String month, String day);
+	}
+
+	public static void showDateDialog(Context activity, int title, String date, final IShowDateDialog showDateDialog) {
+
+		// date day/month/year
+		final Dialog dialog = new Dialog(activity, android.R.style.Theme_Holo_Dialog);
+		dialog.setContentView(R.layout.date_time_layout);
+		final DatePicker datePicker = (DatePicker) dialog.findViewById(R.id.datePicker1);
+		dialog.findViewById(R.id.btn1).setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				dialog.dismiss();
+			}
+		});
+
+		dialog.findViewById(R.id.btn2).setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				dialog.dismiss();
+				showDateDialog.onSend(
+						datePicker.getYear() + "",
+						(datePicker.getMonth() + 1<  10 ? "0":"") +( datePicker.getMonth() + 1)
+						, (datePicker.getDayOfMonth()< 10 ? "0" : "") + datePicker.getDayOfMonth());
+			}
+		});
+		dialog.setTitle(title);
+		try {
+			StringTokenizer stringTokenizer = new StringTokenizer(date, "/");
+			int day = Integer.parseInt(stringTokenizer.nextToken());
+			int month = Integer.parseInt(stringTokenizer.nextToken());
+			int year = Integer.parseInt(stringTokenizer.nextToken());
+			
+			datePicker.updateDate(year, month - 1, day);
+		} catch (Exception exception) {
+
+		}
+		dialog.show();
 	}
 }
