@@ -9,6 +9,7 @@ import vnp.com.mimusic.R;
 import vnp.com.mimusic.VApplication;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.base.diablog.DangKyDialog;
+import vnp.com.mimusic.base.diablog.ReCommnetDialog;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
 import vnp.com.mimusic.view.MenuLeftView;
@@ -43,6 +44,7 @@ import com.vnp.core.crash.CrashExceptionHandler;
 
 public class BaseMusicSlideMenuActivity extends TabActivity {
 	private SlideMenu mSlideMenu;
+	private View recomment_bottom_top;
 
 	@Override
 	protected void onResume() {
@@ -79,6 +81,7 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.mactivity_slidemenu);
+		recomment_bottom_top = findViewById(R.id.recomment_bottom_top);
 		CrashExceptionHandler.onCreate(this);
 		getTabHost().setOnTabChangedListener(new OnTabChangeListener() {
 			@Override
@@ -279,40 +282,53 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 		/**
 		 * recommnet
 		 */
-//		new Handler().postDelayed(new Runnable() {
-//
-//			@Override
-//			public void run() {
-				ReCommentView commentView = new ReCommentView(BaseMusicSlideMenuActivity.this) {
-					@Override
-					public void addContact() {
-//						Intent intent = new Intent(BaseMusicSlideMenuActivity.this, RootMenuActivity.class);
-//						intent.putExtra("type", Conts.NHIEUDICHVU);
-//						intent.putExtra(User._ID, 1 + "");
-//						startActivity(intent);
-//						overridePendingTransitionStartActivity();
-						Conts.showDialogThongbao(BaseMusicSlideMenuActivity.this, getString(R.string.noapi));
-					}
+		// new Handler().postDelayed(new Runnable() {
+		//
+		// @Override
+		// public void run() {
+		// ReCommentView commentView = new
+		// ReCommentView(BaseMusicSlideMenuActivity.this) {
+		// @Override
+		// public void addContact() {
+		// Intent intent = new Intent(BaseMusicSlideMenuActivity.this,
+		// RootMenuActivity.class);
+		// intent.putExtra("type", Conts.NHIEUDICHVU);
+		// intent.putExtra(User._ID, 1 + "");
+		// startActivity(intent);
+		// overridePendingTransitionStartActivity();
+		// Conts.showDialogThongbao(BaseMusicSlideMenuActivity.this,
+		// getString(R.string.noapi));
+		// }
+		// @Override
+		// public void addDv() {
+		// Intent intent = new Intent(BaseMusicSlideMenuActivity.this,
+		// RootMenuActivity.class);
+		// Bundle extras = new Bundle();
+		// extras.putString("type", Conts.MOIDICHVUCHONHIEUNGUOI);
+		// intent.putExtras(extras);
+		// startActivity(intent);
+		// overridePendingTransitionStartActivity();
 
-					@Override
-					public void addDv() {
-//						Intent intent = new Intent(BaseMusicSlideMenuActivity.this, RootMenuActivity.class);
-//						Bundle extras = new Bundle();
-//						extras.putString("type", Conts.MOIDICHVUCHONHIEUNGUOI);
-//						intent.putExtras(extras);
-//						startActivity(intent);
-//						overridePendingTransitionStartActivity();
-						
-						
-						Conts.showDialogThongbao(BaseMusicSlideMenuActivity.this, getString(R.string.noapi));
-						
-					}
-				};
-				((FrameLayout) findViewById(R.id.activity_slidemenu_recomment)).addView(commentView);
-				commentView.start();
-//			}
-//		}, 3000);
+		// Conts.showDialogThongbao(BaseMusicSlideMenuActivity.this,
+		// getString(R.string.noapi));
+		//
+		// }
+		// };
+		// ((FrameLayout)
+		// findViewById(R.id.activity_slidemenu_recomment)).addView(commentView);
+		// commentView.start();
+		// }
+		// }, 3000);
 
+		findViewById(R.id.recomment_bottom_top).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				getSlideMenu().close(true);
+				ReCommnetDialog reCommnetDialog = new ReCommnetDialog(v.getContext());
+				reCommnetDialog.show();
+			}
+
+		});
 		Bundle bundle = new Bundle();
 		((VApplication) getApplication()).execute(RequestMethod.GET, API.API_R026, bundle, new IContsCallBack() {
 

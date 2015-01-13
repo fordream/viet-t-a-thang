@@ -45,18 +45,38 @@
                         android:layout_height="@dimen/dimen_0dp" />
 
                     <FrameLayout
-                          android:layout_marginTop="@dimen/dimen_45dp"
-    android:layout_marginBottom="@dimen/dimen_50dp"
                         android:id="@android:id/tabcontent"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                       />
+                        android:layout_marginBottom="@dimen/dimen_50dp"
+                        android:layout_marginTop="@dimen/dimen_45dp" />
 
                     <vnp.com.mimusic.view.TabView
                         android:id="@+id/mactivityslide_menu_tabview"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" >
                     </vnp.com.mimusic.view.TabView>
+
+                    <LinearLayout
+                        android:id="@+id/recomment_icon_bottom_open"
+                        android:layout_width="@dimen/dimen_40dp"
+                        android:layout_height="@dimen/dimen_40dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true" >
+
+                        <RelativeLayout
+                            android:id="@+id/recomment_bottom_top"
+                            android:layout_width="@dimen/dimen_40dp"
+                            android:layout_height="@dimen/dimen_25dp"
+                            android:src="@drawable/recomment_bottom_top" >
+
+                            <ImageView
+                                android:layout_width="@dimen/dimen_40dp"
+                                android:layout_height="@dimen/dimen_13dp"
+                                android:background="@drawable/recomment_bottom_top" >
+                            </ImageView>
+                        </RelativeLayout>
+                    </LinearLayout>
                 </RelativeLayout>
             </TabHost>
         </FrameLayout>

@@ -5,6 +5,7 @@
     android:orientation="vertical" >
 
     <LinearLayout
+        android:visibility="gone"
         android:id="@+id/recomment_icon_bottom_open"
         android:layout_width="@dimen/dimen_40dp"
         android:layout_height="@dimen/dimen_40dp"
@@ -22,14 +23,14 @@
         android:id="@+id/recomment_main_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/bg_dialog"
         android:orientation="horizontal" >
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/recomment_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/bg_dialog"
+        android:layout_height="wrap_content"
         android:orientation="vertical" >
 
         <RelativeLayout
@@ -117,9 +118,9 @@
         </HorizontalScrollView>
 
         <LinearLayout
-            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_100dp"
+            android:visibility="gone"
             android:weightSum="4" >
 
             <LinearLayout
