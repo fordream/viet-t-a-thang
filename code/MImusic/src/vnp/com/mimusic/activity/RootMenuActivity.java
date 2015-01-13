@@ -6,12 +6,18 @@ package vnp.com.mimusic.activity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import vnp.com.api.API;
+import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.DichVu;
 import vnp.com.db.User;
 import vnp.com.mimusic.R;
+import vnp.com.mimusic.VApplication;
 import vnp.com.mimusic.main.BaseMusicSlideMenuActivity;
 import vnp.com.mimusic.util.Conts;
+import vnp.com.mimusic.util.Conts.DialogCallBack;
+import vnp.com.mimusic.util.Conts.IContsCallBack;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -357,4 +363,56 @@ public class RootMenuActivity extends FragmentActivity {
 		overridePendingTransition(R.anim.abc_scale_in, R.anim.abc_nothing);
 	}
 
+	public void execute(final RequestMethod requestMethod, final String api, final Bundle bundle, final IContsCallBack contsCallBack) {
+		((VApplication) getApplication()).execute(requestMethod, api, bundle, contsCallBack);
+	}
+
+	public void moi(boolean type, Bundle bundle) {
+		onBackPressed();
+		execute(RequestMethod.POST, !type ? API.API_R015 : API.API_R016, bundle, new IContsCallBack() {
+			ProgressDialog dialog;
+
+			@Override
+			public void onSuscess(JSONObject response) {
+				String message = "";
+				try {
+					message = response.getString("message");
+				} catch (JSONException e1) {
+				}
+
+				if (Conts.isBlank(message)) {
+					message = getActivity().getString(R.string.success_moi);
+				} else {
+					message = String.format("%s\n%s", message, getActivity().getString(R.string.success_moi));
+				}
+				Conts.showDialogDongYCallBack(getActivity(), message, new DialogCallBack() {
+					@Override
+					public void callback(Object object) {
+//						((RootMenuActivity) getActivity()).closeActivity();
+						closeActivity();
+					}
+				});
+				if (dialog != null)
+					dialog.dismiss();
+			}
+
+			@Override
+			public void onStart() {
+				if (dialog == null)
+					dialog = ProgressDialog.show(getActivity(), null, getActivity().getString(R.string.loading));
+			}
+
+			@Override
+			public void onError(String message) {
+				Conts.showDialogThongbao(getActivity(), message);
+				if (dialog != null)
+					dialog.dismiss();
+			}
+
+			@Override
+			public void onError() {
+				onError("onError");
+			}
+		});
+	}
 }
