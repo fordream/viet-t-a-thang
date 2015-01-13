@@ -79,21 +79,25 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 	}
 
 	protected void callSHowData() {
-		Cursor cursor = getActivity().getContentResolver().query(DichVu.CONTENT_URI, null, null, null, null);
-		if (cursor != null) {
-			adapter = new HomeAdapter(getActivity(), cursor) {
+		try {
+			Cursor cursor = getActivity().getContentResolver().query(DichVu.CONTENT_URI, null, null, null, null);
+			if (cursor != null) {
+				adapter = new HomeAdapter(getActivity(), cursor) {
 
-				@Override
-				public void updateUI() {
+					@Override
+					public void updateUI() {
 
-				}
+					}
 
-				@Override
-				public void moiDVChoNhieuNguoi(ContentValues contentValues) {
-					(((RootMenuActivity) getActivity())).gotoMoiDvChoNhieuNguoi(contentValues.getAsString(DichVu.ID));
-				}
-			};
-			menu_left_list.setAdapter(adapter);
+					@Override
+					public void moiDVChoNhieuNguoi(ContentValues contentValues) {
+						(((RootMenuActivity) getActivity())).gotoMoiDvChoNhieuNguoi(contentValues.getAsString(DichVu.ID));
+					}
+				};
+				menu_left_list.setAdapter(adapter);
+			}
+		} catch (Exception exception) {
+
 		}
 	}
 
