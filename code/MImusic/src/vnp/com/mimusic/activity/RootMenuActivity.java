@@ -290,7 +290,7 @@ public class RootMenuActivity extends FragmentActivity {
 		args.putString("service_code", "");
 		args.putString("service_codes", "");
 		mauMoiFragment.setArguments(args);
-		transaction.setCustomAnimations(R.anim.abc_slide_in_top, R.anim.abc_slide_in_top, R.anim.abc_slide_out_top, R.anim.abc_slide_out_top);
+		transaction.setCustomAnimations(R.anim.abc_alpha_in, R.anim.abc_alpha_in, R.anim.abc_alpha_out, R.anim.abc_alpha_out);
 		transaction.add(R.id.root_main_fragment, mauMoiFragment, "" + System.currentTimeMillis());
 		transaction.addToBackStack(null);
 
@@ -316,7 +316,7 @@ public class RootMenuActivity extends FragmentActivity {
 		args.putString("service_code", service_code);
 		args.putString("service_codes", service_codes);
 		mauMoiFragment.setArguments(args);
-		transaction.setCustomAnimations(R.anim.abc_slide_in_top, R.anim.abc_slide_in_top, R.anim.abc_slide_out_top, R.anim.abc_slide_out_top);
+		transaction.setCustomAnimations(R.anim.abc_alpha_in, R.anim.abc_alpha_in, R.anim.abc_alpha_out, R.anim.abc_alpha_out);
 		transaction.add(R.id.root_main_fragment, mauMoiFragment, "" + System.currentTimeMillis());
 		transaction.addToBackStack(null);
 
@@ -368,7 +368,7 @@ public class RootMenuActivity extends FragmentActivity {
 	}
 
 	public void moi(boolean type, Bundle bundle) {
-		onBackPressed();
+		//onBackPressed();
 		execute(RequestMethod.POST, !type ? API.API_R015 : API.API_R016, bundle, new IContsCallBack() {
 			ProgressDialog dialog;
 
