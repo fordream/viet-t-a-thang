@@ -181,7 +181,7 @@ public class MoiDvChoNhieuNguoiFragment extends Fragment implements OnItemClickL
 		moi_list.setOnItemClickListener(this);
 
 		Cursor cursor = getActivity().getContentResolver().query(User.CONTENT_URI, null, String.format("%s ='0'", User.STATUS), null, null);
-		adaper = new MoiDvChoNhieuNguoiAdaper(getActivity(), cursor,service_code) {
+		adaper = new MoiDvChoNhieuNguoiAdaper(getActivity(), cursor, service_code) {
 
 			@Override
 			public void addOrRemove(final String _id, boolean isAdd) {
@@ -326,7 +326,7 @@ public class MoiDvChoNhieuNguoiFragment extends Fragment implements OnItemClickL
 	private void gotoLoiMoi(String id) {
 
 		int count = adaper.getListAdd().size() + adaper.getListSeList().size();
-		if (count == 0 || count > 5) {
+		if (count == 0) {
 			Conts.toast(getActivity(), getString(R.string.validateaddnguoi));
 			return;
 		}

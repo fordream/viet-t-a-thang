@@ -81,20 +81,25 @@ public class ImageLoader {
 				bitmap = decodeFile(f);
 				return bitmap;
 			} else if (url != null && url.startsWith("file://")) {
-				Bitmap bitmap = null;
+				// TODO
 				url = url.substring(url.indexOf("file://") + 7, url.length());
-				BitmapFactory.Options options = new BitmapFactory.Options();
-				options.inPreferredConfig = Bitmap.Config.ARGB_8888;
-				bitmap = BitmapFactory.decodeFile(url, options);
 
-				return bitmap;
+				// File file = new File(url);
+				// LogUtils.e("AAAAA", url + " " + path);
+				// LogUtils.e("AAAAA", new File(url).exists() + " " + url + " "
+				// + new File(path).exists());
+				// BitmapFactory.Options options = new BitmapFactory.Options();
+				// options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+				// bitmap = BitmapFactory.decodeFile(url, options);
+				return decodeFile(new File(url));
 			} else if (url != null && url.startsWith("content://")) {
-				Bitmap bitmap = null;
+				// TODO
+				// String path = url.substring(10, url.length());
 				try {
-					bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), Uri.parse(url));
+					return MediaStore.Images.Media.getBitmap(context.getContentResolver(), Uri.parse(url));
 				} catch (Exception e) {
+					return null;
 				}
-				return bitmap;
 			} else {
 
 				try {

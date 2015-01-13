@@ -9,8 +9,7 @@ public class ImageLoaderUtils {
 	public static ImageLoaderUtils instance;
 
 	public static ImageLoaderUtils getInstance(Context context) {
-		return (instance == null ? (instance = new ImageLoaderUtils())
-				: instance).init(context);
+		return (instance == null ? (instance = new ImageLoaderUtils()) : instance).init(context);
 	}
 
 	private ImageLoaderUtils init(Context context) {
@@ -30,7 +29,8 @@ public class ImageLoaderUtils {
 	}
 
 	public void DisplayImage(String url, ImageView imageView, Bitmap bitmap) {
-		imageView.setImageBitmap(bitmap);
+		if (bitmap != null)
+			imageView.setImageBitmap(bitmap);
 		imageLoader.DisplayImage(url, imageView);
 	}
 
