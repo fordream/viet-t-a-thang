@@ -152,10 +152,10 @@ public class RestClient {
 		}
 
 		}
-		if (url != null && url.startsWith("https")) {
-			executeHttps();
-			return;
-		}
+//		if (url != null && url.startsWith("https")) {
+//			executeHttps();
+//			return;
+//		}
 		if (request != null)
 			this.executeRequest(request, url);
 	}
