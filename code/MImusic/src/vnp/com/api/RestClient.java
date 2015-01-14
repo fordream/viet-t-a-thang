@@ -1,5 +1,6 @@
 package vnp.com.api;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -8,6 +9,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+
+import javax.net.ssl.HttpsURLConnection;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -37,6 +40,7 @@ import vnp.com.mimusic.util.LogUtils;
 import android.content.Context;
 
 import com.vnp.core.common.https.RunSSL;
+import com.vnp.core.common.https.RunSSL2;
 
 public class RestClient {
 	public enum RequestMethod {
@@ -149,10 +153,25 @@ public class RestClient {
 
 		}
 		if (url != null && url.startsWith("https")) {
-
+			executeHttps();
+			return;
 		}
 		if (request != null)
 			this.executeRequest(request, url);
+	}
+
+	private void executeHttps() {
+		try {
+			URL urlConnection = new URL(url);
+			RunSSL2.trustAllHosts();
+			HttpsURLConnection https = (HttpsURLConnection) urlConnection.openConnection();
+			https.setHostnameVerifier(RunSSL2.DO_NOT_VERIFY);
+
+			// InputStream in = new
+			// BufferedInputStream(urlConnection.getInputStream());
+			// readStream(in);
+		} catch (Exception e) {
+		}
 	}
 
 	private void executeRequest(HttpUriRequest request, String url) {

@@ -5,6 +5,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+import java.util.ArrayList;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
@@ -12,6 +13,8 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
+
+import org.apache.http.NameValuePair;
 
 public class RunSSL2 {
 
@@ -21,7 +24,7 @@ public class RunSSL2 {
 		}
 	};
 
-	private static void trustAllHosts() {
+	public static void trustAllHosts() {
 		TrustManager[] trustAllCerts = new TrustManager[] { new X509TrustManager() {
 			public java.security.cert.X509Certificate[] getAcceptedIssuers() {
 				return new java.security.cert.X509Certificate[] {};
@@ -62,4 +65,9 @@ public class RunSSL2 {
 			}
 		}
 	}
+
+	// public static HttpURLConnection x(String url, ArrayList<NameValuePair>
+	// headers, ArrayList<NameValuePair> params) {
+	//
+	// }
 }
