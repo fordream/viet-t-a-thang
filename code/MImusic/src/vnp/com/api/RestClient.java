@@ -32,6 +32,8 @@ import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
+import com.vnp.core.common.https.RunSSL;
+
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.LogUtils;
 import android.content.Context;
@@ -154,8 +156,10 @@ public class RestClient {
 		HttpConnectionParams.setConnectionTimeout(httpParameters, timeout);
 		HttpConnectionParams.setSoTimeout(httpParameters, timeout);
 
+		// HttpClient client = new DefaultHttpClient(httpParameters);
 		HttpClient client = new DefaultHttpClient(httpParameters);
 
+		client = new RunSSL().getDefaultHttpClient(timeout);
 		HttpResponse httpResponse;
 
 		try {
@@ -181,7 +185,8 @@ public class RestClient {
 		HttpConnectionParams.setConnectionTimeout(httpParams, 10000);
 		HttpClient client = new DefaultHttpClient(httpParams);
 		// HttpPut request = new HttpPut(url);
-//		client.getParams().setIntParameter("http.connection.timeout", 15 * 1000);
+		// client.getParams().setIntParameter("http.connection.timeout", 15 *
+		// 1000);
 		HttpEntityEnclosingRequestBase request = new HttpPost(url);
 		if (!isPOST) {
 			request = new HttpPut(url);
@@ -218,66 +223,6 @@ public class RestClient {
 			LogUtils.e("ABC", e);
 		}
 	}
-
-	// public void executeUploadFile(boolean isPost) throws Exception {
-	// HttpClient client = new DefaultHttpClient();
-	// HttpEntityEnclosingRequestBase request = new HttpPut(url);
-	//
-	// if (isPost) {
-	// request = new HttpPost(url);
-	// }
-	// MultipartEntity partEntity = new MultipartEntity();
-	//
-	// HttpResponse httpResponse;
-	// for (NameValuePair h : headers) {
-	// request.addHeader(h.getName(), h.getValue());
-	// }
-	//
-	// for (NameValuePair p : params) {
-	// if (p.getName().equals("user[avatar]")) {
-	// partEntity.addPart(p.getName(), new FileBody(new File(p.getValue()),
-	// "image/jpeg"));
-	// } else if (p.getName().equals("file")) {
-	// partEntity.addPart(p.getName(), new FileBody(new File(p.getValue()),
-	// "image/jpeg"));
-	// } else if (p.getName().equals("image")) {
-	// partEntity.addPart(p.getName(), new FileBody(new File(p.getValue()),
-	// "image/jpeg"));
-	// } else if (p.getName().equals("user[cover]")) {
-	// partEntity.addPart(p.getName(), new FileBody(new File(p.getValue()),
-	// "image/jpeg"));
-	// } else if (p.getName().equals("post[url]")) {
-	// partEntity.addPart(p.getName(), new FileBody(new File(p.getValue()),
-	// "image/jpeg"));
-	// } else {
-	// partEntity.addPart(p.getName(), new StringBody(p.getValue()));
-	// }
-	// }
-	//
-	// request.setEntity(partEntity);
-	// try {
-	//
-	// httpResponse = client.execute(request);
-	// responseCode = httpResponse.getStatusLine().getStatusCode();
-	// message = httpResponse.getStatusLine().getReasonPhrase();
-	//
-	// HttpEntity entity = httpResponse.getEntity();
-	//
-	// if (entity != null) {
-	// response = EntityUtils.toString(entity);
-	// }
-	//
-	// } catch (ClientProtocolException e) {
-	// Log.e("ERRRRO", "x", e);
-	// client.getConnectionManager().shutdown();
-	// e.printStackTrace();
-	// } catch (IOException e) {
-	// client.getConnectionManager().shutdown();
-	// e.printStackTrace();
-	// Log.e("ERRRRO", "x", e);
-	// }
-	//
-	// }
 
 	public void exeDownloadFile(RequestInfo requestInfo, final IDownloadUploadFileCallBack downloadUploadFileCallBack) {
 

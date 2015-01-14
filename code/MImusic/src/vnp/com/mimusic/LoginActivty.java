@@ -1,23 +1,25 @@
 package vnp.com.mimusic;
 
+import java.io.IOException;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.ParseException;
+import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
-import com.vnp.core.crash.CrashExceptionHandler;
-
-import vnp.com.api.MImusicService;
-import vnp.com.db.User;
 import vnp.com.mimusic.VApplication.IServiceConfig;
 import vnp.com.mimusic.base.VTAnimationListener;
 import vnp.com.mimusic.main.BaseMusicSlideMenuActivity;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
+import vnp.com.mimusic.util.LogUtils;
 import vnp.com.mimusic.util.VTAnimationUtils;
 import vnp.com.mimusic.view.HeaderView;
 import vnp.com.mimusic.view.LoadingView;
 import vnp.com.mimusic.view.add.OnTouchAnimation;
 import android.app.Activity;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -26,16 +28,18 @@ import android.view.animation.Animation;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.vnp.core.common.https.RunSSL;
+import com.vnp.core.crash.CrashExceptionHandler;
+
 public class LoginActivty extends Activity implements OnClickListener {
 	private LoadingView progressBar1;
-
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		CrashExceptionHandler.sendCrash(this);
-		
+
 		CrashExceptionHandler.onCreate(this);
 		// ((VApplication) getApplication()).dongbodanhba();
 		setContentView(R.layout.activity_login);
@@ -63,7 +67,25 @@ public class LoginActivty extends Activity implements OnClickListener {
 		});
 
 		findViewById(R.id.activity_login_splash).startAnimation(alphaAnimation);
-
+//		new Thread(new Runnable() {
+//
+//			@Override
+//			public void run() {
+//				HttpResponse httpResponse = new RunSSL().getResponseFromUrl("https://125.235.40.85/api.php/authenticate");
+//				HttpEntity entity = httpResponse.getEntity();
+//				String response = null;
+//				if (entity != null) {
+//					try {
+//						response = EntityUtils.toString(entity);
+//					} catch (ParseException e) {
+//						e.printStackTrace();
+//					} catch (IOException e) {
+//						e.printStackTrace();
+//					}
+//				}
+//				LogUtils.e("HttpResponse", (response == null) + " " + ((response!= null)?response.toString() : "") );
+//			}
+//		}).start();
 	}
 
 	private IServiceConfig config = new IServiceConfig() {
