@@ -37,7 +37,7 @@ public class TinTucFragment extends BaseFragment implements OnItemClickListener,
 
 		bangxephang_list.setAdapter(new TintucAdaper(getActivity(), new JSONArray()));
 
-		execute(RequestMethod.POST, API.API_R027, new Bundle(), new IContsCallBack() {
+		execute(RequestMethod.GET, API.API_R027, new Bundle(), new IContsCallBack() {
 			@Override
 			public void onSuscess(JSONObject response) {
 				bangxephang_list.setText(false, "");

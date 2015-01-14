@@ -74,7 +74,7 @@ public class BangXepHangFragment extends BaseFragment implements OnItemClickList
 		Bundle bxhParamBundle = new Bundle();
 		bxhParamBundle.putString("type", type);
 		if (!successRequest) {
-			execute(RequestMethod.POST, API.API_R024, bxhParamBundle, new IContsCallBack() {
+			execute(RequestMethod.GET, API.API_R024, bxhParamBundle, new IContsCallBack() {
 				@Override
 				public void onSuscess(JSONObject response) {
 					successRequest = true;
