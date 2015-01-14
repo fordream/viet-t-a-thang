@@ -90,6 +90,8 @@ public class MImusicService extends Service {
 			@Override
 			public void onSuscess(JSONObject jsonObject) {
 				try {
+					
+					//LogUtils.e("AAAA", jsonObject.toString());
 					String token = jsonObject.getString("token");
 					String keyRefresh = jsonObject.getString("keyRefresh");
 					String phone_number = jsonObject.getString("phone");
@@ -490,7 +492,7 @@ public class MImusicService extends Service {
 	private void updateInFor(JSONObject response) {
 		ContentValues contentValues = new ContentValues();
 		try {
-			
+			//LogUtils.e("AAAA", response.toString());
 			//LogUtils.e("response", response.toString());
 			contentValues.put(User.address, response.getString(User.address));
 			contentValues.put(User.ID, response.getString(User.ID));

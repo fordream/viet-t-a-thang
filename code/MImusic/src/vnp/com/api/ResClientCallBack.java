@@ -29,6 +29,7 @@ public abstract class ResClientCallBack extends CallBack {
 
 	@Override
 	public Object execute() {
+		System.setProperty("http.keepAlive", "false");
 		RestClient client = new RestClient(Conts.SERVER + getApiName());
 		Set<String> set = maps.keySet();
 		for (String key : set) {

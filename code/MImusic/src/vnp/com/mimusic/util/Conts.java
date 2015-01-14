@@ -47,8 +47,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 public class Conts {
-
-	public final static String SERVER = "http://125.235.40.85/api.php/";
+	 public final static String SERVER = "http://125.235.40.85/api.php/";
+//	public final static String SERVER = "https://125.235.40.85:443/api.php/";
 	public final static String HOME = "home";
 	public final static String BANGXEPHANG = "bangxephang";
 	public final static String LICHSUBANHANG = "lichsubanhang";
@@ -529,10 +529,8 @@ public class Conts {
 			@Override
 			public void onClick(View v) {
 				dialog.dismiss();
-				showDateDialog.onSend(
-						datePicker.getYear() + "",
-						(datePicker.getMonth() + 1<  10 ? "0":"") +( datePicker.getMonth() + 1)
-						, (datePicker.getDayOfMonth()< 10 ? "0" : "") + datePicker.getDayOfMonth());
+				showDateDialog.onSend(datePicker.getYear() + "", (datePicker.getMonth() + 1 < 10 ? "0" : "") + (datePicker.getMonth() + 1),
+						(datePicker.getDayOfMonth() < 10 ? "0" : "") + datePicker.getDayOfMonth());
 			}
 		});
 		dialog.setTitle(title);
@@ -541,7 +539,7 @@ public class Conts {
 			int day = Integer.parseInt(stringTokenizer.nextToken());
 			int month = Integer.parseInt(stringTokenizer.nextToken());
 			int year = Integer.parseInt(stringTokenizer.nextToken());
-			
+
 			datePicker.updateDate(year, month - 1, day);
 		} catch (Exception exception) {
 
