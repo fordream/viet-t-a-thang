@@ -32,12 +32,11 @@ import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
-import com.vnp.core.common.https.RunSSL;
-
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.LogUtils;
 import android.content.Context;
-import android.util.Log;
+
+import com.vnp.core.common.https.RunSSL;
 
 public class RestClient {
 	public enum RequestMethod {
@@ -83,6 +82,7 @@ public class RestClient {
 	}
 
 	public void execute(RequestMethod method) throws Exception {
+		HttpUriRequest request = null;
 		switch (method) {
 		case GET: {
 			// add parameters
@@ -99,17 +99,17 @@ public class RestClient {
 				}
 			}
 
-			HttpGet request = new HttpGet(url + combinedParams);
+			request = new HttpGet(url + combinedParams);
 			// add headers
 			for (NameValuePair h : headers) {
 				request.addHeader(h.getName(), h.getValue());
 			}
 
-			this.executeRequest(request, url);
+			// this.executeRequest(request, url);
 			break;
 		}
 		case POST: {
-			HttpPost request = new HttpPost(url);
+			request = new HttpPost(url);
 
 			// add headers
 			for (NameValuePair h : headers) {
@@ -117,40 +117,45 @@ public class RestClient {
 			}
 
 			if (!params.isEmpty()) {
-				request.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
+				((HttpPost) request).setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
 			}
 
-			this.executeRequest(request, url);
+			// this.executeRequest(request, url);
 			break;
 		}
 		case PUT: {
-			HttpPut request = new HttpPut(url);
+			request = new HttpPut(url);
 			// add headers
 			for (NameValuePair h : headers) {
 				request.addHeader(h.getName(), h.getValue());
 			}
 			if (!params.isEmpty()) {
-				request.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
+				((HttpPut) request).setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
 			}
-			this.executeRequest(request, url);
+			// this.executeRequest(request, url);
 			break;
 
 		}
 		case DELETE: {
-			HttpDelete request = new HttpDelete(url);
+			request = new HttpDelete(url);
 			// add headers
 			for (NameValuePair h : headers) {
 				request.addHeader(h.getName(), h.getValue());
 			}
-			this.executeRequest(request, url);
+			// this.executeRequest(request, url);
 			break;
 
 		}
+
 		}
+		if (url != null && url.startsWith("https")) {
+
+		}
+		if (request != null)
+			this.executeRequest(request, url);
 	}
 
 	private void executeRequest(HttpUriRequest request, String url) {
-
 		int timeout = TIME_OUT;
 		HttpParams httpParameters = new BasicHttpParams();
 		HttpConnectionParams.setConnectionTimeout(httpParameters, timeout);
@@ -158,8 +163,8 @@ public class RestClient {
 
 		// HttpClient client = new DefaultHttpClient(httpParameters);
 		HttpClient client = new DefaultHttpClient(httpParameters);
-
 		client = new RunSSL().getDefaultHttpClient(timeout);
+
 		HttpResponse httpResponse;
 
 		try {

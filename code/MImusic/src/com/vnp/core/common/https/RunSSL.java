@@ -54,26 +54,29 @@ public class RunSSL {
 
 		CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
 		// set the user credentials for our site "example.com"
-		credentialsProvider.setCredentials(new AuthScope("example.com", AuthScope.ANY_PORT), new UsernamePasswordCredentials("UserNameHere", "UserPasswordHere"));
+		//credentialsProvider.setCredentials(new AuthScope("example.com", AuthScope.ANY_PORT), new UsernamePasswordCredentials("UserNameHere", "UserPasswordHere"));
+		
+		credentialsProvider.setCredentials(new AuthScope("https://125.235.40.85", AuthScope.ANY_PORT), new UsernamePasswordCredentials("UserNameHere", "UserPasswordHere"));
+		
 		clientConnectionManager = new ThreadSafeClientConnManager(params, schemeRegistry);
 
 		context = new BasicHttpContext();
 		context.setAttribute("http.auth.credentials-provider", credentialsProvider);
 	}
 
-	public HttpResponse getResponseFromUrl(String url) {
-		DefaultHttpClient client = new DefaultHttpClient(clientConnectionManager, params);
-		HttpGet get = new HttpGet(url);
-		HttpResponse response = null;
-		try {
-			response = client.execute(get, context);
-		} catch (ClientProtocolException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return response;
-	}
+//	public HttpResponse getResponseFromUrl(String url) {
+//		DefaultHttpClient client = new DefaultHttpClient(clientConnectionManager, params);
+//		HttpGet get = new HttpGet(url);
+//		HttpResponse response = null;
+//		try {
+//			response = client.execute(get, context);
+//		} catch (ClientProtocolException e) {
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		return response;
+//	}
 
 	public DefaultHttpClient getDefaultHttpClient(int timeout) {
 		HttpConnectionParams.setConnectionTimeout(params, timeout);
