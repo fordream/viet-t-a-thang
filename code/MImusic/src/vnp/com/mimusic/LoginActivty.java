@@ -60,28 +60,9 @@ public class LoginActivty extends Activity implements OnClickListener {
 		});
 
 		findViewById(R.id.activity_login_splash).startAnimation(alphaAnimation);
-//		new Thread(new Runnable() {
-//
-//			@Override
-//			public void run() {
-//				HttpResponse httpResponse = new RunSSL().getResponseFromUrl("https://125.235.40.85/api.php/authenticate");
-//				HttpEntity entity = httpResponse.getEntity();
-//				String response = null;
-//				if (entity != null) {
-//					try {
-//						response = EntityUtils.toString(entity);
-//					} catch (ParseException e) {
-//						e.printStackTrace();
-//					} catch (IOException e) {
-//						e.printStackTrace();
-//					}
-//				}
-//				LogUtils.e("HttpResponse", (response == null) + " " + ((response!= null)?response.toString() : "") );
-//			}
-//		}).start();
-		
-		
-		new Test().connect();
+
+		Conts.isTablet(this);
+
 	}
 
 	private IServiceConfig config = new IServiceConfig() {

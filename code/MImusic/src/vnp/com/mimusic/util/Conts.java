@@ -47,9 +47,9 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 public class Conts {
-	 public final static String SERVER = "http://125.235.40.85/api.php/";
+	public final static String SERVER = "http://125.235.40.85/api.php/";
 	// :443
-//	public final static String SERVER = "https://125.235.40.85/api.php/";
+	// public final static String SERVER = "https://125.235.40.85/api.php/";
 	public final static String HOME = "home";
 	public final static String BANGXEPHANG = "bangxephang";
 	public final static String LICHSUBANHANG = "lichsubanhang";
@@ -546,5 +546,9 @@ public class Conts {
 
 		}
 		dialog.show();
+	}
+
+	public static boolean isTablet(Context context) {
+		return "1".equals(context.getString(R.string.checkdevice));
 	}
 }
