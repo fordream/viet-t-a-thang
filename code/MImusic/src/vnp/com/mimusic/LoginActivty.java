@@ -1,11 +1,5 @@
 package vnp.com.mimusic;
 
-import java.io.IOException;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.ParseException;
-import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
 import vnp.com.mimusic.VApplication.IServiceConfig;
@@ -13,7 +7,6 @@ import vnp.com.mimusic.base.VTAnimationListener;
 import vnp.com.mimusic.main.BaseMusicSlideMenuActivity;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
-import vnp.com.mimusic.util.LogUtils;
 import vnp.com.mimusic.util.VTAnimationUtils;
 import vnp.com.mimusic.view.HeaderView;
 import vnp.com.mimusic.view.LoadingView;
@@ -28,7 +21,7 @@ import android.view.animation.Animation;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.vnp.core.common.https.RunSSL;
+import com.vnp.core.common.https.Test;
 import com.vnp.core.crash.CrashExceptionHandler;
 
 public class LoginActivty extends Activity implements OnClickListener {
@@ -86,6 +79,9 @@ public class LoginActivty extends Activity implements OnClickListener {
 //				LogUtils.e("HttpResponse", (response == null) + " " + ((response!= null)?response.toString() : "") );
 //			}
 //		}).start();
+		
+		
+		new Test().connect();
 	}
 
 	private IServiceConfig config = new IServiceConfig() {
