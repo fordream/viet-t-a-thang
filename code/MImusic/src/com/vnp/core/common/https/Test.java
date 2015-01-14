@@ -13,12 +13,13 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.util.EntityUtils;
 
+import vnp.com.mimusic.util.LogUtils;
 import android.net.Credentials;
 import android.util.Log;
 
 public class Test {
 	String MY_APP_TAG = "net.ajzele.beanstalk.stalkmanager";
-	String username = "brankoa";
+	String username = "brankoa1";
 	String host = "brankoa.beanstalkapp.com";
 	String password = "MyPassHere";
 
@@ -26,11 +27,11 @@ public class Test {
 	String urlApiCall_FindAllRepositories = urlBasePath + "repositories.xml";
 
 	public void connect() {
-		host = "125.235.40.85";
-		urlBasePath = "https://125.235.40.85/api.php/";
-		urlApiCall_FindAllRepositories = urlBasePath;
-		username = "vdealer";
-		password = "";
+		// host = "125.235.40.85";
+		// urlBasePath = "https://125.235.40.85/api.php/";
+		// urlApiCall_FindAllRepositories = urlBasePath;
+		// username = "vdealer";
+		// password = "";
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -43,16 +44,17 @@ public class Test {
 					BasicScheme basicAuth = new BasicScheme();
 					localContext.setAttribute("preemptive-auth", basicAuth);
 					HttpHost targetHost = new HttpHost(host, 443, "https");
-					
+
 					HttpGet httpget = new HttpGet(urlApiCall_FindAllRepositories);
 					httpget.setHeader("Content-Type", "application/xml");
 					HttpResponse response = client.execute(targetHost, httpget, localContext);
 					HttpEntity entity = response.getEntity();
 					Object content = EntityUtils.toString(entity);
-					Log.d(MY_APP_TAG, "OK: " + content.toString());
+					LogUtils.e(MY_APP_TAG, "OK: " + content.toString());
 				} catch (Exception e) {
 					e.printStackTrace();
-					Log.d(MY_APP_TAG, "Error: " + e.getMessage());
+					LogUtils.e(MY_APP_TAG, e);
+					LogUtils.e(MY_APP_TAG, "Error: " + e.getMessage());
 				}
 			}
 		}).start();
