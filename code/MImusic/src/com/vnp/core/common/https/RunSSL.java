@@ -50,7 +50,7 @@ public class RunSSL {
 		params.setParameter(ConnManagerPNames.MAX_CONNECTIONS_PER_ROUTE, new ConnPerRouteBean(1));
 		params.setParameter(HttpProtocolParams.USE_EXPECT_CONTINUE, false);
 		HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1);
-		HttpProtocolParams.setContentCharset(params, "utf8");
+		HttpProtocolParams.setContentCharset(params, "utf-8");
 
 		CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
 		// set the user credentials for our site "example.com"
