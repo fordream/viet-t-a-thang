@@ -82,7 +82,8 @@ public class HttpsRestClient {
 		} };
 
 		try {
-			SSLContext sc = SSLContext.getInstance("TLS");
+			// SSLContext sc = SSLContext.getInstance("TLS");
+			SSLContext sc = SSLContext.getInstance("SSL");
 			sc.init(null, trustAllCerts, new java.security.SecureRandom());
 			HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
 		} catch (Exception e) {
@@ -136,7 +137,6 @@ public class HttpsRestClient {
 			InputStream stream = https.getInputStream();
 			InputStreamReader isReader = new InputStreamReader(stream);
 			BufferedReader br = new BufferedReader(isReader);
-			String result;
 			String line;
 			StringBuilder builder = new StringBuilder();
 			while ((line = br.readLine()) != null) {

@@ -32,18 +32,20 @@ public class IndexActivity extends Activity {
 		// startActivity(new Intent(this, LoginActivty.class));
 		// }
 
-//		new Thread(new Runnable() {
-//
-//			@Override
-//			public void run() {
-//				HttpsRestClient httpsRestClient = new HttpsRestClient("https://125.235.40.85/api.php/n");
-//				httpsRestClient.addParam("u", "1674537885");
-//				httpsRestClient.addParam("p", "241841");
-//				//httpsRestClient.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
-//				httpsRestClient.execute(RequestMethod.GET);
-//				LogUtils.e("resx", httpsRestClient.getResponse());
-//			}
-//		}).start();
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				HttpsRestClient httpsRestClient = new HttpsRestClient("https://125.235.40.85/api.php/utilitiServices?token=5087683F-1687-F8D4-0C8C-974833E65116");
+				//httpsRestClient.addParam("u", "0968050820");
+				//httpsRestClient.addParam("p", "265376");
+				//httpsRestClient.addParam("token", "5087683F-1687-F8D4-0C8C-974833E65116");
+				
+				httpsRestClient.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
+				httpsRestClient.execute(RequestMethod.GET);
+				LogUtils.e("resx", httpsRestClient.getResponse());
+			}
+		}).start();
 		startActivity(new Intent(this, LoginActivty.class));
 		finish();
 
