@@ -124,7 +124,8 @@ public class HttpsRestClient {
 					trustAllHosts();
 					HttpsURLConnection https = (HttpsURLConnection) mxurl.openConnection();
 					https.setRequestMethod(methodStr);
-
+					https.setConnectTimeout(10 * 1000);
+					https.setReadTimeout(10 * 1000);
 					/**
 					 * add header
 					 */
@@ -147,7 +148,7 @@ public class HttpsRestClient {
 					}
 
 					https.connect();
-					
+
 					InputStream stream = https.getInputStream();
 					copyInputStreamToOutputStream(stream, https);
 					https.disconnect();

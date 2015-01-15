@@ -23,12 +23,11 @@ public class IndexActivity extends Activity {
 		// startActivity(new Intent(this, LoginActivty.class));
 		// }
 
-		final HttpsRestClient httpsRestClient = new HttpsRestClient(IndexActivity.this, "https://125.235.40.85/api.php/" + API.API_R001);
-//		httpsRestClient.addParam("u", "0968050820");
-//		httpsRestClient.addParam("p", "265376");
+		HttpsRestClient httpsRestClient = new HttpsRestClient(IndexActivity.this, "https://125.235.40.85/api.php/" + API.API_R001);
+		httpsRestClient.addParam("u", "0968050820");
+		httpsRestClient.addParam("p", "265376");
 		httpsRestClient.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
 		httpsRestClient.execute(RequestMethod.GET, new IHttpsRestClientLisner() {
-
 			@Override
 			public void onSucces(int responseCode, String message, String response, Exception exception) {
 				LogUtils.e("resx", String.format("%s %s %s", responseCode, message + "", response + ""));
