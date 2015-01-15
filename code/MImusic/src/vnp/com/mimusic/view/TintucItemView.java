@@ -4,7 +4,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import vnp.com.mimusic.R;
+import vnp.com.mimusic.util.Conts;
+import vnp.com.mimusic.util.ImageLoaderUtils;
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
@@ -32,14 +35,10 @@ public class TintucItemView extends LinearLayout {
 		TextView tintuc_item_tv_name = (TextView) findViewById(R.id.tintuc_item_tv_name);
 		TextView tintuc_item_tv_date = (TextView) findViewById(R.id.tintuc_item_tv_date);
 		TextView tintuc_item_tv_content = (TextView) findViewById(R.id.tintuc_item_tv_content);
-		tintuc_item_img_icon.setImageResource(R.drawable.no_avatar);
-		
-		try {
-			tintuc_item_tv_name.setText(item.getString("title"));
-			tintuc_item_tv_date.setText(item.getString("public_time"));
-			tintuc_item_tv_content.setText(item.getString("header"));
-		} catch (JSONException e) {
-		}
-
+		//tintuc_item_img_icon.setImageResource(R.drawable.no_avatar);
+		tintuc_item_tv_name.setText(Conts.getString(item, "title"));
+		tintuc_item_tv_date.setText(Conts.getString(item, "public_time"));
+		tintuc_item_tv_content.setText(Conts.getString(item, "header"));
+		ImageLoaderUtils.getInstance(getContext()).DisplayImage(Conts.getString(item, "image"), tintuc_item_img_icon, BitmapFactory.decodeResource(getResources(), R.drawable.no_avatar));
 	}
 }

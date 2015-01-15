@@ -45,7 +45,6 @@ public class TinTucFragment extends BaseFragment implements OnItemClickListener,
 					JSONArray jsonArray = response.getJSONArray("data");
 					((TintucAdaper) bangxephang_list.getAdapter()).setJSOnArray(jsonArray);
 					((TintucAdaper) bangxephang_list.getAdapter()).notifyDataSetChanged();
-
 					if (jsonArray.length() == 0) {
 						bangxephang_list.setTextNoData(true, R.string.nodata);
 					}
@@ -63,7 +62,6 @@ public class TinTucFragment extends BaseFragment implements OnItemClickListener,
 			@Override
 			public void onError(String message) {
 				Conts.showView(loadingView1, false);
-				// Conts.toast(getActivity(), message);
 				bangxephang_list.setText(true, message);
 			}
 

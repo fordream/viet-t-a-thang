@@ -261,10 +261,8 @@ public class RootMenuActivity extends FragmentActivity {
 		JSONObject data = (JSONObject) parent.getItemAtPosition(position);
 		Intent intent = new Intent(this, RootMenuActivity.class);
 		intent.putExtra("type", Conts.CHITIETTINTUC);
-		try {
-			intent.putExtra("id", data.getString("id"));
-		} catch (JSONException e) {
-		}
+		intent.putExtra("id", Conts.getString(data, "id"));
+		intent.putExtra("news_id", Conts.getString(data, "id"));
 		getParent().startActivity(intent);
 		overridePendingTransitionStartActivity();
 	}
@@ -368,7 +366,7 @@ public class RootMenuActivity extends FragmentActivity {
 	}
 
 	public void moi(boolean type, Bundle bundle) {
-		//onBackPressed();
+		// onBackPressed();
 		execute(RequestMethod.POST, !type ? API.API_R015 : API.API_R016, bundle, new IContsCallBack() {
 			ProgressDialog dialog;
 
@@ -388,7 +386,7 @@ public class RootMenuActivity extends FragmentActivity {
 				Conts.showDialogDongYCallBack(getActivity(), message, new DialogCallBack() {
 					@Override
 					public void callback(Object object) {
-//						((RootMenuActivity) getActivity()).closeActivity();
+						// ((RootMenuActivity) getActivity()).closeActivity();
 						closeActivity();
 					}
 				});

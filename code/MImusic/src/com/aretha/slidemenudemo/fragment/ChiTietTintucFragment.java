@@ -12,7 +12,6 @@ import vnp.com.mimusic.util.Conts.IContsCallBack;
 import vnp.com.mimusic.view.HeaderView;
 import vnp.com.mimusic.view.TinTucKhacItemView;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -21,7 +20,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class ChiTietTintucFragment extends BaseFragment implements OnItemClickListener, View.OnClickListener {
 	@Override
@@ -47,22 +45,25 @@ public class ChiTietTintucFragment extends BaseFragment implements OnItemClickLi
 		chitiettintuc_headerview.setButtonRightImage(false, R.drawable.btn_back);
 		chitiet_tintuc_tintuckhac_list = (LinearLayout) view.findViewById(R.id.chitiet_tintuc_tintuckhac_list);
 
-		for (int i = 0; i < 10; i++) {
-			chitiet_tintuc_tintuckhac_list.addView(new TinTucKhacItemView(getActivity()));
-		}
+		// for (int i = 0; i < 10; i++) {
+		// chitiet_tintuc_tintuckhac_list.addView(new
+		// TinTucKhacItemView(getActivity()));
+		// }
 
-		callApi(getArguments());
 		chitiettintuc_item_tv_name = (TextView) view.findViewById(R.id.chitiettintuc_item_tv_name);
 		chitiettintuc_item_tv_date = (TextView) view.findViewById(R.id.chitiettintuc_item_tv_date);
 		home_item_right_control_2_tv = (TextView) view.findViewById(R.id.home_item_right_control_2_tv);
-		// chitiettintuc_item_tv_name.setText("");
-		// chitiettintuc_item_tv_date.setText("");
-		// home_item_right_control_2_tv.setText("");
+
+		chitiettintuc_item_tv_name.setText("");
+		chitiettintuc_item_tv_date.setText("");
+		home_item_right_control_2_tv.setText("");
+
+		callApi(getArguments());
 		return view;
 	}
 
 	private void callApi(Bundle arguments) {
-		//chitiet_tintuc_tintuckhac_list.removeAllViews();
+
 		execute(RequestMethod.POST, API.API_R028, arguments, new IContsCallBack() {
 			@Override
 			public void onStart() {
@@ -76,19 +77,16 @@ public class ChiTietTintucFragment extends BaseFragment implements OnItemClickLi
 
 			@Override
 			public void onError(String message) {
-				Conts.toast(getActivity(), message);
-				// home_item_right_control_2_tv.setText(message);
+				chitiettintuc_item_tv_name.setText(message);
+				chitiettintuc_item_tv_date.setText("");
+				home_item_right_control_2_tv.setText("");
 			}
 
 			@Override
 			public void onSuscess(JSONObject response) {
-				try {
-					chitiettintuc_item_tv_name.setText(response.getString("title"));
-					chitiettintuc_item_tv_date.setText(response.getString("public_time"));
-					home_item_right_control_2_tv.setText(response.getString("content"));
-
-				} catch (JSONException e) {
-				}
+				chitiettintuc_item_tv_name.setText(Conts.getString(response, "title"));
+				chitiettintuc_item_tv_date.setText(Conts.getString(response, "public_time"));
+				home_item_right_control_2_tv.setText(Conts.getString(response, "content"));
 			}
 		});
 
@@ -108,27 +106,25 @@ public class ChiTietTintucFragment extends BaseFragment implements OnItemClickLi
 
 			@Override
 			public void onSuscess(JSONObject response) {
+				chitiet_tintuc_tintuckhac_list.removeAllViews();
 				try {
 					JSONArray jsonArray = response.getJSONArray("data");
+					for (int i = 0; i < jsonArray.length(); i++) {
+						final JSONObject object = jsonArray.getJSONObject(i);
+						TinTucKhacItemView tinTucKhacItemView = new TinTucKhacItemView(getActivity());
+						chitiet_tintuc_tintuckhac_list.addView(tinTucKhacItemView);
+						tinTucKhacItemView.setData(object);
 
-//					for (int i = 0; i < jsonArray.length(); i++) {
-//						final JSONObject jsonObject = jsonArray.getJSONObject(i);
-//						TinTucKhacItemView tucKhacItemView = new TinTucKhacItemView(getActivity());
-//						chitiet_tintuc_tintuckhac_list.addView(tucKhacItemView);
-//						tucKhacItemView.setData(jsonObject);
-//						chitiet_tintuc_tintuckhac_list.setOnClickListener(new View.OnClickListener() {
-//
-//							@Override
-//							public void onClick(View v) {
-//								try {
-//									getArguments().clear();
-//									getArguments().putString("id", jsonObject.getString("id"));
-//									callApi(getArguments());
-//								} catch (JSONException e) {
-//								}
-//							}
-//						});
-//					}
+						tinTucKhacItemView.setOnClickListener(new OnClickListener() {
+
+							@Override
+							public void onClick(View v) {
+								Bundle bundle = new Bundle();
+								bundle.putString("news_id", Conts.getString(object, "news_id"));
+								callApi(bundle);
+							}
+						});
+					}
 
 				} catch (JSONException e) {
 				}
