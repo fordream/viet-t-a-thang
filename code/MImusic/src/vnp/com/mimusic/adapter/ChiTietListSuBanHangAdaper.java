@@ -5,7 +5,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import vnp.com.mimusic.R;
+import vnp.com.mimusic.util.Conts;
+import vnp.com.mimusic.util.ImageLoaderUtils;
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,19 +54,18 @@ public class ChiTietListSuBanHangAdaper extends ArrayAdapter<JSONObject> {
 
 		ImageView avatar = (ImageView) convertView.findViewById(R.id.avatar);
 		JSONObject jsonObject = getItem(position);
-		try {
-			sdt.setText(jsonObject.getString("phone_custom"));
-			dichvu.setText(jsonObject.getString("service_name"));
-			giacuoc.setText(jsonObject.getString("price"));
-			time_ban.setText(jsonObject.getString("time_sale"));
-			time_trave.setText(jsonObject.getString("time_return"));
-			String textstatus = jsonObject.getString("status");
-			textstatus = "1".equals(textstatus)? parent.getContext().getString(R.string.thanhcong):
-				("2".equals(textstatus)?parent.getContext().getString(R.string.thatbai):parent.getContext().getString(R.string.tatca) );
-			status.setText(textstatus);
-		} catch (JSONException e) {
-		}
+		sdt.setText(Conts.getString(jsonObject, "phone_custom"));
+		dichvu.setText(Conts.getString(jsonObject, "service_name"));
+		giacuoc.setText(Conts.getString(jsonObject, "price"));
+		time_ban.setText(Conts.getString(jsonObject, "time_sale"));
+		time_trave.setText(Conts.getString(jsonObject, "time_return"));
+		String textstatus = Conts.getString(jsonObject, "status");
+		textstatus = "1".equals(textstatus) ? parent.getContext().getString(R.string.thanhcong) : ("2".equals(textstatus) ? parent.getContext().getString(R.string.thatbai) : parent.getContext()
+				.getString(R.string.tatca));
+		status.setText(textstatus);
 
+		ImageLoaderUtils.getInstance(getContext()).DisplayImage(Conts.getString(jsonObject, "avatar"), avatar, BitmapFactory.decodeResource(getContext().getResources(), R.drawable.no_avatar));
+		
 		return convertView;
 	}
 }
