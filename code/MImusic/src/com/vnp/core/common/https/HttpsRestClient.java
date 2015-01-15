@@ -8,7 +8,10 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.security.KeyStore;
+import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
+import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +21,7 @@ import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
+import javax.net.ssl.TrustManagerFactory;
 import javax.net.ssl.X509TrustManager;
 
 import org.apache.http.NameValuePair;
@@ -25,14 +29,23 @@ import org.apache.http.message.BasicNameValuePair;
 
 import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.mimusic.util.LogUtils;
+import android.content.Context;
+import android.os.AsyncTask;
 
 public class HttpsRestClient {
+	public interface IHttpsRestClientLisner {
+		// public void onError(Exception exception);
+		public void onSucces(int responseCode, String message, String response, Exception exception);
+	}
+
 	public static final int BUFFER = 1024 * 2;
 	private ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
 	private ArrayList<NameValuePair> headers = new ArrayList<NameValuePair>();
+	private Context context;
 
-	public HttpsRestClient(String url) {
+	public HttpsRestClient(Context context, String url) {
 		this.url = url;
+		this.context = context;
 	}
 
 	private String url;
@@ -91,50 +104,158 @@ public class HttpsRestClient {
 		}
 	}
 
-	public void execute(RequestMethod method) {
-		String methodStr = "GET";
-		if (method == RequestMethod.GET) {
-			methodStr = "GET";
-			String s = getQuery(params);
-			url = url + ("".equals(s) ? "" : ("?" + getQuery(params)));
-		} else if (method == RequestMethod.POST) {
-			methodStr = "POST";
-		}
+	public void execute(final RequestMethod method, final IHttpsRestClientLisner lisner) {
+		new AsyncTask<String, String, String>() {
+			private Exception exception;
 
+			@Override
+			protected String doInBackground(String... zparams) {
+				String methodStr = "GET";
+				if (method == RequestMethod.GET) {
+					methodStr = "GET";
+					String s = getQuery(params);
+					url = url + ("".equals(s) ? "" : ("?" + getQuery(params)));
+				} else if (method == RequestMethod.POST) {
+					methodStr = "POST";
+				}
+
+				try {
+					URL mxurl = new URL(url);
+					trustAllHosts();
+					HttpsURLConnection https = (HttpsURLConnection) mxurl.openConnection();
+					https.setRequestMethod(methodStr);
+
+					/**
+					 * add header
+					 */
+					for (NameValuePair h : headers) {
+						https.setRequestProperty(h.getName(), h.getValue());
+					}
+
+					https.setUseCaches(false);
+					https.setDoInput(true);
+					https.setDoOutput(true);
+					https.setHostnameVerifier(DO_NOT_VERIFY);
+
+					if (method == RequestMethod.POST) {
+						OutputStream os = https.getOutputStream();
+						BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+						writer.write(getQuery(params));
+						writer.flush();
+						writer.close();
+						os.close();
+					}
+
+					https.connect();
+					
+					InputStream stream = https.getInputStream();
+					copyInputStreamToOutputStream(stream, https);
+					https.disconnect();
+				} catch (Exception e) {
+					exception = e;
+				}
+				return null;
+			}
+
+			protected void onPostExecute(String result) {
+				lisner.onSucces(responseCode, message, response, exception);
+			};
+		}.execute("");
+	}
+
+	public void execute2(final RequestMethod method, final IHttpsRestClientLisner lisner) {
+
+		new AsyncTask<String, String, String>() {
+			private Exception exception;
+
+			@Override
+			protected String doInBackground(String... zparams) {
+				String methodStr = "GET";
+				if (method == RequestMethod.GET) {
+					methodStr = "GET";
+					String s = getQuery(params);
+					url = url + ("".equals(s) ? "" : ("?" + getQuery(params)));
+				} else if (method == RequestMethod.POST) {
+					methodStr = "POST";
+				}
+
+				try {
+					CertificateFactory cf = CertificateFactory.getInstance("X.509");
+					InputStream caInput = context.getAssets().open("vdealer.crt");
+
+					Certificate ca;
+					try {
+						ca = cf.generateCertificate(caInput);
+					} finally {
+						caInput.close();
+					}
+
+					String keyStoreType = KeyStore.getDefaultType();
+					KeyStore keyStore = KeyStore.getInstance(keyStoreType);
+					keyStore.load(null, null);
+					keyStore.setCertificateEntry("ca", ca);
+
+					String tmfAlgorithm = TrustManagerFactory.getDefaultAlgorithm();
+					TrustManagerFactory tmf = TrustManagerFactory.getInstance(tmfAlgorithm);
+					tmf.init(keyStore);
+
+					SSLContext context = SSLContext.getInstance("TLS");
+					context.init(null, tmf.getTrustManagers(), null);
+
+					URL url = new URL(HttpsRestClient.this.url);
+
+					HttpsURLConnection https = (HttpsURLConnection) url.openConnection();
+					https.setRequestMethod(methodStr);
+
+					/**
+					 * add header
+					 */
+					for (NameValuePair h : headers) {
+						https.setRequestProperty(h.getName(), h.getValue());
+					}
+
+					https.setUseCaches(false);
+					https.setDoInput(true);
+					https.setDoOutput(true);
+					https.setHostnameVerifier(DO_NOT_VERIFY);
+
+					if (method == RequestMethod.POST) {
+						OutputStream os = https.getOutputStream();
+						BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+						writer.write(getQuery(params));
+						writer.flush();
+						writer.close();
+						os.close();
+					}
+
+					// HttpsURLConnection urlConnection = (HttpsURLConnection)
+					// url.openConnection();
+					https.setSSLSocketFactory(context.getSocketFactory());
+					https.connect();
+					InputStream in = https.getInputStream();
+					copyInputStreamToOutputStream(in, https);
+					https.disconnect();
+				} catch (Exception e) {
+					exception = e;
+				}
+				return null;
+			}
+
+			protected void onPostExecute(String result) {
+				lisner.onSucces(responseCode, message, response, exception);
+			};
+		}.execute("");
+
+	}
+
+	/**
+	 * -------------------------------------
+	 * 
+	 * @param stream
+	 * @param https
+	 */
+	private void copyInputStreamToOutputStream(InputStream stream, HttpsURLConnection https) {
 		try {
-			URL mxurl = new URL(url);
-			trustAllHosts();
-			HttpsURLConnection https = (HttpsURLConnection) mxurl.openConnection();
-			https.setRequestMethod(methodStr);
-
-			/**
-			 * add header
-			 */
-			for (NameValuePair h : headers) {
-				https.setRequestProperty(h.getName(), h.getValue());
-			}
-			// myURLConnection.setRequestProperty("Content-Type",
-			// "application/x-www-form-urlencoded");
-			// myURLConnection.setRequestProperty("Content-Length", "" +
-			// Integer.toString(postData.getBytes().length));
-			// myURLConnection.setRequestProperty("Content-Language", "en-US");
-
-			https.setUseCaches(false);
-			https.setDoInput(true);
-			https.setDoOutput(true);
-			https.setHostnameVerifier(DO_NOT_VERIFY);
-
-			if (method == RequestMethod.POST) {
-				OutputStream os = https.getOutputStream();
-				BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
-				writer.write(getQuery(params));
-				writer.flush();
-				writer.close();
-				os.close();
-			}
-
-			https.connect();
-			InputStream stream = https.getInputStream();
 			InputStreamReader isReader = new InputStreamReader(stream);
 			BufferedReader br = new BufferedReader(isReader);
 			String line;
@@ -144,15 +265,15 @@ public class HttpsRestClient {
 					builder.append(line);
 				}
 			}
-
 			br.close();
+			isReader.close();
 			response = builder.toString();
 			responseCode = https.getResponseCode();
 			message = https.getResponseMessage();
-			https.disconnect();
 		} catch (Exception exception) {
-			LogUtils.e("resx", exception);
+
 		}
+
 	}
 
 	private String getQuery(List<NameValuePair> params) {
@@ -176,4 +297,5 @@ public class HttpsRestClient {
 			return "";
 		}
 	}
+
 }
