@@ -118,7 +118,7 @@ public class HttpsRestClient {
 			// Integer.toString(postData.getBytes().length));
 			// myURLConnection.setRequestProperty("Content-Language", "en-US");
 
-			// https.setUseCaches(false);
+			https.setUseCaches(false);
 			https.setDoInput(true);
 			https.setDoOutput(true);
 			https.setHostnameVerifier(DO_NOT_VERIFY);
