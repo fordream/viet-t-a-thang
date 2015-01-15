@@ -90,8 +90,7 @@ public class MImusicService extends Service {
 			@Override
 			public void onSuscess(JSONObject jsonObject) {
 				try {
-					
-					//LogUtils.e("AAAA", jsonObject.toString());
+					// LogUtils.e("AAAA", jsonObject.toString());
 					String token = jsonObject.getString("token");
 					String keyRefresh = jsonObject.getString("keyRefresh");
 					String phone_number = jsonObject.getString("phone");
@@ -99,6 +98,7 @@ public class MImusicService extends Service {
 					values.put(User.USER, phone_number);
 					if (!Conts.isBlank(p))
 						values.put(User.PASSWORD, p);
+					values.put(User.AVATAR, Conts.getString(jsonObject, User.AVATAR));
 					values.put(User.TOKEN, token);
 					values.put(User.KEYREFRESH, keyRefresh);
 					values.put(User.STATUS, "1");
@@ -119,7 +119,6 @@ public class MImusicService extends Service {
 
 				if (contsCallBack != null)
 					contsCallBack.onSuscess(jsonObject);
-
 				// TODO
 			}
 
@@ -492,8 +491,6 @@ public class MImusicService extends Service {
 	private void updateInFor(JSONObject response) {
 		ContentValues contentValues = new ContentValues();
 		try {
-			//LogUtils.e("AAAA", response.toString());
-			//LogUtils.e("response", response.toString());
 			contentValues.put(User.address, response.getString(User.address));
 			contentValues.put(User.ID, response.getString(User.ID));
 			contentValues.put(User.exchange_number, response.getString(User.exchange_number));
@@ -503,6 +500,7 @@ public class MImusicService extends Service {
 			contentValues.put(User.poundage, response.getString(User.poundage));
 			contentValues.put(User.poundage_month, response.getString(User.poundage_month));
 			contentValues.put(User.birthday, response.getString(User.birthday));
+			contentValues.put(User.AVATAR, Conts.getString(response, User.AVATAR));
 			getContentResolver().update(User.CONTENT_URI, contentValues, String.format("%s=='1'", User.STATUS), null);
 		} catch (JSONException e) {
 		}

@@ -395,7 +395,7 @@ public class Conts {
 		try {
 			return jsonObject.getString(string);
 		} catch (JSONException e) {
-			return null;
+			return "";
 		}
 	}
 
