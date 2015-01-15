@@ -58,7 +58,7 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 
 				int size = adapter.getListSelect().size();
 
-				if (size == 0 ) {
+				if (size == 0) {
 					Conts.toast(getActivity(), getString(R.string.validatesodichvu));
 					return;
 				}
@@ -86,22 +86,28 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 				getActivity().onBackPressed();
 			}
 		});
-
+		moinhieudichvu_dialog_menurightitem = (MenuRightItemView) view.findViewById(R.id.moinhieudichvu_dialog_menurightitem);
 		String where = String.format("%s = '%s'", User._ID, getArguments().getString(User._ID));
-		Cursor cursor = getActivity().getContentResolver().query(User.CONTENT_URI, null, where, null, null);
-		if (cursor != null && cursor.getCount() >= 1) {
-			cursor.moveToNext();
-			LISTIDDVSUDUNG = cursor.getString(cursor.getColumnIndex(User.LISTIDDVSUDUNG));
-			sdt = cursor.getString(cursor.getColumnIndex(User.USER));
 
-			moinhieudichvu_dialog_menurightitem = (MenuRightItemView) view.findViewById(R.id.moinhieudichvu_dialog_menurightitem);
-			moinhieudichvu_dialog_menurightitem.initData(cursor, "");
+		if (Conts.isBlank(getArguments().getString(User._ID))) {
+			sdt = getArguments().getString("msisdn");
+			LISTIDDVSUDUNG = "";
+			moinhieudichvu_dialog_menurightitem.initData(getArguments().getString("name"));
+			menuRightItemViewheader.initData(getArguments().getString("name"));
+		} else {
+			Cursor cursor = getActivity().getContentResolver().query(User.CONTENT_URI, null, where, null, null);
+			if (cursor != null && cursor.getCount() >= 1) {
+				cursor.moveToNext();
+				LISTIDDVSUDUNG = cursor.getString(cursor.getColumnIndex(User.LISTIDDVSUDUNG));
+				sdt = cursor.getString(cursor.getColumnIndex(User.USER));
 
-			menuRightItemViewheader.initData(cursor, "");
-		}
+				moinhieudichvu_dialog_menurightitem.initData(cursor, "");
+				menuRightItemViewheader.initData(cursor, "");
+			}
 
-		if (cursor != null) {
-			cursor.close();
+			if (cursor != null) {
+				cursor.close();
+			}
 		}
 
 		ListView maumoi_list = (ListView) view.findViewById(R.id.moinhieudichvu_dialog_list);
@@ -126,7 +132,7 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 				adapter.notifyDataSetChanged();
 			}
 		});
-		maumoi_list.setAdapter(adapter = new MoiNhieuDichVuAdapter(getActivity(), cursorDV,LISTIDDVSUDUNG ) {
+		maumoi_list.setAdapter(adapter = new MoiNhieuDichVuAdapter(getActivity(), cursorDV, LISTIDDVSUDUNG) {
 
 			@Override
 			public void addOrRemove(final String _id, boolean isAdd, String icon) {

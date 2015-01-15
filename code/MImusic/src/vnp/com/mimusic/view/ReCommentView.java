@@ -31,7 +31,7 @@ import android.widget.Toast;
  */
 
 public abstract class ReCommentView extends LinearLayout {
-	public abstract void addContact();
+	public abstract void addContact(String msisdn, String name);
 
 	public abstract void addDv(String cs);
 
@@ -136,41 +136,28 @@ public abstract class ReCommentView extends LinearLayout {
 		}
 
 		if (responseRecommend != null) {
-			if (responseRecommend.has("data")) {
+			if (responseRecommend.has("contacts")) {
 				try {
-					JSONArray array = responseRecommend.getJSONArray("data");
+					JSONArray array = responseRecommend.getJSONArray("contacts");
 					for (int i = 0; i < array.length(); i++) {
 						final JSONObject jsonObject = array.getJSONObject(i);
-						RecommentItemDvBanChayView banChayView = new RecommentItemDvBanChayView(getContext());
-						banChayView.setBackgroud(i);
-						banChayView.setData(jsonObject);
-
-						banChayView.setOnClickListener(new View.OnClickListener() {
-
+						RecommentItemView recommentItemView = new RecommentItemView(getContext());
+						recommentItemView.setData(jsonObject);
+						recommentItemView.setOnClickListener(new View.OnClickListener() {
 							@Override
 							public void onClick(View v) {
 								close();
-								addDv(Conts.getString(jsonObject, DichVu.ID));
+								addContact(Conts.getString(jsonObject, "msisdn"), Conts.getString(jsonObject, "name"));
 							}
+
 						});
-						recommnet_list_dv_banchay.addView(banChayView);
+
+						recomment_list.addView(recommentItemView);
 					}
 				} catch (JSONException e) {
 				}
 
 			}
-		}
-		for (int i = 0; i < 5; i++) {
-			RecommentItemView recommentItemView = new RecommentItemView(getContext());
-			recommentItemView.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					close();
-					addContact();
-				}
-			});
-
-			recomment_list.addView(recommentItemView);
 		}
 
 	}

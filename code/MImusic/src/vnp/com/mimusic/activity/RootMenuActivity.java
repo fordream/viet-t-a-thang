@@ -92,6 +92,8 @@ public class RootMenuActivity extends FragmentActivity {
 			String _id = getIntent().getStringExtra(User._ID);
 			Bundle bundle = new Bundle();
 			bundle.putString(User._ID, _id);
+			bundle.putString("msisdn", getIntent().getStringExtra("msisdn"));
+			bundle.putString("name", getIntent().getStringExtra("name"));
 			MoiNhieuDichVuFragment moiNhieuDichVuFragment = new MoiNhieuDichVuFragment();
 			moiNhieuDichVuFragment.setArguments(bundle);
 			changeFragemt(R.id.root_main_fragment, moiNhieuDichVuFragment);

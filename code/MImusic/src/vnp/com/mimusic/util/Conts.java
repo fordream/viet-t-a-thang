@@ -44,6 +44,7 @@ import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class Conts {
@@ -550,5 +551,13 @@ public class Conts {
 
 	public static boolean isTablet(Context context) {
 		return "1".equals(context.getString(R.string.checkdevice));
+	}
+
+	public static void setTextView(View findViewById, JSONObject jsonObject, String key) {
+		try {
+			((TextView) findViewById).setText(getString(jsonObject, key));
+		} catch (Exception exception) {
+
+		}
 	}
 }

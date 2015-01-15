@@ -29,8 +29,8 @@ public abstract class ReCommnetDialog extends BaseAdialog implements android.vie
 			}
 
 			@Override
-			public void addContact() {
-
+			public void addContact(String msisdn, String name) {
+				_addContact(msisdn, name);
 			}
 
 			@Override
@@ -43,6 +43,8 @@ public abstract class ReCommnetDialog extends BaseAdialog implements android.vie
 		setContentView(reCommentView);
 		reCommentView.start();
 	}
+
+	public abstract void _addContact(String msisdn, String name);
 
 	public abstract void _addDv(String csCode);
 

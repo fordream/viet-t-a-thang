@@ -371,6 +371,17 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 				getParent().startActivity(intent);
 				overridePendingTransitionStartActivity();
 			}
+
+			@Override
+			public void _addContact(String msisdn, String name) {
+				Intent intent = new Intent(BaseMusicSlideMenuActivity.this, RootMenuActivity.class);
+				intent.putExtra("type", Conts.NHIEUDICHVU);
+				intent.putExtra("msisdn", msisdn);
+				intent.putExtra("name", name);
+				intent.putExtra(User._ID, "");
+				startActivity(intent);
+				overridePendingTransitionStartActivity();
+			}
 		};
 		reCommnetDialog.show();
 	}

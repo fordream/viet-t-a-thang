@@ -90,4 +90,8 @@ public class MenuRightItemView extends LinearLayout {
 	public void showFooter() {
 		findViewById(R.id.menurightitem_main_main).setVisibility(VISIBLE);
 	}
+
+	public void initData(String name) {
+		menu_right_item_tv_name.setText(name + "'");
+	}
 }
