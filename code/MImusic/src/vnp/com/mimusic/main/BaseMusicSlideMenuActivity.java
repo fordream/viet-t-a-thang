@@ -4,6 +4,7 @@ import org.json.JSONObject;
 
 import vnp.com.api.API;
 import vnp.com.api.RestClient.RequestMethod;
+import vnp.com.db.DichVu;
 import vnp.com.db.User;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.VApplication;
@@ -324,18 +325,24 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 			@Override
 			public void onClick(View v) {
 				getSlideMenu().close(true);
-				ReCommnetDialog reCommnetDialog = new ReCommnetDialog(v.getContext());
-				reCommnetDialog.show();
+				// TODO
+				showReCmmend();
 			}
 
 		});
+
+		findViewById(R.id.recomment_bottom_top).setVisibility(View.GONE);
 		Bundle bundle = new Bundle();
 		((VApplication) getApplication()).execute(RequestMethod.GET, API.API_R026, bundle, new IContsCallBack() {
 
 			@Override
 			public void onSuscess(JSONObject response) {
-				// Conts.showDialogThongbao(BaseMusicSlideMenuActivity.this,
-				// response.toString());
+				responseRecommend = response;
+				findViewById(R.id.recomment_bottom_top).setVisibility(View.VISIBLE);
+				getSlideMenu().close(true);
+
+				showReCmmend();
+
 			}
 
 			@Override
@@ -345,18 +352,30 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 
 			@Override
 			public void onError(String message) {
-				// Conts.showDialogThongbao(BaseMusicSlideMenuActivity.this,
-				// message);
 			}
 
 			@Override
 			public void onError() {
-				onError("error");
 			}
 		});
 
 	}
 
+	protected void showReCmmend() {
+		ReCommnetDialog reCommnetDialog = new ReCommnetDialog(BaseMusicSlideMenuActivity.this, responseRecommend) {
+			@Override
+			public void _addDv(String id) {
+				Intent intent = new Intent(BaseMusicSlideMenuActivity.this, RootMenuActivity.class);
+				intent.putExtra("type", Conts.CHITIETDICHVU);
+				intent.putExtra("id", id);
+				getParent().startActivity(intent);
+				overridePendingTransitionStartActivity();
+			}
+		};
+		reCommnetDialog.show();
+	}
+
+	private JSONObject responseRecommend;
 	private View.OnClickListener homeOnClick = new View.OnClickListener() {
 
 		@Override

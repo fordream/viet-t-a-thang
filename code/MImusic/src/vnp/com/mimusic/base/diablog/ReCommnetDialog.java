@@ -1,38 +1,31 @@
 package vnp.com.mimusic.base.diablog;
 
-import vnp.com.mimusic.R;
+import org.json.JSONObject;
+
 import vnp.com.mimusic.base.BaseAdialog;
 import vnp.com.mimusic.view.ReCommentView;
-import vnp.com.mimusic.view.RecommentItemView;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.Animation.AnimationListener;
-import android.view.animation.AnimationUtils;
-import android.widget.LinearLayout;
 
-public class ReCommnetDialog extends BaseAdialog implements android.view.View.OnClickListener {
+public abstract class ReCommnetDialog extends BaseAdialog implements android.view.View.OnClickListener {
 	ReCommentView reCommentView;
+	JSONObject responseRecommend;
 
-	public ReCommnetDialog(Context context, int theme) {
-		super(context, theme);
-	}
-
-	public ReCommnetDialog(Context context) {
+	public ReCommnetDialog(Context context, JSONObject responseRecommend) {
 		super(context);
+		this.responseRecommend = responseRecommend;
 	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		reCommentView = new ReCommentView(getContext()) {
+		reCommentView = new ReCommentView(getContext(), this.responseRecommend) {
 
 			@Override
-			public void addDv() {
-
+			public void addDv(String csCode) {
+				_addDv(csCode);
 			}
 
 			@Override
@@ -50,6 +43,8 @@ public class ReCommnetDialog extends BaseAdialog implements android.view.View.On
 		setContentView(reCommentView);
 		reCommentView.start();
 	}
+
+	public abstract void _addDv(String csCode);
 
 	@Override
 	public int getLayout() {

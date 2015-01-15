@@ -1,6 +1,14 @@
 package vnp.com.mimusic.view;
 
+import java.util.Calendar;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import vnp.com.db.DichVu;
 import vnp.com.mimusic.R;
+import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.LogUtils;
 import android.content.Context;
 import android.util.AttributeSet;
@@ -12,6 +20,7 @@ import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -24,13 +33,16 @@ import android.widget.Toast;
 public abstract class ReCommentView extends LinearLayout {
 	public abstract void addContact();
 
-	public abstract void addDv();
+	public abstract void addDv(String cs);
 
 	private LinearLayout recommnet_list_dv_banchay;
+	private JSONObject responseRecommend;
 
-	public ReCommentView(Context context) {
+	public ReCommentView(Context context, JSONObject responseRecommend) {
 		super(context);
+		this.responseRecommend = responseRecommend;
 		init();
+
 	}
 
 	public ReCommentView(Context context, AttributeSet attrs) {
@@ -40,17 +52,11 @@ public abstract class ReCommentView extends LinearLayout {
 
 	private void init() {
 		((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.recomment, this);
-
+		TextView recomment_dialog_date = (TextView) findViewById(R.id.recomment_dialog_date);
+		Calendar calendar = Calendar.getInstance();
+		recomment_dialog_date.setText(String.format("%s/%s/%s", calendar.get(Calendar.YEAR) + "", (1 + calendar.get(Calendar.MONTH)) + "", calendar.get(Calendar.DAY_OF_MONTH)) + "");
 		findViewById(R.id.recomment_main_background).setOnClickListener(null);
 		recommnet_list_dv_banchay = (LinearLayout) findViewById(R.id.recommnet_list_dv_banchay);
-
-		// findViewById(R.id.recomment_icon_bottom).setOnClickListener(new
-		// View.OnClickListener() {
-		// @Override
-		// public void onClick(View v) {
-		// close();
-		// }
-		// });
 
 		findViewById(R.id.recomment_main_background).setOnTouchListener(new OnTouchListener() {
 			float x = 0, y = 0;
@@ -99,6 +105,61 @@ public abstract class ReCommentView extends LinearLayout {
 		});
 
 		LinearLayout recomment_list = (LinearLayout) findViewById(R.id.recomment_list);
+
+		/**
+		 * add list recomment dichvu
+		 */
+		if (responseRecommend != null) {
+			if (responseRecommend.has("data")) {
+				try {
+					JSONArray array = responseRecommend.getJSONArray("data");
+					for (int i = 0; i < array.length(); i++) {
+						final JSONObject jsonObject = array.getJSONObject(i);
+						RecommentItemDvBanChayView banChayView = new RecommentItemDvBanChayView(getContext());
+						banChayView.setBackgroud(i);
+						banChayView.setData(jsonObject);
+
+						banChayView.setOnClickListener(new View.OnClickListener() {
+
+							@Override
+							public void onClick(View v) {
+								close();
+								addDv(Conts.getString(jsonObject, DichVu.ID));
+							}
+						});
+						recommnet_list_dv_banchay.addView(banChayView);
+					}
+				} catch (JSONException e) {
+				}
+
+			}
+		}
+
+		if (responseRecommend != null) {
+			if (responseRecommend.has("data")) {
+				try {
+					JSONArray array = responseRecommend.getJSONArray("data");
+					for (int i = 0; i < array.length(); i++) {
+						final JSONObject jsonObject = array.getJSONObject(i);
+						RecommentItemDvBanChayView banChayView = new RecommentItemDvBanChayView(getContext());
+						banChayView.setBackgroud(i);
+						banChayView.setData(jsonObject);
+
+						banChayView.setOnClickListener(new View.OnClickListener() {
+
+							@Override
+							public void onClick(View v) {
+								close();
+								addDv(Conts.getString(jsonObject, DichVu.ID));
+							}
+						});
+						recommnet_list_dv_banchay.addView(banChayView);
+					}
+				} catch (JSONException e) {
+				}
+
+			}
+		}
 		for (int i = 0; i < 5; i++) {
 			RecommentItemView recommentItemView = new RecommentItemView(getContext());
 			recommentItemView.setOnClickListener(new View.OnClickListener() {
@@ -110,23 +171,6 @@ public abstract class ReCommentView extends LinearLayout {
 			});
 
 			recomment_list.addView(recommentItemView);
-			// recommentItemView.setOnClickListener(new RecommentItemOnClick());
-		}
-
-		for (int i = 0; i < 5; i++) {
-			// add
-			RecommentItemDvBanChayView banChayView = new RecommentItemDvBanChayView(getContext());
-
-			banChayView.setBackgroud(i);
-			banChayView.setOnClickListener(new View.OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					close();
-					addDv();
-				}
-			});
-			recommnet_list_dv_banchay.addView(banChayView);
 		}
 
 	}

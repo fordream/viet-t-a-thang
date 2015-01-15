@@ -49,26 +49,13 @@ public class HuongDanBanHangFragment extends BaseFragment implements OnItemClick
 			}
 		});
 
-		// Cursor cursor =
-		// getActivity().getContentResolver().query(DichVu.CONTENT_URI, null,
-		// null, null, null);
-		// dichvu_list.setAdapter(new HuongDanBanHangAdapter(getActivity(),
-		// cursor));
-
 		Bundle bundle = new Bundle();
 		bundle.putString("type", 4 + "");
 		execute(RequestMethod.GET, API.API_R010, bundle, new IContsCallBack() {
 
 			@Override
 			public void onSuscess(JSONObject response) {
-				
-				LogUtils.e("response", response.toString());
-				String guide_text = getString(R.string.nodata);
-				try {
-					guide_text = response.getString("guide_text");
-				} catch (JSONException e) {
-				}
-				dichvu_list.setTextNoData(true, guide_text);
+				dichvu_list.setTextNoData(true, Conts.getString(response, "guide_text"));
 				Conts.showView(loadingView, false);
 			}
 

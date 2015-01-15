@@ -1,5 +1,7 @@
 package vnp.com.mimusic.view;
 
+import org.json.JSONObject;
+
 import vnp.com.mimusic.R;
 import android.content.Context;
 import android.util.AttributeSet;
@@ -20,6 +22,10 @@ public class RecommentItemView extends LinearLayout {
 
 	private void init() {
 		((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.recomment_item, this);
+	}
+
+	public void setData(JSONObject jsonObject) {
+		
 	}
 
 }
