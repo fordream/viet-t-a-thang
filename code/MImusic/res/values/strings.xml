@@ -151,4 +151,15 @@
     <string name="chupanhmoi">Chụp ảnh mới</string>
     <string name="chonanhcosan">Chọn ảnh có sẵn</string>
 
+    <color name="bangxephang0">#9f1f31</color>
+    <color name="bangxephang1">#a73444</color>
+    <color name="bangxephang2">#b24c5a</color>
+    <color name="bangxephang3">#b85e6b</color>
+    <color name="bangxephang4">#c57983</color>
+    <color name="bangxephang5">#c98992</color>
+    <color name="bangxephang6">#eaebed</color>
+    <color name="bangxephang7">#dfe0e2</color>
+    
+    <color name="mx">#9a3847</color>
+
 </resources>

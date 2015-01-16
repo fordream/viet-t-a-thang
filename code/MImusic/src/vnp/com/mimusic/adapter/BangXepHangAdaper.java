@@ -45,7 +45,7 @@ public class BangXepHangAdaper extends ArrayAdapter<JSONObject> {
 		}
 		
 		((BangXepHangItemView) convertView).setData(getItem(position));
-
+		((BangXepHangItemView) convertView).setDataColor(position);
 		return convertView;
 	}
 
