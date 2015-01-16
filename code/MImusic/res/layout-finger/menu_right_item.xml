@@ -42,7 +42,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:id="@+id/menu_right_item_tv_link"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

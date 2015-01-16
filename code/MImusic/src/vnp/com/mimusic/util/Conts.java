@@ -541,7 +541,6 @@ public class Conts {
 			int day = Integer.parseInt(stringTokenizer.nextToken());
 			int month = Integer.parseInt(stringTokenizer.nextToken());
 			int year = Integer.parseInt(stringTokenizer.nextToken());
-
 			datePicker.updateDate(year, month - 1, day);
 		} catch (Exception exception) {
 
@@ -558,6 +557,14 @@ public class Conts {
 			((TextView) findViewById).setText(getString(jsonObject, key));
 		} catch (Exception exception) {
 
+		}
+	}
+
+	public static String getStringCursor(Cursor cursor, String key) {
+		try {
+			return cursor.getString(cursor.getColumnIndex(key));
+		} catch (Exception exception) {
+			return "";
 		}
 	}
 }

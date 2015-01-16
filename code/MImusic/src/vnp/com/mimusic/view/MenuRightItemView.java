@@ -4,6 +4,7 @@ import java.util.StringTokenizer;
 
 import vnp.com.db.User;
 import vnp.com.mimusic.R;
+import vnp.com.mimusic.util.Conts;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -76,11 +77,13 @@ public class MenuRightItemView extends LinearLayout {
 				menu_right_item_img_icon.setBackgroundResource(R.drawable.no_avatar);
 			}
 
+			menu_right_item_tv_link.setText(Conts.getStringCursor(cursor, User.USER));
+
 			String dvDaSuDung = cursor.getString(cursor.getColumnIndex(User.LISTIDDVSUDUNG));
-			try {
-				menu_right_item_tv_link.setText(Html.fromHtml(cursor.getString(cursor.getColumnIndex(User.LISTIDTENDVSUDUNG))));
-			} catch (Exception exception) {
-			}
+			// try {
+			// menu_right_item_tv_link.setText(Html.fromHtml(cursor.getString(cursor.getColumnIndex(User.LISTIDTENDVSUDUNG))));
+			// } catch (Exception exception) {
+			// }
 		} catch (Exception exception) {
 
 		}

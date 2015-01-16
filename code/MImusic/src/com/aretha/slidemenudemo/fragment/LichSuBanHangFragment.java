@@ -128,6 +128,12 @@ public class LichSuBanHangFragment extends Fragment implements OnItemClickListen
 		if (requestCode == 2000 && resultCode == Activity.RESULT_OK) {
 			phoneContact = data.getStringExtra(User.USER);
 			lsbh_sdt.setText(data.getStringExtra(User.NAME_CONTACT));
+			
+			if(!Conts.isBlank(phoneContact)){
+				lsbh_sdt.setText(phoneContact);
+			}
+			
+			
 		} else {
 
 		}

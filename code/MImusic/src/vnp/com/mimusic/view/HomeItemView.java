@@ -8,6 +8,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.text.Html;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -125,7 +126,7 @@ public class HomeItemView extends LinearLayout {
 		TextView home_item_header_tv = (TextView) findViewById(R.id.home_item_header_tv);
 
 		home_item_tv_name.setText(cursor.getString(cursor.getColumnIndex(DichVu.service_name)));
-		home_item_tv_content.setText(cursor.getString(cursor.getColumnIndex(DichVu.service_content)));
+		home_item_tv_content.setText(Html.fromHtml(cursor.getString(cursor.getColumnIndex(DichVu.service_content)) + ""));
 
 		home_item_img_icon.setImageResource(R.drawable.no_avatar);
 		// show image
