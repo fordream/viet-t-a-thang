@@ -1,12 +1,13 @@
 package com.aretha.slidemenudemo.fragment;
 
-import vnp.com.db.User;
+import vnp.com.db.DichVu;
 import vnp.com.mimusic.R;
-import vnp.com.mimusic.adapter.ChonSoDienThoaiAdaper;
+import vnp.com.mimusic.adapter.ChonDichVuAdapter;
 import vnp.com.mimusic.view.ChonTatCaView;
 import vnp.com.mimusic.view.HeaderView;
 import vnp.com.mimusic.view.MusicListView;
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -20,16 +21,16 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 
-public class ChonSoDienThoaiFragment extends BaseFragment implements android.view.View.OnClickListener {
+public class ChonDichvuFragment extends BaseFragment implements android.view.View.OnClickListener {
 
 	private vnp.com.mimusic.view.MusicListView bangxephang_list;
-	private ChonSoDienThoaiAdaper adaper;
+	private ChonDichVuAdapter adaper;
 	private View view;
 	private ChonTatCaView header;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		view = inflater.inflate(R.layout.choncontact_dialog, null);
+		view = inflater.inflate(R.layout.chondv_dialog, null);
 
 		header = new ChonTatCaView(container.getContext());
 		//header.initData(getString(R.string.tatca));
@@ -41,8 +42,8 @@ public class ChonSoDienThoaiFragment extends BaseFragment implements android.vie
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent();
-				intent.putExtra(User.NAME_CONTACT, getString(R.string.tatca));
-				intent.putExtra(User.USER, "");
+				intent.putExtra(DichVu.ID, "");
+				intent.putExtra(DichVu.service_name, getString(R.string.tatca));
 				getActivity().setResult(Activity.RESULT_OK, intent);
 				getActivity().onBackPressed();
 			}
@@ -51,13 +52,12 @@ public class ChonSoDienThoaiFragment extends BaseFragment implements android.vie
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				// TODO
 
 				Intent intent = new Intent();
 				if (adaper != null) {
 					Cursor cursor = (Cursor) adaper.getItem(position - 1);
-					intent.putExtra(User.NAME_CONTACT, cursor.getString(cursor.getColumnIndex(User.NAME_CONTACT)));
-					intent.putExtra(User.USER, cursor.getString(cursor.getColumnIndex(User.USER)));
+					intent.putExtra(DichVu.ID, cursor.getString(cursor.getColumnIndex(DichVu.ID)));
+					intent.putExtra(DichVu.service_name, cursor.getString(cursor.getColumnIndex(DichVu.service_name)));
 				}
 				getActivity().setResult(Activity.RESULT_OK, intent);
 				getActivity().onBackPressed();
@@ -65,34 +65,10 @@ public class ChonSoDienThoaiFragment extends BaseFragment implements android.vie
 		});
 		menu_right_editext = (EditText) view.findViewById(R.id.menu_right_editext);
 		HeaderView chitietdichvu_headerview = (HeaderView) view.findViewById(R.id.chitietdichvu_headerview);
-		chitietdichvu_headerview.setTextHeader(R.string.chonsdt);
+		chitietdichvu_headerview.setTextHeader(R.string.chondichvu);
 		chitietdichvu_headerview.setButtonLeftImage(true, R.drawable.btn_back);
 		chitietdichvu_headerview.setButtonRightImage(false, R.drawable.chititetdichvu_right);
-
 		chitietdichvu_headerview.findViewById(R.id.header_btn_right__done).setVisibility(View.INVISIBLE);
-
-		chitietdichvu_headerview.findViewById(R.id.header_btn_right__done).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				// Intent intent = new Intent();
-				// if (adaper != null) {
-				// if (adaper.getIndex() < 0) {
-				// intent.putExtra(User.NAME_CONTACT,
-				// getString(R.string.tatca));
-				// intent.putExtra(User.USER, "");
-				// } else {
-				// Cursor cursor = (Cursor) adaper.getItem(adaper.getIndex());
-				// intent.putExtra(User.NAME_CONTACT,
-				// cursor.getString(cursor.getColumnIndex(User.NAME_CONTACT)));
-				// intent.putExtra(User.USER,
-				// cursor.getString(cursor.getColumnIndex(User.USER)));
-				// }
-				// }
-				// getActivity().setResult(Activity.RESULT_OK, intent);
-				getActivity().onBackPressed();
-			}
-		});
-
 		chitietdichvu_headerview.findViewById(R.id.header_btn_left).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -127,11 +103,22 @@ public class ChonSoDienThoaiFragment extends BaseFragment implements android.vie
 	}
 
 	private void callSHowData() {
-		String where = String.format("%s = '0'", User.STATUS);
-		Cursor cursor = getActivity().getContentResolver().query(User.CONTENT_URI, null, where, null, null);
+		Cursor cursor = getActivity().getContentResolver().query(DichVu.CONTENT_URI, null, null, null, null);
 
 		if (cursor != null) {
-			adaper = new ChonSoDienThoaiAdaper(getActivity(), cursor, "");
+			adaper = new ChonDichVuAdapter(getActivity(), cursor) {
+
+				@Override
+				public void dangKy(ContentValues values) {
+
+				}
+
+				@Override
+				public void moiDVChoNhieuNguoi(String id) {
+
+				}
+
+			};
 			bangxephang_list.setAdapter(adaper);
 		}
 	}

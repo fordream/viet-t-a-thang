@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_dialog"
+    android:orientation="vertical" >
+
+    <vnp.com.mimusic.view.HeaderView
+        android:id="@+id/chitietdichvu_headerview"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+    </vnp.com.mimusic.view.HeaderView>
+
+    <LinearLayout
+        android:id="@+id/date_dialog_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/chitietdichvu_headerview"
+        android:background="#ccffff"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:id="@+id/menu_right_search"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/dimen_55dp" >
+
+            <EditText
+                android:id="@+id/menu_right_editext"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/dimen_30dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dimen_10dp"
+                android:layout_marginRight="@dimen/dimen_10dp"
+                android:background="@drawable/menu_right_edit"
+                android:ems="10"
+                android:gravity="center_vertical"
+                android:hint="@string/timkiem"
+                android:paddingLeft="@dimen/dimen_5dp"
+                android:paddingRight="@dimen/dimen_5dp"
+                android:singleLine="true"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/dimen_13dp" >
+            </EditText>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_50dp"
+            android:visibility="gone" >
+
+            <TextView
+                android:id="@+id/date_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="@string/chonsdt"
+                android:textColor="#336666"
+                android:textSize="@dimen/dimen_15dp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/date_close"
+                android:layout_width="@dimen/dimen_50dp"
+                android:layout_height="@dimen/dimen_50dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/xml_btn2"
+                android:padding="@dimen/dimen_9dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/date_close" />
+
+            <ImageButton
+                android:id="@+id/date_done"
+                android:layout_width="@dimen/dimen_50dp"
+                android:layout_height="@dimen/dimen_50dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/xml_btn2"
+                android:padding="@dimen/dimen_9dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/date_done" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#cccccc" />
+
+        <vnp.com.mimusic.view.MusicListView
+            android:id="@+id/bangxephang_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@drawable/tranfer"
+            android:dividerHeight="0px"
+            android:paddingBottom="@dimen/dimen_5dp"
+            android:paddingTop="@dimen/dimen_5dp" >
+        </vnp.com.mimusic.view.MusicListView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" >
+
+            <RelativeLayout
+                android:layout_width="@dimen/dimen_1dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" >
+
+                <com.vnp.core.view.wheel.WheelView
+                    android:id="@+id/date_wheelview_year"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true" />
+
+                <View
+                    android:layout_width="1px"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:background="#cccccc" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

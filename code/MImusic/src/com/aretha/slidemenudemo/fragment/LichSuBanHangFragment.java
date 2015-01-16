@@ -68,8 +68,8 @@ public class LichSuBanHangFragment extends Fragment implements OnItemClickListen
 		lsbt_trangthai.setOnClickListener(l);
 		lsbh_sdt = (TextView) view.findViewById(R.id.lsbh_sdt);
 		updateTrangThai();
-		lsbt_dichvu.setText(getActivity().getString(R.string.tatca));
-		lsbh_sdt.setText(getActivity().getString(R.string.tatca));
+		//lsbt_dichvu.setText(getActivity().getString(R.string.tatca));
+		// lsbh_sdt.setText(getActivity().getString(R.string.tatca));
 		return view;
 	}
 
@@ -107,13 +107,17 @@ public class LichSuBanHangFragment extends Fragment implements OnItemClickListen
 	private String phoneContact = "";
 
 	private void showDichvu() {
-		new DichVuDialog(getActivity(), idDv) {
-			@Override
-			public void sendData(ContentValues index) {
-				idDv = index.getAsString(DichVu.ID);
-				lsbt_dichvu.setText(index.getAsString(DichVu.service_name));
-			}
-		}.show();
+		// new DichVuDialog(getActivity(), idDv) {
+		// @Override
+		// public void sendData(ContentValues index) {
+		// idDv = index.getAsString(DichVu.ID);
+		// lsbt_dichvu.setText(index.getAsString(DichVu.service_name));
+		// }
+		// }.show();
+
+		Intent intent = new Intent(getActivity(), RootMenuActivity.class);
+		intent.putExtra("type", Conts.CHONDICHVU);
+		startActivityForResult(intent, 20001);
 	}
 
 	private void showDanhBa() {
@@ -128,14 +132,14 @@ public class LichSuBanHangFragment extends Fragment implements OnItemClickListen
 		if (requestCode == 2000 && resultCode == Activity.RESULT_OK) {
 			phoneContact = data.getStringExtra(User.USER);
 			lsbh_sdt.setText(data.getStringExtra(User.NAME_CONTACT));
-			
-			if(!Conts.isBlank(phoneContact)){
+
+			if (!Conts.isBlank(phoneContact)) {
 				lsbh_sdt.setText(phoneContact);
 			}
-			
-			
-		} else {
 
+		} else if (requestCode == 20001 && resultCode == Activity.RESULT_OK) {
+			idDv = data.getStringExtra(DichVu.ID);
+			lsbt_dichvu.setText(data.getStringExtra(DichVu.service_name));
 		}
 	}
 
@@ -146,14 +150,13 @@ public class LichSuBanHangFragment extends Fragment implements OnItemClickListen
 			mdate = String.format("%s/%s/%s", ((dateCalendar.get(Calendar.DATE) < 10 ? "0" : "") + dateCalendar.get(Calendar.DATE)) + "",
 					(((dateCalendar.get(Calendar.MONTH) + 1) < 10 ? "0" : "") + (dateCalendar.get(Calendar.MONTH) + 1)) + "", dateCalendar.get(Calendar.YEAR) + "");
 		}
-//		new LSBHDateDialog(getActivity(), mdate) {
-//			@Override
-//			public void sendData(String date, String month, String year) {
-//				lsbt_tu.setText(String.format("%s/%s/%s", date, month, year));
-//			}
-//		}.show();
-		
-		
+		// new LSBHDateDialog(getActivity(), mdate) {
+		// @Override
+		// public void sendData(String date, String month, String year) {
+		// lsbt_tu.setText(String.format("%s/%s/%s", date, month, year));
+		// }
+		// }.show();
+
 		Conts.showDateDialog(getActivity(), R.string.chonngay, mdate, new IShowDateDialog() {
 			@Override
 			public void onSend(String year, String month, String date) {

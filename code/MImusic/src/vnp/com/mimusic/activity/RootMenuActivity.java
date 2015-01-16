@@ -35,6 +35,7 @@ import com.aretha.slidemenudemo.fragment.ChiTietCaNhanDichVuFragment;
 import com.aretha.slidemenudemo.fragment.ChiTietDichVuFragment;
 import com.aretha.slidemenudemo.fragment.ChiTietListSuBanHangFragment;
 import com.aretha.slidemenudemo.fragment.ChiTietTintucFragment;
+import com.aretha.slidemenudemo.fragment.ChonDichvuFragment;
 import com.aretha.slidemenudemo.fragment.ChonSoDienThoaiFragment;
 import com.aretha.slidemenudemo.fragment.DichVuFragment;
 import com.aretha.slidemenudemo.fragment.GuiDvChoNhieuNguoiFragment;
@@ -125,6 +126,8 @@ public class RootMenuActivity extends FragmentActivity {
 			changeFragemt(R.id.root_main_fragment, new ChiTietListSuBanHangFragment());
 		} else if (Conts.CHONSODIENTHOAIFRAGMENT.equals(type)) {
 			changeFragemt(R.id.root_main_fragment, new ChonSoDienThoaiFragment());
+		} else if (Conts.CHONDICHVU.equals(type)) {
+			changeFragemt(R.id.root_main_fragment, new ChonDichvuFragment());
 		}
 	}
 

@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -66,5 +67,13 @@ public class MoiDvChoNhieuNguoiItemView extends LinearLayout {
 		}
 
 		// menu_right_item_img_icon.setBackgroundResource(R.drawable.bangxephang_avatar_example);
+	}
+
+	public void initData(String name) {
+		((TextView) findViewById(R.id.menu_right_item_tv_name)).setText(name);
+		((ImageView) findViewById(R.id.menu_right_item_img_icon)).setVisibility(View.GONE);
+		CheckBox menu_right_detail_checkbox = (CheckBox) findViewById(R.id.menu_right_detail_checkbox);
+		menu_right_detail_checkbox.setOnCheckedChangeListener(null);
+		menu_right_detail_checkbox.setVisibility(View.GONE);
 	}
 }
