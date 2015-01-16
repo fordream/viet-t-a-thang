@@ -66,7 +66,8 @@ public class MoiDvChoNhieuNguoiItemView extends LinearLayout {
 			((ImageView) findViewById(R.id.menu_right_item_img_icon)).setBackgroundResource(R.drawable.no_avatar);
 		}
 
-		// menu_right_item_img_icon.setBackgroundResource(R.drawable.bangxephang_avatar_example);
+		Conts.setTextViewCursor(findViewById(R.id.menu_right_item_tv_link), cursor, User.USER);
+		findViewById(R.id.menu_right_item_tv_link).setVisibility(View.VISIBLE);
 	}
 
 	public void initData(String name) {

@@ -36,25 +36,6 @@ public class ChonSoDienThoaiAdaper extends CursorAdapter {
 		CheckBox menu_right_detail_checkbox = (CheckBox) ((MoiDvChoNhieuNguoiItemView) convertView).findViewById(R.id.menu_right_detail_checkbox);
 		menu_right_detail_checkbox.setOnCheckedChangeListener(null);
 		menu_right_detail_checkbox.setVisibility(View.GONE);
-
-		final String _id = cursor.getString(cursor.getColumnIndex(User._ID));
-		final String user = cursor.getString(cursor.getColumnIndex(User.USER));
-
-//		convertView.findViewById(R.id.menurightitem_main).setOnClickListener(new View.OnClickListener() {
-//
-//			@Override
-//			public void onClick(View v) {
-//				if (index == index1) {
-//					index = -1;
-//				} else {
-//					index = index1;
-//				}
-//
-//				notifyDataSetChanged();
-//			}
-//		});
-//
-//		convertView.findViewById(R.id.menurightitem_main).setBackgroundColor((index1 == index )? Color.RED : Color.WHITE);
 	}
 
 	@Override

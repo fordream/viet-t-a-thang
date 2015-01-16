@@ -203,21 +203,13 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 		}
 	}
 
-	
 	private Uri path;
 
 	@Override
 	public void onClick(View v) {
 		if (v.equals(infor_ngaysinh)) {
-//			new DateDialog(getActivity(), infor_ngaysinh.getText().toString()) {
-//				@Override
-//				public void sendData(String date, String month, String year) {
-//					infor_ngaysinh.setText(String.format("%s/%s/%s", date, month, year));
-//				}
-//			}.show();
-			
-			
-			Conts.showDateDialog(getActivity(), R.string.chonngaysinh,  infor_ngaysinh.getText().toString(), new IShowDateDialog() {
+
+			Conts.showDateDialog(getActivity(), R.string.chonngaysinh, infor_ngaysinh.getText().toString(), new IShowDateDialog() {
 				@Override
 				public void onSend(String year, String month, String date) {
 					infor_ngaysinh.setText(String.format("%s/%s/%s", date, month, year));
@@ -225,7 +217,7 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 			});
 		} else if (v.equals(menu_left_img_avatar)) {
 			Builder builder = new Builder(getActivity());
-			builder.setItems(new String[] { "Camera", "Gallery" }, new DialogInterface.OnClickListener() {
+			builder.setItems(new String[] { getString(R.string.chupanhmoi), getString(R.string.chonanhcosan) }, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					if (which == 1) {
@@ -244,7 +236,7 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 			builder.show();
 		} else if (v.equals(infor_cover_click_change)) {
 			Builder builder = new Builder(getActivity());
-			builder.setItems(new String[] { "Camera", "Gallery" }, new DialogInterface.OnClickListener() {
+			builder.setItems(new String[] { getString(R.string.chupanhmoi), getString(R.string.chonanhcosan) }, new DialogInterface.OnClickListener() {
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
@@ -288,7 +280,7 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 
 				@Override
 				public void onError(String message) {
-					Conts.toast(getActivity(), message);
+
 					Conts.showView(loadingView, false);
 					Conts.showDialogThongbao(getActivity(), message);
 				}

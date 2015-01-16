@@ -148,5 +148,7 @@
     <string name="validatesodichvu">Bạ cần chọn ít nhất 1 dịch vụ.</string>
     <string name="default_error">{\"errorCode\":10000,\"message\":\"Không thể kết nối đến server, bạn cần kiểm tra lại kết nối wifi hoặc 3G.\"}</string>
     <string name="formatdieukhoan" formatted="false">Điều khoản %s</string>
+    <string name="chupanhmoi">Chụp ảnh mới</string>
+    <string name="chonanhcosan">Chọn ảnh có sẵn</string>
 
 </resources>

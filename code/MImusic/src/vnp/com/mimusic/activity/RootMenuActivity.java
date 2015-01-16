@@ -371,7 +371,7 @@ public class RootMenuActivity extends FragmentActivity {
 	}
 
 	public void moi(boolean type, Bundle bundle) {
-		// onBackPressed();
+		onBackPressed();
 		execute(RequestMethod.POST, !type ? API.API_R015 : API.API_R016, bundle, new IContsCallBack() {
 			ProgressDialog dialog;
 

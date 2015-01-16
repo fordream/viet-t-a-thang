@@ -567,4 +567,12 @@ public class Conts {
 			return "";
 		}
 	}
+
+	public static void setTextViewCursor(View findViewById, Cursor cursor, String key) {
+		try {
+			((TextView) findViewById).setText(cursor.getString(cursor.getColumnIndex(key)));
+		} catch (Exception exception) {
+
+		}
+	}
 }
