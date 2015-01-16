@@ -374,8 +374,8 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 			public void _addDv(String id) {
 				Intent intent = new Intent(BaseMusicSlideMenuActivity.this, RootMenuActivity.class);
 				intent.putExtra("type", Conts.CHITIETDICHVU);
-				intent.putExtra("id", id);
-				getParent().startActivity(intent);
+				intent.putExtra(DichVu.service_code, id);
+				startActivity(intent);
 				overridePendingTransitionStartActivity();
 			}
 

@@ -114,6 +114,8 @@ public class RootMenuActivity extends FragmentActivity {
 			ChiTietDichVuFragment chiTietTintucFragment = new ChiTietDichVuFragment();
 			Bundle args = new Bundle();
 			args.putString("id", getIntent().getStringExtra(DichVu.ID) + "");
+			if (getIntent().hasExtra(DichVu.service_code))
+				args.putString(DichVu.service_code, getIntent().getStringExtra(DichVu.service_code) + "");
 			chiTietTintucFragment.setArguments(args);
 			changeFragemt(R.id.root_main_fragment, chiTietTintucFragment);
 		} else if (Conts.CHITIETCANHANBANGXEPHANG.equals(type)) {

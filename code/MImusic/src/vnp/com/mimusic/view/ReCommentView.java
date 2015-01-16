@@ -117,13 +117,13 @@ public abstract class ReCommentView extends LinearLayout {
 						RecommentItemDvBanChayView banChayView = new RecommentItemDvBanChayView(getContext());
 						banChayView.setBackgroud(i);
 						banChayView.setData(jsonObject);
-
+						DichVu.updateDichvuRecomment(jsonObject, getContext());
 						banChayView.setOnClickListener(new View.OnClickListener() {
 
 							@Override
 							public void onClick(View v) {
 								close();
-								addDv(Conts.getString(jsonObject, DichVu.ID));
+								addDv(Conts.getString(jsonObject, DichVu.service_code));
 							}
 						});
 						recommnet_list_dv_banchay.addView(banChayView);

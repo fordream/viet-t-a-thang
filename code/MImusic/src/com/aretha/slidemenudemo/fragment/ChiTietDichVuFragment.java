@@ -84,6 +84,15 @@ public class ChiTietDichVuFragment extends BaseFragment implements View.OnClickL
 		final String id = getArguments().getString(DichVu.ID);
 		String service_code = "";
 		String selection = DichVu.ID + "='" + id + "'";
+
+		if (getArguments().containsKey(DichVu.service_code)) {
+			service_code = getArguments().getString(DichVu.service_code);
+			
+			if(!Conts.isBlank(service_code)){
+				selection = DichVu.service_code + "='" + service_code + "'";
+			}
+		}
+		
 		final Cursor cursor = getActivity().getContentResolver().query(DichVu.CONTENT_URI, null, selection, null, null);
 
 		if (cursor != null && cursor.getCount() >= 1) {

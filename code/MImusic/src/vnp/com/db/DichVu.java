@@ -2,8 +2,12 @@ package vnp.com.db;
 
 import java.util.Map;
 
+import org.json.JSONObject;
+
+import vnp.com.mimusic.util.Conts;
 import android.content.ContentUris;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -22,8 +26,7 @@ public class DichVu {
 	public static final String service_content = "service_content";
 	public static final String service_price = "service_price";
 	/**
-	 * 0 is dang ky
-	 * 1 chua dang ky
+	 * 0 is dang ky 1 chua dang ky
 	 */
 	public static final String service_status = "service_status";
 
@@ -124,5 +127,34 @@ public class DichVu {
 		}
 
 		return null;
+	}
+
+	public static void updateDichvuRecomment(JSONObject jsonObject, Context context) {
+		Cursor cursor = context.getContentResolver().query(DichVu.CONTENT_URI, null, String.format("%s ='%s'", DichVu.service_code,Conts.getString(jsonObject, DichVu.service_code)), null, null);
+		boolean isNew = true;
+
+		if (cursor != null && cursor.getCount() >= 1) {
+			isNew = false;
+		}
+
+		if (cursor != null) {
+			cursor.close();
+		}
+
+		ContentValues contentValues = new ContentValues();
+		// contentValues.put(DichVu.ID, Conts.getString(jsonObject, DichVu.ID));
+		contentValues.put(DichVu.service_name, Conts.getString(jsonObject, DichVu.service_name));
+		contentValues.put(DichVu.service_icon, Conts.getString(jsonObject, DichVu.service_icon));
+		contentValues.put(DichVu.service_code, Conts.getString(jsonObject, DichVu.service_code));
+		// contentValues.put(DichVu.ID, Conts.getString(jsonObject, DichVu.ID));
+		// TODO
+		
+		
+		if(isNew){
+			context.getContentResolver().insert(DichVu.CONTENT_URI, contentValues);
+		}else{
+			context.getContentResolver().update(DichVu.CONTENT_URI, contentValues, String.format("%s ='%s'",DichVu.service_code, Conts.getString(jsonObject, DichVu.service_code)), null);
+		}
+
 	}
 }
