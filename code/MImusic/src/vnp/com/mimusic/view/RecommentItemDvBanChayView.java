@@ -6,6 +6,7 @@ import vnp.com.db.DichVu;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.ImageLoaderUtils;
+import vnp.com.mimusic.util.LogUtils;
 import android.R.anim;
 import android.content.Context;
 import android.util.AttributeSet;
@@ -31,14 +32,19 @@ public class RecommentItemDvBanChayView extends LinearLayout {
 	}
 
 	public void setBackgroud(int posititon) {
-		findViewById(R.id.imageView1).setBackgroundColor(getResources().getColor(posititon % 2 == 0 ? android.R.color.white : R.color.f3f3f3));
+		findViewById(R.id.icondichvuc).setBackgroundColor(getResources().getColor(posititon % 2 == 0 ? android.R.color.white : R.color.f3f3f3));
 		findViewById(R.id.dangky_dialog_content).setBackgroundColor(getResources().getColor(!(posititon % 2 == 0) ? android.R.color.white : R.color.f3f3f3));
-
 	}
 
 	public void setData(JSONObject jsonObject) {
-		ImageView icondichvuc = (ImageView)findViewById(R.id.icondichvuc);
-		ImageLoaderUtils.getInstance(getContext()).DisplayImage(Conts.getString(jsonObject, DichVu.service_icon), icondichvuc);
-		 ((TextView)findViewById(R.id.dangky_dialog_content)).setText(Conts.getString(jsonObject, DichVu.service_name));
+		ImageView icondichvuc = (ImageView) findViewById(R.id.icondichvuc);
+		String url = Conts.getString(jsonObject, DichVu.service_icon);
+
+		if (!Conts.isBlank(url)) {
+			url = url.replace("https", "http");
+		}
+		
+		ImageLoaderUtils.getInstance(getContext()).DisplayImage(url, icondichvuc);
+		((TextView) findViewById(R.id.dangky_dialog_content)).setText(Conts.getString(jsonObject, DichVu.service_name));
 	}
 }

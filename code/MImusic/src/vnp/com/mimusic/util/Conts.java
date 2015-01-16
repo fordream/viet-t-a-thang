@@ -580,21 +580,22 @@ public class Conts {
 	}
 
 	public static int getDataColor(int position) {
-		int res[] = new int[]{
-				R.color.bangxephang0
-				,R.color.bangxephang1
-				,R.color.bangxephang2
-				,R.color.bangxephang3
-				,R.color.bangxephang4
-				,R.color.bangxephang5
-		};
-		
-		if(position< res.length){
+		int res[] = new int[] { R.color.bangxephang0, R.color.bangxephang1, R.color.bangxephang2, R.color.bangxephang3, R.color.bangxephang4, R.color.bangxephang5 };
+
+		if (position < res.length) {
 			return res[position];
-		}else if(position%2 == 0){
+		} else if (position % 2 == 0) {
 			return R.color.bangxephang6;
 		}
-		
+
 		return R.color.bangxephang7;
+	}
+
+	public static void setTextView(View findViewById, String key) {
+		try {
+			((TextView) findViewById).setText(key);
+		} catch (Exception exception) {
+
+		}
 	}
 }

@@ -42,7 +42,6 @@ public abstract class ReCommentView extends LinearLayout {
 		super(context);
 		this.responseRecommend = responseRecommend;
 		init();
-
 	}
 
 	public ReCommentView(Context context, AttributeSet attrs) {
@@ -136,27 +135,30 @@ public abstract class ReCommentView extends LinearLayout {
 		}
 
 		if (responseRecommend != null) {
-			if (responseRecommend.has("contacts")) {
+			if (responseRecommend.has("data")) {
 				try {
-					JSONArray array = responseRecommend.getJSONArray("contacts");
+					JSONArray array = responseRecommend.getJSONArray("data");
 					for (int i = 0; i < array.length(); i++) {
 						final JSONObject jsonObject = array.getJSONObject(i);
-						RecommentItemView recommentItemView = new RecommentItemView(getContext());
-						recommentItemView.setData(jsonObject);
-						recommentItemView.setOnClickListener(new View.OnClickListener() {
-							@Override
-							public void onClick(View v) {
-								close();
-								addContact(Conts.getString(jsonObject, "msisdn"), Conts.getString(jsonObject, "name"));
-							}
 
-						});
+						JSONArray contacts = jsonObject.getJSONArray("contacts");
 
-						recomment_list.addView(recommentItemView);
+						for (int index = 0; index < contacts.length(); index++) {
+							final JSONObject cotnact = contacts.getJSONObject(index);
+							RecommentItemView recommentItemView = new RecommentItemView(getContext());
+							recommentItemView.setData(cotnact);
+							recommentItemView.setOnClickListener(new View.OnClickListener() {
+								@Override
+								public void onClick(View v) {
+									close();
+									addContact(Conts.getString(cotnact, "phone"), Conts.getString(cotnact, "name"));
+								}
+							});
+							recomment_list.addView(recommentItemView);
+						}
 					}
 				} catch (JSONException e) {
 				}
-
 			}
 		}
 

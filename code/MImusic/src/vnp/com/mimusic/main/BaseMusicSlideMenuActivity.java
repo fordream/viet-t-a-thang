@@ -1,5 +1,6 @@
 package vnp.com.mimusic.main;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import vnp.com.api.API;
@@ -334,15 +335,12 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 		findViewById(R.id.recomment_bottom_top).setVisibility(View.GONE);
 		Bundle bundle = new Bundle();
 		((VApplication) getApplication()).execute(RequestMethod.GET, API.API_R026, bundle, new IContsCallBack() {
-
 			@Override
 			public void onSuscess(JSONObject response) {
 				responseRecommend = response;
 				findViewById(R.id.recomment_bottom_top).setVisibility(View.VISIBLE);
 				getSlideMenu().close(true);
-
 				showReCmmend();
-
 			}
 
 			@Override
@@ -352,6 +350,15 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 
 			@Override
 			public void onError(String message) {
+
+				try {
+					responseRecommend = new JSONObject(getString(R.string.recomment_example));
+					findViewById(R.id.recomment_bottom_top).setVisibility(View.VISIBLE);
+					getSlideMenu().close(true);
+					showReCmmend();
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
 			}
 
 			@Override
