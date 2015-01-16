@@ -42,12 +42,10 @@ public class LichSuBanHangFragment extends Fragment implements OnItemClickListen
 			@Override
 			public void onClick(View v) {
 				getActivity().onBackPressed();
-
 			}
 		});
 
 		view.findViewById(R.id.btn_lichsubanhang).setOnClickListener(new View.OnClickListener() {
-
 			@Override
 			public void onClick(View v) {
 				gotoChiTietLichSuBanHang();
@@ -68,8 +66,6 @@ public class LichSuBanHangFragment extends Fragment implements OnItemClickListen
 		lsbt_trangthai.setOnClickListener(l);
 		lsbh_sdt = (TextView) view.findViewById(R.id.lsbh_sdt);
 		updateTrangThai();
-		//lsbt_dichvu.setText(getActivity().getString(R.string.tatca));
-		// lsbh_sdt.setText(getActivity().getString(R.string.tatca));
 		return view;
 	}
 

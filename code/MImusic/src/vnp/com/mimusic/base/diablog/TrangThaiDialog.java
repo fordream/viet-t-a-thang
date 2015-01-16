@@ -2,6 +2,7 @@ package vnp.com.mimusic.base.diablog;
 
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.base.BaseAdialog;
+import vnp.com.mimusic.util.LogUtils;
 import android.content.Context;
 import android.database.DataSetObserver;
 import android.graphics.Color;
@@ -16,6 +17,9 @@ import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import com.vnp.core.view.wheel.WheelView;
+import com.vnp.core.view.wheel.WheelView.OnWheelChangedListener;
+import com.vnp.core.view.wheel.WheelView.OnWheelClickedListener;
+import com.vnp.core.view.wheel.WheelView.OnWheelScrollListener;
 import com.vnp.core.view.wheel.WheelViewAdapter;
 
 public abstract class TrangThaiDialog extends BaseAdialog implements android.view.View.OnClickListener {
@@ -87,11 +91,40 @@ public abstract class TrangThaiDialog extends BaseAdialog implements android.vie
 				mDismiss(false);
 			}
 		});
-
+		findViewById(R.id.date_done).setVisibility(View.GONE);
 		findViewById(R.id.date_done).setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
+				mDismiss(true);
+			}
+		});
+
+		// date_wheelview_year.addChangingListener(new OnWheelChangedListener()
+		// {
+		// @Override
+		// public void onChanged(WheelView wheel, int oldValue, int newValue) {
+		//
+		// }
+		// });
+
+		// date_wheelview_year.addClickingListener(new OnWheelClickedListener()
+		// {
+		// @Override
+		// public void onItemClicked(WheelView wheel, int itemIndex) {
+		// LogUtils.e("AAAAA", itemIndex + "");
+		// }
+		// });
+		date_wheelview_year.addScrollingListener(new OnWheelScrollListener() {
+
+			@Override
+			public void onScrollingStarted(WheelView wheel) {
+
+			}
+
+			@Override
+			public void onScrollingFinished(WheelView wheel) {
+				// LogUtils.e("AAAAA", wheel.getCurrentItem() + "");
 				mDismiss(true);
 			}
 		});
