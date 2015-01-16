@@ -44,6 +44,8 @@ public abstract class ResClientCallBack extends CallBack {
 				client.execute(getMedthod());
 //			}
 		} catch (Exception e) {
+			
+			LogUtils.e("exception1", e);
 		}
 
 		return client;

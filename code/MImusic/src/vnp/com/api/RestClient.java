@@ -91,16 +91,19 @@ public class RestClient {
 		case GET: {
 			// add parameters
 			String combinedParams = "";
-			if (!params.isEmpty()) {
-				combinedParams += "?";
-				for (NameValuePair p : params) {
-					String paramString = p.getName() + "=" + URLEncoder.encode(p.getValue(), "UTF-8");
-					if (combinedParams.length() > 1) {
-						combinedParams += "&" + paramString;
-					} else {
-						combinedParams += paramString;
+			try {
+				if (!params.isEmpty()) {
+					combinedParams += "?";
+					for (NameValuePair p : params) {
+						String paramString = p.getName() + "=" + URLEncoder.encode(p.getValue(), "UTF-8");
+						if (combinedParams.length() > 1) {
+							combinedParams += "&" + paramString;
+						} else {
+							combinedParams += paramString;
+						}
 					}
 				}
+			} catch (Exception exception) {
 			}
 
 			request = new HttpGet(url + combinedParams);
@@ -152,10 +155,10 @@ public class RestClient {
 		}
 
 		}
-//		if (url != null && url.startsWith("https")) {
-//			executeHttps();
-//			return;
-//		}
+		// if (url != null && url.startsWith("https")) {
+		// executeHttps();
+		// return;
+		// }
 		if (request != null)
 			this.executeRequest(request, url);
 	}

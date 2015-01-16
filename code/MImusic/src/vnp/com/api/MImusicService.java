@@ -78,9 +78,13 @@ public class MImusicService extends Service {
 		contentValues.put(User.STATUS, "0");
 		getContentResolver().update(User.CONTENT_URI, contentValues, null, null);
 		Bundle bundle = new Bundle();
-		bundle.putString("u", u);
-		bundle.putString("p", p);
-		Conts.executeNoProgressBar(is3G ? RequestMethod.GET : RequestMethod.POST, is3G ? API.API_R001 : API.API_R002, this, bundle, new IContsCallBack() {
+		if (!Conts.isBlank(u))
+			bundle.putString("u", u);
+		if (!Conts.isBlank(p))
+			bundle.putString("p", p);
+
+		LogUtils.e("api login", (is3G ? RequestMethod.GET : RequestMethod.POST) + " " + (is3G ? API.API_R001 : API.API_R002));
+		Conts.executeNoProgressBar((is3G ? RequestMethod.GET : RequestMethod.POST), (is3G ? API.API_R001 : API.API_R002), this, bundle, new IContsCallBack() {
 			@Override
 			public void onStart() {
 				if (contsCallBack != null)

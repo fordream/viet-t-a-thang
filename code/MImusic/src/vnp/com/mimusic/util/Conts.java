@@ -209,7 +209,6 @@ public class Conts {
 				RestClient restClient = (RestClient) object;
 				String response = restClient.getResponse();
 				try {
-
 					if (Conts.isBlank(response)) {
 						response = activity.getString(R.string.default_error);
 					}
