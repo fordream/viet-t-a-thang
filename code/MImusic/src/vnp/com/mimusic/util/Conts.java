@@ -209,6 +209,7 @@ public class Conts {
 				String errorCode = "";
 				RestClient restClient = (RestClient) object;
 				String response = restClient.getResponse();
+
 				try {
 					if (Conts.isBlank(response)) {
 						response = activity.getString(R.string.default_error);
@@ -216,7 +217,7 @@ public class Conts {
 					JSONObject jsonObject = new JSONObject(response);
 					errorCode = jsonObject.getString("errorCode");
 					message = jsonObject.getString("message");
-					if ("0".equals(errorCode)) {
+					if ("0".equals(errorCode) || "0000".equals(errorCode)) {
 						if (contsCallBack != null)
 							contsCallBack.onSuscess(jsonObject);
 					} else {
@@ -342,7 +343,7 @@ public class Conts {
 		return manager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnectedOrConnecting();
 	}
 
-	public static boolean isVietTelNUmber(String moidichvuchonhieunguoi_numberText, FragmentActivity activity) {
+	public static boolean isVietTelNUmber(String moidichvuchonhieunguoi_numberText, Context context) {
 
 		while (moidichvuchonhieunguoi_numberText.startsWith("0")) {
 			moidichvuchonhieunguoi_numberText = moidichvuchonhieunguoi_numberText.substring(1, moidichvuchonhieunguoi_numberText.length());
@@ -519,7 +520,6 @@ public class Conts {
 		dialog.setContentView(R.layout.date_time_layout);
 		final DatePicker datePicker = (DatePicker) dialog.findViewById(R.id.datePicker1);
 		dialog.findViewById(R.id.btn1).setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View v) {
 				dialog.dismiss();
@@ -527,7 +527,6 @@ public class Conts {
 		});
 
 		dialog.findViewById(R.id.btn2).setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View v) {
 				dialog.dismiss();
@@ -574,5 +573,9 @@ public class Conts {
 		} catch (Exception exception) {
 
 		}
+	}
+
+	public static void getPhoto(String photo_id) {
+
 	}
 }

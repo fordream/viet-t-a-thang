@@ -1,18 +1,22 @@
 package com.aretha.slidemenudemo.fragment;
 
+import org.json.JSONObject;
+
+import vnp.com.api.API;
+import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.DichVu;
 import vnp.com.db.User;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.adapter.MoiDvChoNhieuNguoiAdaper;
 import vnp.com.mimusic.util.Conts;
-import vnp.com.mimusic.util.LogUtils;
+import vnp.com.mimusic.util.Conts.IContsCallBack;
 import vnp.com.mimusic.view.ChiTietDichVuNoFeatureView;
 import vnp.com.mimusic.view.HeaderView;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -21,11 +25,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
-import android.view.animation.Transformation;
-import android.view.animation.TranslateAnimation;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
@@ -40,7 +41,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
-public class MoiDvChoNhieuNguoiFragment extends Fragment implements OnItemClickListener, View.OnClickListener {
+public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemClickListener, View.OnClickListener {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
@@ -60,7 +61,8 @@ public class MoiDvChoNhieuNguoiFragment extends Fragment implements OnItemClickL
 		public void onClick(View v) {
 			String moidichvuchonhieunguoi_numberText = moidichvuchonhieunguoi_number.getText().toString();
 			if (Conts.isVietTelNUmber(moidichvuchonhieunguoi_numberText, getActivity())) {
-				adaper.addSdt(moidichvuchonhieunguoi_numberText, getActivity());
+				addSodt(moidichvuchonhieunguoi_numberText);
+
 			} else {
 				Conts.toast(getActivity(), String.format(getString(R.string.format_check_sdt), moidichvuchonhieunguoi_numberText));
 			}
@@ -296,6 +298,49 @@ public class MoiDvChoNhieuNguoiFragment extends Fragment implements OnItemClickL
 
 		});
 		return view;
+	}
+
+	protected void addSodt(String moidichvuchonhieunguoi_numberText) {
+
+		// add
+		while (moidichvuchonhieunguoi_numberText.startsWith("0")) {
+			moidichvuchonhieunguoi_numberText = moidichvuchonhieunguoi_numberText.substring(1, moidichvuchonhieunguoi_numberText.length());
+		}
+
+		// TODO
+		Bundle bundle = new Bundle();
+		bundle.putString("msisdn", moidichvuchonhieunguoi_numberText);
+		bundle.putString("service_code", service_code);
+
+		final String sdt = moidichvuchonhieunguoi_numberText;
+		execute(RequestMethod.POST, API.API_R019, bundle, new IContsCallBack() {
+			private ProgressDialog progressDialog;
+
+			@Override
+			public void onSuscess(JSONObject response) {
+				progressDialog.dismiss();
+				// Conts.showDialogThongbao(getActivity(), response.toString());
+				adaper.addSdt((sdt.startsWith("84") ? "" : "84") + sdt, getActivity());
+			}
+
+			@Override
+			public void onStart() {
+				progressDialog = ProgressDialog.show(getActivity(), "", getString(R.string.loading));
+			}
+
+			@Override
+			public void onError(String message) {
+				Conts.showDialogThongbao(getActivity(), message);
+				progressDialog.dismiss();
+			}
+
+			@Override
+			public void onError() {
+				onError("");
+			}
+		});
+		// adaper.addSdt(moidichvuchonhieunguoi_numberText, getActivity());
+
 	}
 
 	int currentTop = 0;

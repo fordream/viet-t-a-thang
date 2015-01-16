@@ -211,6 +211,9 @@ public class MImusicService extends Service {
 				while (cur != null && cur.moveToNext()) {
 					String id = cur.getString(cur.getColumnIndex(ContactsContract.Contacts._ID));
 					String name = cur.getString(cur.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+
+					//String photo_id = Conts.getStringCursor(cur, ContactsContract.Contacts.PHOTO_ID);
+
 					if (Integer.parseInt(cur.getString(cur.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))) > 0) {
 						Cursor pCur = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?", new String[] { id }, null);
 						while (pCur.moveToNext()) {
@@ -335,9 +338,13 @@ public class MImusicService extends Service {
 							updateDongBoXuong(response);
 						} else if (API.API_R013.equals(api)) {
 							updateReGetToken(response);
+						}else if (API.API_R019.equals(api)) {
+							updateKiemTraDieuKienThueBao(response);
 						}
 						return null;
 					}
+
+			
 
 					protected void onPostExecute(String result) {
 						if (contsCallBack != null)
@@ -364,9 +371,10 @@ public class MImusicService extends Service {
 			}
 		});
 	}
-
+	private void updateKiemTraDieuKienThueBao(JSONObject response) {
+		LogUtils.e("updateKiemTraDieuKienThueBao", response.toString());
+	}
 	private void updateDongBoXuong(JSONObject response) {
-		LogUtils.e("updateDongBoXuong", response.toString());
 		try {
 			String user = Conts.getUser(MImusicService.this);
 			JSONArray array = response.getJSONArray("data");
