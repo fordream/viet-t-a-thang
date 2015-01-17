@@ -227,6 +227,8 @@ public class RestClient {
 		for (NameValuePair p : params) {
 			if (p.getName().equals("images")) {
 				partEntity.addPart(p.getName(), new FileBody(Conts.getFileFromPath(context, p.getValue()), "image/jpeg"));
+			} if (p.getName().equals("file")) {
+				partEntity.addPart(p.getName(), new FileBody(Conts.getFileFromPath(context, p.getValue()), "image/jpeg"));
 			} else {
 				partEntity.addPart(p.getName(), new StringBody(p.getValue()));
 			}

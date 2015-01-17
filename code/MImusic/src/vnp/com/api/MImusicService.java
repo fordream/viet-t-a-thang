@@ -151,7 +151,7 @@ public class MImusicService extends Service {
 		/**
 		 * get recomment
 		 */
-		
+
 		/**
 		 * get list dich vu
 		 */
@@ -524,7 +524,11 @@ public class MImusicService extends Service {
 			contentValues.put(User.poundage, response.getString(User.poundage));
 			contentValues.put(User.poundage_month, response.getString(User.poundage_month));
 			contentValues.put(User.birthday, response.getString(User.birthday));
-			contentValues.put(User.AVATAR, Conts.getString(response, User.AVATAR));
+
+			if (!Conts.isBlank(Conts.getString(response, User.AVATAR))) {
+				contentValues.put(User.AVATAR, Conts.getString(response, User.AVATAR));
+			}
+
 			getContentResolver().update(User.CONTENT_URI, contentValues, String.format("%s=='1'", User.STATUS), null);
 		} catch (JSONException e) {
 		}
@@ -570,5 +574,12 @@ public class MImusicService extends Service {
 
 	public JSONObject getRecommend() {
 		return recommend;
+	}
+
+	public void executeUpdateHttpsAvatar(String path, IContsCallBack iContsCallBack) {
+		Bundle bundle = new Bundle();
+		bundle.putString("images", path);// path
+		// bundle.putString("file", path);// path
+		executeHttps(RequestMethod.POST, API.API_R023, bundle, iContsCallBack);
 	}
 }

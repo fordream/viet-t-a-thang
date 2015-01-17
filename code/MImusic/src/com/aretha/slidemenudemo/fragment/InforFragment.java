@@ -111,11 +111,6 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		// if (data == null) {
-		// Conts.showDialogThongbao(getActivity(),
-		// getActivity().getString(R.string.khonglayduocanh));
-		// return;
-		// }
 		if (requestCode == 100 && resultCode == Activity.RESULT_OK) {
 			String path = data.getData().toString();
 			if (path != null) {
@@ -168,7 +163,7 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 
 	private void uploadAvatar(String path) {
 		if (!Conts.isBlank(path)) {
-			executeUpdateAvatar(path, new IContsCallBack() {
+			executeUpdateHttpsAvatar(path, new IContsCallBack() {
 				ProgressDialog progressDialog;
 
 				@Override

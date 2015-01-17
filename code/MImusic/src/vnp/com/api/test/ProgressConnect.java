@@ -40,9 +40,14 @@ public class ProgressConnect {
 					if (!Conts.isBlank(Conts.getHttpsToken(context))) {
 						mRestClient.addParam("token", Conts.getHttpsToken(context));
 					}
-					
-					mRestClient.execute(method);
+
+					if (API.API_R023.equals(api)) {
+						mRestClient.executeUploadFile(context, true);
+					} else{
+						mRestClient.execute(method);
+					}
 				} catch (Exception exception) {
+					LogUtils.e("aaaaaaaaaaa", exception);
 				}
 				return mRestClient.getResponse();
 			}

@@ -232,6 +232,27 @@ public class VApplication extends Application {
 		}
 	}
 
+	public void executeUpdateHttpsAvatar(final String path, final IContsCallBack iContsCallBack) {
+		if (mImusicService == null) {
+			Intent service = new Intent(MImusicService.ACTION);
+			bindService(service, new ServiceConnection() {
+
+				@Override
+				public void onServiceDisconnected(ComponentName name) {
+					mImusicService = null;
+				}
+
+				@Override
+				public void onServiceConnected(ComponentName name, IBinder service) {
+					mImusicService = ((MImusicBin) service).getService();
+					mImusicService.executeUpdateHttpsAvatar(path, iContsCallBack);
+				}
+			}, BIND_AUTO_CREATE);
+		} else {
+			mImusicService.executeUpdateHttpsAvatar(path, iContsCallBack);
+		}		
+	}
+
 	/**
 	 * use dongbo danhba
 	 */

@@ -20,6 +20,10 @@ public class BaseFragment extends Fragment {
 		((VApplication) getActivity().getApplication()).executeUpdateAvatar(path2, iContsCallBack);
 	}
 
+	public void executeUpdateHttpsAvatar(String path2, IContsCallBack iContsCallBack) {
+		((VApplication) getActivity().getApplication()).executeUpdateHttpsAvatar(path2, iContsCallBack);
+	}
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
