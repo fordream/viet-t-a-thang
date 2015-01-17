@@ -63,7 +63,7 @@ public class ChiTietListSuBanHangAdaper extends ArrayAdapter<JSONObject> {
 		textstatus = "1".equals(textstatus) ? parent.getContext().getString(R.string.thanhcong) : ("2".equals(textstatus) ? parent.getContext().getString(R.string.thatbai) : parent.getContext()
 				.getString(R.string.tatca));
 		status.setText(textstatus);
-
+		avatar.setVisibility(View.INVISIBLE);
 		ImageLoaderUtils.getInstance(getContext()).DisplayImage(Conts.getString(jsonObject, "avatar"), avatar, BitmapFactory.decodeResource(getContext().getResources(), R.drawable.no_avatar));
 		
 		return convertView;

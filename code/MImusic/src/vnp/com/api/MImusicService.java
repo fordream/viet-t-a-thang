@@ -472,6 +472,8 @@ public class MImusicService extends Service {
 	}
 
 	private void updateDongBoXuong(JSONObject response) {
+		
+		
 		try {
 			String user = Conts.getUser(MImusicService.this);
 			JSONArray array = response.getJSONArray("data");
@@ -479,7 +481,6 @@ public class MImusicService extends Service {
 				JSONObject jsonObject = array.getJSONObject(i);
 				String phone = Conts.getString(jsonObject, "phone");
 				String name = Conts.getString(jsonObject, "name");
-
 				ContentValues contentValues = new ContentValues();
 				contentValues.put(User.USER, phone);
 				contentValues.put(User.NAME_CONTACT, name);
