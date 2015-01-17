@@ -26,14 +26,14 @@ public class ImageLoaderUtils {
 	public void DisplayImage(String url, ImageView imageView) {
 		imageView.setImageBitmap(null);
 		if (!Conts.isBlank(url)) {
-			url = url.replace("htpps", "htpp");
+		//	url = url.replace("htpps", "htpp");
 		}
 		imageLoader.DisplayImage(url, imageView);
 	}
 
 	public void DisplayImage(String url, ImageView imageView, Bitmap bitmap) {
 		if (!Conts.isBlank(url)) {
-			url = url.replace("htpps", "htpp");
+			//url = url.replace("htpps", "htpp");
 		}
 		if (bitmap != null)
 			imageView.setImageBitmap(bitmap);

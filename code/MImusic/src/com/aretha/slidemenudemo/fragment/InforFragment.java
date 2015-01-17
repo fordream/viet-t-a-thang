@@ -13,6 +13,7 @@ import vnp.com.mimusic.base.diablog.DateDialog;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
 import vnp.com.mimusic.util.Conts.IShowDateDialog;
+import vnp.com.mimusic.util.LogUtils;
 import vnp.com.mimusic.view.HeaderView;
 import vnp.com.mimusic.view.LoadingView;
 import android.app.Activity;
@@ -102,6 +103,8 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 			Conts.showImage(cover, menu_left_img_cover, 0);
 
 			String avatar = cursor.getString(cursor.getColumnIndex(User.AVATAR));
+			
+			LogUtils.e("avatarx", avatar);
 			Conts.showImage(avatar, menu_left_img_avatar, R.drawable.no_avatar);
 
 			cursor.close();

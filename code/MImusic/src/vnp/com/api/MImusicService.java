@@ -585,7 +585,6 @@ public class MImusicService extends Service {
 	 */
 
 	private void updateInFor(JSONObject response) {
-		LogUtils.e("updateInFor", response.toString());
 		ContentValues contentValues = new ContentValues();
 		contentValues.put(User.address, Conts.getString(response, User.address));
 		contentValues.put(User.ID, Conts.getString(response, User.ID));
@@ -596,9 +595,10 @@ public class MImusicService extends Service {
 		contentValues.put(User.poundage, Conts.getString(response, User.poundage));
 		contentValues.put(User.poundage_month, Conts.getString(response, User.poundage_month));
 		contentValues.put(User.birthday, Conts.getString(response, User.birthday));
-		
-		if (!Conts.isBlank(Conts.getString(response, User.AVATAR))) {
-			contentValues.put(User.AVATAR, Conts.getString(response, User.AVATAR));
+		String avatar = Conts.getString(response, User.AVATAR);
+		LogUtils.e("avatar", avatar + "");
+		if (!Conts.isBlank(avatar)) {
+			contentValues.put(User.AVATAR, avatar);
 		}
 
 		getContentResolver().update(User.CONTENT_URI, contentValues, String.format("%s=='1'", User.STATUS), null);

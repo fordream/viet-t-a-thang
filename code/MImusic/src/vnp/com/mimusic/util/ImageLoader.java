@@ -25,11 +25,12 @@ import android.widget.ImageView;
 
 public class ImageLoader {
 
-	MemoryCache memoryCache = new MemoryCache();
-	FileCache fileCache;
+	private MemoryCache memoryCache = new MemoryCache();
+	private FileCache fileCache;
 	private Map<ImageView, String> imageViews = Collections.synchronizedMap(new WeakHashMap<ImageView, String>());
-	ExecutorService executorService;
-	Handler handler = new Handler();// handler to display images in UI thread
+	private ExecutorService executorService;
+	private Handler handler = new Handler();// handler to display images in UI
+											// thread
 	private Context context;
 
 	public ImageLoader(Context context) {
@@ -56,7 +57,8 @@ public class ImageLoader {
 		executorService.submit(new PhotosLoader(p));
 	}
 
-	public Bitmap getBitmap(String url) {
+	private Bitmap getBitmap(String url) {
+
 		File f = fileCache.getFile(url);
 
 		// from SD cache
@@ -66,8 +68,7 @@ public class ImageLoader {
 
 		// from web
 		try {
-			if (url.startsWith("http:")) {
-				Bitmap bitmap = null;
+			if (url.startsWith("http")) {
 				URL imageUrl = new URL(url);
 				HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
 				conn.setConnectTimeout(30000);
@@ -78,19 +79,9 @@ public class ImageLoader {
 				CopyStream(is, os);
 				is.close();
 				os.close();
-				bitmap = decodeFile(f);
-				return bitmap;
+				return decodeFile(f);
 			} else if (url != null && url.startsWith("file://")) {
-				// TODO
 				url = url.substring(url.indexOf("file://") + 7, url.length());
-
-				// File file = new File(url);
-				// LogUtils.e("AAAAA", url + " " + path);
-				// LogUtils.e("AAAAA", new File(url).exists() + " " + url + " "
-				// + new File(path).exists());
-				// BitmapFactory.Options options = new BitmapFactory.Options();
-				// options.inPreferredConfig = Bitmap.Config.ARGB_8888;
-				// bitmap = BitmapFactory.decodeFile(url, options);
 				return decodeFile(new File(url));
 			} else if (url != null && url.startsWith("content://")) {
 				// TODO
@@ -101,58 +92,7 @@ public class ImageLoader {
 					return null;
 				}
 			} else {
-
-				try {
-					int res = Integer.parseInt(url);
-					BitmapFactory.Options o = new BitmapFactory.Options();
-					o.inJustDecodeBounds = true;
-					BitmapFactory.decodeResource(context.getResources(), res, o);
-					// Find the correct scale value. It should be the power of
-					// 2.
-					final int REQUIRED_SIZE = 480;
-					int width_tmp = o.outWidth, height_tmp = o.outHeight;
-					int scale = 1;
-					while (true) {
-						if (width_tmp / 2 < REQUIRED_SIZE || height_tmp / 2 < REQUIRED_SIZE)
-							break;
-						width_tmp /= 2;
-						height_tmp /= 2;
-						scale *= 2;
-					}
-
-					BitmapFactory.Options o2 = new BitmapFactory.Options();
-					o2.inSampleSize = scale;
-
-					return BitmapFactory.decodeResource(context.getResources(), res, o2);
-				} catch (Exception ex) {
-
-					InputStream in1 = null;
-					try {
-						File tmp = new File(url);
-						in1 = new FileInputStream(tmp);
-						if (url.endsWith(".nomedia")) {
-							in1.read(tmp.getName().replace(".nomedia", "").getBytes());
-						}
-					} catch (final Exception e) {
-					}
-
-					OutputStream os = new FileOutputStream(f);
-					CopyStream(in1, os);
-					in1.close();
-					os.close();
-					Bitmap bitmap = decodeFile(f);
-					return bitmap;
-					//
-					// BitmapFactory.Options options = new
-					// BitmapFactory.Options();
-					// options.inScaled = false;
-					// options.inDither = false;
-					// options.inDensity = 7;
-					// options.inTargetDensity = 1;
-					// options.inPreferredConfig = Bitmap.Config.ARGB_8888;
-					//
-					// return BitmapFactory.decodeStream(in1, null, options);
-				}
+				return null;
 			}
 		} catch (Throwable ex) {
 			ex.printStackTrace();
