@@ -49,32 +49,34 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 		// menu_left_list.addHeaderView(home_header);
 		menu_left_list.setOnItemClickListener(this);
 
-		Bundle bundle = new Bundle();
-
-		execute(RequestMethod.GET, API.API_R004, bundle, new IContsCallBack() {
-			@Override
-			public void onStart() {
-				Conts.showView(loadingView1, true);
-			}
-
-			@Override
-			public void onSuscess(JSONObject response) {
-				Conts.showView(loadingView1, false);
-				callSHowData();
-			}
-
-			@Override
-			public void onError(String message) {
-				Conts.showView(loadingView1, false);
-				Conts.toast(getActivity(), message);
-			}
-
-			@Override
-			public void onError() {
-				Conts.showView(loadingView1, false);
-				Conts.toast(getActivity(), "onError");
-			}
-		});
+//		Bundle bundle = new Bundle();
+//
+//		execute(RequestMethod.GET, API.API_R004, bundle, new IContsCallBack() {
+//			@Override
+//			public void onStart() {
+//				Conts.showView(loadingView1, true);
+//			}
+//
+//			@Override
+//			public void onSuscess(JSONObject response) {
+//				Conts.showView(loadingView1, false);
+//				callSHowData();
+//			}
+//
+//			@Override
+//			public void onError(String message) {
+//				Conts.showView(loadingView1, false);
+//				Conts.toast(getActivity(), message);
+//			}
+//
+//			@Override
+//			public void onError() {
+//				Conts.showView(loadingView1, false);
+//				Conts.toast(getActivity(), "onError");
+//			}
+//		});
+		callSHowData();
+		Conts.showView(loadingView1, false);
 		return view;
 	}
 

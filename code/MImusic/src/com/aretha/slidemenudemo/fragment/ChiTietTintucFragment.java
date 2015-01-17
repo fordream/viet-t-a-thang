@@ -6,10 +6,13 @@ import org.json.JSONObject;
 
 import vnp.com.api.API;
 import vnp.com.api.RestClient.RequestMethod;
+import vnp.com.api.test.ProgressConnect;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
+import vnp.com.mimusic.util.LogUtils;
 import vnp.com.mimusic.view.HeaderView;
+import vnp.com.mimusic.view.LoadingView;
 import vnp.com.mimusic.view.TinTucKhacItemView;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -27,12 +30,15 @@ public class ChiTietTintucFragment extends BaseFragment implements OnItemClickLi
 		super.onActivityCreated(savedInstanceState);
 	}
 
+	private LoadingView loadingView;
 	private LinearLayout chitiet_tintuc_tintuckhac_list;
 	private TextView chitiettintuc_item_tv_name, chitiettintuc_item_tv_date, home_item_right_control_2_tv;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.chitiet_tintuc, null);
+
+		loadingView = (LoadingView) view.findViewById(R.id.loadingView1);
 		HeaderView chitiettintuc_headerview = (HeaderView) view.findViewById(R.id.chitiettintuc_headerview);
 		chitiettintuc_headerview.setTextHeader(R.string.chitiettintuc);
 		chitiettintuc_headerview.setButtonLeftImage(true, R.drawable.btn_back);
@@ -44,11 +50,6 @@ public class ChiTietTintucFragment extends BaseFragment implements OnItemClickLi
 		});
 		chitiettintuc_headerview.setButtonRightImage(false, R.drawable.btn_back);
 		chitiet_tintuc_tintuckhac_list = (LinearLayout) view.findViewById(R.id.chitiet_tintuc_tintuckhac_list);
-
-		// for (int i = 0; i < 10; i++) {
-		// chitiet_tintuc_tintuckhac_list.addView(new
-		// TinTucKhacItemView(getActivity()));
-		// }
 
 		chitiettintuc_item_tv_name = (TextView) view.findViewById(R.id.chitiettintuc_item_tv_name);
 		chitiettintuc_item_tv_date = (TextView) view.findViewById(R.id.chitiettintuc_item_tv_date);
@@ -64,33 +65,33 @@ public class ChiTietTintucFragment extends BaseFragment implements OnItemClickLi
 
 	private void callApi(Bundle arguments) {
 
-		execute(RequestMethod.POST, API.API_R028, arguments, new IContsCallBack() {
-			@Override
-			public void onStart() {
-
-			}
-
-			@Override
-			public void onError() {
-				onError("fail");
-			}
-
-			@Override
-			public void onError(String message) {
-				chitiettintuc_item_tv_name.setText(message);
-				chitiettintuc_item_tv_date.setText("");
-				home_item_right_control_2_tv.setText("");
-			}
-
+		executeHttps(RequestMethod.GET, API.API_R028, arguments, new IContsCallBack() {
 			@Override
 			public void onSuscess(JSONObject response) {
 				chitiettintuc_item_tv_name.setText(Conts.getString(response, "title"));
 				chitiettintuc_item_tv_date.setText(Conts.getString(response, "public_time"));
-				home_item_right_control_2_tv.setText(Conts.getString(response, "content"));
+				home_item_right_control_2_tv.setText(Conts.getString(response, "header"));
+				Conts.showView(loadingView, false);
+			}
+
+			@Override
+			public void onStart() {
+				Conts.showView(loadingView, true);
+			}
+
+			@Override
+			public void onError(String message) {
+				Conts.showView(loadingView, false);
+				Conts.showDialogThongbao(getActivity(), message);
+			}
+
+			@Override
+			public void onError() {
+				onError("");
 			}
 		});
 
-		execute(RequestMethod.POST, API.API_R029, arguments, new IContsCallBack() {
+		executeHttps(RequestMethod.GET, API.API_R029, arguments, new IContsCallBack() {
 			@Override
 			public void onStart() {
 
@@ -102,6 +103,8 @@ public class ChiTietTintucFragment extends BaseFragment implements OnItemClickLi
 
 			@Override
 			public void onError(String message) {
+
+				Conts.showDialogThongbao(getActivity(), message);
 			}
 
 			@Override
@@ -116,16 +119,14 @@ public class ChiTietTintucFragment extends BaseFragment implements OnItemClickLi
 						tinTucKhacItemView.setData(object);
 
 						tinTucKhacItemView.setOnClickListener(new OnClickListener() {
-
 							@Override
 							public void onClick(View v) {
 								Bundle bundle = new Bundle();
-								bundle.putString("news_id", Conts.getString(object, "news_id"));
+								bundle.putString("news_id", Conts.getString(object, "id"));
 								callApi(bundle);
 							}
 						});
 					}
-
 				} catch (JSONException e) {
 				}
 			}

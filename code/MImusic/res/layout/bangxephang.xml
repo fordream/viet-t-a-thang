@@ -11,6 +11,22 @@
         android:layout_height="wrap_content" >
     </vnp.com.mimusic.view.BangXepHangHeaderView>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <vnp.com.mimusic.view.BangXephangListView
+            android:id="@+id/bangxephang1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        
+           <vnp.com.mimusic.view.BangXephangListView
+            android:id="@+id/bangxephang2"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
+    <!--
     <vnp.com.mimusic.view.MusicListView
         android:id="@+id/bangxephang_list"
         android:layout_width="match_parent"
@@ -26,11 +42,6 @@
         android:layout_height="match_parent"
         android:divider="@drawable/tranfer"
         android:dividerHeight="0px" >
-    </vnp.com.mimusic.view.MusicListView>
-    <vnp.com.mimusic.view.LoadingView 
-        android:id="@+id/bxhLoadingView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </vnp.com.mimusic.view.LoadingView>
+    </vnp.com.mimusic.view.MusicListView>    -->
 
 </LinearLayout>

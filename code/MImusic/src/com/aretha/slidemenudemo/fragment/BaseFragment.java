@@ -12,6 +12,10 @@ public class BaseFragment extends Fragment {
 		((VApplication) getActivity().getApplication()).execute(requestMethod, api, bundle, contsCallBack);
 	}
 
+	public void executeHttps(final RequestMethod requestMethod, final String api, final Bundle bundle, final IContsCallBack contsCallBack) {
+		((VApplication) getActivity().getApplication()).executeHttps(requestMethod, api, bundle, contsCallBack);
+	}
+
 	public void executeUpdateAvatar(String path2, IContsCallBack iContsCallBack) {
 		((VApplication) getActivity().getApplication()).executeUpdateAvatar(path2, iContsCallBack);
 	}

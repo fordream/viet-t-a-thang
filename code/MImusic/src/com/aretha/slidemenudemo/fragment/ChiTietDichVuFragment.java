@@ -87,12 +87,12 @@ public class ChiTietDichVuFragment extends BaseFragment implements View.OnClickL
 
 		if (getArguments().containsKey(DichVu.service_code)) {
 			service_code = getArguments().getString(DichVu.service_code);
-			
-			if(!Conts.isBlank(service_code)){
+
+			if (!Conts.isBlank(service_code)) {
 				selection = DichVu.service_code + "='" + service_code + "'";
 			}
 		}
-		
+
 		final Cursor cursor = getActivity().getContentResolver().query(DichVu.CONTENT_URI, null, selection, null, null);
 
 		if (cursor != null && cursor.getCount() >= 1) {
@@ -121,7 +121,6 @@ public class ChiTietDichVuFragment extends BaseFragment implements View.OnClickL
 			});
 
 			chitietdichvu_chitietdichvunofeatureview.findViewById(R.id.chitietdichvu_no_feature_moi).setOnClickListener(new View.OnClickListener() {
-
 				@Override
 				public void onClick(View v) {
 					(((RootMenuActivity) getActivity())).gotoMoiDvChoNhieuNguoiFragment(id);

@@ -11,6 +11,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import vnp.com.api.RestClient.RequestMethod;
+import vnp.com.api.test.ProgressConnect;
 import vnp.com.db.DichVu;
 import vnp.com.db.User;
 import vnp.com.mimusic.util.Conts;
@@ -121,8 +122,13 @@ public class MImusicService extends Service {
 				}
 				callUpdateData();
 
-				if (contsCallBack != null)
-					contsCallBack.onSuscess(jsonObject);
+				/*
+				 * get thong tin dich vu
+				 */
+				execute(RequestMethod.GET, API.API_R004, new Bundle(), contsCallBack);
+
+				// if (contsCallBack != null)
+				// contsCallBack.onSuscess(jsonObject);
 				// TODO
 			}
 
@@ -141,10 +147,15 @@ public class MImusicService extends Service {
 	}
 
 	private void callUpdateData() {
+
+		/**
+		 * get recomment
+		 */
+		
 		/**
 		 * get list dich vu
 		 */
-		execute(RequestMethod.GET, API.API_R004, new Bundle(), null);
+		// execute(RequestMethod.GET, API.API_R004, new Bundle(), null);
 		/**
 		 * get infor
 		 */
@@ -212,7 +223,8 @@ public class MImusicService extends Service {
 					String id = cur.getString(cur.getColumnIndex(ContactsContract.Contacts._ID));
 					String name = cur.getString(cur.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
 
-					//String photo_id = Conts.getStringCursor(cur, ContactsContract.Contacts.PHOTO_ID);
+					// String photo_id = Conts.getStringCursor(cur,
+					// ContactsContract.Contacts.PHOTO_ID);
 
 					if (Integer.parseInt(cur.getString(cur.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))) > 0) {
 						Cursor pCur = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?", new String[] { id }, null);
@@ -338,13 +350,11 @@ public class MImusicService extends Service {
 							updateDongBoXuong(response);
 						} else if (API.API_R013.equals(api)) {
 							updateReGetToken(response);
-						}else if (API.API_R019.equals(api)) {
+						} else if (API.API_R019.equals(api)) {
 							updateKiemTraDieuKienThueBao(response);
 						}
 						return null;
 					}
-
-			
 
 					protected void onPostExecute(String result) {
 						if (contsCallBack != null)
@@ -371,9 +381,11 @@ public class MImusicService extends Service {
 			}
 		});
 	}
+
 	private void updateKiemTraDieuKienThueBao(JSONObject response) {
 		LogUtils.e("updateKiemTraDieuKienThueBao", response.toString());
 	}
+
 	private void updateDongBoXuong(JSONObject response) {
 		try {
 			String user = Conts.getUser(MImusicService.this);
@@ -458,7 +470,7 @@ public class MImusicService extends Service {
 				contentValues.put(DichVu.service_price, jsonObject.getString(DichVu.service_price));
 				contentValues.put(DichVu.service_status, jsonObject.getString(DichVu.service_status));
 
-				String selection = String.format("%s='%s'", DichVu.ID, jsonObject.getString(DichVu.ID));
+				String selection = String.format("%s='%s'", DichVu.service_code, jsonObject.getString(DichVu.service_code));
 				Cursor cursor = getContentResolver().query(DichVu.CONTENT_URI, null, selection, null, null);
 
 				boolean isUpdate = cursor != null && cursor.getCount() >= 1;
@@ -542,5 +554,21 @@ public class MImusicService extends Service {
 		Bundle bundle = new Bundle();
 		bundle.putString("images", path);// path
 		execute(RequestMethod.GET, API.API_R023, bundle, iContsCallBack);
+	}
+
+	public void executeHttps(final RequestMethod requestMethod, final String api, final Bundle bundle, final IContsCallBack contsCallBack) {
+		contsCallBack.onStart();
+		ProgressConnect connect = new ProgressConnect(this);
+		connect.execute(api, requestMethod, bundle, contsCallBack);
+	}
+
+	private JSONObject recommend;
+
+	public void saveRecomend(JSONObject response) {
+		recommend = response;
+	}
+
+	public JSONObject getRecommend() {
+		return recommend;
 	}
 }

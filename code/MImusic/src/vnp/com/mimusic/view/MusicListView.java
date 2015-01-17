@@ -67,6 +67,7 @@ public class MusicListView extends ListView {
 	 * @param message
 	 */
 	public void setTextNoData(boolean needShow, String message) {
+		setAdapter(null);
 		headerListTextView.setText(needShow, message);
 		setAdapter(new ArrayAdapter<String>(getContext(), 0, new String[] {}));
 	}

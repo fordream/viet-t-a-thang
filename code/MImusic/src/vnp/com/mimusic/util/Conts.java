@@ -16,9 +16,11 @@ import vnp.com.api.MImusicService;
 import vnp.com.api.ResClientCallBack;
 import vnp.com.api.RestClient;
 import vnp.com.api.RestClient.RequestMethod;
+import vnp.com.db.DataStore;
 import vnp.com.db.User;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.base.diablog.DangKyDialog;
+import vnp.com.mimusic.main.BaseMusicSlideMenuActivity;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.ContentValues;
@@ -35,7 +37,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
 import android.provider.MediaStore;
-import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
@@ -50,7 +51,7 @@ import android.widget.Toast;
 public class Conts {
 	public final static String SERVER = "http://125.235.40.85/api.php/";
 	// :443
-	// public final static String SERVER = "https://125.235.40.85/api.php/";
+	public final static String SERVERS = "https://125.235.40.85/api.php/";
 	public final static String HOME = "home";
 	public final static String BANGXEPHANG = "bangxephang";
 	public final static String LICHSUBANHANG = "lichsubanhang";
@@ -297,6 +298,10 @@ public class Conts {
 		public void onError(String message);
 
 		public void onSuscess(JSONObject response);
+	}
+
+	public interface IContsCallBackData {
+		public void onCallBack(Object response);
 	}
 
 	public static void toast(Context activity, String message) {
@@ -599,4 +604,13 @@ public class Conts {
 		}
 	}
 
+	public static void saveHttpsToken(Context context, String token) {
+		DataStore.getInstance().init(context);
+		DataStore.getInstance().save("httpsToken", token);
+	}
+
+	public static String getHttpsToken(Context context) {
+		DataStore.getInstance().init(context);
+		return DataStore.getInstance().get("httpsToken", "");
+	}
 }

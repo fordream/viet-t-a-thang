@@ -60,9 +60,6 @@ public class LoginActivty extends Activity implements OnClickListener {
 		});
 
 		findViewById(R.id.activity_login_splash).startAnimation(alphaAnimation);
-
-		
-
 	}
 
 	private IServiceConfig config = new IServiceConfig() {

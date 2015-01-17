@@ -97,25 +97,25 @@ public class API {
 	/**
 	 * API_R024: Danh sách BXH
 	 */
-	public static final String API_R024 = "ranking"; // 405
+	public static final String API_R024 = "ranking"; // OKIE
 	/**
 	 * API_R025: Chi tiết BXH
 	 */
-	public static final String API_R025 = "ranking";// 405
+	public static final String API_R025 = "rankingDetail";// OKIE
 	/**
 	 * API_R026: Dịch vụ gợi ý
 	 */
-	public static final String API_R026 = "recommend";// 405
+	public static final String API_R026 = "recommend";// OKIE
 	/**
 	 * API_R027: Danh sách tin tức
 	 */
-	public static final String API_R027 = "news";// 405
+	public static final String API_R027 = "news";// OKIE
 	/**
 	 * API_R028: Chi tiết tin tức
 	 */
-	public static final String API_R028 = "newsDetail";// 405
+	public static final String API_R028 = "newsDetail";// OKIE
 	/**
 	 * API_R029: Tin tức liên quan
 	 */
-	public static final String API_R029 = "relatedNews";// 405
+	public static final String API_R029 = "relatedNews";// OKIE
 }

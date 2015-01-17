@@ -5,8 +5,11 @@ import org.json.JSONObject;
 
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.util.Conts;
+import vnp.com.mimusic.util.ImageLoaderUtils;
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
@@ -42,19 +45,15 @@ public class BangXepHangItemView extends LinearLayout {
 		TextView bxhItemName = (TextView) findViewById(R.id.bangxephang_item_tv_name);
 		TextView bxhItemValue = (TextView) findViewById(R.id.bangxephang_item);
 
-		try {
-			bxhItemSTT.setText((Integer.parseInt(item.getString("position")) + 1) + "");
-			bxhItemName.setText(item.getString("nickname"));
-			if (!item.isNull("type")) {
-				if (item.get("type").equals("1")) {
-					bxhItemValue.setText(item.getString("commission"));
-				} else if (item.get("type").equals("2")) {
-					bxhItemValue.setText(item.getString("quantity"));
-				}
-			}
-		} catch (Exception e) {
+		bxhItemSTT.setText("" + (Integer.parseInt(Conts.getString(item, "position")) + 1));
+		bxhItemName.setText(Conts.getString(item, "nickname"));
+		if ("1".equals(Conts.getString(item, "type"))) {
+			bxhItemValue.setText(Conts.getString(item, "commission"));
+		} else {
+			bxhItemValue.setText(Conts.getString(item, "quantity"));
 		}
 
+		ImageLoaderUtils.getInstance(getContext()).DisplayImage(Conts.getString(item, "avatar"), bxhItemImage, BitmapFactory.decodeResource(getResources(), R.drawable.no_avatar));
 	}
 
 	public void setDataColor(int position) {
@@ -64,5 +63,16 @@ public class BangXepHangItemView extends LinearLayout {
 		if (position >= 6) {
 			bxhItemSTT.setTextColor(getResources().getColor(R.color.mx));
 		}
+	}
+
+	public void setDataBundle(Bundle arguments) {
+		setDataColor(Integer.parseInt(arguments.getString("position")));
+		TextView bxhItemSTT = (TextView) findViewById(R.id.bangxephang_item_tv_stt);
+		TextView bxhItemName = (TextView) findViewById(R.id.bangxephang_item_tv_name);
+		bxhItemSTT.setText("" + (Integer.parseInt(arguments.getString("position")) + 1));
+		bxhItemName.setText(arguments.getString("nickname"));
+		Conts.setTextView(findViewById(R.id.chitietsoluong1dichvu), arguments.getString("quantity"));
+		Conts.setTextView(findViewById(R.id.chitietdoanhthu1dichvu), arguments.getString("commission"));
+
 	}
 }

@@ -101,7 +101,8 @@ public class RootMenuActivity extends FragmentActivity {
 		} else if (Conts.CHITIETTINTUC.equals(type)) {
 			ChiTietTintucFragment chiTietTintucFragment = new ChiTietTintucFragment();
 			Bundle args = new Bundle();
-			args.putString("id", getIntent().getStringExtra("id") + "");
+			// args.putString("id", getIntent().getStringExtra("id") + "");
+			args.putString("news_id", getIntent().getStringExtra("news_id") + "");
 			chiTietTintucFragment.setArguments(args);
 			changeFragemt(R.id.root_main_fragment, chiTietTintucFragment);
 		} else if (Conts.MOIDICHVUCHONHIEUNGUOI.equals(type)) {
@@ -210,11 +211,13 @@ public class RootMenuActivity extends FragmentActivity {
 		JSONObject jo = (JSONObject) parent.getItemAtPosition(position);
 		Intent intent = new Intent(this, RootMenuActivity.class);
 		intent.putExtra("type", Conts.CHITIETCANHANBANGXEPHANGTUNGDICHVU);
-		intent.putExtra("stt", String.valueOf(position));
-		try {
-			intent.putExtra("ranking_id", jo.getString("id"));
-		} catch (JSONException je) {
-		}
+		intent.putExtra("position", Conts.getString(jo, "position"));
+		intent.putExtra("mtype", Conts.getString(jo, "type"));
+		intent.putExtra("avatar", Conts.getString(jo, "avatar"));
+		intent.putExtra("ranking_id", Conts.getString(jo, "id"));
+		intent.putExtra("nickname", Conts.getString(jo, "nickname"));
+		intent.putExtra("quantity", Conts.getString(jo, "quantity"));
+		intent.putExtra("commission", Conts.getString(jo, "commission"));
 		getParent().startActivity(intent);
 		overridePendingTransitionStartActivity();
 	}

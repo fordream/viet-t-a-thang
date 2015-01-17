@@ -117,7 +117,7 @@ public abstract class ReCommentView extends LinearLayout {
 						RecommentItemDvBanChayView banChayView = new RecommentItemDvBanChayView(getContext());
 						banChayView.setBackgroud(i);
 						banChayView.setData(jsonObject);
-						DichVu.updateDichvuRecomment(jsonObject, getContext());
+						//DichVu.updateDichvuRecomment(jsonObject, getContext());
 						banChayView.setOnClickListener(new View.OnClickListener() {
 
 							@Override
@@ -196,6 +196,7 @@ public abstract class ReCommentView extends LinearLayout {
 
 	public void start() {
 		findViewById(R.id.recomment_main_background).setVisibility(View.VISIBLE);
+		findViewById(R.id.recomment_main_background).startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.abc_alpha_in));
 		findViewById(R.id.recomment_main).setVisibility(View.VISIBLE);
 		findViewById(R.id.recomment_main).startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.abc_slide_in_top));
 	}

@@ -23,7 +23,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="end"
-            android:lines="2"
             android:maxLines="2"
             android:text="Quà tặng âm nhạc tháng 12, tuyển tập bài hát nhạc chờ hay nhấy năm"
             android:textColor="#336666"
