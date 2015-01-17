@@ -67,6 +67,64 @@ public class MImusicService extends Service {
 		return super.onStartCommand(intent, flags, startId);
 	}
 
+	public void refreshToken(final IContsCallBack contsCallBack) {
+		Bundle bundle = new Bundle();
+		bundle.putString("key", Conts.getRefreshToken(this));
+		bundle.putString(User.KEYREFRESH, Conts.getRefreshToken(this));
+		execute(RequestMethod.GET, API.API_R013, bundle, new IContsCallBack() {
+
+			@Override
+			public void onSuscess(JSONObject response) {
+				callUpdateData();
+
+				/*
+				 * get thong tin dich vu
+				 */
+				execute(RequestMethod.GET, API.API_R004, new Bundle(), new vnp.com.mimusic.util.Conts.IContsCallBack() {
+
+					@Override
+					public void onStart() {
+
+					}
+
+					@Override
+					public void onError() {
+						onError("");
+					}
+
+					@Override
+					public void onError(String message) {
+						callRecocmment(contsCallBack);
+					}
+
+					@Override
+					public void onSuscess(JSONObject response) {
+						callRecocmment(contsCallBack);
+					}
+				});
+
+			}
+
+			@Override
+			public void onStart() {
+				if (contsCallBack != null)
+					contsCallBack.onStart();
+			}
+
+			@Override
+			public void onError(String message) {
+				if (contsCallBack != null)
+					contsCallBack.onError(message);
+			}
+
+			@Override
+			public void onError() {
+				if (contsCallBack != null)
+					contsCallBack.onError();
+			}
+		});
+	}
+
 	/**
 	 * 
 	 * @param is3G
@@ -125,7 +183,28 @@ public class MImusicService extends Service {
 				/*
 				 * get thong tin dich vu
 				 */
-				execute(RequestMethod.GET, API.API_R004, new Bundle(), contsCallBack);
+				execute(RequestMethod.GET, API.API_R004, new Bundle(), new vnp.com.mimusic.util.Conts.IContsCallBack() {
+
+					@Override
+					public void onStart() {
+
+					}
+
+					@Override
+					public void onError() {
+						onError("");
+					}
+
+					@Override
+					public void onError(String message) {
+						callRecocmment(contsCallBack);
+					}
+
+					@Override
+					public void onSuscess(JSONObject response) {
+						callRecocmment(contsCallBack);
+					}
+				});
 
 				// if (contsCallBack != null)
 				// contsCallBack.onSuscess(jsonObject);
@@ -144,6 +223,10 @@ public class MImusicService extends Service {
 					contsCallBack.onError();
 			}
 		});
+	}
+
+	private void callRecocmment(IContsCallBack contsCallBack) {
+		execute(RequestMethod.GET, API.API_R026, new Bundle(), contsCallBack);
 	}
 
 	private void callUpdateData() {
@@ -352,6 +435,8 @@ public class MImusicService extends Service {
 							updateReGetToken(response);
 						} else if (API.API_R019.equals(api)) {
 							updateKiemTraDieuKienThueBao(response);
+						} else if (API.API_R026.equals(api)) {
+							saveRecomend(response);
 						}
 						return null;
 					}
@@ -443,33 +528,20 @@ public class MImusicService extends Service {
 		}
 	}
 
-	private Map<String, String> mapDichVu = new HashMap<String, String>();
-
-	public String getNameDichVuFromServiceCode(String service_code) {
-		if (Conts.isBlank(service_code)) {
-			return "";
-		}
-		return mapDichVu.get(service_code) + "";
-	}
-
 	private void updateDichVu(JSONObject response) {
+
 		try {
 			JSONArray jsonArray = response.getJSONArray("data");
 			for (int i = 0; i < jsonArray.length(); i++) {
 				JSONObject jsonObject = jsonArray.getJSONObject(i);
-
-				mapDichVu.remove(jsonObject.getString(DichVu.service_code));
-				mapDichVu.put(jsonObject.getString(DichVu.service_code), jsonObject.getString(DichVu.service_name));
-
 				ContentValues contentValues = new ContentValues();
-				contentValues.put(DichVu.ID, jsonObject.getString(DichVu.ID));
-				contentValues.put(DichVu.service_name, jsonObject.getString(DichVu.service_name));
-				contentValues.put(DichVu.service_code, jsonObject.getString(DichVu.service_code));
-				contentValues.put(DichVu.service_icon, jsonObject.getString(DichVu.service_icon));
-				contentValues.put(DichVu.service_content, jsonObject.getString(DichVu.service_content));
-				contentValues.put(DichVu.service_price, jsonObject.getString(DichVu.service_price));
-				contentValues.put(DichVu.service_status, jsonObject.getString(DichVu.service_status));
-
+				contentValues.put(DichVu.ID, Conts.getString(jsonObject, DichVu.ID));
+				contentValues.put(DichVu.service_name, Conts.getString(jsonObject, DichVu.service_name));
+				contentValues.put(DichVu.service_code, Conts.getString(jsonObject, DichVu.service_code));
+				contentValues.put(DichVu.service_icon, Conts.getString(jsonObject, DichVu.service_icon));
+				contentValues.put(DichVu.service_content, Conts.getString(jsonObject, DichVu.service_content));
+				contentValues.put(DichVu.service_price, Conts.getString(jsonObject, DichVu.service_price));
+				contentValues.put(DichVu.service_status, Conts.getString(jsonObject, DichVu.service_status));
 				String selection = String.format("%s='%s'", DichVu.service_code, jsonObject.getString(DichVu.service_code));
 				Cursor cursor = getContentResolver().query(DichVu.CONTENT_URI, null, selection, null, null);
 
@@ -513,25 +585,23 @@ public class MImusicService extends Service {
 	 */
 
 	private void updateInFor(JSONObject response) {
+		LogUtils.e("updateInFor", response.toString());
 		ContentValues contentValues = new ContentValues();
-		try {
-			contentValues.put(User.address, response.getString(User.address));
-			contentValues.put(User.ID, response.getString(User.ID));
-			contentValues.put(User.exchange_number, response.getString(User.exchange_number));
-			contentValues.put(User.exchange_number_month, response.getString(User.exchange_number_month));
-			contentValues.put(User.fullname, response.getString(User.fullname));
-			contentValues.put(User.nickname, response.getString(User.nickname));
-			contentValues.put(User.poundage, response.getString(User.poundage));
-			contentValues.put(User.poundage_month, response.getString(User.poundage_month));
-			contentValues.put(User.birthday, response.getString(User.birthday));
-
-			if (!Conts.isBlank(Conts.getString(response, User.AVATAR))) {
-				contentValues.put(User.AVATAR, Conts.getString(response, User.AVATAR));
-			}
-
-			getContentResolver().update(User.CONTENT_URI, contentValues, String.format("%s=='1'", User.STATUS), null);
-		} catch (JSONException e) {
+		contentValues.put(User.address, Conts.getString(response, User.address));
+		contentValues.put(User.ID, Conts.getString(response, User.ID));
+		contentValues.put(User.exchange_number, Conts.getString(response, User.exchange_number));
+		contentValues.put(User.exchange_number_month, Conts.getString(response, User.exchange_number_month));
+		contentValues.put(User.fullname, Conts.getString(response, User.fullname));
+		contentValues.put(User.nickname, Conts.getString(response, User.nickname));
+		contentValues.put(User.poundage, Conts.getString(response, User.poundage));
+		contentValues.put(User.poundage_month, Conts.getString(response, User.poundage_month));
+		contentValues.put(User.birthday, Conts.getString(response, User.birthday));
+		
+		if (!Conts.isBlank(Conts.getString(response, User.AVATAR))) {
+			contentValues.put(User.AVATAR, Conts.getString(response, User.AVATAR));
 		}
+
+		getContentResolver().update(User.CONTENT_URI, contentValues, String.format("%s=='1'", User.STATUS), null);
 	}
 
 	private void updateReGetToken(JSONObject response) {
@@ -547,23 +617,10 @@ public class MImusicService extends Service {
 
 	}
 
-	public void refreshToken(final IContsCallBack iContsCallBack) {
-		Bundle bundle = new Bundle();
-		bundle.putString("key", Conts.getRefreshToken(this));
-		bundle.putString(User.KEYREFRESH, Conts.getRefreshToken(this));
-		execute(RequestMethod.GET, API.API_R013, bundle, iContsCallBack);
-	}
-
 	public void executeUpdateAvatar(String path, final IContsCallBack iContsCallBack) {
 		Bundle bundle = new Bundle();
 		bundle.putString("images", path);// path
 		execute(RequestMethod.GET, API.API_R023, bundle, iContsCallBack);
-	}
-
-	public void executeHttps(final RequestMethod requestMethod, final String api, final Bundle bundle, final IContsCallBack contsCallBack) {
-		contsCallBack.onStart();
-		ProgressConnect connect = new ProgressConnect(this);
-		connect.execute(api, requestMethod, bundle, contsCallBack);
 	}
 
 	private JSONObject recommend;
@@ -576,10 +633,18 @@ public class MImusicService extends Service {
 		return recommend;
 	}
 
+	public void executeHttps(final RequestMethod requestMethod, final String api, final Bundle bundle, final IContsCallBack contsCallBack) {
+		// contsCallBack.onStart();
+		// ProgressConnect connect = new ProgressConnect(this);
+		// connect.execute(api, requestMethod, bundle, contsCallBack);
+
+		execute(requestMethod, api, bundle, contsCallBack);
+	}
+
 	public void executeUpdateHttpsAvatar(String path, IContsCallBack iContsCallBack) {
 		Bundle bundle = new Bundle();
 		bundle.putString("images", path);// path
 		// bundle.putString("file", path);// path
-		executeHttps(RequestMethod.POST, API.API_R023, bundle, iContsCallBack);
+		execute(RequestMethod.POST, API.API_R023, bundle, iContsCallBack);
 	}
 }

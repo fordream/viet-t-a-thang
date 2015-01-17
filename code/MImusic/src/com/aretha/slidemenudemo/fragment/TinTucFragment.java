@@ -38,7 +38,8 @@ public class TinTucFragment extends BaseFragment implements OnItemClickListener,
 		bangxephang_list.setOnItemClickListener(this);
 
 		bangxephang_list.setAdapter(new TintucAdaper(getActivity(), new JSONArray()));
-		new ProgressConnect(getActivity()).execute(API.API_R027, RequestMethod.GET, new Bundle(), new IContsCallBack() {
+
+		executeHttps(RequestMethod.GET, API.API_R027, new Bundle(), new IContsCallBack() {
 
 			@Override
 			public void onSuscess(JSONObject response) {
@@ -65,50 +66,16 @@ public class TinTucFragment extends BaseFragment implements OnItemClickListener,
 
 			@Override
 			public void onError(String message) {
-
+				Conts.showDialogThongbao(getActivity(), message);
+				Conts.showView(loadingView1, false);
 			}
 
 			@Override
 			public void onError() {
-
+				onError("");
 			}
 		});
-		// execute(RequestMethod.GET, API.API_R027, new Bundle(), new
-		// IContsCallBack() {
-		// @Override
-		// public void onSuscess(JSONObject response) {
-		// bangxephang_list.setText(false, "");
-		// try {
-		// JSONArray jsonArray = response.getJSONArray("data");
-		// ((TintucAdaper)
-		// bangxephang_list.getAdapter()).setJSOnArray(jsonArray);
-		// ((TintucAdaper)
-		// bangxephang_list.getAdapter()).notifyDataSetChanged();
-		// if (jsonArray.length() == 0) {
-		// bangxephang_list.setTextNoData(true, R.string.nodata);
-		// }
-		// } catch (Exception exception) {
-		//
-		// }
-		// Conts.showView(loadingView1, false);
-		// }
-		//
-		// @Override
-		// public void onStart() {
-		// Conts.showView(loadingView1, true);
-		// }
-		//
-		// @Override
-		// public void onError(String message) {
-		// Conts.showView(loadingView1, false);
-		// bangxephang_list.setText(true, message);
-		// }
-		//
-		// @Override
-		// public void onError() {
-		// onError("check network");
-		// }
-		// });
+
 		return view;
 	}
 

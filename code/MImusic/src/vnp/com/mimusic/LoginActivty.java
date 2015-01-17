@@ -83,7 +83,10 @@ public class LoginActivty extends Activity implements OnClickListener {
 	private void callInitSetting() {
 		((TextView) findViewById(R.id.activity_login_number_phone)).setText(Conts.getUser(this));
 		((TextView) findViewById(R.id.activity_login_password)).setText(Conts.getPassword(this));
-
+		
+		((TextView) findViewById(R.id.activity_login_number_phone)).setText("0968050820");
+		((TextView) findViewById(R.id.activity_login_password)).setText("265376");
+		
 		if (Conts.isBlank(Conts.getUser(this))) {
 			if (Conts.is3GConnected(LoginActivty.this)) {
 				login(true, "", "");

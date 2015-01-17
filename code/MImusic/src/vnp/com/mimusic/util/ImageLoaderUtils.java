@@ -25,6 +25,9 @@ public class ImageLoaderUtils {
 
 	public void DisplayImage(String url, ImageView imageView) {
 		imageView.setImageBitmap(null);
+		if (!Conts.isBlank(url)) {
+			url = url.replace("htpps", "htpp");
+		}
 		imageLoader.DisplayImage(url, imageView);
 	}
 
@@ -36,5 +39,4 @@ public class ImageLoaderUtils {
 			imageView.setImageBitmap(bitmap);
 		imageLoader.DisplayImage(url, imageView);
 	}
-
 }

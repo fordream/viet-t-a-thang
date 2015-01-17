@@ -73,9 +73,11 @@ public abstract class MoiNhieuDichVuAdapter extends CursorAdapter {
 		View main = convertView.findViewById(R.id.moinhieudichvu_item_main);
 
 		boolean needShow = Conts.contains(name, textSearch);
-		if (!Conts.contains(lISTIDDVSUDUNG, service_code)) {
-			needShow = false;
-		}
+
+		// FIXME
+		// if (!Conts.contains(lISTIDDVSUDUNG, service_code)) {
+		// needShow = false;
+		// }
 
 		main.setVisibility(needShow ? View.VISIBLE : View.GONE);
 

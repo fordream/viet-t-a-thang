@@ -49,7 +49,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class Conts {
-	public final static String SERVER = "http://125.235.40.85/api.php/";
+	public final static String SERVER = "https://125.235.40.85/api.php/";
 	// :443
 	public final static String SERVERS = "https://125.235.40.85/api.php/";
 	public final static String HOME = "home";
@@ -400,7 +400,12 @@ public class Conts {
 
 	public static String getString(JSONObject jsonObject, String string) {
 		try {
-			return jsonObject.getString(string);
+			String str = jsonObject.getString(string);
+
+			if ("null".equals(str)) {
+				str = "";
+			}
+			return str;
 		} catch (JSONException e) {
 			return "";
 		}
