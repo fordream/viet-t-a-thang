@@ -10,6 +10,7 @@ import vnp.com.mimusic.R;
 import vnp.com.mimusic.adapter.ChiTietListSuBanHangAdaper;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
+import vnp.com.mimusic.util.LogUtils;
 import vnp.com.mimusic.view.FooterBangXepHangNoDataView;
 import vnp.com.mimusic.view.HeaderView;
 import vnp.com.mimusic.view.LoadingView;
@@ -50,6 +51,8 @@ public class ChiTietListSuBanHangFragment extends BaseFragment implements OnItem
 		execute(RequestMethod.GET, API.API_R008, getArguments(), new IContsCallBack() {
 			@Override
 			public void onSuscess(JSONObject response) {
+				
+				LogUtils.e("AAAAAAAa", response.toString());
 				home_list.setText(false, R.string.nodata);
 				try {
 					JSONArray data = response.getJSONArray("data");
