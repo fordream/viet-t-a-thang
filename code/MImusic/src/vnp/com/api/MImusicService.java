@@ -209,10 +209,6 @@ public class MImusicService extends Service {
 						callRecocmment(contsCallBack);
 					}
 				});
-
-				// if (contsCallBack != null)
-				// contsCallBack.onSuscess(jsonObject);
-				// TODO
 			}
 
 			@Override
@@ -239,7 +235,7 @@ public class MImusicService extends Service {
 
 			@Override
 			public void onStart() {
-				contsCallBack.onSuscess(null);
+				//contsCallBack.onSuscess(null);
 			}
 
 			@Override
