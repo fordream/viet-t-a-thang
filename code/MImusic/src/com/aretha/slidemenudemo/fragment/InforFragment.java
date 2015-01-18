@@ -103,7 +103,7 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 			Conts.showImage(cover, menu_left_img_cover, 0);
 
 			String avatar = cursor.getString(cursor.getColumnIndex(User.AVATAR));
-			
+
 			LogUtils.e("avatarx", avatar);
 			Conts.showImage(avatar, menu_left_img_avatar, R.drawable.no_avatar);
 
@@ -164,7 +164,7 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 		}
 	}
 
-	private void uploadAvatar(String path) {
+	private void uploadAvatar(final String path) {
 		if (!Conts.isBlank(path)) {
 			executeUpdateHttpsAvatar(path, new IContsCallBack() {
 				ProgressDialog progressDialog;
@@ -190,7 +190,12 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 
 				@Override
 				public void onSuscess(JSONObject response) {
-					Conts.showDialogThongbao(getActivity(), response.toString());
+
+					ContentValues contentValues = new ContentValues();
+					contentValues.put(User.AVATAR, path);
+					int index = getActivity().getContentResolver().update(User.CONTENT_URI, contentValues, String.format("%s = '1'", User.STATUS), null);
+
+					showData();
 					if (progressDialog != null) {
 						progressDialog.dismiss();
 					}

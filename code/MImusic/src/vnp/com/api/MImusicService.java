@@ -1,9 +1,9 @@
 package vnp.com.api;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.json.JSONArray;
@@ -11,21 +11,25 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import vnp.com.api.RestClient.RequestMethod;
-import vnp.com.api.test.ProgressConnect;
 import vnp.com.db.DichVu;
 import vnp.com.db.User;
 import vnp.com.mimusic.util.Conts;
-import vnp.com.mimusic.util.LogUtils;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
+import vnp.com.mimusic.util.ImageLoader;
+import vnp.com.mimusic.util.LogUtils;
 import android.app.Service;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.ContactsContract;
+import android.provider.MediaStore;
+import android.util.Base64;
 
 public class MImusicService extends Service {
 
@@ -225,8 +229,29 @@ public class MImusicService extends Service {
 		});
 	}
 
-	private void callRecocmment(IContsCallBack contsCallBack) {
-		execute(RequestMethod.GET, API.API_R026, new Bundle(), contsCallBack);
+	private void callRecocmment(final IContsCallBack contsCallBack) {
+		execute(RequestMethod.GET, API.API_R026, new Bundle(), new IContsCallBack() {
+
+			@Override
+			public void onSuscess(JSONObject response) {
+				contsCallBack.onSuscess(null);
+			}
+
+			@Override
+			public void onStart() {
+				contsCallBack.onSuscess(null);
+			}
+
+			@Override
+			public void onError(String message) {
+				contsCallBack.onSuscess(null);
+			}
+
+			@Override
+			public void onError() {
+				contsCallBack.onSuscess(null);
+			}
+		});
 	}
 
 	private void callUpdateData() {
@@ -472,8 +497,7 @@ public class MImusicService extends Service {
 	}
 
 	private void updateDongBoXuong(JSONObject response) {
-		
-		
+
 		try {
 			String user = Conts.getUser(MImusicService.this);
 			JSONArray array = response.getJSONArray("data");
@@ -644,7 +668,9 @@ public class MImusicService extends Service {
 
 	public void executeUpdateHttpsAvatar(String path, IContsCallBack iContsCallBack) {
 		Bundle bundle = new Bundle();
-		bundle.putString("images", path);// path
+
+		bundle.putString("images", Conts.encodeToString(this, path));// path
+		// todo
 		// bundle.putString("file", path);// path
 		execute(RequestMethod.POST, API.API_R023, bundle, iContsCallBack);
 	}

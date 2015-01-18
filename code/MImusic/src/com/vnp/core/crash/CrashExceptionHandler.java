@@ -76,9 +76,9 @@ public class CrashExceptionHandler implements Thread.UncaughtExceptionHandler {
 					if (builder.length() > 0)
 						client.execute(RequestMethod.POST);
 
-					LogUtils.e("Crash", client.getResponse() + builder.length());
+					//LogUtils.e("Crash", client.getResponse() + builder.length());
 				} catch (Exception x) {
-					LogUtils.e("Crash", x);
+					//LogUtils.e("Crash", x);
 				}
 				return client;
 			}

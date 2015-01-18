@@ -1,5 +1,6 @@
 package vnp.com.mimusic.util;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Set;
@@ -20,7 +21,6 @@ import vnp.com.db.DataStore;
 import vnp.com.db.User;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.base.diablog.DangKyDialog;
-import vnp.com.mimusic.main.BaseMusicSlideMenuActivity;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.ContentValues;
@@ -37,6 +37,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
@@ -49,7 +50,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class Conts {
-	public final static String SERVER = "https://125.235.40.85/api.php/";
+	public final static String SERVER = "http://125.235.40.85/api.php/";
 	// :443
 	public final static String SERVERS = "https://125.235.40.85/api.php/";
 	public final static String HOME = "home";
@@ -617,5 +618,30 @@ public class Conts {
 	public static String getHttpsToken(Context context) {
 		DataStore.getInstance().init(context);
 		return DataStore.getInstance().get("httpsToken", "");
+	}
+
+	public static String encodeToString(Context context, String url) {
+		try {
+			Bitmap bitmap = null;
+			if (url != null && url.startsWith("content://")) {
+				try {
+					bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), Uri.parse(url));
+				} catch (Exception e) {
+
+				}
+			} else if (url != null && url.startsWith("file://")) {
+				url = url.substring(url.indexOf("file://") + 7, url.length());
+				bitmap = ImageLoader.decodeFile(new File(url));
+			}
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos); // bm is the
+																	// bitmap
+																	// object
+			byte[] b = baos.toByteArray();
+			return Base64.encodeToString(b, Base64.DEFAULT);
+		} catch (Exception e) {
+			return "";
+			// TODO: handle exception
+		}
 	}
 }
