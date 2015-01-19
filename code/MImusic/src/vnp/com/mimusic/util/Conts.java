@@ -513,7 +513,11 @@ public class Conts {
 	}
 
 	public static boolean contains(String full, String con) {
-		return full.toLowerCase().trim().contains(con.toLowerCase().trim());
+		try {
+			return full.toLowerCase().trim().contains(con.toLowerCase().trim());
+		} catch (Exception exception) {
+			return true;
+		}
 	}
 
 	public static boolean havenewWork(Context loginActivty) {
