@@ -15,6 +15,7 @@ import java.util.WeakHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import vnp.com.api.RestClient;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -68,7 +69,7 @@ public class ImageLoader {
 
 		// from web
 		try {
-			if (url.startsWith("http")) {
+			if (url.startsWith("http:")) {
 				URL imageUrl = new URL(url);
 				HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
 				conn.setConnectTimeout(30000);
@@ -80,6 +81,10 @@ public class ImageLoader {
 				is.close();
 				os.close();
 				return decodeFile(f);
+			} else if (url.startsWith("https:")) {
+				RestClient restClient = new RestClient(url);
+				File file = restClient.exeDownloadFile(context);
+				return decodeFile(file);
 			} else if (url != null && url.startsWith("file://")) {
 				url = url.substring(url.indexOf("file://") + 7, url.length());
 				return decodeFile(new File(url));

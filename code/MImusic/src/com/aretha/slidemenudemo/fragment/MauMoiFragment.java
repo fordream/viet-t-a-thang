@@ -79,7 +79,7 @@ public class MauMoiFragment extends BaseFragment implements android.view.View.On
 				mcursor.close();
 			}
 		}
-		
+
 		Bundle bundle = new Bundle();
 		bundle.putString("service_code", service_code);
 		execute(RequestMethod.GET, API.API_R022, bundle, new IContsCallBack() {
@@ -117,6 +117,10 @@ public class MauMoiFragment extends BaseFragment implements android.view.View.On
 	}
 
 	protected void moi() {
+		if (adaper == null || adaper != null && Conts.isBlank(adaper.getTemplate_id())) {
+			Conts.showDialogThongbao(getActivity(), getString(R.string.banchuachonloimoi));
+			return;
+		}
 		Bundle bundle = new Bundle();
 		bundle.putString("template_id", adaper.getTemplate_id());
 		if (!type) {
@@ -126,53 +130,57 @@ public class MauMoiFragment extends BaseFragment implements android.view.View.On
 			bundle.putString("customers", sdt);
 			bundle.putString("service_code", service_codes);
 		}
-		
-		((RootMenuActivity)getActivity()).moi(type, bundle);
 
-//		execute(RequestMethod.POST, !type ? API.API_R015 : API.API_R016, bundle, new IContsCallBack() {
-//			ProgressDialog dialog;
-//
-//			@Override
-//			public void onSuscess(JSONObject response) {
-//				String message = "";
-//				try {
-//					message = response.getString("message");
-//				} catch (JSONException e1) {
-//				}
-//
-//				if (Conts.isBlank(message)) {
-//					message = getActivity().getString(R.string.success_moi);
-//				} else {
-//					message = String.format("%s\n%s", message, getActivity().getString(R.string.success_moi));
-//				}
-//				Conts.showDialogDongYCallBack(getActivity(), message, new DialogCallBack() {
-//					@Override
-//					public void callback(Object object) {
-//						((RootMenuActivity) getActivity()).closeActivity();
-//					}
-//				});
-//				if (dialog != null)
-//					dialog.dismiss();
-//			}
-//
-//			@Override
-//			public void onStart() {
-//				if (dialog == null)
-//					dialog = ProgressDialog.show(getActivity(), null, getActivity().getString(R.string.loading));
-//			}
-//
-//			@Override
-//			public void onError(String message) {
-//				Conts.showDialogThongbao(getActivity(), message);
-//				if (dialog != null)
-//					dialog.dismiss();
-//			}
-//
-//			@Override
-//			public void onError() {
-//				onError("onError");
-//			}
-//		});
+		((RootMenuActivity) getActivity()).moi(type, bundle);
+
+		// execute(RequestMethod.POST, !type ? API.API_R015 : API.API_R016,
+		// bundle, new IContsCallBack() {
+		// ProgressDialog dialog;
+		//
+		// @Override
+		// public void onSuscess(JSONObject response) {
+		// String message = "";
+		// try {
+		// message = response.getString("message");
+		// } catch (JSONException e1) {
+		// }
+		//
+		// if (Conts.isBlank(message)) {
+		// message = getActivity().getString(R.string.success_moi);
+		// } else {
+		// message = String.format("%s\n%s", message,
+		// getActivity().getString(R.string.success_moi));
+		// }
+		// Conts.showDialogDongYCallBack(getActivity(), message, new
+		// DialogCallBack() {
+		// @Override
+		// public void callback(Object object) {
+		// ((RootMenuActivity) getActivity()).closeActivity();
+		// }
+		// });
+		// if (dialog != null)
+		// dialog.dismiss();
+		// }
+		//
+		// @Override
+		// public void onStart() {
+		// if (dialog == null)
+		// dialog = ProgressDialog.show(getActivity(), null,
+		// getActivity().getString(R.string.loading));
+		// }
+		//
+		// @Override
+		// public void onError(String message) {
+		// Conts.showDialogThongbao(getActivity(), message);
+		// if (dialog != null)
+		// dialog.dismiss();
+		// }
+		//
+		// @Override
+		// public void onError() {
+		// onError("onError");
+		// }
+		// });
 	}
 
 	@Override

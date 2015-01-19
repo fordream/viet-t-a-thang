@@ -227,7 +227,8 @@ public class RestClient {
 		for (NameValuePair p : params) {
 			if (p.getName().equals("images")) {
 				partEntity.addPart(p.getName(), new FileBody(Conts.getFileFromPath(context, p.getValue()), "image/jpeg"));
-			} if (p.getName().equals("file")) {
+			}
+			if (p.getName().equals("file")) {
 				partEntity.addPart(p.getName(), new FileBody(Conts.getFileFromPath(context, p.getValue()), "image/jpeg"));
 			} else {
 				partEntity.addPart(p.getName(), new StringBody(p.getValue()));
@@ -363,6 +364,59 @@ public class RestClient {
 		 */
 		public void onProcess(long total, long curent);
 
+	}
+
+	public File exeDownloadFile(final Context context) {
+
+		File mDirectory = android.os.Environment.getExternalStorageDirectory();
+		// create file
+		File mFile = new File(mDirectory, System.currentTimeMillis() + "");
+
+		HttpURLConnection urlConnection = null;
+		FileOutputStream fileOutput = null;
+		long total = 0;
+		long fileSize = 0;
+		try {
+			URL tmp = new URL(url);
+			urlConnection = (HttpURLConnection) tmp.openConnection();
+			urlConnection.setDoInput(true);
+			urlConnection.setRequestMethod("GET");
+			urlConnection.setReadTimeout(TIME_OUT);
+			urlConnection.setConnectTimeout(TIME_OUT);
+			urlConnection.connect();
+
+			String typeData = urlConnection.getHeaderField("content-type");
+			if (typeData.contains("text/plain")) {
+
+			} else {
+				fileSize = Long.parseLong(urlConnection.getHeaderField("content-length"));
+				String getDateModifier = urlConnection.getHeaderField("last-modified");
+
+				fileOutput = new FileOutputStream(mFile);
+
+				InputStream inputStream = urlConnection.getInputStream();
+
+				byte[] buffer = new byte[BUFFER];
+				int bufferLength = 0;
+
+				while ((bufferLength = inputStream.read(buffer)) > 0) {
+					total += bufferLength;
+					fileOutput.write(buffer, 0, bufferLength);
+
+				}
+
+				fileOutput.close();
+			}
+		} catch (Exception e) {
+			LogUtils.e("mException", e);
+		} finally {
+			try {
+				urlConnection.disconnect();
+			} catch (Exception e2) {
+			}
+		}
+
+		return mFile;
 	}
 }
 
