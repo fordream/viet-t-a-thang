@@ -235,7 +235,7 @@ public class MImusicService extends Service {
 
 			@Override
 			public void onStart() {
-				//contsCallBack.onSuscess(null);
+				// contsCallBack.onSuscess(null);
 			}
 
 			@Override
@@ -647,7 +647,8 @@ public class MImusicService extends Service {
 	private JSONObject recommend;
 
 	public void saveRecomend(JSONObject response) {
-		recommend = response;
+		if (response != null)
+			recommend = response;
 	}
 
 	public JSONObject getRecommend() {

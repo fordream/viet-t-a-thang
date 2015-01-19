@@ -8,7 +8,6 @@ import vnp.com.mimusic.LoginActivty;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.VApplication;
 import vnp.com.mimusic.util.Conts;
-import vnp.com.mimusic.util.LogUtils;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
 import android.app.Activity;
 import android.content.Intent;
@@ -51,7 +50,6 @@ public class IndexActivity extends Activity {
 //
 //			}
 //		});
-
 		startActivity(new Intent(this, LoginActivty.class));
 		finish();
 
