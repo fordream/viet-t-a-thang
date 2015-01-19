@@ -2,6 +2,8 @@ package com.vnp.core.common.https;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -28,14 +30,15 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
 import vnp.com.api.RestClient.RequestMethod;
-import vnp.com.mimusic.util.LogUtils;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.os.Environment;
 
 public class HttpsRestClient {
 	public interface IHttpsRestClientLisner {
 		// public void onError(Exception exception);
-		public void onSucces(int responseCode, String message, String response, Exception exception);
+		public void onSucces(int responseCode, String message, String response, Exception exception, File file);
+
 	}
 
 	public static final int BUFFER = 1024 * 2;
@@ -159,7 +162,7 @@ public class HttpsRestClient {
 			}
 
 			protected void onPostExecute(String result) {
-				lisner.onSucces(responseCode, message, response, exception);
+				lisner.onSucces(responseCode, message, response, exception, null);
 			};
 		}.execute("");
 	}
@@ -243,7 +246,7 @@ public class HttpsRestClient {
 			}
 
 			protected void onPostExecute(String result) {
-				lisner.onSucces(responseCode, message, response, exception);
+				lisner.onSucces(responseCode, message, response, exception, null);
 			};
 		}.execute("");
 
@@ -297,6 +300,64 @@ public class HttpsRestClient {
 		} catch (Exception exception) {
 			return "";
 		}
+	}
+
+	public File executeDownloadFile(final RequestMethod method) {
+
+		File file = new File(Environment.getExternalStorageDirectory(), System.currentTimeMillis() + ".jpg");
+		String methodStr = "GET";
+		if (method == RequestMethod.GET) {
+			methodStr = "GET";
+			String s = getQuery(params);
+			url = url + ("".equals(s) ? "" : ("?" + getQuery(params)));
+		} else if (method == RequestMethod.POST) {
+			methodStr = "POST";
+		}
+
+		try {
+			URL mxurl = new URL(url);
+			trustAllHosts();
+			HttpsURLConnection https = (HttpsURLConnection) mxurl.openConnection();
+			https.setRequestMethod(methodStr);
+			https.setConnectTimeout(10 * 1000);
+			https.setReadTimeout(10 * 1000);
+			/**
+			 * add header
+			 */
+			for (NameValuePair h : headers) {
+				https.setRequestProperty(h.getName(), h.getValue());
+			}
+
+			https.setUseCaches(false);
+			https.setDoInput(true);
+			https.setDoOutput(true);
+			https.setHostnameVerifier(DO_NOT_VERIFY);
+
+			if (method == RequestMethod.POST) {
+				OutputStream os = https.getOutputStream();
+				BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+				writer.write(getQuery(params));
+				writer.flush();
+				writer.close();
+				os.close();
+			}
+
+			https.connect();
+			FileOutputStream fileOutput = new FileOutputStream(file);
+			InputStream inputStream = https.getInputStream();
+			byte[] buffer = new byte[1024];
+			int bufferLength = 0;
+
+			while ((bufferLength = inputStream.read(buffer)) > 0) {
+				fileOutput.write(buffer, 0, bufferLength);
+			}
+			fileOutput.close();
+
+			https.disconnect();
+		} catch (Exception e) {
+		}
+
+		return file;
 	}
 
 }

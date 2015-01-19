@@ -38,9 +38,9 @@ public class ImageLoaderUtils {
 		if (bitmap != null)
 			imageView.setImageBitmap(bitmap);
 		if (!Conts.isBlank(url)) {
-			url = url.replace("https", "http");
+			//url = url.replace("https", "http");
 			
-			LogUtils.e("DisplayImage", url + "");
+			//LogUtils.e("DisplayImage", url + "");
 			imageLoader.DisplayImage(url, imageView);
 		}
 
