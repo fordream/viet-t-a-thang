@@ -4,6 +4,7 @@ import vnp.com.mimusic.R;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
+import android.text.Spanned;
 import android.util.AttributeSet;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -79,6 +80,11 @@ public class MusicListView extends ListView {
 	 */
 	public void setTextNoData(boolean needShow, int message) {
 		headerListTextView.setText(needShow, message);
+		setAdapter(new ArrayAdapter<String>(getContext(), 0, new String[] {}));
+	}
+
+	public void setTextNoDataX(boolean needShow, Spanned fromHtml) {
+		headerListTextView.setTextNoDataX(needShow, fromHtml);
 		setAdapter(new ArrayAdapter<String>(getContext(), 0, new String[] {}));
 	}
 }

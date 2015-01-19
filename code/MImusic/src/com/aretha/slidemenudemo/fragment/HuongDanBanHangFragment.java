@@ -16,6 +16,7 @@ import vnp.com.mimusic.view.MusicListView;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,7 +56,7 @@ public class HuongDanBanHangFragment extends BaseFragment implements OnItemClick
 
 			@Override
 			public void onSuscess(JSONObject response) {
-				dichvu_list.setTextNoData(true, Conts.getString(response, "guide_text"));
+				dichvu_list.setTextNoDataX(true, Html.fromHtml(Conts.getString(response, "guide_text")));
 				Conts.showView(loadingView, false);
 			}
 

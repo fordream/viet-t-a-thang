@@ -2,7 +2,9 @@ package vnp.com.mimusic.view;
 
 import vnp.com.mimusic.R;
 import android.content.Context;
+import android.text.Spanned;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -50,5 +52,13 @@ public class FooterBangXepHangNoDataView extends LinearLayout {
 	public void setText(boolean needShow, int text) {
 		no_data_message.setText(text);
 		findViewById(R.id.chitietdichvu_no_feature_main).setVisibility(needShow ? VISIBLE : GONE);
+	}
+
+	public void setTextNoDataX(boolean needShow, Spanned fromHtml) {
+		no_data_message.setText(fromHtml);
+		findViewById(R.id.chitietdichvu_no_feature_main).setVisibility(needShow ? VISIBLE : GONE);
+		if(needShow){
+			no_data_message.setGravity(Gravity.LEFT);
+		}
 	}
 }
