@@ -12,6 +12,7 @@ import vnp.com.mimusic.util.ImageLoaderUtils;
 import vnp.com.mimusic.view.MoiNhieuDichVuItemView;
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.BitmapFactory;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
@@ -67,7 +68,7 @@ public abstract class MoiNhieuDichVuAdapter extends CursorAdapter {
 		// show image
 		final String service_icon = cursor.getString(cursor.getColumnIndex(DichVu.service_icon)) + "";
 
-		ImageLoaderUtils.getInstance(context).DisplayImage(service_icon, moinhieudichvu_item_icon);
+		ImageLoaderUtils.getInstance(context).DisplayImage(service_icon, moinhieudichvu_item_icon, BitmapFactory.decodeResource(context.getResources(), R.drawable.no_image));
 
 		String service_code = cursor.getString(cursor.getColumnIndex(DichVu.service_code));
 		View main = convertView.findViewById(R.id.moinhieudichvu_item_main);

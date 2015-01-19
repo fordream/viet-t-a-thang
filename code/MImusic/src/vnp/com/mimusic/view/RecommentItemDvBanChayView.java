@@ -9,6 +9,7 @@ import vnp.com.mimusic.util.ImageLoaderUtils;
 import vnp.com.mimusic.util.LogUtils;
 import android.R.anim;
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
@@ -44,7 +45,7 @@ public class RecommentItemDvBanChayView extends LinearLayout {
 			url = url.replace("https", "http");
 		}
 		
-		ImageLoaderUtils.getInstance(getContext()).DisplayImage(url, icondichvuc);
+		ImageLoaderUtils.getInstance(getContext()).DisplayImage(url, icondichvuc, BitmapFactory.decodeResource(getResources(), R.drawable.no_image));
 		((TextView) findViewById(R.id.dangky_dialog_content)).setText(Conts.getString(jsonObject, DichVu.service_name));
 	}
 }

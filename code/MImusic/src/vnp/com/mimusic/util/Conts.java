@@ -50,7 +50,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class Conts {
-	public final static String SERVER = "http://125.235.40.85/api.php/";
+	public final static String SERVER = "https://125.235.40.85/api.php/";
 	// :443
 	public final static String SERVERS = "https://125.235.40.85/api.php/";
 	public final static String HOME = "home";

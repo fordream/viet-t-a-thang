@@ -7,6 +7,7 @@ import vnp.com.mimusic.util.ImageLoaderUtils;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.text.Html;
 import android.util.AttributeSet;
@@ -132,6 +133,6 @@ public class HomeItemView extends LinearLayout {
 		// show image
 		String service_icon = cursor.getString(cursor.getColumnIndex(DichVu.service_icon)) + "";
 
-		ImageLoaderUtils.getInstance(getContext()).DisplayImage(service_icon, home_item_img_icon);
+		ImageLoaderUtils.getInstance(getContext()).DisplayImage(service_icon, home_item_img_icon, BitmapFactory.decodeResource(getResources(), R.drawable.no_image));
 	}
 }

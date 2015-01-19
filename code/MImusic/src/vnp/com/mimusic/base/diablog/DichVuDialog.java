@@ -12,6 +12,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.DataSetObserver;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -94,7 +95,7 @@ public abstract class DichVuDialog extends BaseAdialog implements android.view.V
 				if (Conts.isBlank(id)) {
 					imageView.setImageBitmap(null);
 				} else {
-					ImageLoaderUtils.getInstance(parent.getContext()).DisplayImage(values.getAsString(DichVu.service_icon), imageView);
+					ImageLoaderUtils.getInstance(parent.getContext()).DisplayImage(values.getAsString(DichVu.service_icon), imageView, BitmapFactory.decodeResource(getContext().getResources(), R.drawable.no_image));
 				}
 				return convertView;
 			}

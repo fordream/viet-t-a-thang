@@ -11,6 +11,7 @@ import vnp.com.mimusic.view.HeaderView;
 import vnp.com.mimusic.view.MenuRightItemView;
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -249,7 +250,7 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 		public void setIcon(String icon) {
 			ImageView moinhieudichvu_img_icon = (ImageView) findViewById(R.id.imageView1);
 			moinhieudichvu_img_icon.setImageResource(R.drawable.no_avatar);
-			ImageLoaderUtils.getInstance(getActivity()).DisplayImage(icon, moinhieudichvu_img_icon);
+			ImageLoaderUtils.getInstance(getActivity()).DisplayImage(icon, moinhieudichvu_img_icon, BitmapFactory.decodeResource(getResources(), R.drawable.no_image));
 
 		}
 

@@ -5,6 +5,7 @@ import vnp.com.mimusic.R;
 import vnp.com.mimusic.util.ImageLoaderUtils;
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.BitmapFactory;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,7 +51,7 @@ public class ChiTietDichVuNoFeatureView extends LinearLayout {
 		home_item_img_icon.setImageResource(R.drawable.no_avatar);
 		// show image
 		String service_icon = cursor.getString(cursor.getColumnIndex(DichVu.service_icon)) + "";
-		ImageLoaderUtils.getInstance(getContext()).DisplayImage(service_icon, home_item_img_icon);
+		ImageLoaderUtils.getInstance(getContext()).DisplayImage(service_icon, home_item_img_icon, BitmapFactory.decodeResource(getResources(), R.drawable.no_image));
 
 		findViewById(R.id.chitietdichvu_no_feature_dangky).setVisibility(isDangKy ? View.INVISIBLE : View.VISIBLE);
 	}
