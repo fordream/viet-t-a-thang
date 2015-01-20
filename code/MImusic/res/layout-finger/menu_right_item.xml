@@ -28,8 +28,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:orientation="vertical"
-                android:paddingLeft="@dimen/dimen_0dp"
-                android:paddingRight="@dimen/dimen_3dp" >
+                android:paddingLeft="@dimen/dimen_5dp"
+                android:paddingRight="@dimen/dimen_5dp" >
 
                 <TextView
                     android:id="@+id/menu_right_item_tv_name"
@@ -46,7 +46,7 @@
                     android:id="@+id/menu_right_item_tv_link"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/dimen_3dp"
+                    android:layout_marginTop="@dimen/dimen_3dp"
                     android:singleLine="true"
                     android:text="imuzik | imuzik | imuzik"
                     android:textColor="#333333"

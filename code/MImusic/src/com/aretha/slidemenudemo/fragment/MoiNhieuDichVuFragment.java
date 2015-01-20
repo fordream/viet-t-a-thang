@@ -95,6 +95,7 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 			LISTIDDVSUDUNG = "";
 			moinhieudichvu_dialog_menurightitem.initData(getArguments().getString("name"));
 			menuRightItemViewheader.initData(getArguments().getString("name"));
+			menuRightItemViewheader.initSdt(sdt);
 		} else {
 			Cursor cursor = getActivity().getContentResolver().query(User.CONTENT_URI, null, where, null, null);
 			if (cursor != null && cursor.getCount() >= 1) {
