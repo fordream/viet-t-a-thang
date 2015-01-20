@@ -80,11 +80,17 @@ public abstract class ReCommentView extends LinearLayout {
 				} else if (event.getAction() == MotionEvent.ACTION_MOVE) {
 					if (event.getY() - y >= 0) {
 					} else {
-						float dx = event.getY() - y;
-						LogUtils.e("DY", dx + "");
+						float dy = event.getY() - y;
+						LogUtils.e("DY", dy + "");
 						RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) findViewById(R.id.recomment_main).getLayoutParams();
-						params.setMargins(0, (int) dx, 0, 0);
+						params.setMargins(0, (int) dy, 0, 0);
 						findViewById(R.id.recomment_main).setLayoutParams(params);
+						try {
+							float f = ((float) Math.abs(dy)) / (float) findViewById(R.id.recomment_main).getHeight();
+							findViewById(R.id.recomment_main_background).setAlpha(1 - f);
+						} catch (Exception exception) {
+
+						}
 					}
 				}
 				return true;
