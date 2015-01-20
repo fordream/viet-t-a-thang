@@ -10,6 +10,7 @@ import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
 import vnp.com.mimusic.view.BangXepHangItemView;
 import vnp.com.mimusic.view.HeaderView;
+import vnp.com.mimusic.view.LoadingView;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,7 +22,7 @@ import android.widget.Toast;
 
 public class ChiTietCaNhanBangXepHangTungDichVuFragment extends BaseFragment implements View.OnClickListener {
 	private TextView soGDTrongThang, soGD, soHHTrongThang, soHH, bangxephangItemTvStt;
-
+	private LoadingView loadingView;
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
@@ -30,6 +31,8 @@ public class ChiTietCaNhanBangXepHangTungDichVuFragment extends BaseFragment imp
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.chitietcanhanbangxephangtungdichvu, null);
+		loadingView = (LoadingView)view.findViewById(R.id.loadingView1);
+		
 		BangXepHangItemView bXHItemView = (BangXepHangItemView) view.findViewById(R.id.bangxephangitemview);
 		LinearLayout blockLayout = (LinearLayout) bXHItemView.findViewById(R.id.bangxephang_block);
 		blockLayout.setVisibility(View.GONE);
@@ -55,6 +58,8 @@ public class ChiTietCaNhanBangXepHangTungDichVuFragment extends BaseFragment imp
 
 		bXHItemView.setDataBundle(getArguments());
 
+	
+
 		soGDTrongThang = (TextView) view.findViewById(R.id.soGDTrongThang);
 		soGD = (TextView) view.findViewById(R.id.soGD);
 		soHHTrongThang = (TextView) view.findViewById(R.id.soHHTrongThang);
@@ -64,7 +69,9 @@ public class ChiTietCaNhanBangXepHangTungDichVuFragment extends BaseFragment imp
 		soGD.setText("");
 		soHHTrongThang.setText("");
 		soHH.setText("");
-
+		
+		soGD.setText(getArguments().getString("quantity"));
+		soHH.setText(getArguments().getString("commission"));
 		callApi(getArguments());
 
 		return view;
@@ -78,7 +85,7 @@ public class ChiTietCaNhanBangXepHangTungDichVuFragment extends BaseFragment imp
 		executeHttps(RequestMethod.GET, API.API_R025, bundle, new IContsCallBack() {
 			@Override
 			public void onStart() {
-
+				Conts.showView(loadingView, true);
 			}
 
 			@Override
@@ -89,24 +96,34 @@ public class ChiTietCaNhanBangXepHangTungDichVuFragment extends BaseFragment imp
 			@Override
 			public void onError(String message) {
 				Conts.showDialogThongbao(getActivity(), message);
+				Conts.showView(loadingView, false);
 			}
 
 			@Override
 			public void onSuscess(JSONObject response) {
-				//Conts.showDialogThongbao(getActivity(), response.toString());
-				// so giao dich thanh cong
-				String exchange_number = Conts.getString(response, "exchange_number");
-				// so giao dich thanh cong trong thang
-				String exchange_number_month = Conts.getString(response, "exchange_number_month");
-				// poundage tien hoa hong
-				String poundage = Conts.getString(response, "poundage");
-				// poundage_month tien hoa hong trong thang
-				String poundage_month = Conts.getString(response, "poundage_month");
+				Conts.showView(loadingView, false);
+				// Conts.showDialogThongbao(getActivity(), response.toString());
+//				// so giao dich thanh cong
+//				String exchange_number = Conts.getString(response, "exchange_number");
+//				// so giao dich thanh cong trong thang
+//				String exchange_number_month = Conts.getString(response, "exchange_number_month");
+//				// poundage tien hoa hong
+//				String poundage = Conts.getString(response, "poundage");
+//				// poundage_month tien hoa hong trong thang
+//				String poundage_month = Conts.getString(response, "poundage_month");
+
+				// quantity_in_duration
+				// commission_in_duration
+
+				// soGD.setText(exchange_number);
+				// soHH.setText(poundage);
+
+				String quantity_in_duration = Conts.getString(response, "quantity_in_duration");
 				
-				soGD.setText(exchange_number);
-				soGDTrongThang.setText(exchange_number_month);
-				soHH.setText(poundage);
-				soHHTrongThang.setText(poundage_month);
+				String commission_in_duration = Conts.getString(response, "commission_in_duration");
+				
+				soGDTrongThang.setText(quantity_in_duration);
+				soHHTrongThang.setText(commission_in_duration);
 			}
 		});
 	}
