@@ -1,5 +1,7 @@
 package vnp.com.mimusic.util;
 
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -23,6 +25,7 @@ import vnp.com.mimusic.R;
 import vnp.com.mimusic.base.diablog.DangKyDialog;
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -36,6 +39,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
+import android.provider.ContactsContract.Contacts;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.view.View;
@@ -664,5 +668,50 @@ public class Conts {
 			return "0" + string.substring(2, string.length());
 		}
 		return string;
+	}
+
+	public static Bitmap getBitmapFromContactId(Context context, String contactId) {
+		Bitmap bitmap = null;
+		try {
+			Uri contactUri = ContentUris.withAppendedId(Contacts.CONTENT_URI, Long.parseLong(contactId));
+			Uri photoUri = Uri.withAppendedPath(contactUri, Contacts.Photo.CONTENT_DIRECTORY);
+			Cursor cursor = context.getContentResolver().query(photoUri, new String[] { Contacts.Photo.PHOTO }, null, null, null);
+			File yourFile = new File(Environment.getExternalStorageDirectory(), System.currentTimeMillis() + "");
+			if (cursor.moveToFirst()) {
+				byte[] data = cursor.getBlob(0);
+				if (data != null) {
+					BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(yourFile));
+					bos.write(data);
+					bos.flush();
+					bos.close();
+				}
+			}
+
+			bitmap = ImageLoader.decodeFile(yourFile);
+			if (cursor != null) {
+				cursor.close();
+			}
+		} catch (Exception exception) {
+
+		}
+		return bitmap;
+	}
+
+	public static void showAvatar(ImageView menu_right_item_img_icon, String avatar, String contact_id) {
+		if (Conts.isBlank(avatar)) {
+			if (Conts.isBlank(contact_id)) {
+				menu_right_item_img_icon.setImageResource(R.drawable.no_avatar);
+			} else {
+				Bitmap bitmap = Conts.getBitmapFromContactId(menu_right_item_img_icon.getContext(), contact_id);
+				if (bitmap == null) {
+					menu_right_item_img_icon.setImageResource(R.drawable.no_avatar);
+				} else {
+					menu_right_item_img_icon.setImageBitmap(bitmap);
+				}
+			}
+		} else {
+			ImageLoaderUtils.getInstance(menu_right_item_img_icon.getContext()).DisplayImage(avatar, menu_right_item_img_icon,
+					BitmapFactory.decodeResource(menu_right_item_img_icon.getContext().getResources(), R.drawable.no_avatar));
+		}
 	}
 }

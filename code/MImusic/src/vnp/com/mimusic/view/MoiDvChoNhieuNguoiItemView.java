@@ -59,13 +59,19 @@ public class MoiDvChoNhieuNguoiItemView extends LinearLayout {
 		main.setVisibility(needShow ? View.VISIBLE : View.GONE);
 
 		((TextView) findViewById(R.id.menu_right_item_tv_name)).setText(name);
+//		String avatar = cursor.getString(cursor.getColumnIndex(User.AVATAR));
+//		if (avatar == null) {
+//
+//		} else {
+//			((ImageView) findViewById(R.id.menu_right_item_img_icon)).setBackgroundResource(R.drawable.no_avatar);
+//		}
+
+		
 		String avatar = cursor.getString(cursor.getColumnIndex(User.AVATAR));
-		if (avatar == null) {
-
-		} else {
-			((ImageView) findViewById(R.id.menu_right_item_img_icon)).setBackgroundResource(R.drawable.no_avatar);
-		}
-
+		String contact_id = Conts.getStringCursor(cursor, User.contact_id);
+	
+		Conts.showAvatar(((ImageView) findViewById(R.id.menu_right_item_img_icon)), avatar,contact_id);
+		
 		Conts.setTextViewCursor(findViewById(R.id.menu_right_item_tv_link), cursor, User.USER);
 
 		Conts.getSDT(findViewById(R.id.menu_right_item_tv_link));

@@ -5,9 +5,11 @@ import java.util.StringTokenizer;
 import vnp.com.db.User;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.util.Conts;
+import vnp.com.mimusic.util.ImageLoaderUtils;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.BitmapFactory;
 import android.text.Html;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -70,21 +72,33 @@ public class MenuRightItemView extends LinearLayout {
 			menurightitem_main.setVisibility(name.toUpperCase().contains(textSearch.toUpperCase()) ? View.VISIBLE : View.GONE);
 			menu_right_item_tv_name.setText(name);
 
+			
+			
+			
 			String avatar = cursor.getString(cursor.getColumnIndex(User.AVATAR));
-			if (avatar == null) {
-
-			} else {
-				menu_right_item_img_icon.setBackgroundResource(R.drawable.no_avatar);
-			}
+			String contact_id = Conts.getStringCursor(cursor, User.contact_id);
+		
+			Conts.showAvatar(menu_right_item_img_icon, avatar,contact_id);
+//			if (Conts.isBlank(avatar)) {
+//				if (Conts.isBlank(contact_id)) {
+//					menu_right_item_img_icon.setImageResource(R.drawable.no_avatar);
+//				} else {
+//					menu_right_item_img_icon.setImageBitmap(Conts.getBitmapFromContactId(getContext(), contact_id));
+//				}
+//			} else {
+//				// menu_right_item_img_icon.setBackgroundResource(R.drawable.no_avatar);
+//				ImageLoaderUtils.getInstance(getContext()).DisplayImage(avatar, menu_right_item_img_icon, BitmapFactory.decodeResource(getResources(), R.drawable.no_avatar));
+//			}
 
 			menu_right_item_tv_link.setText(Conts.getStringCursor(cursor, User.USER));
 			Conts.getSDT(menu_right_item_tv_link);
-			
+
 			String dvDaSuDung = cursor.getString(cursor.getColumnIndex(User.LISTIDDVSUDUNG));
 			// try {
 			// menu_right_item_tv_link.setText(Html.fromHtml(cursor.getString(cursor.getColumnIndex(User.LISTIDTENDVSUDUNG))));
 			// } catch (Exception exception) {
 			// }
+
 		} catch (Exception exception) {
 
 		}
