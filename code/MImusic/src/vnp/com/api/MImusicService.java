@@ -1,9 +1,9 @@
 package vnp.com.api;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.json.JSONArray;
@@ -15,21 +15,16 @@ import vnp.com.db.DichVu;
 import vnp.com.db.User;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
-import vnp.com.mimusic.util.ImageLoader;
 import vnp.com.mimusic.util.LogUtils;
 import android.app.Service;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.ContactsContract;
-import android.provider.MediaStore;
-import android.util.Base64;
 
 public class MImusicService extends Service {
 
@@ -38,6 +33,7 @@ public class MImusicService extends Service {
 	public static final String KEY = "KEY";
 	public static final String VALUE = "VALUE";
 	public static final String METHOD = "METHOD";
+	private Map<String, String> avatarHashmap = new HashMap<String, String>();
 
 	public MImusicService() {
 		super();
@@ -328,8 +324,7 @@ public class MImusicService extends Service {
 					String id = cur.getString(cur.getColumnIndex(ContactsContract.Contacts._ID));
 					String name = cur.getString(cur.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
 
-					// String photo_id = Conts.getStringCursor(cur,
-					// ContactsContract.Contacts.PHOTO_ID);
+					String photo_id = Conts.getStringCursor(cur, ContactsContract.Contacts.PHOTO_ID);
 
 					if (Integer.parseInt(cur.getString(cur.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))) > 0) {
 						Cursor pCur = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?", new String[] { id }, null);
@@ -338,13 +333,17 @@ public class MImusicService extends Service {
 							if (!Conts.isBlank(phoneNo)) {
 								phoneNo = phoneNo.replace(" ", "");
 							}
+
 							if (Conts.isBlank(name)) {
 								name = phoneNo;
 							}
 
 							if (!Conts.isBlank(phoneNo)) {
 								if (!listSdt.contains(phoneNo)) {
+
 									listSdt.add(phoneNo);
+									if (!Conts.isBlank(phoneNo) && !Conts.isBlank(photo_id))
+										avatarHashmap.put(phoneNo, photo_id);
 									if (conttacts.length() == 0) {
 										conttacts.append(String.format("{\"phone\":\"%s\",\"name\":\"%s\"}", phoneNo, name));
 									} else {
@@ -675,4 +674,5 @@ public class MImusicService extends Service {
 		// bundle.putString("file", path);// path
 		execute(RequestMethod.POST, API.API_R023, bundle, iContsCallBack);
 	}
+
 }
