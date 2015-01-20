@@ -83,7 +83,6 @@ public class ChiTietCaNhanBangXepHangTungDichVuFragment extends BaseFragment imp
 
 			@Override
 			public void onError() {
-
 				onError("erorr");
 			}
 
@@ -95,19 +94,19 @@ public class ChiTietCaNhanBangXepHangTungDichVuFragment extends BaseFragment imp
 			@Override
 			public void onSuscess(JSONObject response) {
 				//Conts.showDialogThongbao(getActivity(), response.toString());
-				try {
-					String STT = "";// truyền từ danh sách vào
-					String imagePath = response.getString("avatar");
-					String name = response.getString("nickname");
-					String soLuong = response.getString("quantity");
-					String doanhThu = response.getString("commission");
-					String soGDThanhCongTrongThang = response.getString("commission");
-					String soGDThanhCong = response.getString("commission");
-					String soTienHoaHongTrongThang = response.getString("commission");
-					String soTienHoaHong = response.getString("commission");
-					// set value for element of form
-				} catch (JSONException e) {
-				}
+				// so giao dich thanh cong
+				String exchange_number = Conts.getString(response, "exchange_number");
+				// so giao dich thanh cong trong thang
+				String exchange_number_month = Conts.getString(response, "exchange_number_month");
+				// poundage tien hoa hong
+				String poundage = Conts.getString(response, "poundage");
+				// poundage_month tien hoa hong trong thang
+				String poundage_month = Conts.getString(response, "poundage_month");
+				
+				soGD.setText(exchange_number);
+				soGDTrongThang.setText(exchange_number_month);
+				soHH.setText(poundage);
+				soHHTrongThang.setText(poundage_month);
 			}
 		});
 	}
