@@ -75,18 +75,20 @@ public class LoginActivty extends Activity implements OnClickListener {
 	};
 
 	private void gotoHome() {
-		startActivity(new Intent(this, BaseMusicSlideMenuActivity.class));
-		finish();
-		overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_nothing);
+		if (!isFinishing()) {
+			startActivity(new Intent(this, BaseMusicSlideMenuActivity.class));
+			finish();
+			overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_nothing);
+		}
 	}
 
 	private void callInitSetting() {
 		((TextView) findViewById(R.id.activity_login_number_phone)).setText(Conts.getUser(this));
 		((TextView) findViewById(R.id.activity_login_password)).setText(Conts.getPassword(this));
-		
+
 		((TextView) findViewById(R.id.activity_login_number_phone)).setText("0968050820");
 		((TextView) findViewById(R.id.activity_login_password)).setText("265376");
-		
+
 		if (Conts.isBlank(Conts.getUser(this))) {
 			if (Conts.is3GConnected(LoginActivty.this)) {
 				login(true, "", "");
@@ -160,13 +162,6 @@ public class LoginActivty extends Activity implements OnClickListener {
 			@Override
 			public void onError() {
 				onError("onError");
-				// Toast.makeText(LoginActivty.this, "please check network",
-				// Toast.LENGTH_SHORT).show();
-				// Conts.showView(progressBar1, false);
-				// Conts.enableView(new View[] { //
-				// findViewById(R.id.activity_login_number_phone), //
-				// findViewById(R.id.activity_login_password), //
-				// findViewById(R.id.activity_login_btn) });//
 			}
 		});
 	}

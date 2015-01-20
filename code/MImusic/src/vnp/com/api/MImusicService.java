@@ -342,8 +342,10 @@ public class MImusicService extends Service {
 								if (!listSdt.contains(phoneNo)) {
 
 									listSdt.add(phoneNo);
-									if (!Conts.isBlank(phoneNo) && !Conts.isBlank(photo_id))
-										avatarHashmap.put(phoneNo, photo_id);
+									if (!Conts.isBlank(phoneNo) && !Conts.isBlank(photo_id)) {
+										addPhoneId(phoneNo, photo_id);
+
+									}
 									if (conttacts.length() == 0) {
 										conttacts.append(String.format("{\"phone\":\"%s\",\"name\":\"%s\"}", phoneNo, name));
 									} else {
@@ -395,12 +397,33 @@ public class MImusicService extends Service {
 
 	}
 
+	private void addPhoneId(String phoneNo, String photo_id) {
+
+		if (!Conts.isBlank(phoneNo) && !Conts.isBlank(photo_id)) {
+
+			if (phoneNo.startsWith("+840")) {
+				phoneNo = "84" + phoneNo.substring("+840".length(), phoneNo.length());
+			} else if (phoneNo.startsWith("+84")) {
+				phoneNo = "84" + phoneNo.substring("+84".length(), phoneNo.length());
+			} else if (phoneNo.startsWith("840")) {
+				phoneNo = "84" + phoneNo.substring("840".length(), phoneNo.length());
+			} else if (phoneNo.startsWith("84")) {
+				phoneNo = "84" + phoneNo.substring("84".length(), phoneNo.length());
+			} else if (phoneNo.startsWith("0")) {
+				phoneNo = "84" + phoneNo.substring("0".length(), phoneNo.length());
+			}
+
+			if (avatarHashmap.containsKey(phoneNo)) {
+				avatarHashmap.remove(phoneNo);
+			}
+
+			avatarHashmap.put(phoneNo, photo_id);
+		}
+	}
+
 	public void dongboDanhBaXuong(final IContsCallBack contsCallBack, final List<String> numbers) {
 
-		// String number = numbers.get(0);
-		// numbers.remove(0);
 		Bundle bundle = new Bundle();
-		// bundle.putString("phonenumber", number);
 		execute(RequestMethod.GET, API.API_R012, bundle, new IContsCallBack() {
 
 			@Override
@@ -496,11 +519,12 @@ public class MImusicService extends Service {
 
 	private void updateDongBoXuong(JSONObject response) {
 
+		// TODO
 		Set<String> keys = avatarHashmap.keySet();
-		for (String key  : keys) {
+		for (String key : keys) {
 			LogUtils.e("updateDongBoXuong", key + " : " + avatarHashmap.get(key));
-			
 		}
+
 		try {
 			String user = Conts.getUser(MImusicService.this);
 			JSONArray array = response.getJSONArray("data");
@@ -513,16 +537,25 @@ public class MImusicService extends Service {
 				contentValues.put(User.NAME_CONTACT, name);
 				contentValues.put(User.STATUS, user.equals(phone) ? "1" : "0");
 
+				String photo_id = "";
+				if (avatarHashmap.containsKey(phone)) {
+					photo_id = avatarHashmap.get(phone);
+				}
+
+				if (Conts.isBlank(photo_id)) {
+					photo_id = "";
+				}
+				
+				contentValues.put(User.photo_id, photo_id);
+
 				String service_codes = "";
 				String service_codes_name = "";
 				if (jsonObject.has("services")) {
 					JSONArray services = jsonObject.getJSONArray("services");
-
 					String format = "%s";
 					int count = 0;
 					for (int in = 0; in < services.length(); in++) {
 						count++;
-
 						// id,service_name,service_code,service_icon
 						String service_code = services.getJSONObject(in).getString("service_code");
 						if (Conts.isBlank(service_codes)) {
