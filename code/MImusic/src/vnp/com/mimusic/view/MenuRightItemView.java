@@ -96,10 +96,11 @@ public class MenuRightItemView extends LinearLayout {
 	}
 
 	public void initData(String name) {
-		menu_right_item_tv_name.setText(name + "'");
+		menu_right_item_tv_name.setText(name + "");
 	}
 
 	public void initSdt(String sdt) {
 		menu_right_item_tv_link.setText(sdt);
+		Conts.getSDT(menu_right_item_tv_link);
 	}
 }
