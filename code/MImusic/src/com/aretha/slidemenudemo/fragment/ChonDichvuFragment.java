@@ -65,7 +65,7 @@ public class ChonDichvuFragment extends BaseFragment implements android.view.Vie
 		});
 		menu_right_editext = (EditText) view.findViewById(R.id.menu_right_editext);
 		HeaderView chitietdichvu_headerview = (HeaderView) view.findViewById(R.id.chitietdichvu_headerview);
-		chitietdichvu_headerview.setTextHeader(R.string.chondichvu);
+		chitietdichvu_headerview.setTextHeader(R.string.timkiemdichvu);
 		chitietdichvu_headerview.setButtonLeftImage(true, R.drawable.btn_back);
 		chitietdichvu_headerview.setButtonRightImage(false, R.drawable.chititetdichvu_right);
 		chitietdichvu_headerview.findViewById(R.id.header_btn_right__done).setVisibility(View.INVISIBLE);

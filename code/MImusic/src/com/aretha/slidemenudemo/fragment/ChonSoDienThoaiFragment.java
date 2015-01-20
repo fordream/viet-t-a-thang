@@ -29,10 +29,9 @@ public class ChonSoDienThoaiFragment extends BaseFragment implements android.vie
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		view = inflater.inflate(R.layout.choncontact_dialog, null);
+		view = inflater.inflate(R.layout.chonsodienthoai, null);
 
 		header = new ChonTatCaView(container.getContext());
-		//header.initData(getString(R.string.tatca));
 		bangxephang_list = (MusicListView) view.findViewById(R.id.bangxephang_list);
 		bangxephang_list.addHeaderView(header);
 
@@ -65,7 +64,7 @@ public class ChonSoDienThoaiFragment extends BaseFragment implements android.vie
 		});
 		menu_right_editext = (EditText) view.findViewById(R.id.menu_right_editext);
 		HeaderView chitietdichvu_headerview = (HeaderView) view.findViewById(R.id.chitietdichvu_headerview);
-		chitietdichvu_headerview.setTextHeader(R.string.chonsdt);
+		chitietdichvu_headerview.setTextHeader(R.string.timkiemdanhba);
 		chitietdichvu_headerview.setButtonLeftImage(true, R.drawable.btn_back);
 		chitietdichvu_headerview.setButtonRightImage(false, R.drawable.chititetdichvu_right);
 
@@ -74,21 +73,6 @@ public class ChonSoDienThoaiFragment extends BaseFragment implements android.vie
 		chitietdichvu_headerview.findViewById(R.id.header_btn_right__done).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// Intent intent = new Intent();
-				// if (adaper != null) {
-				// if (adaper.getIndex() < 0) {
-				// intent.putExtra(User.NAME_CONTACT,
-				// getString(R.string.tatca));
-				// intent.putExtra(User.USER, "");
-				// } else {
-				// Cursor cursor = (Cursor) adaper.getItem(adaper.getIndex());
-				// intent.putExtra(User.NAME_CONTACT,
-				// cursor.getString(cursor.getColumnIndex(User.NAME_CONTACT)));
-				// intent.putExtra(User.USER,
-				// cursor.getString(cursor.getColumnIndex(User.USER)));
-				// }
-				// }
-				// getActivity().setResult(Activity.RESULT_OK, intent);
 				getActivity().onBackPressed();
 			}
 		});

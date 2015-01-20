@@ -94,8 +94,8 @@
             android:layout_height="match_parent"
             android:divider="@drawable/tranfer"
             android:dividerHeight="0px"
-            android:paddingBottom="@dimen/dimen_5dp"
             android:background="@android:color/white"
+            android:paddingBottom="@dimen/dimen_5dp"
             android:paddingTop="@dimen/dimen_5dp" >
         </vnp.com.mimusic.view.MusicListView>
 

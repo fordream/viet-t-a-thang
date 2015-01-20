@@ -208,6 +208,8 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 						if (progressDialog != null) {
 							progressDialog.dismiss();
 						}
+
+						Conts.showDialogThongbao(BaseMusicSlideMenuActivity.this, Conts.getString(response, "message"));
 					}
 
 					@Override
@@ -219,6 +221,8 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 
 					@Override
 					public void onError(String message) {
+
+						Conts.showDialogThongbao(BaseMusicSlideMenuActivity.this, message);
 						if (progressDialog != null) {
 							progressDialog.dismiss();
 						}
