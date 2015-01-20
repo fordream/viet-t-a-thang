@@ -47,19 +47,21 @@ public class ChiTietDichVuNoFeatureView extends LinearLayout {
 		TextView chitietdichvu_no_feature_gia_2 = (TextView) findViewById(R.id.chitietdichvu_no_feature_gia_2);
 		home_item_tv_name.setText(cursor.getString(cursor.getColumnIndex(DichVu.service_name)));
 		chitietdichvu_no_feature_gia_1.setText(cursor.getString(cursor.getColumnIndex(DichVu.service_price)));
-		chitietdichvu_no_feature_gia_2.setText(String.format(getContext().getString(R.string.format_gia), 
-				cursor.getString(cursor.getColumnIndex(DichVu.service_price)))
-		);
+		chitietdichvu_no_feature_gia_2.setText(String.format(getContext().getString(R.string.format_gia), cursor.getString(cursor.getColumnIndex(DichVu.service_price))));
 		home_item_img_icon.setImageResource(R.drawable.no_avatar);
 		// show image
 		String service_icon = cursor.getString(cursor.getColumnIndex(DichVu.service_icon)) + "";
 		ImageLoaderUtils.getInstance(getContext()).DisplayImage(service_icon, home_item_img_icon, BitmapFactory.decodeResource(getResources(), R.drawable.no_image));
 
-		findViewById(R.id.chitietdichvu_no_feature_dangky).setVisibility(isDangKy ? View.INVISIBLE : View.VISIBLE);
+		findViewById(R.id.chitietdichvu_no_feature_dangky).setEnabled(isDangKy ? false : true);
+		((TextView) findViewById(R.id.dangkyx)).setText(isDangKy ? R.string.dangdung : R.string.dangky);
+		findViewById(R.id.dangkyxm1).setVisibility(isDangKy ? View.GONE : View.VISIBLE);
 	}
 
 	public void hiddenChitietdichvu_no_feature_dangky() {
-		findViewById(R.id.chitietdichvu_no_feature_dangky).setVisibility(View.INVISIBLE);
+		findViewById(R.id.chitietdichvu_no_feature_dangky).setEnabled(false);
+		((TextView) findViewById(R.id.dangkyx)).setText(R.string.dangdung);
+		findViewById(R.id.dangkyxm1).setVisibility(View.GONE);
 	}
 
 	public void showFooter() {

@@ -52,7 +52,7 @@ public class MoiDvChoNhieuNguoiItemView extends LinearLayout {
 		main.setVisibility(name.toUpperCase().contains(textSearch.toUpperCase()) ? View.VISIBLE : View.GONE);
 		boolean needShow = Conts.contains(name, textSearch);
 
-		if (!Conts.contains(cursor.getString(cursor.getColumnIndex(User.LISTIDDVSUDUNG)), service_code)) {
+		if (cursor != null && !Conts.contains(cursor.getString(cursor.getColumnIndex(User.LISTIDDVSUDUNG)), service_code)) {
 			needShow = false;
 		}
 
@@ -67,7 +67,7 @@ public class MoiDvChoNhieuNguoiItemView extends LinearLayout {
 		}
 
 		Conts.setTextViewCursor(findViewById(R.id.menu_right_item_tv_link), cursor, User.USER);
-		
+
 		Conts.getSDT(findViewById(R.id.menu_right_item_tv_link));
 		findViewById(R.id.menu_right_item_tv_link).setVisibility(View.VISIBLE);
 	}

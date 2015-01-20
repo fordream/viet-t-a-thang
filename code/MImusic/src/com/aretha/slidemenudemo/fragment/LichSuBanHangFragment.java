@@ -136,6 +136,8 @@ public class LichSuBanHangFragment extends Fragment implements OnItemClickListen
 				lsbh_sdt.setText(phoneContact);
 			}
 
+			
+			Conts.getSDT(lsbh_sdt);
 		} else if (requestCode == 20001 && resultCode == Activity.RESULT_OK) {
 			idDv = data.getStringExtra(DichVu.ID);
 			lsbt_dichvu.setText(data.getStringExtra(DichVu.service_name));
