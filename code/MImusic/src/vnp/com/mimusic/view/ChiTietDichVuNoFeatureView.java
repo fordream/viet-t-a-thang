@@ -40,7 +40,7 @@ public class ChiTietDichVuNoFeatureView extends LinearLayout {
 	}
 
 	public void setData(Cursor cursor) {
-		final boolean isDangKy = "0".equals(cursor.getString(cursor.getColumnIndex(DichVu.service_status)));
+		boolean isDangKy = "0".equals(cursor.getString(cursor.getColumnIndex(DichVu.service_status)));
 		ImageView home_item_img_icon = (ImageView) findViewById(R.id.home_item_img_icon);
 		TextView home_item_tv_name = (TextView) findViewById(R.id.home_item_tv_name);
 		TextView chitietdichvu_no_feature_gia_1 = (TextView) findViewById(R.id.chitietdichvu_no_feature_gia_1);

@@ -230,7 +230,8 @@ public class MImusicService extends Service {
 
 			@Override
 			public void onSuscess(JSONObject response) {
-				contsCallBack.onSuscess(null);
+				if (contsCallBack != null)
+					contsCallBack.onSuscess(null);
 			}
 
 			@Override
@@ -240,12 +241,14 @@ public class MImusicService extends Service {
 
 			@Override
 			public void onError(String message) {
-				contsCallBack.onSuscess(null);
+				if (contsCallBack != null)
+					contsCallBack.onSuscess(null);
 			}
 
 			@Override
 			public void onError() {
-				contsCallBack.onSuscess(null);
+				if (contsCallBack != null)
+					contsCallBack.onSuscess(null);
 			}
 		});
 	}

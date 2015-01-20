@@ -94,7 +94,7 @@ public class ChiTietCaNhanBangXepHangTungDichVuFragment extends BaseFragment imp
 
 			@Override
 			public void onSuscess(JSONObject response) {
-
+				//Conts.showDialogThongbao(getActivity(), response.toString());
 				try {
 					String STT = "";// truyền từ danh sách vào
 					String imagePath = response.getString("avatar");

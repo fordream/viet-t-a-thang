@@ -211,7 +211,7 @@ public class Conts {
 				String errorCode = "";
 				RestClient restClient = (RestClient) object;
 				String response = restClient.getResponse();
-
+				LogUtils.e("responsex", response + "");
 				try {
 					if (Conts.isBlank(response)) {
 						response = activity.getString(R.string.default_error);

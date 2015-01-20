@@ -73,6 +73,8 @@ public class BangXepHangItemView extends LinearLayout {
 		bxhItemName.setText(arguments.getString("nickname"));
 		Conts.setTextView(findViewById(R.id.chitietsoluong1dichvu), arguments.getString("quantity"));
 		Conts.setTextView(findViewById(R.id.chitietdoanhthu1dichvu), arguments.getString("commission"));
+		ImageView bxhItemImage = (ImageView) findViewById(R.id.bangxephang_item_img_icon);
+		ImageLoaderUtils.getInstance(getContext()).DisplayImage(arguments.getString("avatar"), bxhItemImage, BitmapFactory.decodeResource(getResources(), R.drawable.no_avatar));
 
 	}
 }
