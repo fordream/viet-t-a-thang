@@ -158,10 +158,10 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 
 		final String id = getArguments().getString(DichVu.ID);
 		String selection = DichVu.ID + "='" + id + "'";
-		
-		if(Conts.isBlank(id)){
-			 String mService_code = getArguments().getString(DichVu.service_code);
-			 selection = DichVu.service_code + "='" + mService_code + "'";
+
+		if (Conts.isBlank(id)) {
+			String mService_code = getArguments().getString(DichVu.service_code);
+			selection = DichVu.service_code + "='" + mService_code + "'";
 		}
 		final Cursor mcursor = getActivity().getContentResolver().query(DichVu.CONTENT_URI, null, selection, null, null);
 
@@ -432,6 +432,8 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 			} else {
 				((TextView) findViewById(R.id.moinhieudichvu_item_tv_name)).setText(_id);
 			}
+
+			Conts.getSDT(findViewById(R.id.moinhieudichvu_item_tv_name));
 		}
 	}
 
