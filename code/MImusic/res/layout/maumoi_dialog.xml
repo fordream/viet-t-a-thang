@@ -4,11 +4,17 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
+    <RelativeLayout
+          android:id="@+id/recomment_main_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_dialog" >
+    </RelativeLayout>
+
     <LinearLayout
         android:id="@+id/maumoi_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/bg_dialog"
+        android:layout_height="wrap_content"
         android:orientation="vertical" >
 
         <RelativeLayout
@@ -98,7 +104,8 @@
     <vnp.com.mimusic.view.LoadingView
         android:id="@+id/loadingView1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:visibility="gone" >
     </vnp.com.mimusic.view.LoadingView>
 
 </RelativeLayout>

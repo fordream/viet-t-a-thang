@@ -11,16 +11,17 @@ import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.adapter.MauMoiAdaper;
 import vnp.com.mimusic.util.Conts;
-import vnp.com.mimusic.util.Conts.DialogCallBack;
-import vnp.com.mimusic.util.Conts.IContsCallBack;
 import vnp.com.mimusic.util.LogUtils;
-import android.app.ProgressDialog;
+import vnp.com.mimusic.util.Conts.IContsCallBack;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 public class MauMoiFragment extends BaseFragment implements android.view.View.OnClickListener {
 	private View loading;
@@ -42,7 +43,7 @@ public class MauMoiFragment extends BaseFragment implements android.view.View.On
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.maumoi_dialog, null);
+		final View view = inflater.inflate(R.layout.maumoi_dialog, null);
 		loading = view.findViewById(R.id.loadingView1);
 		view.setOnClickListener(null);
 		final ListView maumoi_list = (ListView) view.findViewById(R.id.maumoi_list);
@@ -103,7 +104,7 @@ public class MauMoiFragment extends BaseFragment implements android.view.View.On
 
 			@Override
 			public void onError(String message) {
-				Conts.toast(getActivity(), message);
+				Conts.showDialogThongbao(getActivity(), message);
 				Conts.showView(loading, false);
 			}
 
@@ -113,7 +114,49 @@ public class MauMoiFragment extends BaseFragment implements android.view.View.On
 				Conts.showView(loading, false);
 			}
 		});
+
+		view.findViewById(R.id.recomment_main_background).setOnTouchListener(new OnTouchListener() {
+
+			float x = 0, y = 0;
+
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				if (event.getAction() == MotionEvent.ACTION_DOWN) {
+					x = event.getX();
+					y = event.getY();
+				} else if (event.getAction() == MotionEvent.ACTION_UP) {
+					// close();
+					if (event.getY() - y < 0) {
+						close();
+					}
+				} else if (event.getAction() == MotionEvent.ACTION_CANCEL) {
+					if (event.getY() - y < 0) {
+						close();
+					}
+					// close();
+				} else if (event.getAction() == MotionEvent.ACTION_MOVE) {
+					if (event.getY() - y >= 0) {
+					} else {
+						float dy = event.getY() - y;
+						RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) view.findViewById(R.id.maumoi_main).getLayoutParams();
+						params.setMargins(0, (int) dy, 0, 0);
+						view.findViewById(R.id.maumoi_main).setLayoutParams(params);
+						try {
+							float f = ((float) Math.abs(dy)) / (float) view.findViewById(R.id.maumoi_main).getHeight();
+							view.findViewById(R.id.recomment_main_background).setAlpha(1 - f);
+						} catch (Exception exception) {
+
+						}
+					}
+				}
+				return true;
+			}
+		});
 		return view;
+	}
+
+	protected void close() {
+		getActivity().onBackPressed();
 	}
 
 	protected void moi() {
@@ -133,54 +176,6 @@ public class MauMoiFragment extends BaseFragment implements android.view.View.On
 
 		((RootMenuActivity) getActivity()).moi(type, bundle);
 
-		// execute(RequestMethod.POST, !type ? API.API_R015 : API.API_R016,
-		// bundle, new IContsCallBack() {
-		// ProgressDialog dialog;
-		//
-		// @Override
-		// public void onSuscess(JSONObject response) {
-		// String message = "";
-		// try {
-		// message = response.getString("message");
-		// } catch (JSONException e1) {
-		// }
-		//
-		// if (Conts.isBlank(message)) {
-		// message = getActivity().getString(R.string.success_moi);
-		// } else {
-		// message = String.format("%s\n%s", message,
-		// getActivity().getString(R.string.success_moi));
-		// }
-		// Conts.showDialogDongYCallBack(getActivity(), message, new
-		// DialogCallBack() {
-		// @Override
-		// public void callback(Object object) {
-		// ((RootMenuActivity) getActivity()).closeActivity();
-		// }
-		// });
-		// if (dialog != null)
-		// dialog.dismiss();
-		// }
-		//
-		// @Override
-		// public void onStart() {
-		// if (dialog == null)
-		// dialog = ProgressDialog.show(getActivity(), null,
-		// getActivity().getString(R.string.loading));
-		// }
-		//
-		// @Override
-		// public void onError(String message) {
-		// Conts.showDialogThongbao(getActivity(), message);
-		// if (dialog != null)
-		// dialog.dismiss();
-		// }
-		//
-		// @Override
-		// public void onError() {
-		// onError("onError");
-		// }
-		// });
 	}
 
 	@Override
