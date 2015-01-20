@@ -349,7 +349,6 @@ public class MImusicService extends Service {
 									} else {
 										conttacts.append(String.format(",{\"phone\":\"%s\",\"name\":\"%s\"}", phoneNo, name));
 									}
-
 								}
 							}
 						}
@@ -497,6 +496,11 @@ public class MImusicService extends Service {
 
 	private void updateDongBoXuong(JSONObject response) {
 
+		Set<String> keys = avatarHashmap.keySet();
+		for (String key  : keys) {
+			LogUtils.e("updateDongBoXuong", key + " : " + avatarHashmap.get(key));
+			
+		}
 		try {
 			String user = Conts.getUser(MImusicService.this);
 			JSONArray array = response.getJSONArray("data");
