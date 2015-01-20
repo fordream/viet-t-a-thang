@@ -59,10 +59,10 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 	private OnClickListener moidichvuchonhieunguoi_add_plusOnCLick = new OnClickListener() {
 		@Override
 		public void onClick(View v) {
+			Conts.hiddenKeyBoard(getActivity());
 			String moidichvuchonhieunguoi_numberText = moidichvuchonhieunguoi_number.getText().toString();
 			if (Conts.isVietTelNUmber(moidichvuchonhieunguoi_numberText, getActivity())) {
 				addSodt(moidichvuchonhieunguoi_numberText);
-
 			} else {
 				Conts.toast(getActivity(), String.format(getString(R.string.format_check_sdt), moidichvuchonhieunguoi_numberText));
 			}
