@@ -1,6 +1,8 @@
 package vnp.com.mimusic.view;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -117,7 +119,8 @@ public abstract class ReCommentView extends LinearLayout {
 						RecommentItemDvBanChayView banChayView = new RecommentItemDvBanChayView(getContext());
 						banChayView.setBackgroud(i);
 						banChayView.setData(jsonObject);
-						//DichVu.updateDichvuRecomment(jsonObject, getContext());
+						// DichVu.updateDichvuRecomment(jsonObject,
+						// getContext());
 						banChayView.setOnClickListener(new View.OnClickListener() {
 
 							@Override
@@ -136,6 +139,7 @@ public abstract class ReCommentView extends LinearLayout {
 
 		if (responseRecommend != null) {
 			if (responseRecommend.has("data")) {
+				List<JSONObject> list = new ArrayList<JSONObject>();
 				try {
 					JSONArray array = responseRecommend.getJSONArray("data");
 					for (int i = 0; i < array.length(); i++) {
@@ -145,23 +149,33 @@ public abstract class ReCommentView extends LinearLayout {
 
 						for (int index = 0; index < contacts.length(); index++) {
 							final JSONObject cotnact = contacts.getJSONObject(index);
-							RecommentItemView recommentItemView = new RecommentItemView(getContext());
-							recommentItemView.setData(cotnact);
-							recommentItemView.setOnClickListener(new View.OnClickListener() {
-								@Override
-								public void onClick(View v) {
-									close();
-									addContact(Conts.getString(cotnact, "phone"), Conts.getString(cotnact, "name"));
+
+							boolean canAdd = true;
+							for (JSONObject object : list) {
+								if (!Conts.isBlank(Conts.getString(cotnact, "phone")) && Conts.getString(cotnact, "phone").equals(Conts.getString(object, "phone"))) {
+									canAdd = false;
 								}
-							});
-							recomment_list.addView(recommentItemView);
+							}
+							if (canAdd) {
+
+								list.add(cotnact);
+								RecommentItemView recommentItemView = new RecommentItemView(getContext());
+								recommentItemView.setData(cotnact);
+								recommentItemView.setOnClickListener(new View.OnClickListener() {
+									@Override
+									public void onClick(View v) {
+										close();
+										addContact(Conts.getString(cotnact, "phone"), Conts.getString(cotnact, "name"));
+									}
+								});
+								recomment_list.addView(recommentItemView);
+							}
 						}
 					}
 				} catch (JSONException e) {
 				}
 			}
 		}
-
 	}
 
 	private void close() {

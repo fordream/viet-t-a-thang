@@ -35,7 +35,7 @@
         android:layout_centerVertical="true"
         android:text="@string/trangchu"
         android:textColor="@android:color/white"
-        android:textSize="@dimen/dimen_15dp"
+        android:textSize="@dimen/dimen_18dp"
         android:textStyle="bold" />
 
     <RelativeLayout

@@ -40,6 +40,8 @@ public class ChiTietDichVuFragment extends BaseFragment implements View.OnClickL
 		}
 	}
 
+	private String id = "";
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.chitietdichvu, null);
@@ -66,22 +68,13 @@ public class ChiTietDichVuFragment extends BaseFragment implements View.OnClickL
 					service_guide = getActivity().getString(R.string.nodata);
 				}
 
-				// ContentValues contentValues = new ContentValues();
-				// contentValues.put("btn_right", getString(R.string.dong));
-				// contentValues.put("btn_left_close", true);
-				// contentValues.put("name",
-				// getString(R.string.huongdanbanhang));
-				// contentValues.put("content", service_guide);
-				// DangKyDialog dangKyDialog = new DangKyDialog(getActivity(),
-				// contentValues);
-				// dangKyDialog.show();
 				(((RootMenuActivity) getActivity())).gotoHuongDanBanHangOfDichVh(service_guide);
 			}
 		});
 
 		final ChiTietDichVuNoFeatureView chitietdichvu_chitietdichvunofeatureview = (ChiTietDichVuNoFeatureView) view.findViewById(R.id.chitietdichvu_chitietdichvunofeatureview);
 
-		final String id = getArguments().getString(DichVu.ID);
+		id = getArguments().getString(DichVu.ID);
 		String service_code = "";
 		String selection = DichVu.ID + "='" + id + "'";
 
@@ -98,6 +91,7 @@ public class ChiTietDichVuFragment extends BaseFragment implements View.OnClickL
 		if (cursor != null && cursor.getCount() >= 1) {
 			cursor.moveToNext();
 			service_code = cursor.getString(cursor.getColumnIndex(DichVu.service_code));
+			id = cursor.getString(cursor.getColumnIndex(DichVu.ID));
 			chitietdichvu_chitietdichvunofeatureview.setData(cursor);
 			final ContentValues values = new ContentValues();
 			values.put(DichVu.ID, id);

@@ -35,7 +35,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_65dp"
+            android:layout_height="@dimen/dimen_75dp"
             android:background="#003333"
             android:padding="@dimen/dimen_10dp" >
 
@@ -62,7 +62,7 @@
                     android:layout_marginTop="@dimen/dimen_5dp"
                     android:text="@string/dexuatbanhang"
                     android:textColor="@android:color/white"
-                    android:textSize="@dimen/dimen_15dp"
+                    android:textSize="@dimen/dimen_18dp"
                     android:textStyle="bold" />
             </LinearLayout>
 

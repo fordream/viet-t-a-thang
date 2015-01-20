@@ -34,7 +34,7 @@
     <string name="sotienhoahongtrongthang">Số tiền hoa hồng trong tháng</string>
     <string name="sotienhoahong">Số tiền hoa hồng</string>
     <string name="dichvubanchay">Dịch vụ bán chạy</string>
-    <string name="dexuatbanhang">Để xuất bán hàng</string>
+    <string name="dexuatbanhang">Đề xuất bán hàng</string>
     <string name="sothuebaonemoi">Số thuê bao nên mời</string>
     <string name="baocaochitiettaikhoan">Báo cáo chi tiết tài khoản</string>
     <string name="timkiemdichvu">Tìm kiếm dịch vụ</string>
@@ -163,4 +163,5 @@
 
     <string name="recomment_example"> {\"errorCode\":0,\"message\":\"Th\u00e0nh c\u00f4ng\",\"data\":[{\"service_name\":\"All Blocking\",\"service_icon\":\"https://125.235.40.85/cache/uploads/medias/service/icon/2014/11/12/6e19f264de06aa266d779f34fb5c5964563cada8_30_30.jpg\",\"service_url\":null,\"service_code\":\"CS\",\"contacts\":[{\"phone\":\"84986810606\",\"name\":\"Test\"}]},{\"service_name\":\"MobiTV BASIC\",\"service_icon\":\"https://125.235.40.85/cache/uploads/medias/service/icon/2014/11/12/ab90c06aaae035fd47db11d4cba0a064c55e24f9_30_30.jpg\",\"service_url\":null,\"service_code\":\"MT\",\"contacts\":[{\"phone\":\"84986810606\",\"name\":\"Test\"}]},{\"service_name\":\"Call Blocking\",\"service_icon\":\"https://125.235.40.85/cache/uploads/medias/service/icon/2014/11/12/f91dde68a393c53fd0af241db292f3f4b356a7d7_30_30.jpg\",\"service_url\":null,\"service_code\":\"CB\",\"contacts\":[{\"phone\":\"84986810606\",\"name\":\"Test\"}]}]}</string>
 <string name="banchuachonloimoi">Bạn chưa chọn lời mời.</string>
+<string name="format_gia">Giá : %s</string>
 </resources>
