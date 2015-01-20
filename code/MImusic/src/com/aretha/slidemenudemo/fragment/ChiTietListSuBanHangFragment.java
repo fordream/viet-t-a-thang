@@ -52,7 +52,6 @@ public class ChiTietListSuBanHangFragment extends BaseFragment implements OnItem
 			@Override
 			public void onSuscess(JSONObject response) {
 				
-				LogUtils.e("AAAAAAAa", response.toString());
 				home_list.setText(false, R.string.nodata);
 				try {
 					JSONArray data = response.getJSONArray("data");
