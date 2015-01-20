@@ -146,7 +146,6 @@ public class MImusicService extends Service {
 		if (!Conts.isBlank(p))
 			bundle.putString("p", p);
 
-		LogUtils.e("api login", (is3G ? RequestMethod.GET : RequestMethod.POST) + " " + (is3G ? API.API_R001 : API.API_R002));
 		Conts.executeNoProgressBar((is3G ? RequestMethod.GET : RequestMethod.POST), (is3G ? API.API_R001 : API.API_R002), this, bundle, new IContsCallBack() {
 			@Override
 			public void onStart() {
@@ -157,7 +156,6 @@ public class MImusicService extends Service {
 			@Override
 			public void onSuscess(JSONObject jsonObject) {
 				try {
-					// LogUtils.e("AAAA", jsonObject.toString());
 					String token = jsonObject.getString("token");
 					String keyRefresh = jsonObject.getString("keyRefresh");
 					String phone_number = jsonObject.getString("phone");
@@ -352,6 +350,7 @@ public class MImusicService extends Service {
 									} else {
 										conttacts.append(String.format(",{\"phone\":\"%s\",\"name\":\"%s\"}", phoneNo, name));
 									}
+
 								}
 							}
 						}
