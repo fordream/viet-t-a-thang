@@ -78,7 +78,8 @@ public class MenuRightItemView extends LinearLayout {
 			}
 
 			menu_right_item_tv_link.setText(Conts.getStringCursor(cursor, User.USER));
-
+			Conts.getSDT(menu_right_item_tv_link);
+			
 			String dvDaSuDung = cursor.getString(cursor.getColumnIndex(User.LISTIDDVSUDUNG));
 			// try {
 			// menu_right_item_tv_link.setText(Html.fromHtml(cursor.getString(cursor.getColumnIndex(User.LISTIDTENDVSUDUNG))));

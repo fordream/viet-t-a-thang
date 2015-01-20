@@ -66,30 +66,14 @@ public class MenuLeftView extends LinearLayout {
 		Cursor cursor = getContext().getContentResolver().query(User.CONTENT_URI, null, String.format("%s = '1'", User.STATUS), null, null);
 		if (cursor != null && cursor.getCount() >= 1) {
 			cursor.moveToNext();
-			menu_left_tv_name.setText(String.format("%s (%s)", Conts.getName(cursor), cursor.getString(cursor.getColumnIndex(User.USER))));
+
+			menu_left_tv_name.setText(String.format("%s (%s)", Conts.getName(cursor), Conts.getSDT(cursor.getString(cursor.getColumnIndex(User.USER)))));
 
 			String cover = cursor.getString(cursor.getColumnIndex(User.COVER));
-
 			Conts.showImage(cover, menu_left_img_cover, 0);
-			// if (!Conts.isBlank(cover)) {
-			// BitmapFactory.Options options = new BitmapFactory.Options();
-			// options.inPreferredConfig = Bitmap.Config.ARGB_8888;
-			// Bitmap bitmap = BitmapFactory.decodeFile(cover, options);
-			// menu_left_img_cover.setImageBitmap(bitmap);
-			// }
 			String avatar = cursor.getString(cursor.getColumnIndex(User.AVATAR));
 			Conts.showImage(avatar, menu_left_img_avatar, R.drawable.no_avatar);
 
-			// if (!Conts.isBlank(avatar)) {
-			// BitmapFactory.Options options = new BitmapFactory.Options();
-			// options.inPreferredConfig = Bitmap.Config.ARGB_8888;
-			// Bitmap bitmap = BitmapFactory.decodeFile(avatar, options);
-			// menu_left_img_avatar.setImageBitmap(bitmap);
-			// } else {
-			// menu_left_img_avatar.setImageBitmap(BitmapFactory.decodeResource(getResources(),
-			// R.drawable.no_avatar));
-			//
-			// }
 			cursor.close();
 		}
 	}

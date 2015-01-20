@@ -6,21 +6,24 @@ import vnp.com.db.DichVu;
 import vnp.com.db.User;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
-import vnp.com.mimusic.base.diablog.DichVuDialog;
-import vnp.com.mimusic.base.diablog.LSBHDateDialog;
 import vnp.com.mimusic.base.diablog.TrangThaiDialog;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IShowDateDialog;
 import vnp.com.mimusic.view.HeaderView;
 import android.app.Activity;
-import android.content.ContentValues;
+import android.app.AlertDialog.Builder;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView;
 
@@ -65,7 +68,7 @@ public class LichSuBanHangFragment extends Fragment implements OnItemClickListen
 		lsbt_trangthai = (TextView) view.findViewById(R.id.lsbt_trangthai);
 		lsbt_trangthai.setOnClickListener(l);
 		lsbh_sdt = (TextView) view.findViewById(R.id.lsbh_sdt);
-		updateTrangThai();
+		// updateTrangThai();
 		return view;
 	}
 
@@ -183,16 +186,30 @@ public class LichSuBanHangFragment extends Fragment implements OnItemClickListen
 	}
 
 	protected void showTrangThai() {
-		TrangThaiDialog thaiDialog = new TrangThaiDialog(getActivity(), indexTrangThai) {
+
+		final Dialog dialog = new Dialog(getActivity(), android.R.style.Theme_Holo_Dialog);
+		dialog.setContentView(R.layout.trangthai_layout);
+		dialog.setTitle(getString(R.string.chontrangthai));
+		dialog.findViewById(R.id.btn1).setOnClickListener(new View.OnClickListener() {
 
 			@Override
-			public void sendData(int index) {
-				indexTrangThai = index;
+			public void onClick(View v) {
+				dialog.dismiss();
+			}
+		});
+
+		ListView datePicker1 = (ListView) dialog.findViewById(R.id.datePicker1);
+		datePicker1.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, getActivity().getResources().getStringArray(R.array.ltrangthai)));
+		datePicker1.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				dialog.dismiss();
+				indexTrangThai = position;
 				updateTrangThai();
 			}
-		};
+		});
+		dialog.show();
 
-		thaiDialog.show();
 	}
 
 	protected void updateTrangThai() {

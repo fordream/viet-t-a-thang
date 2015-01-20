@@ -213,7 +213,7 @@
                     android:singleLine="true"
                     android:text="@string/luthaydoi"
                     android:textColor="@android:color/white"
-                    android:textSize="@dimen/dimen_10dp"
+                    android:textSize="@dimen/dimen_13dp"
                     android:textStyle="bold" />
             </RelativeLayout>
         </LinearLayout>

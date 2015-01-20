@@ -648,4 +648,21 @@ public class Conts {
 			// TODO: handle exception
 		}
 	}
+
+	public static void getSDT(View textView) {
+		if (textView instanceof TextView) {
+			String sdt = ((TextView) textView).getText().toString();
+
+			if (!Conts.isBlank(sdt) && sdt.startsWith("84")) {
+				((TextView) textView).setText("0" + sdt.substring(2, sdt.length()));
+			}
+		}
+	}
+
+	public static String getSDT(String string) {
+		if (!Conts.isBlank(string) && string.startsWith("84")) {
+			return "0" + string.substring(2, string.length());
+		}
+		return string;
+	}
 }

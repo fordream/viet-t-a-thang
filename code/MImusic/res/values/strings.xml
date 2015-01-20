@@ -112,9 +112,9 @@
     <string name="gui1">gửi</string>
 
     <string-array name="ltrangthai">
-        <item>tất cả</item>
-        <item>thành công</item>
-        <item>thất bại</item>
+        <item>Tất cả</item>
+        <item>Thành công</item>
+        <item>Thất bại</item>
     </string-array>
 
     <string name="daaddsdt">Bạn đã thêm số điện thoại này rồi, vui lòng nhập số điện thoại khác.</string>
