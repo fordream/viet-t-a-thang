@@ -35,6 +35,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -429,6 +430,9 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 
 			if (cursor != null && cursor.moveToNext()) {
 				((TextView) findViewById(R.id.moinhieudichvu_item_tv_name)).setText(Conts.getName(cursor));
+				String avatar = cursor.getString(cursor.getColumnIndex(User.AVATAR));
+				String contact_id = Conts.getStringCursor(cursor, User.contact_id);
+				Conts.showAvatar(((ImageView) findViewById(R.id.imageView1)), avatar,contact_id);
 			} else {
 				((TextView) findViewById(R.id.moinhieudichvu_item_tv_name)).setText(_id);
 			}
