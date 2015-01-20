@@ -45,7 +45,7 @@ public class User {
 	public static final String poundage = "poundage";
 	public static final String poundage_month = "poundage_month";
 
-	public static final String photo_id = ContactsContract.Contacts.PHOTO_ID;
+	public static final String contact_id = "contact_id";
 
 	public static final String CREATE_DB_TABLE() {
 		StringBuilder builder = new StringBuilder();
@@ -55,7 +55,7 @@ public class User {
 		String[] colums = new String[] {//
 		nickname, fullname, exchange_number, exchange_number_month, poundage, poundage_month, TOKEN, KEYREFRESH,
 
-		USER, PASSWORD, STATUS, COVER, ID, birthday, address, NAME, NAME_CONTACT, photo_id,//
+		USER, PASSWORD, STATUS, COVER, ID, birthday, address, NAME, NAME_CONTACT, contact_id,//
 				EMAIL, AVATAR, LISTIDDVSUDUNG, SOLUONG, DOANHTHU, LISTIDUSERDAMOI, LISTIDTENDVSUDUNG //
 		};
 		for (int i = 0; i < colums.length; i++) {

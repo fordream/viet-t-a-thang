@@ -321,13 +321,13 @@ public class MImusicService extends Service {
 				ContentResolver cr = getContentResolver();
 				Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
 				while (cur != null && cur.moveToNext()) {
-					String id = cur.getString(cur.getColumnIndex(ContactsContract.Contacts._ID));
+					String contact_id = cur.getString(cur.getColumnIndex(ContactsContract.Contacts._ID));
 					String name = cur.getString(cur.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
 
 					String photo_id = Conts.getStringCursor(cur, ContactsContract.Contacts.PHOTO_ID);
 
 					if (Integer.parseInt(cur.getString(cur.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))) > 0) {
-						Cursor pCur = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?", new String[] { id }, null);
+						Cursor pCur = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?", new String[] { contact_id }, null);
 						while (pCur.moveToNext()) {
 							String phoneNo = pCur.getString(pCur.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
 							if (!Conts.isBlank(phoneNo)) {
@@ -343,7 +343,7 @@ public class MImusicService extends Service {
 
 									listSdt.add(phoneNo);
 									if (!Conts.isBlank(phoneNo) && !Conts.isBlank(photo_id)) {
-										addPhoneId(phoneNo, photo_id);
+										addPhoneId(phoneNo, contact_id);
 
 									}
 									if (conttacts.length() == 0) {
@@ -520,10 +520,10 @@ public class MImusicService extends Service {
 	private void updateDongBoXuong(JSONObject response) {
 
 		// TODO
-		Set<String> keys = avatarHashmap.keySet();
-		for (String key : keys) {
-			LogUtils.e("updateDongBoXuong", key + " : " + avatarHashmap.get(key));
-		}
+//		Set<String> keys = avatarHashmap.keySet();
+//		for (String key : keys) {
+//			LogUtils.e("updateDongBoXuong", key + " : " + avatarHashmap.get(key));
+//		}
 
 		try {
 			String user = Conts.getUser(MImusicService.this);
@@ -537,16 +537,16 @@ public class MImusicService extends Service {
 				contentValues.put(User.NAME_CONTACT, name);
 				contentValues.put(User.STATUS, user.equals(phone) ? "1" : "0");
 
-				String photo_id = "";
+				String contact_id = "";
 				if (avatarHashmap.containsKey(phone)) {
-					photo_id = avatarHashmap.get(phone);
+					contact_id = avatarHashmap.get(phone);
 				}
 
-				if (Conts.isBlank(photo_id)) {
-					photo_id = "";
+				if (Conts.isBlank(contact_id)) {
+					contact_id = "";
 				}
 				
-				contentValues.put(User.photo_id, photo_id);
+				contentValues.put(User.contact_id, contact_id);
 
 				String service_codes = "";
 				String service_codes_name = "";
