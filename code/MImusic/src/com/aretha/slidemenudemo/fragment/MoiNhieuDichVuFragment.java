@@ -96,6 +96,23 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 			moinhieudichvu_dialog_menurightitem.initData(getArguments().getString("name"));
 			menuRightItemViewheader.initData(getArguments().getString("name"));
 			menuRightItemViewheader.initSdt(sdt);
+			
+			where = String.format("%s = '%s'", User.USER, sdt);
+			
+			Cursor cursor = getActivity().getContentResolver().query(User.CONTENT_URI, null, where, null, null);
+			if (cursor != null && cursor.getCount() >= 1) {
+				cursor.moveToNext();
+				LISTIDDVSUDUNG = cursor.getString(cursor.getColumnIndex(User.LISTIDDVSUDUNG));
+				sdt = cursor.getString(cursor.getColumnIndex(User.USER));
+
+				moinhieudichvu_dialog_menurightitem.initData(cursor, "");
+				menuRightItemViewheader.initData(cursor, "");
+			}
+
+			if (cursor != null) {
+				cursor.close();
+			}
+			
 		} else {
 			Cursor cursor = getActivity().getContentResolver().query(User.CONTENT_URI, null, where, null, null);
 			if (cursor != null && cursor.getCount() >= 1) {
