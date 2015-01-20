@@ -345,11 +345,13 @@ public class MImusicService extends Service {
 							}
 
 							if (!Conts.isBlank(phoneNo)) {
-								listSdt.add(phoneNo);
-								if (conttacts.length() == 0) {
-									conttacts.append(String.format("{\"phone\":\"%s\",\"name\":\"%s\"}", phoneNo, name));
-								} else {
-									conttacts.append(String.format(",{\"phone\":\"%s\",\"name\":\"%s\"}", phoneNo, name));
+								if (!listSdt.contains(phoneNo)) {
+									listSdt.add(phoneNo);
+									if (conttacts.length() == 0) {
+										conttacts.append(String.format("{\"phone\":\"%s\",\"name\":\"%s\"}", phoneNo, name));
+									} else {
+										conttacts.append(String.format(",{\"phone\":\"%s\",\"name\":\"%s\"}", phoneNo, name));
+									}
 								}
 							}
 						}
