@@ -165,5 +165,6 @@
     <string name="banchuachonloimoi">Bạn chưa chọn lời mời.</string>
     <string name="format_gia">Giá : %s</string>
     <string name="title_dangky">Đăng ký dịch vụ %s</string>
+    <string name="format_tien">%s VNĐ</string>
 
 </resources>
