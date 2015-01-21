@@ -81,6 +81,7 @@ public class MauMoiFragment extends BaseFragment implements android.view.View.On
 			}
 		}
 
+		//Conts.showDialogThongbao(getActivity(), service_code + "");
 		Bundle bundle = new Bundle();
 		bundle.putString("service_code", service_code);
 		execute(RequestMethod.GET, API.API_R022, bundle, new IContsCallBack() {
