@@ -71,7 +71,7 @@ public class ChiTietCaNhanBangXepHangTungDichVuFragment extends BaseFragment imp
 		soHH.setText("");
 		
 		soGD.setText(getArguments().getString("quantity"));
-		soHH.setText(getArguments().getString("commission"));
+		soHH.setText(String.format(getString(R.string.format_tien),getArguments().getString("commission")));
 		callApi(getArguments());
 
 		return view;
@@ -123,7 +123,7 @@ public class ChiTietCaNhanBangXepHangTungDichVuFragment extends BaseFragment imp
 				String commission_in_duration = Conts.getString(response, "commission_in_duration");
 				
 				soGDTrongThang.setText(quantity_in_duration);
-				soHHTrongThang.setText(commission_in_duration);
+				soHHTrongThang.setText(String.format(getString(R.string.format_tien),commission_in_duration+""));
 			}
 		});
 	}
