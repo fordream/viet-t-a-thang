@@ -115,6 +115,8 @@ public class ChiTietDichVuFragment extends BaseFragment implements View.OnClickL
 						}.show();
 					}
 				});
+			} else {
+				chitietdichvu_chitietdichvunofeatureview.findViewById(R.id.chitietdichvu_no_feature_dangky).setOnClickListener(null);
 			}
 			chitietdichvu_chitietdichvunofeatureview.findViewById(R.id.chitietdichvu_no_feature_moi).setOnClickListener(new View.OnClickListener() {
 				@Override
