@@ -32,29 +32,34 @@ public abstract class HomeAdapter extends CursorAdapter {
 		}
 
 		((HomeItemView) convertView).setDataCusor(cursor, cursor.getPosition());
-		
+
 		final ContentValues values = new ContentValues();
-		values.put("name", 
-				
-				String.format(context.getString(R.string.title_dangky), cursor.getString(cursor.getColumnIndex(DichVu.service_name)))
-				
-				);
+		values.put("name",
+
+		String.format(context.getString(R.string.title_dangky), cursor.getString(cursor.getColumnIndex(DichVu.service_name)))
+
+		);
 		values.put(DichVu.service_code, cursor.getString(cursor.getColumnIndex(DichVu.service_code)));
 		values.put("content", cursor.getString(cursor.getColumnIndex(DichVu.service_content)));
 		values.put(DichVu.ID, cursor.getString(cursor.getColumnIndex(DichVu.ID)));
 		values.put("type", "dangky");
+		final boolean isDangKy = "0".equals(cursor.getString(cursor.getColumnIndex(DichVu.service_status)));
 
 		convertView.findViewById(R.id.home_item_right_control_1).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				DangKyDialog dangKyDialog = new DangKyDialog(v.getContext(), values) {
-					@Override
-					public void updateUiDangKy() {
-						super.updateUiDangKy();
-						updateUI();
-					}
-				};
-				dangKyDialog.show();
+
+				if (!isDangKy) {
+
+					DangKyDialog dangKyDialog = new DangKyDialog(v.getContext(), values) {
+						@Override
+						public void updateUiDangKy() {
+							super.updateUiDangKy();
+							updateUI();
+						}
+					};
+					dangKyDialog.show();
+				}
 			}
 		});
 
