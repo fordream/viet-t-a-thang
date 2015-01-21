@@ -34,7 +34,11 @@ public abstract class HomeAdapter extends CursorAdapter {
 		((HomeItemView) convertView).setDataCusor(cursor, cursor.getPosition());
 		
 		final ContentValues values = new ContentValues();
-		values.put("name", cursor.getString(cursor.getColumnIndex(DichVu.service_name)));
+		values.put("name", 
+				
+				String.format(context.getString(R.string.title_dangky), cursor.getString(cursor.getColumnIndex(DichVu.service_name)))
+				
+				);
 		values.put(DichVu.service_code, cursor.getString(cursor.getColumnIndex(DichVu.service_code)));
 		values.put("content", cursor.getString(cursor.getColumnIndex(DichVu.service_content)));
 		values.put(DichVu.ID, cursor.getString(cursor.getColumnIndex(DichVu.ID)));

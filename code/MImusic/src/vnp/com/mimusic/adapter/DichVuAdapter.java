@@ -84,7 +84,10 @@ public abstract class DichVuAdapter extends CursorAdapter {
 
 		ImageLoaderUtils.getInstance(context).DisplayImage(service_icon, home_item_img_icon, BitmapFactory.decodeResource(context.getResources(), R.drawable.no_image));
 		final ContentValues values = new ContentValues();
-		values.put("name", cursor.getString(cursor.getColumnIndex(DichVu.service_name)));
+		values.put("name", 
+				String.format(context.getString(R.string.title_dangky), cursor.getString(cursor.getColumnIndex(DichVu.service_name)))
+//				cursor.getString(cursor.getColumnIndex(DichVu.service_name))
+				);
 		values.put(DichVu.service_code, cursor.getString(cursor.getColumnIndex(DichVu.service_code)));
 		values.put("content", cursor.getString(cursor.getColumnIndex(DichVu.service_content)));
 		values.put(DichVu.ID, cursor.getString(cursor.getColumnIndex(DichVu.ID)));

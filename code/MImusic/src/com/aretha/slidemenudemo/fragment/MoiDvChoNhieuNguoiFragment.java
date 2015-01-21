@@ -182,6 +182,7 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 		headerOfList.findViewById(R.id.chitietdichvu_no_feature_dangky).setVisibility(View.INVISIBLE);
 		headerOfList.findViewById(R.id.chitietdichvu_no_feature_moi).setVisibility(View.INVISIBLE);
 
+		headerOfList.center();
 		header.setBackground(android.R.color.white);
 		header.useValue2(true);
 		header.setOnClickListener(null);

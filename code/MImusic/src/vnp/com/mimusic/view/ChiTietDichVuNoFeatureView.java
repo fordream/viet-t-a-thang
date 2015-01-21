@@ -7,6 +7,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -66,5 +67,9 @@ public class ChiTietDichVuNoFeatureView extends LinearLayout {
 
 	public void showFooter() {
 		findViewById(R.id.chitietdichvu_no_feature_main_footer).setVisibility(View.VISIBLE);
+	}
+
+	public void center() {
+		((LinearLayout)findViewById(R.id.chitietdichvu_no_feature_x_main)).setGravity(Gravity.CENTER_VERTICAL);
 	}
 }

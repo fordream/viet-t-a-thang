@@ -37,7 +37,7 @@
                     android:singleLine="true"
                     android:text="Khuyến mãi nhạc trờ iMusicz"
                     android:textColor="#336666"
-                    android:textSize="@dimen/dimen_14dp"
+                    android:textSize="@dimen/dimen_17dp"
                     android:textStyle="bold" />
 
                 <TextView

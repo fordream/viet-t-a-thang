@@ -97,7 +97,7 @@ public class ChiTietDichVuFragment extends BaseFragment implements View.OnClickL
 			values.put(DichVu.ID, id);
 			values.put("type", "dangky");
 			values.put(DichVu.service_code, cursor.getString(cursor.getColumnIndex(DichVu.service_code)));
-			values.put("name", cursor.getString(cursor.getColumnIndex(DichVu.service_name)));
+			values.put("name", String.format(getString(R.string.title_dangky), cursor.getString(cursor.getColumnIndex(DichVu.service_name))));
 			values.put("content", cursor.getString(cursor.getColumnIndex(DichVu.service_content)));
 
 			chitietdichvu_chitietdichvunofeatureview.findViewById(R.id.chitietdichvu_no_feature_dangky).setOnClickListener(new View.OnClickListener() {

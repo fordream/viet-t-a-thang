@@ -31,8 +31,9 @@
             android:paddingRight="@dimen/dimen_3dp" >
 
             <LinearLayout
+                android:id="@+id/chitietdichvu_no_feature_x_main"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical" >
 
                 <RelativeLayout
@@ -62,7 +63,7 @@
                 </RelativeLayout>
 
                 <TextView
-                    android:layout_marginTop="@dimen/dimen_5dp"
+                    android:layout_marginTop="@dimen/dimen_8dp"
                     android:id="@+id/chitietdichvu_no_feature_gia_2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
