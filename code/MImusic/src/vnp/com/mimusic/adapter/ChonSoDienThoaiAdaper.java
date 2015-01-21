@@ -10,12 +10,40 @@ import android.graphics.Color;
 import android.support.v4.widget.CursorAdapter;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AlphabetIndexer;
 import android.widget.CheckBox;
+import android.widget.SectionIndexer;
 
-public class ChonSoDienThoaiAdaper extends CursorAdapter {
+public class ChonSoDienThoaiAdaper extends CursorAdapter implements SectionIndexer {
+	private AlphabetIndexer mAlphabetIndexer;
 
-	public ChonSoDienThoaiAdaper(Context context, Cursor c, String service_code) {
-		super(context, c);
+	@Override
+	public int getPositionForSection(int sectionIndex) {
+		return mAlphabetIndexer.getPositionForSection(sectionIndex);
+	}
+
+	/**
+	 * Returns the section index for a given position in the list by querying
+	 * the item and comparing it with all items in the section array.
+	 */
+	@Override
+	public int getSectionForPosition(int position) {
+		return mAlphabetIndexer.getSectionForPosition(position);
+	}
+
+	/**
+	 * Returns the section array constructed from the alphabet provided in the
+	 * constructor.
+	 */
+	@Override
+	public Object[] getSections() {
+		return mAlphabetIndexer.getSections();
+	}
+
+	public ChonSoDienThoaiAdaper(Context context, Cursor cursor, String service_code) {
+		super(context, cursor);
+		mAlphabetIndexer = new AlphabetIndexer(cursor, cursor.getColumnIndex(User.NAME_CONTACT), " ABCDEFGHIJKLMNOPQRTSUVWXYZ");
+		mAlphabetIndexer.setCursor(cursor);
 	}
 
 	private int index = -1;

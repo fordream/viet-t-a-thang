@@ -58,8 +58,8 @@ public class MenuRightView extends LinearLayout {
 	public void initData() {
 		final EditText menu_right_editext = (EditText) findViewById(R.id.menu_right_editext);
 		ImageView menu_right_img_search = (ImageView) findViewById(R.id.menu_right_img_search);
-		ListView menu_right_list = (ListView) findViewById(R.id.menu_right_list);
-		menu_right_list.setFastScrollEnabled(true);
+		com.woozzu.android.widget.IndexableListView menu_right_list = (com.woozzu.android.widget.IndexableListView) findViewById(R.id.menu_right_list);
+		
 		String where = String.format("%s = '0'", User.STATUS);
 		Cursor cursor = getContext().getContentResolver().query(User.CONTENT_URI, null, where, null, User.NAME_CONTACT);
 		adaper = new MenuRightAdaper(getContext(), cursor) {

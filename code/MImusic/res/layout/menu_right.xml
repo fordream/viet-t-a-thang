@@ -41,14 +41,13 @@
         </EditText>
     </RelativeLayout>
 
-    <vnp.com.mimusic.view.MusicListView
+    <com.woozzu.android.widget.IndexableListView
         android:id="@+id/menu_right_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/menu_right_search"
         android:divider="#333333"
-        android:dividerHeight="1px" >
-    </vnp.com.mimusic.view.MusicListView>
+        android:dividerHeight="1px" />
     <!-- 
     <vnp.com.mimusic.view.MenuRightDetailView
         android:visibility="gone"

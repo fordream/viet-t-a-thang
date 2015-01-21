@@ -22,7 +22,7 @@ import android.widget.EditText;
 
 public class ChonSoDienThoaiFragment extends BaseFragment implements android.view.View.OnClickListener {
 
-	private vnp.com.mimusic.view.MusicListView bangxephang_list;
+	private com.woozzu.android.widget.IndexableListView bangxephang_list;
 	private ChonSoDienThoaiAdaper adaper;
 	private View view;
 	private ChonTatCaView header;
@@ -32,7 +32,7 @@ public class ChonSoDienThoaiFragment extends BaseFragment implements android.vie
 		view = inflater.inflate(R.layout.chonsodienthoai, null);
 
 		header = new ChonTatCaView(container.getContext());
-		bangxephang_list = (MusicListView) view.findViewById(R.id.bangxephang_list);
+		bangxephang_list = (com.woozzu.android.widget.IndexableListView) view.findViewById(R.id.bangxephang_list);
 		bangxephang_list.addHeaderView(header);
 
 		header.setOnClickListener(new OnClickListener() {

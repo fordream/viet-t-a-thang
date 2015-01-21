@@ -11,36 +11,36 @@ import android.view.ViewGroup;
 import android.widget.AlphabetIndexer;
 import android.widget.SectionIndexer;
 
-public abstract class MenuRightAdaper extends CursorAdapter  {
-//	private AlphabetIndexer mAlphabetIndexer;
-//
-//	@Override
-//	public int getPositionForSection(int sectionIndex) {
-//		return mAlphabetIndexer.getPositionForSection(sectionIndex);
-//	}
-//
-//	/**
-//	 * Returns the section index for a given position in the list by querying
-//	 * the item and comparing it with all items in the section array.
-//	 */
-//	@Override
-//	public int getSectionForPosition(int position) {
-//		return mAlphabetIndexer.getSectionForPosition(position);
-//	}
-//
-//	/**
-//	 * Returns the section array constructed from the alphabet provided in the
-//	 * constructor.
-//	 */
-//	@Override
-//	public Object[] getSections() {
-//		return mAlphabetIndexer.getSections();
-//	}
+public abstract class MenuRightAdaper extends CursorAdapter implements SectionIndexer {
+	private AlphabetIndexer mAlphabetIndexer;
+
+	@Override
+	public int getPositionForSection(int sectionIndex) {
+		return mAlphabetIndexer.getPositionForSection(sectionIndex);
+	}
+
+	/**
+	 * Returns the section index for a given position in the list by querying
+	 * the item and comparing it with all items in the section array.
+	 */
+	@Override
+	public int getSectionForPosition(int position) {
+		return mAlphabetIndexer.getSectionForPosition(position);
+	}
+
+	/**
+	 * Returns the section array constructed from the alphabet provided in the
+	 * constructor.
+	 */
+	@Override
+	public Object[] getSections() {
+		return mAlphabetIndexer.getSections();
+	}
 
 	public MenuRightAdaper(Context context, Cursor cursor) {
 		super(context, cursor);
-//		mAlphabetIndexer = new AlphabetIndexer(cursor, cursor.getColumnIndex(User.NAME_CONTACT), " ABCDEFGHIJKLMNOPQRTSUVWXYZ");
-//		mAlphabetIndexer.setCursor(cursor);
+		mAlphabetIndexer = new AlphabetIndexer(cursor, cursor.getColumnIndex(User.NAME_CONTACT), " ABCDEFGHIJKLMNOPQRTSUVWXYZ");
+		mAlphabetIndexer.setCursor(cursor);
 	}
 
 	@Override
