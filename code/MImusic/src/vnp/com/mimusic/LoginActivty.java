@@ -86,7 +86,7 @@ public class LoginActivty extends Activity implements OnClickListener {
 		((TextView) findViewById(R.id.activity_login_number_phone)).setText(Conts.getUser(this));
 		((TextView) findViewById(R.id.activity_login_password)).setText(Conts.getPassword(this));
 
-		((TextView) findViewById(R.id.activity_login_number_phone)).setText("0968050820");
+		((TextView) findViewById(R.id.activity_login_number_phone)).setText("0964506972");
 		((TextView) findViewById(R.id.activity_login_password)).setText("265376");
 
 		if (Conts.isBlank(Conts.getUser(this))) {

@@ -370,6 +370,9 @@ public class MImusicService extends Service {
 					MImusicService.this.execute(RequestMethod.POST, API.API_R011, bundle, new IContsCallBack() {
 						@Override
 						public void onSuscess(JSONObject response) {
+							
+							
+							LogUtils.e("onPostExecute", response.toString());
 							startDongBoDAnhBaXuong();
 						}
 
