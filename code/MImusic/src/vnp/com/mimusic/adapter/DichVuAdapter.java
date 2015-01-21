@@ -2,6 +2,7 @@ package vnp.com.mimusic.adapter;
 
 import vnp.com.db.DichVu;
 import vnp.com.mimusic.R;
+import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.ImageLoaderUtils;
 import vnp.com.mimusic.view.DichVuItemView;
 import android.content.ContentValues;
@@ -89,7 +90,15 @@ public abstract class DichVuAdapter extends CursorAdapter {
 //				cursor.getString(cursor.getColumnIndex(DichVu.service_name))
 				);
 		values.put(DichVu.service_code, cursor.getString(cursor.getColumnIndex(DichVu.service_code)));
-		values.put("content", cursor.getString(cursor.getColumnIndex(DichVu.service_content)));
+		
+		
+		String content = String.format(context.getString(R.string.xacnhandangky_form), 
+				Conts.getStringCursor(cursor, DichVu.service_name),
+				Conts.getStringCursor(cursor, DichVu.service_price)
+				);
+//		values.put("content", cursor.getString(cursor.getColumnIndex(DichVu.service_content)));
+		values.put("content", content);
+		
 		values.put(DichVu.ID, cursor.getString(cursor.getColumnIndex(DichVu.ID)));
 		values.put("type", "dangky");
 		home_item_right_control_1.setOnClickListener(new View.OnClickListener() {

@@ -98,7 +98,16 @@ public class ChiTietDichVuFragment extends BaseFragment implements View.OnClickL
 			values.put("type", "dangky");
 			values.put(DichVu.service_code, cursor.getString(cursor.getColumnIndex(DichVu.service_code)));
 			values.put("name", String.format(getString(R.string.title_dangky), cursor.getString(cursor.getColumnIndex(DichVu.service_name))));
-			values.put("content", cursor.getString(cursor.getColumnIndex(DichVu.service_content)));
+			
+			
+			
+			String content = String.format(getString(R.string.xacnhandangky_form), 
+					Conts.getStringCursor(cursor, DichVu.service_name),
+					Conts.getStringCursor(cursor, DichVu.service_price)
+					);
+//			values.put("content", cursor.getString(cursor.getColumnIndex(DichVu.service_content)));
+			values.put("content", content);
+			
 			boolean isDangKy = "0".equals(cursor.getString(cursor.getColumnIndex(DichVu.service_status)));
 
 			if (!isDangKy) {

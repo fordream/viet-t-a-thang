@@ -5,6 +5,7 @@ import java.util.List;
 import vnp.com.db.DichVu;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.base.diablog.DangKyDialog;
+import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.view.DichVuItemView;
 import vnp.com.mimusic.view.HomeItemView;
 import android.content.ContentValues;
@@ -40,7 +41,13 @@ public abstract class HomeAdapter extends CursorAdapter {
 
 		);
 		values.put(DichVu.service_code, cursor.getString(cursor.getColumnIndex(DichVu.service_code)));
-		values.put("content", cursor.getString(cursor.getColumnIndex(DichVu.service_content)));
+		
+		String content = String.format(context.getString(R.string.xacnhandangky_form), 
+				Conts.getStringCursor(cursor, DichVu.service_name),
+				Conts.getStringCursor(cursor, DichVu.service_price)
+				);
+//		values.put("content", cursor.getString(cursor.getColumnIndex(DichVu.service_content)));
+		values.put("content", content);
 		values.put(DichVu.ID, cursor.getString(cursor.getColumnIndex(DichVu.ID)));
 		values.put("type", "dangky");
 		final boolean isDangKy = "0".equals(cursor.getString(cursor.getColumnIndex(DichVu.service_status)));
