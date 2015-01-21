@@ -2,6 +2,8 @@ package vnp.com.mimusic.view;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -163,25 +165,46 @@ public abstract class ReCommentView extends LinearLayout {
 								}
 							}
 							if (canAdd) {
-
 								list.add(cotnact);
-								RecommentItemView recommentItemView = new RecommentItemView(getContext());
-								recommentItemView.setData(cotnact);
-								recommentItemView.setOnClickListener(new View.OnClickListener() {
-									@Override
-									public void onClick(View v) {
-										close();
-										addContact(Conts.getString(cotnact, "phone"), Conts.getString(cotnact, "name"));
-									}
-								});
-								recomment_list.addView(recommentItemView);
 							}
 						}
 					}
 				} catch (JSONException e) {
 				}
+
+				Comparator<JSONObject> comparator = new Comparator<JSONObject>() {
+
+					@Override
+					public int compare(JSONObject lhs, JSONObject rhs) {
+
+						if (lhs != null && rhs != null) {
+							String phone1 = Conts.getString(lhs, "name");
+							String phone2 = Conts.getString(rhs, "name");
+
+							if (!Conts.isBlank(phone1) && !Conts.isBlank(phone2)) {
+								return phone1.compareTo(phone2);
+							}
+						}
+						return 0;
+					}
+				};
+
+				Collections.sort(list, comparator);
+				for (final JSONObject cotnact : list) {
+					RecommentItemView recommentItemView = new RecommentItemView(getContext());
+					recommentItemView.setData(cotnact);
+					recommentItemView.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							close();
+							addContact(Conts.getString(cotnact, "phone"), Conts.getString(cotnact, "name"));
+						}
+					});
+					recomment_list.addView(recommentItemView);
+				}
 			}
 		}
+
 	}
 
 	private void close() {
