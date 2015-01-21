@@ -41,10 +41,11 @@
                     android:layout_height="wrap_content" >
 
                     <TextView
+                        android:paddingRight="@dimen/dimen_5dp"
                         android:id="@+id/home_item_tv_name"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:singleLine="true"
+                        android:layout_toLeftOf="@+id/chitietdichvu_no_feature_gia_1"
                         android:text="Dịch vụ Imuzik"
                         android:textColor="#475055"
                         android:textSize="@dimen/dimen_15dp"
