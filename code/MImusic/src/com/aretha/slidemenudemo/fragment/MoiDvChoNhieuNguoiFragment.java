@@ -62,10 +62,12 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 		public void onClick(View v) {
 			Conts.hiddenKeyBoard(getActivity());
 			String moidichvuchonhieunguoi_numberText = moidichvuchonhieunguoi_number.getText().toString();
-			if (Conts.isVietTelNUmber(moidichvuchonhieunguoi_numberText, getActivity())) {
-				addSodt(moidichvuchonhieunguoi_numberText);
-			} else {
-				Conts.toast(getActivity(), String.format(getString(R.string.format_check_sdt), moidichvuchonhieunguoi_numberText));
+			if (moidichvuchonhieunguoi_contact.isChecked()) {
+				if (Conts.isVietTelNUmber(moidichvuchonhieunguoi_numberText, getActivity())) {
+					addSodt(moidichvuchonhieunguoi_numberText);
+				} else {
+					Conts.toast(getActivity(), String.format(getString(R.string.format_check_sdt), moidichvuchonhieunguoi_numberText));
+				}
 			}
 		}
 	};
@@ -432,7 +434,7 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 				((TextView) findViewById(R.id.moinhieudichvu_item_tv_name)).setText(Conts.getName(cursor));
 				String avatar = cursor.getString(cursor.getColumnIndex(User.AVATAR));
 				String contact_id = Conts.getStringCursor(cursor, User.contact_id);
-				Conts.showAvatar(((ImageView) findViewById(R.id.imageView1)), avatar,contact_id);
+				Conts.showAvatar(((ImageView) findViewById(R.id.imageView1)), avatar, contact_id);
 			} else {
 				((TextView) findViewById(R.id.moinhieudichvu_item_tv_name)).setText(_id);
 			}

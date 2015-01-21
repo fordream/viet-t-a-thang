@@ -372,7 +372,7 @@ public class MImusicService extends Service {
 						public void onSuscess(JSONObject response) {
 							
 							
-							LogUtils.e("onPostExecute", response.toString());
+							//LogUtils.e("onPostExecute", response.toString());
 							startDongBoDAnhBaXuong();
 						}
 
