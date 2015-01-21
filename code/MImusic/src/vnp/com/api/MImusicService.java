@@ -287,7 +287,6 @@ public class MImusicService extends Service {
 
 			@Override
 			public void onSuscess(JSONObject response) {
-
 			}
 
 			@Override
@@ -297,7 +296,6 @@ public class MImusicService extends Service {
 
 			@Override
 			public void onError(String message) {
-
 			}
 
 			@Override
@@ -370,9 +368,8 @@ public class MImusicService extends Service {
 					MImusicService.this.execute(RequestMethod.POST, API.API_R011, bundle, new IContsCallBack() {
 						@Override
 						public void onSuscess(JSONObject response) {
-							
-							
-							//LogUtils.e("onPostExecute", response.toString());
+							Conts.toast(MImusicService.this, Conts.getString(response, "message"));
+							// LogUtils.e("onPostExecute", response.toString());
 							startDongBoDAnhBaXuong();
 						}
 
@@ -382,6 +379,7 @@ public class MImusicService extends Service {
 
 						@Override
 						public void onError(String message) {
+							Conts.toast(MImusicService.this, message);
 							startDongBoDAnhBaXuong();
 						}
 
@@ -391,6 +389,7 @@ public class MImusicService extends Service {
 						}
 
 						private void startDongBoDAnhBaXuong() {
+
 							dongboDanhBaXuong(contsCallBack, listSdt);
 						}
 					});
@@ -523,10 +522,11 @@ public class MImusicService extends Service {
 	private void updateDongBoXuong(JSONObject response) {
 
 		// TODO
-//		Set<String> keys = avatarHashmap.keySet();
-//		for (String key : keys) {
-//			LogUtils.e("updateDongBoXuong", key + " : " + avatarHashmap.get(key));
-//		}
+		// Set<String> keys = avatarHashmap.keySet();
+		// for (String key : keys) {
+		// LogUtils.e("updateDongBoXuong", key + " : " +
+		// avatarHashmap.get(key));
+		// }
 
 		try {
 			String user = Conts.getUser(MImusicService.this);
@@ -548,7 +548,7 @@ public class MImusicService extends Service {
 				if (Conts.isBlank(contact_id)) {
 					contact_id = "";
 				}
-				
+
 				contentValues.put(User.contact_id, contact_id);
 
 				String service_codes = "";
