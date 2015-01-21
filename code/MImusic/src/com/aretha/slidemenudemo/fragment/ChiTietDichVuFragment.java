@@ -101,11 +101,10 @@ public class ChiTietDichVuFragment extends BaseFragment implements View.OnClickL
 			values.put("content", cursor.getString(cursor.getColumnIndex(DichVu.service_content)));
 			boolean isDangKy = "0".equals(cursor.getString(cursor.getColumnIndex(DichVu.service_status)));
 
-			if (!isDangKy)
+			if (!isDangKy) {
 				chitietdichvu_chitietdichvunofeatureview.findViewById(R.id.chitietdichvu_no_feature_dangky).setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-
 						// TODO
 						new DangKyDialog(v.getContext(), values) {
 							@Override
@@ -116,7 +115,7 @@ public class ChiTietDichVuFragment extends BaseFragment implements View.OnClickL
 						}.show();
 					}
 				});
-
+			}
 			chitietdichvu_chitietdichvunofeatureview.findViewById(R.id.chitietdichvu_no_feature_moi).setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
