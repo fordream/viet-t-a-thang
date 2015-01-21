@@ -99,20 +99,23 @@ public class ChiTietDichVuFragment extends BaseFragment implements View.OnClickL
 			values.put(DichVu.service_code, cursor.getString(cursor.getColumnIndex(DichVu.service_code)));
 			values.put("name", String.format(getString(R.string.title_dangky), cursor.getString(cursor.getColumnIndex(DichVu.service_name))));
 			values.put("content", cursor.getString(cursor.getColumnIndex(DichVu.service_content)));
+			boolean isDangKy = "0".equals(cursor.getString(cursor.getColumnIndex(DichVu.service_status)));
 
-			chitietdichvu_chitietdichvunofeatureview.findViewById(R.id.chitietdichvu_no_feature_dangky).setOnClickListener(new View.OnClickListener() {
+			if (!isDangKy)
+				chitietdichvu_chitietdichvunofeatureview.findViewById(R.id.chitietdichvu_no_feature_dangky).setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
 
-				@Override
-				public void onClick(View v) {
-					new DangKyDialog(v.getContext(), values) {
-						@Override
-						public void updateUiDangKy() {
-							super.updateUiDangKy();
-							chitietdichvu_chitietdichvunofeatureview.hiddenChitietdichvu_no_feature_dangky();
-						}
-					}.show();
-				}
-			});
+						// TODO
+						new DangKyDialog(v.getContext(), values) {
+							@Override
+							public void updateUiDangKy() {
+								super.updateUiDangKy();
+								chitietdichvu_chitietdichvunofeatureview.hiddenChitietdichvu_no_feature_dangky();
+							}
+						}.show();
+					}
+				});
 
 			chitietdichvu_chitietdichvunofeatureview.findViewById(R.id.chitietdichvu_no_feature_moi).setOnClickListener(new View.OnClickListener() {
 				@Override

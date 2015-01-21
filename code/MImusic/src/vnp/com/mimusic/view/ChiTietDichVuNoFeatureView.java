@@ -60,7 +60,7 @@ public class ChiTietDichVuNoFeatureView extends LinearLayout {
 	}
 
 	public void hiddenChitietdichvu_no_feature_dangky() {
-		findViewById(R.id.chitietdichvu_no_feature_dangky).setEnabled(false);
+		findViewById(R.id.chitietdichvu_no_feature_dangky).setOnClickListener(null);
 		((TextView) findViewById(R.id.dangkyx)).setText(R.string.dangdung);
 		findViewById(R.id.dangkyxm1).setVisibility(View.GONE);
 	}
