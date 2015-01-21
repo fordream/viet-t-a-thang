@@ -104,9 +104,7 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 
 			String avatar = cursor.getString(cursor.getColumnIndex(User.AVATAR));
 
-			LogUtils.e("avatarx", avatar);
 			Conts.showImage(avatar, menu_left_img_avatar, R.drawable.no_avatar);
-
 			cursor.close();
 		}
 	}
@@ -147,10 +145,10 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 			}
 
 		} else if (requestCode == 102 && resultCode == Activity.RESULT_OK) {
-			if (path == null) {
-				Conts.showDialogThongbao(getActivity(), getActivity().getString(R.string.khonglayduocanh));
-				return;
-			}
+//			if (path == null) {
+//				Conts.showDialogThongbao(getActivity(), getActivity().getString(R.string.khonglayduocanh));
+//				return;
+//			}
 			String path = data.getData().toString();
 			uploadAvatar(path);
 		} else if (requestCode == 103 && resultCode == Activity.RESULT_OK) {
