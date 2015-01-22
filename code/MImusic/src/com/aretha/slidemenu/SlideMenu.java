@@ -139,18 +139,21 @@ public class SlideMenu extends ViewGroup {
 		TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.SlideMenu, defStyle, 0);
 
 		// Set the shadow attributes
-		setPrimaryShadowWidth(a.getDimension(R.styleable.SlideMenu_primaryShadowWidth, 30));
-		setSecondaryShadowWidth(a.getDimension(R.styleable.SlideMenu_secondaryShadowWidth, 30));
+		// TODO
+		setPrimaryShadowWidth(a.getDimension(R.styleable.SlideMenu_primaryShadowWidth, 5));
+		setSecondaryShadowWidth(a.getDimension(R.styleable.SlideMenu_secondaryShadowWidth, 5));
 
+		// TODO
 		Drawable primaryShadowDrawable = a.getDrawable(R.styleable.SlideMenu_primaryShadowDrawable);
 		if (null == primaryShadowDrawable) {
-			primaryShadowDrawable = new GradientDrawable(Orientation.LEFT_RIGHT, new int[] { Color.TRANSPARENT, Color.argb(99, 0, 0, 0) });
+			primaryShadowDrawable = new GradientDrawable(Orientation.LEFT_RIGHT, new int[] { Color.TRANSPARENT, Color.argb(66, 0, 0, 0) });
 		}
 		setPrimaryShadowDrawable(primaryShadowDrawable);
 
+		// TODO
 		Drawable secondaryShadowDrawable = a.getDrawable(R.styleable.SlideMenu_secondaryShadowDrawable);
 		if (null == secondaryShadowDrawable) {
-			secondaryShadowDrawable = new GradientDrawable(Orientation.LEFT_RIGHT, new int[] { Color.argb(99, 0, 0, 0), Color.TRANSPARENT });
+			secondaryShadowDrawable = new GradientDrawable(Orientation.LEFT_RIGHT, new int[] { Color.argb(66, 0, 0, 0), Color.TRANSPARENT });
 		}
 		setSecondaryShadowDrawable(secondaryShadowDrawable);
 
