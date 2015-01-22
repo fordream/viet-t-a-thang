@@ -90,10 +90,10 @@ public class RunSSL2 {
 
 					br.close();
 					// LogUtils.e("resx", https.getResponseCode() + "");
-					LogUtils.e("resx", builder.toString() + "");
+//					LogUtils.e("resx", builder.toString() + "");
 					https.disconnect();
 				} catch (Exception e) {
-					LogUtils.e("resx", e);
+//					LogUtils.e("resx", e);
 				}
 
 			}

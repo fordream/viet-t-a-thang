@@ -516,7 +516,7 @@ public class MImusicService extends Service {
 	}
 
 	private void updateKiemTraDieuKienThueBao(JSONObject response) {
-		LogUtils.e("updateKiemTraDieuKienThueBao", response.toString());
+//		LogUtils.e("updateKiemTraDieuKienThueBao", response.toString());
 	}
 
 	private void updateDongBoXuong(JSONObject response) {
@@ -660,7 +660,7 @@ public class MImusicService extends Service {
 		contentValues.put(User.poundage_month, Conts.getString(response, User.poundage_month));
 		contentValues.put(User.birthday, Conts.getString(response, User.birthday));
 		String avatar = Conts.getString(response, User.AVATAR);
-		LogUtils.e("avatar", avatar + "");
+//		LogUtils.e("avatar", avatar + "");
 		if (!Conts.isBlank(avatar)) {
 			contentValues.put(User.AVATAR, avatar);
 		}

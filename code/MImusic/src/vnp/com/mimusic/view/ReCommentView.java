@@ -83,7 +83,7 @@ public abstract class ReCommentView extends LinearLayout {
 					if (event.getY() - y >= 0) {
 					} else {
 						float dy = event.getY() - y;
-						LogUtils.e("DY", dy + "");
+//						LogUtils.e("DY", dy + "");
 						RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) findViewById(R.id.recomment_main).getLayoutParams();
 						params.setMargins(0, (int) dy, 0, 0);
 						findViewById(R.id.recomment_main).setLayoutParams(params);

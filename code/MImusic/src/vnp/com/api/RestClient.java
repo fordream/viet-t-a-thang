@@ -250,7 +250,7 @@ public class RestClient {
 		} catch (Exception e) {
 			client.getConnectionManager().shutdown();
 			e.printStackTrace();
-			LogUtils.e("ABC", e);
+//			LogUtils.e("ABC", e);
 		}
 	}
 
@@ -408,7 +408,7 @@ public class RestClient {
 				fileOutput.close();
 			}
 		} catch (Exception e) {
-			LogUtils.e("mException", e);
+//			LogUtils.e("mException", e);
 		} finally {
 			try {
 				urlConnection.disconnect();

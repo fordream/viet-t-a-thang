@@ -32,7 +32,7 @@ public class ProgressConnect {
 					if (arguments != null) {
 						Set<String> keys = arguments.keySet();
 						for (String key : keys) {
-							LogUtils.e("keys", key + " : " + arguments.getString(key));
+//							LogUtils.e("keys", key + " : " + arguments.getString(key));
 							mRestClient.addParam(key, arguments.getString(key));
 						}
 					}
@@ -47,7 +47,7 @@ public class ProgressConnect {
 						mRestClient.execute(method);
 					}
 				} catch (Exception exception) {
-					LogUtils.e("aaaaaaaaaaa", exception);
+//					LogUtils.e("aaaaaaaaaaa", exception);
 				}
 				return mRestClient.getResponse();
 			}

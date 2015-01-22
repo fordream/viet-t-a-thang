@@ -156,7 +156,7 @@ public abstract class LSBHDateDialog extends BaseAdialog implements android.view
 		});
 		try {
 			if (!Conts.isBlank(date)) {
-				LogUtils.e("date", date);
+//				LogUtils.e("date", date);
 				StringTokenizer stringTokenizer = new StringTokenizer(date, "/");
 				String day = stringTokenizer.nextToken();
 				String month = stringTokenizer.nextToken();
@@ -188,7 +188,7 @@ public abstract class LSBHDateDialog extends BaseAdialog implements android.view
 	}
 
 	private void showDate(int month, int year) {
-		LogUtils.e("data-", year + "");
+//		LogUtils.e("data-", year + "");
 		int curent = date_wheelview_date.getCurrentItem();
 		DateWheelViewAdapter dateWheelViewAdapter = new DateWheelViewAdapter(month, year);
 		date_wheelview_date.setViewAdapter(dateWheelViewAdapter);

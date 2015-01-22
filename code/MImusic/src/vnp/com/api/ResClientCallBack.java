@@ -45,7 +45,7 @@ public abstract class ResClientCallBack extends CallBack {
 //			}
 		} catch (Exception e) {
 
-			LogUtils.e("exception1", e);
+//			LogUtils.e("exception1", e);
 		}
 
 		return client;

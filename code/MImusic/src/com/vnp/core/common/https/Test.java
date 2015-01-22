@@ -50,11 +50,11 @@ public class Test {
 					HttpResponse response = client.execute(targetHost, httpget, localContext);
 					HttpEntity entity = response.getEntity();
 					Object content = EntityUtils.toString(entity);
-					LogUtils.e(MY_APP_TAG, "OK: " + content.toString());
+//					LogUtils.e(MY_APP_TAG, "OK: " + content.toString());
 				} catch (Exception e) {
 					e.printStackTrace();
-					LogUtils.e(MY_APP_TAG, e);
-					LogUtils.e(MY_APP_TAG, "Error: " + e.getMessage());
+//					LogUtils.e(MY_APP_TAG, e);
+//					LogUtils.e(MY_APP_TAG, "Error: " + e.getMessage());
 				}
 			}
 		}).start();

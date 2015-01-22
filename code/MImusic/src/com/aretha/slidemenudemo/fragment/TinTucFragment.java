@@ -54,7 +54,7 @@ public class TinTucFragment extends BaseFragment implements OnItemClickListener,
 							bangxephang_list.setAdapter(new TintucAdaper(getActivity(), jsonArray));
 						}
 					} catch (Exception exception) {
-						LogUtils.e("ProgressConnect", exception);
+//						LogUtils.e("ProgressConnect", exception);
 					}
 				}
 			}

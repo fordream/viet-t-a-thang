@@ -508,7 +508,7 @@ public class Conts {
 				return new File(Environment.getExternalStorageDirectory() + "/temp.png");
 			} catch (Exception e) {
 
-				LogUtils.e("CHECK", e);
+//				LogUtils.e("CHECK", e);
 			}
 		}
 
