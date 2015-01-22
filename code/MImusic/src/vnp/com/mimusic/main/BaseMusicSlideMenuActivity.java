@@ -272,7 +272,6 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 
 			@Override
 			public void onSlideStateChange(int slideState) {
-				Log.e("onSlideStateChange", slideState + "");
 				Conts.hiddenKeyBoard(BaseMusicSlideMenuActivity.this);
 			}
 
