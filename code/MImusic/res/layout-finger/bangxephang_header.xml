@@ -36,11 +36,13 @@
             android:button="@null"
             android:checked="true"
             android:gravity="center"
+            android:textSize="@dimen/dimen_15dp"
             android:padding="@dimen/dimen_0dp"
             android:text="Số lượng" />
 
         <vnp.com.mimusic.view.BangXepHangHeaderRadioButton
             android:id="@+id/radio1"
+             android:textSize="@dimen/dimen_15dp"
             android:layout_width="@dimen/dimen_1dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -75,14 +77,14 @@
                 <View
                     android:layout_width="@dimen/dimen_1dp"
                     android:layout_height="match_parent"
-                    android:background="@android:color/black" />
+                    android:background="@color/f3f3f3" />
             </LinearLayout>
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
 		    android:layout_height="@dimen/dimen_1dp"
-            android:background="@android:color/black" />
+            android:background="@color/f3f3f3" />
     </LinearLayout>
 
 </RelativeLayout>
