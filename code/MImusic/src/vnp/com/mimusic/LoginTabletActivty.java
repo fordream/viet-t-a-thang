@@ -6,11 +6,14 @@ import vnp.com.mimusic.VApplication.IServiceConfig;
 import vnp.com.mimusic.base.VTAnimationListener;
 import vnp.com.mimusic.main.BaseMusicSlideMenuActivity;
 import vnp.com.mimusic.util.Conts;
-import vnp.com.mimusic.util.Conts.IContsCallBack;
 import vnp.com.mimusic.util.VTAnimationUtils;
+import vnp.com.mimusic.util.Conts.IContsCallBack;
 import vnp.com.mimusic.view.HeaderView;
 import vnp.com.mimusic.view.LoadingView;
 import vnp.com.mimusic.view.add.OnTouchAnimation;
+
+import com.vnp.core.crash.CrashExceptionHandler;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,19 +24,18 @@ import android.view.animation.Animation;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.vnp.core.common.https.Test;
-import com.vnp.core.crash.CrashExceptionHandler;
-
 public class LoginTabletActivty extends Activity implements OnClickListener {
 	private LoadingView progressBar1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
 		CrashExceptionHandler.sendCrash(this);
+
 		CrashExceptionHandler.onCreate(this);
-		setContentView(R.layout.activity_login_land);
-		
+		// ((VApplication) getApplication()).dongbodanhba();
+		setContentView(R.layout.activity_login);
 		progressBar1 = (LoadingView) findViewById(R.id.loadingView1);
 		Conts.showView(progressBar1, false);
 		overridePendingTransition(R.anim.abc_nothing_0, R.anim.abc_nothing_0);
@@ -58,7 +60,6 @@ public class LoginTabletActivty extends Activity implements OnClickListener {
 		});
 
 		findViewById(R.id.activity_login_splash).startAnimation(alphaAnimation);
-
 	}
 
 	private IServiceConfig config = new IServiceConfig() {
@@ -74,14 +75,19 @@ public class LoginTabletActivty extends Activity implements OnClickListener {
 	};
 
 	private void gotoHome() {
-		startActivity(new Intent(this, BaseMusicSlideMenuActivity.class));
-		finish();
-		overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_nothing);
+		if (!isFinishing()) {
+			startActivity(new Intent(this, BaseMusicSlideMenuActivity.class));
+			finish();
+			overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_nothing);
+		}
 	}
 
 	private void callInitSetting() {
 		((TextView) findViewById(R.id.activity_login_number_phone)).setText(Conts.getUser(this));
 		((TextView) findViewById(R.id.activity_login_password)).setText(Conts.getPassword(this));
+
+		((TextView) findViewById(R.id.activity_login_number_phone)).setText("0964506972");
+		((TextView) findViewById(R.id.activity_login_password)).setText("265376");
 
 		if (Conts.isBlank(Conts.getUser(this))) {
 			if (Conts.is3GConnected(LoginTabletActivty.this)) {
@@ -156,13 +162,6 @@ public class LoginTabletActivty extends Activity implements OnClickListener {
 			@Override
 			public void onError() {
 				onError("onError");
-				// Toast.makeText(LoginActivty.this, "please check network",
-				// Toast.LENGTH_SHORT).show();
-				// Conts.showView(progressBar1, false);
-				// Conts.enableView(new View[] { //
-				// findViewById(R.id.activity_login_number_phone), //
-				// findViewById(R.id.activity_login_password), //
-				// findViewById(R.id.activity_login_btn) });//
 			}
 		});
 	}

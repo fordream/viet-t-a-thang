@@ -574,7 +574,8 @@ public class Conts {
 	}
 
 	public static boolean isTablet(Context context) {
-		return "1".equals(context.getString(R.string.checkdevice));
+		// return "1".equals(context.getString(R.string.checkdevice));
+		return true;
 	}
 
 	public static void setTextView(View findViewById, JSONObject jsonObject, String key) {
