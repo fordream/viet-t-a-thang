@@ -31,21 +31,15 @@ public abstract class ResClientCallBack extends CallBack {
 	public Object execute() {
 		System.setProperty("http.keepAlive", "false");
 		RestClient client = new RestClient(Conts.SERVER + getApiName());
-		Set<String> set = maps.keySet();
-		for (String key : set) {
-			client.addParam(key, maps.get(key));
-
-			// LogUtils.e("key", key + " :" + maps.get(key));
-		}
 		try {
-//			if (getApiName().equals(API.API_R023)) {
-//				client.executeUploadFile(context, true);
-//			} else {
-				client.execute(getMedthod());
-//			}
-		} catch (Exception e) {
+			Set<String> set = maps.keySet();
+			for (String key : set) {
+				client.addParam(key, maps.get(key));
+			}
 
-//			LogUtils.e("exception1", e);
+			client.execute(getMedthod());
+		} catch (Exception e) {
+			LogUtils.e("response", e);
 		}
 
 		return client;

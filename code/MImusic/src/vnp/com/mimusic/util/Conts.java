@@ -189,7 +189,7 @@ public class Conts {
 		Cursor cursor = activity.getContentResolver().query(User.CONTENT_URI, null, selection, null, null);
 		if (cursor != null && cursor.getCount() >= 1) {
 			cursor.moveToNext();
-			token = cursor.getString(cursor.getColumnIndex(User.TOKEN));
+			token = getStringCursor(cursor, User.TOKEN);
 		}
 
 		if (cursor != null) {
@@ -215,6 +215,7 @@ public class Conts {
 				String errorCode = "";
 				RestClient restClient = (RestClient) object;
 				String response = restClient.getResponse();
+
 				try {
 					if (Conts.isBlank(response)) {
 						response = activity.getString(R.string.default_error);
@@ -227,37 +228,44 @@ public class Conts {
 							contsCallBack.onSuscess(jsonObject);
 					} else {
 						try {
-							JSONObject errorMessage = jsonObject.getJSONObject("errorMessage");
-							java.util.Iterator<String> iterator = errorMessage.keys();
-							while (iterator.hasNext()) {
-								String key = iterator.next();
-								message += "\n" + errorMessage.getString(key);
+							if (jsonObject.has("errorMessage")) {
+								JSONObject errorMessage = jsonObject.getJSONObject("errorMessage");
+								java.util.Iterator<String> iterator = errorMessage.keys();
+								while (iterator.hasNext()) {
+									String key = iterator.next();
+									message += "\n" + errorMessage.getString(key);
+								}
 							}
 						} catch (Exception exception) {
-
+							LogUtils.e("response", exception);
 						}
 
 						try {
-							JSONArray errorMessage = jsonObject.getJSONArray("customers_fail");
-							String mNewData = "";
-							for (int i = 0; i < errorMessage.length(); i++) {
-								String newData = errorMessage.get(i).toString();
-								mNewData += "" + newData;
-							}
+							if (jsonObject.has("customers_fail")) {
+								JSONArray errorMessage = jsonObject.getJSONArray("customers_fail");
+								String mNewData = "";
+								for (int i = 0; i < errorMessage.length(); i++) {
+									String newData = errorMessage.get(i).toString();
+									mNewData += "" + newData;
+								}
 
-							if (!Conts.isBlank(mNewData)) {
-								mNewData = mNewData.replace("{", "").replace("}", "").replace("\"\"", " , ").replace("\"", "");
-								message += "\n" + String.format(activity.getString(R.string.danhsachsodienthoaikhongthemoi), mNewData);
+								if (!Conts.isBlank(mNewData)) {
+									mNewData = mNewData.replace("{", "").replace("}", "").replace("\"\"", " , ").replace("\"", "");
+									message += "\n" + String.format(activity.getString(R.string.danhsachsodienthoaikhongthemoi), mNewData);
+								}
 							}
 						} catch (Exception exception) {
-
+							LogUtils.e("response", exception);
 						}
-						if (contsCallBack != null)
+						if (contsCallBack != null) {
 							contsCallBack.onError(message);
+						}
 					}
 				} catch (Exception exception) {
-					if (contsCallBack != null)
+					LogUtils.e("response", exception);
+					if (contsCallBack != null) {
 						contsCallBack.onError();
+					}
 				}
 
 				checkToken(restClient.getResponseCode(), errorCode);
@@ -508,7 +516,7 @@ public class Conts {
 				return new File(Environment.getExternalStorageDirectory() + "/temp.png");
 			} catch (Exception e) {
 
-//				LogUtils.e("CHECK", e);
+				// LogUtils.e("CHECK", e);
 			}
 		}
 

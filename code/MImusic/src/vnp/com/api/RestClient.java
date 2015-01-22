@@ -104,8 +104,9 @@ public class RestClient {
 					}
 				}
 			} catch (Exception exception) {
+				LogUtils.e("response", exception);
 			}
-
+			LogUtils.e("mxUrl", url + combinedParams);
 			request = new HttpGet(url + combinedParams);
 			// add headers
 			for (NameValuePair h : headers) {
@@ -199,10 +200,11 @@ public class RestClient {
 			if (entity != null) {
 				response = EntityUtils.toString(entity);
 			}
-
 		} catch (ClientProtocolException e) {
 			client.getConnectionManager().shutdown();
+			LogUtils.e("response", e);
 		} catch (IOException e) {
+			LogUtils.e("response", e);
 			client.getConnectionManager().shutdown();
 		}
 	}
@@ -250,7 +252,7 @@ public class RestClient {
 		} catch (Exception e) {
 			client.getConnectionManager().shutdown();
 			e.printStackTrace();
-//			LogUtils.e("ABC", e);
+			// LogUtils.e("ABC", e);
 		}
 	}
 
@@ -408,7 +410,7 @@ public class RestClient {
 				fileOutput.close();
 			}
 		} catch (Exception e) {
-//			LogUtils.e("mException", e);
+			// LogUtils.e("mException", e);
 		} finally {
 			try {
 				urlConnection.disconnect();
