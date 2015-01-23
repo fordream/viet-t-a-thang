@@ -28,5 +28,7 @@ public class RecommentItemView extends LinearLayout {
 	public void setData(JSONObject jsonObject) {
 		String text = String.format("%s (%s)", Conts.getString(jsonObject, "name"), Conts.getSDT(Conts.getString(jsonObject, "phone")));
 		Conts.setTextView(findViewById(R.id.home_item_tv_name), text);
+		Conts.setTextView(findViewById(R.id.home_item_tv_name), jsonObject, "name");
+		Conts.setTextView(findViewById(R.id.home_item_tv_content_sdt), jsonObject, "phone");
 	}
 }
