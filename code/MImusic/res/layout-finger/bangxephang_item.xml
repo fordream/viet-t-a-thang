@@ -2,13 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/white"
     android:orientation="vertical" >
 
     <LinearLayout
+        android:id="@+id/bangxephang_item_bg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/white"
         android:orientation="horizontal" >
 
         <TextView
@@ -42,10 +41,9 @@
 
             <LinearLayout
                 android:id="@+id/bangxephang_block"
-                android:layout_width="@dimen/dimen_70dp"
+                android:layout_width="@dimen/dimen_80dp"
                 android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
-                android:background="@drawable/bangxephang_item_bg_count"
                 android:gravity="center"
                 android:orientation="vertical" >
 
@@ -67,7 +65,7 @@
                 android:layout_toLeftOf="@+id/bangxephang_block"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:paddingLeft="@dimen/dimen_15dp"
+                android:paddingLeft="@dimen/dimen_5dp"
                 android:paddingRight="@dimen/dimen_5dp" >
 
                 <TextView
@@ -147,7 +145,7 @@
 
     <View
         android:layout_width="fill_parent"
-        android:layout_height="@dimen/dimen_3dp"
+        android:layout_height="0px"
         android:background="#f3f3f3" />
 
 </LinearLayout>

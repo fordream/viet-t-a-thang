@@ -33,7 +33,7 @@
                 android:layout_toLeftOf="@+id/menu_right_detail_checkbox"
                 android:layout_toRightOf="@+id/menu_right_item_img_icon"
                 android:orientation="vertical"
-                android:paddingLeft="@dimen/dimen_0dp"
+                android:paddingLeft="@dimen/dimen_5dp"
                 android:paddingRight="@dimen/dimen_3dp" >
 
                 <TextView
@@ -47,6 +47,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:layout_marginTop="@dimen/dimen_5dp"
                     android:id="@+id/menu_right_item_tv_link"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/bxh_tab"
     android:orientation="horizontal" >
 
     <LinearLayout
@@ -15,7 +16,7 @@
             android:layout_width="@dimen/dimen_1dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/tab_selectd"
+            android:background="@drawable/bangxephang_top"
             android:orientation="horizontal"
             android:padding="@dimen/dimen_0dp" >
 

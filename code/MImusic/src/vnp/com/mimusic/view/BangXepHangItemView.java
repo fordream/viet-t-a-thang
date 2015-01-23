@@ -63,6 +63,9 @@ public class BangXepHangItemView extends LinearLayout {
 		if (position >= 6) {
 			bxhItemSTT.setTextColor(getResources().getColor(R.color.mx));
 		}
+
+		findViewById(R.id.bangxephang_item_bg).setBackgroundResource(position % 2 == 0 ? R.drawable.bxh_bg_1 : R.drawable.bxh_bg_2);
+		findViewById(R.id.bangxephang_block).setBackgroundResource(position % 2 == 0 ? R.drawable.bxh_bg_x_1 : R.drawable.bxh_bg_x_2);
 	}
 
 	public void setDataBundle(Bundle arguments) {
@@ -76,8 +79,6 @@ public class BangXepHangItemView extends LinearLayout {
 		ImageView bxhItemImage = (ImageView) findViewById(R.id.bangxephang_item_img_icon);
 		ImageLoaderUtils.getInstance(getContext()).DisplayImage(arguments.getString("avatar"), bxhItemImage, BitmapFactory.decodeResource(getResources(), R.drawable.no_avatar));
 
-		
-		
-		((TextView)findViewById(R.id.chitietdoanhthu1dichvu)).setText(String.format(getContext().getString(R.string.format_tien),arguments.getString("commission")));
+		((TextView) findViewById(R.id.chitietdoanhthu1dichvu)).setText(String.format(getContext().getString(R.string.format_tien), arguments.getString("commission")));
 	}
 }
