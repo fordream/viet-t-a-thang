@@ -27,7 +27,9 @@
             android:layout_height="@dimen/dimen_80dp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:background="@drawable/bangxephang_avatar_example" />
+            android:padding="@dimen/dimen_10dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bangxephang_avatar_example" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -142,6 +144,10 @@
             </LinearLayout>
         </RelativeLayout>
     </LinearLayout>
-    <View android:layout_width="fill_parent" android:layout_height="@dimen/dimen_3dp" android:background="#f3f3f3"/>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/dimen_3dp"
+        android:background="#f3f3f3" />
 
 </LinearLayout>

@@ -20,11 +20,11 @@
         android:layout_height="wrap_content"
         android:background="#cccccc"
         android:gravity="center"
-        android:paddingBottom="@dimen/dimen_3dp"
-        android:paddingTop="@dimen/dimen_3dp"
+        android:paddingBottom="@dimen/dimen_6dp"
+        android:paddingTop="@dimen/dimen_6dp"
         android:singleLine="true"
         android:text="Dịch vụ imuzic"
-        android:textColor="#666666"
+        android:textColor="#336666"
         android:textSize="@dimen/dimen_10dp" />
 
 </LinearLayout>

@@ -33,8 +33,8 @@ public class RecommentItemDvBanChayView extends LinearLayout {
 	}
 
 	public void setBackgroud(int posititon) {
-		findViewById(R.id.icondichvuc).setBackgroundColor(getResources().getColor(posititon % 2 == 0 ? android.R.color.white : R.color.f3f3f3));
-		findViewById(R.id.dangky_dialog_content).setBackgroundColor(getResources().getColor(!(posititon % 2 == 0) ? android.R.color.white : R.color.f3f3f3));
+		findViewById(R.id.icondichvuc).setBackgroundResource(posititon % 2 == 0 ? R.drawable.recomment_bg_mx1 : R.drawable.recomment_bg_mx2);
+		findViewById(R.id.dangky_dialog_content).setBackgroundResource(posititon % 2 == 0 ? R.drawable.recomment_bg_mxx1 : R.drawable.recomment_bg_mxx2);
 	}
 
 	public void setData(JSONObject jsonObject) {
@@ -44,7 +44,7 @@ public class RecommentItemDvBanChayView extends LinearLayout {
 		if (!Conts.isBlank(url)) {
 			url = url.replace("https", "http");
 		}
-		
+
 		ImageLoaderUtils.getInstance(getContext()).DisplayImage(url, icondichvuc, BitmapFactory.decodeResource(getResources(), R.drawable.no_image));
 		((TextView) findViewById(R.id.dangky_dialog_content)).setText(Conts.getString(jsonObject, DichVu.service_name));
 	}
