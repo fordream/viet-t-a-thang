@@ -52,6 +52,7 @@
                     android:background="@drawable/login_header" />
 
                 <LinearLayout
+                    android:layout_marginTop="@dimen/dimen_10dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
@@ -100,10 +101,10 @@
                     </LinearLayout>
 
                     <TextView
-                        android:layout_width="@dimen/dimen_200dp"
+                        android:layout_width="@dimen/dimen_250dp"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/dimen_5dp"
-                        android:layout_marginTop="@dimen/dimen_0dp"
+                        android:layout_marginTop="@dimen/dimen_25dp"
                         android:text="@string/nhapsodienthoai"
                         android:textColor="#336666"
                         android:textSize="@dimen/dimen_13dp"
@@ -111,7 +112,7 @@
 
                     <EditText
                         android:id="@+id/activity_login_number_phone"
-                        android:layout_width="@dimen/dimen_200dp"
+                        android:layout_width="@dimen/dimen_250dp"
                         android:layout_height="@dimen/dimen_35dp"
                         android:layout_marginBottom="@dimen/dimen_5dp"
                         android:background="@drawable/menu_right_edit"
@@ -124,7 +125,7 @@
                         android:textSize="@dimen/dimen_13dp" />
 
                     <TextView
-                        android:layout_width="@dimen/dimen_200dp"
+                        android:layout_width="@dimen/dimen_250dp"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/dimen_5dp"
                         android:layout_marginTop="@dimen/dimen_5dp"
@@ -135,7 +136,7 @@
 
                     <EditText
                         android:id="@+id/activity_login_password"
-                        android:layout_width="@dimen/dimen_200dp"
+                        android:layout_width="@dimen/dimen_250dp"
                         android:layout_height="@dimen/dimen_35dp"
                         android:layout_marginBottom="@dimen/dimen_10dp"
                         android:background="@drawable/menu_right_edit"
@@ -151,14 +152,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/dimen_5dp"
-                        android:layout_marginTop="@dimen/dimen_5dp"
+                        android:layout_marginTop="@dimen/dimen_15dp"
                         android:gravity="center"
                         android:paddingLeft="@dimen/dimen_10dp"
                         android:paddingRight="@dimen/dimen_10dp" >
 
                         <Button
                             android:id="@+id/activity_login_soantin"
-                            android:layout_width="@dimen/dimen_95dp"
+                            android:layout_width="@dimen/dimen_122dp"
                             android:layout_height="@dimen/dimen_35dp"
                             android:layout_marginRight="@dimen/dimen_10dp"
                             android:background="@drawable/xml_btn_dangky"
@@ -169,7 +170,7 @@
 
                         <Button
                             android:id="@+id/activity_login_btn"
-                            android:layout_width="@dimen/dimen_95dp"
+                            android:layout_width="@dimen/dimen_122dp"
                             android:layout_height="@dimen/dimen_35dp"
                             android:background="@drawable/xml_btn_infor"
                             android:singleLine="true"

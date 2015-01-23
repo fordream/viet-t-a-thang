@@ -29,6 +29,7 @@
                 android:singleLine="true"
                 android:text="Hoàng hải Nam"
                 android:textColor="#336666"
+                android:textStyle="bold"
                 android:textSize="@dimen/dimen_13dp" />
 
             <TextView
