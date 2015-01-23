@@ -30,5 +30,6 @@ public class RecommentItemView extends LinearLayout {
 		Conts.setTextView(findViewById(R.id.home_item_tv_name), text);
 		Conts.setTextView(findViewById(R.id.home_item_tv_name), jsonObject, "name");
 		Conts.setTextView(findViewById(R.id.home_item_tv_content_sdt), jsonObject, "phone");
+		Conts.getSDT(findViewById(R.id.home_item_tv_content_sdt));
 	}
 }

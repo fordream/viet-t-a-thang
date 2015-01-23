@@ -5,6 +5,8 @@
     android:orientation="vertical" >
 
     <RelativeLayout
+        android:layout_marginTop="@dimen/dimen_5dp"
+        android:layout_marginBottom="@dimen/dimen_5dp"
         android:id="@+id/home_item_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,7 +18,7 @@
             android:layout_centerVertical="true"
             android:gravity="center"
             android:orientation="vertical"
-            android:paddingLeft="@dimen/dimen_10dp"
+            android:paddingLeft="@dimen/dimen_15dp"
             android:paddingRight="@dimen/dimen_10dp" >
 
             <TextView
@@ -77,6 +79,8 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
+        android:layout_marginLeft="@dimen/dimen_30dp"
+        android:layout_marginRight="@dimen/dimen_30dp"
         android:background="@drawable/recommnent_item_space" />
 
 </LinearLayout>

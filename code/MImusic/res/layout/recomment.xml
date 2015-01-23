@@ -85,13 +85,13 @@
             <View
                 android:layout_width="@dimen/dimen_5dp"
                 android:layout_height="match_parent"
-                android:background="@drawable/home_item_header_img" />
+                android:background="#993333" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:paddingLeft="@dimen/dimen_5dp"
+                android:paddingLeft="@dimen/dimen_15dp"
                 android:singleLine="true"
                 android:text="@string/dichvubanchay"
                 android:textColor="#993333"
@@ -256,14 +256,14 @@
             <View
                 android:layout_width="@dimen/dimen_5dp"
                 android:layout_height="match_parent"
-                android:background="@drawable/home_item_header_img" />
+                android:background="#993333" />
 
             <TextView
                 android:id="@+id/home_item_header_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:paddingLeft="@dimen/dimen_5dp"
+                android:paddingLeft="@dimen/dimen_15dp"
                 android:singleLine="true"
                 android:text="@string/sothuebaonemoi"
                 android:textColor="#993333"
