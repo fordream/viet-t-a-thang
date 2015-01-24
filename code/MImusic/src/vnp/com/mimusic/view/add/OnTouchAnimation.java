@@ -1,6 +1,5 @@
 package vnp.com.mimusic.view.add;
 
-import android.annotation.SuppressLint;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
@@ -15,7 +14,6 @@ public class OnTouchAnimation implements OnTouchListener {
 
 	}
 
-	@SuppressLint("ClickableViewAccessibility")
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
 

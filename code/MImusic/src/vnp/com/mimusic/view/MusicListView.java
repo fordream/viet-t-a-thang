@@ -1,7 +1,6 @@
 package vnp.com.mimusic.view;
 
 import vnp.com.mimusic.R;
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.text.Spanned;
@@ -28,7 +27,6 @@ public class MusicListView extends ListView {
 		init();
 	}
 
-	@SuppressLint("NewApi")
 	private void init() {
 		try {
 			setCacheColorHint(Color.TRANSPARENT);
