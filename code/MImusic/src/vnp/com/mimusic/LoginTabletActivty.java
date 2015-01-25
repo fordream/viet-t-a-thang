@@ -59,7 +59,7 @@ public class LoginTabletActivty extends Activity implements OnClickListener {
 			}
 		});
 
-		findViewById(R.id.activity_login_splash).startAnimation(alphaAnimation);
+//		findViewById(R.id.activity_login_splash).startAnimation(alphaAnimation);
 	}
 
 	private IServiceConfig config = new IServiceConfig() {

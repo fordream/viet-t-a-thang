@@ -95,7 +95,18 @@ public class RestClient {
 				if (!params.isEmpty()) {
 					combinedParams += "?";
 					for (NameValuePair p : params) {
-						String paramString = p.getName() + "=" + URLEncoder.encode(p.getValue(), "UTF-8");
+
+						String name = p.getName();
+						String value = p.getValue();
+
+						if (Conts.isBlank(name)) {
+							name = "";
+						}
+
+						if (Conts.isBlank(value)) {
+							value = "";
+						}
+						String paramString = name + "=" + URLEncoder.encode(value, "UTF-8");
 						if (combinedParams.length() > 1) {
 							combinedParams += "&" + paramString;
 						} else {

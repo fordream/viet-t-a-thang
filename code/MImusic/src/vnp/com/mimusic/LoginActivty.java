@@ -30,15 +30,13 @@ public class LoginActivty extends Activity implements OnClickListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+		
 		CrashExceptionHandler.sendCrash(this);
-
 		CrashExceptionHandler.onCreate(this);
-		// ((VApplication) getApplication()).dongbodanhba();
+
 		setContentView(R.layout.activity_login);
 		progressBar1 = (LoadingView) findViewById(R.id.loadingView1);
 		Conts.showView(progressBar1, false);
-		overridePendingTransition(R.anim.abc_nothing_0, R.anim.abc_nothing_0);
 
 		findViewById(R.id.activity_login_btn).setOnClickListener(this);
 		findViewById(R.id.activity_login_btn).setOnTouchListener(new OnTouchAnimation());
@@ -46,30 +44,15 @@ public class LoginActivty extends Activity implements OnClickListener {
 		findViewById(R.id.activity_login_soantin).setOnClickListener(this);
 		findViewById(R.id.activity_login_soantin).setOnTouchListener(new OnTouchAnimation());
 
-		final AlphaAnimation alphaAnimation = new AlphaAnimation(0f, 1f);
-		alphaAnimation.setDuration(500);
-		alphaAnimation.setAnimationListener(new VTAnimationListener() {
-			@Override
-			public void onAnimationEnd(Animation animation) {
-				super.onAnimationEnd(animation);
-				((VApplication) getApplication()).init(config);
-			}
-		});
-
-		findViewById(R.id.activity_login_splash).startAnimation(alphaAnimation);
+		init();
 	}
 
-	private IServiceConfig config = new IServiceConfig() {
-		@Override
-		public void onServiceDisconnected() {
-
-		}
-
-		@Override
-		public void onServiceConnected() {
-			callInitSetting();
-		}
-	};
+	private void init() {
+		((TextView) findViewById(R.id.activity_login_number_phone)).setText(Conts.getUser(this));
+		((TextView) findViewById(R.id.activity_login_password)).setText(Conts.getPassword(this));
+		((TextView) findViewById(R.id.activity_login_number_phone)).setText("0964506972");
+		((TextView) findViewById(R.id.activity_login_password)).setText("265376");
+	}
 
 	private void gotoHome() {
 		if (!isFinishing()) {
@@ -80,11 +63,6 @@ public class LoginActivty extends Activity implements OnClickListener {
 	}
 
 	private void callInitSetting() {
-		((TextView) findViewById(R.id.activity_login_number_phone)).setText(Conts.getUser(this));
-		((TextView) findViewById(R.id.activity_login_password)).setText(Conts.getPassword(this));
-
-		((TextView) findViewById(R.id.activity_login_number_phone)).setText("0964506972");
-		((TextView) findViewById(R.id.activity_login_password)).setText("265376");
 
 		if (Conts.isBlank(Conts.getUser(this))) {
 			if (Conts.is3GConnected(LoginActivty.this)) {

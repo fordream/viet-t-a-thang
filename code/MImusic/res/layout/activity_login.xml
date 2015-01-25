@@ -6,19 +6,6 @@
     android:gravity="center"
     android:orientation="vertical" >
 
-    <LinearLayout
-        android:id="@+id/activity_login_splash"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:gravity="center"
-        android:orientation="vertical" >
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/splash" />
-    </LinearLayout>
-
     <ScrollView
         android:id="@+id/activity_login_main"
         android:layout_width="fill_parent"

@@ -351,7 +351,6 @@ public class Conts {
 
 	public static boolean is3GConnected(Context context) {
 		ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-		// For 3G check
 		return manager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).isConnectedOrConnecting();
 	}
 
