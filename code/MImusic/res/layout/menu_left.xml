@@ -1,28 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/RelativeLayout1"
-    android:layout_width="@dimen/dimen_250dp"
+    android:layout_width="@dimen/dimen_270dp"
     android:layout_height="match_parent"
-    android:background="@drawable/menu_left_item_bg"
+    android:background="@drawable/menu_left_bg"
     android:orientation="vertical" >
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/menu_left_header"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/dimen_285dp"
+        android:background="@drawable/menu_left_header_bg"
         android:orientation="vertical" >
 
-        <RelativeLayout
+        <ImageView
+            android:id="@+id/menu_left_img_cover"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_150dp"
-            android:orientation="vertical" >
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
 
-            <ImageView
-                android:id="@+id/menu_left_img_cover"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:src="@drawable/bg_avatar_example" />
+        <RelativeLayout
+            android:id="@+id/xmain"
+            android:layout_width="@dimen/dimen_125dp"
+            android:layout_height="@dimen/dimen_125dp"
+            android:layout_centerInParent="true"
+            android:orientation="vertical" >
 
             <RelativeLayout
                 android:layout_width="@dimen/dimen_110dp"
@@ -54,14 +56,16 @@
         <TextView
             android:id="@+id/menu_left_tv_name"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_45dp"
-            android:background="@drawable/menu_left_phone"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/xmain"
             android:gravity="center"
+            android:maxLines="2"
             android:singleLine="true"
             android:text="Hoài Anh (0968678678)"
-            android:textColor="#2a2d2f"
-            android:textSize="@dimen/dimen_15dp" />
-    </LinearLayout>
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/dimen_16dp" />
+    </RelativeLayout>
 
     <vnp.com.mimusic.view.MusicListView
         android:id="@+id/menu_left_list"
@@ -69,8 +73,9 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/menu_left_footer"
         android:layout_below="@+id/menu_left_header"
-        android:divider="#333333"
-        android:dividerHeight="1px" >
+        android:divider="@drawable/tranfer"
+        android:dividerHeight="0px"
+        android:background="@drawable/menu_left_list_bg" >
     </vnp.com.mimusic.view.MusicListView>
 
     <vnp.com.mimusic.view.MenuLeftFooterView
