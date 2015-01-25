@@ -5,15 +5,15 @@ import java.io.File;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.soundcloud.android.crop.Crop;
+
 import vnp.com.api.API;
 import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.User;
 import vnp.com.mimusic.R;
-import vnp.com.mimusic.base.diablog.DateDialog;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
 import vnp.com.mimusic.util.Conts.IShowDateDialog;
-import vnp.com.mimusic.util.LogUtils;
 import vnp.com.mimusic.view.HeaderView;
 import vnp.com.mimusic.view.LoadingView;
 import android.app.Activity;
@@ -38,10 +38,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class InforFragment extends BaseFragment implements OnItemClickListener, View.OnClickListener {
-	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
-	}
 
 	private ImageView menu_left_img_cover, menu_left_img_avatar, infor_cover_click_change;
 	private TextView menu_left_tv_name;
@@ -145,10 +141,13 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 			}
 
 		} else if (requestCode == 102 && resultCode == Activity.RESULT_OK) {
-//			if (path == null) {
-//				Conts.showDialogThongbao(getActivity(), getActivity().getString(R.string.khonglayduocanh));
-//				return;
-//			}
+			// if (path == null) {
+			// Conts.showDialogThongbao(getActivity(),
+			// getActivity().getString(R.string.khonglayduocanh));
+			// return;
+			// }
+
+			// beginCrop(data.getData());
 			String path = data.getData().toString();
 			uploadAvatar(path);
 		} else if (requestCode == 103 && resultCode == Activity.RESULT_OK) {
