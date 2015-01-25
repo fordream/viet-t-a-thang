@@ -2,13 +2,10 @@ package vnp.com.mimusic;
 
 import org.json.JSONObject;
 
-import vnp.com.mimusic.VApplication.IServiceConfig;
-import vnp.com.mimusic.base.VTAnimationListener;
 import vnp.com.mimusic.main.BaseMusicSlideMenuActivity;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
 import vnp.com.mimusic.util.VTAnimationUtils;
-import vnp.com.mimusic.view.HeaderView;
 import vnp.com.mimusic.view.LoadingView;
 import vnp.com.mimusic.view.add.OnTouchAnimation;
 import android.app.Activity;
@@ -16,12 +13,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.vnp.core.common.https.Test;
 import com.vnp.core.crash.CrashExceptionHandler;
 
 public class LoginActivty extends Activity implements OnClickListener {
@@ -30,7 +23,7 @@ public class LoginActivty extends Activity implements OnClickListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		CrashExceptionHandler.sendCrash(this);
 		CrashExceptionHandler.onCreate(this);
 
@@ -52,23 +45,8 @@ public class LoginActivty extends Activity implements OnClickListener {
 		((TextView) findViewById(R.id.activity_login_password)).setText(Conts.getPassword(this));
 		((TextView) findViewById(R.id.activity_login_number_phone)).setText("0964506972");
 		((TextView) findViewById(R.id.activity_login_password)).setText("265376");
-	}
 
-	private void gotoHome() {
-		if (!isFinishing()) {
-			startActivity(new Intent(this, BaseMusicSlideMenuActivity.class));
-			finish();
-			overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_nothing);
-		}
-	}
-
-	private void callInitSetting() {
-
-		if (Conts.isBlank(Conts.getUser(this))) {
-			if (Conts.is3GConnected(LoginActivty.this)) {
-				login(true, "", "");
-			}
-		} else {
+		if (!Conts.isBlank(Conts.getUser(this))) {
 			((VApplication) getApplication()).refreshToken(new IContsCallBack() {
 				@Override
 				public void onStart() {
@@ -88,7 +66,7 @@ public class LoginActivty extends Activity implements OnClickListener {
 
 				@Override
 				public void onError(String message) {
-					Toast.makeText(LoginActivty.this, message, Toast.LENGTH_SHORT).show();
+					Conts.showDialogThongbao(LoginActivty.this, message);
 					Conts.showView(progressBar1, false);
 					Conts.enableView(new View[] { //
 					findViewById(R.id.activity_login_number_phone), //
@@ -102,7 +80,14 @@ public class LoginActivty extends Activity implements OnClickListener {
 				}
 			});
 		}
-		findViewById(R.id.activity_login_main).setVisibility(View.VISIBLE);
+	}
+
+	private void gotoHome() {
+		if (!isFinishing()) {
+			startActivity(new Intent(this, BaseMusicSlideMenuActivity.class));
+			finish();
+			overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_nothing);
+		}
 	}
 
 	private void login(boolean is3G, final String u, final String p) {
@@ -126,7 +111,7 @@ public class LoginActivty extends Activity implements OnClickListener {
 
 			@Override
 			public void onError(String message) {
-				Toast.makeText(LoginActivty.this, message, Toast.LENGTH_SHORT).show();
+				Conts.showDialogThongbao(LoginActivty.this, message);
 				Conts.showView(progressBar1, false);
 				Conts.enableView(new View[] { //
 				findViewById(R.id.activity_login_number_phone), //
@@ -152,14 +137,15 @@ public class LoginActivty extends Activity implements OnClickListener {
 				sendIntent.putExtra("address", "567");
 				startActivity(sendIntent);
 			} catch (Exception exception) {
-				Conts.toast(this, getString(R.string.noappsendmessage));
+				Conts.showDialogThongbao(this, getString(R.string.noappsendmessage));
 			}
 			return;
 		}
-		String numberPhone = ((TextView) findViewById(R.id.activity_login_number_phone)).getText().toString();
+
+		final String numberPhone = ((TextView) findViewById(R.id.activity_login_number_phone)).getText().toString();
 		final String password = ((TextView) findViewById(R.id.activity_login_password)).getText().toString();
 
-		if (!numberPhone.trim().equals("") && !password.trim().equals("")) {
+		if (!Conts.isBlank(numberPhone) && !Conts.isBlank(password)) {
 			login(false, numberPhone, password);
 		} else {
 			if (Conts.isBlank(numberPhone)) {
@@ -169,7 +155,8 @@ public class LoginActivty extends Activity implements OnClickListener {
 			if (Conts.isBlank(password)) {
 				VTAnimationUtils.animationErrorEditText(findViewById(R.id.activity_login_password));
 			}
-			Toast.makeText(this, "input password and number phone", Toast.LENGTH_SHORT).show();
+
+			Conts.showDialogThongbao(LoginActivty.this, getString(R.string.bancannhapsdtvamatkkau));
 		}
 	}
 }

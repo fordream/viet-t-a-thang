@@ -190,47 +190,47 @@ public class VApplication extends Application {
 		}
 	}
 
-	public void saveRecomend(final JSONObject response) {
-		if (mImusicService == null) {
-			Intent service = new Intent(MImusicService.ACTION);
-			bindService(service, new ServiceConnection() {
+//	public void saveRecomend(final JSONObject response) {
+//		if (mImusicService == null) {
+//			Intent service = new Intent(MImusicService.ACTION);
+//			bindService(service, new ServiceConnection() {
+//
+//				@Override
+//				public void onServiceDisconnected(ComponentName name) {
+//					mImusicService = null;
+//				}
+//
+//				@Override
+//				public void onServiceConnected(ComponentName name, IBinder service) {
+//					mImusicService = ((MImusicBin) service).getService();
+//					mImusicService.saveRecomend(response);
+//				}
+//			}, BIND_AUTO_CREATE);
+//		} else {
+//			mImusicService.saveRecomend(response);
+//		}
+//	}
 
-				@Override
-				public void onServiceDisconnected(ComponentName name) {
-					mImusicService = null;
-				}
-
-				@Override
-				public void onServiceConnected(ComponentName name, IBinder service) {
-					mImusicService = ((MImusicBin) service).getService();
-					mImusicService.saveRecomend(response);
-				}
-			}, BIND_AUTO_CREATE);
-		} else {
-			mImusicService.saveRecomend(response);
-		}
-	}
-
-	public void getReommend(final IContsCallBackData contsCallBackData) {
-		if (mImusicService == null) {
-			Intent service = new Intent(MImusicService.ACTION);
-			bindService(service, new ServiceConnection() {
-
-				@Override
-				public void onServiceDisconnected(ComponentName name) {
-					mImusicService = null;
-				}
-
-				@Override
-				public void onServiceConnected(ComponentName name, IBinder service) {
-					mImusicService = ((MImusicBin) service).getService();
-					contsCallBackData.onCallBack(mImusicService.getRecommend());
-				}
-			}, BIND_AUTO_CREATE);
-		} else {
-			contsCallBackData.onCallBack(mImusicService.getRecommend());
-		}
-	}
+//	public void getReommend(final IContsCallBackData contsCallBackData) {
+//		if (mImusicService == null) {
+//			Intent service = new Intent(MImusicService.ACTION);
+//			bindService(service, new ServiceConnection() {
+//
+//				@Override
+//				public void onServiceDisconnected(ComponentName name) {
+//					mImusicService = null;
+//				}
+//
+//				@Override
+//				public void onServiceConnected(ComponentName name, IBinder service) {
+//					mImusicService = ((MImusicBin) service).getService();
+//					contsCallBackData.onCallBack(mImusicService.getRecommend());
+//				}
+//			}, BIND_AUTO_CREATE);
+//		} else {
+//			contsCallBackData.onCallBack(mImusicService.getRecommend());
+//		}
+//	}
 
 	public void executeUpdateHttpsAvatar(final String path, final IContsCallBack iContsCallBack) {
 		if (mImusicService == null) {

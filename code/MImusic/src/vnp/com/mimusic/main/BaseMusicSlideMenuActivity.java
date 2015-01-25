@@ -284,57 +284,57 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 		 * recommnet
 		 */
 
-		findViewById(R.id.recomment_bottom_top).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				getSlideMenu().close(true);
-				// TODO
-				showReCmmend();
-			}
-
-		});
+//		findViewById(R.id.recomment_bottom_top).setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				getSlideMenu().close(true);
+//				// TODO
+//				showReCmmend();
+//			}
+//
+//		});
 
 		findViewById(R.id.recomment_bottom_top).setVisibility(View.GONE);
 
-		((VApplication) getApplication()).getReommend(new IContsCallBackData() {
-
-			@Override
-			public void onCallBack(Object response) {
-				responseRecommend = (JSONObject) response;
-
-				if (responseRecommend != null) {
-					findViewById(R.id.recomment_bottom_top).setVisibility(View.VISIBLE);
-					showReCmmend();
-				}
-			}
-		});
+//		((VApplication) getApplication()).getReommend(new IContsCallBackData() {
+//
+//			@Override
+//			public void onCallBack(Object response) {
+//				responseRecommend = (JSONObject) response;
+//
+//				if (responseRecommend != null) {
+//					findViewById(R.id.recomment_bottom_top).setVisibility(View.VISIBLE);
+//					showReCmmend();
+//				}
+//			}
+//		});
 
 	}
 
-	protected void showReCmmend() {
-		ReCommnetDialog reCommnetDialog = new ReCommnetDialog(BaseMusicSlideMenuActivity.this, responseRecommend) {
-			@Override
-			public void _addDv(String id) {
-				Intent intent = new Intent(BaseMusicSlideMenuActivity.this, RootMenuActivity.class);
-				intent.putExtra("type", Conts.CHITIETDICHVU);
-				intent.putExtra(DichVu.service_code, id);
-				startActivity(intent);
-				overridePendingTransitionStartActivity();
-			}
-
-			@Override
-			public void _addContact(String msisdn, String name) {
-				Intent intent = new Intent(BaseMusicSlideMenuActivity.this, RootMenuActivity.class);
-				intent.putExtra("type", Conts.NHIEUDICHVU);
-				intent.putExtra("msisdn", msisdn);
-				intent.putExtra("name", name);
-				intent.putExtra(User._ID, "");
-				startActivity(intent);
-				overridePendingTransitionStartActivity();
-			}
-		};
-		reCommnetDialog.show();
-	}
+//	protected void showReCmmend() {
+//		ReCommnetDialog reCommnetDialog = new ReCommnetDialog(BaseMusicSlideMenuActivity.this, responseRecommend) {
+//			@Override
+//			public void _addDv(String id) {
+//				Intent intent = new Intent(BaseMusicSlideMenuActivity.this, RootMenuActivity.class);
+//				intent.putExtra("type", Conts.CHITIETDICHVU);
+//				intent.putExtra(DichVu.service_code, id);
+//				startActivity(intent);
+//				overridePendingTransitionStartActivity();
+//			}
+//
+//			@Override
+//			public void _addContact(String msisdn, String name) {
+//				Intent intent = new Intent(BaseMusicSlideMenuActivity.this, RootMenuActivity.class);
+//				intent.putExtra("type", Conts.NHIEUDICHVU);
+//				intent.putExtra("msisdn", msisdn);
+//				intent.putExtra("name", name);
+//				intent.putExtra(User._ID, "");
+//				startActivity(intent);
+//				overridePendingTransitionStartActivity();
+//			}
+//		};
+//		reCommnetDialog.show();
+//	}
 
 	private JSONObject responseRecommend;
 	private View.OnClickListener homeOnClick = new View.OnClickListener() {

@@ -94,12 +94,16 @@ public class MImusicService extends Service {
 
 					@Override
 					public void onError(String message) {
-						callRecocmment(contsCallBack);
+						if (contsCallBack != null) {
+							contsCallBack.onError(message);
+						}
 					}
 
 					@Override
 					public void onSuscess(JSONObject response) {
-						callRecocmment(contsCallBack);
+						if (contsCallBack != null) {
+							contsCallBack.onSuscess(response);
+						}
 					}
 				});
 
@@ -195,12 +199,18 @@ public class MImusicService extends Service {
 
 					@Override
 					public void onError(String message) {
-						callRecocmment(contsCallBack);
+						if (contsCallBack != null) {
+							contsCallBack.onError(message);
+						}
+						// callRecocmment(contsCallBack);
 					}
 
 					@Override
 					public void onSuscess(JSONObject response) {
-						callRecocmment(contsCallBack);
+						if (contsCallBack != null) {
+							contsCallBack.onSuscess(response);
+						}
+						// callRecocmment(contsCallBack);
 					}
 				});
 			}
@@ -219,33 +229,34 @@ public class MImusicService extends Service {
 		});
 	}
 
-	private void callRecocmment(final IContsCallBack contsCallBack) {
-		execute(RequestMethod.GET, API.API_R026, new Bundle(), new IContsCallBack() {
-
-			@Override
-			public void onSuscess(JSONObject response) {
-				if (contsCallBack != null)
-					contsCallBack.onSuscess(null);
-			}
-
-			@Override
-			public void onStart() {
-				// contsCallBack.onSuscess(null);
-			}
-
-			@Override
-			public void onError(String message) {
-				if (contsCallBack != null)
-					contsCallBack.onSuscess(null);
-			}
-
-			@Override
-			public void onError() {
-				if (contsCallBack != null)
-					contsCallBack.onSuscess(null);
-			}
-		});
-	}
+	// private void callRecocmment(final IContsCallBack contsCallBack) {
+	// execute(RequestMethod.GET, API.API_R026, new Bundle(), new
+	// IContsCallBack() {
+	//
+	// @Override
+	// public void onSuscess(JSONObject response) {
+	// if (contsCallBack != null)
+	// contsCallBack.onSuscess(null);
+	// }
+	//
+	// @Override
+	// public void onStart() {
+	// // contsCallBack.onSuscess(null);
+	// }
+	//
+	// @Override
+	// public void onError(String message) {
+	// if (contsCallBack != null)
+	// contsCallBack.onSuscess(null);
+	// }
+	//
+	// @Override
+	// public void onError() {
+	// if (contsCallBack != null)
+	// contsCallBack.onSuscess(null);
+	// }
+	// });
+	// }
 
 	private void callUpdateData() {
 
@@ -484,7 +495,7 @@ public class MImusicService extends Service {
 						} else if (API.API_R019.equals(api)) {
 							updateKiemTraDieuKienThueBao(response);
 						} else if (API.API_R026.equals(api)) {
-							saveRecomend(response);
+							// saveRecomend(response);
 						}
 						return null;
 					}
@@ -516,7 +527,7 @@ public class MImusicService extends Service {
 	}
 
 	private void updateKiemTraDieuKienThueBao(JSONObject response) {
-//		LogUtils.e("updateKiemTraDieuKienThueBao", response.toString());
+		// LogUtils.e("updateKiemTraDieuKienThueBao", response.toString());
 	}
 
 	private void updateDongBoXuong(JSONObject response) {
@@ -593,7 +604,7 @@ public class MImusicService extends Service {
 	}
 
 	private void updateDichVu(JSONObject response) {
-
+		LogUtils.e("updateDichVu", response.toString());
 		try {
 			JSONArray jsonArray = response.getJSONArray("data");
 			for (int i = 0; i < jsonArray.length(); i++) {
@@ -660,7 +671,7 @@ public class MImusicService extends Service {
 		contentValues.put(User.poundage_month, Conts.getString(response, User.poundage_month));
 		contentValues.put(User.birthday, Conts.getString(response, User.birthday));
 		String avatar = Conts.getString(response, User.AVATAR);
-//		LogUtils.e("avatar", avatar + "");
+		// LogUtils.e("avatar", avatar + "");
 		if (!Conts.isBlank(avatar)) {
 			contentValues.put(User.AVATAR, avatar);
 		}
@@ -687,16 +698,16 @@ public class MImusicService extends Service {
 		execute(RequestMethod.GET, API.API_R023, bundle, iContsCallBack);
 	}
 
-	private JSONObject recommend;
+	// private JSONObject recommend;
 
-	public void saveRecomend(JSONObject response) {
-		if (response != null)
-			recommend = response;
-	}
-
-	public JSONObject getRecommend() {
-		return recommend;
-	}
+	// public void saveRecomend(JSONObject response) {
+	// if (response != null)
+	// recommend = response;
+	// }
+	//
+	// public JSONObject getRecommend() {
+	// return recommend;
+	// }
 
 	public void executeHttps(final RequestMethod requestMethod, final String api, final Bundle bundle, final IContsCallBack contsCallBack) {
 		// contsCallBack.onStart();
