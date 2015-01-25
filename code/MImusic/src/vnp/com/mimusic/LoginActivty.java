@@ -45,9 +45,6 @@ public class LoginActivty extends Activity implements OnClickListener {
 
 		findViewById(R.id.activity_login_soantin).setOnClickListener(this);
 		findViewById(R.id.activity_login_soantin).setOnTouchListener(new OnTouchAnimation());
-		HeaderView header = (HeaderView) findViewById(R.id.activity_login_header);
-		header.setTextHeader(R.string.dangnhap);
-		header.showButton(false, false);
 
 		final AlphaAnimation alphaAnimation = new AlphaAnimation(0f, 1f);
 		alphaAnimation.setDuration(500);
