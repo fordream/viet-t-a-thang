@@ -14,7 +14,7 @@ public class DBProvider extends ContentProvider {
 	public static final String PROVIDER_NAME = "vnp.com.mimusic.db.DBProvider";
 
 	private void openDB() {
-		//closeDB();
+		// closeDB();
 		db = new DBDatabaseHelper(getContext()).getWritableDatabase();
 	}
 
@@ -42,6 +42,7 @@ public class DBProvider extends ContentProvider {
 			DichVu.addUriMatcher(uriMatcher, PROVIDER_NAME);
 			Recomment.addUriMatcher(uriMatcher, PROVIDER_NAME);
 			BangXepHangChiTiet.addUriMatcher(uriMatcher, PROVIDER_NAME);
+			MauMoi.addUriMatcher(uriMatcher, PROVIDER_NAME);
 		}
 
 		return (db == null) ? false : true;
@@ -49,7 +50,7 @@ public class DBProvider extends ContentProvider {
 
 	@Override
 	public Uri insert(Uri uri, ContentValues values) {
-		//openDB();
+		// openDB();
 		int match = uriMatcher.match(uri);
 		Uri _uri = User.insert(match, db, uri, values);
 
@@ -64,6 +65,11 @@ public class DBProvider extends ContentProvider {
 		if (_uri == null) {
 			_uri = BangXepHangChiTiet.insert(match, db, _uri, values);
 		}
+
+		if (_uri == null) {
+			_uri = MauMoi.insert(match, db, _uri, values);
+		}
+
 		if (_uri != null) {
 			getContext().getContentResolver().notifyChange(_uri, null);
 		}
@@ -72,7 +78,7 @@ public class DBProvider extends ContentProvider {
 
 	@Override
 	public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
-		//openDB();
+		// openDB();
 		int match = uriMatcher.match(uri);
 		Cursor c = User.query(match, db, uri, projection, selection, selectionArgs, sortOrder);
 
@@ -88,6 +94,9 @@ public class DBProvider extends ContentProvider {
 		if (c == null) {
 			c = BangXepHangChiTiet.query(match, db, uri, projection, selection, selectionArgs, sortOrder);
 		}
+		if (c == null) {
+			c = MauMoi.query(match, db, uri, projection, selection, selectionArgs, sortOrder);
+		}
 
 		if (c != null) {
 			c.setNotificationUri(getContext().getContentResolver(), uri);
@@ -102,7 +111,7 @@ public class DBProvider extends ContentProvider {
 
 	@Override
 	public int delete(Uri uri, String selection, String[] selectionArgs) {
-		//openDB();
+		// openDB();
 		int count = 0;
 		int match = uriMatcher.match(uri);
 
@@ -119,6 +128,10 @@ public class DBProvider extends ContentProvider {
 		if (count == -2) {
 			count = BangXepHangChiTiet.delete(match, db, uri, selection, selectionArgs);
 		}
+
+		if (count == -2) {
+			count = MauMoi.delete(match, db, uri, selection, selectionArgs);
+		}
 		//
 		if (count == -2 || match == UriMatcher.NO_MATCH) {
 			throw new IllegalArgumentException("Unknown URI " + uri);
@@ -130,7 +143,7 @@ public class DBProvider extends ContentProvider {
 
 	@Override
 	public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
-		//openDB();
+		// openDB();
 		int count = 0;
 
 		int match = uriMatcher.match(uri);
@@ -148,7 +161,9 @@ public class DBProvider extends ContentProvider {
 		if (count == -2) {
 			count = BangXepHangChiTiet.update(match, db, uri, values, selection, selectionArgs);
 		}
-
+		if (count == -2) {
+			count = MauMoi.update(match, db, uri, values, selection, selectionArgs);
+		}
 		if (count == -2 || match == UriMatcher.NO_MATCH) {
 			throw new IllegalArgumentException("Unknown URI " + uri);
 		}
@@ -164,6 +179,7 @@ public class DBProvider extends ContentProvider {
 		DichVu.getType(mMap);
 		Recomment.getType(mMap);
 		BangXepHangChiTiet.getType(mMap);
+		MauMoi.getType(mMap);
 		String type = mMap.get(uriMatcher.match(uri));
 
 		if (type == null) {

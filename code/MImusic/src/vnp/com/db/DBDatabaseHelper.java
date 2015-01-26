@@ -19,6 +19,7 @@ public class DBDatabaseHelper extends SQLiteOpenHelper {
 		db.execSQL(DichVu.CREATE_DB_TABLE());
 		db.execSQL(Recomment.CREATE_DB_TABLE());
 		db.execSQL(BangXepHangChiTiet.CREATE_DB_TABLE());
+		db.execSQL(MauMoi.CREATE_DB_TABLE());
 	}
 
 	@Override
@@ -27,6 +28,7 @@ public class DBDatabaseHelper extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXISTS " + DichVu.DICHVU_TABLE_NAME);
 		db.execSQL("DROP TABLE IF EXISTS " + Recomment.RECOMMENT_TABLE_NAME);
 		db.execSQL("DROP TABLE IF EXISTS " + BangXepHangChiTiet.BANGXEPHANGCHITIET_TABLE_NAME);
+		db.execSQL("DROP TABLE IF EXISTS " + MauMoi.TABLE_NAME);
 		onCreate(db);
 	}
 }
