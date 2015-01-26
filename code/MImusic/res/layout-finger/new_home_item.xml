@@ -196,11 +196,6 @@
                     android:textColor="#666699"
                     android:textSize="@dimen/dimen_8dp" />
             </LinearLayout>
-
-            <View
-                android:layout_width="1px"
-                android:layout_height="fill_parent"
-                android:background="@drawable/new_dichvu_bg" />
         </RelativeLayout>
 
         <ImageView

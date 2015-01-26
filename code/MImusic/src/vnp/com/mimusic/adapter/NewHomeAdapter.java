@@ -62,7 +62,7 @@ public abstract class NewHomeAdapter extends ArrayAdapter<NewHomeItem> {
 				item.name = context.getString(R.string.dichvuhot);
 				list.add(item);
 			}
-
+			int index = 0;
 			while (cursorDVHot.moveToNext()) {
 				NewHomeItem item = new NewHomeItem();
 				item.type = 2;
@@ -73,6 +73,13 @@ public abstract class NewHomeAdapter extends ArrayAdapter<NewHomeItem> {
 				item.service_code = Conts.getStringCursor(cursorDVHot, DichVu.service_code);
 				item.service_price = Conts.getStringCursor(cursorDVHot, DichVu.service_price);
 				item.isDangky = "0".equals(Conts.getStringCursor(cursorDVHot, DichVu.service_status));
+				item.index = index;
+
+				if (index == 0) {
+					index = 1;
+				} else {
+					index = 0;
+				}
 				list.add(item);
 			}
 
@@ -97,9 +104,9 @@ public abstract class NewHomeAdapter extends ArrayAdapter<NewHomeItem> {
 		}
 
 		((NewHomeItemView) convertView).initData(position, getItem(position));
-		
+
 		Conts.getView(convertView, R.id.new_home_header_spacing).setVisibility(getItem(position).type == 0 && position > 0 ? View.VISIBLE : View.GONE);
-		
+
 		convertView.findViewById(R.id.moi).setOnClickListener(new MoiOnClickListener(getItem(position).content, getItem(position).name));
 		convertView.findViewById(R.id.xemall).setOnClickListener(new XemAllClickListener(getItem(position).name));
 
@@ -145,6 +152,8 @@ public abstract class NewHomeAdapter extends ArrayAdapter<NewHomeItem> {
 			Conts.setTextView(findViewById(R.id.menu_right_item_tv_link), item.content);
 			Conts.setTextView(findViewById(R.id.home_item_tv_content), item.content);
 
+			findViewById(R.id.new_home_item_blog2).setBackgroundResource(item.index == 0 ? R.drawable.home_dv_bg_0 : R.drawable.home_dv_bg_1);
+			findViewById(R.id.home_item_right_control).setBackgroundResource(item.index == 0 ? R.drawable.home_dv_bg_x_0 : R.drawable.home_dv_bg_x_1);
 		}
 
 		public NewHomeItemView(Context context, AttributeSet attrs) {

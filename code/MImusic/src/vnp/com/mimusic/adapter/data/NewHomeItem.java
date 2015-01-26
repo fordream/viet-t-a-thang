@@ -14,4 +14,5 @@ public class NewHomeItem {
 	public String content = "";
 	public boolean isDangky = false;
 	public String service_price = "";
+	public int index = 0;
 }
