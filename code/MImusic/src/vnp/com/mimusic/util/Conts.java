@@ -721,4 +721,22 @@ public class Conts {
 					BitmapFactory.decodeResource(menu_right_item_img_icon.getContext().getResources(), R.drawable.no_avatar));
 		}
 	}
+	
+	public static void showAvatarNoImage(ImageView menu_right_item_img_icon, String avatar, String contact_id) {
+		if (Conts.isBlank(avatar)) {
+			if (Conts.isBlank(contact_id)) {
+				menu_right_item_img_icon.setImageResource(R.drawable.no_image);
+			} else {
+				Bitmap bitmap = Conts.getBitmapFromContactId(menu_right_item_img_icon.getContext(), contact_id);
+				if (bitmap == null) {
+					menu_right_item_img_icon.setImageResource(R.drawable.no_image);
+				} else {
+					menu_right_item_img_icon.setImageBitmap(bitmap);
+				}
+			}
+		} else {
+			ImageLoaderUtils.getInstance(menu_right_item_img_icon.getContext()).DisplayImage(avatar, menu_right_item_img_icon,
+					BitmapFactory.decodeResource(menu_right_item_img_icon.getContext().getResources(), R.drawable.no_image));
+		}
+	}
 }

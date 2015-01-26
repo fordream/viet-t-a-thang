@@ -72,32 +72,15 @@ public class MenuRightItemView extends LinearLayout {
 			menurightitem_main.setVisibility(name.toUpperCase().contains(textSearch.toUpperCase()) ? View.VISIBLE : View.GONE);
 			menu_right_item_tv_name.setText(name);
 
-			
-			
-			
 			String avatar = cursor.getString(cursor.getColumnIndex(User.AVATAR));
 			String contact_id = Conts.getStringCursor(cursor, User.contact_id);
-		
-			Conts.showAvatar(menu_right_item_img_icon, avatar,contact_id);
-//			if (Conts.isBlank(avatar)) {
-//				if (Conts.isBlank(contact_id)) {
-//					menu_right_item_img_icon.setImageResource(R.drawable.no_avatar);
-//				} else {
-//					menu_right_item_img_icon.setImageBitmap(Conts.getBitmapFromContactId(getContext(), contact_id));
-//				}
-//			} else {
-//				// menu_right_item_img_icon.setBackgroundResource(R.drawable.no_avatar);
-//				ImageLoaderUtils.getInstance(getContext()).DisplayImage(avatar, menu_right_item_img_icon, BitmapFactory.decodeResource(getResources(), R.drawable.no_avatar));
-//			}
+
+			Conts.showAvatarNoImage(menu_right_item_img_icon, avatar, contact_id);
 
 			menu_right_item_tv_link.setText(Conts.getStringCursor(cursor, User.USER));
 			Conts.getSDT(menu_right_item_tv_link);
 
 			String dvDaSuDung = cursor.getString(cursor.getColumnIndex(User.LISTIDDVSUDUNG));
-			// try {
-			// menu_right_item_tv_link.setText(Html.fromHtml(cursor.getString(cursor.getColumnIndex(User.LISTIDTENDVSUDUNG))));
-			// } catch (Exception exception) {
-			// }
 
 		} catch (Exception exception) {
 
