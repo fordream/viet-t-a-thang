@@ -10,7 +10,7 @@
         android:layout_height="@dimen/dimen_50dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/bg_tab"
+        android:background="@drawable/new_tabs_bg"
         android:weightSum="4" >
 
         <LinearLayout
@@ -18,7 +18,7 @@
             android:layout_width="@dimen/dimen_1dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/tab_selectd"
+            android:background="@drawable/new_tabs_selected"
             android:gravity="center"
             android:orientation="vertical" >
         </LinearLayout>
@@ -42,12 +42,14 @@
 
             <ImageView
                 android:id="@+id/tab_1_img"
-                android:layout_width="@dimen/dimen_25dp"
-                android:layout_height="@dimen/dimen_25dp"
+                android:scaleType="fitXY"
+                android:layout_width="@dimen/dimen_20dp"
+                android:layout_height="@dimen/dimen_20dp"
                 android:src="@drawable/tab_item_1" />
 
             <TextView
                 android:id="@+id/tab_1_tv"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/trangchu"
@@ -66,15 +68,16 @@
 
             <ImageView
                 android:id="@+id/tab_2_img"
-                android:layout_width="@dimen/dimen_25dp"
-                android:layout_height="@dimen/dimen_25dp"
+          android:scaleType="fitXY"
+                android:layout_width="@dimen/dimen_20dp"
+                android:layout_height="@dimen/dimen_20dp"
                 android:src="@drawable/tab_item_2" />
 
             <TextView
                 android:id="@+id/tab_2_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/dichvu"
+                android:text="@string/dichvu"  android:visibility="gone"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/dimen_10dp" />
         </LinearLayout>
@@ -90,15 +93,16 @@
 
             <ImageView
                 android:id="@+id/tab_4_img"
-                android:layout_width="@dimen/dimen_25dp"
-                android:layout_height="@dimen/dimen_25dp"
+                  android:scaleType="fitXY"
+                android:layout_width="@dimen/dimen_20dp"
+                android:layout_height="@dimen/dimen_20dp"
                 android:src="@drawable/tab_item_3" />
 
             <TextView
                 android:id="@+id/tab_4_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/bangxephang"
+                android:text="@string/bangxephang"  android:visibility="gone"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/dimen_10dp" />
         </LinearLayout>
@@ -114,12 +118,13 @@
 
             <ImageView
                 android:id="@+id/tab_3_img"
-                android:layout_width="@dimen/dimen_25dp"
-                android:layout_height="@dimen/dimen_25dp"
+                  android:scaleType="fitXY"
+                android:layout_width="@dimen/dimen_20dp"
+                android:layout_height="@dimen/dimen_20dp"
                 android:src="@drawable/tintuc" />
 
             <TextView
-                android:id="@+id/tab_3_tv"
+                android:id="@+id/tab_3_tv"  android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tintuc"
