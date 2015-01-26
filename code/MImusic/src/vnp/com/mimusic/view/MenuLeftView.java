@@ -52,10 +52,6 @@ public class MenuLeftView extends LinearLayout {
 		});
 
 		menu_left_list.setAdapter(new MenuLeftAdaper(getContext(), menuleft_list));
-		// ImageView menu_left_img_avatar = (ImageView)
-		// findViewById(R.id.menu_left_img_avatar);
-		// TextView menu_left_tv_name = (TextView)
-		// findViewById(R.id.menu_left_tv_name);
 	}
 
 	public void showData() {
