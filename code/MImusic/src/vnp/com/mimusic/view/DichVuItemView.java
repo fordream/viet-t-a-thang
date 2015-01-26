@@ -38,11 +38,8 @@ public class DichVuItemView extends LinearLayout {
 		 * config backgroud for item
 		 */
 		findViewById(R.id.home_item_main).setBackgroundResource(poistion % 2 == 0 ? R.drawable.tranfer : R.drawable.new_dichvu_item_2_bg);
+		findViewById(R.id.home_item_img_icon).setBackgroundResource(poistion % 2 == 0 ? R.drawable.new_dichvu_icon_bg_0 : R.drawable.new_dichvu_icon_bg_1);
 
-		TextView home_item_right_control_1_tv = (TextView) findViewById(R.id.home_item_right_control_1_tv);
-		home_item_right_control_1_tv.setText(isDangKy ? R.string.dangdung : R.string.dangky);
-
-		
 		Conts.setTextResource(findViewById(R.id.home_item_right_control_1_tv), isDangKy ? R.string.dangdung : R.string.dangky);
 		Conts.setTextViewCursor(findViewById(R.id.home_item_tv_name), cursor, DichVu.service_name);
 		Conts.setTextViewCursor(findViewById(R.id.home_item_tv_content), cursor, DichVu.service_content);
