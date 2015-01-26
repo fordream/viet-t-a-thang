@@ -32,7 +32,6 @@ public class DichVuItemView extends LinearLayout {
 
 		final boolean isDangKy = "0".equals(cursor.getString(cursor.getColumnIndex(DichVu.service_status)));
 		int poistion = cursor.getPosition();
-		Resources resources = getContext().getResources();
 
 		/**
 		 * config backgroud for item
