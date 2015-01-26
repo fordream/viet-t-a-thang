@@ -9,15 +9,18 @@ import vnp.com.db.User;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.adapter.data.NewHomeItem;
 import vnp.com.mimusic.util.Conts;
+import vnp.com.mimusic.util.ImageLoaderUtils;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.BitmapFactory;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 public abstract class NewHomeAdapter extends ArrayAdapter<NewHomeItem> {
@@ -91,16 +94,15 @@ public abstract class NewHomeAdapter extends ArrayAdapter<NewHomeItem> {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		if (convertView == null) {
 			convertView = new NewHomeItemView(getContext());
-
 		}
 
 		((NewHomeItemView) convertView).initData(position, getItem(position));
 
 		convertView.findViewById(R.id.moi).setOnClickListener(new MoiOnClickListener(getItem(position).content, getItem(position).name));
 		convertView.findViewById(R.id.xemall).setOnClickListener(new XemAllClickListener(getItem(position).name));
+
 		ContentValues values = new ContentValues();
 		values.put("name", String.format(getContext().getString(R.string.title_dangky), getItem(position).name));
-
 		values.put(DichVu.service_code, getItem(position).service_code);
 		String content = String.format(getContext().getString(R.string.xacnhandangky_form), getItem(position).name, getItem(position).service_price);
 		values.put("content", content);
@@ -130,6 +132,10 @@ public abstract class NewHomeAdapter extends ArrayAdapter<NewHomeItem> {
 			Conts.setTextView(findViewById(R.id.name_1), item.name);
 			Conts.setTextView(findViewById(R.id.menu_right_item_tv_name), item.name);
 			Conts.setTextView(findViewById(R.id.home_item_tv_name), item.name);
+			Conts.getSDT(findViewById(R.id.menu_right_item_tv_name));
+
+			Conts.showAvatarNoImage((ImageView) findViewById(R.id.menu_right_item_img_icon), item.avatar, item.contact_id);
+			ImageLoaderUtils.getInstance(getContext()).DisplayImage(item.avatar, (ImageView) findViewById(R.id.home_item_img_icon), BitmapFactory.decodeResource(getResources(), R.drawable.no_image));
 			/**
 			 * content
 			 */

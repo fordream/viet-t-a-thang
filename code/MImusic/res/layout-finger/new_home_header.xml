@@ -1,54 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/home_header_main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/home_bg"
-    android:orientation="vertical"
-    android:scrollbarThumbHorizontal="@drawable/tranfer"
-    android:scrollbarThumbVertical="@drawable/tranfer"
-    android:scrollbars="none" >
+    android:layout_height="wrap_content" >
 
-    <RelativeLayout
+    <LinearLayout
+        android:id="@+id/home_header_main"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dimen_12dp" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:singleLine="true"
-            android:text="@string/dichvubanchay"
-            android:textColor="#3d3d3d"
-            android:textSize="@dimen/dimen_15dp" />
-
-        <TextView
-            android:id="@+id/dichvubanchay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:singleLine="true"
-            android:text="@string/xemtatca"
-            android:textColor="#3d3d3d"
-            android:textSize="@dimen/dimen_11dp" />
-
-    </RelativeLayout>
-
-    <Gallery
-        android:id="@+id/gallery1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@drawable/home_bg"
+        android:orientation="vertical"
         android:scrollbarThumbHorizontal="@drawable/tranfer"
         android:scrollbarThumbVertical="@drawable/tranfer"
-        android:scrollbars="none" />
+        android:scrollbars="none" >
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:layout_marginLeft="@dimen/dimen_12dp"
-        android:layout_marginRight="@dimen/dimen_12dp"
-        android:background="@drawable/new_home_line" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_12dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:singleLine="true"
+                android:text="@string/dichvubanchay"
+                android:textColor="#3d3d3d"
+                android:textSize="@dimen/dimen_15dp" />
+
+            <TextView
+                android:id="@+id/dichvubanchay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:singleLine="true"
+                android:text="@string/xemtatca"
+                android:textColor="#3d3d3d"
+                android:textSize="@dimen/dimen_11dp" />
+        </RelativeLayout>
+
+        <Gallery
+            android:id="@+id/gallery1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbarThumbHorizontal="@drawable/tranfer"
+            android:scrollbarThumbVertical="@drawable/tranfer"
+            android:scrollbars="none" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="@dimen/dimen_12dp"
+            android:layout_marginRight="@dimen/dimen_12dp"
+            android:background="@drawable/new_home_line" />
+    </LinearLayout>
 
 </LinearLayout>

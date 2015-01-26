@@ -1,7 +1,6 @@
 package vnp.com.mimusic.util;
 
 import java.io.BufferedOutputStream;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -23,7 +22,6 @@ import vnp.com.db.DataStore;
 import vnp.com.db.User;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.base.diablog.DangKyDialog;
-import vnp.com.mimusic.view.MusicListView;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.ContentUris;
@@ -745,6 +743,11 @@ public class Conts {
 		if (view != null && view instanceof TextView) {
 			((TextView) view).setText(res);
 		}
+	}
+
+	public static <T extends View> T getView(View view, int id) {
+		T v = (T) view.findViewById(id);
+		return v;
 	}
 
 }

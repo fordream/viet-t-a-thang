@@ -4,6 +4,7 @@ import org.json.JSONObject;
 
 import vnp.com.api.API;
 import vnp.com.api.RestClient.RequestMethod;
+import vnp.com.db.Recomment;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.adapter.NewHomeAdapter;
@@ -14,12 +15,16 @@ import vnp.com.mimusic.util.Conts.IContsCallBack;
 import vnp.com.mimusic.view.MusicListView;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Gallery;
+import android.widget.LinearLayout;
 
 public class HomeFragment extends BaseFragment implements OnItemClickListener, View.OnClickListener {
 	private vnp.com.mimusic.view.MusicListView list;
@@ -79,6 +84,24 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 	}
 
 	private void updateUI() {
+
+		Cursor cursor = Recomment.getCursorFromDichvu(getActivity(), -1);
+		if (cursor != null) {
+			if (cursor.getCount() > 0) {
+				Conts.showView(home_header.findViewById(R.id.home_header_main), true);
+				Gallery gallery = Conts.getView(home_header, R.id.gallery1);
+				gallery.setAdapter(new GalleryAdapter(getActivity(), cursor));
+			} else {
+				Conts.showView(home_header.findViewById(R.id.home_header_main), false);
+				cursor.close();
+			}
+
+		} else {
+			Conts.showView(home_header.findViewById(R.id.home_header_main), false);
+
+		}
+
+		int current = list.getSelectedItemPosition();
 		list.setAdapter(new NewHomeAdapter(getActivity()) {
 
 			@Override
@@ -103,11 +126,11 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 
 			@Override
 			public void moiContactUser(String user, String name) {
-				(((RootMenuActivity) getActivity())).moiContactUser(user,name);
-
+				(((RootMenuActivity) getActivity())).moiContactUser(user, name);
 			}
-
 		});
+
+		list.setSelection(current);
 	}
 
 	@Override
@@ -134,6 +157,37 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 			} else if (name.equals(getString(R.string.dichvubanchay))) {
 
 			}
+		}
+	}
+
+	private class GalleryAdapter extends CursorAdapter {
+
+		public GalleryAdapter(Context context, Cursor c) {
+			super(context, c);
+		}
+
+		@Override
+		public void bindView(View convertView, Context context, Cursor cursor) {
+			if (convertView == null) {
+				convertView = new DichVuItemView(context);
+			}
+
+		}
+
+		@Override
+		public View newView(Context context, Cursor arg1, ViewGroup arg2) {
+			return new DichVuItemView(context);
+		}
+	}
+
+	public class DichVuItemView extends LinearLayout {
+		public DichVuItemView(Context context) {
+			super(context);
+			init();
+		}
+
+		private void init() {
+			((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.new_home_gallery_item, this);
 		}
 	}
 }
