@@ -130,7 +130,7 @@ public class DichVu {
 	}
 
 	public static void updateDichvuRecomment(JSONObject jsonObject, Context context) {
-		Cursor cursor = context.getContentResolver().query(DichVu.CONTENT_URI, null, String.format("%s ='%s'", DichVu.service_code,Conts.getString(jsonObject, DichVu.service_code)), null, null);
+		Cursor cursor = context.getContentResolver().query(DichVu.CONTENT_URI, null, String.format("%s ='%s'", DichVu.service_code, Conts.getString(jsonObject, DichVu.service_code)), null, null);
 		boolean isNew = true;
 
 		if (cursor != null && cursor.getCount() >= 1) {
@@ -148,13 +148,22 @@ public class DichVu {
 		contentValues.put(DichVu.service_code, Conts.getString(jsonObject, DichVu.service_code));
 		// contentValues.put(DichVu.ID, Conts.getString(jsonObject, DichVu.ID));
 		// TODO
-		
-		
-		if(isNew){
+
+		if (isNew) {
 			context.getContentResolver().insert(DichVu.CONTENT_URI, contentValues);
-		}else{
-			context.getContentResolver().update(DichVu.CONTENT_URI, contentValues, String.format("%s ='%s'",DichVu.service_code, Conts.getString(jsonObject, DichVu.service_code)), null);
+		} else {
+			context.getContentResolver().update(DichVu.CONTENT_URI, contentValues, String.format("%s ='%s'", DichVu.service_code, Conts.getString(jsonObject, DichVu.service_code)), null);
 		}
 
+	}
+
+	public static Cursor getCursorFromUser(Context context, int maxColum) {
+		String limit = null;
+		
+		if (maxColum > 0) {
+			limit = String.format("%s limit %s ", DichVu.service_name, maxColum);
+		}
+
+		return context.getContentResolver().query(DichVu.CONTENT_URI, null, null, null, limit);
 	}
 }
