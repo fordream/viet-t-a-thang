@@ -12,6 +12,7 @@ import vnp.com.db.DichVu;
 import vnp.com.db.User;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.VApplication;
+import vnp.com.mimusic.adapter.data.NewHomeItem;
 import vnp.com.mimusic.main.BaseMusicSlideMenuActivity;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.DialogCallBack;
@@ -236,8 +237,8 @@ public class RootMenuActivity extends FragmentActivity {
 
 		Intent intent = new Intent(this, RootMenuActivity.class);
 		intent.putExtra("type", Conts.CHITIETDICHVU);
-		Cursor cursor = (Cursor) parent.getItemAtPosition(position);
-		intent.putExtra("id", cursor.getString(cursor.getColumnIndex(DichVu.ID)));
+		NewHomeItem cursor = (NewHomeItem) parent.getItemAtPosition(position);
+		intent.putExtra("id", cursor.id);
 		getParent().startActivity(intent);
 		overridePendingTransitionStartActivity();
 	}
@@ -378,8 +379,8 @@ public class RootMenuActivity extends FragmentActivity {
 	public void moi(boolean type, Bundle bundle) {
 		onBackPressed();
 		String api = !type ? API.API_R015 : API.API_R016;
-		
-		//Conts.showDialogThongbao(this, api + " : " +  bundle.toString());
+
+		// Conts.showDialogThongbao(this, api + " : " + bundle.toString());
 		execute(RequestMethod.POST, api, bundle, new IContsCallBack() {
 			ProgressDialog dialog;
 
@@ -425,5 +426,15 @@ public class RootMenuActivity extends FragmentActivity {
 				onError("onError");
 			}
 		});
+	}
+
+	public void moiContactUser(String user, String name) {
+		Intent intent = new Intent(this, RootMenuActivity.class);
+		intent.putExtra("type", Conts.NHIEUDICHVU);
+		intent.putExtra("msisdn", user);
+		intent.putExtra("name", name);
+		intent.putExtra(User._ID, "");
+		startActivity(intent);
+		overridePendingTransitionStartActivity();
 	}
 }

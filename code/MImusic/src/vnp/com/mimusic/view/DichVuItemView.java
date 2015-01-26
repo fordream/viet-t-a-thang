@@ -53,4 +53,13 @@ public class DichVuItemView extends LinearLayout {
 		((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.dichvu_item, this);
 		findViewById(R.id.home_item_header).setOnClickListener(null);
 	}
+
+	public void setDataHome(Cursor cursor) {
+		int poistion = cursor.getPosition() + 1;
+		/**
+		 * config backgroud for item
+		 */
+		findViewById(R.id.home_item_main).setBackgroundResource(poistion % 2 == 0 ? R.drawable.tranfer : R.drawable.new_dichvu_item_2_bg);
+		findViewById(R.id.home_item_img_icon).setBackgroundResource(poistion % 2 == 0 ? R.drawable.new_dichvu_icon_bg_0 : R.drawable.new_dichvu_icon_bg_1);
+	}
 }

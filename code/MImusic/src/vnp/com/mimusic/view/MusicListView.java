@@ -36,10 +36,14 @@ public class MusicListView extends ListView {
 		} catch (Exception exception) {
 
 		}
-		setOverScrollMode(android.view.View.OVER_SCROLL_NEVER);
-		headerListTextView = new FooterBangXepHangNoDataView(getContext());
-		headerListTextView.setText(false, null);
-		addFooterView(headerListTextView);
+		try {
+			setOverScrollMode(android.view.View.OVER_SCROLL_NEVER);
+			headerListTextView = new FooterBangXepHangNoDataView(getContext());
+			headerListTextView.setText(false, null);
+			addFooterView(headerListTextView);
+		} catch (Exception exception) {
+
+		}
 	}
 
 	/**

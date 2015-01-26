@@ -169,5 +169,8 @@
     <string name="xacnhandangky_form" formatted="false">Xác nhận đăng ký dịch vụ %s giá %s</string>
     <string name="banchuacomatkhauvuilongsoantinnhan">Bạn chưa có hoặc quên mât khẩu!\nVui lòng soạn tin nhắn(miễn phí)</string>
     <string name="bancannhapsdtvamatkkau">Bạn cần nhập số điện thoại và mật khẩu.</string>
+    <string name="xemtatca">Xem tất cả ></string>
+    <string name="moithanhvien">Mời thành viên</string>
+    <string name="dichvuhot">Dịch vụ hot</string>
 
 </resources>

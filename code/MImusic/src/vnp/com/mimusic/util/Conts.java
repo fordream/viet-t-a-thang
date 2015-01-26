@@ -23,6 +23,7 @@ import vnp.com.db.DataStore;
 import vnp.com.db.User;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.base.diablog.DangKyDialog;
+import vnp.com.mimusic.view.MusicListView;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.ContentUris;
@@ -721,7 +722,7 @@ public class Conts {
 					BitmapFactory.decodeResource(menu_right_item_img_icon.getContext().getResources(), R.drawable.no_avatar));
 		}
 	}
-	
+
 	public static void showAvatarNoImage(ImageView menu_right_item_img_icon, String avatar, String contact_id) {
 		if (Conts.isBlank(avatar)) {
 			if (Conts.isBlank(contact_id)) {
@@ -740,9 +741,10 @@ public class Conts {
 		}
 	}
 
-	public static void setTextResource(View  view, int res) {
-		if( view!= null &&  view instanceof TextView){
+	public static void setTextResource(View view, int res) {
+		if (view != null && view instanceof TextView) {
 			((TextView) view).setText(res);
 		}
 	}
+
 }

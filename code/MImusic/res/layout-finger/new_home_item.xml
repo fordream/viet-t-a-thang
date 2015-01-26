@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/new_home_item_blog0"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="@dimen/dimen_12dp"
+            android:layout_marginRight="@dimen/dimen_12dp"
+            android:background="@drawable/new_home_line" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_12dp" >
+
+            <TextView
+                android:id="@+id/name_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:singleLine="true"
+                android:text="@string/dichvubanchay"
+                android:textColor="#3d3d3d"
+                android:textSize="@dimen/dimen_15dp" />
+
+            <TextView
+                android:id="@+id/xemall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:singleLine="true"
+                android:text="@string/xemtatca"
+                android:textColor="#3d3d3d"
+                android:textSize="@dimen/dimen_11dp" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/new_home_item_blog1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_12dp"
+            android:layout_marginRight="@dimen/dimen_12dp"
+            android:layout_marginTop="@dimen/dimen_12dp" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/moi"
+                android:gravity="center" >
+
+                <ImageView
+                    android:id="@+id/menu_right_item_img_icon"
+                    android:layout_width="@dimen/dimen_50dp"
+                    android:layout_height="@dimen/dimen_50dp"
+                    android:layout_marginRight="@dimen/dimen_12dp"
+                    android:background="@drawable/no_avatar" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/menu_right_item_tv_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:text="Trần Hữu Nhật Minh"
+                        android:textColor="#333333"
+                        android:textSize="@dimen/dimen_15dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/menu_right_item_tv_link"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_3dp"
+                        android:singleLine="true"
+                        android:text="imuzik | imuzik | imuzik"
+                        android:textColor="#666666"
+                        android:textSize="@dimen/dimen_10dp"
+                        android:visibility="visible" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/moi"
+                android:layout_width="@dimen/dimen_40dp"
+                android:layout_height="@dimen/dimen_23dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/new_home_contact_moi"
+                android:gravity="center"
+                android:text="@string/moi"
+                android:textColor="#0a3156"
+                android:textSize="@dimen/dimen_10dp" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/f3f3f3"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/new_home_item_blog2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <RelativeLayout
+            android:id="@+id/home_item_right_control"
+            android:layout_width="@dimen/dimen_50dp"
+            android:layout_height="@dimen/dimen_100dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/new_dichvu_control_bg"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/home_item_right_control_1"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_50dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:scaleType="fitXY"
+                android:src="@drawable/xml_btn2" >
+
+                <ImageView
+                    android:id="@+id/home_item_right_control_icon"
+                    android:layout_width="@dimen/dimen_20dp"
+                    android:layout_height="@dimen/dimen_20dp"
+                    android:background="@drawable/new_dichvu_dangky" />
+
+                <TextView
+                    android:id="@+id/home_item_right_control_1_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_3dp"
+                    android:gravity="center"
+                    android:text="@string/dangky"
+                    android:textColor="#666699"
+                    android:textSize="@dimen/dimen_8dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/home_item_right_control_2"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_50dp"
+                android:layout_alignParentBottom="true"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:scaleType="fitXY"
+                android:src="@drawable/xml_btn2" >
+
+                <ImageView
+                    android:id="@+id/home_item_right_control_2_icon"
+                    android:layout_width="@dimen/dimen_20dp"
+                    android:layout_height="@dimen/dimen_20dp"
+                    android:background="@drawable/new_dichvu_moi" />
+
+                <TextView
+                    android:id="@+id/home_item_right_control_2_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_3dp"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="@string/moi"
+                    android:textColor="#666699"
+                    android:textSize="@dimen/dimen_8dp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="fill_parent"
+                android:background="@drawable/new_dichvu_bg" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/home_item_img_icon"
+            android:layout_width="@dimen/dimen_80dp"
+            android:layout_height="@dimen/dimen_80dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dimen_12dp"
+            android:layout_marginRight="@dimen/dimen_12dp"
+            android:background="@color/f3f3f3"
+            android:padding="@dimen/dimen_10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/dvanybook" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dimen_12dp"
+            android:layout_toLeftOf="@+id/home_item_right_control"
+            android:layout_toRightOf="@+id/home_item_img_icon"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/home_item_tv_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dimen_5dp"
+                android:singleLine="true"
+                android:text="ten dich vu"
+                android:textColor="#336666"
+                android:textSize="@dimen/dimen_15dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/home_item_tv_link"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dimen_3dp"
+                android:singleLine="true"
+                android:text="link dich vu"
+                android:textColor="#666666"
+                android:textSize="@dimen/dimen_10dp"
+                android:visibility="gone" />
+
+            <vnp.com.mimusic.view.VTTextView
+                android:id="@+id/home_item_tv_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:lineSpacingExtra="@dimen/dimen_2dp"
+                android:lines="2"
+                android:maxLines="2"
+                android:text="mo ta dich vu  mo ta dich vu mo ta dich vu  mo ta dich vu mo ta dich vu  mo ta dich vu mo ta dich vu  mo ta dich vu mo ta dich vu  mo ta dich vu"
+                android:textColor="#333333"
+                android:textSize="@dimen/dimen_10dp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>
