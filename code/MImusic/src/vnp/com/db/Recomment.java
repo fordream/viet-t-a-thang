@@ -172,13 +172,24 @@ public class Recomment {
 		return String.format("(%s)", dichvu);
 	}
 
-	public static Cursor getCursorFromDichvu(Context context) {
+	public static Cursor getCursorFromDichvu(Context context, int maxColum) {
 		String selection = String.format("%s in (%s)", DichVu.service_code, getListReCommentDichvu(context));
+
+		if (maxColum > 0) {
+			selection = String.format("%s in (%s) limit %s", DichVu.service_code, getListReCommentDichvu(context), maxColum);
+		}
+
 		return context.getContentResolver().query(DichVu.CONTENT_URI, null, selection, null, null);
+
 	}
 
-	public static Cursor getCursorFromUser(Context context) {
+	public static Cursor getCursorFromUser(Context context, int maxColum) {
 		String selection = String.format("%s in (%s)", User.USER, getListPhone(context));
+
+		if (maxColum > 0) {
+			selection = String.format("%s in (%s) limit %s", User.USER, getListPhone(context), maxColum);
+		}
+		
 		return context.getContentResolver().query(User.CONTENT_URI, null, selection, null, null);
 	}
 }
