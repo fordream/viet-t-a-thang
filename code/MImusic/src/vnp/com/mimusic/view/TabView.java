@@ -5,9 +5,12 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.animation.TranslateAnimation;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 public class TabView extends LinearLayout {
+	private ImageView tab_1_img, tab_2_img, tab_3_img, tab_4_img;
+
 	public TabView(Context context) {
 		super(context);
 		init();
@@ -20,6 +23,11 @@ public class TabView extends LinearLayout {
 
 	private void init() {
 		((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.tab, this);
+		tab_1_img = (ImageView) findViewById(R.id.tab_1_img);
+		tab_2_img = (ImageView) findViewById(R.id.tab_2_img);
+		tab_3_img = (ImageView) findViewById(R.id.tab_3_img);
+		tab_4_img = (ImageView) findViewById(R.id.tab_4_img);
+
 	}
 
 	public void setOnClickListener(OnClickListener tabOnClick, OnClickListener homeOnClick) {
@@ -50,19 +58,14 @@ public class TabView extends LinearLayout {
 			next = 3;
 		}
 
+		tab_1_img.setImageResource(next == 0 ? R.drawable.a_1 : R.drawable.a_1_dis);
+		tab_2_img.setImageResource(next == 1 ? R.drawable.a_2 : R.drawable.a_2_dis);
+		tab_4_img.setImageResource(next == 2 ? R.drawable.a_3 : R.drawable.a_3_dis);
+		tab_3_img.setImageResource(next == 3 ? R.drawable.a_4 : R.drawable.a_4_dis);
+
 		if (next != index) {
 			findViewById(R.id.tab_selected_main).post(new NextRunable(next));
 		}
-		// findViewById(R.id.tab_1).setBackgroundResource(res ==
-		// R.string.kenhbanvas ? R.drawable.tab_indivicator_selected :
-		// R.drawable.tab_indivicator);
-		// findViewById(R.id.tab_2).setBackgroundResource(res == R.string.dichvu
-		// ? R.drawable.tab_indivicator_selected : R.drawable.tab_indivicator);
-		// findViewById(R.id.tab_3).setBackgroundResource(res == R.string.tintuc
-		// ? R.drawable.tab_indivicator_selected : R.drawable.tab_indivicator);
-		// findViewById(R.id.tab_4).setBackgroundResource(res ==
-		// R.string.bangxephang ? R.drawable.tab_indivicator_selected :
-		// R.drawable.tab_indivicator);
 	}
 
 	private class NextRunable implements Runnable {
