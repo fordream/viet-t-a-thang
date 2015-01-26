@@ -437,4 +437,12 @@ public class RootMenuActivity extends FragmentActivity {
 		startActivity(intent);
 		overridePendingTransitionStartActivity();
 	}
+
+	public void gotoChiTietDichVuFromHome(String id) {
+		Intent intent = new Intent(this, RootMenuActivity.class);
+		intent.putExtra("type", Conts.CHITIETDICHVU);
+		intent.putExtra("id", id);
+		getParent().startActivity(intent);
+		overridePendingTransitionStartActivity();
+	}
 }

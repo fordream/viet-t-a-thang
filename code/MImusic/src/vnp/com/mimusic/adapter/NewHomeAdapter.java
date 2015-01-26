@@ -151,6 +151,7 @@ public abstract class NewHomeAdapter extends ArrayAdapter<NewHomeItem> {
 
 			Conts.setTextView(findViewById(R.id.menu_right_item_tv_link), item.content);
 			Conts.setTextView(findViewById(R.id.home_item_tv_content), item.content);
+			Conts.setTextView(findViewById(R.id.home_item_right_control_1_tv), getContext().getString(item.isDangky ? R.string.dangdung : R.string.dangky));
 
 			findViewById(R.id.new_home_item_blog2).setBackgroundResource(item.index == 0 ? R.drawable.home_dv_bg_0 : R.drawable.home_dv_bg_1);
 			findViewById(R.id.home_item_right_control).setBackgroundResource(item.index == 0 ? R.drawable.home_dv_bg_x_0 : R.drawable.home_dv_bg_x_1);

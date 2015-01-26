@@ -24,6 +24,7 @@ import android.os.Bundle;
 import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -95,7 +96,7 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 	}
 
 	private void updateUI() {
-
+		int current = list.getFirstVisiblePosition();
 		Cursor cursor = Recomment.getCursorFromDichvu(getActivity(), -1);
 		if (cursor != null) {
 			if (cursor.getCount() > 0) {
@@ -106,6 +107,8 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 					ReCommentDichVuItemView dichVuItemView = new ReCommentDichVuItemView(getActivity());
 					gallery.addView(dichVuItemView);
 					dichVuItemView.setData(cursor);
+
+					dichVuItemView.setOnClickListener(new RecomendDvOnClickListener(Conts.getStringCursor(cursor, DichVu.ID)));
 				}
 
 			} else {
@@ -118,7 +121,6 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 
 		}
 
-		int current = list.getSelectedItemPosition();
 		list.setAdapter(new NewHomeAdapter(getActivity()) {
 
 			@Override
@@ -222,12 +224,26 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 			int poistion = cursor.getPosition();
 
 			Conts.getView(this, R.id.left).setVisibility(poistion == 0 ? View.VISIBLE : View.GONE);
-			
-			
+
 		}
 
 		private void init() {
 			((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.new_home_gallery_item, this);
 		}
+	}
+
+	private class RecomendDvOnClickListener implements OnClickListener {
+		private String id = "";
+
+		public RecomendDvOnClickListener(String id) {
+			this.id = id;
+
+		}
+
+		@Override
+		public void onClick(View v) {
+			(((RootMenuActivity) getActivity())).gotoChiTietDichVuFromHome(id);
+		}
+
 	}
 }
