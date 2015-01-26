@@ -136,9 +136,9 @@ public class Recomment {
 
 				if (!Conts.isBlank(service_code)) {
 					if (Conts.isBlank(dichvu)) {
-						dichvu = service_code;
+						dichvu = String.format("'%s'", service_code);
 					} else {
-						dichvu = String.format("%s,%s", dichvu, service_code);
+						dichvu = String.format("%s,'%s'", dichvu, service_code);
 					}
 				}
 			}
@@ -159,9 +159,9 @@ public class Recomment {
 
 				if (!Conts.isBlank(service_code)) {
 					if (Conts.isBlank(dichvu)) {
-						dichvu = service_code;
+						dichvu = String.format("'%s'", service_code);
 					} else {
-						dichvu = String.format("%s,%s", dichvu, service_code);
+						dichvu = String.format("%s,'%s'", dichvu, service_code);
 					}
 				}
 			}
@@ -176,7 +176,7 @@ public class Recomment {
 		String selection = String.format("%s in (%s)", DichVu.service_code, getListReCommentDichvu(context));
 
 		if (maxColum > 0) {
-			selection = String.format("%s in (%s) limit %s", DichVu.service_code, getListReCommentDichvu(context), maxColum);
+			//selection = String.format("%s in (%s) limit %s", DichVu.service_code, getListReCommentDichvu(context), maxColum);
 		}
 
 		return context.getContentResolver().query(DichVu.CONTENT_URI, null, selection, null, null);
@@ -184,12 +184,12 @@ public class Recomment {
 	}
 
 	public static Cursor getCursorFromUser(Context context, int maxColum) {
-		String selection = String.format("%s in (%s)", User.USER, getListPhone(context));
+		String selection = String.format("%s in %s", User.USER, getListPhone(context));
 
 		if (maxColum > 0) {
-			selection = String.format("%s in (%s) limit %s", User.USER, getListPhone(context), maxColum);
+			//selection = String.format("%s in %s limit %s", User.USER, getListPhone(context), maxColum);
 		}
-		
+
 		return context.getContentResolver().query(User.CONTENT_URI, null, selection, null, null);
 	}
 }
