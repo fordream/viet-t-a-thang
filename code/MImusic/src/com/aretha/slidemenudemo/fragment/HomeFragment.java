@@ -82,8 +82,9 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 	}
 
 	private void updateUI() {
-		Cursor dichvu = Recomment.getCursorFromUser(getActivity(), 3);
-		Conts.showDialogThongbao(getActivity(), dichvu.getCount() + "");
+		// Cursor dichvu = Recomment.getCursorFromUser(getActivity(), 3);
+		// Conts.showDialogThongbao(getActivity(), dichvu.getCount() + "");
+		// TODO
 	}
 
 	protected void callSHowData() {
