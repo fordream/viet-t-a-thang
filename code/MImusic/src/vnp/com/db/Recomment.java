@@ -2,25 +2,30 @@ package vnp.com.db;
 
 import java.util.Map;
 
+import vnp.com.mimusic.util.Conts;
 import android.content.ContentUris;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
+import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 
 public class Recomment {
 	public static final String RECOMMENT_TABLE_NAME = "recomment";
-
 	public static final String _ID = "_id";
 	public static final String ID = "id";
-	public static final String IDUSER = "iduser";
+	public static final String user = "user";
+	public static final String phone = "phone";
+	public static final String name = "name";
+	public static final String service_code = "service_code";
 
-	public static final String TIME = "time";
-	public static final String CONTENT = "content";
-	public static final String STATUS = "status";
+	// type 0 is recomment phone
+	// type 1 recomment service
+	public static final String type = "type";
 
 	public static final String CREATE_DB_TABLE() {
 		StringBuilder builder = new StringBuilder();
@@ -29,8 +34,7 @@ public class Recomment {
 		builder.append("(");
 		builder.append(_ID).append(" INTEGER PRIMARY KEY AUTOINCREMENT").append(",");
 		String[] colums = new String[] {//
-		IDUSER, ID, TIME, STATUS, CONTENT //
-		};//
+		user, ID, service_code, phone, name, type };//
 
 		for (int i = 0; i < colums.length; i++) {
 			if (i < colums.length - 1) {
@@ -120,5 +124,28 @@ public class Recomment {
 		}
 
 		return null;
+	}
+
+	public static String getListReCommentDichvu(Context context) {
+		String selection = String.format("%s = '%s' GROUP BY %s", Recomment.user, Conts.getUser(context), Recomment.service_code);
+		Cursor cursor = context.getContentResolver().query(Recomment.CONTENT_URI, null, selection, null, String.format("%s", Recomment.service_code));
+		String dichvu = "";
+		if (cursor != null) {
+			while (cursor.moveToNext()) {
+				String service_code = Conts.getStringCursor(cursor, Recomment.service_code);
+
+				if (!Conts.isBlank(service_code)) {
+					if (Conts.isBlank(dichvu)) {
+						dichvu = service_code;
+					} else {
+						dichvu = String.format("%s,%s", dichvu, service_code);
+					}
+				}
+			}
+
+			cursor.close();
+		}
+
+		return String.format("(%s)", dichvu);
 	}
 }

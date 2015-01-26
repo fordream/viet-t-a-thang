@@ -1,6 +1,8 @@
 package vnp.com.api;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,10 +15,12 @@ import org.json.JSONObject;
 import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.DichVu;
 import vnp.com.db.MauMoi;
+import vnp.com.db.Recomment;
 import vnp.com.db.User;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
 import vnp.com.mimusic.util.LogUtils;
+import vnp.com.mimusic.view.RecommentItemView;
 import android.app.Service;
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -27,6 +31,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.ContactsContract;
+import android.view.View;
 
 public class MImusicService extends Service {
 
@@ -497,7 +502,7 @@ public class MImusicService extends Service {
 						} else if (API.API_R019.equals(api)) {
 							updateKiemTraDieuKienThueBao(response);
 						} else if (API.API_R026.equals(api)) {
-							// saveRecomend(response);
+							saveRecomend(response);
 						} else if (API.API_R022.equals(api)) {
 							updateMauMoi(response, bundle.getString(DichVu.service_code));
 						}
@@ -738,14 +743,35 @@ public class MImusicService extends Service {
 
 	// private JSONObject recommend;
 
-	// public void saveRecomend(JSONObject response) {
-	// if (response != null)
-	// recommend = response;
-	// }
-	//
-	// public JSONObject getRecommend() {
-	// return recommend;
-	// }
+	public void saveRecomend(JSONObject response) {
+		if (response != null && response.has("data")) {
+			try {
+				String user = Conts.getUser(this);
+				JSONArray array = response.getJSONArray("data");
+				for (int i = 0; i < array.length(); i++) {
+					final JSONObject jsonObject = array.getJSONObject(i);
+					String service_code = Conts.getString(jsonObject, Recomment.service_code);
+
+					JSONArray contacts = jsonObject.getJSONArray("contacts");
+
+					for (int index = 0; index < contacts.length(); index++) {
+						final JSONObject cotnact = contacts.getJSONObject(index);
+						String phone = Conts.getString(cotnact, Recomment.phone);
+						String name = Conts.getString(cotnact, Recomment.name);
+
+						ContentValues values = new ContentValues();
+						values.put(Recomment.service_code, service_code);
+						values.put(Recomment.phone, phone);
+						values.put(Recomment.name, name);
+						values.put(Recomment.user, user);
+						getContentResolver().insert(Recomment.CONTENT_URI, values);
+					}
+				}
+			} catch (JSONException e) {
+			}
+		}
+
+	}
 
 	public void executeHttps(final RequestMethod requestMethod, final String api, final Bundle bundle, final IContsCallBack contsCallBack) {
 		// contsCallBack.onStart();
