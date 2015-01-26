@@ -5,8 +5,6 @@ import java.io.File;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.soundcloud.android.crop.Crop;
-
 import vnp.com.api.API;
 import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.User;
