@@ -2,6 +2,7 @@ package vnp.com.db;
 
 import java.util.Map;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import vnp.com.mimusic.util.Conts;
@@ -22,10 +23,8 @@ public class MauMoi {
 	public static final String ID = "id";
 	public static final String user = "user";
 	public static final String content = "content";
-	/**
-	 * 0 is dang ky 1 chua dang ky
-	 */
-	public static final String service_status = "service_status";
+
+	public static final String service_code = "service_code";
 
 	public static final String CREATE_DB_TABLE() {
 		StringBuilder builder = new StringBuilder();
@@ -33,7 +32,7 @@ public class MauMoi {
 		builder.append("(");
 		builder.append(_ID).append(" INTEGER PRIMARY KEY AUTOINCREMENT").append(",");
 		String[] colums = new String[] {//
-		ID, content, user };//
+		ID, content, user, service_code };//
 
 		for (int i = 0; i < colums.length; i++) {
 			if (i < colums.length - 1) {
@@ -59,8 +58,8 @@ public class MauMoi {
 	}
 
 	// matcher
-	public static final int DICHVU_MATCHER = 7;
-	public static final int DICHVU_MATCHER_ID = 8;
+	public static final int DICHVU_MATCHER = 9;
+	public static final int DICHVU_MATCHER_ID = 10;
 
 	public static final void addUriMatcher(UriMatcher uriMatcher, String PROVIDER_NAME) {
 		uriMatcher.addURI(PROVIDER_NAME, TABLE_NAME, DICHVU_MATCHER);
@@ -124,4 +123,29 @@ public class MauMoi {
 		return null;
 	}
 
+	public static Cursor getCursorMauMoi(Context activity, String service_code) {
+		String where = String.format("%s = '%s' and %s = '%s'", MauMoi.user, Conts.getUser(activity), MauMoi.service_code, service_code);
+		return activity.getContentResolver().query(MauMoi.CONTENT_URI, null, where, null, null);
+	}
+
+	public static JSONArray getCursorMauMoiListJson(Context activity, String service_code) {
+		JSONArray list = new JSONArray();
+		String where = String.format("%s = '%s' and %s = '%s'", MauMoi.user, Conts.getUser(activity), MauMoi.service_code, service_code);
+
+		Cursor cursor = activity.getContentResolver().query(MauMoi.CONTENT_URI, null, where, null, null);
+
+		if (cursor != null) {
+			while (cursor.moveToNext()) {
+				try {
+					JSONObject jsonObject = new JSONObject();
+					jsonObject.put(MauMoi.ID, Conts.getStringCursor(cursor, MauMoi.ID));
+					jsonObject.put(MauMoi.content, Conts.getStringCursor(cursor, MauMoi.content));
+					list.put(jsonObject);
+				} catch (Exception e) {
+				}
+			}
+			cursor.close();
+		}
+		return list;
+	}
 }

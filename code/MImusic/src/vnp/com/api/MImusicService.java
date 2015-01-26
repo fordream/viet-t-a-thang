@@ -12,6 +12,7 @@ import org.json.JSONObject;
 
 import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.DichVu;
+import vnp.com.db.MauMoi;
 import vnp.com.db.User;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
@@ -21,6 +22,7 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Paint.Join;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -496,6 +498,8 @@ public class MImusicService extends Service {
 							updateKiemTraDieuKienThueBao(response);
 						} else if (API.API_R026.equals(api)) {
 							// saveRecomend(response);
+						} else if (API.API_R022.equals(api)) {
+							updateMauMoi(response, bundle.getString(DichVu.service_code));
 						}
 						return null;
 					}
@@ -528,6 +532,40 @@ public class MImusicService extends Service {
 
 	private void updateKiemTraDieuKienThueBao(JSONObject response) {
 		// LogUtils.e("updateKiemTraDieuKienThueBao", response.toString());
+	}
+
+	private void updateMauMoi(JSONObject response, String service_code) {
+		try {
+			String user = Conts.getUser(this);
+			JSONArray array = response.getJSONArray("data");
+			for (int i = 0; i < array.length(); i++) {
+				JSONObject jsonObject = array.getJSONObject(i);
+				String id = Conts.getString(jsonObject, MauMoi.ID);
+				String content = Conts.getString(jsonObject, MauMoi.content);
+
+				ContentValues values = new ContentValues();
+				values.put(MauMoi.ID, id);
+				values.put(MauMoi.content, content);
+				values.put(MauMoi.service_code, service_code);
+				values.put(MauMoi.user, user);
+
+				String where = String.format("%s = '%s' and %s = '%s'  and %s = '%s'", MauMoi.user, user, MauMoi.service_code, service_code, MauMoi.ID, id);
+				Cursor cursor = getContentResolver().query(MauMoi.CONTENT_URI, null, where, null, null);
+
+				boolean needInsert = true;
+				if (cursor != null) {
+					if (cursor.getCount() >= 1) {
+						needInsert = false;
+					}
+					cursor.close();
+				}
+
+				if (needInsert) {
+					getContentResolver().insert(MauMoi.CONTENT_URI, values);
+				}
+			}
+		} catch (JSONException e) {
+		}
 	}
 
 	private void updateDongBoXuong(JSONObject response) {

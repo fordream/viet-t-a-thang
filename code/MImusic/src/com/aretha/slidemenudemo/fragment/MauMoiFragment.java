@@ -7,6 +7,7 @@ import org.json.JSONObject;
 import vnp.com.api.API;
 import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.DichVu;
+import vnp.com.db.MauMoi;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.adapter.MauMoiAdaper;
@@ -81,41 +82,45 @@ public class MauMoiFragment extends BaseFragment implements android.view.View.On
 			}
 		}
 
-		//Conts.showDialogThongbao(getActivity(), service_code + "");
-		Bundle bundle = new Bundle();
-		bundle.putString("service_code", service_code);
-		execute(RequestMethod.GET, API.API_R022, bundle, new IContsCallBack() {
-
-			@Override
-			public void onSuscess(JSONObject response) {
-				try {
-					JSONArray array = response.getJSONArray("data");
+		JSONArray array = MauMoi.getCursorMauMoiListJson(getActivity(), service_code);
+		if (array.length() > 0) {
+			adaper = new MauMoiAdaper(getActivity(), new JSONObject[] {}, array);
+			maumoi_list.setAdapter(adaper);
+		} else {
+			Bundle bundle = new Bundle();
+			bundle.putString("service_code", service_code);
+			execute(RequestMethod.GET, API.API_R022, bundle, new IContsCallBack() {
+				@Override
+				public void onSuscess(JSONObject response) {
+					JSONArray array = MauMoi.getCursorMauMoiListJson(getActivity(), service_code);
+					// try {
+					// JSONArray array = response.getJSONArray("data");
 					adaper = new MauMoiAdaper(getActivity(), new JSONObject[] {}, array);
 					maumoi_list.setAdapter(adaper);
 
-				} catch (JSONException e) {
+					// } catch (JSONException e) {
+					// }
+					Conts.showView(loading, false);
 				}
-				Conts.showView(loading, false);
-			}
 
-			@Override
-			public void onStart() {
-				Conts.showView(loading, true);
-			}
+				@Override
+				public void onStart() {
+					Conts.showView(loading, true);
+				}
 
-			@Override
-			public void onError(String message) {
-				Conts.showDialogThongbao(getActivity(), message);
-				Conts.showView(loading, false);
-			}
+				@Override
+				public void onError(String message) {
+					Conts.showDialogThongbao(getActivity(), message);
+					Conts.showView(loading, false);
+				}
 
-			@Override
-			public void onError() {
-				Conts.toast(getActivity(), "onError");
-				Conts.showView(loading, false);
-			}
-		});
-
+				@Override
+				public void onError() {
+					Conts.toast(getActivity(), "onError");
+					Conts.showView(loading, false);
+				}
+			});
+		}
 		view.findViewById(R.id.recomment_main_background).setOnTouchListener(new OnTouchListener() {
 
 			float x = 0, y = 0;

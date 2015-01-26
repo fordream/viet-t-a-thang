@@ -73,7 +73,9 @@ public class MenuLeftView extends LinearLayout {
 			Conts.showImage(cover, menu_left_img_cover, 0);
 			String avatar = cursor.getString(cursor.getColumnIndex(User.AVATAR));
 			Conts.showImage(avatar, menu_left_img_avatar, R.drawable.no_avatar);
+		}
 
+		if (cursor != null) {
 			cursor.close();
 		}
 	}
