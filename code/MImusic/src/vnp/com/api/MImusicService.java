@@ -573,6 +573,30 @@ public class MImusicService extends Service {
 		}
 	}
 
+	private void updateDongBoXuongRecomment(String phone, String name) {
+		if (!Conts.isBlank(phone)) {
+			ContentValues contentValues = new ContentValues();
+			contentValues.put(User.USER, phone);
+			contentValues.put(User.NAME_CONTACT, name);
+			String contact_id = "";
+			if (avatarHashmap.containsKey(phone)) {
+				contact_id = avatarHashmap.get(phone);
+			}
+
+			if (Conts.isBlank(contact_id)) {
+				contact_id = "";
+			}
+
+			contentValues.put(User.contact_id, contact_id);
+			
+			if (Conts.haveContact(phone, this)) {
+				getContentResolver().update(User.CONTENT_URI, contentValues, String.format("%s = '%s'", User.USER, phone), null);
+			} else {
+				getContentResolver().insert(User.CONTENT_URI, contentValues);
+			}
+		}
+	}
+
 	private void updateDongBoXuong(JSONObject response) {
 
 		try {
@@ -757,7 +781,10 @@ public class MImusicService extends Service {
 						values.put(Recomment.phone, phone);
 						values.put(Recomment.name, name);
 						values.put(Recomment.user, user);
+
 						getContentResolver().insert(Recomment.CONTENT_URI, values);
+
+						updateDongBoXuongRecomment(phone, name);
 					}
 				}
 			} catch (JSONException e) {
