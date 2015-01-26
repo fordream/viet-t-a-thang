@@ -575,13 +575,6 @@ public class MImusicService extends Service {
 
 	private void updateDongBoXuong(JSONObject response) {
 
-		// TODO
-		// Set<String> keys = avatarHashmap.keySet();
-		// for (String key : keys) {
-		// LogUtils.e("updateDongBoXuong", key + " : " +
-		// avatarHashmap.get(key));
-		// }
-
 		try {
 			String user = Conts.getUser(MImusicService.this);
 			JSONArray array = response.getJSONArray("data");
