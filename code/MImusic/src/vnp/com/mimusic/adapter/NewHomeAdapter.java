@@ -97,7 +97,9 @@ public abstract class NewHomeAdapter extends ArrayAdapter<NewHomeItem> {
 		}
 
 		((NewHomeItemView) convertView).initData(position, getItem(position));
-
+		
+		Conts.getView(convertView, R.id.new_home_header_spacing).setVisibility(getItem(position).type == 0 && position > 0 ? View.VISIBLE : View.GONE);
+		
 		convertView.findViewById(R.id.moi).setOnClickListener(new MoiOnClickListener(getItem(position).content, getItem(position).name));
 		convertView.findViewById(R.id.xemall).setOnClickListener(new XemAllClickListener(getItem(position).name));
 

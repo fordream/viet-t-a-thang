@@ -27,7 +27,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Gallery;
+import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -100,13 +100,19 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 		if (cursor != null) {
 			if (cursor.getCount() > 0) {
 				Conts.showView(home_header.findViewById(R.id.home_header_main), true);
-				Gallery gallery = Conts.getView(home_header, R.id.gallery1);
-				gallery.setAdapter(new GalleryAdapter(getActivity(), cursor));
+				LinearLayout gallery = Conts.getView(home_header, R.id.gallery1);
+
+				while (cursor.moveToNext()) {
+					ReCommentDichVuItemView dichVuItemView = new ReCommentDichVuItemView(getActivity());
+					gallery.addView(dichVuItemView);
+					dichVuItemView.setData(cursor);
+				}
+
 			} else {
 				Conts.showView(home_header.findViewById(R.id.home_header_main), false);
-				cursor.close();
-			}
 
+			}
+			cursor.close();
 		} else {
 			Conts.showView(home_header.findViewById(R.id.home_header_main), false);
 
@@ -171,29 +177,29 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 		}
 	}
 
-	private class GalleryAdapter extends CursorAdapter {
+	// private class GalleryAdapter extends CursorAdapter {
+	//
+	// public GalleryAdapter(Context context, Cursor c) {
+	// super(context, c);
+	// }
+	//
+	// @Override
+	// public void bindView(View convertView, Context context, Cursor cursor) {
+	// if (convertView == null) {
+	// convertView = new DichVuItemView(context);
+	// }
+	//
+	// ((DichVuItemView) convertView).setData(cursor);
+	// }
+	//
+	// @Override
+	// public View newView(Context context, Cursor arg1, ViewGroup arg2) {
+	// return new DichVuItemView(context);
+	// }
+	// }
 
-		public GalleryAdapter(Context context, Cursor c) {
-			super(context, c);
-		}
-
-		@Override
-		public void bindView(View convertView, Context context, Cursor cursor) {
-			if (convertView == null) {
-				convertView = new DichVuItemView(context);
-			}
-
-			((DichVuItemView) convertView).setData(cursor);
-		}
-
-		@Override
-		public View newView(Context context, Cursor arg1, ViewGroup arg2) {
-			return new DichVuItemView(context);
-		}
-	}
-
-	public class DichVuItemView extends LinearLayout {
-		public DichVuItemView(Context context) {
+	public class ReCommentDichVuItemView extends LinearLayout {
+		public ReCommentDichVuItemView(Context context) {
 			super(context);
 			init();
 		}
@@ -212,6 +218,12 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 			} else if (position % 3 == 2) {
 				home_item_img_icon.setBackgroundResource(R.drawable.new_home_dv_bg_3);
 			}
+
+			int poistion = cursor.getPosition();
+
+			Conts.getView(this, R.id.left).setVisibility(poistion == 0 ? View.VISIBLE : View.GONE);
+			
+			
 		}
 
 		private void init() {
