@@ -127,12 +127,35 @@ public class Recomment {
 	}
 
 	public static String getListReCommentDichvu(Context context) {
-		String selection = String.format("%s = '%s' GROUP BY %s", Recomment.user, Conts.getUser(context), Recomment.service_code);
+		String selection = String.format("%s = '%s') GROUP BY ( %s", Recomment.user, Conts.getUser(context), Recomment.service_code);
 		Cursor cursor = context.getContentResolver().query(Recomment.CONTENT_URI, null, selection, null, String.format("%s", Recomment.service_code));
 		String dichvu = "";
 		if (cursor != null) {
 			while (cursor.moveToNext()) {
 				String service_code = Conts.getStringCursor(cursor, Recomment.service_code);
+
+				if (!Conts.isBlank(service_code)) {
+					if (Conts.isBlank(dichvu)) {
+						dichvu = service_code;
+					} else {
+						dichvu = String.format("%s,%s", dichvu, service_code);
+					}
+				}
+			}
+
+			cursor.close();
+		}
+
+		return String.format("(%s)", dichvu);
+	}
+
+	public static String getListPhone(Context context) {
+		String selection = String.format("%s = '%s') GROUP BY ( %s", Recomment.user, Conts.getUser(context), Recomment.phone);
+		Cursor cursor = context.getContentResolver().query(Recomment.CONTENT_URI, null, selection, null, String.format("%s", Recomment.service_code));
+		String dichvu = "";
+		if (cursor != null) {
+			while (cursor.moveToNext()) {
+				String service_code = Conts.getStringCursor(cursor, Recomment.phone);
 
 				if (!Conts.isBlank(service_code)) {
 					if (Conts.isBlank(dichvu)) {

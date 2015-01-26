@@ -82,7 +82,7 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 	}
 
 	private void updateUI() {
-		String dichvu = Recomment.getListReCommentDichvu(getActivity());
+		String dichvu = Recomment.getListPhone(getActivity());
 		Conts.showDialogThongbao(getActivity(), dichvu);
 	}
 
