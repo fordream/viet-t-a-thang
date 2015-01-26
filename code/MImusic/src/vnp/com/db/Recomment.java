@@ -146,7 +146,7 @@ public class Recomment {
 			cursor.close();
 		}
 
-		return String.format("(%s)", dichvu);
+		return String.format("%s", dichvu);
 	}
 
 	public static String getListPhone(Context context) {

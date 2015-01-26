@@ -4,6 +4,7 @@ import org.json.JSONObject;
 
 import vnp.com.api.API;
 import vnp.com.api.RestClient.RequestMethod;
+import vnp.com.db.DichVu;
 import vnp.com.db.Recomment;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
@@ -12,10 +13,13 @@ import vnp.com.mimusic.adapter.data.NewHomeItem;
 import vnp.com.mimusic.base.diablog.DangKyDialog;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
+import vnp.com.mimusic.util.ImageLoaderUtils;
+import vnp.com.mimusic.view.LoadingView;
 import vnp.com.mimusic.view.MusicListView;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
@@ -24,11 +28,13 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Gallery;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 public class HomeFragment extends BaseFragment implements OnItemClickListener, View.OnClickListener {
 	private vnp.com.mimusic.view.MusicListView list;
 	private View home_header;
+	private LoadingView loadingView;
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
@@ -38,14 +44,15 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 	@Override
 	public void onResume() {
 		super.onResume();
-		updateUI();
+		if (loadingView.getVisibility() == View.GONE)
+			updateUI();
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.home, null);
+		loadingView = Conts.getView(view, R.id.loadingView1);
 		list = (MusicListView) view.findViewById(R.id.list);
-
 		list.setOnItemClickListener(this);
 		home_header = ((LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.new_home_header, null);
 		Conts.showView(home_header.findViewById(R.id.home_header_main), false);
@@ -62,15 +69,19 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 		execute(RequestMethod.GET, API.API_R026, bundle, new IContsCallBack() {
 			@Override
 			public void onStart() {
+				Conts.showView(loadingView, true);
 			}
 
 			@Override
 			public void onSuscess(JSONObject response) {
 				updateUI();
+				Conts.showView(loadingView, false);
 			}
 
 			@Override
 			public void onError(String message) {
+				updateUI();
+				Conts.showView(loadingView, false);
 			}
 
 			@Override
@@ -172,6 +183,7 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 				convertView = new DichVuItemView(context);
 			}
 
+			((DichVuItemView) convertView).setData(cursor);
 		}
 
 		@Override
@@ -184,6 +196,22 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 		public DichVuItemView(Context context) {
 			super(context);
 			init();
+		}
+
+		public void setData(Cursor cursor) {
+			ImageView home_item_img_icon = (ImageView) findViewById(R.id.icon);
+			String service_icon = cursor.getString(cursor.getColumnIndex(DichVu.service_icon)) + "";
+			ImageLoaderUtils.getInstance(getContext()).DisplayImage(service_icon, home_item_img_icon, BitmapFactory.decodeResource(getResources(), R.drawable.no_image));
+			Conts.setTextViewCursor(findViewById(R.id.name), cursor, DichVu.service_name);
+
+			int position = cursor.getPosition();
+			if (position % 3 == 0) {
+				home_item_img_icon.setBackgroundResource(R.drawable.new_home_dv_bg_1);
+			} else if (position % 3 == 1) {
+				home_item_img_icon.setBackgroundResource(R.drawable.new_home_dv_bg_2);
+			} else if (position % 3 == 2) {
+				home_item_img_icon.setBackgroundResource(R.drawable.new_home_dv_bg_3);
+			}
 		}
 
 		private void init() {

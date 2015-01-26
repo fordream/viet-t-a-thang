@@ -40,9 +40,12 @@
         </RelativeLayout>
 
         <Gallery
+            android:spacing="@dimen/dimen_0dp"
+            android:gravity="left"
             android:id="@+id/gallery1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="@dimen/dimen_0dp"
             android:scrollbarThumbHorizontal="@drawable/tranfer"
             android:scrollbarThumbVertical="@drawable/tranfer"
             android:scrollbars="none" />
