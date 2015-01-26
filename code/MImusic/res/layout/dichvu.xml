@@ -51,6 +51,9 @@
             android:id="@+id/dichvu_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:scrollbars="none"
+            android:scrollbarThumbHorizontal="@drawable/tranfer"
+            android:scrollbarThumbVertical="@drawable/tranfer"
             android:divider="@drawable/tranfer"
             android:dividerHeight="0px" >
         </vnp.com.mimusic.view.MusicListView>

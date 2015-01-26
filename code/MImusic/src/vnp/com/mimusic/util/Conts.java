@@ -739,4 +739,10 @@ public class Conts {
 					BitmapFactory.decodeResource(menu_right_item_img_icon.getContext().getResources(), R.drawable.no_image));
 		}
 	}
+
+	public static void setTextResource(View  view, int res) {
+		if( view!= null &&  view instanceof TextView){
+			((TextView) view).setText(res);
+		}
+	}
 }
