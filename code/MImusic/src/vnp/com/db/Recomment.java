@@ -171,4 +171,14 @@ public class Recomment {
 
 		return String.format("(%s)", dichvu);
 	}
+
+	public static Cursor getCursorFromDichvu(Context context) {
+		String selection = String.format("%s in (%s)", DichVu.service_code, getListReCommentDichvu(context));
+		return context.getContentResolver().query(DichVu.CONTENT_URI, null, selection, null, null);
+	}
+
+	public static Cursor getCursorFromUser(Context context) {
+		String selection = String.format("%s in (%s)", User.USER, getListPhone(context));
+		return context.getContentResolver().query(User.CONTENT_URI, null, selection, null, null);
+	}
 }
