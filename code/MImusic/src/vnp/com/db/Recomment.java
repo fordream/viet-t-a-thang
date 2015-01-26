@@ -176,9 +176,7 @@ public class Recomment {
 		String selection = String.format("%s in (%s)", DichVu.service_code, getListReCommentDichvu(context));
 		String limit = null;
 		if (maxColum > 0) {
-			// selection = String.format("%s in (%s) limit %s",
-			// DichVu.service_code, getListReCommentDichvu(context), maxColum);
-			limit = String.format(" limit %s ", maxColum);
+			limit = String.format("%s limit %s ", DichVu.service_name, maxColum);
 		}
 
 		return context.getContentResolver().query(DichVu.CONTENT_URI, null, selection, null, limit);
@@ -189,10 +187,7 @@ public class Recomment {
 		String selection = String.format("%s in %s", User.USER, getListPhone(context));
 		String limit = null;
 		if (maxColum > 0) {
-			// selection = String.format("%s in %s limit %s", User.USER,
-			// getListPhone(context), maxColum);
-
-			limit = String.format(" limit %s ", maxColum);
+			limit = String.format("%s limit %s ", User.NAME_CONTACT, maxColum);
 		}
 
 		return context.getContentResolver().query(User.CONTENT_URI, null, selection, null, limit);
