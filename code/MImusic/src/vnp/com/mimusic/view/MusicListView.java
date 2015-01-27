@@ -30,7 +30,7 @@ public class MusicListView extends ListView {
 	private void init() {
 		try {
 			setCacheColorHint(Color.TRANSPARENT);
-			setSelector(R.drawable.xml_list_selection);
+//			setSelector(R.drawable.xml_list_selection);
 			setDividerHeight(0);
 			setDivider(null);
 		} catch (Exception exception) {
