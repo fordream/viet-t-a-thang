@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/new_dichvu_bg"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <vnp.com.mimusic.view.HeaderView
+            android:id="@+id/activity_login_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+        </vnp.com.mimusic.view.HeaderView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dimen_12dp" >
+
+            <EditText
+                android:id="@+id/dichvu_edittext_search"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_28dp"
+                android:background="@drawable/new_dichvu_edit"
+                android:gravity="center"
+                android:hint="@string/timkiemdichvu"
+                android:paddingLeft="@dimen/dimen_10dp"
+                android:paddingRight="@dimen/dimen_10dp"
+                android:singleLine="true"
+                android:textColorHint="#336666"
+                android:textSize="@dimen/dimen_12dp" >
+            </EditText>
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="@dimen/dimen_17dp"
+                android:layout_height="@dimen/dimen_17dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dimen_8dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/new_menu_right_search" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="@dimen/dimen_12dp"
+            android:layout_marginRight="@dimen/dimen_12dp"
+            android:background="@drawable/new_dichvu_space" />
+
+        <vnp.com.mimusic.view.MusicListView
+            android:id="@+id/dichvu_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@drawable/tranfer"
+            android:dividerHeight="0px"
+            android:scrollbarThumbHorizontal="@drawable/tranfer"
+            android:scrollbarThumbVertical="@drawable/tranfer"
+            android:scrollbars="none" >
+        </vnp.com.mimusic.view.MusicListView>
+    </LinearLayout>
+
+</RelativeLayout>

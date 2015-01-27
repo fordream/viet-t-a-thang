@@ -38,7 +38,9 @@ import com.aretha.slidemenudemo.fragment.ChiTietListSuBanHangFragment;
 import com.aretha.slidemenudemo.fragment.ChiTietTintucFragment;
 import com.aretha.slidemenudemo.fragment.ChonDichvuFragment;
 import com.aretha.slidemenudemo.fragment.ChonSoDienThoaiFragment;
+import com.aretha.slidemenudemo.fragment.DichVuBanChayFragment;
 import com.aretha.slidemenudemo.fragment.DichVuFragment;
+import com.aretha.slidemenudemo.fragment.DichVuHotFragment;
 import com.aretha.slidemenudemo.fragment.GuiDvChoNhieuNguoiFragment;
 import com.aretha.slidemenudemo.fragment.HomeFragment;
 import com.aretha.slidemenudemo.fragment.HuongDanBanHangFragment;
@@ -132,6 +134,10 @@ public class RootMenuActivity extends FragmentActivity {
 			changeFragemt(R.id.root_main_fragment, new ChonSoDienThoaiFragment());
 		} else if (Conts.CHONDICHVU.equals(type)) {
 			changeFragemt(R.id.root_main_fragment, new ChonDichvuFragment());
+		} else if (Conts.DICHVUHOT.equals(type)) {
+			changeFragemt(R.id.root_main_fragment, new DichVuHotFragment());
+		} else if (Conts.DICHVUBANCHAY.equals(type)) {
+			changeFragemt(R.id.root_main_fragment, new DichVuBanChayFragment());
 		}
 	}
 
@@ -258,6 +264,15 @@ public class RootMenuActivity extends FragmentActivity {
 		choNhieuNguoiFragment.setArguments(args);
 		changeFragemt(R.id.root_main_fragment, choNhieuNguoiFragment, true);
 
+	}
+
+	public void gotoChiTietDichVuFragment(AdapterView<?> parent, View view, int position, long id) {
+		Cursor cursor = (Cursor) parent.getItemAtPosition(position);
+		ChiTietDichVuFragment chiTietDichVuFragment = new ChiTietDichVuFragment();
+		Bundle args = new Bundle();
+		args.putString("id", cursor.getString(cursor.getColumnIndex(DichVu.ID)));
+		chiTietDichVuFragment.setArguments(args);
+		changeFragemt(R.id.root_main_fragment, chiTietDichVuFragment, true);
 	}
 
 	public void gotoSendDvChoNhieuNguoi(boolean isEmail) {
@@ -444,5 +459,23 @@ public class RootMenuActivity extends FragmentActivity {
 		intent.putExtra("id", id);
 		getParent().startActivity(intent);
 		overridePendingTransitionStartActivity();
+	}
+
+	public void homeXemall(String name) {
+		// TODO
+
+		if (!Conts.isBlank(name)) {
+			Intent intent = new Intent(this, RootMenuActivity.class);
+			if (name.equals(getString(R.string.dichvuhot))) {
+				intent.putExtra("type", Conts.DICHVUHOT);
+			} else if (name.equals(getString(R.string.moithanhvien))) {
+				intent.putExtra("type", Conts.MOITHANHVIEN);
+			} else if (name.equals(getString(R.string.dichvubanchay))) {
+				intent.putExtra("type", Conts.DICHVUBANCHAY);
+			}
+			getParent().startActivity(intent);
+			overridePendingTransitionStartActivity();
+		}
+
 	}
 }

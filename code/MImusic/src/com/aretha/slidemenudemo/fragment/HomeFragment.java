@@ -61,7 +61,7 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 		home_header.findViewById(R.id.dichvubanchay).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				homeXemall(getString(R.string.dichvubanchay));
+				(((RootMenuActivity) getActivity())).homeXemall(getString(R.string.dichvubanchay));
 			}
 		});
 		list.addHeaderView(home_header);
@@ -139,7 +139,7 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 
 			@Override
 			public void xemall(String name) {
-				homeXemall(name);
+				(((RootMenuActivity) getActivity())).homeXemall(name);
 
 			}
 
@@ -163,19 +163,6 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 		if (homeItem.type == 2) {
 			// call to dich vu
 			(((RootMenuActivity) getActivity())).gotoChiTietDichVuFromHome(parent, view, position, id);
-		}
-	}
-
-	private void homeXemall(String name) {
-		// TODO
-		if (!Conts.isBlank(name)) {
-			if (name.equals(getString(R.string.dichvuhot))) {
-
-			} else if (name.equals(getString(R.string.moithanhvien))) {
-
-			} else if (name.equals(getString(R.string.dichvubanchay))) {
-
-			}
 		}
 	}
 
