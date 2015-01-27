@@ -234,4 +234,8 @@ public abstract class NewHomeAdapter extends ArrayAdapter<NewHomeItem> {
 	public abstract void xemall(String name);
 
 	public abstract void moiContactUser(String user, String name);
+
+	public void update() {
+
+	}
 }

@@ -97,60 +97,67 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 
 	private void updateUI() {
 		int current = list.getFirstVisiblePosition();
-		Cursor cursor = Recomment.getCursorFromDichvu(getActivity(), -1);
-		if (cursor != null) {
-			if (cursor.getCount() > 0) {
-				Conts.showView(home_header.findViewById(R.id.home_header_main), true);
-				LinearLayout gallery = Conts.getView(home_header, R.id.gallery1);
+		LinearLayout gallery = Conts.getView(home_header, R.id.gallery1);
 
-				while (cursor.moveToNext()) {
-					ReCommentDichVuItemView dichVuItemView = new ReCommentDichVuItemView(getActivity());
-					gallery.addView(dichVuItemView);
-					dichVuItemView.setData(cursor);
+		if (gallery.getChildCount() <= 0) {
+			Cursor cursor = Recomment.getCursorFromDichvu(getActivity(), -1);
+			if (cursor != null) {
+				if (cursor.getCount() > 0) {
+					Conts.showView(home_header.findViewById(R.id.home_header_main), true);
 
-					dichVuItemView.setOnClickListener(new RecomendDvOnClickListener(Conts.getStringCursor(cursor, DichVu.ID)));
+					while (cursor.moveToNext()) {
+						ReCommentDichVuItemView dichVuItemView = new ReCommentDichVuItemView(getActivity());
+						gallery.addView(dichVuItemView);
+						dichVuItemView.setData(cursor);
+
+						dichVuItemView.setOnClickListener(new RecomendDvOnClickListener(Conts.getStringCursor(cursor, DichVu.ID)));
+					}
+
+				} else {
+					Conts.showView(home_header.findViewById(R.id.home_header_main), false);
+
 				}
-
+				cursor.close();
 			} else {
 				Conts.showView(home_header.findViewById(R.id.home_header_main), false);
 
 			}
-			cursor.close();
-		} else {
-			Conts.showView(home_header.findViewById(R.id.home_header_main), false);
-
 		}
+		if (homeAdapter == null) {
+			list.setAdapter(homeAdapter = new NewHomeAdapter(getActivity()) {
 
-		list.setAdapter(new NewHomeAdapter(getActivity()) {
+				@Override
+				public void moiDVChoNhieuNguoi(String id) {
+					(((RootMenuActivity) getActivity())).gotoMoiDvChoNhieuNguoi(id);
+				}
 
-			@Override
-			public void moiDVChoNhieuNguoi(String id) {
-				(((RootMenuActivity) getActivity())).gotoMoiDvChoNhieuNguoi(id);
-			}
+				@Override
+				public void dangKy(ContentValues values) {
+					new DangKyDialog(getActivity(), values) {
+						public void updateUiDangKy() {
+							updateUI();
+						};
+					}.show();
+				}
 
-			@Override
-			public void dangKy(ContentValues values) {
-				new DangKyDialog(getActivity(), values) {
-					public void updateUiDangKy() {
-						updateUI();
-					};
-				}.show();
-			}
+				@Override
+				public void xemall(String name) {
+					(((RootMenuActivity) getActivity())).homeXemall(name);
 
-			@Override
-			public void xemall(String name) {
-				(((RootMenuActivity) getActivity())).homeXemall(name);
+				}
 
-			}
-
-			@Override
-			public void moiContactUser(String user, String name) {
-				(((RootMenuActivity) getActivity())).moiContactUser(user, name);
-			}
-		});
-
-		list.setSelection(current);
+				@Override
+				public void moiContactUser(String user, String name) {
+					(((RootMenuActivity) getActivity())).moiContactUser(user, name);
+				}
+			});
+		} else {
+			homeAdapter.update();
+		}
+		// list.setSelection(current);
 	}
+
+	private NewHomeAdapter homeAdapter;
 
 	@Override
 	public void onClick(View v) {
