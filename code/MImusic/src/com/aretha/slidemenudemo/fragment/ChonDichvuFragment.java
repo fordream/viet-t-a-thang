@@ -26,28 +26,28 @@ public class ChonDichvuFragment extends BaseFragment implements android.view.Vie
 	private vnp.com.mimusic.view.MusicListView bangxephang_list;
 	private ChonDichVuAdapter adaper;
 	private View view;
-	private ChonTatCaView header;
+
+	// private ChonTatCaView header;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.chondv_dialog, null);
 
-		header = new ChonTatCaView(container.getContext());
-		//header.initData(getString(R.string.tatca));
-		bangxephang_list = (MusicListView) view.findViewById(R.id.bangxephang_list);
-		bangxephang_list.addHeaderView(header);
+		// header = new ChonTatCaView(container.getContext());
+		bangxephang_list = (MusicListView) view.findViewById(R.id.dichvu_list);
+		// bangxephang_list.addHeaderView(header);
 
-		header.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent();
-				intent.putExtra(DichVu.ID, "");
-				intent.putExtra(DichVu.service_name, getString(R.string.tatca));
-				getActivity().setResult(Activity.RESULT_OK, intent);
-				getActivity().onBackPressed();
-			}
-		});
+		// header.setOnClickListener(new OnClickListener() {
+		//
+		// @Override
+		// public void onClick(View v) {
+		// Intent intent = new Intent();
+		// intent.putExtra(DichVu.ID, "");
+		// intent.putExtra(DichVu.service_name, getString(R.string.tatca));
+		// getActivity().setResult(Activity.RESULT_OK, intent);
+		// getActivity().onBackPressed();
+		// }
+		// });
 		bangxephang_list.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -55,7 +55,7 @@ public class ChonDichvuFragment extends BaseFragment implements android.view.Vie
 
 				Intent intent = new Intent();
 				if (adaper != null) {
-					Cursor cursor = (Cursor) adaper.getItem(position - 1);
+					Cursor cursor = (Cursor) adaper.getItem(position);
 					intent.putExtra(DichVu.ID, cursor.getString(cursor.getColumnIndex(DichVu.ID)));
 					intent.putExtra(DichVu.service_name, cursor.getString(cursor.getColumnIndex(DichVu.service_name)));
 				}
@@ -63,7 +63,7 @@ public class ChonDichvuFragment extends BaseFragment implements android.view.Vie
 				getActivity().onBackPressed();
 			}
 		});
-		menu_right_editext = (EditText) view.findViewById(R.id.menu_right_editext);
+		menu_right_editext = (EditText) view.findViewById(R.id.dichvu_edittext_search);
 		HeaderView chitietdichvu_headerview = (HeaderView) view.findViewById(R.id.chitietdichvu_headerview);
 		chitietdichvu_headerview.setTextHeader(R.string.timkiemdichvu);
 		chitietdichvu_headerview.setButtonLeftImage(true, R.drawable.btn_back);
@@ -72,6 +72,10 @@ public class ChonDichvuFragment extends BaseFragment implements android.view.Vie
 		chitietdichvu_headerview.findViewById(R.id.header_btn_left).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				Intent intent = new Intent();
+				intent.putExtra(DichVu.ID, "");
+				intent.putExtra(DichVu.service_name, getString(R.string.tatca));
+				getActivity().setResult(Activity.RESULT_OK, intent);
 				getActivity().onBackPressed();
 			}
 		});
