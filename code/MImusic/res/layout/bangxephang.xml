@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:orientation="vertical" >
+
     <!-- @drawable/bangxephang_list_bg -->
 
     <vnp.com.mimusic.view.BangXepHangHeaderView
@@ -19,12 +20,22 @@
         <vnp.com.mimusic.view.BangXephangListView
             android:id="@+id/bangxephang1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:divider="@drawable/tranfer"
+            android:dividerHeight="0px"
+            android:scrollbarThumbHorizontal="@drawable/tranfer"
+            android:scrollbarThumbVertical="@drawable/tranfer"
+            android:scrollbars="none" />
 
         <vnp.com.mimusic.view.BangXephangListView
             android:id="@+id/bangxephang2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:divider="@drawable/tranfer"
+            android:dividerHeight="0px"
+            android:scrollbarThumbHorizontal="@drawable/tranfer"
+            android:scrollbarThumbVertical="@drawable/tranfer"
+            android:scrollbars="none"
             android:visibility="gone" />
     </RelativeLayout>
 

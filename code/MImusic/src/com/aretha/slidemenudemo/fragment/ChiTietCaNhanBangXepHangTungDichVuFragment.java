@@ -23,6 +23,7 @@ import android.widget.Toast;
 public class ChiTietCaNhanBangXepHangTungDichVuFragment extends BaseFragment implements View.OnClickListener {
 	private TextView soGDTrongThang, soGD, soHHTrongThang, soHH, bangxephangItemTvStt;
 	private LoadingView loadingView;
+
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
@@ -31,10 +32,10 @@ public class ChiTietCaNhanBangXepHangTungDichVuFragment extends BaseFragment imp
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.chitietcanhanbangxephangtungdichvu, null);
-		loadingView = (LoadingView)view.findViewById(R.id.loadingView1);
-		
+		loadingView = (LoadingView) view.findViewById(R.id.loadingView1);
+
 		BangXepHangItemView bXHItemView = (BangXepHangItemView) view.findViewById(R.id.bangxephangitemview);
-		LinearLayout blockLayout = (LinearLayout) bXHItemView.findViewById(R.id.bangxephang_block);
+		View blockLayout = bXHItemView.findViewById(R.id.bangxephang_block);
 		blockLayout.setVisibility(View.GONE);
 		LinearLayout soLuongLayout = (LinearLayout) bXHItemView.findViewById(R.id.bxhSoLuongLayout);
 		soLuongLayout.setVisibility(View.VISIBLE);
@@ -42,7 +43,7 @@ public class ChiTietCaNhanBangXepHangTungDichVuFragment extends BaseFragment imp
 		doanhThuLayout.setVisibility(View.VISIBLE);
 
 		HeaderView chitiettintuc_headerview = (HeaderView) view.findViewById(R.id.chitietcanhanbangxephangtungdichvu_header);
-		chitiettintuc_headerview.setTextHeader(R.string.chitietcanhanbangxephang);
+		chitiettintuc_headerview.setTextHeader(R.string.chitietcanhanbxh);
 		chitiettintuc_headerview.setButtonLeftImage(true, R.drawable.btn_back);
 		chitiettintuc_headerview.setButtonRightImage(false, R.drawable.chititetdichvu_right);
 		chitiettintuc_headerview.findViewById(R.id.header_btn_left).setOnClickListener(new View.OnClickListener() {
@@ -58,8 +59,6 @@ public class ChiTietCaNhanBangXepHangTungDichVuFragment extends BaseFragment imp
 
 		bXHItemView.setDataBundle(getArguments());
 
-	
-
 		soGDTrongThang = (TextView) view.findViewById(R.id.soGDTrongThang);
 		soGD = (TextView) view.findViewById(R.id.soGD);
 		soHHTrongThang = (TextView) view.findViewById(R.id.soHHTrongThang);
@@ -69,9 +68,9 @@ public class ChiTietCaNhanBangXepHangTungDichVuFragment extends BaseFragment imp
 		soGD.setText("");
 		soHHTrongThang.setText("");
 		soHH.setText("");
-		
+
 		soGD.setText(getArguments().getString("quantity"));
-		soHH.setText(String.format(getString(R.string.format_tien),getArguments().getString("commission")));
+		soHH.setText(String.format(getString(R.string.format_tien), getArguments().getString("commission")));
 		callApi(getArguments());
 
 		return view;
@@ -103,14 +102,17 @@ public class ChiTietCaNhanBangXepHangTungDichVuFragment extends BaseFragment imp
 			public void onSuscess(JSONObject response) {
 				Conts.showView(loadingView, false);
 				// Conts.showDialogThongbao(getActivity(), response.toString());
-//				// so giao dich thanh cong
-//				String exchange_number = Conts.getString(response, "exchange_number");
-//				// so giao dich thanh cong trong thang
-//				String exchange_number_month = Conts.getString(response, "exchange_number_month");
-//				// poundage tien hoa hong
-//				String poundage = Conts.getString(response, "poundage");
-//				// poundage_month tien hoa hong trong thang
-//				String poundage_month = Conts.getString(response, "poundage_month");
+				// // so giao dich thanh cong
+				// String exchange_number = Conts.getString(response,
+				// "exchange_number");
+				// // so giao dich thanh cong trong thang
+				// String exchange_number_month = Conts.getString(response,
+				// "exchange_number_month");
+				// // poundage tien hoa hong
+				// String poundage = Conts.getString(response, "poundage");
+				// // poundage_month tien hoa hong trong thang
+				// String poundage_month = Conts.getString(response,
+				// "poundage_month");
 
 				// quantity_in_duration
 				// commission_in_duration
@@ -119,11 +121,11 @@ public class ChiTietCaNhanBangXepHangTungDichVuFragment extends BaseFragment imp
 				// soHH.setText(poundage);
 
 				String quantity_in_duration = Conts.getString(response, "quantity_in_duration");
-				
+
 				String commission_in_duration = Conts.getString(response, "commission_in_duration");
-				
+
 				soGDTrongThang.setText(quantity_in_duration);
-				soHHTrongThang.setText(String.format(getString(R.string.format_tien),commission_in_duration+""));
+				soHHTrongThang.setText(String.format(getString(R.string.format_tien), commission_in_duration + ""));
 			}
 		});
 	}

@@ -71,6 +71,8 @@ public class BangXepHangItemView extends LinearLayout {
 
 	public void setDataBundle(Bundle arguments) {
 		setDataColor(Integer.parseInt(arguments.getString("position")));
+		findViewById(R.id.bangxephang_item_bg).setBackgroundResource( R.drawable.bxp_bg_item2);
+
 		TextView bxhItemSTT = (TextView) findViewById(R.id.bangxephang_item_tv_stt);
 		TextView bxhItemName = (TextView) findViewById(R.id.bangxephang_item_tv_name);
 		bxhItemSTT.setText("" + (Integer.parseInt(arguments.getString("position")) + 1));
