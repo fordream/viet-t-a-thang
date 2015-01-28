@@ -33,7 +33,6 @@ public class ChiTietDichVuNoFeatureView extends LinearLayout {
 	}
 
 	public void setBackground(int white) {
-		findViewById(R.id.chitietdichvu_no_feature_main).setBackgroundColor(getResources().getColor(white));
 	}
 
 	public void useValue2(boolean b) {
@@ -51,7 +50,7 @@ public class ChiTietDichVuNoFeatureView extends LinearLayout {
 		ImageLoaderUtils.getInstance(getContext()).DisplayImage(service_icon, home_item_img_icon, BitmapFactory.decodeResource(getResources(), R.drawable.no_image));
 
 		((TextView) findViewById(R.id.home_item_right_control_1_tv)).setText(isDangKy ? R.string.dangdung : R.string.dangky);
-	
+
 		Conts.setTextViewCursor(findViewById(R.id.gia), cursor, DichVu.service_price);
 	}
 
