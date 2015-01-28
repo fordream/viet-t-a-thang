@@ -7,12 +7,13 @@
     <LinearLayout
         android:id="@+id/bangxephang_item_bg"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_65dp"
+        android:layout_height="@dimen/dimen_70dp"
+        android:gravity="center"
         android:orientation="horizontal" >
 
         <TextView
             android:id="@+id/bangxephang_item_tv_stt"
-            android:layout_width="@dimen/dimen_30dp"
+            android:layout_width="@dimen/dimen_25dp"
             android:layout_height="match_parent"
             android:background="@color/red_purple"
             android:gravity="center"
@@ -21,12 +22,13 @@
             android:textSize="@dimen/dimen_13dp" />
 
         <ImageView
+            android:layout_marginLeft="@dimen/dimen_10dp"
+            android:layout_marginRight="@dimen/dimen_10dp"
             android:id="@+id/bangxephang_item_img_icon"
-            android:layout_width="@dimen/dimen_65dp"
-            android:layout_height="@dimen/dimen_65dp"
+            android:layout_width="@dimen/dimen_50dp"
+            android:layout_height="@dimen/dimen_50dp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:padding="@dimen/dimen_10dp"
             android:scaleType="centerCrop"
             android:src="@drawable/bangxephang_avatar_example" />
 
@@ -39,7 +41,7 @@
             android:paddingLeft="@dimen/dimen_0dp"
             android:paddingRight="@dimen/dimen_0dp" >
 
-            <LinearLayout
+            <RelativeLayout
                 android:id="@+id/bangxephang_block"
                 android:layout_width="@dimen/dimen_80dp"
                 android:layout_height="match_parent"
@@ -50,32 +52,31 @@
                 <TextView
                     android:id="@+id/bangxephang_item"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:gravity="center"
                     android:singleLine="true"
                     android:text="10000"
-                    android:textColor="#697585"
-                    android:textSize="@dimen/dimen_13dp"
+                    android:textColor="#959ea8"
+                    android:textSize="@dimen/dimen_14dp"
                     android:textStyle="bold" />
-            </LinearLayout>
+                
+                <View android:layout_width="1px" android:layout_height="fill_parent" android:background="#f3f3f3"/>
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_toLeftOf="@+id/bangxephang_block"
                 android:gravity="center"
-                android:orientation="vertical"
-                android:paddingLeft="@dimen/dimen_5dp"
-                android:paddingRight="@dimen/dimen_5dp" >
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/bangxephang_item_tv_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="3dp"
                     android:singleLine="true"
                     android:text="Trần tiến"
-                    android:textColor="#333333"
+                    android:textColor="#333739"
                     android:textSize="@dimen/dimen_14dp"
                     android:textStyle="bold" />
 

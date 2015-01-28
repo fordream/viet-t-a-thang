@@ -57,6 +57,7 @@
             android:id="@+id/dichvu_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:listSelector="@drawable/tranfer"
             android:scrollbars="none"
             android:scrollbarThumbHorizontal="@drawable/tranfer"
             android:scrollbarThumbVertical="@drawable/tranfer"

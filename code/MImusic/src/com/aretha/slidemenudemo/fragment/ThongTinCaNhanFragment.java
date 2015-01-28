@@ -135,6 +135,12 @@ public class ThongTinCaNhanFragment extends BaseFragment implements OnItemClickL
 
 				String avatar = cursor.getString(cursor.getColumnIndex(User.AVATAR));
 				Conts.showImage(avatar, menu_left_img_avatar, R.drawable.no_avatar);
+				
+				TextView menu_left_tv_name = (TextView) view.findViewById(R.id.menu_left_tv_name);
+				menu_left_tv_name.setText(String.format("%s (%s)", Conts.getName(cursor), Conts.getSDT(cursor.getString(cursor.getColumnIndex(User.USER)))));
+
+				
+				
 				cursor.close();
 			}
 		} catch (Exception exception) {

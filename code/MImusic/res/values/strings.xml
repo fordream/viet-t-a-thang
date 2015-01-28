@@ -129,7 +129,8 @@
     <string name="danhsachsodienthoaikhongthemoi">Bạn không thể mời các số điện thoại sau (%s).</string>
 
     <color name="bangxephang_header_activr">#a73444</color>
-    <color name="bangxephang_header_un_active">#336666</color>
+    <color name="bangxephang_header_un_active">#475055</color>
+    <color name="bangxephang_header_active">#183f6a</color>
     <color name="f3f3f3">#f3f3f3</color>
     <color name="a73444">#a73444</color>
     <color name="dcdee1">#dcdee1</color>
@@ -151,14 +152,14 @@
     <string name="chupanhmoi">Chụp ảnh mới</string>
     <string name="chonanhcosan">Chọn ảnh có sẵn</string>
 
-    <color name="bangxephang0">#9f1f31</color>
-    <color name="bangxephang1">#a73444</color>
-    <color name="bangxephang2">#b24c5a</color>
-    <color name="bangxephang3">#b85e6b</color>
-    <color name="bangxephang4">#c57983</color>
-    <color name="bangxephang5">#c98992</color>
-    <color name="bangxephang6">#eaebed</color>
-    <color name="bangxephang7">#dfe0e2</color>
+    <color name="bangxephang0">#0a3156</color>
+    <color name="bangxephang1">#224567</color>
+    <color name="bangxephang2">#395875</color>
+    <color name="bangxephang3">#536e88</color>
+    <color name="bangxephang4">#677f95</color>
+    <color name="bangxephang5">#8498aa</color>
+    <color name="bangxephang6">#fafafa</color>
+    <color name="bangxephang7">#ffffff</color>
     <color name="mx">#9a3847</color>
 
     <string name="recomment_example"> {\"errorCode\":0,\"message\":\"Th\u00e0nh c\u00f4ng\",\"data\":[{\"service_name\":\"All Blocking\",\"service_icon\":\"https://125.235.40.85/cache/uploads/medias/service/icon/2014/11/12/6e19f264de06aa266d779f34fb5c5964563cada8_30_30.jpg\",\"service_url\":null,\"service_code\":\"CS\",\"contacts\":[{\"phone\":\"84986810606\",\"name\":\"Test\"}]},{\"service_name\":\"MobiTV BASIC\",\"service_icon\":\"https://125.235.40.85/cache/uploads/medias/service/icon/2014/11/12/ab90c06aaae035fd47db11d4cba0a064c55e24f9_30_30.jpg\",\"service_url\":null,\"service_code\":\"MT\",\"contacts\":[{\"phone\":\"84986810606\",\"name\":\"Test\"}]},{\"service_name\":\"Call Blocking\",\"service_icon\":\"https://125.235.40.85/cache/uploads/medias/service/icon/2014/11/12/f91dde68a393c53fd0af241db292f3f4b356a7d7_30_30.jpg\",\"service_url\":null,\"service_code\":\"CB\",\"contacts\":[{\"phone\":\"84986810606\",\"name\":\"Test\"}]}]}</string>
@@ -178,4 +179,5 @@
     <string name="thoigianbatdau">Thời gian bắt đầu</string>
     <string name="thoigianketthuc">Thời gian kết thúc</string>
     <string name="sodienthoaikhachhang1">SĐT Khách hàng</string>
+    <string name="lichsugiaodich">Lịch sử giao dịch</string>
 </resources>

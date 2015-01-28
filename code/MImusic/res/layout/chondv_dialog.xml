@@ -60,7 +60,7 @@
             android:scrollbars="none"
             android:scrollbarThumbHorizontal="@drawable/tranfer"
             android:scrollbarThumbVertical="@drawable/tranfer"
-            android:divider="@drawable/tranfer"
+            android:divider="@drawable/tranfer" android:listSelector="@drawable/tranfer"
             android:dividerHeight="0px" >
         </vnp.com.mimusic.view.MusicListView>
     </LinearLayout>

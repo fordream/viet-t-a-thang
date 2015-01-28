@@ -32,7 +32,7 @@ public class BangXepHangHeaderRadioButton extends RadioButton {
 	public void setChecked(boolean checked) {
 		super.setChecked(checked);
 		try {
-			setTextColor(getResources().getColor(checked ? android.R.color.white : R.color.bangxephang_header_un_active));
+			setTextColor(getResources().getColor(checked ? R.color.bangxephang_header_active : R.color.bangxephang_header_un_active));
 		} catch (Exception ex) {
 		}
 	}

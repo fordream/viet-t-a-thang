@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/menu_left_header"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dimen_285dp"
+    android:background="@drawable/menu_left_header_bg"
+    android:orientation="vertical" >
+
+    <ImageView
+        android:id="@+id/menu_left_img_cover"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop" />
+
+    <RelativeLayout
+        android:id="@+id/xmain"
+        android:layout_width="@dimen/dimen_130dp"
+        android:layout_height="@dimen/dimen_130dp"
+        android:layout_centerInParent="true"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="@dimen/dimen_120dp"
+            android:layout_height="@dimen/dimen_120dp"
+            android:layout_centerInParent="true" >
+
+            <vnp.com.mimusic.view.CustomImageView
+                android:id="@+id/menu_left_img_avatar"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_margin="2px"
+                android:scaleType="centerCrop" />
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@drawable/avatar_example_1_bg" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/menu_left_img_avatar_bg"
+            android:layout_width="@dimen/dimen_120dp"
+            android:layout_height="@dimen/dimen_120dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/avatar_bg" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/menu_left_tv_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/xmain"
+        android:layout_marginBottom="@dimen/dimen_10dp"
+        android:gravity="center"
+        android:maxLines="2"
+        android:singleLine="true"
+        android:text="Hoài Anh (0968678678)"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/dimen_16dp" />
+
+    <ImageView
+        android:id="@+id/infor_cover_click_change"
+        android:layout_width="@dimen/dimen_44dp"
+        android:layout_height="@dimen/dimen_44dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/xml_btn2"
+        android:padding="@dimen/dimen_12dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/infor_edit_corver" />
+
+</RelativeLayout>

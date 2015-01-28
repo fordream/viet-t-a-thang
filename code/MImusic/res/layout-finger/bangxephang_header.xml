@@ -9,6 +9,7 @@
         android:id="@+id/bangxephang_header_main"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_45dp"
+        android:background="@drawable/bangxephang_header_x1"
         android:weightSum="2" >
 
         <LinearLayout
@@ -16,7 +17,7 @@
             android:layout_width="@dimen/dimen_1dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/bangxephang_top"
+            android:background="@drawable/bangxephang_header_x2"
             android:orientation="horizontal"
             android:padding="@dimen/dimen_0dp" >
 
@@ -52,40 +53,5 @@
             android:padding="@dimen/dimen_0dp"
             android:text="Doanh thu" />
     </RadioGroup>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_45dp"
-            android:weightSum="2" >
-
-            <LinearLayout
-                android:layout_width="@dimen/dimen_1dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:padding="@dimen/dimen_0dp" />
-
-            <LinearLayout
-                android:layout_width="@dimen/dimen_1dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:padding="@dimen/dimen_0dp" >
-
-                <View
-                    android:layout_width="@dimen/dimen_1dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/f3f3f3" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-		    android:layout_height="@dimen/dimen_1dp"
-            android:background="@color/f3f3f3" />
-    </LinearLayout>
 
 </RelativeLayout>
