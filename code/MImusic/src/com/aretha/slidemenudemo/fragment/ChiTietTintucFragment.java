@@ -117,7 +117,7 @@ public class ChiTietTintucFragment extends BaseFragment implements OnItemClickLi
 						TinTucKhacItemView tinTucKhacItemView = new TinTucKhacItemView(getActivity());
 						chitiet_tintuc_tintuckhac_list.addView(tinTucKhacItemView);
 						tinTucKhacItemView.setData(object);
-
+						tinTucKhacItemView.setData(i);
 						tinTucKhacItemView.setOnClickListener(new OnClickListener() {
 							@Override
 							public void onClick(View v) {

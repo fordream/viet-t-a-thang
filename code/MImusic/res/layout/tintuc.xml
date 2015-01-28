@@ -2,13 +2,19 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bangxephang_list_bg"
+    android:background="@drawable/new_tintuc_bg1"
     android:orientation="vertical" >
 
     <vnp.com.mimusic.view.MusicListView
         android:id="@+id/tintuc_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:divider="@drawable/tranfer"
+        android:dividerHeight="0px"
+        android:listSelector="@drawable/tranfer"
+        android:scrollbarThumbHorizontal="@drawable/tranfer"
+        android:scrollbarThumbVertical="@drawable/tranfer"
+        android:scrollbars="none" >
     </vnp.com.mimusic.view.MusicListView>
 
     <vnp.com.mimusic.view.LoadingView

@@ -20,63 +20,72 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@android:color/white"
+            android:background="@drawable/new_tintuc_lienquan_bg"
             android:orientation="horizontal" >
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:padding="@dimen/dimen_10dp" >
+                android:orientation="vertical" >
 
-                <TextView
-                    android:id="@+id/chitiettintuc_item_tv_name"
+                <LinearLayout
+                    android:background="@android:color/white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/dimen_5dp"
-                    android:singleLine="true"
-                    android:text="Khuyến mãi nhạc trờ iMusicz"
-                    android:textColor="#336666"
-                    android:textSize="@dimen/dimen_17dp"
-                    android:textStyle="bold" />
+                    android:orientation="vertical"
+                    android:padding="@dimen/dimen_12dp" >
 
-                <TextView
-                    android:id="@+id/chitiettintuc_item_tv_date"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/dimen_5dp"
-                    android:padding="@dimen/dimen_5dp"
-                    android:singleLine="true"
-                    android:text="27/06/2014"
-                    android:textColor="#336666"
-                    android:textSize="@dimen/dimen_10dp" />
+                    <TextView
+                        android:id="@+id/chitiettintuc_item_tv_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:text="Khuyến mãi nhạc trờ iMusicz"
+                        android:textColor="#475055"
+                        android:textSize="@dimen/dimen_15dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/chitiettintuc_item_tv_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/dimen_3dp"
+                        android:layout_marginTop="@dimen/dimen_3dp"
+                        android:singleLine="true"
+                        android:text="27/06/2014"
+                        android:textColor="#727a7e"
+                        android:textSize="@dimen/dimen_10dp" />
+
+                    <vnp.com.mimusic.view.VTTextView
+                        android:id="@+id/home_item_right_control_2_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:text="Việc thanh toán cước viễn thông sẽ trở nên dễ dàng, nhanh chóng, thuận tiện hơn với Cổng thanh toán dịch vụ viễn thông trực tuyến của Viettel.Việc thanh toán cước viễn thông sẽ trở nên dễ dàng, nhanh chóng, thuận tiện hơn với Cổng thanh toán dịch vụ viễn thông trực tuyến của Viettel.Việc thanh toán cước viễn thông sẽ trở nên dễ dàng, nhanh chóng, thuận tiện hơn với Cổng thanh toán dịch vụ viễn thông trực tuyến của Viettel.Việc thanh toán cước viễn thông sẽ trở nên dễ dàng, nhanh chóng, thuận tiện hơn với Cổng thanh toán dịch vụ viễn thông trực tuyến của Viettel."
+                        android:textColor="#353f45"
+                        android:textSize="@dimen/dimen_14dp" />
+                </LinearLayout>
 
                 <vnp.com.mimusic.view.VTTextView
-                    android:id="@+id/home_item_right_control_2_tv"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:padding="@dimen/dimen_5dp"
-                    android:text="Việc thanh toán cước viễn thông sẽ trở nên dễ dàng, nhanh chóng, thuận tiện hơn với Cổng thanh toán dịch vụ viễn thông trực tuyến của Viettel.Việc thanh toán cước viễn thông sẽ trở nên dễ dàng, nhanh chóng, thuận tiện hơn với Cổng thanh toán dịch vụ viễn thông trực tuyến của Viettel.Việc thanh toán cước viễn thông sẽ trở nên dễ dàng, nhanh chóng, thuận tiện hơn với Cổng thanh toán dịch vụ viễn thông trực tuyến của Viettel.Việc thanh toán cước viễn thông sẽ trở nên dễ dàng, nhanh chóng, thuận tiện hơn với Cổng thanh toán dịch vụ viễn thông trực tuyến của Viettel."
-                    android:textColor="#336666"
-                    android:textSize="@dimen/dimen_14dp" />
-
-                <TextView
+                    
                     android:id="@+id/home_item_right_control_1_tv"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/dimen_50dp"
                     android:background="@drawable/tinkhac_bg"
-                    android:padding="@dimen/dimen_5dp"
                     android:singleLine="true"
                     android:text="@string/tinkhac"
-                    android:textColor="#336666"
-                    android:textSize="@dimen/dimen_14dp"
+                    android:paddingLeft="@dimen/dimen_12dp"
+                    android:textColor="#475055"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/dimen_15dp"
                     android:textStyle="bold" />
 
                 <View
+                    android:layout_marginLeft="@dimen/dimen_12dp"
+                    android:layout_marginRight="@dimen/dimen_12dp"
                     android:layout_width="match_parent"
                     android:layout_height="1px"
-                    android:background="#cccccc" />
+                    android:background="@drawable/new_tintuckhac_line" />
 
                 <LinearLayout
                     android:id="@+id/chitiet_tintuc_tintuckhac_list"
@@ -95,7 +104,8 @@
     <vnp.com.mimusic.view.LoadingView
         android:id="@+id/loadingView1"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
+        android:layout_height="fill_parent"
+        android:visibility="gone" >
     </vnp.com.mimusic.view.LoadingView>
 
 </RelativeLayout>

@@ -61,7 +61,10 @@ public class TintucAdaper extends ArrayAdapter<JSONObject> {
 		if (convertView == null) {
 			convertView = new TintucItemView(parent.getContext());
 		}
-		convertView.findViewById(R.id.tintuc_item_main).setBackgroundColor(parent.getContext().getResources().getColor(position % 2 == 0 ? android.R.color.white : R.color.f3f3f3));
+		
+		convertView.findViewById(R.id.tintuc_item_main).setBackgroundResource(
+				position % 2 == 0 ? R.drawable.new_tintuc_bg1 : R.drawable.new_tintuc_bg2);
+		
 		((TintucItemView) convertView).setData(getItem(position));
 		return convertView;
 	}
