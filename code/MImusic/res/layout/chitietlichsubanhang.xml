@@ -7,7 +7,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/thongtincanhan_bg"
+        android:background="@drawable/new_lsbh_bg"
         android:orientation="vertical" >
 
         <vnp.com.mimusic.view.HeaderView
@@ -20,8 +20,11 @@
             android:id="@+id/home_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:divider="#333333"
-            android:dividerHeight="1px" >
+            android:scrollbars="none"
+            android:scrollbarThumbHorizontal="@drawable/tranfer"
+            android:scrollbarThumbVertical="@drawable/tranfer"
+            android:divider="@drawable/tranfer"
+            android:dividerHeight="0px" >
         </vnp.com.mimusic.view.MusicListView>
     </LinearLayout>
 

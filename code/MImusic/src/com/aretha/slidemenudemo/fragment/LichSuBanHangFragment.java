@@ -69,9 +69,9 @@ public class LichSuBanHangFragment extends Fragment implements OnItemClickListen
 		lsbt_trangthai.setOnClickListener(l);
 		lsbh_sdt = (TextView) view.findViewById(R.id.lsbh_sdt);
 		updateTrangThai();
-		
-		lsbt_trangthai.setText(R.string.tatca);
-		lsbt_dichvu.setText(R.string.tatca);
+
+		// lsbt_trangthai.setText(R.string.tatca);
+		// lsbt_dichvu.setText(R.string.tatca);
 		return view;
 	}
 
@@ -82,7 +82,7 @@ public class LichSuBanHangFragment extends Fragment implements OnItemClickListen
 		bundle.putString("to", lsbt_den.getText().toString());
 		bundle.putString("service", idDv);
 		bundle.putString("status", indexTrangThai == 0 ? "" : ("" + indexTrangThai));
-		bundle.putString("customer", phoneContact);
+		bundle.putString("customer", lsbh_sdt.getText().toString().trim());
 		(((RootMenuActivity) getActivity())).gotoChiTietLichSuBanHang(bundle);
 	}
 
@@ -106,7 +106,8 @@ public class LichSuBanHangFragment extends Fragment implements OnItemClickListen
 	};
 	private int indexTrangThai = 0;
 	private String idDv = "";
-	private String phoneContact = "";
+
+	// private String phoneContact = "";
 
 	private void showDichvu() {
 		// new DichVuDialog(getActivity(), idDv) {
@@ -132,14 +133,15 @@ public class LichSuBanHangFragment extends Fragment implements OnItemClickListen
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		if (requestCode == 2000 && resultCode == Activity.RESULT_OK) {
-			phoneContact = data.getStringExtra(User.USER);
-			lsbh_sdt.setText(data.getStringExtra(User.NAME_CONTACT));
-
-			if (!Conts.isBlank(phoneContact)) {
-				lsbh_sdt.setText(phoneContact);
-			}
-
+//			phoneContact = data.getStringExtra(User.USER);
+//			lsbh_sdt.setText(data.getStringExtra(User.NAME_CONTACT));
+//
+//			if (!Conts.isBlank(phoneContact)) {
+//				lsbh_sdt.setText(phoneContact);
+//			}
+			lsbh_sdt.setText(data.getStringExtra(User.USER));
 			
+
 			Conts.getSDT(lsbh_sdt);
 		} else if (requestCode == 20001 && resultCode == Activity.RESULT_OK) {
 			idDv = data.getStringExtra(DichVu.ID);

@@ -175,4 +175,7 @@
     
     <color name="new_tintuc_khac_1">#2a2d2f</color>
     <color name="new_tintuc_khac_2">#154177</color>
+    <string name="thoigianbatdau">Thời gian bắt đầu</string>
+    <string name="thoigianketthuc">Thời gian kết thúc</string>
+    <string name="sodienthoaikhachhang1">SĐT Khách hàng</string>
 </resources>

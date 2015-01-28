@@ -3,20 +3,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="@dimen/dimen_10dp" >
+    android:padding="@dimen/dimen_12dp" >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/thongtincanhan_top"
-        android:orientation="vertical"
-        android:padding="@dimen/dimen_5dp" >
+        android:orientation="vertical" >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="@dimen/dimen_5dp" >
+            android:padding="@dimen/dimen_12dp" >
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -41,24 +40,21 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="@dimen/dimen_5dp"
-                        android:text="@string/sodienthoaikhachhang"
-                        android:textColor="#336666"
-                        android:textSize="@dimen/dimen_14dp" />
+                        android:layout_marginBottom="@dimen/dimen_3dp"
+                        android:text="@string/sodienthoaikhachhang1"
+                        android:textColor="#475055"
+                        android:textSize="@dimen/dimen_13dp" />
 
                     <TextView
                         android:id="@+id/sdt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="right"
-                        android:paddingLeft="@dimen/dimen_5dp"
                         android:text="01674537886"
-                        android:textColor="#336666"
-                        android:textSize="@dimen/dimen_14dp"
+                        android:textColor="#475055"
+                        android:textSize="@dimen/dimen_15dp"
                         android:textStyle="bold" />
-
                 </LinearLayout>
-
             </RelativeLayout>
 
             <View
@@ -68,18 +64,16 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/dimen_5dp"
-                android:layout_marginTop="@dimen/dimen_5dp"
+                android:layout_height="@dimen/dimen_40dp"
                 android:gravity="center"
-                android:padding="@dimen/dimen_5dp" >
+        >
 
                 <TextView
-                    android:layout_width="@dimen/dimen_80dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/dichvu"
-                    android:textColor="#336666"
-                    android:textSize="@dimen/dimen_14dp" />
+                    android:textColor="#475055"
+                    android:textSize="@dimen/dimen_11dp" />
 
                 <TextView
                     android:id="@+id/dichvu"
@@ -87,8 +81,9 @@
                     android:layout_height="wrap_content"
                     android:gravity="right"
                     android:text="Anibook"
-                    android:textColor="#336666"
-                    android:textSize="@dimen/dimen_14dp" />
+                    android:textColor="#475055"
+                    android:textSize="@dimen/dimen_11dp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <View
@@ -98,18 +93,16 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/dimen_5dp"
-                android:layout_marginTop="@dimen/dimen_5dp"
+                android:layout_height="@dimen/dimen_40dp"
                 android:gravity="center"
-                android:padding="@dimen/dimen_5dp" >
+               >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/giacuoc"
-                    android:textColor="#336666"
-                    android:textSize="@dimen/dimen_14dp" />
+                    android:textColor="#475055"
+                    android:textSize="@dimen/dimen_11dp" />
 
                 <TextView
                     android:id="@+id/giacuoc"
@@ -117,8 +110,9 @@
                     android:layout_height="wrap_content"
                     android:gravity="right"
                     android:text="1000VNĐ"
-                    android:textColor="#336666"
-                    android:textSize="@dimen/dimen_14dp" />
+                    android:textColor="#475055"
+                    android:textSize="@dimen/dimen_11dp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <View
@@ -128,18 +122,16 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/dimen_5dp"
-                android:layout_marginTop="@dimen/dimen_5dp"
+               android:layout_height="@dimen/dimen_40dp"
                 android:gravity="center"
-                android:padding="@dimen/dimen_5dp" >
+          >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/thoigianban"
-                    android:textColor="#336666"
-                    android:textSize="@dimen/dimen_14dp" />
+                    android:textColor="#475055"
+                    android:textSize="@dimen/dimen_11dp" />
 
                 <TextView
                     android:id="@+id/time_ban"
@@ -147,8 +139,9 @@
                     android:layout_height="wrap_content"
                     android:gravity="right"
                     android:text="2014/12/12"
-                    android:textColor="#336666"
-                    android:textSize="@dimen/dimen_14dp" />
+                    android:textColor="#475055"
+                    android:textSize="@dimen/dimen_11dp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <View
@@ -158,18 +151,16 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/dimen_5dp"
-                android:layout_marginTop="@dimen/dimen_5dp"
+               android:layout_height="@dimen/dimen_40dp"
                 android:gravity="center"
-                android:padding="@dimen/dimen_5dp" >
+             >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/thoigiantrave"
-                    android:textColor="#336666"
-                    android:textSize="@dimen/dimen_14dp" />
+                    android:textColor="#475055"
+                    android:textSize="@dimen/dimen_11dp" />
 
                 <TextView
                     android:id="@+id/time_trave"
@@ -177,25 +168,29 @@
                     android:layout_height="wrap_content"
                     android:gravity="right"
                     android:text="2014/12/12"
-                    android:textColor="#336666"
-                    android:textSize="@dimen/dimen_14dp" />
+                    android:textColor="#475055"
+                    android:textSize="@dimen/dimen_11dp"
+                    android:textStyle="bold" />
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@drawable/thongtincanhan_bg" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/dimen_5dp"
-                android:layout_marginTop="@dimen/dimen_5dp"
+               android:layout_height="@dimen/dimen_40dp"
                 android:gravity="center"
-                android:padding="@dimen/dimen_5dp" >
+              >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="right"
                     android:text="@string/trangthai"
-                    android:textColor="#336666"
-                    android:textSize="@dimen/dimen_14dp" />
+                    android:textColor="#475055"
+                    android:textSize="@dimen/dimen_11dp" />
 
                 <TextView
                     android:id="@+id/status"
@@ -203,9 +198,9 @@
                     android:layout_height="wrap_content"
                     android:gravity="right"
                     android:text="Thành công"
-                    android:textColor="#336666"
-                    android:textSize="@dimen/dimen_14dp" />
-
+                    android:textColor="#475055"
+                    android:textSize="@dimen/dimen_11dp"
+                    android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
