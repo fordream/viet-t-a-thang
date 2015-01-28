@@ -60,7 +60,7 @@ public class BangXepHangItemView extends LinearLayout {
 		findViewById(R.id.bangxephang_item_tv_stt).setBackgroundColor(getResources().getColor(Conts.getDataColor(position)));
 		TextView bxhItemSTT = (TextView) findViewById(R.id.bangxephang_item_tv_stt);
 		bxhItemSTT.setTextColor(Color.WHITE);
-		if (position > 6) {
+		if (position >= 6) {
 			bxhItemSTT.setTextColor(getResources().getColor(R.color.mx));
 		}
 

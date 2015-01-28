@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 //vnp.com.mimusic.view.BangXephangListView
@@ -25,6 +26,7 @@ public class BangXephangListView extends LinearLayout {
 	private vnp.com.mimusic.view.MusicListView list;
 	private String type = "1";
 	private String noDataText;
+	private TextView message;
 
 	public void setType(String type) {
 		this.type = type;
@@ -48,6 +50,7 @@ public class BangXephangListView extends LinearLayout {
 	private void init() {
 		((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.bangxephanglist, this);
 		list = (MusicListView) findViewById(R.id.list);
+		message = Conts.getView(this, R.id.message);
 	}
 
 	public void execute() {
@@ -64,7 +67,15 @@ public class BangXephangListView extends LinearLayout {
 					adaper.setType(type);
 					list.setAdapter(adaper);
 					if (jsonArray.length() == 0) {
-						list.setTextNoData(true, noDataText);
+						// list.setTextNoData(true, noDataText);
+						if (list.getCount() <= 0) {
+							message.setText(noDataText);
+						} else {
+							message.setText("");
+						}
+
+					} else {
+						message.setText("");
 					}
 				} catch (Exception exception) {
 
@@ -79,9 +90,15 @@ public class BangXephangListView extends LinearLayout {
 			}
 
 			@Override
-			public void onError(String message) {
+			public void onError(String xmessage) {
 				progressDialog.dismiss();
-				list.setTextNoData(true, noDataText);
+				// list.setTextNoData(true, noDataText);
+
+				if (list.getCount() <= 0) {
+					message.setText(noDataText);
+				} else {
+					message.setText("");
+				}
 			}
 
 			@Override
