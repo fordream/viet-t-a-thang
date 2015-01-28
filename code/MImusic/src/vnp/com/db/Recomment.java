@@ -188,6 +188,8 @@ public class Recomment {
 		String limit = null;
 		if (maxColum > 0) {
 			limit = String.format("%s limit %s ", User.NAME_CONTACT, maxColum);
+		} else {
+			limit = User.NAME_CONTACT;
 		}
 
 		return context.getContentResolver().query(User.CONTENT_URI, null, selection, null, limit);

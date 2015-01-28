@@ -37,8 +37,7 @@
                 android:singleLine="true"
                 android:text="@string/dichvubanchay"
                 android:textColor="#3d3d3d"
-                android:textSize="@dimen/dimen_15dp"
-                android:textStyle="bold" />
+                android:textSize="@dimen/dimen_15dp" />
 
             <TextView
                 android:id="@+id/xemall"
@@ -196,6 +195,11 @@
                     android:textColor="#666699"
                     android:textSize="@dimen/dimen_8dp" />
             </LinearLayout>
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="fill_parent"
+                android:background="@drawable/new_dichvu_bg" />
         </RelativeLayout>
 
         <ImageView

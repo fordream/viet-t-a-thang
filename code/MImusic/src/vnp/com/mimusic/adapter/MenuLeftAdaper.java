@@ -28,7 +28,7 @@ public class MenuLeftAdaper extends ArrayAdapter<String> {
 		int resimg[] = new int[] {//
 		R.drawable.menu_left_icon_1,//
 				R.drawable.menu_left_icon_2,//
-				R.drawable.menu_left_icon_3,//
+				//R.drawable.menu_left_icon_3,//
 				R.drawable.menu_left_icon_4,//
 				R.drawable.menu_left_icon_5,//
 		};//

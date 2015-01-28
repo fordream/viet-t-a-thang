@@ -21,14 +21,14 @@
 
         <RelativeLayout
             android:id="@+id/xmain"
-            android:layout_width="@dimen/dimen_125dp"
-            android:layout_height="@dimen/dimen_125dp"
+            android:layout_width="@dimen/dimen_130dp"
+            android:layout_height="@dimen/dimen_130dp"
             android:layout_centerInParent="true"
             android:orientation="vertical" >
 
             <RelativeLayout
-                android:layout_width="@dimen/dimen_110dp"
-                android:layout_height="@dimen/dimen_110dp"
+                android:layout_width="@dimen/dimen_120dp"
+                android:layout_height="@dimen/dimen_120dp"
                 android:layout_centerInParent="true" >
 
                 <vnp.com.mimusic.view.CustomImageView
@@ -62,6 +62,7 @@
             android:gravity="center"
             android:maxLines="2"
             android:singleLine="true"
+            android:layout_marginBottom="@dimen/dimen_10dp"
             android:text="Hoài Anh (0968678678)"
             android:textColor="@android:color/white"
             android:textSize="@dimen/dimen_16dp" />

@@ -50,6 +50,7 @@ import com.aretha.slidemenudemo.fragment.LichSuBanHangFragment;
 import com.aretha.slidemenudemo.fragment.MauMoiFragment;
 import com.aretha.slidemenudemo.fragment.MoiDvChoNhieuNguoiFragment;
 import com.aretha.slidemenudemo.fragment.MoiNhieuDichVuFragment;
+import com.aretha.slidemenudemo.fragment.MoiThanhVienFragment;
 import com.aretha.slidemenudemo.fragment.QuyDinhBanHangFragment;
 import com.aretha.slidemenudemo.fragment.SearchFragment;
 import com.aretha.slidemenudemo.fragment.ThongTinCaNhanFragment;
@@ -138,6 +139,8 @@ public class RootMenuActivity extends FragmentActivity {
 			changeFragemt(R.id.root_main_fragment, new DichVuHotFragment());
 		} else if (Conts.DICHVUBANCHAY.equals(type)) {
 			changeFragemt(R.id.root_main_fragment, new DichVuBanChayFragment());
+		} else if (Conts.MOITHANHVIEN.equals(type)) {
+			changeFragemt(R.id.root_main_fragment, new MoiThanhVienFragment());
 		}
 	}
 
@@ -451,6 +454,17 @@ public class RootMenuActivity extends FragmentActivity {
 		intent.putExtra(User._ID, "");
 		startActivity(intent);
 		overridePendingTransitionStartActivity();
+	}
+
+	public void moiContactUserFragment(String _id) {
+
+		Bundle bundle = new Bundle();
+		bundle.putString(User._ID, _id);
+		bundle.putString("msisdn", "");
+		bundle.putString("name", "");
+		MoiNhieuDichVuFragment moiNhieuDichVuFragment = new MoiNhieuDichVuFragment();
+		moiNhieuDichVuFragment.setArguments(bundle);
+		changeFragemt(R.id.root_main_fragment, moiNhieuDichVuFragment);
 	}
 
 	public void gotoChiTietDichVuFromHome(String id) {

@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@+id/maumoi_item_checkbox"
             android:orientation="vertical"
-            android:padding="@dimen/dimen_10dp" >
+            android:padding="@dimen/dimen_18dp" >
 
             <TextView
                 android:id="@+id/bangxephang_item_tv_name"
@@ -23,28 +23,30 @@
                 android:singleLine="true"
                 android:text="Mẫu tin mời"
                 android:textColor="#475055"
-                android:textSize="@dimen/dimen_14dp"
+                android:textSize="@dimen/dimen_15dp"
                 android:textStyle="bold" />
 
-            <TextView
+            <vnp.com.mimusic.view.VTTextView
                 android:id="@+id/bangxephang_item_tv_listdv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/dimen_3dp"
                 android:layout_marginTop="@dimen/dimen_5dp"
+                android:lines="2"
+                android:maxLines="2"
                 android:text="Thuê bao XXXX mời bạn sử dụng dịch vụ imusiz(700 vnđ), Để sử dụng dịch vụ , soạn tin YES gửi 567, Để từ trối nhận bản tin lan tỏa từ thuê bao khác soạn NO gửi XXX. "
-                android:textColor="#475055"
-                android:textSize="@dimen/dimen_13dp" />
+                android:textColor="#353f45"
+                android:textSize="@dimen/dimen_11dp" />
         </LinearLayout>
 
         <RadioButton
             android:id="@+id/maumoi_item_checkbox"
             android:layout_width="@dimen/dimen_20dp"
             android:layout_height="@dimen/dimen_20dp"
-            android:layout_marginRight="@dimen/dimen_10dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:background="@drawable/newmaumoi_selected"
+            android:layout_marginRight="@dimen/dimen_10dp"
+            android:background="@drawable/new_maumoi_selected"
             android:button="@null" />
     </RelativeLayout>
 

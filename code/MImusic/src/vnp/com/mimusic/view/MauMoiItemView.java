@@ -27,7 +27,7 @@ public class MauMoiItemView extends LinearLayout {
 	}
 
 	public void setBackgroundItemColor(int position) {
-		findViewById(R.id.maumoi_item_main).setBackgroundColor(getContext().getResources().getColor(position % 2 == 0 ? android.R.color.transparent : R.color.f3f3f3));
+		findViewById(R.id.maumoi_item_main).setBackgroundResource(position % 2 == 0 ? R.drawable.new_maumoi_1 : R.drawable.new_maumoi_2);
 	}
 
 	public void setData(JSONObject jsonObject) {

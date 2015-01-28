@@ -155,6 +155,7 @@ public abstract class NewHomeAdapter extends ArrayAdapter<NewHomeItem> {
 
 			findViewById(R.id.new_home_item_blog2).setBackgroundResource(item.index == 0 ? R.drawable.home_dv_bg_0 : R.drawable.home_dv_bg_1);
 			findViewById(R.id.home_item_right_control).setBackgroundResource(item.index == 0 ? R.drawable.home_dv_bg_x_0 : R.drawable.home_dv_bg_x_1);
+			findViewById(R.id.home_item_img_icon).setBackgroundResource(item.index % 2 == 0 ? R.drawable.new_dichvu_icon_bg_0 : R.drawable.new_dichvu_icon_bg_1);
 		}
 
 		public NewHomeItemView(Context context, AttributeSet attrs) {

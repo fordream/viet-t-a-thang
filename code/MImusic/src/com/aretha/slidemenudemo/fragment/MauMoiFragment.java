@@ -1,7 +1,6 @@
 package com.aretha.slidemenudemo.fragment;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import vnp.com.api.API;
@@ -12,7 +11,6 @@ import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.adapter.MauMoiAdaper;
 import vnp.com.mimusic.util.Conts;
-import vnp.com.mimusic.util.LogUtils;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -64,13 +62,13 @@ public class MauMoiFragment extends BaseFragment implements android.view.View.On
 			}
 		});
 
-		view.findViewById(R.id.recomment_icon_bottom).setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				getActivity().onBackPressed();
-			}
-		});
+//		view.findViewById(R.id.recomment_icon_bottom).setOnClickListener(new View.OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//				getActivity().onBackPressed();
+//			}
+//		});
 
 		if (!type) {
 			String selection = DichVu.ID + "='" + id + "'";
