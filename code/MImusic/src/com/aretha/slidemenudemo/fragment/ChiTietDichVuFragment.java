@@ -98,20 +98,14 @@ public class ChiTietDichVuFragment extends BaseFragment implements View.OnClickL
 			values.put("type", "dangky");
 			values.put(DichVu.service_code, cursor.getString(cursor.getColumnIndex(DichVu.service_code)));
 			values.put("name", String.format(getString(R.string.title_dangky), cursor.getString(cursor.getColumnIndex(DichVu.service_name))));
-			
-			
-			
-			String content = String.format(getString(R.string.xacnhandangky_form), 
-					Conts.getStringCursor(cursor, DichVu.service_name),
-					Conts.getStringCursor(cursor, DichVu.service_price)
-					);
-//			values.put("content", cursor.getString(cursor.getColumnIndex(DichVu.service_content)));
+
+			String content = String.format(getString(R.string.xacnhandangky_form), Conts.getStringCursor(cursor, DichVu.service_name), Conts.getStringCursor(cursor, DichVu.service_price));
 			values.put("content", content);
-			
+
 			boolean isDangKy = "0".equals(cursor.getString(cursor.getColumnIndex(DichVu.service_status)));
 
 			if (!isDangKy) {
-				chitietdichvu_chitietdichvunofeatureview.findViewById(R.id.chitietdichvu_no_feature_dangky).setOnClickListener(new View.OnClickListener() {
+				chitietdichvu_chitietdichvunofeatureview.findViewById(R.id.home_item_right_control_1).setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
 						// TODO
@@ -125,9 +119,9 @@ public class ChiTietDichVuFragment extends BaseFragment implements View.OnClickL
 					}
 				});
 			} else {
-				chitietdichvu_chitietdichvunofeatureview.findViewById(R.id.chitietdichvu_no_feature_dangky).setOnClickListener(null);
+				chitietdichvu_chitietdichvunofeatureview.findViewById(R.id.home_item_right_control_1).setOnClickListener(null);
 			}
-			chitietdichvu_chitietdichvunofeatureview.findViewById(R.id.chitietdichvu_no_feature_moi).setOnClickListener(new View.OnClickListener() {
+			chitietdichvu_chitietdichvunofeatureview.findViewById(R.id.home_item_right_control_2).setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					(((RootMenuActivity) getActivity())).gotoMoiDvChoNhieuNguoiFragment(id);
