@@ -60,12 +60,13 @@ public class BangXepHangItemView extends LinearLayout {
 		findViewById(R.id.bangxephang_item_tv_stt).setBackgroundColor(getResources().getColor(Conts.getDataColor(position)));
 		TextView bxhItemSTT = (TextView) findViewById(R.id.bangxephang_item_tv_stt);
 		bxhItemSTT.setTextColor(Color.WHITE);
-		if (position >= 6) {
+		if (position > 6) {
 			bxhItemSTT.setTextColor(getResources().getColor(R.color.mx));
 		}
 
 		findViewById(R.id.bangxephang_item_bg).setBackgroundResource(position % 2 == 0 ? R.drawable.bxp_bg_item1 : R.drawable.bxp_bg_item2);
-		findViewById(R.id.bangxephang_block).setBackgroundResource(position % 2 == 0 ? R.drawable.bxp_bg_item1_sl : R.drawable.bxp_bg_item2_sl);
+
+		findViewById(R.id.bangxephang_item).setBackgroundResource(position % 2 == 0 ? R.drawable.x_01 : R.drawable.x_02);
 	}
 
 	public void setDataBundle(Bundle arguments) {
