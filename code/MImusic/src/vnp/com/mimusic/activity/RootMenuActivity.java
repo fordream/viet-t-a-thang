@@ -175,7 +175,7 @@ public class RootMenuActivity extends FragmentActivity {
 			fragmentManager.popBackStack();
 		} else if (count == 1) {
 			try {
-				((BaseMusicSlideMenuActivity) getParent()).finish(true);
+				((vnp.com.mimusic.main.NewMusicSlideMenuActivity) getParent()).finish(true);
 			} catch (Exception exception) {
 				finish();
 				overridePendingTransition(R.anim.abc_nothing, R.anim.abc_scale_out);
