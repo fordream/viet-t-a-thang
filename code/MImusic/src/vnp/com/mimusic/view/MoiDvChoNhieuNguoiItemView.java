@@ -49,29 +49,16 @@ public class MoiDvChoNhieuNguoiItemView extends LinearLayout {
 			name = "";
 
 		View main = findViewById(R.id.menurightitem_main);
-		main.setVisibility(name.toUpperCase().contains(textSearch.toUpperCase()) ? View.VISIBLE : View.GONE);
-		boolean needShow = Conts.contains(name, textSearch);
-
-		if (cursor != null && !Conts.contains(cursor.getString(cursor.getColumnIndex(User.LISTIDDVSUDUNG)), service_code)) {
-			needShow = false;
-		}
-
+		main.setVisibility(Conts.xDontains(textSearch, false, new String[] { name }) ? View.VISIBLE : View.GONE);
+		boolean needShow = Conts.xDontains(textSearch, true, new String[] { name, Conts.getStringCursor(cursor, User.USER) });
 		main.setVisibility(needShow ? View.VISIBLE : View.GONE);
-
 		((TextView) findViewById(R.id.menu_right_item_tv_name)).setText(name);
-//		String avatar = cursor.getString(cursor.getColumnIndex(User.AVATAR));
-//		if (avatar == null) {
-//
-//		} else {
-//			((ImageView) findViewById(R.id.menu_right_item_img_icon)).setBackgroundResource(R.drawable.no_avatar);
-//		}
 
-		
 		String avatar = cursor.getString(cursor.getColumnIndex(User.AVATAR));
 		String contact_id = Conts.getStringCursor(cursor, User.contact_id);
-	
-		Conts.showAvatar(((ImageView) findViewById(R.id.menu_right_item_img_icon)), avatar,contact_id);
-		
+
+		Conts.showAvatar(((ImageView) findViewById(R.id.menu_right_item_img_icon)), avatar, contact_id);
+
 		Conts.setTextViewCursor(findViewById(R.id.menu_right_item_tv_link), cursor, User.USER);
 
 		Conts.getSDT(findViewById(R.id.menu_right_item_tv_link));

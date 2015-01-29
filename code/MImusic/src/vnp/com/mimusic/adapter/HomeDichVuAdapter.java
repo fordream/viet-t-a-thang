@@ -34,7 +34,7 @@ public abstract class HomeDichVuAdapter extends CursorAdapter {
 		 */
 		String name = cursor.getString(cursor.getColumnIndex(DichVu.service_name));
 		final String id = cursor.getString(cursor.getColumnIndex(DichVu.ID));
-		convertView.findViewById(R.id.home_item_main).setVisibility(name.toUpperCase().contains(textSearch.toUpperCase()) ? View.VISIBLE : View.GONE);
+		convertView.findViewById(R.id.home_item_main).setVisibility(Conts.xDontains(textSearch, false, new String[] { name }) ? View.VISIBLE : View.GONE);
 
 		/**
 		 * set data

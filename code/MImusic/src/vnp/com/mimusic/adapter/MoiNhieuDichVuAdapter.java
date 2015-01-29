@@ -74,19 +74,14 @@ public abstract class MoiNhieuDichVuAdapter extends CursorAdapter {
 		String service_code = cursor.getString(cursor.getColumnIndex(DichVu.service_code));
 		View main = convertView.findViewById(R.id.moinhieudichvu_item_main);
 
-		boolean needShow = Conts.contains(name, textSearch);
-
-		// FIXME
-		// if (!Conts.contains(lISTIDDVSUDUNG, service_code)) {
-		// needShow = false;
-		// }
+		boolean needShow = Conts.xDontains(textSearch,false, new String[] { name });
 
 		main.setVisibility(needShow ? View.VISIBLE : View.GONE);
 
 		((MoiNhieuDichVuItemView) convertView).moinhieudichvu_item_tv_name.setText(name);
 
 		Conts.setTextViewCursor(Conts.getView(convertView, R.id.content), cursor, DichVu.service_content);
-		
+
 		((MoiNhieuDichVuItemView) convertView).moinhieudichvu_item_checkbox.setOnCheckedChangeListener(null);
 		((MoiNhieuDichVuItemView) convertView).moinhieudichvu_item_checkbox.setChecked(listSelect.contains(_id));
 		((MoiNhieuDichVuItemView) convertView).moinhieudichvu_item_checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
