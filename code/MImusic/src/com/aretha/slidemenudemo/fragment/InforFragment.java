@@ -1,6 +1,10 @@
 package com.aretha.slidemenudemo.fragment;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,9 +38,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import eu.janmuller.android.simplecropimage.CropImage;
+import eu.janmuller.android.simplecropimage.example.InternalStorageContentProvider;
 
 public class InforFragment extends BaseFragment implements OnItemClickListener, View.OnClickListener {
-
+	protected static final int REQUEST_CODE_TAKE_PICTURE = 103;
+	private static final int REQUEST_CODE_CROP_IMAGE = 10003;
+	protected static final int REQUEST_CODE_GALLERY = 102;
+	private File mFileTemp;
 	private ImageView menu_left_img_cover, menu_left_img_avatar, infor_cover_click_change;
 	private TextView menu_left_tv_name;
 	private Button activity_login_btn;
@@ -48,6 +57,12 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.infor, null);
+		String state = Environment.getExternalStorageState();
+		if (Environment.MEDIA_MOUNTED.equals(state)) {
+			mFileTemp = new File(Environment.getExternalStorageDirectory(), InternalStorageContentProvider.TEMP_PHOTO_FILE_NAME);
+		} else {
+			mFileTemp = new File(getActivity().getFilesDir(), InternalStorageContentProvider.TEMP_PHOTO_FILE_NAME);
+		}
 
 		loadingView = (LoadingView) view.findViewById(R.id.loadingView1);
 		Conts.showView(loadingView, false);
@@ -138,7 +153,7 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 				Toast.makeText(getActivity(), getActivity().getString(R.string.khongthelayduocduongdan), Toast.LENGTH_SHORT).show();
 			}
 
-		} else if (requestCode == 102 && resultCode == Activity.RESULT_OK) {
+		} else if (requestCode == REQUEST_CODE_GALLERY && resultCode == Activity.RESULT_OK) {
 			// if (path == null) {
 			// Conts.showDialogThongbao(getActivity(),
 			// getActivity().getString(R.string.khonglayduocanh));
@@ -146,17 +161,59 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 			// }
 
 			// beginCrop(data.getData());
-			String path = data.getData().toString();
-			uploadAvatar(path);
-		} else if (requestCode == 103 && resultCode == Activity.RESULT_OK) {
+			// String path = data.getData().toString();
+			// uploadAvatar(path);
 
+			try {
+				InputStream inputStream = getActivity().getContentResolver().openInputStream(data.getData());
+				FileOutputStream fileOutputStream = new FileOutputStream(mFileTemp);
+				copyStream(inputStream, fileOutputStream);
+				fileOutputStream.close();
+				inputStream.close();
+				startCropImage();
+			} catch (Exception e) {
+
+			}
+		} else if (requestCode == REQUEST_CODE_TAKE_PICTURE && resultCode == Activity.RESULT_OK) {
+
+			// if (path == null) {
+			// Conts.showDialogThongbao(getActivity(),
+			// getActivity().getString(R.string.khonglayduocanh));
+			// return;
+			// }
+			// String path = this.path.toString();
+			// uploadAvatar(path);
+
+			startCropImage();
+		} else if (REQUEST_CODE_CROP_IMAGE == requestCode) {
+			String path = data.getStringExtra(CropImage.IMAGE_PATH);
 			if (path == null) {
-				Conts.showDialogThongbao(getActivity(), getActivity().getString(R.string.khonglayduocanh));
 				return;
 			}
-			String path = this.path.toString();
+
 			uploadAvatar(path);
 		}
+	}
+
+	public static void copyStream(InputStream input, OutputStream output) throws IOException {
+
+		byte[] buffer = new byte[1024];
+		int bytesRead;
+		while ((bytesRead = input.read(buffer)) != -1) {
+			output.write(buffer, 0, bytesRead);
+		}
+	}
+
+	private void startCropImage() {
+
+		Intent intent = new Intent(getActivity(), CropImage.class);
+		intent.putExtra(CropImage.IMAGE_PATH, mFileTemp.getPath());
+		intent.putExtra(CropImage.SCALE, true);
+
+		intent.putExtra(CropImage.ASPECT_X, 2);
+		intent.putExtra(CropImage.ASPECT_Y, 2);
+
+		startActivityForResult(intent, REQUEST_CODE_CROP_IMAGE);
 	}
 
 	private void uploadAvatar(final String path) {
@@ -219,15 +276,32 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					if (which == 1) {
-						Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+						// ACTION_GET_CONTENT
+						Intent intent = new Intent(Intent.ACTION_PICK);
 						intent.setType("image/*");
-						startActivityForResult(Intent.createChooser(intent, getActivity().getString(R.string.chonanh)), 102);
+						startActivityForResult(Intent.createChooser(intent, getActivity().getString(R.string.chonanh)), REQUEST_CODE_GALLERY);
+
 					} else {
 						Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-						path = Uri.fromFile(new File(Environment.getExternalStorageDirectory(), "tmp_avatar_" + System.currentTimeMillis() + ".jpg"));
-						cameraIntent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, path);
+						// path = Uri.fromFile(new
+						// File(Environment.getExternalStorageDirectory(),
+						// "tmp_avatar_" + System.currentTimeMillis() +
+						// ".jpg"));
+						// cameraIntent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT,
+						// path);
+						// cameraIntent.putExtra("return-data", true);
+						// startActivityForResult(cameraIntent, 103);
+
+						Uri mImageCaptureUri = null;
+						String state = Environment.getExternalStorageState();
+						if (Environment.MEDIA_MOUNTED.equals(state)) {
+							mImageCaptureUri = Uri.fromFile(mFileTemp);
+						} else {
+							mImageCaptureUri = InternalStorageContentProvider.CONTENT_URI;
+						}
+						cameraIntent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, mImageCaptureUri);
 						cameraIntent.putExtra("return-data", true);
-						startActivityForResult(cameraIntent, 103);
+						startActivityForResult(cameraIntent, REQUEST_CODE_TAKE_PICTURE);
 					}
 				}
 			});
