@@ -91,7 +91,7 @@
                         android:maxLines="2"
                         android:singleLine="true"
                         android:text="Hoài Anh (0968678678)"
-                        android:textColor="@android:color/white"
+                        android:textColor="#336666"
                         android:textSize="@dimen/dimen_16dp" />
                 </RelativeLayout>
 
