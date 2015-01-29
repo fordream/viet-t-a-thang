@@ -335,6 +335,8 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 		String customers = "";
 		for (String _id : adaper.getListSeList()) {
 			String user = adaper.getUserFrom_ID(_id);
+			user = Conts.getSDT(user);
+			
 			if (!Conts.isBlank(user)) {
 				if (customers.endsWith("\"")) {
 					customers = String.format("%s,\"%s\"", customers, user);
