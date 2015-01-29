@@ -795,9 +795,9 @@ public class Conts {
 		AlphaAnimation alphaAnimation = new AlphaAnimation(1f, 1f);
 
 		if (isHidden) {
-			alphaAnimation = new AlphaAnimation(0.8f, 0.8f);
+			alphaAnimation = new AlphaAnimation(0.6f, 0.6f);
 		}
-		alphaAnimation.setFillAfter(false);
+		alphaAnimation.setFillAfter(true);
 		view.setAnimation(alphaAnimation);
 	}
 
