@@ -10,12 +10,14 @@ import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.adapter.MoiDvChoNhieuNguoiAdaper;
 import vnp.com.mimusic.util.Conts;
+import vnp.com.mimusic.util.ImageLoaderUtils;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
 import vnp.com.mimusic.view.ChiTietDichVuNoFeatureView;
 import vnp.com.mimusic.view.HeaderView;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
@@ -153,6 +155,12 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 			service_code = mcursor.getString(mcursor.getColumnIndex(DichVu.service_code));
 			Conts.setTextViewCursor(view.findViewById(R.id.name), mcursor, DichVu.service_name);
 			Conts.setTextViewCursor(view.findViewById(R.id.gia), mcursor, DichVu.service_price);
+			ImageView home_item_img_icon = (ImageView) view.findViewById(R.id.icon);
+			String service_icon = Conts.getStringCursor(mcursor, DichVu.service_icon);
+			ImageLoaderUtils.getInstance(getActivity()).DisplayImage(service_icon, home_item_img_icon, BitmapFactory.decodeResource(getResources(), R.drawable.no_image));
+		
+			
+			//
 			mcursor.close();
 		}
 

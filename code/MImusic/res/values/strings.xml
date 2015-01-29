@@ -167,7 +167,7 @@
     <string name="format_gia">Giá : %s</string>
     <string name="title_dangky">Đăng ký dịch vụ %s</string>
     <string name="format_tien">%s VNĐ</string>
-    <string name="xacnhandangky_form" formatted="false">Xác nhận đăng ký dịch vụ %s giá %s</string>
+    <string name="xacnhandangky_form" formatted="false">Xác nhận đăng ký dịch vụ %s \ngiá %s</string>
     <string name="banchuacomatkhauvuilongsoantinnhan">Bạn chưa có hoặc quên mât khẩu!\nVui lòng soạn tin nhắn(miễn phí)</string>
     <string name="bancannhapsdtvamatkkau">Bạn cần nhập số điện thoại và mật khẩu.</string>
     <string name="xemtatca">Xem tất cả ></string>
