@@ -80,11 +80,12 @@
         
         <!-- crop image -->
          <activity android:name="eu.janmuller.android.simplecropimage.CropImage" />
-
+<!-- 
         <provider
             android:name="eu.janmuller.android.simplecropimage.example.InternalStorageContentProvider"
             android:authorities="eu.janmuller.android.simplecropimage.example"
             android:exported="true" />
+     -->
     </application>
 
 </manifest>

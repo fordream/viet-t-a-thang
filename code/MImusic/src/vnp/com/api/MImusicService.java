@@ -796,7 +796,6 @@ public class MImusicService extends Service {
 
 	public void executeUpdateHttpsAvatar(String path, IContsCallBack iContsCallBack) {
 		Bundle bundle = new Bundle();
-
 		bundle.putString("images", Conts.encodeToString(this, path));// path
 		// todo
 		// bundle.putString("file", path);// path

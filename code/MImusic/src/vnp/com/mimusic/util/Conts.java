@@ -676,6 +676,8 @@ public class Conts {
 			} else if (url != null && url.startsWith("file://")) {
 				url = url.substring(url.indexOf("file://") + 7, url.length());
 				bitmap = ImageLoader.decodeFile(new File(url));
+			} else {
+				bitmap = ImageLoader.decodeFile(new File(url));
 			}
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 			bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos); // bm is the

@@ -85,8 +85,8 @@ public class ImageLoader {
 				os.close();
 				return decodeFile(f);
 			} else if (url.startsWith("https:")) {
-//				RestClient restClient = new RestClient(url);
-//				File file = restClient.exeDownloadFile(context);
+				// RestClient restClient = new RestClient(url);
+				// File file = restClient.exeDownloadFile(context);
 				HttpsRestClient client = new HttpsRestClient(context, url);
 				return decodeFile(client.executeDownloadFile(RequestMethod.GET));
 			} else if (url != null && url.startsWith("file://")) {
@@ -101,7 +101,7 @@ public class ImageLoader {
 					return null;
 				}
 			} else {
-				return null;
+				return decodeFile(new File(url));
 			}
 		} catch (Throwable ex) {
 			ex.printStackTrace();
