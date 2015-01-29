@@ -30,16 +30,12 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 	private MoiNhieuDichVuAdapter adapter;
 	private EditText moinhieudichvu_dialog_search;
 	private String sdt = "";
-	private View main_mm;
-	private MenuRightItemView menuright_item, menuRightItemViewheader;
+	private MenuRightItemView menuright_item;
 	private String LISTIDDVSUDUNG = "";
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.moinhieudichvu_dialog, null);
-		main_mm = (view.findViewById(R.id.main_mm));
-		menuRightItemViewheader = new MenuRightItemView(getActivity());
-		menuRightItemViewheader.showFooter();
 		moinhieudichvu_dialog_search = (EditText) view.findViewById(R.id.moinhieudichvu_dialog_search);
 		moinhieudichvu_dialog_list_hor = (LinearLayout) view.findViewById(R.id.moinhieudichvu_dialog_list_hor);
 
@@ -53,8 +49,6 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 			sdt = getArguments().getString("msisdn");
 			LISTIDDVSUDUNG = "";
 			menuright_item.initData(getArguments().getString("name"));
-			menuRightItemViewheader.initData(getArguments().getString("name"));
-			menuRightItemViewheader.initSdt(sdt);
 
 			where = String.format("%s = '%s'", User.USER, sdt);
 
@@ -65,7 +59,6 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 				sdt = cursor.getString(cursor.getColumnIndex(User.USER));
 
 				menuright_item.initData(cursor, "");
-				menuRightItemViewheader.initData(cursor, "");
 			}
 
 			if (cursor != null) {
@@ -80,7 +73,6 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 				sdt = cursor.getString(cursor.getColumnIndex(User.USER));
 
 				menuright_item.initData(cursor, "");
-				menuRightItemViewheader.initData(cursor, "");
 			}
 
 			if (cursor != null) {
@@ -89,7 +81,6 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 		}
 
 		ListView maumoi_list = (ListView) view.findViewById(R.id.moinhieudichvu_dialog_list);
-		maumoi_list.addHeaderView(menuRightItemViewheader);
 
 		Cursor cursorDV = getActivity().getContentResolver().query(DichVu.CONTENT_URI, null, null, null, null);
 		moinhieudichvu_dialog_search.addTextChangedListener(new TextWatcher() {
@@ -179,7 +170,6 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 		return view;
 	}
 
-
 	@Override
 	public void onClick(View v) {
 		if (v.getId() == R.id.back) {
@@ -187,10 +177,9 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 		} else if (v.getId() == R.id.moi) {
 			int size = adapter.getListSelect().size();
 			if (size == 0) {
-				Conts.toast(getActivity(), getString(R.string.validatesodichvu));
+				Conts.showDialogThongbao(getActivity(), getString(R.string.validatesodichvu));
 				return;
 			}
-			// TODO
 			String service_codes = "";
 			for (String _id : adapter.getListSelect()) {
 				String service_code = adapter.getService_code(_id);
