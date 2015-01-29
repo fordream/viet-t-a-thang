@@ -10,17 +10,14 @@ import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.adapter.MoiDvChoNhieuNguoiAdaper;
 import vnp.com.mimusic.util.Conts;
-import vnp.com.mimusic.util.ImageLoaderUtils;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
-import vnp.com.mimusic.view.ChiTietDichVuNoFeatureView;
-import vnp.com.mimusic.view.HeaderView;
+import vnp.com.mimusic.util.ImageLoaderUtils;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -29,19 +26,12 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
-import android.widget.AbsListView;
-import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
@@ -158,8 +148,6 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 			ImageView home_item_img_icon = (ImageView) view.findViewById(R.id.icon);
 			String service_icon = Conts.getStringCursor(mcursor, DichVu.service_icon);
 			ImageLoaderUtils.getInstance(getActivity()).DisplayImage(service_icon, home_item_img_icon, BitmapFactory.decodeResource(getResources(), R.drawable.no_image));
-		
-			
 			//
 			mcursor.close();
 		}
@@ -176,6 +164,7 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 					addItemView.setMId(_id);
 
 					moinhieudichvu_dialog_list_hor.addView(addItemView);
+					Conts.showAlpha(MoiDvChoNhieuNguoiFragment.this.getView().findViewById(R.id.moi), (moinhieudichvu_dialog_list_hor.getChildCount() == 0));
 					Conts.addViewScale(addItemView);
 					addItemView.findViewById(R.id.x).setOnClickListener(new View.OnClickListener() {
 						@Override
@@ -196,6 +185,8 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 								@Override
 								public void onAnimationEnd(Animation animation) {
 									moinhieudichvu_dialog_list_hor.removeView(addItemView);
+									Conts.showAlpha(MoiDvChoNhieuNguoiFragment.this.getView().findViewById(R.id.moi), (moinhieudichvu_dialog_list_hor.getChildCount() == 0));
+									
 								}
 							});
 							adaper.remove(_id);
@@ -222,6 +213,8 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 								@Override
 								public void onAnimationEnd(Animation animation) {
 									moinhieudichvu_dialog_list_hor.removeView(child);
+									Conts.showAlpha(MoiDvChoNhieuNguoiFragment.this.getView().findViewById(R.id.moi), (moinhieudichvu_dialog_list_hor.getChildCount() == 0));
+									
 								}
 							});
 							break;
@@ -237,7 +230,8 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 					addItemView.setMId(sdt);
 
 					moinhieudichvu_dialog_list_hor.addView(addItemView);
-
+					Conts.showAlpha(MoiDvChoNhieuNguoiFragment.this.getView().findViewById(R.id.moi), (moinhieudichvu_dialog_list_hor.getChildCount() == 0));
+					
 					addItemView.findViewById(R.id.x).setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
@@ -257,6 +251,8 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 								@Override
 								public void onAnimationEnd(Animation animation) {
 									moinhieudichvu_dialog_list_hor.removeView(addItemView);
+									Conts.showAlpha(MoiDvChoNhieuNguoiFragment.this.getView().findViewById(R.id.moi), (moinhieudichvu_dialog_list_hor.getChildCount() == 0));
+									
 								}
 							});
 							adaper.remove(sdt);
@@ -268,6 +264,8 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 		};
 
 		moi_list.setAdapter(adaper);
+
+		Conts.showAlpha(view.findViewById(R.id.moi), (moinhieudichvu_dialog_list_hor.getChildCount() == 0));
 		return view;
 	}
 
@@ -344,7 +342,7 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 		for (String _id : adaper.getListSeList()) {
 			String user = adaper.getUserFrom_ID(_id);
 			user = Conts.getSDT(user);
-			
+
 			if (!Conts.isBlank(user)) {
 				if (customers.endsWith("\"")) {
 					customers = String.format("%s,\"%s\"", customers, user);

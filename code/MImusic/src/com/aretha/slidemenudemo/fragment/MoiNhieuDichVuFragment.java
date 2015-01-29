@@ -26,6 +26,8 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 
 public class MoiNhieuDichVuFragment extends Fragment implements android.view.View.OnClickListener {
+
+	private View moi;
 	private LinearLayout moinhieudichvu_dialog_list_hor;
 	private MoiNhieuDichVuAdapter adapter;
 	private EditText moinhieudichvu_dialog_search;
@@ -33,9 +35,14 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 	private MenuRightItemView menuright_item;
 	private String LISTIDDVSUDUNG = "";
 
+	public void updateMoi() {
+		Conts.showAlpha(moi, (moinhieudichvu_dialog_list_hor.getChildCount() == 0));
+	}
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.moinhieudichvu_dialog, null);
+		moi = Conts.getView(view, R.id.moi);
 		moinhieudichvu_dialog_search = (EditText) view.findViewById(R.id.moinhieudichvu_dialog_search);
 		moinhieudichvu_dialog_list_hor = (LinearLayout) view.findViewById(R.id.moinhieudichvu_dialog_list_hor);
 
@@ -109,6 +116,7 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 					final MoiNhieuDichVuAddItemView addItemView = new MoiNhieuDichVuAddItemView(getActivity());
 					moinhieudichvu_dialog_list_hor.addView(addItemView);
 					Conts.addViewScale(addItemView);
+					updateMoi();
 					addItemView.setMId(_id);
 					addItemView.setIcon(icon);
 
@@ -131,6 +139,7 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 								@Override
 								public void onAnimationEnd(Animation animation) {
 									moinhieudichvu_dialog_list_hor.removeView(addItemView);
+									updateMoi();
 								}
 							});
 							adapter.remove(_id);
@@ -156,7 +165,7 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 								@Override
 								public void onAnimationEnd(Animation animation) {
 									moinhieudichvu_dialog_list_hor.removeView(child);
-
+									updateMoi();
 								}
 							});
 							break;
@@ -166,7 +175,7 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 			}
 
 		});
-
+		updateMoi();
 		return view;
 	}
 

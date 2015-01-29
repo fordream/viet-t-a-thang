@@ -43,6 +43,7 @@ import android.provider.MediaStore;
 import android.util.Base64;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
@@ -788,6 +789,16 @@ public class Conts {
 		// imm.hideSoftInputFromWindow(keEditText.getWindowToken(), 0);
 		imm.showSoftInput(keEditText, InputMethodManager.SHOW_IMPLICIT);
 
+	}
+
+	public static void showAlpha(View view, boolean isHidden) {
+		AlphaAnimation alphaAnimation = new AlphaAnimation(1f, 1f);
+
+		if (isHidden) {
+			alphaAnimation = new AlphaAnimation(0.8f, 0.8f);
+		}
+		alphaAnimation.setFillAfter(false);
+		view.setAnimation(alphaAnimation);
 	}
 
 }
