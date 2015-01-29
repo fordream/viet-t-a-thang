@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_50dp"
+        android:layout_marginLeft="@dimen/dimen_15dp"
+        android:layout_marginRight="@dimen/dimen_15dp" >
+
+        <ImageView
+            android:id="@+id/keyboard_x"
+            android:layout_width="@dimen/dimen_21dp"
+            android:layout_height="@dimen/dimen_21dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/keyboard_x" />
+
+        <EditText
+            android:id="@+id/keyboard_number"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/keyboard_add"
+            android:layout_toRightOf="@+id/keyboard_x"
+            android:background="@drawable/tranfer"
+            android:gravity="center"
+            android:imeOptions="actionDone"
+            android:inputType="phone"
+            android:textColor="#666666"
+            android:textSize="@dimen/dimen_25dp" />
+
+        <TextView
+            android:id="@+id/keyboard_add"
+            android:layout_width="@dimen/dimen_45dp"
+            android:layout_height="@dimen/dimen_23dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/keyboard_add"
+            android:gravity="center"
+            android:text="@string/them"
+            android:textColor="#003366"
+            android:textSize="@dimen/dimen_11dp" />
+    </RelativeLayout>
+
+</LinearLayout>

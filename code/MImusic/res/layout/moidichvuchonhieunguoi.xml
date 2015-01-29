@@ -19,7 +19,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:background="@drawable/xml_btn2"
-            android:padding="@dimen/dimen_15dp"
+            android:padding="@dimen/dimen_12dp"
             android:scaleType="fitXY"
             android:src="@drawable/btn_back" />
 
@@ -58,16 +58,22 @@
                     android:background="@drawable/search_x" />
             </RelativeLayout>
 
-            <CheckBox
+            <LinearLayout
                 android:id="@+id/moidichvuchonhieunguoi_contact"
-                android:layout_width="@dimen/dimen_20dp"
-                android:layout_height="@dimen/dimen_20dp"
+                android:layout_width="@dimen/dimen_45dp"
+                android:layout_height="fill_parent"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/dimen_15dp"
-                android:layout_marginRight="@dimen/dimen_15dp"
-                android:background="@drawable/moi_add_sdt"
-                android:button="@null" />
+                android:gravity="center" >
+
+                <ImageView
+                    android:layout_width="@dimen/dimen_20dp"
+                    android:layout_height="@dimen/dimen_20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/moi_add_sdt" />
+            </LinearLayout>
         </RelativeLayout>
     </LinearLayout>
 
@@ -209,6 +215,13 @@
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/dimen_11dp" />
             </RelativeLayout>
+
+            <vnp.com.mimusic.view.KeyBoardView
+                android:id="@+id/keyBoardView1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone" >
+            </vnp.com.mimusic.view.KeyBoardView>
         </LinearLayout>
     </RelativeLayout>
 

@@ -48,6 +48,7 @@ import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -751,6 +752,14 @@ public class Conts {
 	public static <T extends View> T getView(View view, int id) {
 		T v = (T) view.findViewById(id);
 		return v;
+	}
+
+	public static void showKeyBoard(EditText keEditText) {
+		keEditText.requestFocus();
+		InputMethodManager imm = (InputMethodManager) keEditText.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+		//imm.hideSoftInputFromWindow(keEditText.getWindowToken(), 0);
+		imm.showSoftInput(keEditText, InputMethodManager.SHOW_IMPLICIT);
+
 	}
 
 }

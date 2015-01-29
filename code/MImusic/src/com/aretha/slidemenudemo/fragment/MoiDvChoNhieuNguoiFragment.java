@@ -34,6 +34,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -53,19 +54,21 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 	private EditText moidichvuchonhieunguoi_number;
 	private MoiDvChoNhieuNguoiAdaper adaper;
 	private String service_code = "";
-	private CheckBox moidichvuchonhieunguoi_contact;
-
+	private View moidichvuchonhieunguoi_contact;
+	private vnp.com.mimusic.view.KeyBoardView boardView;
 	private OnClickListener moidichvuchonhieunguoi_add_plusOnCLick = new OnClickListener() {
 		@Override
 		public void onClick(View v) {
+
 			Conts.hiddenKeyBoard(getActivity());
-			String moidichvuchonhieunguoi_numberText = moidichvuchonhieunguoi_number.getText().toString();
-			if (moidichvuchonhieunguoi_contact.isChecked()) {
-				if (Conts.isVietTelNUmber(moidichvuchonhieunguoi_numberText, getActivity())) {
-					addSodt(moidichvuchonhieunguoi_numberText);
-				} else {
-					Conts.toast(getActivity(), String.format(getString(R.string.format_check_sdt), moidichvuchonhieunguoi_numberText));
-				}
+			String moidichvuchonhieunguoi_numberText = boardView.getString();
+			if (Conts.isVietTelNUmber(moidichvuchonhieunguoi_numberText, getActivity())) {
+				addSodt(moidichvuchonhieunguoi_numberText);
+				boardView.clear();
+				boardView.setVisibility(View.GONE);
+				moidichvuchonhieunguoi_number.setEnabled(true);
+			} else {
+				Conts.toast(getActivity(), String.format(getString(R.string.format_check_sdt), moidichvuchonhieunguoi_numberText));
 			}
 		}
 	};
@@ -74,17 +77,23 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.moidichvuchonhieunguoi, null);
 
-		moidichvuchonhieunguoi_contact = (CheckBox) view.findViewById(R.id.moidichvuchonhieunguoi_contact);
-		moidichvuchonhieunguoi_contact.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+		view.findViewById(R.id.LinearLayout01).setOnClickListener(null);
+
+		boardView = Conts.getView(view, R.id.keyBoardView1);
+		boardView.getKeEditText().setOnEditorActionListener(new OnEditorActionListener() {
+
 			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				moidichvuchonhieunguoi_number.setHint(moidichvuchonhieunguoi_contact.isChecked() ? R.string.nhapsodienthoai : R.string.timkiemdanhba);
-				moidichvuchonhieunguoi_number.setText("");
-				adaper.setTextSearch("");
-				adaper.notifyDataSetChanged();
-				moidichvuchonhieunguoi_number.setInputType(moidichvuchonhieunguoi_contact.isChecked() ? InputType.TYPE_CLASS_PHONE : InputType.TYPE_CLASS_TEXT);
+			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+				if (actionId == KeyEvent.KEYCODE_ENDCALL || event == null || KeyEvent.KEYCODE_CALL == actionId) {
+					Conts.hiddenKeyBoard(getActivity());
+					moidichvuchonhieunguoi_add_plusOnCLick.onClick(null);
+				}
+				return false;
 			}
 		});
+		boardView.addActionOnClickAdd(moidichvuchonhieunguoi_add_plusOnCLick);
+		moidichvuchonhieunguoi_contact = view.findViewById(R.id.moidichvuchonhieunguoi_contact);
+		moidichvuchonhieunguoi_contact.setOnClickListener(this);
 
 		moinhieudichvu_dialog_list_hor = (LinearLayout) view.findViewById(R.id.moinhieudichvu_dialog_list_hor);
 		moidichvuchonhieunguoi_number = (EditText) view.findViewById(R.id.search);
@@ -96,7 +105,6 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
 				if (actionId == KeyEvent.KEYCODE_ENDCALL || event == null || KeyEvent.KEYCODE_CALL == actionId) {
 					Conts.hiddenKeyBoard(getActivity());
-					moidichvuchonhieunguoi_add_plusOnCLick.onClick(null);
 				}
 				return false;
 			}
@@ -115,10 +123,10 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				if (!moidichvuchonhieunguoi_contact.isChecked()) {
-					adaper.setTextSearch(moidichvuchonhieunguoi_number.getText().toString().trim());
-					adaper.notifyDataSetChanged();
-				}
+				// if (!moidichvuchonhieunguoi_contact.isChecked()) {
+				adaper.setTextSearch(moidichvuchonhieunguoi_number.getText().toString().trim());
+				adaper.notifyDataSetChanged();
+				// }
 			}
 		});
 
@@ -143,9 +151,6 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 		if (mcursor != null && mcursor.getCount() >= 1) {
 			mcursor.moveToNext();
 			service_code = mcursor.getString(mcursor.getColumnIndex(DichVu.service_code));
-			// TODO
-			// header.setData(mcursor);
-
 			Conts.setTextViewCursor(view.findViewById(R.id.name), mcursor, DichVu.service_name);
 			Conts.setTextViewCursor(view.findViewById(R.id.gia), mcursor, DichVu.service_price);
 			mcursor.close();
@@ -265,7 +270,6 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 			moidichvuchonhieunguoi_numberText = moidichvuchonhieunguoi_numberText.substring(1, moidichvuchonhieunguoi_numberText.length());
 		}
 
-		// TODO
 		Bundle bundle = new Bundle();
 		bundle.putString("msisdn", moidichvuchonhieunguoi_numberText);
 		bundle.putString("service_code", service_code);
@@ -306,6 +310,17 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 			getActivity().onBackPressed();
 		} else if (v.getId() == R.id.moi) {
 			gotoLoiMoi(getArguments().getString(DichVu.ID));
+		} else if (v.getId() == R.id.moidichvuchonhieunguoi_contact) {
+
+			if (boardView.getVisibility() == View.VISIBLE) {
+				Conts.hiddenKeyBoard(getActivity());
+				boardView.setVisibility(View.GONE);
+				moidichvuchonhieunguoi_number.setEnabled(true);
+			} else {
+				Conts.showKeyBoard(boardView.getKeEditText());
+				boardView.setVisibility(View.VISIBLE);
+				moidichvuchonhieunguoi_number.setEnabled(false);
+			}
 		}
 	}
 
