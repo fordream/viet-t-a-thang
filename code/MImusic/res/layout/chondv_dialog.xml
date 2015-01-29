@@ -22,6 +22,7 @@
             android:padding="@dimen/dimen_12dp" >
 
             <EditText
+                 android:inputType="textNoSuggestions"
                 android:id="@+id/dichvu_edittext_search"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_28dp"

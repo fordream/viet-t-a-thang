@@ -32,6 +32,7 @@
             android:background="@drawable/a_est" >
 
             <EditText
+                 android:inputType="textNoSuggestions"
                 android:id="@+id/moinhieudichvu_dialog_search"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_35dp"

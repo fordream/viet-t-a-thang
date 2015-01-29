@@ -55,9 +55,8 @@
             android:name="vnp.com.mimusic.activity.RootMenuActivity"
             android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|fontScale"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize" 
-            
-            >
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"
+           >
         </activity>
 
         <provider

@@ -22,6 +22,7 @@
                 android:background="@drawable/new_dichvu_edit"
                 android:gravity="center"
                 android:hint="@string/timkiemdichvu"
+                android:inputType="textNoSuggestions"
                 android:paddingLeft="@dimen/dimen_10dp"
                 android:paddingRight="@dimen/dimen_10dp"
                 android:singleLine="true"
@@ -51,11 +52,11 @@
             android:id="@+id/dichvu_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scrollbars="none"
+            android:divider="@drawable/tranfer"
+            android:dividerHeight="0px"
             android:scrollbarThumbHorizontal="@drawable/tranfer"
             android:scrollbarThumbVertical="@drawable/tranfer"
-            android:divider="@drawable/tranfer"
-            android:dividerHeight="0px" >
+            android:scrollbars="none" >
         </vnp.com.mimusic.view.MusicListView>
     </LinearLayout>
 
