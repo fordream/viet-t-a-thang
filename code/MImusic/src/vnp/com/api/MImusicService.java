@@ -381,8 +381,6 @@ public class MImusicService extends Service {
 					MImusicService.this.execute(RequestMethod.POST, API.API_R011, bundle, new IContsCallBack() {
 						@Override
 						public void onSuscess(JSONObject response) {
-							Conts.toast(MImusicService.this, Conts.getString(response, "message"));
-							// LogUtils.e("onPostExecute", response.toString());
 							startDongBoDAnhBaXuong();
 						}
 
@@ -583,7 +581,7 @@ public class MImusicService extends Service {
 			}
 
 			contentValues.put(User.contact_id, contact_id);
-			
+
 			if (Conts.haveContact(phone, this)) {
 				getContentResolver().update(User.CONTENT_URI, contentValues, String.format("%s = '%s'", User.USER, phone), null);
 			} else {

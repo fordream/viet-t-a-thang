@@ -150,6 +150,7 @@ public abstract class NewHomeAdapter extends ArrayAdapter<NewHomeItem> {
 			 */
 
 			Conts.setTextView(findViewById(R.id.menu_right_item_tv_link), item.content);
+			Conts.getSDT(findViewById(R.id.menu_right_item_tv_link));
 			Conts.setTextView(findViewById(R.id.home_item_tv_content), item.content);
 			Conts.setTextView(findViewById(R.id.home_item_right_control_1_tv), getContext().getString(item.isDangky ? R.string.dangdung : R.string.dangky));
 
@@ -195,7 +196,6 @@ public abstract class NewHomeAdapter extends ArrayAdapter<NewHomeItem> {
 		public void onClick(View v) {
 			xemall(name);
 		}
-
 	}
 
 	private class DangKyClickListener implements OnClickListener {
