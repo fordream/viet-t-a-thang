@@ -531,7 +531,7 @@ public class Conts {
 		}
 
 		if (isSdt) {
-			if (con.startsWith("0")) {
+			if (con.startsWith("0") && con.length() >= 1) {
 				con = con.substring(1, con.length());
 			}
 		}
@@ -539,7 +539,7 @@ public class Conts {
 		for (int i = 0; i < full.length; i++) {
 			String str = full[i];
 
-			if (str.toLowerCase().contains(con.toLowerCase())) {
+			if (str.toLowerCase().trim().contains(con.toLowerCase().trim())) {
 				return true;
 			}
 		}
