@@ -253,6 +253,7 @@ public class RootMenuActivity extends FragmentActivity {
 	}
 
 	public void gotoMoiDvChoNhieuNguoi(String id) {
+		Conts.hiddenKeyBoard(this);
 		Intent intent = new Intent(this, RootMenuActivity.class);
 		intent.putExtra("type", Conts.MOIDICHVUCHONHIEUNGUOI);
 		intent.putExtra("id", id);
@@ -261,6 +262,8 @@ public class RootMenuActivity extends FragmentActivity {
 	}
 
 	public void gotoMoiDvChoNhieuNguoiFragment(String id) {
+		Conts.hiddenKeyBoard(this);
+		
 		MoiDvChoNhieuNguoiFragment choNhieuNguoiFragment = new MoiDvChoNhieuNguoiFragment();
 		Bundle args = new Bundle();
 		args.putString("id", id);
