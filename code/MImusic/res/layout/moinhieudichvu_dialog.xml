@@ -118,7 +118,10 @@
                     android:layout_height="@dimen/dimen_70dp"
                     android:layout_alignParentBottom="true"
                     android:layout_toLeftOf="@+id/moi"
-                    android:background="#ffffff" >
+                    android:background="#ffffff"
+                    android:scrollbarThumbHorizontal="@drawable/tranfer"
+                    android:scrollbarThumbVertical="@drawable/tranfer"
+                    android:scrollbars="none" >
 
                     <LinearLayout
                         android:id="@+id/moinhieudichvu_dialog_list_hor"
@@ -134,16 +137,14 @@
                     android:layout_width="@dimen/dimen_40dp"
                     android:layout_height="@dimen/dimen_22dp"
                     android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dimen_12dp"
+                    android:layout_marginRight="@dimen/dimen_12dp"
                     android:background="@drawable/xmoi"
                     android:gravity="center"
                     android:text="@string/moi"
                     android:textColor="@android:color/white"
-                    android:layout_marginLeft="@dimen/dimen_12dp"
-                    
-                    android:layout_marginRight="@dimen/dimen_12dp"
-                    android:layout_centerVertical="true"
                     android:textSize="@dimen/dimen_11dp" />
-
             </RelativeLayout>
         </LinearLayout>
     </RelativeLayout>

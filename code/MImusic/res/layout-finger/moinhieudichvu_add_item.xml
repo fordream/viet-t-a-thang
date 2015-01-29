@@ -10,6 +10,7 @@
         android:layout_width="@dimen/dimen_50dp"
         android:layout_height="@dimen/dimen_50dp"
         android:scaleType="fitXY"
+        android:padding="@dimen/dimen_5dp"
         android:src="@drawable/dvanybook" />
 
     <ImageView

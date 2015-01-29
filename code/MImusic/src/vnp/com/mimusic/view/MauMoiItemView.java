@@ -4,6 +4,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import vnp.com.mimusic.R;
+import vnp.com.mimusic.util.Conts;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -27,7 +28,8 @@ public class MauMoiItemView extends LinearLayout {
 	}
 
 	public void setBackgroundItemColor(int position) {
-		findViewById(R.id.maumoi_item_main).setBackgroundResource(position % 2 == 0 ? R.drawable.new_maumoi_1 : R.drawable.new_maumoi_2);
+		Conts.setTextView(findViewById(R.id.stt), "" + (position + 1));
+		//findViewById(R.id.maumoi_item_main).setBackgroundResource(position % 2 == 0 ? R.drawable.new_maumoi_1 : R.drawable.new_maumoi_2);
 	}
 
 	public void setData(JSONObject jsonObject) {

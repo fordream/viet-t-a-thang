@@ -98,7 +98,7 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 
 			String avatar = cursor.getString(cursor.getColumnIndex(User.AVATAR));
 
-			Conts.showImage(avatar, menu_left_img_avatar, R.drawable.no_avatar);
+			Conts.showImage(avatar, menu_left_img_avatar, R.drawable.new_no_avatar);
 			cursor.close();
 		}
 	}

@@ -36,7 +36,7 @@
                     android:id="@+id/menu_left_header"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen_220dp"
-                    android:background="@drawable/menu_left_header_bg"
+                    android:background="@drawable/cover_bg"
                     android:orientation="vertical" >
 
                     <ImageView
@@ -62,6 +62,7 @@
                                 android:layout_width="fill_parent"
                                 android:layout_height="fill_parent"
                                 android:layout_margin="2px"
+                                android:src="@drawable/new_no_avatar"
                                 android:scaleType="centerCrop" />
 
                             <ImageView

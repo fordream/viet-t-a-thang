@@ -10,33 +10,50 @@
         android:layout_height="wrap_content" >
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@+id/maumoi_item_checkbox"
-            android:orientation="vertical"
-            android:padding="@dimen/dimen_18dp" >
+            android:gravity="center"
+            android:orientation="horizontal" >
 
             <TextView
-                android:id="@+id/bangxephang_item_tv_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:id="@+id/stt"
+                android:layout_width="@dimen/dimen_23dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
                 android:singleLine="true"
-                android:text="Mẫu tin mời"
-                android:textColor="#475055"
-                android:textSize="@dimen/dimen_15dp"
+                android:text="1"
+                android:textColor="#336666"
+                android:textSize="@dimen/dimen_12dp"
                 android:textStyle="bold" />
 
-            <vnp.com.mimusic.view.VTTextView
-                android:id="@+id/bangxephang_item_tv_listdv"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/dimen_3dp"
-                android:layout_marginTop="@dimen/dimen_5dp"
-                android:lines="2"
-                android:maxLines="2"
-                android:text="Thuê bao XXXX mời bạn sử dụng dịch vụ imusiz(700 vnđ), Để sử dụng dịch vụ , soạn tin YES gửi 567, Để từ trối nhận bản tin lan tỏa từ thuê bao khác soạn NO gửi XXX. "
-                android:textColor="#353f45"
-                android:textSize="@dimen/dimen_11dp" />
+                android:orientation="vertical"
+                android:padding="@dimen/dimen_18dp" >
+
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/bangxephang_item_tv_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="Mẫu tin mời"
+                    android:textColor="#475055"
+                    android:textSize="@dimen/dimen_15dp"
+                    android:textStyle="bold" />
+
+                <vnp.com.mimusic.view.VTTextView
+                    android:id="@+id/bangxephang_item_tv_listdv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="3"
+                    android:maxLines="3"
+                    android:text="Thuê bao XXXX mời bạn sử dụng dịch vụ imusiz(700 vnđ), Để sử dụng dịch vụ , soạn tin YES gửi 567, Để từ trối nhận bản tin lan tỏa từ thuê bao khác soạn NO gửi XXX. "
+                    android:textColor="#353f45"
+                    android:textSize="@dimen/dimen_11dp" />
+            </LinearLayout>
         </LinearLayout>
 
         <RadioButton
@@ -45,9 +62,13 @@
             android:layout_height="@dimen/dimen_20dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/dimen_10dp"
             android:background="@drawable/new_maumoi_selected"
             android:button="@null" />
     </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#cccccc" />
 
 </LinearLayout>

@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.CursorAdapter;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public abstract class MoiNhieuDichVuAdapter extends CursorAdapter {
 	private List<String> listSelect = new ArrayList<String>();
@@ -83,6 +84,9 @@ public abstract class MoiNhieuDichVuAdapter extends CursorAdapter {
 		main.setVisibility(needShow ? View.VISIBLE : View.GONE);
 
 		((MoiNhieuDichVuItemView) convertView).moinhieudichvu_item_tv_name.setText(name);
+
+		Conts.setTextViewCursor(Conts.getView(convertView, R.id.content), cursor, DichVu.service_content);
+		
 		((MoiNhieuDichVuItemView) convertView).moinhieudichvu_item_checkbox.setOnCheckedChangeListener(null);
 		((MoiNhieuDichVuItemView) convertView).moinhieudichvu_item_checkbox.setChecked(listSelect.contains(_id));
 		((MoiNhieuDichVuItemView) convertView).moinhieudichvu_item_checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

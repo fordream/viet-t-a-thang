@@ -10,7 +10,7 @@
         android:id="@+id/menu_left_header"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_285dp"
-        android:background="@drawable/menu_left_header_bg"
+        android:background="@drawable/cover_bg"
         android:orientation="vertical" >
 
         <ImageView
