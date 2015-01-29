@@ -49,12 +49,10 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 	}
 
 	private ListView moi_list;
-	private View main_mm;
 	private LinearLayout moinhieudichvu_dialog_list_hor;
 	private EditText moidichvuchonhieunguoi_number;
 	private MoiDvChoNhieuNguoiAdaper adaper;
 	private String service_code = "";
-	private View moidichvuchonhieunguoi_add_plus;
 	private CheckBox moidichvuchonhieunguoi_contact;
 
 	private OnClickListener moidichvuchonhieunguoi_add_plusOnCLick = new OnClickListener() {
@@ -71,32 +69,25 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 			}
 		}
 	};
-	private ChiTietDichVuNoFeatureView headerOfList;
-	private ChiTietDichVuNoFeatureView header;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.moidichvuchonhieunguoi, null);
-		main_mm = view.findViewById(R.id.main_mm);
-		moidichvuchonhieunguoi_add_plus = view.findViewById(R.id.moidichvuchonhieunguoi_add_plus);
 
-		moidichvuchonhieunguoi_add_plus.setOnClickListener(moidichvuchonhieunguoi_add_plusOnCLick);
 		moidichvuchonhieunguoi_contact = (CheckBox) view.findViewById(R.id.moidichvuchonhieunguoi_contact);
 		moidichvuchonhieunguoi_contact.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				moidichvuchonhieunguoi_add_plus.setVisibility(moidichvuchonhieunguoi_contact.isChecked() ? View.VISIBLE : View.GONE);
 				moidichvuchonhieunguoi_number.setHint(moidichvuchonhieunguoi_contact.isChecked() ? R.string.nhapsodienthoai : R.string.timkiemdanhba);
 				moidichvuchonhieunguoi_number.setText("");
 				adaper.setTextSearch("");
 				adaper.notifyDataSetChanged();
-
 				moidichvuchonhieunguoi_number.setInputType(moidichvuchonhieunguoi_contact.isChecked() ? InputType.TYPE_CLASS_PHONE : InputType.TYPE_CLASS_TEXT);
 			}
 		});
 
 		moinhieudichvu_dialog_list_hor = (LinearLayout) view.findViewById(R.id.moinhieudichvu_dialog_list_hor);
-		moidichvuchonhieunguoi_number = (EditText) view.findViewById(R.id.moidichvuchonhieunguoi_number);
+		moidichvuchonhieunguoi_number = (EditText) view.findViewById(R.id.search);
 
 		// moidichvuchonhieunguoi_number ime
 		moidichvuchonhieunguoi_number.setOnEditorActionListener(new OnEditorActionListener() {
@@ -131,33 +122,14 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 			}
 		});
 
-		HeaderView chitiettintuc_headerview = (HeaderView) view.findViewById(R.id.moidichvuchonhieunguoi_headerview);
-		chitiettintuc_headerview.setTextHeader(R.string.moi);
-		chitiettintuc_headerview.setButtonLeftImage(true, R.drawable.btn_back);
-		chitiettintuc_headerview.setButtonRightImage(false, R.drawable.btn_back);
-		chitiettintuc_headerview.setButtonMoi(true);
-		chitiettintuc_headerview.findViewById(R.id.header_btn_right_moi).setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				gotoLoiMoi(getArguments().getString(DichVu.ID));
-			}
-		});
-		chitiettintuc_headerview.findViewById(R.id.header_btn_left).setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				getActivity().onBackPressed();
-			}
-		});
+		view.findViewById(R.id.moi).setOnClickListener(this);
+		view.findViewById(R.id.back).setOnClickListener(this);
 
-		moi_list = (ListView) view.findViewById(R.id.moidichvuchonhieunguoi_list);
+		moi_list = (ListView) view.findViewById(R.id.list);
 
 		/**
 		 * show data
 		 */
-		header = (ChiTietDichVuNoFeatureView) view.findViewById(R.id.moidichvuchonhieunguoi_chiteitdichvunofeatureview);
-		headerOfList = new ChiTietDichVuNoFeatureView(getActivity());
-		headerOfList.showFooter();
-		moi_list.addHeaderView(headerOfList);
 
 		final String id = getArguments().getString(DichVu.ID);
 		String selection = DichVu.ID + "='" + id + "'";
@@ -171,23 +143,13 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 		if (mcursor != null && mcursor.getCount() >= 1) {
 			mcursor.moveToNext();
 			service_code = mcursor.getString(mcursor.getColumnIndex(DichVu.service_code));
+			// TODO
+			// header.setData(mcursor);
 
-			header.setData(mcursor);
-			headerOfList.setData(mcursor);
+			Conts.setTextViewCursor(view.findViewById(R.id.name), mcursor, DichVu.service_name);
+			Conts.setTextViewCursor(view.findViewById(R.id.gia), mcursor, DichVu.service_price);
 			mcursor.close();
 		}
-		headerOfList.setBackground(android.R.color.white);
-		headerOfList.useValue2(true);
-		headerOfList.setOnClickListener(null);
-		//headerOfList.findViewById(R.id.chitietdichvu_no_feature_dangky).setVisibility(View.INVISIBLE);
-		//headerOfList.findViewById(R.id.chitietdichvu_no_feature_moi).setVisibility(View.INVISIBLE);
-
-		headerOfList.center();
-		header.setBackground(android.R.color.white);
-		header.useValue2(true);
-		header.setOnClickListener(null);
-		//header.findViewById(R.id.chitietdichvu_no_feature_dangky).setVisibility(View.INVISIBLE);
-		//header.findViewById(R.id.chitietdichvu_no_feature_moi).setVisibility(View.INVISIBLE);
 
 		moi_list.setOnItemClickListener(this);
 
@@ -293,19 +255,6 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 		};
 
 		moi_list.setAdapter(adaper);
-		moi_list.setOnScrollListener(new OnScrollListener() {
-
-			@Override
-			public void onScrollStateChanged(AbsListView view, int scrollState) {
-
-			}
-
-			@Override
-			public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-				monScroll();
-			}
-
-		});
 		return view;
 	}
 
@@ -348,33 +297,16 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 				onError("");
 			}
 		});
-		// adaper.addSdt(moidichvuchonhieunguoi_numberText, getActivity());
 
-	}
-
-	int currentTop = 0;
-
-	private void monScroll() {
-		int top = headerOfList.getTop();
-		int heightt = header.getHeight();
-		int next = 0;
-		if (top < 0) {
-			if (top + heightt <= 0) {
-				next = -heightt;
-			} else {
-				next = top;
-			}
-		} else if (top > 0) {
-			next = top;
-		}
-		currentTop = next;
-		RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) main_mm.getLayoutParams();
-		params.setMargins(0, next, 0, 0);
-		main_mm.setLayoutParams(params);
 	}
 
 	@Override
 	public void onClick(View v) {
+		if (v.getId() == R.id.back) {
+			getActivity().onBackPressed();
+		} else if (v.getId() == R.id.moi) {
+			gotoLoiMoi(getArguments().getString(DichVu.ID));
+		}
 	}
 
 	private void gotoLoiMoi(String id) {
