@@ -30,6 +30,6 @@ public class TextViewRegular extends TextView {
 	}
 
 	private void init() {
-		FontsUtils.getInstance().setTextFontsRobotoMedium(this);
+		FontsUtils.getInstance().setTextFontsRobotoRegular(this);
 	}
 }

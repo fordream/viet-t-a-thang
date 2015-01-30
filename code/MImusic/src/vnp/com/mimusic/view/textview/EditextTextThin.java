@@ -31,6 +31,6 @@ public class EditextTextThin extends EditText {
 	}
 
 	private void init() {
-		FontsUtils.getInstance().setTextFontsRobotoMedium(this);
+		FontsUtils.getInstance().setTextFontsRobotoThin(this);
 	}
 }

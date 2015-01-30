@@ -30,6 +30,6 @@ public class TextViewThin extends TextView {
 	}
 
 	private void init() {
-		FontsUtils.getInstance().setTextFontsRobotoMedium(this);
+		FontsUtils.getInstance().setTextFontsRobotoThin(this);
 	}
 }

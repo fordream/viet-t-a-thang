@@ -31,6 +31,6 @@ public class TextViewMedium extends TextView {
 
 	private void init() {
 
-		FontsUtils.getInstance().setTextFontsRobotoRegular(this);
+		FontsUtils.getInstance().setTextFontsRobotoMedium(this);
 	}
 }

@@ -31,6 +31,6 @@ public class ButtonRegular extends Button {
 	}
 
 	private void init() {
-		FontsUtils.getInstance().setTextFontsRobotoMedium(this);
+		FontsUtils.getInstance().setTextFontsRobotoRegular(this);
 	}
 }
