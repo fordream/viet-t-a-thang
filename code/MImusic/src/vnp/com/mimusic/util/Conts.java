@@ -406,6 +406,9 @@ public class Conts {
 			contentValues.put("btn_left_close", true);
 			contentValues.put("name", context.getString(R.string.thongbao));
 			contentValues.put("content", message);
+			
+			contentValues.put("typeThongBao", true);
+			
 			DangKyDialog dangKyDialog = new DangKyDialog(context, contentValues);
 			dangKyDialog.show();
 		} catch (Exception exception) {

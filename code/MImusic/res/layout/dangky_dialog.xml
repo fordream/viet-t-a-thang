@@ -17,7 +17,7 @@
             android:id="@+id/dangky_dialog_main"
             android:layout_width="@dimen/dimen_250dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_dangky"
+            android:background="@drawable/dialog_bg"
             android:orientation="vertical" >
 
             <RelativeLayout

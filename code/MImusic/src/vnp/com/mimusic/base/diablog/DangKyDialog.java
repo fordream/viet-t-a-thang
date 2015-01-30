@@ -48,6 +48,15 @@ public class DangKyDialog extends BaseAdialog implements android.view.View.OnCli
 		}
 		findViewById(R.id.dangky_dialog_cancel).setOnClickListener(this);
 		findViewById(R.id.dangky_dialog_register).setOnClickListener(this);
+
+		findViewById(R.id.thongbaox).setOnClickListener(this);
+		if (contentValues.containsKey("typeThongBao")) {
+			boolean typeThongBao = contentValues.getAsBoolean("typeThongBao");
+			if (typeThongBao) {
+				findViewById(R.id.thongbaox).setVisibility(View.VISIBLE);
+				findViewById(R.id.thongbaofooter).setVisibility(View.GONE);
+			}
+		}
 	}
 
 	public void mDismiss() {
@@ -85,7 +94,9 @@ public class DangKyDialog extends BaseAdialog implements android.view.View.OnCli
 
 	@Override
 	public void onClick(View v) {
-		if (v.getId() == R.id.dangky_dialog_cancel) {
+		if (v.getId() == R.id.thongbaox) {
+			mDismiss();
+		} else if (v.getId() == R.id.dangky_dialog_cancel) {
 			mDismiss();
 		} else if (v.getId() == R.id.dangky_dialog_register) {
 			// call to server
