@@ -39,7 +39,7 @@
             android:gravity="center"
             android:padding="@dimen/dimen_0dp"
             android:text="Số lượng"
-            android:textSize="@dimen/dimen_15dp"
+            android:textSize="@dimen/dimen_16dp"
             android:textStyle="bold" />
 
         <vnp.com.mimusic.view.BangXepHangHeaderRadioButton
@@ -51,7 +51,7 @@
             android:gravity="center"
             android:padding="@dimen/dimen_0dp"
             android:text="Doanh thu"
-            android:textSize="@dimen/dimen_15dp"
+            android:textSize="@dimen/dimen_16dp"
             android:textStyle="bold" />
     </RadioGroup>
 

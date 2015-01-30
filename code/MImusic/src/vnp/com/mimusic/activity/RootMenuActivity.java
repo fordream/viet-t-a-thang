@@ -347,6 +347,7 @@ public class RootMenuActivity extends FragmentActivity {
 	 * @param service_codes
 	 */
 	public void gotoLoiMoi(String sdt, String service_code, String service_codes) {
+		Conts.hiddenKeyBoard(this);
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
 		MauMoiFragment mauMoiFragment = new MauMoiFragment();
