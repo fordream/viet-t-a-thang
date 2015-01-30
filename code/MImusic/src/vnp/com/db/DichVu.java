@@ -21,6 +21,7 @@ public class DichVu {
 	public static final String _ID = "_id";
 	public static final String ID = "id";
 	public static final String service_name = "service_name";
+	public static final String service_name_eng = "service_name_eng";
 	public static final String service_icon = "service_icon";
 	public static final String service_code = "service_code";
 	public static final String service_content = "service_content";

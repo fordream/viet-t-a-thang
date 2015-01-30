@@ -23,6 +23,7 @@ public class User {
 	public static final String STATUS = "status";
 	public static final String NAME = "name";
 	public static final String NAME_CONTACT = "name_contact";
+	public static final String NAME_CONTACT_ENG = "name_contact_ENG";
 	public static final String EMAIL = "email";
 	public static final String AVATAR = "avatar";
 	public static final String LISTIDDVSUDUNG = "listiddvsudung";
