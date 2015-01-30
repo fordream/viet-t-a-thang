@@ -4,8 +4,10 @@ import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.text.Normalizer;
 import java.util.Set;
 import java.util.StringTokenizer;
+import java.util.regex.Pattern;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -55,6 +57,26 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class Conts {
+	public static final class StringConnvert {
+		public static final String convertVNToAlpha(String str) {
+			if (isBlank(str)) {
+				return str;
+			}
+			try {
+				String temp = Normalizer.normalize(str, Normalizer.Form.NFD);
+				Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+				// D D d d
+				return pattern.matcher(temp).replaceAll("").replaceAll("Đ", "D").replaceAll("đ", "d").toLowerCase();
+			} catch (Exception exception) {
+				return str;
+			}
+		}
+
+		private static boolean isBlank(String str) {
+			return str == null || (str != null && str.trim().equals(""));
+		}
+	}
+
 	public final static String SERVER = "https://125.235.40.85/api.php/";
 	// :443
 	public final static String SERVERS = "https://125.235.40.85/api.php/";

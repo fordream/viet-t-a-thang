@@ -37,7 +37,7 @@ public class DichVu {
 		builder.append("(");
 		builder.append(_ID).append(" INTEGER PRIMARY KEY AUTOINCREMENT").append(",");
 		String[] colums = new String[] {//
-		ID, service_name, service_icon, service_code, service_content, service_price, service_status //
+		ID, service_name, service_icon, service_code, service_content, service_price, service_status ,service_name_eng//
 		};//
 
 		for (int i = 0; i < colums.length; i++) {

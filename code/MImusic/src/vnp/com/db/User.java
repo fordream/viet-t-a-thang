@@ -56,7 +56,7 @@ public class User {
 		String[] colums = new String[] {//
 		nickname, fullname, exchange_number, exchange_number_month, poundage, poundage_month, TOKEN, KEYREFRESH,
 
-		USER, PASSWORD, STATUS, COVER, ID, birthday, address, NAME, NAME_CONTACT, contact_id,//
+		USER, PASSWORD, STATUS, COVER, NAME_CONTACT_ENG,ID, birthday, address, NAME, NAME_CONTACT, contact_id,//
 				EMAIL, AVATAR, LISTIDDVSUDUNG, SOLUONG, DOANHTHU, LISTIDUSERDAMOI, LISTIDTENDVSUDUNG //
 		};
 		for (int i = 0; i < colums.length; i++) {

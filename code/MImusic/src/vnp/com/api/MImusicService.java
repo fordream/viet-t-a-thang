@@ -571,6 +571,8 @@ public class MImusicService extends Service {
 			ContentValues contentValues = new ContentValues();
 			contentValues.put(User.USER, phone);
 			contentValues.put(User.NAME_CONTACT, name);
+			
+			contentValues.put(User.NAME_CONTACT_ENG, Conts.StringConnvert.convertVNToAlpha(name));
 			String contact_id = "";
 			if (avatarHashmap.containsKey(phone)) {
 				contact_id = avatarHashmap.get(phone);
@@ -602,6 +604,7 @@ public class MImusicService extends Service {
 				ContentValues contentValues = new ContentValues();
 				contentValues.put(User.USER, phone);
 				contentValues.put(User.NAME_CONTACT, name);
+				contentValues.put(User.NAME_CONTACT_ENG, Conts.StringConnvert.convertVNToAlpha(name));
 				contentValues.put(User.STATUS, user.equals(phone) ? "1" : "0");
 
 				String contact_id = "";
@@ -665,6 +668,7 @@ public class MImusicService extends Service {
 				ContentValues contentValues = new ContentValues();
 				contentValues.put(DichVu.ID, Conts.getString(jsonObject, DichVu.ID));
 				contentValues.put(DichVu.service_name, Conts.getString(jsonObject, DichVu.service_name));
+				contentValues.put(DichVu.service_name_eng, Conts.StringConnvert.convertVNToAlpha(Conts.getString(jsonObject, DichVu.service_name)));
 				contentValues.put(DichVu.service_code, Conts.getString(jsonObject, DichVu.service_code));
 				contentValues.put(DichVu.service_icon, Conts.getString(jsonObject, DichVu.service_icon));
 				contentValues.put(DichVu.service_content, Conts.getString(jsonObject, DichVu.service_content));
