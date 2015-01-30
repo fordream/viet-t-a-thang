@@ -34,7 +34,7 @@
                 android:layout_toRightOf="@+id/menu_right_item_img_icon"
                 android:orientation="vertical" >
 
-                <TextView
+                <vnp.com.mimusic.view.textview.TextViewMedium
                     android:id="@+id/menu_right_item_tv_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
                     android:textSize="@dimen/dimen_15dp"
                     android:textStyle="bold" />
 
-                <TextView
+                <vnp.com.mimusic.view.textview.TextViewLight
                     android:id="@+id/menu_right_item_tv_link"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

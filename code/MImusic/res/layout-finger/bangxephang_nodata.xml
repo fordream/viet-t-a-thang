@@ -7,7 +7,7 @@
     android:orientation="horizontal"
     android:padding="@dimen/dimen_10dp" >
 
-    <TextView
+    <vnp.com.mimusic.view.textview.TextViewLight
         android:id="@+id/no_data_message"
         android:gravity="center"
         android:layout_width="match_parent"

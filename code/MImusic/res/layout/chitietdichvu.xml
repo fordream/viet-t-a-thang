@@ -46,7 +46,7 @@
                 android:paddingLeft="@dimen/dimen_15dp"
                 android:paddingRight="@dimen/dimen_15dp" >
 
-                <TextView
+                <vnp.com.mimusic.view.textview.TextViewMedium
                     android:id="@+id/home_item_tv_name"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen_50dp"
@@ -58,7 +58,7 @@
                     android:textStyle="bold" />
                 <!-- android:text="@string/tinhnangdichvuexample" -->
 
-                <vnp.com.mimusic.view.VTTextView
+                <vnp.com.mimusic.view.textview.TextViewLightHeight
                     android:id="@+id/mchitiet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

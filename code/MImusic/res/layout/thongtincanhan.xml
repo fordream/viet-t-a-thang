@@ -75,7 +75,7 @@
                         android:background="@drawable/avatar_bg" />
                 </RelativeLayout>
 
-                <TextView
+                <vnp.com.mimusic.view.textview.TextViewLight
                     android:id="@+id/menu_left_tv_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -105,7 +105,7 @@
                     android:paddingRight="@dimen/dimen_12dp"
                     android:paddingTop="@dimen/dimen_12dp" >
 
-                    <TextView
+                    <vnp.com.mimusic.view.textview.TextViewMedium
                         android:id="@+id/text_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -125,14 +125,14 @@
                         android:layout_height="@dimen/dimen_40dp"
                         android:gravity="center" >
 
-                        <TextView
+                        <vnp.com.mimusic.view.textview.TextViewLight
                             android:layout_width="@dimen/dimen_80dp"
                             android:layout_height="wrap_content"
                             android:text="@string/bidanh"
                             android:textColor="#475055"
                             android:textSize="@dimen/dimen_11dp" />
 
-                        <TextView
+                        <vnp.com.mimusic.view.textview.TextViewMedium
                             android:id="@+id/text_bidanh"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -153,14 +153,14 @@
                         android:layout_height="@dimen/dimen_40dp"
                         android:gravity="center" >
 
-                        <TextView
+                        <vnp.com.mimusic.view.textview.TextViewLight
                             android:layout_width="@dimen/dimen_80dp"
                             android:layout_height="wrap_content"
                             android:text="@string/ngaysinh"
                             android:textColor="#475055"
                             android:textSize="@dimen/dimen_11dp" />
 
-                        <TextView
+                        <vnp.com.mimusic.view.textview.TextViewMedium
                             android:id="@+id/text_ngaysinh"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -181,14 +181,14 @@
                         android:layout_height="@dimen/dimen_40dp"
                         android:gravity="center" >
 
-                        <TextView
+                        <vnp.com.mimusic.view.textview.TextViewLight
                             android:layout_width="@dimen/dimen_80dp"
                             android:layout_height="wrap_content"
                             android:text="@string/diachi"
                             android:textColor="#475055"
                             android:textSize="@dimen/dimen_11dp" />
 
-                        <TextView
+                        <vnp.com.mimusic.view.textview.TextViewMedium
                             android:id="@+id/text_diachi"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -209,7 +209,7 @@
                 android:paddingLeft="@dimen/dimen_26dp"
                 android:paddingRight="@dimen/dimen_26dp" >
 
-                <TextView
+                <vnp.com.mimusic.view.textview.TextViewMedium
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/dimen_12dp"
@@ -229,7 +229,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen_44dp" >
 
-                    <TextView
+                    <vnp.com.mimusic.view.textview.TextViewLight
                         android:id="@+id/bangxephang_item_soluong"
                         android:layout_width="@dimen/dimen_200dp"
                         android:layout_height="match_parent"
@@ -238,7 +238,7 @@
                         android:textColor="#475055"
                         android:textSize="@dimen/dimen_11dp" />
 
-                    <TextView
+                    <vnp.com.mimusic.view.textview.TextViewMedium
                         android:id="@+id/text_sogiaodichthanhcongtrongthang"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -259,7 +259,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen_40dp" >
 
-                    <TextView
+                    <vnp.com.mimusic.view.textview.TextViewLight
                         android:layout_width="@dimen/dimen_200dp"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
@@ -267,7 +267,7 @@
                         android:textColor="#475055"
                         android:textSize="@dimen/dimen_11dp" />
 
-                    <TextView
+                    <vnp.com.mimusic.view.textview.TextViewMedium
                         android:id="@+id/text_sogiaodichthanhcong"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -288,7 +288,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen_40dp" >
 
-                    <TextView
+                    <vnp.com.mimusic.view.textview.TextViewLight
                         android:layout_width="@dimen/dimen_200dp"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
@@ -296,7 +296,7 @@
                         android:textColor="#475055"
                         android:textSize="@dimen/dimen_11dp" />
 
-                    <TextView
+                    <vnp.com.mimusic.view.textview.TextViewMedium
                         android:id="@+id/text_sotienhoahongtrongthang"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -317,7 +317,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen_40dp" >
 
-                    <TextView
+                    <vnp.com.mimusic.view.textview.TextViewLight
                         android:layout_width="@dimen/dimen_200dp"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
@@ -325,7 +325,7 @@
                         android:textColor="#475055"
                         android:textSize="@dimen/dimen_11dp" />
 
-                    <TextView
+                    <vnp.com.mimusic.view.textview.TextViewMedium
                         android:id="@+id/text_sotienhoahong"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"

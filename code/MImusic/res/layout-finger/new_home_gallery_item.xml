@@ -30,7 +30,7 @@
             android:layout_height="@dimen/dimen_50dp"
             android:orientation="vertical" >
 
-            <TextView
+            <vnp.com.mimusic.view.textview.TextViewRegular
                 android:id="@+id/name"
                 android:gravity="center"
                 android:layout_width="match_parent"

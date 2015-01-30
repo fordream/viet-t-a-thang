@@ -53,7 +53,7 @@
                 android:background="@drawable/avatar_bg" />
         </RelativeLayout>
 
-        <TextView
+        <vnp.com.mimusic.view.textview.TextViewLight
             android:id="@+id/menu_left_tv_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -17,7 +17,7 @@
             android:layout_marginRight="@dimen/dimen_11dp"
             android:background="@drawable/tintuckhac_point" />
 
-        <vnp.com.mimusic.view.VTTextView
+        <vnp.com.mimusic.view.textview.TextViewLightHeight
             android:id="@+id/tintuckhac_item_tv_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

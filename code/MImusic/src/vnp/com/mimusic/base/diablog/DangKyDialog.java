@@ -44,7 +44,7 @@ public class DangKyDialog extends BaseAdialog implements android.view.View.OnCli
 		}
 		type = contentValues.getAsString("type");
 		if (btn_right != null && !btn_right.trim().equals("")) {
-			((Button) findViewById(R.id.dangky_dialog_register)).setText(btn_right);
+			((TextView) findViewById(R.id.dangky_dialog_register)).setText(btn_right);
 		}
 		findViewById(R.id.dangky_dialog_cancel).setOnClickListener(this);
 		findViewById(R.id.dangky_dialog_register).setOnClickListener(this);

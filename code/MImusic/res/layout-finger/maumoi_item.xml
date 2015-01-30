@@ -18,7 +18,7 @@
             android:gravity="center"
             android:orientation="horizontal" >
 
-            <TextView
+            <vnp.com.mimusic.view.textview.TextViewMedium	
                 android:id="@+id/stt"
                 android:layout_width="@dimen/dimen_23dp"
                 android:layout_height="match_parent"
@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical" >
 
-                <TextView
+                <vnp.com.mimusic.view.textview.TextViewMedium
                     android:id="@+id/bangxephang_item_tv_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
                     android:textStyle="bold"
                     android:visibility="gone" />
 
-                <vnp.com.mimusic.view.VTTextView
+                <vnp.com.mimusic.view.textview.TextViewLightHeight
                     android:id="@+id/bangxephang_item_tv_listdv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

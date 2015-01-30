@@ -36,7 +36,7 @@
                 android:layout_toRightOf="@+id/moinhieudichvu_item_icon"
                 android:orientation="vertical" >
 
-                <TextView
+                <vnp.com.mimusic.view.textview.TextViewMedium
                     android:id="@+id/moinhieudichvu_item_tv_name"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -46,7 +46,7 @@
                     android:textSize="@dimen/dimen_15dp"
                     android:textStyle="bold" />
 
-                <vnp.com.mimusic.view.VTTextView
+                <vnp.com.mimusic.view.textview.TextViewLightHeight
                     android:id="@+id/content"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"

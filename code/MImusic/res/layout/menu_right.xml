@@ -34,7 +34,7 @@
             android:singleLine="true"
             android:textSize="@dimen/dimen_13dp" >
 
-            <EditText
+            <vnp.com.mimusic.view.textview.EditextTextThin
                 android:id="@+id/menu_right_editext"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_28dp"
@@ -48,7 +48,7 @@
                 android:textColor="@android:color/black"
                 android:textColorHint="#336666"
                 android:textSize="@dimen/dimen_12dp" >
-            </EditText>
+            </vnp.com.mimusic.view.textview.EditextTextThin>
 
             <ImageView
                 android:id="@+id/menu_right_img_search_click"

@@ -27,7 +27,7 @@
         android:scaleType="fitXY"
         android:src="@drawable/header_home_2" />
 
-    <TextView
+    <vnp.com.mimusic.view.textview.TextViewMedium
         android:id="@+id/header_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

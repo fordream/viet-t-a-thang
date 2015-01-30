@@ -46,7 +46,7 @@
                         android:scaleType="fitXY"
                         android:src="@drawable/lsbh_dangba1" />
 
-                    <TextView
+                    <vnp.com.mimusic.view.textview.TextViewLight
                         android:id="@+id/TextView01"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -57,7 +57,7 @@
                         android:textSize="@dimen/dimen_13dp" />
                 </LinearLayout>
 
-                <EditText
+                <vnp.com.mimusic.view.textview.EditextTextThin
                     android:id="@+id/lsbh_sdt"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -79,7 +79,7 @@
                 android:layout_marginBottom="@dimen/dimen_25dp"
                 android:layout_marginTop="@dimen/dimen_25dp" >
 
-                <TextView
+                <vnp.com.mimusic.view.textview.TextViewThin
                     android:id="@+id/lsbt_tu"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -107,7 +107,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_32dp" >
 
-                <TextView
+                <vnp.com.mimusic.view.textview.TextViewThin
                     android:id="@+id/lsbt_den"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -137,7 +137,7 @@
                 android:layout_marginBottom="@dimen/dimen_25dp"
                 android:layout_marginTop="@dimen/dimen_25dp" >
 
-                <TextView
+                <vnp.com.mimusic.view.textview.TextViewThin
                     android:id="@+id/lsbt_dichvu"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -166,7 +166,7 @@
                 android:layout_height="@dimen/dimen_32dp"
                 android:layout_marginBottom="@dimen/dimen_35dp" >
 
-                <TextView
+                <vnp.com.mimusic.view.textview.TextViewThin
                     android:id="@+id/lsbt_trangthai"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -197,7 +197,7 @@
                 android:background="@drawable/lsbh_traccuu"
                 android:gravity="center" >
 
-                <TextView
+                <vnp.com.mimusic.view.textview.TextViewRegular
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"

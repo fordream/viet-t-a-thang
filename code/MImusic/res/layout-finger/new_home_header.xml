@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dimen_12dp" >
 
-            <TextView
+            <vnp.com.mimusic.view.textview.TextViewRegular
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -28,7 +28,7 @@
                 android:textSize="@dimen/dimen_16dp"
                />
 
-            <TextView
+            <vnp.com.mimusic.view.textview.TextViewLight
                 android:id="@+id/dichvubanchay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

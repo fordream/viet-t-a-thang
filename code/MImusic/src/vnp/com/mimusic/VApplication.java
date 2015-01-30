@@ -1,30 +1,23 @@
 package vnp.com.mimusic;
 
-import org.json.JSONObject;
-
 import vnp.com.api.MImusicBin;
 import vnp.com.api.MImusicService;
 import vnp.com.api.RestClient.RequestMethod;
-import vnp.com.db.User;
-import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
-import vnp.com.mimusic.util.Conts.IContsCallBackData;
+import vnp.com.mimusic.util.FontsUtils;
 import android.app.Application;
 import android.content.ComponentName;
-import android.content.ContentResolver;
-import android.content.ContentValues;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.provider.ContactsContract;
 
 public class VApplication extends Application {
 
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		FontsUtils.getInstance().init(this);
 	}
 
 	/**
@@ -190,47 +183,47 @@ public class VApplication extends Application {
 		}
 	}
 
-//	public void saveRecomend(final JSONObject response) {
-//		if (mImusicService == null) {
-//			Intent service = new Intent(MImusicService.ACTION);
-//			bindService(service, new ServiceConnection() {
-//
-//				@Override
-//				public void onServiceDisconnected(ComponentName name) {
-//					mImusicService = null;
-//				}
-//
-//				@Override
-//				public void onServiceConnected(ComponentName name, IBinder service) {
-//					mImusicService = ((MImusicBin) service).getService();
-//					mImusicService.saveRecomend(response);
-//				}
-//			}, BIND_AUTO_CREATE);
-//		} else {
-//			mImusicService.saveRecomend(response);
-//		}
-//	}
+	// public void saveRecomend(final JSONObject response) {
+	// if (mImusicService == null) {
+	// Intent service = new Intent(MImusicService.ACTION);
+	// bindService(service, new ServiceConnection() {
+	//
+	// @Override
+	// public void onServiceDisconnected(ComponentName name) {
+	// mImusicService = null;
+	// }
+	//
+	// @Override
+	// public void onServiceConnected(ComponentName name, IBinder service) {
+	// mImusicService = ((MImusicBin) service).getService();
+	// mImusicService.saveRecomend(response);
+	// }
+	// }, BIND_AUTO_CREATE);
+	// } else {
+	// mImusicService.saveRecomend(response);
+	// }
+	// }
 
-//	public void getReommend(final IContsCallBackData contsCallBackData) {
-//		if (mImusicService == null) {
-//			Intent service = new Intent(MImusicService.ACTION);
-//			bindService(service, new ServiceConnection() {
-//
-//				@Override
-//				public void onServiceDisconnected(ComponentName name) {
-//					mImusicService = null;
-//				}
-//
-//				@Override
-//				public void onServiceConnected(ComponentName name, IBinder service) {
-//					mImusicService = ((MImusicBin) service).getService();
-//					contsCallBackData.onCallBack(mImusicService.getRecommend());
-//				}
-//			}, BIND_AUTO_CREATE);
-//		} else {
-//			contsCallBackData.onCallBack(mImusicService.getRecommend());
-//		}
-//	}
+	// public void getReommend(final IContsCallBackData contsCallBackData) {
+	// if (mImusicService == null) {
+	// Intent service = new Intent(MImusicService.ACTION);
+	// bindService(service, new ServiceConnection() {
+	//
+	// @Override
+	// public void onServiceDisconnected(ComponentName name) {
+	// mImusicService = null;
+	// }
+	//
+	// @Override
+	// public void onServiceConnected(ComponentName name, IBinder service) {
+	// mImusicService = ((MImusicBin) service).getService();
+	// contsCallBackData.onCallBack(mImusicService.getRecommend());
+	// }
+	// }, BIND_AUTO_CREATE);
+	// } else {
+	// contsCallBackData.onCallBack(mImusicService.getRecommend());
+	// }
+	// }
 
 	public void executeUpdateHttpsAvatar(final String path, final IContsCallBack iContsCallBack) {
 		if (mImusicService == null) {
@@ -250,7 +243,7 @@ public class VApplication extends Application {
 			}, BIND_AUTO_CREATE);
 		} else {
 			mImusicService.executeUpdateHttpsAvatar(path, iContsCallBack);
-		}		
+		}
 	}
 
 	/**

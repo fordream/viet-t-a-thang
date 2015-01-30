@@ -4,6 +4,7 @@ import vnp.com.db.User;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.adapter.MenuLeftAdaper;
 import vnp.com.mimusic.util.Conts;
+import vnp.com.mimusic.util.FontsUtils;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;

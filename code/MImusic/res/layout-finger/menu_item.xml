@@ -19,7 +19,7 @@
             android:layout_marginRight="@dimen/dimen_20dp"
             android:background="@drawable/ic_launcher" />
 
-        <TextView
+        <vnp.com.mimusic.view.textview.TextViewLight
             android:id="@+id/menu_item_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

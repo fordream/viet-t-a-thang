@@ -33,7 +33,7 @@
                 android:layout_toLeftOf="@+id/moidichvuchonhieunguoi_contact"
                 android:background="@drawable/a_est" >
 
-                <EditText
+                <vnp.com.mimusic.view.textview.EditextTextThin
                      android:inputType="textNoSuggestions"
                     android:id="@+id/search"
                     android:layout_width="match_parent"
@@ -47,7 +47,7 @@
                     android:textColorHint="#475055"
                     android:textSize="@dimen/dimen_12dp"
                     android:textStyle="bold" >
-                </EditText>
+                </vnp.com.mimusic.view.textview.EditextTextThin>
 
                 <ImageView
                     android:id="@+id/imageView1"
@@ -205,7 +205,7 @@
                     </LinearLayout>
                 </HorizontalScrollView>
 
-                <TextView
+                <vnp.com.mimusic.view.textview.TextViewRegular
                     android:id="@+id/moi"
                     android:layout_width="@dimen/dimen_40dp"
                     android:layout_height="@dimen/dimen_22dp"

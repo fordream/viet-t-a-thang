@@ -49,7 +49,7 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 	private File mFileTemp;
 	private ImageView menu_left_img_cover, menu_left_img_avatar, infor_cover_click_change;
 	private TextView menu_left_tv_name;
-	private Button activity_login_btn;
+	private TextView activity_login_btn;
 	private EditText infor_name, infor_bidanh, infor_diachi;
 	private TextView infor_ngaysinh;
 
@@ -81,7 +81,7 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 		menu_left_img_cover = (ImageView) view.findViewById(R.id.menu_left_img_cover);
 		menu_left_img_avatar = (ImageView) view.findViewById(R.id.menu_left_img_avatar);
 		menu_left_tv_name = (TextView) view.findViewById(R.id.menu_left_tv_name);
-		activity_login_btn = (Button) view.findViewById(R.id.activity_login_btn);
+		activity_login_btn = (TextView) view.findViewById(R.id.activity_login_btn);
 		infor_name = (EditText) view.findViewById(R.id.infor_name);
 		infor_bidanh = (EditText) view.findViewById(R.id.infor_didanh);
 		infor_ngaysinh = (TextView) view.findViewById(R.id.infor_ngaysinh);
