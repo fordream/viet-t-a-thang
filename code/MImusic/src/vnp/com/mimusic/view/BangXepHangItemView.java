@@ -93,7 +93,7 @@ public class BangXepHangItemView extends LinearLayout {
 		} else {
 			Conts.setTextView(findViewById(R.id.bangxephang_item), arguments.getString("quantity"));
 
-			Conts.setTextView(findViewById(R.id.sl), "DT : " + arguments.getString("commission"));
+			Conts.setTextView(findViewById(R.id.sl), "DT : " + arguments.getString("commission") + " " +getContext().getString(R.string.vnd));
 		}
 		findViewById(R.id.bangxephang_item).setBackgroundResource(R.drawable.tranfer);
 		findViewById(R.id.sl).setVisibility(View.VISIBLE);
