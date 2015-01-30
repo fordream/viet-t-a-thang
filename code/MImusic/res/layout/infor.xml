@@ -5,15 +5,21 @@
     android:background="@android:color/white"
     android:orientation="vertical" >
 
+    <vnp.com.mimusic.view.HeaderView
+        android:id="@+id/infor_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </vnp.com.mimusic.view.HeaderView>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/infor_header"
         android:background="@drawable/infor_bg"
-        
-             android:scrollbars="none"
-            android:scrollbarThumbHorizontal="@drawable/tranfer"
-            android:scrollbarThumbVertical="@drawable/tranfer"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:scrollbarThumbHorizontal="@drawable/tranfer"
+        android:scrollbarThumbVertical="@drawable/tranfer"
+        android:scrollbars="none" >
 
         <LinearLayout
             android:id="@+id/menu_left_header"
@@ -22,12 +28,6 @@
             android:gravity="center_horizontal"
             android:orientation="vertical"
             android:paddingBottom="@dimen/dimen_20dp" >
-
-            <vnp.com.mimusic.view.HeaderView
-                android:id="@+id/infor_header"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
-            </vnp.com.mimusic.view.HeaderView>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -40,7 +40,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop" />
-<RelativeLayout
+
+                <RelativeLayout
                     android:id="@+id/xmain"
                     android:layout_width="@dimen/dimen_130dp"
                     android:layout_height="@dimen/dimen_130dp"
@@ -89,7 +90,7 @@
                     android:text="Hoài Anh (0968678678)"
                     android:textColor="#555d61"
                     android:textSize="@dimen/dimen_16dp" />
-              
+
                 <ImageView
                     android:id="@+id/infor_cover_click_change"
                     android:layout_width="@dimen/dimen_44dp"
@@ -197,8 +198,7 @@
                     android:singleLine="true"
                     android:text="@string/luthaydoi"
                     android:textColor="@android:color/white"
-                    android:textSize="@dimen/dimen_13dp"
-                 />
+                    android:textSize="@dimen/dimen_13dp" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

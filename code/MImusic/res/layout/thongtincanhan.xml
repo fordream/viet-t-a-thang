@@ -6,10 +6,17 @@
     android:gravity="center"
     android:orientation="vertical" >
 
+    <vnp.com.mimusic.view.HeaderView
+        android:id="@+id/activity_login_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </vnp.com.mimusic.view.HeaderView>
+
     <ScrollView
         android:id="@+id/scrollView1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/activity_login_header"
         android:scrollbarThumbHorizontal="@drawable/tranfer"
         android:scrollbarThumbVertical="@drawable/tranfer"
         android:scrollbars="none" >
@@ -18,12 +25,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical" >
-
-            <vnp.com.mimusic.view.HeaderView
-                android:id="@+id/activity_login_header"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
-            </vnp.com.mimusic.view.HeaderView>
 
             <RelativeLayout
                 android:id="@+id/menu_left_header"
