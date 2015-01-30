@@ -24,6 +24,7 @@ public class ChitietCaNhanBangXepHangTungDichVuView extends LinearLayout impleme
 	private TextView soGDTrongThang, soGD, soHHTrongThang, soHH, bangxephangItemTvStt;
 	private LoadingView loadingView;
 	private BangXepHangItemView bXHItemView;
+	private vnp.com.mimusic.view.BangXepHangHeaderView bxhHeader;
 
 	public ChitietCaNhanBangXepHangTungDichVuView(Context context) {
 		super(context);
@@ -33,7 +34,7 @@ public class ChitietCaNhanBangXepHangTungDichVuView extends LinearLayout impleme
 	@Override
 	public void onClick(View v) {
 		if (v.getId() == R.id.mainx) {
-			gone();
+			// gone();
 		}
 	}
 
@@ -75,7 +76,8 @@ public class ChitietCaNhanBangXepHangTungDichVuView extends LinearLayout impleme
 
 		bXHItemView = (BangXepHangItemView) findViewById(R.id.bangxephangitemview);
 		bangxephangItemTvStt = (TextView) bXHItemView.findViewById(R.id.bangxephang_item_tv_stt);
-
+		bxhHeader = Conts.getView(this, R.id.bxhheader);
+		bxhHeader.disable();
 		// View blockLayout = bXHItemView.findViewById(R.id.bangxephang_block);
 		// blockLayout.setVisibility(View.GONE);
 
@@ -94,8 +96,8 @@ public class ChitietCaNhanBangXepHangTungDichVuView extends LinearLayout impleme
 		bangxephangItemTvStt.setText(bundle.getString("position"));
 		soGD.setText(bundle.getString("quantity"));
 		soHH.setText(String.format(getContext().getString(R.string.format_tien), bundle.getString("commission")));
-		bXHItemView.setDataBundle(bundle);
 		bXHItemView.setType(type);
+		bXHItemView.setDataBundle(bundle);
 
 		callApi(bundle);
 	}
@@ -153,5 +155,6 @@ public class ChitietCaNhanBangXepHangTungDichVuView extends LinearLayout impleme
 		this.type = type;
 		// 2 so luong
 		// 1 dong thu
+		bxhHeader.setDoanhThu("1".equals(type));
 	}
 }

@@ -226,10 +226,11 @@ public class RootMenuActivity extends FragmentActivity {
 		changeFragemt(R.id.root_main_fragment, new ChiTietCaNhanBangXepHangTungDichVuFragment(), true);
 	}
 
-	public void gotoChiTietCaNhanTungDichVu1(AdapterView<?> parent, View view, int position, long id) {
+	public void gotoChiTietCaNhanTungDichVu1(AdapterView<?> parent, View view, int position, long id, String xType) {
 		JSONObject jo = (JSONObject) parent.getItemAtPosition(position);
 		Intent intent = new Intent(this, RootMenuActivity.class);
 		intent.putExtra("type", Conts.CHITIETCANHANBANGXEPHANGTUNGDICHVU);
+		intent.putExtra("xType", xType);
 		intent.putExtra("position", Conts.getString(jo, "position"));
 		intent.putExtra("mtype", Conts.getString(jo, "type"));
 		intent.putExtra("avatar", Conts.getString(jo, "avatar"));

@@ -11,6 +11,12 @@
         android:background="@color/f3f3f3"
         android:orientation="vertical" >
 
+        <vnp.com.mimusic.view.BangXepHangHeaderView
+            android:id="@+id/bxhheader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+        </vnp.com.mimusic.view.BangXepHangHeaderView>
+
         <vnp.com.mimusic.view.BangXepHangItemView
             android:id="@+id/bangxephangitemview"
             android:layout_width="match_parent"

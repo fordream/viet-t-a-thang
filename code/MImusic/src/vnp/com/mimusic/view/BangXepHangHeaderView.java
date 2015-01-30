@@ -30,10 +30,12 @@ public class BangXepHangHeaderView extends LinearLayout {
 	}
 
 	private RadioButton radio0;
+	private RadioButton radio1;
 
 	private void init() {
 		((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.bangxephang_header, this);
 		radio0 = (RadioButton) findViewById(R.id.radio0);
+		radio1 = (RadioButton) findViewById(R.id.radio1);
 		radio0.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
 			@Override
@@ -83,5 +85,18 @@ public class BangXepHangHeaderView extends LinearLayout {
 	}
 
 	private int index = 0;
+
+	public void disable() {
+		radio1.setClickable(false);
+		radio0.setClickable(false);
+	}
+
+	public void setDoanhThu(boolean isDoanhThu) {
+		if (isDoanhThu) {
+			radio1.setChecked(true);
+		} else {
+			radio0.setChecked(true);
+		}
+	}
 
 }
