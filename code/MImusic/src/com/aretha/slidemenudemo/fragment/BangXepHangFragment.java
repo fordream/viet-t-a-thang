@@ -1,28 +1,15 @@
 package com.aretha.slidemenudemo.fragment;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import vnp.com.api.API;
-import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
-import vnp.com.mimusic.adapter.BangXepHangAdaper;
-import vnp.com.mimusic.util.Conts;
-import vnp.com.mimusic.util.Conts.IContsCallBack;
 import vnp.com.mimusic.view.BangXepHangHeaderView;
-import vnp.com.mimusic.view.BangXephangListView;
-import vnp.com.mimusic.view.LoadingView;
 import vnp.com.mimusic.view.BangXepHangHeaderView.BangXepHangHeaderInterface;
-import android.app.AlertDialog;
+import vnp.com.mimusic.view.BangXephangListView;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class BangXepHangFragment extends BaseFragment implements OnItemClickListener, View.OnClickListener {

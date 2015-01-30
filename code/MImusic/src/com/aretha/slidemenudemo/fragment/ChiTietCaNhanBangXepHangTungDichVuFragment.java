@@ -1,6 +1,5 @@
 package com.aretha.slidemenudemo.fragment;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import vnp.com.api.API;
@@ -12,13 +11,11 @@ import vnp.com.mimusic.view.BangXepHangItemView;
 import vnp.com.mimusic.view.HeaderView;
 import vnp.com.mimusic.view.LoadingView;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class ChiTietCaNhanBangXepHangTungDichVuFragment extends BaseFragment implements View.OnClickListener {
 	private TextView soGDTrongThang, soGD, soHHTrongThang, soHH, bangxephangItemTvStt;
@@ -101,29 +98,8 @@ public class ChiTietCaNhanBangXepHangTungDichVuFragment extends BaseFragment imp
 			@Override
 			public void onSuscess(JSONObject response) {
 				Conts.showView(loadingView, false);
-				// Conts.showDialogThongbao(getActivity(), response.toString());
-				// // so giao dich thanh cong
-				// String exchange_number = Conts.getString(response,
-				// "exchange_number");
-				// // so giao dich thanh cong trong thang
-				// String exchange_number_month = Conts.getString(response,
-				// "exchange_number_month");
-				// // poundage tien hoa hong
-				// String poundage = Conts.getString(response, "poundage");
-				// // poundage_month tien hoa hong trong thang
-				// String poundage_month = Conts.getString(response,
-				// "poundage_month");
-
-				// quantity_in_duration
-				// commission_in_duration
-
-				// soGD.setText(exchange_number);
-				// soHH.setText(poundage);
-
 				String quantity_in_duration = Conts.getString(response, "quantity_in_duration");
-
 				String commission_in_duration = Conts.getString(response, "commission_in_duration");
-
 				soGDTrongThang.setText(quantity_in_duration);
 				soHHTrongThang.setText(String.format(getString(R.string.format_tien), commission_in_duration + ""));
 			}

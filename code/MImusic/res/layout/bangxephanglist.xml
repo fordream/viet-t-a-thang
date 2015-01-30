@@ -21,4 +21,10 @@
         android:textColor="#353f45"
         android:textSize="@dimen/dimen_11dp" />
 
+    <vnp.com.mimusic.view.ChitietCaNhanBangXepHangTungDichVuView
+        android:id="@+id/chitiet"
+        android:visibility="gone"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent" />
+
 </RelativeLayout>

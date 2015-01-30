@@ -9,20 +9,25 @@ import vnp.com.api.API;
 import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.VApplication;
+import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.adapter.BangXepHangAdaper;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 //vnp.com.mimusic.view.BangXephangListView
 public class BangXephangListView extends LinearLayout {
+	private vnp.com.mimusic.view.ChitietCaNhanBangXepHangTungDichVuView chitiet;
 	private vnp.com.mimusic.view.MusicListView list;
 	private String type = "1";
 	private String noDataText;
@@ -47,8 +52,20 @@ public class BangXephangListView extends LinearLayout {
 		init();
 	}
 
+	@Override
+	public void setVisibility(int visibility) {
+		super.setVisibility(visibility);
+
+		if (visibility == GONE) {
+			chitiet.setVisibility(GONE);
+		}
+	}
+
 	private void init() {
 		((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.bangxephanglist, this);
+
+		chitiet = Conts.getView(this, R.id.chitiet);
+
 		list = (MusicListView) findViewById(R.id.list);
 		message = Conts.getView(this, R.id.message);
 	}
@@ -109,7 +126,25 @@ public class BangXephangListView extends LinearLayout {
 	}
 
 	public void setOnItemClick(android.widget.AdapterView.OnItemClickListener listener) {
-		list.setOnItemClickListener(listener);
+		list.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View arg1, int position, long arg3) {
+				JSONObject jo = (JSONObject) parent.getItemAtPosition(position);
+				Bundle intent = new Bundle();
+				intent.putString("type", Conts.CHITIETCANHANBANGXEPHANGTUNGDICHVU);
+				intent.putString("position", Conts.getString(jo, "position"));
+				intent.putString("mtype", Conts.getString(jo, "type"));
+				intent.putString("avatar", Conts.getString(jo, "avatar"));
+				intent.putString("ranking_id", Conts.getString(jo, "id"));
+				intent.putString("nickname", Conts.getString(jo, "nickname"));
+				intent.putString("quantity", Conts.getString(jo, "quantity"));
+				intent.putString("commission", Conts.getString(jo, "commission"));
+
+				chitiet.setVisibility(VISIBLE);
+				chitiet.initData(intent);
+			}
+		});
 	}
 
 }
