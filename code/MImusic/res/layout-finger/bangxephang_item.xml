@@ -154,6 +154,17 @@
                     android:textColor="#666666"
                     android:textSize="@dimen/dimen_10dp"
                     android:visibility="gone" />
+                
+                 <TextView
+                    android:id="@+id/sl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_3dp"
+                    android:singleLine="true"
+                    android:text="TextView"
+                    android:textColor="#475055"
+                    android:textSize="@dimen/dimen_11dp"
+                    android:visibility="gone" />
             </LinearLayout>
         </RelativeLayout>
     </LinearLayout>

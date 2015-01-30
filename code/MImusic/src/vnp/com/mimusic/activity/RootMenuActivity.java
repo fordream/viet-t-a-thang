@@ -3,6 +3,8 @@
  */
 package vnp.com.mimusic.activity;
 
+import java.util.List;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -174,6 +176,13 @@ public class RootMenuActivity extends FragmentActivity {
 		if (count > 1) {
 			fragmentManager.popBackStack();
 		} else if (count == 1) {
+			List<Fragment> fragments = fragmentManager.getFragments();
+
+//			if (fragments.get(fragments.size() - 1) instanceof BangXepHangFragment) {
+//				if (((BangXepHangFragment) fragments.get(fragments.size() - 1)).onBackPressed()) {
+//					return;
+//				}
+//			}
 			try {
 				((vnp.com.mimusic.main.NewMusicSlideMenuActivity) getParent()).finish(true);
 			} catch (Exception exception) {
@@ -263,7 +272,7 @@ public class RootMenuActivity extends FragmentActivity {
 
 	public void gotoMoiDvChoNhieuNguoiFragment(String id) {
 		Conts.hiddenKeyBoard(this);
-		
+
 		MoiDvChoNhieuNguoiFragment choNhieuNguoiFragment = new MoiDvChoNhieuNguoiFragment();
 		Bundle args = new Bundle();
 		args.putString("id", id);

@@ -26,7 +26,6 @@
             android:scrollbarThumbHorizontal="@drawable/tranfer"
             android:scrollbarThumbVertical="@drawable/tranfer"
             android:scrollbars="none" />
-
         <vnp.com.mimusic.view.BangXephangListView
             android:id="@+id/bangxephang2"
             android:layout_width="match_parent"

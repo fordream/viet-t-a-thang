@@ -6,6 +6,7 @@ import vnp.com.api.API;
 import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.VApplication;
+import vnp.com.mimusic.base.VTAnimationListener;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
 import android.content.Context;
@@ -13,6 +14,8 @@ import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -30,16 +33,32 @@ public class ChitietCaNhanBangXepHangTungDichVuView extends LinearLayout impleme
 	@Override
 	public void onClick(View v) {
 		if (v.getId() == R.id.mainx) {
-			setVisibility(View.GONE);
+			gone();
 		}
 	}
 
 	@Override
 	public void setVisibility(int visibility) {
+
 		super.setVisibility(visibility);
-		if (visibility == GONE) {
-			indexApi++;
+
+		if (visibility == VISIBLE) {
+			findViewById(R.id.mainx).startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.abc_scale_in));
 		}
+	}
+
+	public void gone() {
+		Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.abc_scale_out);
+		animation.setAnimationListener(new VTAnimationListener() {
+			@Override
+			public void onAnimationEnd(Animation animation) {
+				super.onAnimationEnd(animation);
+				setVisibility(GONE);
+			}
+		});
+
+		findViewById(R.id.mainx).startAnimation(animation);
+		indexApi++;
 	}
 
 	public ChitietCaNhanBangXepHangTungDichVuView(Context context, AttributeSet attrs) {
@@ -56,14 +75,14 @@ public class ChitietCaNhanBangXepHangTungDichVuView extends LinearLayout impleme
 
 		bXHItemView = (BangXepHangItemView) findViewById(R.id.bangxephangitemview);
 		bangxephangItemTvStt = (TextView) bXHItemView.findViewById(R.id.bangxephang_item_tv_stt);
-		View blockLayout = bXHItemView.findViewById(R.id.bangxephang_block);
-		blockLayout.setVisibility(View.GONE);
+
+		// View blockLayout = bXHItemView.findViewById(R.id.bangxephang_block);
+		// blockLayout.setVisibility(View.GONE);
 
 		soGDTrongThang = (TextView) findViewById(R.id.soGDTrongThang);
 		soGD = (TextView) findViewById(R.id.soGD);
 		soHHTrongThang = (TextView) findViewById(R.id.soHHTrongThang);
 		soHH = (TextView) findViewById(R.id.soHH);
-
 	}
 
 	public void initData(Bundle bundle) {
@@ -76,6 +95,7 @@ public class ChitietCaNhanBangXepHangTungDichVuView extends LinearLayout impleme
 		soGD.setText(bundle.getString("quantity"));
 		soHH.setText(String.format(getContext().getString(R.string.format_tien), bundle.getString("commission")));
 		bXHItemView.setDataBundle(bundle);
+		bXHItemView.setType(type);
 
 		callApi(bundle);
 	}
@@ -84,7 +104,6 @@ public class ChitietCaNhanBangXepHangTungDichVuView extends LinearLayout impleme
 
 	private void callApi(Bundle arguments) {
 		indexApi = indexApi + 1;
-
 		final int positionChecked = indexApi;
 		Bundle bundle = new Bundle();
 		bundle.putString("ranking_id", arguments.getString("ranking_id"));
@@ -126,5 +145,13 @@ public class ChitietCaNhanBangXepHangTungDichVuView extends LinearLayout impleme
 
 	public void executeHttps(final RequestMethod requestMethod, final String api, final Bundle bundle, final IContsCallBack contsCallBack) {
 		((VApplication) getContext().getApplicationContext()).executeHttps(requestMethod, api, bundle, contsCallBack);
+	}
+
+	private String type = "1";
+
+	public void setType(String type) {
+		this.type = type;
+		// 2 so luong
+		// 1 dong thu
 	}
 }

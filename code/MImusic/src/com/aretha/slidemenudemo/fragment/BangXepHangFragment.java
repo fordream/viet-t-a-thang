@@ -62,4 +62,15 @@ public class BangXepHangFragment extends BaseFragment implements OnItemClickList
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		(((RootMenuActivity) getActivity())).gotoChiTietCaNhanTungDichVu1(parent, view, position, id);
 	}
+
+//	public boolean onBackPressed() {
+//		if (bangxephangSoluong.getVisibility() == View.VISIBLE) {
+//			return bangxephangSoluong.onBackPressed();
+//		}
+//
+//		if (bangxephangDoanhthu.getVisibility() == View.VISIBLE) {
+//			return bangxephangDoanhthu.onBackPressed();
+//		}
+//		return false;
+//	}
 }

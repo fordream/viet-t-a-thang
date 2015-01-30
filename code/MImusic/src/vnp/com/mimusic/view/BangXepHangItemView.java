@@ -12,6 +12,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -65,13 +66,12 @@ public class BangXepHangItemView extends LinearLayout {
 		}
 
 		findViewById(R.id.bangxephang_item_bg).setBackgroundResource(position % 2 == 0 ? R.drawable.bxp_bg_item1 : R.drawable.bxp_bg_item2);
-
 		findViewById(R.id.bangxephang_item).setBackgroundResource(position % 2 == 0 ? R.drawable.x_01 : R.drawable.x_02);
 	}
 
 	public void setDataBundle(Bundle arguments) {
 		setDataColor(Integer.parseInt(arguments.getString("position")));
-		findViewById(R.id.bangxephang_item_bg).setBackgroundResource( R.drawable.bxp_bg_item2);
+		findViewById(R.id.bangxephang_item_bg).setBackgroundResource(R.drawable.bxp_bg_item2);
 
 		TextView bxhItemSTT = (TextView) findViewById(R.id.bangxephang_item_tv_stt);
 		TextView bxhItemName = (TextView) findViewById(R.id.bangxephang_item_tv_name);
@@ -81,7 +81,26 @@ public class BangXepHangItemView extends LinearLayout {
 		Conts.setTextView(findViewById(R.id.chitietdoanhthu1dichvu), arguments.getString("commission"));
 		ImageView bxhItemImage = (ImageView) findViewById(R.id.bangxephang_item_img_icon);
 		ImageLoaderUtils.getInstance(getContext()).DisplayImage(arguments.getString("avatar"), bxhItemImage, BitmapFactory.decodeResource(getResources(), R.drawable.no_avatar));
-
 		((TextView) findViewById(R.id.chitietdoanhthu1dichvu)).setText(String.format(getContext().getString(R.string.format_tien), arguments.getString("commission")));
+
+		if ("1".equals(type)) {
+			Conts.setTextView(findViewById(R.id.bangxephang_item), arguments.getString("commission"));
+			Conts.setTextView(findViewById(R.id.sl), "SL : " + arguments.getString("quantity"));
+		} else {
+			Conts.setTextView(findViewById(R.id.bangxephang_item), arguments.getString("quantity"));
+
+			Conts.setTextView(findViewById(R.id.sl), "DT : " + arguments.getString("commission"));
+		}
+		findViewById(R.id.bangxephang_item).setBackgroundResource(R.drawable.tranfer);
+		findViewById(R.id.sl).setVisibility(View.VISIBLE);
+
+	}
+
+	private String type = "1";
+
+	public void setType(String type) {
+		this.type = type;
+		// 2 so luong
+		// 1 dong thu
 	}
 }

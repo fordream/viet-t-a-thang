@@ -27,7 +27,7 @@ import android.widget.Toast;
 
 //vnp.com.mimusic.view.BangXephangListView
 public class BangXephangListView extends LinearLayout {
-	private vnp.com.mimusic.view.ChitietCaNhanBangXepHangTungDichVuView chitiet;
+//	private vnp.com.mimusic.view.ChitietCaNhanBangXepHangTungDichVuView chitiet;
 	private vnp.com.mimusic.view.MusicListView list;
 	private String type = "1";
 	private String noDataText;
@@ -35,6 +35,8 @@ public class BangXephangListView extends LinearLayout {
 
 	public void setType(String type) {
 		this.type = type;
+
+//		chitiet.setType(type);
 		if ("2".equals(type)) {
 			noDataText = getResources().getString(R.string.bangxephang_so_luong_no_data);
 		} else {
@@ -57,14 +59,14 @@ public class BangXephangListView extends LinearLayout {
 		super.setVisibility(visibility);
 
 		if (visibility == GONE) {
-			chitiet.setVisibility(GONE);
+//			chitiet.gone();
 		}
 	}
 
 	private void init() {
 		((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.bangxephanglist, this);
 
-		chitiet = Conts.getView(this, R.id.chitiet);
+		//chitiet = Conts.getView(this, R.id.chitiet);
 
 		list = (MusicListView) findViewById(R.id.list);
 		message = Conts.getView(this, R.id.message);
@@ -126,25 +128,35 @@ public class BangXephangListView extends LinearLayout {
 	}
 
 	public void setOnItemClick(android.widget.AdapterView.OnItemClickListener listener) {
-		list.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View arg1, int position, long arg3) {
-				JSONObject jo = (JSONObject) parent.getItemAtPosition(position);
-				Bundle intent = new Bundle();
-				intent.putString("type", Conts.CHITIETCANHANBANGXEPHANGTUNGDICHVU);
-				intent.putString("position", Conts.getString(jo, "position"));
-				intent.putString("mtype", Conts.getString(jo, "type"));
-				intent.putString("avatar", Conts.getString(jo, "avatar"));
-				intent.putString("ranking_id", Conts.getString(jo, "id"));
-				intent.putString("nickname", Conts.getString(jo, "nickname"));
-				intent.putString("quantity", Conts.getString(jo, "quantity"));
-				intent.putString("commission", Conts.getString(jo, "commission"));
-
-				chitiet.setVisibility(VISIBLE);
-				chitiet.initData(intent);
-			}
-		});
+		list.setOnItemClickListener(listener);
+//		list.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
+//
+//			@Override
+//			public void onItemClick(AdapterView<?> parent, View arg1, int position, long arg3) {
+//				JSONObject jo = (JSONObject) parent.getItemAtPosition(position);
+//				Bundle intent = new Bundle();
+//				intent.putString("type", Conts.CHITIETCANHANBANGXEPHANGTUNGDICHVU);
+//				intent.putString("xtype",type);
+//				intent.putString("position", Conts.getString(jo, "position"));
+//				intent.putString("mtype", Conts.getString(jo, "type"));
+//				intent.putString("avatar", Conts.getString(jo, "avatar"));
+//				intent.putString("ranking_id", Conts.getString(jo, "id"));
+//				intent.putString("nickname", Conts.getString(jo, "nickname"));
+//				intent.putString("quantity", Conts.getString(jo, "quantity"));
+//				intent.putString("commission", Conts.getString(jo, "commission"));
+//
+//				chitiet.setVisibility(VISIBLE);
+//				chitiet.initData(intent);
+//			}
+//		});
 	}
+
+//	public boolean onBackPressed() {
+//		if (chitiet.getVisibility() == VISIBLE) {
+//			chitiet.gone();
+//			return true;
+//		}
+//		return false;
+//	}
 
 }
