@@ -18,7 +18,7 @@
             android:layout_centerVertical="true"
             android:background="@drawable/keyboard_x" />
 
-        <EditText
+        <vnp.com.mimusic.view.textview.EditextTextLight
             android:id="@+id/keyboard_number"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -32,7 +32,7 @@
             android:textColor="#666666"
             android:textSize="@dimen/dimen_25dp" />
 
-        <TextView
+        <vnp.com.mimusic.view.textview.TextViewRegular
             android:id="@+id/keyboard_add"
             android:layout_width="@dimen/dimen_45dp"
             android:layout_height="@dimen/dimen_23dp"

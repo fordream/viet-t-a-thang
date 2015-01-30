@@ -43,7 +43,7 @@
                     android:gravity="center"
                     android:orientation="vertical" >
 
-                    <vnp.com.mimusic.view.VTTextView
+                    <vnp.com.mimusic.view.textview.TextViewLightHeight
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -51,7 +51,7 @@
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/dimen_13dp" />
 
-                    <vnp.com.mimusic.view.VTTextView
+                    <vnp.com.mimusic.view.textview.TextViewThin
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -60,7 +60,7 @@
                         android:textSize="@dimen/dimen_30dp" />
                 </LinearLayout>
 
-                <EditText
+                <vnp.com.mimusic.view.textview.EditextTextThin
                     android:id="@+id/activity_login_number_phone"
                     android:layout_width="@dimen/dimen_240dp"
                     android:layout_height="@dimen/dimen_33dp"
@@ -75,9 +75,9 @@
                     android:singleLine="true"
                     android:textColorHint="#475055"
                     android:textSize="@dimen/dimen_13dp" >
-                </EditText>
+                </vnp.com.mimusic.view.textview.EditextTextThin>
 
-                <EditText
+                <vnp.com.mimusic.view.textview.EditextTextThin
                     android:id="@+id/activity_login_password"
                     android:layout_width="@dimen/dimen_240dp"
                     android:layout_height="@dimen/dimen_33dp"
@@ -99,7 +99,7 @@
                     android:layout_marginBottom="@dimen/dimen_15dp"
                     android:gravity="center" >
 
-                    <Button
+                    <vnp.com.mimusic.view.textview.ButtonRegular
                         android:id="@+id/activity_login_soantin"
                         android:layout_width="@dimen/dimen_115dp"
                         android:layout_height="@dimen/dimen_32dp"
@@ -110,7 +110,7 @@
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/dimen_13dp" />
 
-                    <Button
+                    <vnp.com.mimusic.view.textview.ButtonRegular
                         android:id="@+id/activity_login_btn"
                         android:layout_width="@dimen/dimen_115dp"
                         android:layout_height="@dimen/dimen_32dp"
