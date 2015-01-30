@@ -66,7 +66,11 @@ public class BangXepHangItemView extends LinearLayout {
 		}
 
 		findViewById(R.id.bangxephang_item_bg).setBackgroundResource(position % 2 == 0 ? R.drawable.bxp_bg_item1 : R.drawable.bxp_bg_item2);
-		findViewById(R.id.bangxephang_item).setBackgroundResource(position % 2 == 0 ? R.drawable.x_01 : R.drawable.x_02);
+
+		// findViewById(R.id.bangxephang_item).setBackgroundResource(position %
+		// 2 == 0 ? R.drawable.x_01 : R.drawable.x_02);
+
+		findViewById(R.id.bangxephang_item).setBackgroundColor(getContext().getResources().getColor(position % 2 == 0 ? R.color.fafafa : R.color.ffffff));
 	}
 
 	public void setDataBundle(Bundle arguments) {
