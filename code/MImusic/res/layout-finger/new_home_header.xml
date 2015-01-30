@@ -25,7 +25,7 @@
                 android:singleLine="true"
                 android:text="@string/dichvubanchay"
                 android:textColor="#3d3d3d"
-                android:textSize="@dimen/dimen_15dp"
+                android:textSize="@dimen/dimen_16dp"
                />
 
             <TextView
@@ -58,7 +58,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1px"
+            android:layout_height="2px"
             android:layout_marginLeft="@dimen/dimen_12dp"
             android:layout_marginRight="@dimen/dimen_12dp"
             android:background="@drawable/new_home_line" />
