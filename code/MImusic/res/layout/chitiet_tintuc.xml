@@ -84,7 +84,7 @@
                     android:layout_marginLeft="@dimen/dimen_12dp"
                     android:layout_marginRight="@dimen/dimen_12dp"
                     android:layout_width="match_parent"
-                    android:layout_height="1px"
+                    android:layout_height="2px"
                     android:background="@drawable/new_tintuckhac_line" />
 
                 <LinearLayout

@@ -29,6 +29,6 @@ public class VTTextView extends TextView {
 	}
 
 	private void init() {
-		setLineSpacing(1.2f, 1.3f);
+		setLineSpacing(1.3f, 1.3f);
 	}
 }

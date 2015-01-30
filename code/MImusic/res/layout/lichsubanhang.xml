@@ -24,6 +24,7 @@
             android:padding="@dimen/dimen_40dp" >
 
             <LinearLayout
+                android:layout_marginTop="@dimen/dimen_50dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center" >
@@ -204,7 +205,7 @@
                     android:text="@string/tracuu"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/dimen_13dp"
-                    android:textStyle="bold" />
+                   />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

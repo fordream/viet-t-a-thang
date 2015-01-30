@@ -6,247 +6,137 @@
     android:gravity="center"
     android:orientation="vertical" >
 
-    <LinearLayout
-        android:id="@+id/activity_login_main"
-        android:layout_width="wrap_content"
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:visibility="visible" >
+        android:scrollbarThumbHorizontal="@drawable/tranfer"
+        android:scrollbarThumbVertical="@drawable/tranfer"
+        android:scrollbars="none" >
 
-        <ScrollView
-            android:id="@+id/scrollView1"
-            android:scrollbars="none"
-            android:scrollbarThumbHorizontal="@drawable/tranfer"
-            android:scrollbarThumbVertical="@drawable/tranfer"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <vnp.com.mimusic.view.HeaderView
+                android:id="@+id/activity_login_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+            </vnp.com.mimusic.view.HeaderView>
+
+            <RelativeLayout
+                android:id="@+id/menu_left_header"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_225dp"
+                android:background="@drawable/cover_bg"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:id="@+id/menu_left_img_cover"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop" />
+
+                <RelativeLayout
+                    android:id="@+id/xmain"
+                    android:layout_width="@dimen/dimen_130dp"
+                    android:layout_height="@dimen/dimen_130dp"
+                    android:layout_centerInParent="true"
+                    android:layout_marginBottom="@dimen/dimen_5dp"
+                    android:orientation="vertical" >
+
+                    <RelativeLayout
+                        android:layout_width="@dimen/dimen_120dp"
+                        android:layout_height="@dimen/dimen_120dp"
+                        android:layout_centerInParent="true" >
+
+                        <vnp.com.mimusic.view.CustomImageView
+                            android:id="@+id/menu_left_img_avatar"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_margin="2px"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/new_no_avatar" />
+
+                        <ImageView
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:background="@drawable/avatar_example_1_bg" />
+                    </RelativeLayout>
+
+                    <ImageView
+                        android:id="@+id/menu_left_img_avatar_bg"
+                        android:layout_width="@dimen/dimen_120dp"
+                        android:layout_height="@dimen/dimen_120dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/avatar_bg" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/menu_left_tv_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_below="@+id/xmain"
+                    android:layout_marginBottom="@dimen/dimen_15dp"
+                    android:gravity="center"
+                    android:maxLines="2"
+                    android:singleLine="true"
+                    android:text="Hoài Anh (0968678678)"
+                    android:textColor="#555d61"
+                    android:textSize="@dimen/dimen_16dp" />
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical" >
-
-                <vnp.com.mimusic.view.HeaderView
-                    android:id="@+id/activity_login_header"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" >
-                </vnp.com.mimusic.view.HeaderView>
-
-                <RelativeLayout
-                    android:id="@+id/menu_left_header"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dimen_220dp"
-                    android:background="@drawable/cover_bg"
-                    android:orientation="vertical" >
-
-                    <ImageView
-                        android:id="@+id/menu_left_img_cover"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="centerCrop" />
-
-                    <RelativeLayout
-                        android:id="@+id/xmain"
-                        android:layout_width="@dimen/dimen_130dp"
-                        android:layout_height="@dimen/dimen_130dp"
-                        android:layout_centerInParent="true"
-                        android:orientation="vertical" >
-
-                        <RelativeLayout
-                            android:layout_width="@dimen/dimen_120dp"
-                            android:layout_height="@dimen/dimen_120dp"
-                            android:layout_centerInParent="true" >
-
-                            <vnp.com.mimusic.view.CustomImageView
-                                android:id="@+id/menu_left_img_avatar"
-                                android:layout_width="fill_parent"
-                                android:layout_height="fill_parent"
-                                android:layout_margin="2px"
-                                android:src="@drawable/new_no_avatar"
-                                android:scaleType="centerCrop" />
-
-                            <ImageView
-                                android:layout_width="fill_parent"
-                                android:layout_height="fill_parent"
-                                android:background="@drawable/avatar_example_1_bg" />
-                        </RelativeLayout>
-
-                        <ImageView
-                            android:id="@+id/menu_left_img_avatar_bg"
-                            android:layout_width="@dimen/dimen_120dp"
-                            android:layout_height="@dimen/dimen_120dp"
-                            android:layout_centerHorizontal="true"
-                            android:layout_centerVertical="true"
-                            android:background="@drawable/avatar_bg" />
-                    </RelativeLayout>
-
-                    <TextView
-                        android:id="@+id/menu_left_tv_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_below="@+id/xmain"
-                        android:layout_marginBottom="@dimen/dimen_10dp"
-                        android:gravity="center"
-                        android:maxLines="2"
-                        android:singleLine="true"
-                        android:text="Hoài Anh (0968678678)"
-                        android:textColor="#336666"
-                        android:textSize="@dimen/dimen_16dp" />
-                </RelativeLayout>
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/dimen_15dp" >
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/thongtincanhan_top"
                     android:orientation="vertical"
-                    android:padding="@dimen/dimen_15dp" >
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/thongtincanhan_top"
-                        android:orientation="vertical"
-                        android:paddingLeft="@dimen/dimen_12dp"
-                        android:paddingRight="@dimen/dimen_12dp"
-                        android:paddingTop="@dimen/dimen_12dp" >
-
-                        <TextView
-                            android:id="@+id/text_name"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/dimen_10dp"
-                            android:text="@string/hoten"
-                            android:textColor="#475055"
-                            android:textSize="@dimen/dimen_15dp"
-                            android:textStyle="bold" />
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1px"
-                            android:background="@drawable/thongtincanhan_bg" />
-     <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/dimen_40dp"
-                            android:gravity="center" >
-
-                            <TextView
-                                android:layout_width="@dimen/dimen_80dp"
-                                android:layout_height="wrap_content"
-                                android:text="@string/bidanh"
-                                android:textColor="#475055"
-                                android:textSize="@dimen/dimen_11dp" />
-
-                            <TextView
-                                android:id="@+id/text_bidanh"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="right"
-                                android:text="@string/hoten"
-                                android:textColor="#475055"
-                                android:textSize="@dimen/dimen_11dp"
-                                android:textStyle="bold" />
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1px"
-                            android:background="@drawable/thongtincanhan_bg" />
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/dimen_40dp"
-                            android:gravity="center" >
-
-                            <TextView
-                                android:layout_width="@dimen/dimen_80dp"
-                                android:layout_height="wrap_content"
-                                android:text="@string/ngaysinh"
-                                android:textColor="#475055"
-                                android:textSize="@dimen/dimen_11dp" />
-
-                            <TextView
-                                android:id="@+id/text_ngaysinh"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="right"
-                                android:text="@string/hoten"
-                                android:textColor="#475055"
-                                android:textSize="@dimen/dimen_11dp"
-                                android:textStyle="bold" />
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1px"
-                            android:background="@drawable/thongtincanhan_bg" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/dimen_40dp"
-                            android:gravity="center" >
-
-                            <TextView
-                                android:layout_width="@dimen/dimen_80dp"
-                                android:layout_height="wrap_content"
-                                android:text="@string/diachi"
-                                android:textColor="#475055"
-                                android:textSize="@dimen/dimen_11dp" />
-
-                            <TextView
-                                android:id="@+id/text_diachi"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="right"
-                                android:text="@string/hoten"
-                                android:textColor="#475055"
-                                android:textSize="@dimen/dimen_11dp"
-                                android:textStyle="bold" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingLeft="@dimen/dimen_26dp"
-                    android:paddingRight="@dimen/dimen_26dp" >
+                    android:paddingLeft="@dimen/dimen_12dp"
+                    android:paddingRight="@dimen/dimen_12dp"
+                    android:paddingTop="@dimen/dimen_12dp" >
 
                     <TextView
+                        android:id="@+id/text_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/dimen_10dp"
-                        android:gravity="center_vertical"
-                        android:singleLine="true"
-                        android:text="@string/lichsugiaodich"
+                        android:layout_marginBottom="@dimen/dimen_15dp"
+                        android:text="@string/hoten"
                         android:textColor="#475055"
                         android:textSize="@dimen/dimen_15dp"
                         android:textStyle="bold" />
 
                     <View
                         android:layout_width="match_parent"
-                        android:layout_height="1px"
+                        android:layout_height="2px"
                         android:background="@drawable/thongtincanhan_bg" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/dimen_44dp" >
+                        android:layout_height="@dimen/dimen_40dp"
+                        android:gravity="center" >
 
                         <TextView
-                            android:id="@+id/bangxephang_item_soluong"
-                            android:layout_width="@dimen/dimen_200dp"
-                            android:layout_height="match_parent"
-                            android:gravity="center_vertical"
-                            android:text="@string/sogiaodichthanhcongtrongthang"
+                            android:layout_width="@dimen/dimen_80dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/bidanh"
                             android:textColor="#475055"
                             android:textSize="@dimen/dimen_11dp" />
 
                         <TextView
-                            android:id="@+id/text_sogiaodichthanhcongtrongthang"
+                            android:id="@+id/text_bidanh"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center|right"
-                            android:paddingLeft="@dimen/dimen_5dp"
-                            android:text="100"
+                            android:layout_height="wrap_content"
+                            android:gravity="right"
+                            android:text="@string/hoten"
                             android:textColor="#475055"
                             android:textSize="@dimen/dimen_11dp"
                             android:textStyle="bold" />
@@ -259,23 +149,22 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/dimen_40dp" >
+                        android:layout_height="@dimen/dimen_40dp"
+                        android:gravity="center" >
 
                         <TextView
-                            android:layout_width="@dimen/dimen_200dp"
-                            android:layout_height="match_parent"
-                            android:gravity="center_vertical"
-                            android:text="@string/sogiaodichthanhcong"
+                            android:layout_width="@dimen/dimen_80dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/ngaysinh"
                             android:textColor="#475055"
                             android:textSize="@dimen/dimen_11dp" />
 
                         <TextView
-                            android:id="@+id/text_sogiaodichthanhcong"
+                            android:id="@+id/text_ngaysinh"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center|right"
-                            android:paddingLeft="@dimen/dimen_5dp"
-                            android:text="100"
+                            android:layout_height="wrap_content"
+                            android:gravity="right"
+                            android:text="@string/hoten"
                             android:textColor="#475055"
                             android:textSize="@dimen/dimen_11dp"
                             android:textStyle="bold" />
@@ -288,65 +177,172 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/dimen_40dp" >
+                        android:layout_height="@dimen/dimen_40dp"
+                        android:gravity="center" >
 
                         <TextView
-                            android:layout_width="@dimen/dimen_200dp"
-                            android:layout_height="match_parent"
-                            android:gravity="center_vertical"
-                            android:text="@string/sotienhoahongtrongthang"
+                            android:layout_width="@dimen/dimen_80dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/diachi"
                             android:textColor="#475055"
                             android:textSize="@dimen/dimen_11dp" />
 
                         <TextView
-                            android:id="@+id/text_sotienhoahongtrongthang"
+                            android:id="@+id/text_diachi"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center|right"
-                            android:paddingLeft="@dimen/dimen_5dp"
-                            android:text="100"
+                            android:layout_height="wrap_content"
+                            android:gravity="right"
+                            android:text="@string/hoten"
                             android:textColor="#475055"
                             android:textSize="@dimen/dimen_11dp"
                             android:textStyle="bold" />
                     </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1px"
-                        android:background="@drawable/thongtincanhan_bg" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/dimen_40dp" >
-
-                        <TextView
-                            android:layout_width="@dimen/dimen_200dp"
-                            android:layout_height="match_parent"
-                            android:gravity="center_vertical"
-                            android:text="@string/sotienhoahong"
-                            android:textColor="#475055"
-                            android:textSize="@dimen/dimen_11dp" />
-
-                        <TextView
-                            android:id="@+id/text_sotienhoahong"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center|right"
-                            android:paddingLeft="@dimen/dimen_5dp"
-                            android:text="100"
-                            android:textColor="#475055"
-                            android:textSize="@dimen/dimen_11dp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1px"
-                        android:background="@drawable/thongtincanhan_bg" />
                 </LinearLayout>
             </LinearLayout>
-        </ScrollView>
-    </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dimen_40dp"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/dimen_26dp"
+                android:paddingRight="@dimen/dimen_26dp" >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dimen_12dp"
+                    android:gravity="center_vertical"
+                    android:singleLine="true"
+                    android:text="@string/lichsugiaodich"
+                    android:textColor="#475055"
+                    android:textSize="@dimen/dimen_15dp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2px"
+                    android:background="@drawable/thongtincanhan_bg" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_44dp" >
+
+                    <TextView
+                        android:id="@+id/bangxephang_item_soluong"
+                        android:layout_width="@dimen/dimen_200dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="@string/sogiaodichthanhcongtrongthang"
+                        android:textColor="#475055"
+                        android:textSize="@dimen/dimen_11dp" />
+
+                    <TextView
+                        android:id="@+id/text_sogiaodichthanhcongtrongthang"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center|right"
+                        android:paddingLeft="@dimen/dimen_5dp"
+                        android:text="100"
+                        android:textColor="#475055"
+                        android:textSize="@dimen/dimen_11dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@drawable/thongtincanhan_bg" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_40dp" >
+
+                    <TextView
+                        android:layout_width="@dimen/dimen_200dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="@string/sogiaodichthanhcong"
+                        android:textColor="#475055"
+                        android:textSize="@dimen/dimen_11dp" />
+
+                    <TextView
+                        android:id="@+id/text_sogiaodichthanhcong"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center|right"
+                        android:paddingLeft="@dimen/dimen_5dp"
+                        android:text="100"
+                        android:textColor="#475055"
+                        android:textSize="@dimen/dimen_11dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@drawable/thongtincanhan_bg" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_40dp" >
+
+                    <TextView
+                        android:layout_width="@dimen/dimen_200dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="@string/sotienhoahongtrongthang"
+                        android:textColor="#475055"
+                        android:textSize="@dimen/dimen_11dp" />
+
+                    <TextView
+                        android:id="@+id/text_sotienhoahongtrongthang"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center|right"
+                        android:paddingLeft="@dimen/dimen_5dp"
+                        android:text="100"
+                        android:textColor="#475055"
+                        android:textSize="@dimen/dimen_11dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@drawable/thongtincanhan_bg" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_40dp" >
+
+                    <TextView
+                        android:layout_width="@dimen/dimen_200dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="@string/sotienhoahong"
+                        android:textColor="#475055"
+                        android:textSize="@dimen/dimen_11dp" />
+
+                    <TextView
+                        android:id="@+id/text_sotienhoahong"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center|right"
+                        android:paddingLeft="@dimen/dimen_5dp"
+                        android:text="100"
+                        android:textColor="#475055"
+                        android:textSize="@dimen/dimen_11dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@drawable/thongtincanhan_bg" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
     <vnp.com.mimusic.view.LoadingView
         android:id="@+id/loadingView1"

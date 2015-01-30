@@ -14,8 +14,8 @@
 
         <ImageView
             android:id="@+id/tintuc_item_img_icon"
-            android:layout_width="@dimen/dimen_80dp"
-            android:layout_height="@dimen/dimen_80dp"
+            android:layout_width="@dimen/dimen_81dp"
+            android:layout_height="@dimen/dimen_81dp"
             android:scaleType="centerCrop"
             android:layout_marginRight="@dimen/dimen_12dp"
             android:src="@drawable/tintuc_example" />
@@ -47,7 +47,7 @@
                     android:id="@+id/tintuc_item_tv_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/dimen_3dp"
+                    android:layout_marginBottom="@dimen/dimen_5dp"
                     android:layout_marginTop="@dimen/dimen_3dp"
                     android:singleLine="true"
                     android:text="27/06/2014"

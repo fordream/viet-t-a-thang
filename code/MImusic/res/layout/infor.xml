@@ -31,7 +31,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_220dp"
+                android:layout_height="@dimen/dimen_225dp"
                 android:background="@drawable/cover_bg"
                 android:orientation="vertical" >
 
@@ -40,12 +40,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop" />
-
-                <RelativeLayout
+<RelativeLayout
                     android:id="@+id/xmain"
                     android:layout_width="@dimen/dimen_130dp"
                     android:layout_height="@dimen/dimen_130dp"
                     android:layout_centerInParent="true"
+                    android:layout_marginBottom="@dimen/dimen_5dp"
                     android:orientation="vertical" >
 
                     <RelativeLayout
@@ -58,7 +58,8 @@
                             android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
                             android:layout_margin="2px"
-                            android:scaleType="centerCrop" />
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/new_no_avatar" />
 
                         <ImageView
                             android:layout_width="fill_parent"
@@ -81,14 +82,14 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_below="@+id/xmain"
-                    android:layout_marginBottom="@dimen/dimen_10dp"
+                    android:layout_marginBottom="@dimen/dimen_15dp"
                     android:gravity="center"
                     android:maxLines="2"
                     android:singleLine="true"
                     android:text="Hoài Anh (0968678678)"
-                    android:textColor="#336666"
+                    android:textColor="#555d61"
                     android:textSize="@dimen/dimen_16dp" />
-
+              
                 <ImageView
                     android:id="@+id/infor_cover_click_change"
                     android:layout_width="@dimen/dimen_44dp"
@@ -162,8 +163,8 @@
                         android:textSize="@dimen/dimen_12dp" />
 
                     <ImageView
-                        android:layout_width="@dimen/dimen_35dp"
-                        android:layout_height="@dimen/dimen_35dp"
+                        android:layout_width="@dimen/dimen_32dp"
+                        android:layout_height="@dimen/dimen_32dp"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:padding="@dimen/dimen_10dp"
@@ -197,7 +198,7 @@
                     android:text="@string/luthaydoi"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/dimen_13dp"
-                    android:textStyle="bold" />
+                 />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
