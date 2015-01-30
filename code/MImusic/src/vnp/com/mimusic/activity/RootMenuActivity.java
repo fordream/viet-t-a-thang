@@ -178,11 +178,13 @@ public class RootMenuActivity extends FragmentActivity {
 		} else if (count == 1) {
 			List<Fragment> fragments = fragmentManager.getFragments();
 
-//			if (fragments.get(fragments.size() - 1) instanceof BangXepHangFragment) {
-//				if (((BangXepHangFragment) fragments.get(fragments.size() - 1)).onBackPressed()) {
-//					return;
-//				}
-//			}
+			// if (fragments.get(fragments.size() - 1) instanceof
+			// BangXepHangFragment) {
+			// if (((BangXepHangFragment) fragments.get(fragments.size() -
+			// 1)).onBackPressed()) {
+			// return;
+			// }
+			// }
 			try {
 				((vnp.com.mimusic.main.NewMusicSlideMenuActivity) getParent()).finish(true);
 			} catch (Exception exception) {
@@ -316,7 +318,7 @@ public class RootMenuActivity extends FragmentActivity {
 	 * @param customers
 	 */
 	public void gotoLoiMoi(String id, String customers) {
-
+		Conts.hiddenKeyBoard(this);
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
 		MauMoiFragment mauMoiFragment = new MauMoiFragment();
