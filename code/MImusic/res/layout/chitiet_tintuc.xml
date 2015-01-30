@@ -85,7 +85,7 @@
                     android:layout_marginRight="@dimen/dimen_12dp"
                     android:layout_width="match_parent"
                     android:layout_height="2px"
-                    android:background="@drawable/new_tintuckhac_line" />
+                    android:background="#dfdfdf" />
 
                 <LinearLayout
                     android:id="@+id/chitiet_tintuc_tintuckhac_list"
