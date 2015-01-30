@@ -64,7 +64,7 @@
             android:singleLine="true"
             android:layout_marginBottom="@dimen/dimen_10dp"
             android:text="Hoài Anh (0968678678)"
-            android:textColor="#336666"
+            android:textColor="#515a5e"
             android:textSize="@dimen/dimen_16dp" />
     </RelativeLayout>
 
