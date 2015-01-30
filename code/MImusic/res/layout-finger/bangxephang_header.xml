@@ -20,7 +20,6 @@
             android:background="@drawable/bangxephang_header_x2"
             android:orientation="horizontal"
             android:padding="@dimen/dimen_0dp" >
-
         </LinearLayout>
     </LinearLayout>
 
@@ -38,20 +37,22 @@
             android:button="@null"
             android:checked="true"
             android:gravity="center"
-            android:textSize="@dimen/dimen_15dp"
             android:padding="@dimen/dimen_0dp"
-            android:text="Số lượng" />
+            android:text="Số lượng"
+            android:textSize="@dimen/dimen_15dp"
+            android:textStyle="bold" />
 
         <vnp.com.mimusic.view.BangXepHangHeaderRadioButton
             android:id="@+id/radio1"
-             android:textSize="@dimen/dimen_15dp"
             android:layout_width="@dimen/dimen_1dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:button="@null"
             android:gravity="center"
             android:padding="@dimen/dimen_0dp"
-            android:text="Doanh thu" />
+            android:text="Doanh thu"
+            android:textSize="@dimen/dimen_15dp"
+            android:textStyle="bold" />
     </RadioGroup>
 
 </RelativeLayout>

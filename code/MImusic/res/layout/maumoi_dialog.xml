@@ -101,7 +101,8 @@
                             android:background="@drawable/maumoi_huy"
                             android:scaleType="fitXY"
                             android:text="@string/huy"
-                            android:textColor="@android:color/white" />
+                            android:textColor="@android:color/white"
+                            android:textSize="@dimen/dimen_13dp" />
 
                         <Button
                             android:id="@+id/moinhieudichvu_dialog_moi"
