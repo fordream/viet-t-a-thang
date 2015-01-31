@@ -27,7 +27,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/dimen_12dp" >
+              android:id="@+id/xemall"
+            android:padding="@dimen/dimen_12dp" >
 
             <vnp.com.mimusic.view.textview.TextViewRegular
                 android:id="@+id/name_1"
@@ -40,7 +41,7 @@
                 android:textSize="@dimen/dimen_16dp" />
 
             <vnp.com.mimusic.view.textview.TextViewLight
-                android:id="@+id/xemall"
+              
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"

@@ -101,7 +101,7 @@ public class ChonSoDienThoaiFragment extends BaseFragment implements android.vie
 			public void afterTextChanged(Editable s) {
 				try {
 					adaper.setTextSearch(menu_right_editext.getText().toString());
-					adaper.notifyDataSetChanged();
+					//adaper.notifyDataSetChanged();
 				} catch (Exception exception) {
 
 				}

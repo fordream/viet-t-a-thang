@@ -78,7 +78,7 @@ public class MoiThanhVienFragment extends BaseFragment implements OnItemClickLis
 			public void afterTextChanged(Editable s) {
 				if (adapter != null) {
 					adapter.setTextSearch(dichvu_edittext_search.getText().toString().trim());
-					adapter.notifyDataSetChanged();
+//					adapter.notifyDataSetChanged();
 				}
 			}
 		});

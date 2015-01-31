@@ -9,7 +9,7 @@
     <RelativeLayout
         android:id="@+id/menu_left_header"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_285dp"
+        android:layout_height="@dimen/dimen_280dp"
         android:background="@drawable/cover_bg"
         android:orientation="vertical" >
 

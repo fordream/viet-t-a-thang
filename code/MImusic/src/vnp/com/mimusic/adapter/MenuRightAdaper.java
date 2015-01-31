@@ -9,6 +9,7 @@ import android.support.v4.widget.CursorAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AlphabetIndexer;
+import android.widget.FilterQueryProvider;
 import android.widget.SectionIndexer;
 
 public abstract class MenuRightAdaper extends CursorAdapter implements SectionIndexer {
@@ -38,9 +39,11 @@ public abstract class MenuRightAdaper extends CursorAdapter implements SectionIn
 	}
 
 	public MenuRightAdaper(Context context, Cursor cursor) {
-		super(context, cursor);
+		super(context, cursor, true);
 		mAlphabetIndexer = new AlphabetIndexer(cursor, cursor.getColumnIndex(User.NAME_CONTACT), " ABCDEFGHIJKLMNOPQRTSUVWXYZ");
 		mAlphabetIndexer.setCursor(cursor);
+
+		setFilterQueryProvider(filterQueryProvider);
 	}
 
 	@Override
@@ -62,7 +65,30 @@ public abstract class MenuRightAdaper extends CursorAdapter implements SectionIn
 
 	private String textSearch = "";
 
-	public void setTextSearch(String textSearh) {
-		this.textSearch = textSearh;
+	public void setTextSearch(final String textSearh) {
+		getFilter().filter(textSearh);
+		// this.textSearch = textSearh;
+		// new AsyncTask<String, String, String>() {
+		// Cursor cursor = null;
+		//
+		// @Override
+		// protected String doInBackground(String... params) {
+		// cursor = User.querySearch(mContext, textSearh);
+		// return null;
+		// }
+		//
+		// protected void onPostExecute(String result) {
+		// //changeCursor(cursor);
+		// };
+		// }.execute("");
 	}
+
+	private FilterQueryProvider filterQueryProvider = new FilterQueryProvider() {
+
+		@Override
+		public Cursor runQuery(CharSequence constraint) {
+			String search = constraint.toString().trim();
+			return User.querySearch(mContext, search);
+		}
+	};
 }

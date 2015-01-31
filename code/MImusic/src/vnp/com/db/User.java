@@ -4,6 +4,7 @@ import java.util.Map;
 
 import android.content.ContentUris;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -56,7 +57,7 @@ public class User {
 		String[] colums = new String[] {//
 		nickname, fullname, exchange_number, exchange_number_month, poundage, poundage_month, TOKEN, KEYREFRESH,
 
-		USER, PASSWORD, STATUS, COVER, NAME_CONTACT_ENG,ID, birthday, address, NAME, NAME_CONTACT, contact_id,//
+		USER, PASSWORD, STATUS, COVER, NAME_CONTACT_ENG, ID, birthday, address, NAME, NAME_CONTACT, contact_id,//
 				EMAIL, AVATAR, LISTIDDVSUDUNG, SOLUONG, DOANHTHU, LISTIDUSERDAMOI, LISTIDTENDVSUDUNG //
 		};
 		for (int i = 0; i < colums.length; i++) {
@@ -147,6 +148,13 @@ public class User {
 		}
 
 		return null;
+	}
+
+	public static Cursor querySearch(Context mContext, String search) {
+		StringBuilder selection = new StringBuilder();
+		selection.append(NAME_CONTACT_ENG).append(" LIKE '%").append(search.toLowerCase()).append("%' ");
+		selection.append(" OR ").append(USER).append(" LIKE '%").append(search.toLowerCase()).append("%' ");
+		return mContext.getContentResolver().query(CONTENT_URI, null, selection.toString(), null, null);
 	}
 
 }

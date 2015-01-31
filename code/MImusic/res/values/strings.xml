@@ -173,8 +173,8 @@
     <string name="banchuacomatkhauvuilongsoantinnhan">Bạn chưa có hoặc quên mât khẩu!\nVui lòng soạn tin nhắn(miễn phí)</string>
     <string name="bancannhapsdtvamatkkau">Bạn cần nhập số điện thoại và mật khẩu.</string>
     <string name="xemtatca">Xem tất cả ></string>
-    <string name="moithanhvien">Mời thành viên</string>
-    <string name="dichvuhot">Dịch vụ hot</string>
+    <string name="moithanhvien">Người bạn được đề xuất mời</string>
+    <string name="dichvuhot">Dịch vụ bán chạy</string>
 
     <color name="new_tintuc_khac_1">#2a2d2f</color>
     <color name="new_tintuc_khac_2">#154177</color>

@@ -14,22 +14,23 @@
         android:scrollbars="none" >
 
         <RelativeLayout
+             android:id="@+id/dichvubanchay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/dimen_12dp" >
+            android:padding="@dimen/dimen_12dp" >
 
             <vnp.com.mimusic.view.textview.TextViewRegular
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:singleLine="true"
-                android:text="@string/dichvubanchay"
+                android:text="Dịch vụ được đề xuất"
                 android:textColor="#3d3d3d"
                 android:textSize="@dimen/dimen_16dp"
                />
 
             <vnp.com.mimusic.view.textview.TextViewLight
-                android:id="@+id/dichvubanchay"
+               
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
