@@ -10,7 +10,7 @@
         android:layout_x="0dip"
         android:layout_y="0dip"
         class="eu.janmuller.android.simplecropimage.CropImageView"
-        android:background="#55000000" />
+        android:background="@drawable/new_dichvu_bg" />
 
     <RelativeLayout
         android:layout_width="wrap_content"
