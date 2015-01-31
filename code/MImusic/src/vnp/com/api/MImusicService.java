@@ -501,6 +501,8 @@ public class MImusicService extends Service {
 							updateMauMoi(response, bundle.getString(DichVu.service_code));
 						} else if (API.API_R027.equals(api)) {
 							TinTuc.updateTintuc(MImusicService.this, response);
+						} else if (API.API_R028.equals(api)) {
+							TinTuc.updateTintuc(MImusicService.this, response);
 						}
 
 						return null;

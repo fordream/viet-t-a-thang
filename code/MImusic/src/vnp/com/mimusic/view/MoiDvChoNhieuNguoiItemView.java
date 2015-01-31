@@ -57,7 +57,7 @@ public class MoiDvChoNhieuNguoiItemView extends LinearLayout {
 		String avatar = cursor.getString(cursor.getColumnIndex(User.AVATAR));
 		String contact_id = Conts.getStringCursor(cursor, User.contact_id);
 
-		Conts.showAvatar(((ImageView) findViewById(R.id.menu_right_item_img_icon)), avatar, contact_id);
+		Conts.showAvatarNoImage(((ImageView) findViewById(R.id.menu_right_item_img_icon)), avatar, contact_id);
 
 		Conts.setTextViewCursor(findViewById(R.id.menu_right_item_tv_link), cursor, User.USER);
 

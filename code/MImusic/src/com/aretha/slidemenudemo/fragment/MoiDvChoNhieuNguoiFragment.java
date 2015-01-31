@@ -186,7 +186,7 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 								public void onAnimationEnd(Animation animation) {
 									moinhieudichvu_dialog_list_hor.removeView(addItemView);
 									Conts.showAlpha(MoiDvChoNhieuNguoiFragment.this.getView().findViewById(R.id.moi), (moinhieudichvu_dialog_list_hor.getChildCount() == 0));
-									
+
 								}
 							});
 							adaper.remove(_id);
@@ -214,7 +214,7 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 								public void onAnimationEnd(Animation animation) {
 									moinhieudichvu_dialog_list_hor.removeView(child);
 									Conts.showAlpha(MoiDvChoNhieuNguoiFragment.this.getView().findViewById(R.id.moi), (moinhieudichvu_dialog_list_hor.getChildCount() == 0));
-									
+
 								}
 							});
 							break;
@@ -231,7 +231,7 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 
 					moinhieudichvu_dialog_list_hor.addView(addItemView);
 					Conts.showAlpha(MoiDvChoNhieuNguoiFragment.this.getView().findViewById(R.id.moi), (moinhieudichvu_dialog_list_hor.getChildCount() == 0));
-					
+
 					addItemView.findViewById(R.id.x).setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
@@ -252,7 +252,7 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 								public void onAnimationEnd(Animation animation) {
 									moinhieudichvu_dialog_list_hor.removeView(addItemView);
 									Conts.showAlpha(MoiDvChoNhieuNguoiFragment.this.getView().findViewById(R.id.moi), (moinhieudichvu_dialog_list_hor.getChildCount() == 0));
-									
+
 								}
 							});
 							adaper.remove(sdt);
@@ -390,7 +390,7 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 				((TextView) findViewById(R.id.moinhieudichvu_item_tv_name)).setText(Conts.getName(cursor));
 				String avatar = cursor.getString(cursor.getColumnIndex(User.AVATAR));
 				String contact_id = Conts.getStringCursor(cursor, User.contact_id);
-				Conts.showAvatar(((ImageView) findViewById(R.id.imageView1)), avatar, contact_id);
+				Conts.showAvatarNoImage(((ImageView) findViewById(R.id.imageView1)), avatar, contact_id);
 			} else {
 				((TextView) findViewById(R.id.moinhieudichvu_item_tv_name)).setText(_id);
 			}

@@ -7,6 +7,7 @@ import org.json.JSONObject;
 import vnp.com.api.API;
 import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.api.test.ProgressConnect;
+import vnp.com.db.TinTuc;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
@@ -14,6 +15,7 @@ import vnp.com.mimusic.util.LogUtils;
 import vnp.com.mimusic.view.HeaderView;
 import vnp.com.mimusic.view.LoadingView;
 import vnp.com.mimusic.view.TinTucKhacItemView;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,38 +65,55 @@ public class ChiTietTintucFragment extends BaseFragment implements OnItemClickLi
 		return view;
 	}
 
+	private boolean updateTintucUI(String id) {
+		boolean needLoad = false;
+		Cursor cursor = TinTuc.queryFromId(getActivity(), id);
+		if (cursor != null) {
+			if (cursor.moveToNext()) {
+				chitiettintuc_item_tv_name.setText(Conts.getStringCursor(cursor, TinTuc.title));
+				chitiettintuc_item_tv_date.setText(Conts.getStringCursor(cursor, TinTuc.public_time));
+				home_item_right_control_2_tv.setText(Conts.getStringCursor(cursor, TinTuc.header));
+				needLoad = true;
+			}
+			cursor.close();
+		}
+
+		return needLoad;
+	}
+
 	private void callApi(Bundle arguments) {
+		final String id = arguments.getString("news_id");
+		boolean needLoad = !updateTintucUI(id);
 
-		executeHttps(RequestMethod.GET, API.API_R028, arguments, new IContsCallBack() {
-			@Override
-			public void onSuscess(JSONObject response) {
-				chitiettintuc_item_tv_name.setText(Conts.getString(response, "title"));
-				chitiettintuc_item_tv_date.setText(Conts.getString(response, "public_time"));
-				home_item_right_control_2_tv.setText(Conts.getString(response, "header"));
-				Conts.showView(loadingView, false);
-			}
+		if (needLoad)
+			executeHttps(RequestMethod.GET, API.API_R028, arguments, new IContsCallBack() {
+				@Override
+				public void onSuscess(JSONObject response) {
+					Conts.showView(loadingView, false);
+					updateTintucUI(id);
+				}
 
-			@Override
-			public void onStart() {
-				Conts.showView(loadingView, true);
-			}
+				@Override
+				public void onStart() {
+					Conts.showView(loadingView, true);
+				}
 
-			@Override
-			public void onError(String message) {
-				Conts.showView(loadingView, false);
-				Conts.showDialogThongbao(getActivity(), message);
-			}
+				@Override
+				public void onError(String message) {
+					Conts.showView(loadingView, false);
+					Conts.showDialogThongbao(getActivity(), message);
+				}
 
-			@Override
-			public void onError() {
-				onError("");
-			}
-		});
+				@Override
+				public void onError() {
+					onError("");
+				}
+			});
 
 		executeHttps(RequestMethod.GET, API.API_R029, arguments, new IContsCallBack() {
 			@Override
 			public void onStart() {
-
+				chitiet_tintuc_tintuckhac_list.removeAllViews();
 			}
 
 			@Override
@@ -103,8 +122,6 @@ public class ChiTietTintucFragment extends BaseFragment implements OnItemClickLi
 
 			@Override
 			public void onError(String message) {
-
-				Conts.showDialogThongbao(getActivity(), message);
 			}
 
 			@Override

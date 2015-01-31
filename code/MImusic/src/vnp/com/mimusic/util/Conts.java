@@ -406,9 +406,9 @@ public class Conts {
 			contentValues.put("btn_left_close", true);
 			contentValues.put("name", context.getString(R.string.thongbao));
 			contentValues.put("content", message);
-			
+
 			contentValues.put("typeThongBao", true);
-			
+
 			DangKyDialog dangKyDialog = new DangKyDialog(context, contentValues);
 			dangKyDialog.show();
 		} catch (Exception exception) {
@@ -782,11 +782,11 @@ public class Conts {
 	public static void showAvatarNoImage(ImageView menu_right_item_img_icon, String avatar, String contact_id) {
 		if (Conts.isBlank(avatar)) {
 			if (Conts.isBlank(contact_id)) {
-				menu_right_item_img_icon.setImageResource(R.drawable.no_image);
+				menu_right_item_img_icon.setImageResource(R.drawable.new_no_avatar);
 			} else {
 				Bitmap bitmap = Conts.getBitmapFromContactId(menu_right_item_img_icon.getContext(), contact_id);
 				if (bitmap == null) {
-					menu_right_item_img_icon.setImageResource(R.drawable.no_image);
+					menu_right_item_img_icon.setImageResource(R.drawable.new_no_avatar);
 				} else {
 					menu_right_item_img_icon.setImageBitmap(bitmap);
 				}
