@@ -14,6 +14,7 @@ import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.DichVu;
 import vnp.com.db.MauMoi;
 import vnp.com.db.Recomment;
+import vnp.com.db.TinTuc;
 import vnp.com.db.User;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
@@ -498,13 +499,17 @@ public class MImusicService extends Service {
 							saveRecomend(response);
 						} else if (API.API_R022.equals(api)) {
 							updateMauMoi(response, bundle.getString(DichVu.service_code));
+						} else if (API.API_R027.equals(api)) {
+							TinTuc.updateTintuc(MImusicService.this, response);
 						}
+
 						return null;
 					}
 
 					protected void onPostExecute(String result) {
-						if (contsCallBack != null)
+						if (contsCallBack != null) {
 							contsCallBack.onSuscess(response);
+						}
 
 						if (API.API_R013.equals(api)) {
 							callUpdateData();
@@ -571,7 +576,7 @@ public class MImusicService extends Service {
 			ContentValues contentValues = new ContentValues();
 			contentValues.put(User.USER, phone);
 			contentValues.put(User.NAME_CONTACT, name);
-			
+
 			contentValues.put(User.NAME_CONTACT_ENG, Conts.StringConnvert.convertVNToAlpha(name));
 			String contact_id = "";
 			if (avatarHashmap.containsKey(phone)) {

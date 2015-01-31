@@ -13,17 +13,6 @@ import android.net.Uri;
 public class DBProvider extends ContentProvider {
 	public static final String PROVIDER_NAME = "vnp.com.mimusic.db.DBProvider";
 
-	private void openDB() {
-		// closeDB();
-		db = new DBDatabaseHelper(getContext()).getWritableDatabase();
-	}
-
-	private void closeDB() {
-		if (db != null) {
-			db.close();
-		}
-	}
-
 	public DBProvider() {
 		super();
 	}
@@ -39,6 +28,7 @@ public class DBProvider extends ContentProvider {
 		if (uriMatcher == null) {
 			uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 			User.addUriMatcher(uriMatcher, PROVIDER_NAME);
+			TinTuc.addUriMatcher(uriMatcher, PROVIDER_NAME);
 			DichVu.addUriMatcher(uriMatcher, PROVIDER_NAME);
 			Recomment.addUriMatcher(uriMatcher, PROVIDER_NAME);
 			BangXepHangChiTiet.addUriMatcher(uriMatcher, PROVIDER_NAME);
@@ -56,6 +46,10 @@ public class DBProvider extends ContentProvider {
 
 		if (_uri == null) {
 			_uri = DichVu.insert(match, db, _uri, values);
+		}
+
+		if (_uri == null) {
+			_uri = TinTuc.insert(match, db, _uri, values);
 		}
 
 		if (_uri == null) {
@@ -86,7 +80,10 @@ public class DBProvider extends ContentProvider {
 		if (c == null) {
 			c = DichVu.query(match, db, uri, projection, selection, selectionArgs, sortOrder);
 		}
-
+		// cursor == null --> request othr
+		if (c == null) {
+			c = TinTuc.query(match, db, uri, projection, selection, selectionArgs, sortOrder);
+		}
 		if (c == null) {
 			c = Recomment.query(match, db, uri, projection, selection, selectionArgs, sortOrder);
 		}
@@ -120,7 +117,10 @@ public class DBProvider extends ContentProvider {
 		if (count == -2) {
 			count = DichVu.delete(match, db, uri, selection, selectionArgs);
 		}
-
+		// count == -2 delete other
+		if (count == -2) {
+			count = TinTuc.delete(match, db, uri, selection, selectionArgs);
+		}
 		if (count == -2) {
 			count = Recomment.delete(match, db, uri, selection, selectionArgs);
 		}
@@ -153,7 +153,9 @@ public class DBProvider extends ContentProvider {
 		if (count == -2) {
 			count = DichVu.update(match, db, uri, values, selection, selectionArgs);
 		}
-
+		if (count == -2) {
+			count = TinTuc.update(match, db, uri, values, selection, selectionArgs);
+		}
 		if (count == -2) {
 			count = Recomment.update(match, db, uri, values, selection, selectionArgs);
 		}
@@ -178,6 +180,7 @@ public class DBProvider extends ContentProvider {
 		User.getType(mMap);
 		DichVu.getType(mMap);
 		Recomment.getType(mMap);
+		TinTuc.getType(mMap);
 		BangXepHangChiTiet.getType(mMap);
 		MauMoi.getType(mMap);
 		String type = mMap.get(uriMatcher.match(uri));

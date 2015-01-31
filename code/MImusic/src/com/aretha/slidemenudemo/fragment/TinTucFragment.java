@@ -1,25 +1,23 @@
 package com.aretha.slidemenudemo.fragment;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import vnp.com.api.API;
 import vnp.com.api.RestClient.RequestMethod;
-import vnp.com.api.test.ProgressConnect;
+import vnp.com.db.TinTuc;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.adapter.TintucAdaper;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
-import vnp.com.mimusic.util.LogUtils;
 import vnp.com.mimusic.view.LoadingView;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ListView;
 
 public class TinTucFragment extends BaseFragment implements OnItemClickListener, View.OnClickListener {
 	@Override
@@ -37,24 +35,36 @@ public class TinTucFragment extends BaseFragment implements OnItemClickListener,
 		bangxephang_list = (vnp.com.mimusic.view.MusicListView) view.findViewById(R.id.tintuc_list);
 		bangxephang_list.setOnItemClickListener(this);
 
-		bangxephang_list.setAdapter(new TintucAdaper(getActivity(), new JSONArray()));
+		// bangxephang_list.setAdapter(new TintucAdaper(getActivity(), new
+		// JSONArray()));
 
 		executeHttps(RequestMethod.GET, API.API_R027, new Bundle(), new IContsCallBack() {
 
 			@Override
 			public void onSuscess(JSONObject response) {
 				Conts.showView(loadingView1, false);
-				if (response != null) {
+				// if (response != null) {
+				//
+				// try {
+				// JSONArray jsonArray = response.getJSONArray("data");
+				// if (jsonArray.length() == 0) {
+				// bangxephang_list.setTextNoData(true, R.string.nodata);
+				// } else {
+				// bangxephang_list.setAdapter(new TintucAdaper(getActivity(),
+				// jsonArray));
+				// }
+				// } catch (Exception exception) {
+				// }
+				// }
+				Cursor cursor = TinTuc.queryFromId(getActivity(), null);
 
-					try {
-						JSONArray jsonArray = response.getJSONArray("data");
-						if (jsonArray.length() == 0) {
-							bangxephang_list.setTextNoData(true, R.string.nodata);
-						} else {
-							bangxephang_list.setAdapter(new TintucAdaper(getActivity(), jsonArray));
-						}
-					} catch (Exception exception) {
-//						LogUtils.e("ProgressConnect", exception);
+				if (cursor == null) {
+					bangxephang_list.setTextNoData(true, R.string.nodata);
+				} else {
+					if (cursor.getCount() == 0) {
+						bangxephang_list.setTextNoData(true, R.string.nodata);
+					} else {
+						bangxephang_list.setAdapter(new TintucAdaper(getActivity(), cursor));
 					}
 				}
 			}
@@ -67,7 +77,7 @@ public class TinTucFragment extends BaseFragment implements OnItemClickListener,
 			@Override
 			public void onError(String message) {
 				bangxephang_list.setTextNoData(true, message);
-				//Conts.showDialogThongbao(getActivity(), message);
+				// Conts.showDialogThongbao(getActivity(), message);
 				Conts.showView(loadingView1, false);
 			}
 

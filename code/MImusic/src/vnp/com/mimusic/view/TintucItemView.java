@@ -2,10 +2,12 @@ package vnp.com.mimusic.view;
 
 import org.json.JSONObject;
 
+import vnp.com.db.TinTuc;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.ImageLoaderUtils;
 import android.content.Context;
+import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -29,20 +31,20 @@ public class TintucItemView extends LinearLayout {
 		((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.tintuc_item, this);
 	}
 
-	public void setData(JSONObject item) {
+	public void setData(Cursor item) {
 		ImageView tintuc_item_img_icon = (ImageView) findViewById(R.id.tintuc_item_img_icon);
 		TextView tintuc_item_tv_name = (TextView) findViewById(R.id.tintuc_item_tv_name);
 		TextView tintuc_item_tv_date = (TextView) findViewById(R.id.tintuc_item_tv_date);
 		TextView tintuc_item_tv_content = (TextView) findViewById(R.id.tintuc_item_tv_content);
-		tintuc_item_tv_name.setText(Conts.getString(item, "title"));
-		tintuc_item_tv_date.setText(Conts.getString(item, "public_time"));
-		tintuc_item_tv_content.setText(Conts.getString(item, "header"));
+		tintuc_item_tv_name.setText(Conts.getStringCursor(item, TinTuc.title));
+		tintuc_item_tv_date.setText(Conts.getStringCursor(item, TinTuc.public_time));
+		tintuc_item_tv_content.setText(Conts.getStringCursor(item, TinTuc.header));
 
-		String images = Conts.getString(item, "images");
+		String images = Conts.getStringCursor(item, TinTuc.images);
 		if (!Conts.isBlank(images)) {
 			images = images.replace("https", "http");
 		}
-		
+
 		ImageLoaderUtils.getInstance(getContext()).DisplayImage(images, tintuc_item_img_icon, BitmapFactory.decodeResource(getResources(), R.drawable.no_avatar));
 	}
 }

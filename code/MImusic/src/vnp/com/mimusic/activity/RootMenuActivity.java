@@ -11,6 +11,7 @@ import org.json.JSONObject;
 import vnp.com.api.API;
 import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.DichVu;
+import vnp.com.db.TinTuc;
 import vnp.com.db.User;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.VApplication;
@@ -302,11 +303,11 @@ public class RootMenuActivity extends FragmentActivity {
 	}
 
 	public void gotoChiTietTinTuc(AdapterView<?> parent, View view, int position, long id) {
-		JSONObject data = (JSONObject) parent.getItemAtPosition(position);
+		Cursor data = (Cursor) parent.getItemAtPosition(position);
 		Intent intent = new Intent(this, RootMenuActivity.class);
 		intent.putExtra("type", Conts.CHITIETTINTUC);
-		intent.putExtra("id", Conts.getString(data, "id"));
-		intent.putExtra("news_id", Conts.getString(data, "id"));
+		intent.putExtra("id", Conts.getStringCursor(data, TinTuc.ID));
+		intent.putExtra("news_id", Conts.getStringCursor(data, TinTuc.ID));
 		getParent().startActivity(intent);
 		overridePendingTransitionStartActivity();
 	}
