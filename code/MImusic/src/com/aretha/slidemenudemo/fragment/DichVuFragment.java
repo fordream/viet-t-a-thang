@@ -9,6 +9,7 @@ import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.adapter.DichVuAdapter;
 import vnp.com.mimusic.base.diablog.DangKyDialog;
+import vnp.com.mimusic.main.NewMusicSlideMenuActivity;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
 import vnp.com.mimusic.view.LoadingView;
@@ -23,6 +24,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 public class DichVuFragment extends BaseFragment implements OnItemClickListener, View.OnClickListener {
@@ -48,37 +50,52 @@ public class DichVuFragment extends BaseFragment implements OnItemClickListener,
 	private LoadingView loadingView1;
 
 	@Override
+	public void onCLickButtonLeft() {
+		((NewMusicSlideMenuActivity) getActivity().getParent()).openMenuLeft();
+	}
+
+	@Override
+	public void onCLickButtonRight() {
+		((NewMusicSlideMenuActivity) getActivity().getParent()).openMenuRight();
+	}
+
+	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.dichvu, null);
+		createHeader(getString(R.string.dichvu), true, true);
+
+		((LinearLayout) view.findViewById(R.id.header)).addView(getHeaderView());
+
 		loadingView1 = (LoadingView) view.findViewById(R.id.loadingView1);
 		dichvu_list = (ListView) view.findViewById(R.id.dichvu_list);
 		dichvu_list.setOnItemClickListener(this);
-//		Bundle bundle = new Bundle();
-//
-//		execute(RequestMethod.GET, API.API_R004, bundle, new IContsCallBack() {
-//			@Override
-//			public void onStart() {
-//				Conts.showView(loadingView1, true);
-//			}
-//
-//			@Override
-//			public void onSuscess(JSONObject response) {
-//				Conts.showView(loadingView1, false);
-//				callSHowData();
-//			}
-//
-//			@Override
-//			public void onError(String message) {
-//				Conts.showView(loadingView1, false);
-//				Conts.toast(getActivity(), message);
-//			}
-//
-//			@Override
-//			public void onError() {
-//				Conts.showView(loadingView1, false);
-//				Conts.toast(getActivity(), "onError");
-//			}
-//		});
+		// Bundle bundle = new Bundle();
+		//
+		// execute(RequestMethod.GET, API.API_R004, bundle, new IContsCallBack()
+		// {
+		// @Override
+		// public void onStart() {
+		// Conts.showView(loadingView1, true);
+		// }
+		//
+		// @Override
+		// public void onSuscess(JSONObject response) {
+		// Conts.showView(loadingView1, false);
+		// callSHowData();
+		// }
+		//
+		// @Override
+		// public void onError(String message) {
+		// Conts.showView(loadingView1, false);
+		// Conts.toast(getActivity(), message);
+		// }
+		//
+		// @Override
+		// public void onError() {
+		// Conts.showView(loadingView1, false);
+		// Conts.toast(getActivity(), "onError");
+		// }
+		// });
 		callSHowData();
 		Conts.showView(loadingView1, false);
 		final EditText dichvu_edittext_search = (EditText) view.findViewById(R.id.dichvu_edittext_search);

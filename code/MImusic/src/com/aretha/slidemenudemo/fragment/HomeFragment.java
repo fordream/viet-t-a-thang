@@ -11,6 +11,7 @@ import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.adapter.NewHomeAdapter;
 import vnp.com.mimusic.adapter.data.NewHomeItem;
 import vnp.com.mimusic.base.diablog.DangKyDialog;
+import vnp.com.mimusic.main.NewMusicSlideMenuActivity;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
 import vnp.com.mimusic.view.LoadingView;
@@ -34,6 +35,16 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 	private LoadingView loadingView;
 
 	@Override
+	public void onCLickButtonLeft() {
+		((NewMusicSlideMenuActivity) getActivity().getParent()).openMenuLeft();
+	}
+
+	@Override
+	public void onCLickButtonRight() {
+		((NewMusicSlideMenuActivity) getActivity().getParent()).openMenuRight();
+	}
+
+	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 	}
@@ -48,8 +59,11 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.home, null);
+
+		createHeader(getString(R.string.kenhbanvas), true, true);
 		loadingView = Conts.getView(view, R.id.loadingView1);
 		list = (MusicListView) view.findViewById(R.id.list);
+
 		list.setOnItemClickListener(this);
 		home_header = ((LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.new_home_header, null);
 
@@ -61,6 +75,8 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 				(((RootMenuActivity) getActivity())).homeXemall(getString(R.string.dichvubanchay));
 			}
 		});
+
+		list.addHeaderView(getHeaderView());
 		list.addHeaderView(home_header);
 
 		Bundle bundle = new Bundle();

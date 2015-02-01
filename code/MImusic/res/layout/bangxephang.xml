@@ -7,6 +7,14 @@
 
     <!-- @drawable/bangxephang_list_bg -->
 
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+    </LinearLayout>
+
     <vnp.com.mimusic.view.BangXepHangHeaderView
         android:id="@+id/bangxephang_bangxephangheader"
         android:layout_width="match_parent"

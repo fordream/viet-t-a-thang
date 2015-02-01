@@ -135,6 +135,7 @@
     </LinearLayout>
 
     <vnp.com.mimusic.view.HeaderView
+        android:visibility="gone"
         android:id="@+id/tab_headerview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

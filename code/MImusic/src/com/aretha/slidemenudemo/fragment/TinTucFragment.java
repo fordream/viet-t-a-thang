@@ -8,6 +8,7 @@ import vnp.com.db.TinTuc;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.adapter.TintucAdaper;
+import vnp.com.mimusic.main.NewMusicSlideMenuActivity;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
 import vnp.com.mimusic.view.LoadingView;
@@ -29,10 +30,24 @@ public class TinTucFragment extends BaseFragment implements OnItemClickListener,
 	vnp.com.mimusic.view.MusicListView bangxephang_list;
 
 	@Override
+	public void onCLickButtonLeft() {
+		// super.onCLickButtonLeft();
+		((NewMusicSlideMenuActivity) getActivity().getParent()).openMenuLeft();
+	}
+
+	@Override
+	public void onCLickButtonRight() {
+		// super.onCLickButtonRight();
+		((NewMusicSlideMenuActivity) getActivity().getParent()).openMenuRight();
+	}
+
+	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.tintuc, null);
+		createHeader(getString(R.string.tintuc), true, true);
 		loadingView1 = (LoadingView) view.findViewById(R.id.loadingView1);
 		bangxephang_list = (vnp.com.mimusic.view.MusicListView) view.findViewById(R.id.tintuc_list);
+		bangxephang_list.addHeaderView(getHeaderView());
 		bangxephang_list.setOnItemClickListener(this);
 
 		// bangxephang_list.setAdapter(new TintucAdaper(getActivity(), new

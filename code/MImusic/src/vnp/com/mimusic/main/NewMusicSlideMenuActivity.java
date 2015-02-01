@@ -28,14 +28,11 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
-import android.widget.TabHost;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabSpec;
 
-import com.aretha.slidemenu.ISlideMenuListener;
-import com.aretha.slidemenu.SlideMenu;
-import com.aretha.slidemenu.SlideMenu.OnSlideStateChangeListener;
 import com.vnp.core.crash.CrashExceptionHandler;
 
 public class NewMusicSlideMenuActivity extends TabActivity {

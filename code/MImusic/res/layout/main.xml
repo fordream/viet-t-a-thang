@@ -28,7 +28,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:layout_marginBottom="@dimen/dimen_50dp"
-                    android:layout_marginTop="@dimen/dimen_45dp" />
+                    android:layout_marginTop="@dimen/dimen_0dp" />
 
                 <vnp.com.mimusic.view.TabView
                     android:id="@+id/mactivityslide_menu_tabview"
