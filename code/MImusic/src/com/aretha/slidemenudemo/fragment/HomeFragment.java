@@ -13,23 +13,19 @@ import vnp.com.mimusic.adapter.data.NewHomeItem;
 import vnp.com.mimusic.base.diablog.DangKyDialog;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
-import vnp.com.mimusic.util.ImageLoaderUtils;
 import vnp.com.mimusic.view.LoadingView;
 import vnp.com.mimusic.view.MusicListView;
+import vnp.com.mimusic.view.ReCommentDichVuItemView;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ImageSwitcher;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 public class HomeFragment extends BaseFragment implements OnItemClickListener, View.OnClickListener {
@@ -56,6 +52,7 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 		list = (MusicListView) view.findViewById(R.id.list);
 		list.setOnItemClickListener(this);
 		home_header = ((LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.new_home_header, null);
+
 		Conts.showView(home_header.findViewById(R.id.home_header_main), false);
 
 		home_header.findViewById(R.id.dichvubanchay).setOnClickListener(new View.OnClickListener() {
@@ -99,29 +96,46 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 		int current = list.getFirstVisiblePosition();
 		LinearLayout gallery = Conts.getView(home_header, R.id.gallery1);
 
-		if (gallery.getChildCount() <= 0) {
-			Cursor cursor = Recomment.getCursorFromDichvu(getActivity(), -1);
-			if (cursor != null) {
-				if (cursor.getCount() > 0) {
-					Conts.showView(home_header.findViewById(R.id.home_header_main), true);
+		// if (gallery.getChildCount() <= 0) {
 
-					while (cursor.moveToNext()) {
-						ReCommentDichVuItemView dichVuItemView = new ReCommentDichVuItemView(getActivity());
-						gallery.addView(dichVuItemView);
+		((ReCommentDichVuItemView) Conts.getView(gallery, R.id.recommen1)).setData(null);
+		((ReCommentDichVuItemView) Conts.getView(gallery, R.id.recommen2)).setData(null);
+		((ReCommentDichVuItemView) Conts.getView(gallery, R.id.recommen3)).setData(null);
+		((ReCommentDichVuItemView) Conts.getView(gallery, R.id.recommen4)).setData(null);
+		Cursor cursor = Recomment.getCursorFromDichvu(getActivity(), 3);
+		if (cursor != null) {
+			if (cursor.getCount() > 0) {
+				Conts.showView(home_header.findViewById(R.id.home_header_main), true);
+				while (cursor.moveToNext()) {
+					ReCommentDichVuItemView dichVuItemView = null;
+					if (cursor.getPosition() == 0) {
+						dichVuItemView = Conts.getView(gallery, R.id.recommen1);
+					} else if (cursor.getPosition() == 1) {
+						dichVuItemView = Conts.getView(gallery, R.id.recommen2);
+					} else if (cursor.getPosition() == 2) {
+						dichVuItemView = Conts.getView(gallery, R.id.recommen3);
+					}
+					// ReCommentDichVuItemView dichVuItemView = new
+					// ReCommentDichVuItemView(getActivity());
+					// gallery.addView(dichVuItemView);
+					if (dichVuItemView != null) {
 						dichVuItemView.setData(cursor);
-
 						dichVuItemView.setOnClickListener(new RecomendDvOnClickListener(Conts.getStringCursor(cursor, DichVu.ID)));
 					}
-
-				} else {
-					Conts.showView(home_header.findViewById(R.id.home_header_main), false);
-
 				}
-				cursor.close();
 			} else {
 				Conts.showView(home_header.findViewById(R.id.home_header_main), false);
 
 			}
+			cursor.close();
+			// }
+			// else {
+			// Conts.showView(home_header.findViewById(R.id.home_header_main),
+			// false);
+			// }
+		} else {
+			Conts.showView(home_header.findViewById(R.id.home_header_main), true);
+
 		}
 		if (homeAdapter == null) {
 			list.setAdapter(homeAdapter = new NewHomeAdapter(getActivity()) {
@@ -170,59 +184,6 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 		if (homeItem.type == 2) {
 			// call to dich vu
 			(((RootMenuActivity) getActivity())).gotoChiTietDichVuFromHome(parent, view, position, id);
-		}
-	}
-
-	// private class GalleryAdapter extends CursorAdapter {
-	//
-	// public GalleryAdapter(Context context, Cursor c) {
-	// super(context, c);
-	// }
-	//
-	// @Override
-	// public void bindView(View convertView, Context context, Cursor cursor) {
-	// if (convertView == null) {
-	// convertView = new DichVuItemView(context);
-	// }
-	//
-	// ((DichVuItemView) convertView).setData(cursor);
-	// }
-	//
-	// @Override
-	// public View newView(Context context, Cursor arg1, ViewGroup arg2) {
-	// return new DichVuItemView(context);
-	// }
-	// }
-
-	public class ReCommentDichVuItemView extends LinearLayout {
-		public ReCommentDichVuItemView(Context context) {
-			super(context);
-			init();
-		}
-
-		public void setData(Cursor cursor) {
-			ImageView home_item_img_icon = (ImageView) findViewById(R.id.icon);
-			String service_icon = cursor.getString(cursor.getColumnIndex(DichVu.service_icon)) + "";
-			ImageLoaderUtils.getInstance(getContext()).DisplayImage(service_icon, home_item_img_icon, BitmapFactory.decodeResource(getResources(), R.drawable.no_image));
-			Conts.setTextViewCursor(findViewById(R.id.name), cursor, DichVu.service_name);
-
-			int position = cursor.getPosition();
-			if (position % 3 == 0) {
-				home_item_img_icon.setBackgroundResource(R.drawable.new_home_dv_bg_1);
-			} else if (position % 3 == 1) {
-				home_item_img_icon.setBackgroundResource(R.drawable.new_home_dv_bg_2);
-			} else if (position % 3 == 2) {
-				home_item_img_icon.setBackgroundResource(R.drawable.new_home_dv_bg_3);
-			}
-
-			int poistion = cursor.getPosition();
-
-			Conts.getView(this, R.id.left).setVisibility(poistion == 0 ? View.VISIBLE : View.GONE);
-
-		}
-
-		private void init() {
-			((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.new_home_gallery_item, this);
 		}
 	}
 

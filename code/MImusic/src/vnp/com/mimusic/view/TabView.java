@@ -77,16 +77,16 @@ public class TabView extends LinearLayout {
 
 		@Override
 		public void run() {
-//			int width = findViewById(R.id.tab_selected_main).getWidth();
-//			TranslateAnimation animation = new TranslateAnimation(width / 4 * index, width / 4 * next, 0, 0);
-//			animation.setDuration(0);
-//			animation.setFillAfter(true);
-//			findViewById(R.id.tab_selected).startAnimation(animation);
+			int width = findViewById(R.id.tab_selected_main).getWidth();
+			TranslateAnimation animation = new TranslateAnimation(width / 4 * index, width / 4 * next, 0, 0);
+			animation.setDuration(100);
+			animation.setFillAfter(true);
+			findViewById(R.id.tab_selected).startAnimation(animation);
 			index = next;
-			findViewById(R.id.tab_1).setBackgroundResource(next == 0 ? R.drawable.new_tabs_selected : R.drawable.tranfer);
-			findViewById(R.id.tab_2).setBackgroundResource(next == 1 ? R.drawable.new_tabs_selected : R.drawable.tranfer);
-			findViewById(R.id.tab_3).setBackgroundResource(next == 3 ? R.drawable.new_tabs_selected : R.drawable.tranfer);
-			findViewById(R.id.tab_4).setBackgroundResource(next == 2 ? R.drawable.new_tabs_selected : R.drawable.tranfer);
+//			findViewById(R.id.tab_1).setBackgroundResource(next == 0 ? R.drawable.new_tabs_selected : R.drawable.tranfer);
+//			findViewById(R.id.tab_2).setBackgroundResource(next == 1 ? R.drawable.new_tabs_selected : R.drawable.tranfer);
+//			findViewById(R.id.tab_3).setBackgroundResource(next == 3 ? R.drawable.new_tabs_selected : R.drawable.tranfer);
+//			findViewById(R.id.tab_4).setBackgroundResource(next == 2 ? R.drawable.new_tabs_selected : R.drawable.tranfer);
 
 		}
 	}
