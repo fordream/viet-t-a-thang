@@ -14,7 +14,6 @@
         android:weightSum="4" >
 
         <LinearLayout
-            android:visibility="gone"
             android:id="@+id/tab_selected"
             android:layout_width="@dimen/dimen_1dp"
             android:layout_height="match_parent"
@@ -37,7 +36,7 @@
             android:layout_width="@dimen/dimen_1dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/new_tabs_selected"
+        
             android:gravity="center"
             
             android:orientation="vertical" >

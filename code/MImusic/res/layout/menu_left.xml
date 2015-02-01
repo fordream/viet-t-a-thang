@@ -9,7 +9,7 @@
     <RelativeLayout
         android:id="@+id/menu_left_header"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_280dp"
+        android:layout_height="@dimen/dimen_150dp"
         android:background="@drawable/cover_bg"
         android:orientation="vertical" >
 
@@ -18,17 +18,19 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop" />
+        <!-- android:layout_centerInParent="true" android:layout_marginLeft="@dimen/dimen_15dp" -->
 
         <RelativeLayout
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dimen_34dp"
             android:id="@+id/xmain"
-            android:layout_width="@dimen/dimen_130dp"
-            android:layout_height="@dimen/dimen_130dp"
-            android:layout_centerInParent="true"
+            android:layout_width="@dimen/dimen_62dp"
+            android:layout_height="@dimen/dimen_62dp"
             android:orientation="vertical" >
 
             <RelativeLayout
-                android:layout_width="@dimen/dimen_120dp"
-                android:layout_height="@dimen/dimen_120dp"
+                android:layout_width="@dimen/dimen_58dp"
+                android:layout_height="@dimen/dimen_58dp"
                 android:layout_centerInParent="true" >
 
                 <vnp.com.mimusic.view.CustomImageView
@@ -53,19 +55,22 @@
                 android:background="@drawable/avatar_bg" />
         </RelativeLayout>
 
+        <!--  android:layout_below="@+id/xmain"
+          -->
         <vnp.com.mimusic.view.textview.TextViewLight
             android:id="@+id/menu_left_tv_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_below="@+id/xmain"
-            android:gravity="center"
+           android:gravity="center"
+            android:layout_marginBottom="@dimen/dimen_15dp"
+           	android:layout_marginLeft="@dimen/dimen_15dp"
+           	android:layout_marginRight="@dimen/dimen_15dp"
             android:maxLines="2"
             android:singleLine="true"
-            android:layout_marginBottom="@dimen/dimen_10dp"
             android:text="Hoài Anh (0968678678)"
             android:textColor="#515a5e"
-            android:textSize="@dimen/dimen_16dp" />
+            android:textSize="@dimen/dimen_12dp" />
     </RelativeLayout>
 
     <vnp.com.mimusic.view.MusicListView
@@ -74,9 +79,9 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/menu_left_footer"
         android:layout_below="@+id/menu_left_header"
+        android:background="@drawable/menu_left_list_bg"
         android:divider="@drawable/tranfer"
-        android:dividerHeight="0px"
-        android:background="@drawable/menu_left_list_bg" >
+        android:dividerHeight="0px" >
     </vnp.com.mimusic.view.MusicListView>
 
     <vnp.com.mimusic.view.MenuLeftFooterView

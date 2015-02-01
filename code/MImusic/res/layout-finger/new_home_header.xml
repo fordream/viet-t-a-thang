@@ -14,7 +14,7 @@
         android:scrollbars="none" >
 
         <RelativeLayout
-             android:id="@+id/dichvubanchay"
+            android:id="@+id/dichvubanchay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/dimen_12dp" >
@@ -26,11 +26,9 @@
                 android:singleLine="true"
                 android:text="Dịch vụ được đề xuất"
                 android:textColor="#3d3d3d"
-                android:textSize="@dimen/dimen_16dp"
-               />
+                android:textSize="@dimen/dimen_16dp" />
 
             <vnp.com.mimusic.view.textview.TextViewLight
-               
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -41,7 +39,7 @@
                 android:textSize="@dimen/dimen_11dp" />
         </RelativeLayout>
 
-        <HorizontalScrollView
+        <RelativeLayout
             android:id="@+id/horizontalScrollView1"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/dimen_138dp"
@@ -54,16 +52,38 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal" >
+
+                <vnp.com.mimusic.view.ReCommentDichVuItemView
+                    android:id="@+id/recommen1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" >
+
+                </vnp.com.mimusic.view.ReCommentDichVuItemView>
+                  <vnp.com.mimusic.view.ReCommentDichVuItemView
+                       android:id="@+id/recommen2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" >
+                </vnp.com.mimusic.view.ReCommentDichVuItemView>
+                  <vnp.com.mimusic.view.ReCommentDichVuItemView
+                       android:id="@+id/recommen3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" >
+                </vnp.com.mimusic.view.ReCommentDichVuItemView>
+                  <vnp.com.mimusic.view.ReCommentDichVuItemView
+                       android:id="@+id/recommen4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" >
+                </vnp.com.mimusic.view.ReCommentDichVuItemView>
             </LinearLayout>
-        </HorizontalScrollView>
+        </RelativeLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="2px"
-            android:visibility="gone"
             android:layout_marginLeft="@dimen/dimen_12dp"
             android:layout_marginRight="@dimen/dimen_12dp"
-            android:background="@drawable/new_home_line" />
+            android:background="@drawable/new_home_line"
+            android:visibility="gone" />
     </LinearLayout>
 
 </LinearLayout>
