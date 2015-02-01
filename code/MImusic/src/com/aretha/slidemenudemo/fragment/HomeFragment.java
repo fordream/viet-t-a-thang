@@ -27,6 +27,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 
 public class HomeFragment extends BaseFragment implements OnItemClickListener, View.OnClickListener {
@@ -78,7 +79,7 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 
 		list.addHeaderView(getHeaderView());
 		list.addHeaderView(home_header);
-
+		list.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1));
 		Bundle bundle = new Bundle();
 		execute(RequestMethod.GET, API.API_R026, bundle, new IContsCallBack() {
 			@Override
