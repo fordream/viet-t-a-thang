@@ -9,6 +9,7 @@
 
     <View
         android:layout_width="@dimen/dimen_12dp"
+        android:id="@+id/xleft"
         android:layout_height="fill_parent"
         android:background="@drawable/menu_right_space_1" />
 

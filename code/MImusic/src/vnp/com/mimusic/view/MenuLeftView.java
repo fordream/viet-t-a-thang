@@ -41,7 +41,7 @@ public class MenuLeftView extends LinearLayout {
 
 	private void init() {
 		((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.menu_left, this);
-
+		findViewById(R.id.xleft).setOnClickListener(null);
 		findViewById(R.id.menu_left_header).setOnClickListener(null);
 		findViewById(R.id.menu_left_footer).setOnClickListener(null);
 		ListView menu_left_list = (ListView) findViewById(R.id.menu_left_list);

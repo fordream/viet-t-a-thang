@@ -51,6 +51,7 @@ public class MenuRightView extends LinearLayout {
 
 	private void init() {
 		((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.menu_right, this);
+		findViewById(R.id.xleft).setOnClickListener(null);
 	}
 
 	private MenuRightAdaper adaper;
@@ -59,15 +60,19 @@ public class MenuRightView extends LinearLayout {
 		final EditText menu_right_editext = (EditText) findViewById(R.id.menu_right_editext);
 		ImageView menu_right_img_search = (ImageView) findViewById(R.id.menu_right_img_search);
 		com.woozzu.android.widget.IndexableListView menu_right_list = (com.woozzu.android.widget.IndexableListView) findViewById(R.id.menu_right_list);
-		
+
 		String where = String.format("%s = '0'", User.STATUS);
 		Cursor cursor = getContext().getContentResolver().query(User.CONTENT_URI, null, where, null, User.NAME_CONTACT);
-		adaper = new MenuRightAdaper(getContext(), cursor) {
-			@Override
-			public void openMoi(ContentValues contentValues) {
+		if (adaper == null) {
+			adaper = new MenuRightAdaper(getContext(), cursor) {
+				@Override
+				public void openMoi(ContentValues contentValues) {
 
-			}
-		};
+				}
+			};
+		} else {
+			adaper.changeCursor(cursor);
+		}
 		adaper.setTextSearch(menu_right_editext.getText().toString().trim());
 		menu_right_list.setAdapter(adaper);
 		menu_right_editext.addTextChangedListener(new TextWatcher() {
@@ -85,7 +90,7 @@ public class MenuRightView extends LinearLayout {
 			@Override
 			public void afterTextChanged(Editable s) {
 				adaper.setTextSearch(menu_right_editext.getText().toString().trim());
-				//adaper.notifyDataSetChanged();
+				// adaper.notifyDataSetChanged();
 			}
 		});
 
