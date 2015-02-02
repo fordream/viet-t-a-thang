@@ -73,7 +73,7 @@
                     android:layout_height="@dimen/dimen_50dp"
                     android:background="@drawable/tinkhac_bg"
                     android:singleLine="true"
-                    android:text="@string/tinkhac"
+                    android:text="@string/tinlienquan"
                     android:paddingLeft="@dimen/dimen_12dp"
                     android:textColor="#475055"
                     android:gravity="center_vertical"
