@@ -126,8 +126,8 @@ public class ChiTietTintucFragment extends BaseFragment implements OnItemClickLi
 
 			@Override
 			public void onSuscess(JSONObject response) {
-				chitiet_tintuc_tintuckhac_list.removeAllViews();
 				try {
+					chitiet_tintuc_tintuckhac_list.removeAllViews();
 					JSONArray jsonArray = response.getJSONArray("data");
 					for (int i = 0; i < jsonArray.length(); i++) {
 						final JSONObject object = jsonArray.getJSONObject(i);
@@ -144,7 +144,7 @@ public class ChiTietTintucFragment extends BaseFragment implements OnItemClickLi
 							}
 						});
 					}
-				} catch (JSONException e) {
+				} catch (Exception e) {
 				}
 			}
 		});
