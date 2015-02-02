@@ -55,7 +55,7 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 	public void onResume() {
 		super.onResume();
 		if (loadingView.getVisibility() == View.GONE) {
-			updateUI(updateSuccess);
+			//updateUI(updateSuccess);
 		}
 	}
 
