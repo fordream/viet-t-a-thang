@@ -95,6 +95,13 @@ public abstract class MenuRightAdaper extends CursorAdapter implements SectionIn
 		};
 	}
 
+//	@Override
+//	public void changeCursor(Cursor cursor) {
+//		super.changeCursor(cursor);
+//		mAlphabetIndexer = new AlphabetIndexer(cursor, cursor.getColumnIndex(User.NAME_CONTACT), " ABCDEFGHIJKLMNOPQRTSUVWXYZ");
+//		mAlphabetIndexer.setCursor(cursor);
+//	}
+
 	@Override
 	public View newView(Context context, Cursor cursor, ViewGroup parent) {
 		return new MenuRightItemView(context);
