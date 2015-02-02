@@ -177,15 +177,6 @@ public class RootMenuActivity extends FragmentActivity {
 		if (count > 1) {
 			fragmentManager.popBackStack();
 		} else if (count == 1) {
-			List<Fragment> fragments = fragmentManager.getFragments();
-
-			// if (fragments.get(fragments.size() - 1) instanceof
-			// BangXepHangFragment) {
-			// if (((BangXepHangFragment) fragments.get(fragments.size() -
-			// 1)).onBackPressed()) {
-			// return;
-			// }
-			// }
 			try {
 				((vnp.com.mimusic.main.NewMusicSlideMenuActivity) getParent()).finish(true);
 			} catch (Exception exception) {
