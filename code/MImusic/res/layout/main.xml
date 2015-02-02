@@ -41,14 +41,14 @@
 
     <vnp.com.mimusic.view.MenuLeftView
         android:id="@+id/mactivity_slidemenu_menuleft"
-        android:layout_width="@dimen/dimen_270dp"
+        android:layout_width="@dimen/dimen_282dp"
         android:layout_height="match_parent"
         android:layout_gravity="start" >
     </vnp.com.mimusic.view.MenuLeftView>
 
     <vnp.com.mimusic.view.MenuRightView
         android:id="@+id/mactivity_menu_right"
-        android:layout_width="@dimen/dimen_270dp"
+        android:layout_width="@dimen/dimen_282dp"
         android:layout_height="match_parent"
         android:layout_gravity="end" >
     </vnp.com.mimusic.view.MenuRightView>
