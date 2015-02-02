@@ -175,7 +175,7 @@
     <string name="xemtatca">Xem tất cả ></string>
     <string name="moithanhvien">Người bạn được đề xuất mời</string>
     <string name="dichvuhot">Dịch vụ bán chạy</string>
-    <string name="dichvudexuat">Dịch vụ đề xuất</string>
+    <string name="dichvudexuat">Dịch vụ được đề xuất</string>
 
     <color name="new_tintuc_khac_1">#2a2d2f</color>
     <color name="new_tintuc_khac_2">#154177</color>
