@@ -186,7 +186,7 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 			// uploadAvatar(path);
 
 			startCropImage();
-		} else if (REQUEST_CODE_CROP_IMAGE == requestCode) {
+		} else if (REQUEST_CODE_CROP_IMAGE == requestCode && resultCode == Activity.RESULT_OK) {
 			String path = data.getStringExtra(CropImage.IMAGE_PATH);
 			if (path == null) {
 				return;

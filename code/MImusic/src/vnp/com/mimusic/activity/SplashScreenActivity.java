@@ -7,6 +7,7 @@ import vnp.com.mimusic.R;
 import vnp.com.mimusic.VApplication;
 import vnp.com.mimusic.VApplication.IServiceConfig;
 import vnp.com.mimusic.main.BaseMusicSlideMenuActivity;
+import vnp.com.mimusic.main.NewMusicSlideMenuActivity;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
 import vnp.com.mimusic.view.LoadingView;
@@ -68,7 +69,7 @@ public class SplashScreenActivity extends Activity {
 						//
 						Conts.showView(loadingView, false);
 						if (!isFinishing()) {
-							startActivity(new Intent(SplashScreenActivity.this, BaseMusicSlideMenuActivity.class));
+							startActivity(new Intent(SplashScreenActivity.this, NewMusicSlideMenuActivity.class));
 							finish();
 							overridePendingTransition(R.anim.abc_scale_in, R.anim.abc_nothing);
 						}
