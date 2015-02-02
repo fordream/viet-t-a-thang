@@ -9,6 +9,7 @@ import vnp.com.db.Recomment;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.adapter.NewHomeAdapter;
+import vnp.com.mimusic.adapter.NewHomeAdapter.UpdateSuccess;
 import vnp.com.mimusic.adapter.data.NewHomeItem;
 import vnp.com.mimusic.base.diablog.DangKyDialog;
 import vnp.com.mimusic.main.NewMusicSlideMenuActivity;
@@ -20,6 +21,7 @@ import vnp.com.mimusic.view.ReCommentDichVuItemView;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +29,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 
 public class HomeFragment extends BaseFragment implements OnItemClickListener, View.OnClickListener {
@@ -53,8 +54,9 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (loadingView.getVisibility() == View.GONE)
-			updateUI();
+		if (loadingView.getVisibility() == View.GONE) {
+			updateUI(updateSuccess);
+		}
 	}
 
 	@Override
@@ -73,7 +75,7 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 		home_header.findViewById(R.id.dichvubanchay).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				(((RootMenuActivity) getActivity())).homeXemall(getString(R.string.dichvubanchay));
+				(((RootMenuActivity) getActivity())).homeXemall(getString(R.string.dichvudexuat));
 			}
 		});
 
@@ -90,7 +92,7 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 			public void dangKy(ContentValues values) {
 				new DangKyDialog(getActivity(), values) {
 					public void updateUiDangKy() {
-						updateUI();
+						updateUI(updateSuccess);
 					};
 				}.show();
 			}
@@ -117,14 +119,14 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 
 			@Override
 			public void onSuscess(JSONObject response) {
-				updateUI();
-				Conts.showView(loadingView, false);
+				updateUI(updateSuccess);
+
 			}
 
 			@Override
 			public void onError(String message) {
-				updateUI();
-				Conts.showView(loadingView, false);
+				updateUI(updateSuccess);
+
 			}
 
 			@Override
@@ -136,43 +138,60 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 		return view;
 	}
 
-	private void updateUI() {
-		int current = list.getFirstVisiblePosition();
-		LinearLayout gallery = Conts.getView(home_header, R.id.gallery1);
+	private UpdateSuccess updateSuccess = new UpdateSuccess() {
+
+		@Override
+		public void onUpdateSuccess() {
+			Conts.showView(loadingView, false);
+		}
+	};
+
+	private void updateUI(UpdateSuccess updateSuceess) {
+		// int current = list.getFirstVisiblePosition();
+		final LinearLayout gallery = Conts.getView(home_header, R.id.gallery1);
 
 		((ReCommentDichVuItemView) Conts.getView(gallery, R.id.recommen1)).setData(null);
 		((ReCommentDichVuItemView) Conts.getView(gallery, R.id.recommen2)).setData(null);
 		((ReCommentDichVuItemView) Conts.getView(gallery, R.id.recommen3)).setData(null);
 		((ReCommentDichVuItemView) Conts.getView(gallery, R.id.recommen4)).setData(null);
-		Cursor cursor = Recomment.getCursorFromDichvu(getActivity(), 3);
-		if (cursor != null) {
-			if (cursor.getCount() > 0) {
-				Conts.showView(home_header.findViewById(R.id.home_header_main), true);
-				while (cursor.moveToNext()) {
-					ReCommentDichVuItemView dichVuItemView = null;
-					if (cursor.getPosition() == 0) {
-						dichVuItemView = Conts.getView(gallery, R.id.recommen1);
-					} else if (cursor.getPosition() == 1) {
-						dichVuItemView = Conts.getView(gallery, R.id.recommen2);
-					} else if (cursor.getPosition() == 2) {
-						dichVuItemView = Conts.getView(gallery, R.id.recommen3);
-					}
+		new AsyncTask<String, String, String>() {
+			Cursor cursor;
 
-					if (dichVuItemView != null) {
-						dichVuItemView.setData(cursor);
-						dichVuItemView.setOnClickListener(new RecomendDvOnClickListener(Conts.getStringCursor(cursor, DichVu.ID)));
+			protected String doInBackground(String[] params) {
+				cursor = Recomment.getCursorFromDichvu(getActivity(), 3);
+				return null;
+			};
+
+			protected void onPostExecute(String result) {
+				if (cursor != null) {
+					if (cursor.getCount() > 0) {
+						Conts.showView(home_header.findViewById(R.id.home_header_main), true);
+						while (cursor.moveToNext()) {
+							ReCommentDichVuItemView dichVuItemView = null;
+							if (cursor.getPosition() == 0) {
+								dichVuItemView = Conts.getView(gallery, R.id.recommen1);
+							} else if (cursor.getPosition() == 1) {
+								dichVuItemView = Conts.getView(gallery, R.id.recommen2);
+							} else if (cursor.getPosition() == 2) {
+								dichVuItemView = Conts.getView(gallery, R.id.recommen3);
+							}
+
+							if (dichVuItemView != null) {
+								dichVuItemView.setData(cursor);
+								dichVuItemView.setOnClickListener(new RecomendDvOnClickListener(Conts.getStringCursor(cursor, DichVu.ID)));
+							}
+						}
+					} else {
+						Conts.showView(home_header.findViewById(R.id.home_header_main), false);
 					}
+					cursor.close();
+				} else {
+					Conts.showView(home_header.findViewById(R.id.home_header_main), true);
 				}
-			} else {
-				Conts.showView(home_header.findViewById(R.id.home_header_main), false);
-			}
-			cursor.close();
-
-		} else {
-			Conts.showView(home_header.findViewById(R.id.home_header_main), true);
-		}
-
-		homeAdapter.update();
+			};
+		}.execute("");
+		// Cursor cursor = Recomment.getCursorFromDichvu(getActivity(), 3);
+		homeAdapter.update(updateSuceess);
 
 	}
 

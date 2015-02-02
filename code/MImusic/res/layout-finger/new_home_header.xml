@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:singleLine="true"
-                android:text="Dịch vụ được đề xuất"
+                android:text="@string/dichvudexuat"
                 android:textColor="#3d3d3d"
                 android:textSize="@dimen/dimen_16dp" />
 

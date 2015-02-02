@@ -492,7 +492,7 @@ public class RootMenuActivity extends FragmentActivity {
 				intent.putExtra("type", Conts.DICHVUHOT);
 			} else if (name.equals(getString(R.string.moithanhvien))) {
 				intent.putExtra("type", Conts.MOITHANHVIEN);
-			} else if (name.equals(getString(R.string.dichvubanchay))) {
+			} else if (name.equals(getString(R.string.dichvudexuat))) {
 				intent.putExtra("type", Conts.DICHVUBANCHAY);
 			}
 			getParent().startActivity(intent);
