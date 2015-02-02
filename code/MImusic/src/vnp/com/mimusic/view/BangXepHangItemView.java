@@ -54,7 +54,7 @@ public class BangXepHangItemView extends LinearLayout {
 			bxhItemValue.setText(Conts.getString(item, "quantity"));
 		}
 
-		ImageLoaderUtils.getInstance(getContext()).DisplayImage(Conts.getString(item, "avatar"), bxhItemImage, BitmapFactory.decodeResource(getResources(), R.drawable.no_avatar));
+		ImageLoaderUtils.getInstance(getContext()).DisplayImage(Conts.getString(item, "avatar"), bxhItemImage, R.drawable.no_avatar);
 	}
 
 	public void setDataColor(int position) {
@@ -84,7 +84,7 @@ public class BangXepHangItemView extends LinearLayout {
 		Conts.setTextView(findViewById(R.id.chitietsoluong1dichvu), arguments.getString("quantity"));
 		Conts.setTextView(findViewById(R.id.chitietdoanhthu1dichvu), arguments.getString("commission"));
 		ImageView bxhItemImage = (ImageView) findViewById(R.id.bangxephang_item_img_icon);
-		ImageLoaderUtils.getInstance(getContext()).DisplayImage(arguments.getString("avatar"), bxhItemImage, BitmapFactory.decodeResource(getResources(), R.drawable.no_avatar));
+		ImageLoaderUtils.getInstance(getContext()).DisplayImage(arguments.getString("avatar"), bxhItemImage, R.drawable.no_avatar);
 		((TextView) findViewById(R.id.chitietdoanhthu1dichvu)).setText(String.format(getContext().getString(R.string.format_tien), arguments.getString("commission")));
 
 		if ("1".equals(type)) {
@@ -93,7 +93,7 @@ public class BangXepHangItemView extends LinearLayout {
 		} else {
 			Conts.setTextView(findViewById(R.id.bangxephang_item), arguments.getString("quantity"));
 
-			Conts.setTextView(findViewById(R.id.sl), "DT : " + arguments.getString("commission") + " " +getContext().getString(R.string.vnd));
+			Conts.setTextView(findViewById(R.id.sl), "DT : " + arguments.getString("commission") + " " + getContext().getString(R.string.vnd));
 		}
 		findViewById(R.id.bangxephang_item).setBackgroundResource(R.drawable.tranfer);
 		findViewById(R.id.sl).setVisibility(View.VISIBLE);

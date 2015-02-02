@@ -45,6 +45,6 @@ public class TintucItemView extends LinearLayout {
 			images = images.replace("https", "http");
 		}
 
-		ImageLoaderUtils.getInstance(getContext()).DisplayImage(images, tintuc_item_img_icon, BitmapFactory.decodeResource(getResources(), R.drawable.no_avatar));
+		ImageLoaderUtils.getInstance(getContext()).DisplayImage(images, tintuc_item_img_icon, R.drawable.no_avatar);
 	}
 }

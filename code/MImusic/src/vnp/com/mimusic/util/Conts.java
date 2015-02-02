@@ -175,39 +175,13 @@ public class Conts {
 
 	public static void showImage(String path, ImageView img, int no_image) {
 
-		Bitmap bitmap = null;
+//		Bitmap bitmap = null;
+//
+//		if (no_image != 0) {
+//			bitmap = BitmapFactory.decodeResource(img.getContext().getResources(), no_image);
+//		}
+		ImageLoaderUtils.getInstance(img.getContext()).DisplayImage(path, img, no_image);
 
-		if (no_image != 0) {
-			bitmap = BitmapFactory.decodeResource(img.getContext().getResources(), no_image);
-		}
-		ImageLoaderUtils.getInstance(img.getContext()).DisplayImage(path, img, bitmap);
-
-		// Bitmap bitmap = null;
-		// if (path != null && path.contains("file://")) {
-		// path = path.substring(path.indexOf("file://") + 7, path.length());
-		// BitmapFactory.Options options = new BitmapFactory.Options();
-		// options.inPreferredConfig = Bitmap.Config.ARGB_8888;
-		// bitmap = BitmapFactory.decodeFile(path, options);
-		// }
-		//
-		// if (path != null && path.contains("content://")) {
-		// try {
-		// bitmap =
-		// MediaStore.Images.Media.getBitmap(img.getContext().getContentResolver(),
-		// Uri.parse(path));
-		// } catch (Exception e) {
-		// }
-		// }
-		//
-		// if (bitmap == null && no_image != 0) {
-		// bitmap =
-		// BitmapFactory.decodeResource(img.getContext().getResources(),
-		// no_image);
-		// }
-		//
-		// if (bitmap != null) {
-		// img.setImageBitmap(bitmap);
-		// }
 	}
 
 	public static String getToken(Context activity) {
@@ -775,8 +749,7 @@ public class Conts {
 				}
 			}
 		} else {
-			ImageLoaderUtils.getInstance(menu_right_item_img_icon.getContext()).DisplayImage(avatar, menu_right_item_img_icon,
-					BitmapFactory.decodeResource(menu_right_item_img_icon.getContext().getResources(), R.drawable.no_avatar));
+			ImageLoaderUtils.getInstance(menu_right_item_img_icon.getContext()).DisplayImage(avatar, menu_right_item_img_icon, R.drawable.no_avatar);
 		}
 	}
 
@@ -784,21 +757,21 @@ public class Conts {
 		menu_right_item_img_icon.setImageResource(R.drawable.new_no_avatar);
 		if (Conts.isBlank(avatar)) {
 			if (Conts.isBlank(contact_id)) {
-				//menu_right_item_img_icon.setImageResource(R.drawable.new_no_avatar);
+				// menu_right_item_img_icon.setImageResource(R.drawable.new_no_avatar);
 			} else {
-			//	Bitmap bitmap = Conts.getBitmapFromContactId(menu_right_item_img_icon.getContext(), contact_id);
-			//	if (bitmap == null) {
-//					menu_right_item_img_icon.setImageResource(R.drawable.new_no_avatar);
-//				} else {
-//					menu_right_item_img_icon.setImageBitmap(bitmap);
-//				}
-				
-				ImageLoaderUtils.getInstance(menu_right_item_img_icon.getContext()).DisplayImage(contact_id, menu_right_item_img_icon,
-						null);
+				// Bitmap bitmap =
+				// Conts.getBitmapFromContactId(menu_right_item_img_icon.getContext(),
+				// contact_id);
+				// if (bitmap == null) {
+				// menu_right_item_img_icon.setImageResource(R.drawable.new_no_avatar);
+				// } else {
+				// menu_right_item_img_icon.setImageBitmap(bitmap);
+				// }
+
+				ImageLoaderUtils.getInstance(menu_right_item_img_icon.getContext()).DisplayImage(contact_id, menu_right_item_img_icon, 0);
 			}
 		} else {
-			ImageLoaderUtils.getInstance(menu_right_item_img_icon.getContext()).DisplayImage(avatar, menu_right_item_img_icon,
-					null);
+			ImageLoaderUtils.getInstance(menu_right_item_img_icon.getContext()).DisplayImage(avatar, menu_right_item_img_icon, 0);
 		}
 	}
 

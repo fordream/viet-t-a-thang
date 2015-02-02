@@ -45,7 +45,7 @@ public class RecommentItemDvBanChayView extends LinearLayout {
 			url = url.replace("https", "http");
 		}
 
-		ImageLoaderUtils.getInstance(getContext()).DisplayImage(url, icondichvuc, BitmapFactory.decodeResource(getResources(), R.drawable.no_image));
+		ImageLoaderUtils.getInstance(getContext()).DisplayImage(url, icondichvuc, R.drawable.no_image);
 		((TextView) findViewById(R.id.dangky_dialog_content)).setText(Conts.getString(jsonObject, DichVu.service_name));
 	}
 }

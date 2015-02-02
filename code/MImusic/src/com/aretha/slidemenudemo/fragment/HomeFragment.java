@@ -79,7 +79,35 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 
 		list.addHeaderView(getHeaderView());
 		list.addHeaderView(home_header);
-		list.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1));
+		homeAdapter = new NewHomeAdapter(getActivity()) {
+
+			@Override
+			public void moiDVChoNhieuNguoi(String id) {
+				(((RootMenuActivity) getActivity())).gotoMoiDvChoNhieuNguoi(id);
+			}
+
+			@Override
+			public void dangKy(ContentValues values) {
+				new DangKyDialog(getActivity(), values) {
+					public void updateUiDangKy() {
+						updateUI();
+					};
+				}.show();
+			}
+
+			@Override
+			public void xemall(String name) {
+				(((RootMenuActivity) getActivity())).homeXemall(name);
+
+			}
+
+			@Override
+			public void moiContactUser(String user, String name) {
+				(((RootMenuActivity) getActivity())).moiContactUser(user, name);
+			}
+		};
+
+		list.setAdapter(homeAdapter);
 		Bundle bundle = new Bundle();
 		execute(RequestMethod.GET, API.API_R026, bundle, new IContsCallBack() {
 			@Override
@@ -104,7 +132,6 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 				onError("");
 			}
 		});
-		// callSHowData();
 
 		return view;
 	}
@@ -112,8 +139,6 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 	private void updateUI() {
 		int current = list.getFirstVisiblePosition();
 		LinearLayout gallery = Conts.getView(home_header, R.id.gallery1);
-
-		// if (gallery.getChildCount() <= 0) {
 
 		((ReCommentDichVuItemView) Conts.getView(gallery, R.id.recommen1)).setData(null);
 		((ReCommentDichVuItemView) Conts.getView(gallery, R.id.recommen2)).setData(null);
@@ -132,9 +157,7 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 					} else if (cursor.getPosition() == 2) {
 						dichVuItemView = Conts.getView(gallery, R.id.recommen3);
 					}
-					// ReCommentDichVuItemView dichVuItemView = new
-					// ReCommentDichVuItemView(getActivity());
-					// gallery.addView(dichVuItemView);
+
 					if (dichVuItemView != null) {
 						dichVuItemView.setData(cursor);
 						dichVuItemView.setOnClickListener(new RecomendDvOnClickListener(Conts.getStringCursor(cursor, DichVu.ID)));
@@ -144,47 +167,13 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 				Conts.showView(home_header.findViewById(R.id.home_header_main), false);
 			}
 			cursor.close();
-			// }
-			// else {
-			// Conts.showView(home_header.findViewById(R.id.home_header_main),
-			// false);
-			// }
+
 		} else {
 			Conts.showView(home_header.findViewById(R.id.home_header_main), true);
-
 		}
-		if (homeAdapter == null) {
-			list.setAdapter(homeAdapter = new NewHomeAdapter(getActivity()) {
 
-				@Override
-				public void moiDVChoNhieuNguoi(String id) {
-					(((RootMenuActivity) getActivity())).gotoMoiDvChoNhieuNguoi(id);
-				}
+		homeAdapter.update();
 
-				@Override
-				public void dangKy(ContentValues values) {
-					new DangKyDialog(getActivity(), values) {
-						public void updateUiDangKy() {
-							updateUI();
-						};
-					}.show();
-				}
-
-				@Override
-				public void xemall(String name) {
-					(((RootMenuActivity) getActivity())).homeXemall(name);
-
-				}
-
-				@Override
-				public void moiContactUser(String user, String name) {
-					(((RootMenuActivity) getActivity())).moiContactUser(user, name);
-				}
-			});
-		} else {
-			homeAdapter.update();
-		}
-		// list.setSelection(current);
 	}
 
 	private NewHomeAdapter homeAdapter;

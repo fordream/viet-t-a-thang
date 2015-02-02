@@ -34,7 +34,7 @@ public abstract class ChonDichVuAdapter extends CursorAdapter {
 		 */
 		String name = cursor.getString(cursor.getColumnIndex(DichVu.service_name));
 		final String id = cursor.getString(cursor.getColumnIndex(DichVu.ID));
-		convertView.findViewById(R.id.home_item_main).setVisibility(Conts.xDontains(textSearch,false, new String[] { name }) ? View.VISIBLE : View.GONE);
+		convertView.findViewById(R.id.home_item_main).setVisibility(Conts.xDontains(textSearch, false, new String[] { name }) ? View.VISIBLE : View.GONE);
 
 		/**
 		 * set data
@@ -83,7 +83,7 @@ public abstract class ChonDichVuAdapter extends CursorAdapter {
 		// show image
 		String service_icon = cursor.getString(cursor.getColumnIndex(DichVu.service_icon)) + "";
 
-		ImageLoaderUtils.getInstance(context).DisplayImage(service_icon, home_item_img_icon, BitmapFactory.decodeResource(context.getResources(), R.drawable.no_image));
+		ImageLoaderUtils.getInstance(context).DisplayImage(service_icon, home_item_img_icon, R.drawable.no_image);
 		final ContentValues values = new ContentValues();
 		values.put("name", cursor.getString(cursor.getColumnIndex(DichVu.service_name)));
 		values.put(DichVu.service_code, cursor.getString(cursor.getColumnIndex(DichVu.service_code)));

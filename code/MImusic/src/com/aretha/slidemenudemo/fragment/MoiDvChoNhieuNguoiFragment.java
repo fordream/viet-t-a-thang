@@ -147,7 +147,7 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 			Conts.setTextViewCursor(view.findViewById(R.id.gia), mcursor, DichVu.service_price);
 			ImageView home_item_img_icon = (ImageView) view.findViewById(R.id.icon);
 			String service_icon = Conts.getStringCursor(mcursor, DichVu.service_icon);
-			ImageLoaderUtils.getInstance(getActivity()).DisplayImage(service_icon, home_item_img_icon, BitmapFactory.decodeResource(getResources(), R.drawable.no_image));
+			ImageLoaderUtils.getInstance(getActivity()).DisplayImage(service_icon, home_item_img_icon, R.drawable.no_image);
 			//
 			mcursor.close();
 		}
