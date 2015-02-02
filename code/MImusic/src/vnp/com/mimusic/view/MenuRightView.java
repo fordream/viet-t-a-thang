@@ -52,6 +52,9 @@ public class MenuRightView extends LinearLayout {
 	private void init() {
 		((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.menu_right, this);
 		findViewById(R.id.xleft).setOnClickListener(null);
+		
+		findViewById(R.id.menu_right_search).setOnClickListener(null);
+		
 	}
 
 	private MenuRightAdaper adaper;

@@ -85,7 +85,7 @@ public class BangXepHangAdaper extends ArrayAdapter<JSONObject> {
 						key = "quantity";
 					}
 
-					return Conts.getString(rhs, key).compareTo(Conts.getString(lhs, key));
+					return Conts.getString(lhs, key).compareTo(Conts.getString(rhs, key)) > 0 ? -1 : 1;
 				}
 				return 0;
 			}
