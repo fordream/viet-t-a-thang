@@ -85,7 +85,7 @@ public class MenuRightView extends LinearLayout {
 			@Override
 			public void afterTextChanged(Editable s) {
 				adaper.setTextSearch(menu_right_editext.getText().toString().trim());
-				adaper.notifyDataSetChanged();
+				//adaper.notifyDataSetChanged();
 			}
 		});
 

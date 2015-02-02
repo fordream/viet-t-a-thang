@@ -2,18 +2,29 @@ package vnp.com.mimusic.adapter;
 
 import vnp.com.db.User;
 import vnp.com.mimusic.view.MenuRightItemView;
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.widget.CursorAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AlphabetIndexer;
+import android.widget.Filter;
 import android.widget.FilterQueryProvider;
 import android.widget.SectionIndexer;
 
 public abstract class MenuRightAdaper extends CursorAdapter implements SectionIndexer {
 	private AlphabetIndexer mAlphabetIndexer;
+	private Handler handler = new Handler() {
+		@Override
+		public void dispatchMessage(Message msg) {
+			super.dispatchMessage(msg);
+			// notifyDataSetChanged();
+		}
+	};
 
 	@Override
 	public int getPositionForSection(int sectionIndex) {
@@ -43,7 +54,7 @@ public abstract class MenuRightAdaper extends CursorAdapter implements SectionIn
 		mAlphabetIndexer = new AlphabetIndexer(cursor, cursor.getColumnIndex(User.NAME_CONTACT), " ABCDEFGHIJKLMNOPQRTSUVWXYZ");
 		mAlphabetIndexer.setCursor(cursor);
 
-		setFilterQueryProvider(filterQueryProvider);
+		// setFilterQueryProvider(filterQueryProvider);
 	}
 
 	@Override
@@ -57,6 +68,34 @@ public abstract class MenuRightAdaper extends CursorAdapter implements SectionIn
 	}
 
 	@Override
+	public Filter getFilter() {
+		return new Filter() {
+
+			@Override
+			protected void publishResults(final CharSequence constraint, final FilterResults results) {
+				((Activity) mContext).runOnUiThread(new Runnable() {
+
+					@Override
+					public void run() {
+						changeCursor((Cursor) results.values);
+						// handler.sendEmptyMessage(0);
+
+					}
+				});
+
+			}
+
+			@Override
+			protected FilterResults performFiltering(CharSequence constraint) {
+				final FilterResults oReturn = new FilterResults();
+				String search = constraint.toString().trim();
+				oReturn.values = User.querySearch(mContext, search);
+				return oReturn;
+			}
+		};
+	}
+
+	@Override
 	public View newView(Context context, Cursor cursor, ViewGroup parent) {
 		return new MenuRightItemView(context);
 	}
@@ -67,20 +106,6 @@ public abstract class MenuRightAdaper extends CursorAdapter implements SectionIn
 
 	public void setTextSearch(final String textSearh) {
 		getFilter().filter(textSearh);
-		// this.textSearch = textSearh;
-		// new AsyncTask<String, String, String>() {
-		// Cursor cursor = null;
-		//
-		// @Override
-		// protected String doInBackground(String... params) {
-		// cursor = User.querySearch(mContext, textSearh);
-		// return null;
-		// }
-		//
-		// protected void onPostExecute(String result) {
-		// //changeCursor(cursor);
-		// };
-		// }.execute("");
 	}
 
 	private FilterQueryProvider filterQueryProvider = new FilterQueryProvider() {
