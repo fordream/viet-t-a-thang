@@ -98,6 +98,10 @@ public abstract class MoiNhieuDichVuAdapter extends CursorAdapter {
 				add(_id, service_icon, cs);
 			}
 		});
+
+		((MoiNhieuDichVuItemView) convertView).findViewById(R.id.moinhieudichvu_item_main).setBackgroundColor(
+				context.getResources().getColor(cursor.getPosition() % 2 == 0 ? R.color.f6f6f6 : R.color.ffffff));
+
 	}
 
 	@Override

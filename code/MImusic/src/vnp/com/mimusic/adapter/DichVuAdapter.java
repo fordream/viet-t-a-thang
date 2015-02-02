@@ -54,6 +54,7 @@ public abstract class DichVuAdapter extends CursorAdapter {
 		values.put("type", "dangky");
 		convertView.findViewById(R.id.home_item_right_control_1).setOnClickListener(new DangKyClickListener(values, isDangKy));
 		convertView.findViewById(R.id.home_item_right_control_2).setOnClickListener(new MoiDichVuClickListener(id));
+
 	}
 
 	public abstract void dangKy(ContentValues values);

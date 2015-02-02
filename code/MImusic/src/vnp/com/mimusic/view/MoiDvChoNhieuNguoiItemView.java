@@ -63,6 +63,7 @@ public class MoiDvChoNhieuNguoiItemView extends LinearLayout {
 
 		Conts.getSDT(findViewById(R.id.menu_right_item_tv_link));
 		findViewById(R.id.menu_right_item_tv_link).setVisibility(View.VISIBLE);
+
 	}
 
 	public void initData(String name) {

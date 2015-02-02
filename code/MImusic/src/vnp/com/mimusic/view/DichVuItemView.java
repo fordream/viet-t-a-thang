@@ -47,6 +47,9 @@ public class DichVuItemView extends LinearLayout {
 		ImageView home_item_img_icon = (ImageView) findViewById(R.id.home_item_img_icon);
 		String service_icon = cursor.getString(cursor.getColumnIndex(DichVu.service_icon)) + "";
 		ImageLoaderUtils.getInstance(getContext()).DisplayImage(service_icon, home_item_img_icon, R.drawable.no_image);
+
+		findViewById(R.id.home_item_right_control).setBackgroundResource(poistion % 2 == 0 ? R.drawable.home_dv_bg_x_0 : R.drawable.home_dv_bg_x_1);
+
 	}
 
 	private void init() {
