@@ -14,6 +14,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -246,61 +247,74 @@ public abstract class NewHomeAdapter extends ArrayAdapter<NewHomeItem> {
 
 	public void update() {
 		list.clear();
-		Cursor cursorUserRecomment = Recomment.getCursorFromUser(getContext(), 5);
+		new AsyncTask<String, String, String>() {
+			private List<NewHomeItem> xlist = new ArrayList<NewHomeItem>();
 
-		if (cursorUserRecomment != null) {
-			if (cursorUserRecomment.getCount() > 0) {
-				NewHomeItem item = new NewHomeItem();
-				item.type = 0;
-				item.name = getContext().getString(R.string.moithanhvien);
+			@Override
+			protected String doInBackground(String... params) {
+				Cursor cursorUserRecomment = Recomment.getCursorFromUser(getContext(), 5);
+				if (cursorUserRecomment != null) {
+					if (cursorUserRecomment.getCount() > 0) {
+						NewHomeItem item = new NewHomeItem();
+						item.type = 0;
+						item.name = getContext().getString(R.string.moithanhvien);
 
-				list.add(item);
-			}
+						xlist.add(item);
+					}
 
-			while (cursorUserRecomment.moveToNext()) {
-				NewHomeItem item = new NewHomeItem();
-				item.type = 1;
-				item.name = Conts.getStringCursor(cursorUserRecomment, User.NAME_CONTACT);
-				item.content = Conts.getStringCursor(cursorUserRecomment, User.USER);
-				item.avatar = Conts.getStringCursor(cursorUserRecomment, User.AVATAR);
-				item.contact_id = Conts.getStringCursor(cursorUserRecomment, User.contact_id);
+					while (cursorUserRecomment.moveToNext()) {
+						NewHomeItem item = new NewHomeItem();
+						item.type = 1;
+						item.name = Conts.getStringCursor(cursorUserRecomment, User.NAME_CONTACT);
+						item.content = Conts.getStringCursor(cursorUserRecomment, User.USER);
+						item.avatar = Conts.getStringCursor(cursorUserRecomment, User.AVATAR);
+						item.contact_id = Conts.getStringCursor(cursorUserRecomment, User.contact_id);
 
-				list.add(item);
-			}
+						xlist.add(item);
+					}
 
-			cursorUserRecomment.close();
-		}
-
-		Cursor cursorDVHot = DichVu.getCursorFromUser(getContext(), 3);
-		if (cursorDVHot != null) {
-			if (cursorDVHot.getCount() > 0) {
-				NewHomeItem item = new NewHomeItem();
-				item.type = 0;
-				item.name = getContext().getString(R.string.dichvuhot);
-				list.add(item);
-			}
-			int index = 0;
-			while (cursorDVHot.moveToNext()) {
-				NewHomeItem item = new NewHomeItem();
-				item.type = 2;
-				item.id = Conts.getStringCursor(cursorDVHot, DichVu.ID);
-				item.name = Conts.getStringCursor(cursorDVHot, DichVu.service_name);
-				item.content = Conts.getStringCursor(cursorDVHot, DichVu.service_content);
-				item.avatar = Conts.getStringCursor(cursorDVHot, DichVu.service_icon);
-				item.service_code = Conts.getStringCursor(cursorDVHot, DichVu.service_code);
-				item.service_price = Conts.getStringCursor(cursorDVHot, DichVu.service_price);
-				item.isDangky = "0".equals(Conts.getStringCursor(cursorDVHot, DichVu.service_status));
-				item.index = index;
-
-				if (index == 0) {
-					index = 1;
-				} else {
-					index = 0;
+					cursorUserRecomment.close();
 				}
-				list.add(item);
+
+				Cursor cursorDVHot = DichVu.getCursorFromUser(getContext(), 3);
+				if (cursorDVHot != null) {
+					if (cursorDVHot.getCount() > 0) {
+						NewHomeItem item = new NewHomeItem();
+						item.type = 0;
+						item.name = getContext().getString(R.string.dichvuhot);
+						xlist.add(item);
+					}
+					int index = 0;
+					while (cursorDVHot.moveToNext()) {
+						NewHomeItem item = new NewHomeItem();
+						item.type = 2;
+						item.id = Conts.getStringCursor(cursorDVHot, DichVu.ID);
+						item.name = Conts.getStringCursor(cursorDVHot, DichVu.service_name);
+						item.content = Conts.getStringCursor(cursorDVHot, DichVu.service_content);
+						item.avatar = Conts.getStringCursor(cursorDVHot, DichVu.service_icon);
+						item.service_code = Conts.getStringCursor(cursorDVHot, DichVu.service_code);
+						item.service_price = Conts.getStringCursor(cursorDVHot, DichVu.service_price);
+						item.isDangky = "0".equals(Conts.getStringCursor(cursorDVHot, DichVu.service_status));
+						item.index = index;
+
+						if (index == 0) {
+							index = 1;
+						} else {
+							index = 0;
+						}
+						xlist.add(item);
+					}
+
+					cursorDVHot.close();
+				}
+				return null;
 			}
 
-			cursorDVHot.close();
-		}
+			protected void onPostExecute(String result) {
+				list.addAll(xlist);
+				notifyDataSetChanged();
+			};
+		}.execute("");
+
 	}
 }

@@ -24,6 +24,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.DrawerLayout.DrawerListener;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -32,7 +33,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabSpec;
-import android.widget.Toast;
 
 import com.vnp.core.crash.CrashExceptionHandler;
 
@@ -76,6 +76,28 @@ public class NewMusicSlideMenuActivity extends TabActivity {
 		setContentView(R.layout.main);
 		CrashExceptionHandler.onCreate(this);
 		drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
+		drawerLayout.setDrawerListener(new DrawerListener() {
+
+			@Override
+			public void onDrawerStateChanged(int arg0) {
+
+			}
+
+			@Override
+			public void onDrawerSlide(View arg0, float arg1) {
+
+			}
+
+			@Override
+			public void onDrawerOpened(View arg0) {
+
+			}
+
+			@Override
+			public void onDrawerClosed(View arg0) {
+				Conts.hiddenKeyBoard(NewMusicSlideMenuActivity.this);
+			}
+		});
 		getTabHost().setOnTabChangedListener(new OnTabChangeListener() {
 			@Override
 			public void onTabChanged(String tabId) {
