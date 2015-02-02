@@ -37,6 +37,7 @@ import android.graphics.Path;
 import android.graphics.Rect;
 import android.net.ConnectivityManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
@@ -779,21 +780,25 @@ public class Conts {
 		}
 	}
 
-	public static void showAvatarNoImage(ImageView menu_right_item_img_icon, String avatar, String contact_id) {
+	public static void showAvatarNoImage(final ImageView menu_right_item_img_icon, final String avatar, final String contact_id) {
+		menu_right_item_img_icon.setImageResource(R.drawable.new_no_avatar);
 		if (Conts.isBlank(avatar)) {
 			if (Conts.isBlank(contact_id)) {
-				menu_right_item_img_icon.setImageResource(R.drawable.new_no_avatar);
+				//menu_right_item_img_icon.setImageResource(R.drawable.new_no_avatar);
 			} else {
-				Bitmap bitmap = Conts.getBitmapFromContactId(menu_right_item_img_icon.getContext(), contact_id);
-				if (bitmap == null) {
-					menu_right_item_img_icon.setImageResource(R.drawable.new_no_avatar);
-				} else {
-					menu_right_item_img_icon.setImageBitmap(bitmap);
-				}
+			//	Bitmap bitmap = Conts.getBitmapFromContactId(menu_right_item_img_icon.getContext(), contact_id);
+			//	if (bitmap == null) {
+//					menu_right_item_img_icon.setImageResource(R.drawable.new_no_avatar);
+//				} else {
+//					menu_right_item_img_icon.setImageBitmap(bitmap);
+//				}
+				
+				ImageLoaderUtils.getInstance(menu_right_item_img_icon.getContext()).DisplayImage(contact_id, menu_right_item_img_icon,
+						null);
 			}
 		} else {
 			ImageLoaderUtils.getInstance(menu_right_item_img_icon.getContext()).DisplayImage(avatar, menu_right_item_img_icon,
-					BitmapFactory.decodeResource(menu_right_item_img_icon.getContext().getResources(), R.drawable.no_image));
+					null);
 		}
 	}
 

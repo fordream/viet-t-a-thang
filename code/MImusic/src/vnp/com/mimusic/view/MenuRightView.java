@@ -58,12 +58,12 @@ public class MenuRightView extends LinearLayout {
 
 	public void initData() {
 		final EditText menu_right_editext = (EditText) findViewById(R.id.menu_right_editext);
-		ImageView menu_right_img_search = (ImageView) findViewById(R.id.menu_right_img_search);
+//		ImageView menu_right_img_search = (ImageView) findViewById(R.id.menu_right_img_search);
 		com.woozzu.android.widget.IndexableListView menu_right_list = (com.woozzu.android.widget.IndexableListView) findViewById(R.id.menu_right_list);
+		if (adaper == null || adaper != null && adaper.getCount() == 0) {
+			String where = String.format("%s = '0'", User.STATUS);
+			Cursor cursor = getContext().getContentResolver().query(User.CONTENT_URI, null, where, null, User.NAME_CONTACT);
 
-		String where = String.format("%s = '0'", User.STATUS);
-		Cursor cursor = getContext().getContentResolver().query(User.CONTENT_URI, null, where, null, User.NAME_CONTACT);
-		if (adaper == null) {
 			adaper = new MenuRightAdaper(getContext(), cursor) {
 				@Override
 				public void openMoi(ContentValues contentValues) {
@@ -71,7 +71,7 @@ public class MenuRightView extends LinearLayout {
 				}
 			};
 		} else {
-			adaper.changeCursor(cursor);
+			// adaper.changeCursor(cursor);
 		}
 		adaper.setTextSearch(menu_right_editext.getText().toString().trim());
 		menu_right_list.setAdapter(adaper);

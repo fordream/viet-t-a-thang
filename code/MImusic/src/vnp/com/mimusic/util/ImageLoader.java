@@ -101,6 +101,12 @@ public class ImageLoader {
 					return null;
 				}
 			} else {
+				try {
+					int contact_id = Integer.parseInt(url);
+					return Conts.getBitmapFromContactId(context, url);
+				} catch (Exception exception) {
+
+				}
 				return decodeFile(new File(url));
 			}
 		} catch (Throwable ex) {
