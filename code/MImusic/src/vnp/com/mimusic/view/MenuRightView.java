@@ -61,23 +61,23 @@ public class MenuRightView extends LinearLayout {
 		// ImageView menu_right_img_search = (ImageView)
 		// findViewById(R.id.menu_right_img_search);
 		com.woozzu.android.widget.IndexableListView menu_right_list = (com.woozzu.android.widget.IndexableListView) findViewById(R.id.menu_right_list);
-		// if (adaper == null || adaper != null && adaper.getCount() == 0) {
-		String where = String.format("%s = '0'", User.STATUS);
-		Cursor cursor = getContext().getContentResolver().query(User.CONTENT_URI, null, where, null, User.NAME_CONTACT);
+		if (adaper == null || adaper != null && adaper.getCount() == 0) {
+			String where = String.format("%s = '0'", User.STATUS);
+			Cursor cursor = getContext().getContentResolver().query(User.CONTENT_URI, null, where, null, User.NAME_CONTACT_ENG);
 
-		// if (adaper == null) {
-		adaper = new MenuRightAdaper(getContext(), cursor) {
-			@Override
-			public void openMoi(ContentValues contentValues) {
+			if (adaper == null) {
+				adaper = new MenuRightAdaper(getContext(), cursor) {
+					@Override
+					public void openMoi(ContentValues contentValues) {
 
+					}
+				};
+				menu_right_list.setAdapter(adaper);
+				adaper.setTextSearch(menu_right_editext.getText().toString().trim());
+			} else {
+				adaper.changeCursor(cursor);
 			}
-		};
-		menu_right_list.setAdapter(adaper);
-		adaper.setTextSearch(menu_right_editext.getText().toString().trim());
-		// } else {
-		// adaper.changeCursor(cursor);
-		// }
-		// }
+		}
 
 		menu_right_editext.addTextChangedListener(new TextWatcher() {
 

@@ -154,7 +154,7 @@ public class User {
 		StringBuilder selection = new StringBuilder();
 		selection.append(NAME_CONTACT_ENG).append(" LIKE '%").append(search.toLowerCase()).append("%' ");
 		selection.append(" OR ").append(USER).append(" LIKE '%").append(search.toLowerCase()).append("%' ");
-		return mContext.getContentResolver().query(CONTENT_URI, null, selection.toString(), null, null);
+		return mContext.getContentResolver().query(CONTENT_URI, null, selection.toString(), null, NAME_CONTACT_ENG);
 	}
 
 }
