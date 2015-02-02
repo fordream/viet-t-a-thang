@@ -536,7 +536,7 @@ public class MImusicService extends Service {
 	}
 
 	private void updateKiemTraDieuKienThueBao(JSONObject response) {
-		// LogUtils.e("updateKiemTraDieuKienThueBao", response.toString());
+		 LogUtils.e("updateKiemTraDieuKienThueBao", response.toString());
 	}
 
 	private void updateMauMoi(JSONObject response, String service_code) {
