@@ -245,6 +245,7 @@ public abstract class NewHomeAdapter extends ArrayAdapter<NewHomeItem> {
 	public abstract void moiContactUser(String user, String name);
 
 	public void update() {
+		list.clear();
 		Cursor cursorUserRecomment = Recomment.getCursorFromUser(getContext(), 5);
 
 		if (cursorUserRecomment != null) {
