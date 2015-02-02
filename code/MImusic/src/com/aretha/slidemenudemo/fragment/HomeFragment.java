@@ -142,7 +142,6 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 				}
 			} else {
 				Conts.showView(home_header.findViewById(R.id.home_header_main), false);
-
 			}
 			cursor.close();
 			// }
