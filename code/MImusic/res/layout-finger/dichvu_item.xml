@@ -115,7 +115,7 @@
             android:layout_marginRight="@dimen/dimen_12dp"
             android:background="@color/f3f3f3"
             android:scaleType="fitXY"
-            android:padding="@dimen/dimen_10dp"
+           
             android:src="@drawable/dvanybook" />
 
         <LinearLayout
