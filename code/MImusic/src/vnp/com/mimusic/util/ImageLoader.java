@@ -88,7 +88,7 @@ public class ImageLoader {
 				// RestClient restClient = new RestClient(url);
 				// File file = restClient.exeDownloadFile(context);
 				HttpsRestClient client = new HttpsRestClient(context, url);
-				return decodeFile(client.executeDownloadFile(RequestMethod.GET));
+				return decodeFile(client.executeDownloadFile(RequestMethod.GET, f));
 			} else if (url != null && url.startsWith("file://")) {
 				url = url.substring(url.indexOf("file://") + 7, url.length());
 				return decodeFile(new File(url));
@@ -242,12 +242,16 @@ public class ImageLoader {
 
 		public FileCache(Context context) {
 			// Find the dir to save cached images
-			if (android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED))
-				cacheDir = new File(android.os.Environment.getExternalStorageDirectory(), "LazyList");
-			else
+			String path = "Android/data/" + context.getPackageName() + "/LazyList";
+			if (android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED)) {
+				// LazyList
+				cacheDir = new File(android.os.Environment.getExternalStorageDirectory(), path);
+			} else {
 				cacheDir = context.getCacheDir();
-			if (!cacheDir.exists())
+			}
+			if (!cacheDir.exists()) {
 				cacheDir.mkdirs();
+			}
 		}
 
 		public File getFile(String url) {

@@ -22,7 +22,7 @@
             android:layout_width="@dimen/dimen_88dp"
             android:layout_height="@dimen/dimen_88dp"
             android:background="@drawable/no_avatar"
-            android:padding="@dimen/dimen_10dp"
+            android:padding="@dimen/dimen_5dp"
             android:scaleType="centerCrop" />
 
         <LinearLayout

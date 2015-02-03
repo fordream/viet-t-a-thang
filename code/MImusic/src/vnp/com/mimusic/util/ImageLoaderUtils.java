@@ -13,8 +13,11 @@ public class ImageLoaderUtils {
 	}
 
 	private ImageLoaderUtils init(Context context) {
-		if (imageLoader == null)
+		if (imageLoader == null) {
+			// imageLoader = new ImageLoader(context);
 			imageLoader = new ImageLoader(context);
+			// imageLoader.init(context);
+		}
 		imageLoader.updateContext(context);
 		return this;
 	}

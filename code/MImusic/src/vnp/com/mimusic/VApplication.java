@@ -5,6 +5,7 @@ import vnp.com.api.MImusicService;
 import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
 import vnp.com.mimusic.util.FontsUtils;
+import vnp.com.mimusic.util.ImageLoaderUtils;
 import android.app.Application;
 import android.content.ComponentName;
 import android.content.Intent;
@@ -18,6 +19,7 @@ public class VApplication extends Application {
 	public void onCreate() {
 		super.onCreate();
 		FontsUtils.getInstance().init(this);
+		ImageLoaderUtils.getInstance(this);
 	}
 
 	/**

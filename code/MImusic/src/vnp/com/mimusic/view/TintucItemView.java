@@ -41,9 +41,6 @@ public class TintucItemView extends LinearLayout {
 		tintuc_item_tv_content.setText(Conts.getStringCursor(item, TinTuc.header));
 
 		String images = Conts.getStringCursor(item, TinTuc.images);
-		if (!Conts.isBlank(images)) {
-			images = images.replace("https", "http");
-		}
 
 		ImageLoaderUtils.getInstance(getContext()).DisplayImage(images, tintuc_item_img_icon, R.drawable.no_avatar);
 	}

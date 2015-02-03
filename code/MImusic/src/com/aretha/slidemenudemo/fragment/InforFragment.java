@@ -59,11 +59,27 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.infor, null);
 		String state = Environment.getExternalStorageState();
-		if (Environment.MEDIA_MOUNTED.equals(state)) {
-			mFileTemp = new File(Environment.getExternalStorageDirectory(), InternalStorageContentProvider.TEMP_PHOTO_FILE_NAME);
+		File cacheDir = null;
+		String path = "Android/data/" + getActivity().getPackageName() + "/LazyList";
+		if (android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED)) {
+			// LazyList
+			cacheDir = new File(android.os.Environment.getExternalStorageDirectory(), path);
 		} else {
-			mFileTemp = new File(getActivity().getFilesDir(), InternalStorageContentProvider.TEMP_PHOTO_FILE_NAME);
+			cacheDir = getActivity().getCacheDir();
 		}
+		if (!cacheDir.exists()) {
+			cacheDir.mkdirs();
+		}
+		
+		mFileTemp = new File(cacheDir, InternalStorageContentProvider.TEMP_PHOTO_FILE_NAME);
+		
+		// if (Environment.MEDIA_MOUNTED.equals(state)) {
+		// mFileTemp = new File(Environment.getExternalStorageDirectory(),
+		// InternalStorageContentProvider.TEMP_PHOTO_FILE_NAME);
+		// } else {
+		// mFileTemp = new File(getActivity().getFilesDir(),
+		// InternalStorageContentProvider.TEMP_PHOTO_FILE_NAME);
+		// }
 
 		loadingView = (LoadingView) view.findViewById(R.id.loadingView1);
 		Conts.showView(loadingView, false);

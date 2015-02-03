@@ -302,9 +302,9 @@ public class HttpsRestClient {
 		}
 	}
 
-	public File executeDownloadFile(final RequestMethod method) {
+	public File executeDownloadFile(final RequestMethod method, File file) {
 
-		File file = new File(Environment.getExternalStorageDirectory(), System.currentTimeMillis() + ".jpg");
+		//File file = new File(Environment.getExternalStorageDirectory(), System.currentTimeMillis() + ".jpg");
 		String methodStr = "GET";
 		if (method == RequestMethod.GET) {
 			methodStr = "GET";
