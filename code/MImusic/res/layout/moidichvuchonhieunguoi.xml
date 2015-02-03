@@ -1,238 +1,259 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#f6f6f6"
     android:orientation="vertical" >
 
     <LinearLayout
-        android:id="@+id/LinearLayout01"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_60dp"
-        android:background="#0a3156"
-        android:gravity="center" >
+        android:layout_height="match_parent"
+        android:layout_above="@+id/keyBoardView1"
+        android:background="#f6f6f6"
+        android:orientation="vertical" >
 
-        <ImageButton
-            android:id="@+id/back"
-            android:layout_width="@dimen/dimen_45dp"
-            android:layout_height="@dimen/dimen_45dp"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:background="@drawable/xml_btn2"
-            android:padding="@dimen/dimen_12dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/btn_back" />
-
-        <RelativeLayout
+        <LinearLayout
+            android:id="@+id/LinearLayout01"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_28dp" >
+            android:layout_height="@dimen/dimen_60dp"
+            android:background="#0a3156"
+            android:gravity="center" >
+
+            <ImageButton
+                android:id="@+id/back"
+                android:layout_width="@dimen/dimen_45dp"
+                android:layout_height="@dimen/dimen_45dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/xml_btn2"
+                android:padding="@dimen/dimen_12dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/btn_back" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_28dp"
-                android:layout_toLeftOf="@+id/moidichvuchonhieunguoi_contact"
-                android:background="@drawable/a_est" >
+                android:layout_height="@dimen/dimen_28dp" >
 
-                <vnp.com.mimusic.view.textview.EditextTextThin
-                     android:inputType="textNoSuggestions"
-                    android:id="@+id/search"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dimen_35dp"
-                    android:background="@drawable/tranfer"
-                    android:gravity="center"
-                    android:hint="@string/timkiemdanhba"
-                    android:paddingLeft="@dimen/dimen_15dp"
-                    android:singleLine="true"
-                    android:textColor="#475055"
-                    android:textColorHint="#475055"
-                    android:textSize="@dimen/dimen_14dp"
-                    android:textStyle="bold" >
-                </vnp.com.mimusic.view.textview.EditextTextThin>
+                    android:layout_height="@dimen/dimen_28dp"
+                    android:layout_toLeftOf="@+id/moidichvuchonhieunguoi_contact"
+                    android:background="@drawable/a_est" >
 
-                <ImageView
-                    android:id="@+id/imageView1"
-                    android:layout_width="@dimen/dimen_17dp"
-                    android:layout_height="@dimen/dimen_17dp"
+                    <vnp.com.mimusic.view.textview.EditextTextThin
+                        android:id="@+id/search"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_35dp"
+                        android:background="@drawable/tranfer"
+                        android:gravity="center"
+                        android:hint="@string/timkiemdanhba"
+                        android:inputType="textNoSuggestions"
+                        android:paddingLeft="@dimen/dimen_15dp"
+                        android:singleLine="true"
+                        android:textColor="#475055"
+                        android:textColorHint="#475055"
+                        android:textSize="@dimen/dimen_14dp"
+                        android:textStyle="bold" >
+                    </vnp.com.mimusic.view.textview.EditextTextThin>
+
+                    <ImageView
+                        android:id="@+id/imageView1"
+                        android:layout_width="@dimen/dimen_17dp"
+                        android:layout_height="@dimen/dimen_17dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/dimen_5dp"
+                        android:background="@drawable/search_x" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/moidichvuchonhieunguoi_contact"
+                    android:layout_width="@dimen/dimen_45dp"
+                    android:layout_height="fill_parent"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/dimen_5dp"
-                    android:background="@drawable/search_x" />
+                    android:gravity="center" >
+
+                    <ImageView
+                        android:layout_width="@dimen/dimen_20dp"
+                        android:layout_height="@dimen/dimen_20dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/moi_add_sdt" />
+                </LinearLayout>
             </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone" >
 
             <LinearLayout
-                android:id="@+id/moidichvuchonhieunguoi_contact"
-                android:layout_width="@dimen/dimen_45dp"
-                android:layout_height="fill_parent"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:gravity="center" >
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dimen_12dp" >
 
                 <ImageView
-                    android:layout_width="@dimen/dimen_20dp"
-                    android:layout_height="@dimen/dimen_20dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
+                    android:id="@+id/icon"
+                    android:layout_width="@dimen/dimen_80dp"
+                    android:layout_height="@dimen/dimen_80dp"
+                    android:layout_marginRight="@dimen/dimen_12dp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/moi_add_sdt" />
+                    android:src="@drawable/icon_imusiz" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/dimen_12dp"
+                    android:layout_toLeftOf="@+id/home_item_right_control"
+                    android:layout_toRightOf="@+id/home_item_img_icon"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/dimen_10dp"
+                        android:singleLine="true"
+                        android:text="ten dich vu"
+                        android:textColor="#336666"
+                        android:textSize="@dimen/dimen_15dp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="bottom"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/dimen_3dp"
+                            android:singleLine="true"
+                            android:text="@string/gia"
+                            android:textColor="#336666"
+                            android:textSize="@dimen/dimen_13dp" />
+
+                        <TextView
+                            android:id="@+id/gia"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:text="@string/gia"
+                            android:textColor="#993333"
+                            android:textSize="@dimen/dimen_16dp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="@dimen/dimen_12dp"
+                android:layout_marginRight="@dimen/dimen_12dp"
+                android:background="#dfdfdf" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <vnp.com.mimusic.view.MusicListView
+                android:id="@+id/list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/horizontalScrollView1"
+                android:divider="@drawable/tranfer"
+                android:dividerHeight="0px"
+                android:fadeScrollbars="false"
+                android:scrollX="0px"
+                android:scrollY="0px"
+                android:scrollbarSize="0px"
+                android:scrollbarStyle="outsideOverlay"
+                android:scrollbarThumbHorizontal="@drawable/tranfer"
+                android:scrollbarThumbVertical="@drawable/tranfer"
+                android:scrollbars="none" >
+            </vnp.com.mimusic.view.MusicListView>
+
+            <LinearLayout
+                android:id="@+id/horizontalScrollView1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:orientation="vertical" >
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1px"
+                    android:background="#dfdfdf" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_70dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="#ffffff" >
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_70dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_toLeftOf="@+id/moi"
+                        android:background="#ffffff"
+                        android:scrollbarThumbHorizontal="@drawable/tranfer"
+                        android:scrollbarThumbVertical="@drawable/tranfer"
+                        android:scrollbars="none" >
+
+                        <LinearLayout
+                            android:id="@+id/moinhieudichvu_dialog_list_hor"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="horizontal" >
+                        </LinearLayout>
+                    </HorizontalScrollView>
+
+                    <vnp.com.mimusic.view.textview.TextViewRegular
+                        android:id="@+id/moi"
+                        android:layout_width="@dimen/dimen_40dp"
+                        android:layout_height="@dimen/dimen_22dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/dimen_12dp"
+                        android:layout_marginRight="@dimen/dimen_12dp"
+                        android:background="@drawable/xmoi"
+                        android:gravity="center"
+                        android:text="@string/moi"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/dimen_11dp" />
+                </RelativeLayout>
             </LinearLayout>
         </RelativeLayout>
     </LinearLayout>
 
     <LinearLayout
-        android:visibility="gone"
+        android:id="@+id/mkeyboard"
+        android:background="@drawable/new_dialog_bg"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/keyBoardView1"
+        android:visibility="gone" 
         android:orientation="vertical" >
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/dimen_12dp" >
-
-            <ImageView
-                android:id="@+id/icon"
-                android:layout_width="@dimen/dimen_80dp"
-                android:layout_height="@dimen/dimen_80dp"
-                android:layout_marginRight="@dimen/dimen_12dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/icon_imusiz" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/dimen_12dp"
-                android:layout_toLeftOf="@+id/home_item_right_control"
-                android:layout_toRightOf="@+id/home_item_img_icon"
-                android:gravity="center_vertical"
-                android:orientation="vertical" >
-
-                <TextView
-                    android:id="@+id/name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/dimen_10dp"
-                    android:singleLine="true"
-                    android:text="ten dich vu"
-                    android:textColor="#336666"
-                    android:textSize="@dimen/dimen_15dp"
-                    android:textStyle="bold" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="bottom"
-                    android:orientation="horizontal" >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/dimen_3dp"
-                        android:singleLine="true"
-                        android:text="@string/gia"
-                        android:textColor="#336666"
-                        android:textSize="@dimen/dimen_13dp" />
-
-                    <TextView
-                        android:id="@+id/gia"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:singleLine="true"
-                        android:text="@string/gia"
-                        android:textColor="#993333"
-                        android:textSize="@dimen/dimen_16dp" />
-                </LinearLayout>
-            </LinearLayout>
-        </LinearLayout>
-
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="1px"
-            android:layout_marginLeft="@dimen/dimen_12dp"
-            android:layout_marginRight="@dimen/dimen_12dp"
-            android:background="#dfdfdf" />
     </LinearLayout>
 
-    <RelativeLayout
+    <vnp.com.mimusic.view.KeyBoardView
+        android:id="@+id/keyBoardView1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone" >
 
-        <vnp.com.mimusic.view.MusicListView
-            android:id="@+id/list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@+id/horizontalScrollView1"
-            android:divider="@drawable/tranfer"
-            android:dividerHeight="0px"
-            android:fadeScrollbars="false"
-            android:scrollX="0px"
-            android:scrollY="0px"
-            android:scrollbarSize="0px"
-            android:scrollbarStyle="outsideOverlay"
-            android:scrollbarThumbHorizontal="@drawable/tranfer"
-            android:scrollbarThumbVertical="@drawable/tranfer"
-            android:scrollbars="none" >
-        </vnp.com.mimusic.view.MusicListView>
+    </vnp.com.mimusic.view.KeyBoardView>
 
-        <LinearLayout
-            android:id="@+id/horizontalScrollView1"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:orientation="vertical" >
-
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="1px"
-                android:background="#dfdfdf" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_70dp"
-                android:layout_alignParentBottom="true"
-                android:background="#ffffff" >
-
-                <HorizontalScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dimen_70dp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_toLeftOf="@+id/moi"
-                    android:background="#ffffff"
-                    android:scrollbarThumbHorizontal="@drawable/tranfer"
-                    android:scrollbarThumbVertical="@drawable/tranfer"
-                    android:scrollbars="none" >
-
-                    <LinearLayout
-                        android:id="@+id/moinhieudichvu_dialog_list_hor"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:orientation="horizontal" >
-                    </LinearLayout>
-                </HorizontalScrollView>
-
-                <vnp.com.mimusic.view.textview.TextViewRegular
-                    android:id="@+id/moi"
-                    android:layout_width="@dimen/dimen_40dp"
-                    android:layout_height="@dimen/dimen_22dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/dimen_12dp"
-                    android:layout_marginRight="@dimen/dimen_12dp"
-                    android:background="@drawable/xmoi"
-                    android:gravity="center"
-                    android:text="@string/moi"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/dimen_11dp" />
-            </RelativeLayout>
-
-            <vnp.com.mimusic.view.KeyBoardView
-                android:id="@+id/keyBoardView1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone" >
-            </vnp.com.mimusic.view.KeyBoardView>
-        </LinearLayout>
-    </RelativeLayout>
-
-</LinearLayout>
+</RelativeLayout>

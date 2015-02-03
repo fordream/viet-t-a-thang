@@ -174,6 +174,13 @@ public class RootMenuActivity extends FragmentActivity {
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		int count = fragmentManager.getBackStackEntryCount();
 
+		List<Fragment> list = fragmentManager.getFragments();
+		if (list.size() > 0) {
+			Fragment fragment = list.get(list.size() - 1);
+			if (fragment instanceof MoiDvChoNhieuNguoiFragment && ((MoiDvChoNhieuNguoiFragment) fragment).onBackPressed()) {
+				return;
+			}
+		}
 		if (count > 1) {
 			fragmentManager.popBackStack();
 		} else if (count == 1) {

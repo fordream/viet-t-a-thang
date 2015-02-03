@@ -15,7 +15,6 @@ import vnp.com.mimusic.util.ImageLoaderUtils;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -48,6 +47,7 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 	private String service_code = "";
 	private View moidichvuchonhieunguoi_contact;
 	private vnp.com.mimusic.view.KeyBoardView boardView;
+	private View mkeyboard;
 	private OnClickListener moidichvuchonhieunguoi_add_plusOnCLick = new OnClickListener() {
 		@Override
 		public void onClick(View v) {
@@ -58,7 +58,8 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 				addSodt(moidichvuchonhieunguoi_numberText);
 				boardView.clear();
 				boardView.setVisibility(View.GONE);
-				moidichvuchonhieunguoi_number.setEnabled(true);
+				mkeyboard.setVisibility(View.GONE);
+				// moidichvuchonhieunguoi_number.setEnabled(true);
 			} else {
 				Conts.toast(getActivity(), String.format(getString(R.string.format_check_sdt), moidichvuchonhieunguoi_numberText));
 			}
@@ -70,7 +71,8 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 		View view = inflater.inflate(R.layout.moidichvuchonhieunguoi, null);
 		nhieuNgoiHeaderView = new MoiNhieuNgoiHeaderView(getActivity());
 		view.findViewById(R.id.LinearLayout01).setOnClickListener(null);
-
+		mkeyboard = view.findViewById(R.id.mkeyboard);
+		mkeyboard.setOnClickListener(this);
 		boardView = Conts.getView(view, R.id.keyBoardView1);
 		boardView.getKeEditText().setOnEditorActionListener(new OnEditorActionListener() {
 
@@ -318,18 +320,27 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 		if (v.getId() == R.id.back) {
 			getActivity().onBackPressed();
 		} else if (v.getId() == R.id.moi) {
+
+			Conts.hiddenKeyBoard(getActivity());
+			boardView.setVisibility(View.GONE);
+			mkeyboard.setVisibility(View.GONE);
+			
 			gotoLoiMoi(getArguments().getString(DichVu.ID));
 		} else if (v.getId() == R.id.moidichvuchonhieunguoi_contact) {
 
 			if (boardView.getVisibility() == View.VISIBLE) {
 				Conts.hiddenKeyBoard(getActivity());
 				boardView.setVisibility(View.GONE);
-				moidichvuchonhieunguoi_number.setEnabled(true);
+				mkeyboard.setVisibility(View.GONE);
+				// moidichvuchonhieunguoi_number.setEnabled(true);
 			} else {
 				Conts.showKeyBoard(boardView.getKeEditText());
 				boardView.setVisibility(View.VISIBLE);
-				moidichvuchonhieunguoi_number.setEnabled(false);
+				mkeyboard.setVisibility(View.VISIBLE);
+				// moidichvuchonhieunguoi_number.setEnabled(false);
 			}
+		} else if (v.getId() == R.id.mkeyboard) {
+
 		}
 	}
 
@@ -418,5 +429,14 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 			ImageLoaderUtils.getInstance(getActivity()).DisplayImage(service_icon, home_item_img_icon, R.drawable.no_image);
 		}
 
+	}
+
+	public boolean onBackPressed() {
+		if (boardView.getVisibility() == View.VISIBLE) {
+			Conts.showView(boardView, false);
+			Conts.showView(mkeyboard, false);
+			return true;
+		}
+		return false;
 	}
 }
