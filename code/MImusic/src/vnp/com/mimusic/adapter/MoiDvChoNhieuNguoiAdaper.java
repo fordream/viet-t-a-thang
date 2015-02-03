@@ -122,6 +122,8 @@ public abstract class MoiDvChoNhieuNguoiAdaper extends CursorAdapter {
 				add(_id, user);
 			}
 		});
+		
+		((MoiDvChoNhieuNguoiItemView) convertView).updateBackground(cursor.getPosition());
 
 	}
 

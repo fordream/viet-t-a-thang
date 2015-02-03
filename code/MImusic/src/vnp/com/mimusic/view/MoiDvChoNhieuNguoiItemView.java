@@ -73,4 +73,8 @@ public class MoiDvChoNhieuNguoiItemView extends LinearLayout {
 		menu_right_detail_checkbox.setOnCheckedChangeListener(null);
 		menu_right_detail_checkbox.setVisibility(View.GONE);
 	}
+
+	public void updateBackground(int position) {
+		findViewById(R.id.menurightitem_main).setBackgroundColor(getContext().getResources().getColor(position % 2 == 0 ? R.color.f6f6f6 : R.color.ffffff));
+	}
 }
