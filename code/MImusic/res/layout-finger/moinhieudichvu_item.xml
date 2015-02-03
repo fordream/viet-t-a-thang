@@ -24,7 +24,6 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/dimen_12dp"
                 android:background="@color/f3f3f3"
-                android:padding="@dimen/dimen_10dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/dvanybook" />
 
