@@ -58,22 +58,29 @@
         </RelativeLayout>
     </LinearLayout>
 
-    <vnp.com.mimusic.view.MenuRightItemView
-        android:id="@+id/menurightitem"
+    <LinearLayout
+        android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-    </vnp.com.mimusic.view.MenuRightItemView>
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
 
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="@dimen/dimen_12dp" />
+        <vnp.com.mimusic.view.MenuRightItemView
+            android:id="@+id/menurightitem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+        </vnp.com.mimusic.view.MenuRightItemView>
 
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="2px"
-        android:layout_marginLeft="@dimen/dimen_12dp"
-        android:layout_marginRight="@dimen/dimen_12dp"
-        android:background="#dfdfdf" />
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/dimen_12dp" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2px"
+            android:layout_marginLeft="@dimen/dimen_12dp"
+            android:layout_marginRight="@dimen/dimen_12dp"
+            android:background="#dfdfdf" />
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"

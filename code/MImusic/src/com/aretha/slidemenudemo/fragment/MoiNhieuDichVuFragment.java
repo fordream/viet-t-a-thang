@@ -34,6 +34,7 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 	private String sdt = "";
 	private MenuRightItemView menuright_item;
 	private String LISTIDDVSUDUNG = "";
+	private MoiNhieuDichVuHeader moiNhieuDichVuHeader;
 
 	public void updateMoi() {
 		Conts.showAlpha(moi, (moinhieudichvu_dialog_list_hor.getChildCount() == 0));
@@ -42,7 +43,12 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.moinhieudichvu_dialog, null);
+		ListView maumoi_list = (ListView) view.findViewById(R.id.moinhieudichvu_dialog_list);
+
 		moi = Conts.getView(view, R.id.moi);
+		moiNhieuDichVuHeader = new MoiNhieuDichVuHeader(getActivity());
+		maumoi_list.addHeaderView(moiNhieuDichVuHeader);
+
 		moinhieudichvu_dialog_search = (EditText) view.findViewById(R.id.moinhieudichvu_dialog_search);
 		moinhieudichvu_dialog_list_hor = (LinearLayout) view.findViewById(R.id.moinhieudichvu_dialog_list_hor);
 
@@ -56,7 +62,7 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 			sdt = getArguments().getString("msisdn");
 			LISTIDDVSUDUNG = "";
 			menuright_item.initData(getArguments().getString("name"));
-
+			moiNhieuDichVuHeader.initData(getArguments().getString("name"));
 			where = String.format("%s = '%s'", User.USER, sdt);
 
 			Cursor cursor = getActivity().getContentResolver().query(User.CONTENT_URI, null, where, null, null);
@@ -66,6 +72,8 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 				sdt = cursor.getString(cursor.getColumnIndex(User.USER));
 
 				menuright_item.initData(cursor, "");
+
+				moiNhieuDichVuHeader.initData(cursor, "");
 			}
 
 			if (cursor != null) {
@@ -80,14 +88,13 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 				sdt = cursor.getString(cursor.getColumnIndex(User.USER));
 
 				menuright_item.initData(cursor, "");
+				moiNhieuDichVuHeader.initData(cursor, "");
 			}
 
 			if (cursor != null) {
 				cursor.close();
 			}
 		}
-
-		ListView maumoi_list = (ListView) view.findViewById(R.id.moinhieudichvu_dialog_list);
 
 		Cursor cursorDV = getActivity().getContentResolver().query(DichVu.CONTENT_URI, null, null, null, null);
 		moinhieudichvu_dialog_search.addTextChangedListener(new TextWatcher() {
@@ -227,6 +234,22 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 
 		public void setMId(String _id) {
 			mId = _id;
+		}
+	}
+
+	public class MoiNhieuDichVuHeader extends LinearLayout {
+
+		public MoiNhieuDichVuHeader(Context context) {
+			super(context);
+			((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.moinhieudv_header, this);
+		}
+
+		public void initData(Cursor cursor, String string) {
+			((MenuRightItemView) findViewById(R.id.menurightitem)).initData(cursor, string);
+		}
+
+		public void initData(String string) {
+			((MenuRightItemView) findViewById(R.id.menurightitem)).initData(string);
 		}
 
 	}
