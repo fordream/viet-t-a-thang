@@ -324,7 +324,7 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 			Conts.hiddenKeyBoard(getActivity());
 			boardView.setVisibility(View.GONE);
 			mkeyboard.setVisibility(View.GONE);
-			
+
 			gotoLoiMoi(getArguments().getString(DichVu.ID));
 		} else if (v.getId() == R.id.moidichvuchonhieunguoi_contact) {
 
@@ -340,7 +340,9 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 				// moidichvuchonhieunguoi_number.setEnabled(false);
 			}
 		} else if (v.getId() == R.id.mkeyboard) {
-
+			Conts.hiddenKeyBoard(getActivity());
+			boardView.setVisibility(View.GONE);
+			mkeyboard.setVisibility(View.GONE);
 		}
 	}
 

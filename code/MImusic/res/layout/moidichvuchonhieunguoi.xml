@@ -243,6 +243,7 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/keyBoardView1"
         android:visibility="gone" 
+        android:layout_marginBottom="@dimen/dimen_70dp"
         android:orientation="vertical" >
 
     </LinearLayout>

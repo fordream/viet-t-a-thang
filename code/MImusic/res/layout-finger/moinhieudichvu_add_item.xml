@@ -18,7 +18,7 @@
         android:layout_width="@dimen/dimen_20dp"
         android:layout_height="@dimen/dimen_20dp"
         android:layout_alignRight="@+id/imageView1"
-        android:padding="@dimen/dimen_3dp"
+        android:padding="@dimen/dimen_5dp"
         android:scaleType="fitXY"
         android:src="@drawable/x" />
 
