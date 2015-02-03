@@ -292,6 +292,12 @@ public class NewMusicSlideMenuActivity extends TabActivity {
 	}
 
 	public void finish(boolean b) {
+
+		if (drawerLayout.isDrawerOpen(Gravity.START) || drawerLayout.isDrawerOpen(Gravity.END)) {
+			drawerLayout.closeDrawers();
+			return;
+		}
+
 		// Toast.makeText(this, "out", Toast.LENGTH_SHORT).show();
 		ContentValues contentValues = new ContentValues();
 		contentValues.put("btn_right", getString(R.string.dongy));
