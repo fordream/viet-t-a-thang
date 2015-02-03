@@ -128,6 +128,9 @@ public class Recomment {
 
 	public static String getListReCommentDichvu(Context context) {
 		String selection = String.format("%s = '%s') GROUP BY ( %s", Recomment.user, Conts.getUser(context), Recomment.service_code);
+		if (context == null) {
+			return "";
+		}
 		Cursor cursor = context.getContentResolver().query(Recomment.CONTENT_URI, null, selection, null, String.format("%s", Recomment.service_code));
 		String dichvu = "";
 		if (cursor != null) {

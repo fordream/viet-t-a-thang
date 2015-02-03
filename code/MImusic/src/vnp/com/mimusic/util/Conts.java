@@ -68,7 +68,7 @@ public class Conts {
 				// D D d d
 				return pattern.matcher(temp).replaceAll("").replaceAll("Đ", "D").replaceAll("đ", "d").toUpperCase();
 			} catch (Exception exception) {
-				
+
 				LogUtils.e("TABG", exception);
 				return str;
 			}
@@ -176,11 +176,13 @@ public class Conts {
 
 	public static void showImage(String path, ImageView img, int no_image) {
 
-//		Bitmap bitmap = null;
-//
-//		if (no_image != 0) {
-//			bitmap = BitmapFactory.decodeResource(img.getContext().getResources(), no_image);
-//		}
+		// Bitmap bitmap = null;
+		//
+		// if (no_image != 0) {
+		// bitmap =
+		// BitmapFactory.decodeResource(img.getContext().getResources(),
+		// no_image);
+		// }
 		ImageLoaderUtils.getInstance(img.getContext()).DisplayImage(path, img, no_image);
 
 	}
@@ -443,6 +445,9 @@ public class Conts {
 	}
 
 	public static String getUser(Context context) {
+		if (context == null) {
+			return "";
+		}
 		String user = "";
 		Cursor cursor = context.getContentResolver().query(User.CONTENT_URI, null, User.STATUS + "='1'", null, null);
 		if (cursor != null && cursor.getCount() >= 1) {
