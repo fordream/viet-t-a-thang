@@ -45,7 +45,7 @@
                     android:singleLine="true"
                     android:textColor="#475055"
                     android:textColorHint="#475055"
-                    android:textSize="@dimen/dimen_12dp"
+                    android:textSize="@dimen/dimen_14dp"
                     android:textStyle="bold" >
                 </vnp.com.mimusic.view.textview.EditextTextThin>
 
@@ -79,73 +79,79 @@
     </LinearLayout>
 
     <LinearLayout
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/dimen_12dp" >
-
-        <ImageView
-            android:id="@+id/icon"
-            android:layout_width="@dimen/dimen_80dp"
-            android:layout_height="@dimen/dimen_80dp"
-            android:layout_marginRight="@dimen/dimen_12dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/icon_imusiz" />
+        android:orientation="vertical" >
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/dimen_12dp"
-            android:layout_toLeftOf="@+id/home_item_right_control"
-            android:layout_toRightOf="@+id/home_item_img_icon"
-            android:gravity="center_vertical"
-            android:orientation="vertical" >
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dimen_12dp" >
 
-            <TextView
-                android:id="@+id/name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/dimen_10dp"
-                android:singleLine="true"
-                android:text="ten dich vu"
-                android:textColor="#336666"
-                android:textSize="@dimen/dimen_15dp"
-                android:textStyle="bold" />
+            <ImageView
+                android:id="@+id/icon"
+                android:layout_width="@dimen/dimen_80dp"
+                android:layout_height="@dimen/dimen_80dp"
+                android:layout_marginRight="@dimen/dimen_12dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/icon_imusiz" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="bottom"
-                
-                android:orientation="horizontal" >
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dimen_12dp"
+                android:layout_toLeftOf="@+id/home_item_right_control"
+                android:layout_toRightOf="@+id/home_item_img_icon"
+                android:gravity="center_vertical"
+                android:orientation="vertical" >
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/dimen_3dp"
+                    android:layout_marginBottom="@dimen/dimen_10dp"
                     android:singleLine="true"
-                    android:text="@string/gia"
+                    android:text="ten dich vu"
                     android:textColor="#336666"
-                    android:textSize="@dimen/dimen_13dp" />
+                    android:textSize="@dimen/dimen_15dp"
+                    android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/gia"
-                    android:layout_width="fill_parent"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:singleLine="true"
-                    android:text="@string/gia"
-                    android:textColor="#993333"
-                    android:textSize="@dimen/dimen_16dp" />
+                    android:gravity="bottom"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/dimen_3dp"
+                        android:singleLine="true"
+                        android:text="@string/gia"
+                        android:textColor="#336666"
+                        android:textSize="@dimen/dimen_13dp" />
+
+                    <TextView
+                        android:id="@+id/gia"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:text="@string/gia"
+                        android:textColor="#993333"
+                        android:textSize="@dimen/dimen_16dp" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
 
-    <View
-        android:layout_width="fill_parent"
-        android:layout_marginLeft="@dimen/dimen_12dp"
-        android:layout_marginRight="@dimen/dimen_12dp"
-        android:layout_height="1px"
-        android:background="#dfdfdf" />
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="@dimen/dimen_12dp"
+            android:layout_marginRight="@dimen/dimen_12dp"
+            android:background="#dfdfdf" />
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"

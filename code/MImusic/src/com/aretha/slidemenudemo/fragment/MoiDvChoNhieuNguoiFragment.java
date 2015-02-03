@@ -68,7 +68,7 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.moidichvuchonhieunguoi, null);
-
+		nhieuNgoiHeaderView = new MoiNhieuNgoiHeaderView(getActivity());
 		view.findViewById(R.id.LinearLayout01).setOnClickListener(null);
 
 		boardView = Conts.getView(view, R.id.keyBoardView1);
@@ -126,7 +126,7 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 		view.findViewById(R.id.back).setOnClickListener(this);
 
 		moi_list = (ListView) view.findViewById(R.id.list);
-
+		moi_list.addHeaderView(nhieuNgoiHeaderView);
 		/**
 		 * show data
 		 */
@@ -149,7 +149,10 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 			String service_icon = Conts.getStringCursor(mcursor, DichVu.service_icon);
 			ImageLoaderUtils.getInstance(getActivity()).DisplayImage(service_icon, home_item_img_icon, R.drawable.no_image);
 			//
+
+			nhieuNgoiHeaderView.setData(mcursor);
 			mcursor.close();
+			// /
 		}
 
 		moi_list.setOnItemClickListener(this);
@@ -399,4 +402,21 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 		}
 	}
 
+	private MoiNhieuNgoiHeaderView nhieuNgoiHeaderView;
+
+	private class MoiNhieuNgoiHeaderView extends LinearLayout {
+		public MoiNhieuNgoiHeaderView(Context context) {
+			super(context);
+			((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.moinghieunguoi_header, this);
+		}
+
+		public void setData(Cursor mcursor) {
+			Conts.setTextViewCursor(findViewById(R.id.name), mcursor, DichVu.service_name);
+			Conts.setTextViewCursor(findViewById(R.id.gia), mcursor, DichVu.service_price);
+			ImageView home_item_img_icon = (ImageView) findViewById(R.id.icon);
+			String service_icon = Conts.getStringCursor(mcursor, DichVu.service_icon);
+			ImageLoaderUtils.getInstance(getActivity()).DisplayImage(service_icon, home_item_img_icon, R.drawable.no_image);
+		}
+
+	}
 }
