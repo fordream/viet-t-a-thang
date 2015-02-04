@@ -9,6 +9,7 @@ import vnp.com.db.User;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.adapter.MoiDvChoNhieuNguoiAdaper;
+import vnp.com.mimusic.base.VTAnimationListener;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
 import vnp.com.mimusic.util.ImageLoaderUtils;
@@ -25,6 +26,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
@@ -58,7 +60,7 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 				addSodt(moidichvuchonhieunguoi_numberText);
 				boardView.clear();
 				boardView.setVisibility(View.GONE);
-				mkeyboard.setVisibility(View.GONE);
+				mkeyboard(false);
 				// moidichvuchonhieunguoi_number.setEnabled(true);
 			} else {
 				Conts.toast(getActivity(), String.format(getString(R.string.format_check_sdt), moidichvuchonhieunguoi_numberText));
@@ -323,26 +325,44 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 
 			Conts.hiddenKeyBoard(getActivity());
 			boardView.setVisibility(View.GONE);
-			mkeyboard.setVisibility(View.GONE);
-
+			mkeyboard(false);
 			gotoLoiMoi(getArguments().getString(DichVu.ID));
 		} else if (v.getId() == R.id.moidichvuchonhieunguoi_contact) {
 
 			if (boardView.getVisibility() == View.VISIBLE) {
 				Conts.hiddenKeyBoard(getActivity());
 				boardView.setVisibility(View.GONE);
-				mkeyboard.setVisibility(View.GONE);
-				// moidichvuchonhieunguoi_number.setEnabled(true);
+
+				mkeyboard(false);
 			} else {
 				Conts.showKeyBoard(boardView.getKeEditText());
 				boardView.setVisibility(View.VISIBLE);
-				mkeyboard.setVisibility(View.VISIBLE);
-				// moidichvuchonhieunguoi_number.setEnabled(false);
+				mkeyboard(true);
 			}
 		} else if (v.getId() == R.id.mkeyboard) {
 			Conts.hiddenKeyBoard(getActivity());
 			boardView.setVisibility(View.GONE);
+			mkeyboard(false);
+		}
+	}
+
+	public void mkeyboard(boolean show) {
+		if (show) {
+			mkeyboard.setVisibility(View.VISIBLE);
+			mkeyboard.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.abc_alpha_in));
+		} else {
+//			Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.abc_alpha_out);
+//			animation.setAnimationListener(new VTAnimationListener() {
+//				@Override
+//				public void onAnimationEnd(Animation animation) {
+//					super.onAnimationEnd(animation);
+//					//mkeyboard.setVisibility(View.GONE);
+//				}
+//			});
+//			mkeyboard.startAnimation(animation);
+//			
 			mkeyboard.setVisibility(View.GONE);
+
 		}
 	}
 
