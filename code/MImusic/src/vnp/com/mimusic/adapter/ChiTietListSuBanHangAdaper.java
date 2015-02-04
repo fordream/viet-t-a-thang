@@ -71,7 +71,7 @@ public class ChiTietListSuBanHangAdaper extends ArrayAdapter<JSONObject> {
 
 		String xAvatar = Conts.getString(jsonObject, "avatar");
 		if (!Conts.isBlank(xAvatar)) {
-			ImageLoaderUtils.getInstance(getContext()).DisplayImage(xAvatar, avatar, R.drawable.no_avatar);
+			ImageLoaderUtils.getInstance(getContext()).DisplayImage(xAvatar, avatar, R.drawable.new_no_avatar);
 		} else {
 			String selection = String.format("%s ='%s'", User.USER, Conts.getString(jsonObject, "phone_custom"));
 			Cursor cursor = getContext().getContentResolver().query(User.CONTENT_URI, null, selection, null, null);
@@ -79,7 +79,12 @@ public class ChiTietListSuBanHangAdaper extends ArrayAdapter<JSONObject> {
 				cursor.moveToNext();
 				String mavatar = cursor.getString(cursor.getColumnIndex(User.AVATAR));
 				String contact_id = Conts.getStringCursor(cursor, User.contact_id);
-				Conts.showAvatar(avatar, mavatar, contact_id);
+
+				if (!Conts.isBlank(mavatar)) {
+					ImageLoaderUtils.getInstance(getContext()).DisplayImage(mavatar, avatar, R.drawable.new_no_avatar);
+				} else {
+					ImageLoaderUtils.getInstance(getContext()).DisplayImage(contact_id, avatar, R.drawable.new_no_avatar);
+				}
 			}
 
 			if (cursor != null) {

@@ -102,17 +102,38 @@ public class ImageLoader {
 			} else {
 				try {
 					int contact_id = Integer.parseInt(url);
-					return Conts.getBitmapFromContactId(context, url);
+					Conts.getBitmapFromContactId(context, url, f);
+					return decodeFile(f);
 				} catch (Exception exception) {
 
 				}
-				return decodeFile(new File(url));
+
+				copy(new File(url), f);
+				return decodeFile(f);
 			}
 		} catch (Throwable ex) {
 			ex.printStackTrace();
 			if (ex instanceof OutOfMemoryError)
 				memoryCache.clear();
 			return null;
+		}
+	}
+
+	public void copy(File src, File dst) {
+		try {
+			InputStream in = new FileInputStream(src);
+			OutputStream out = new FileOutputStream(dst);
+
+			// Transfer bytes from in to out
+			byte[] buf = new byte[1024];
+			int len;
+			while ((len = in.read(buf)) > 0) {
+				out.write(buf, 0, len);
+			}
+			in.close();
+			out.close();
+		} catch (Exception exception) {
+
 		}
 	}
 

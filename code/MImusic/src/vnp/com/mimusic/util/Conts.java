@@ -711,13 +711,15 @@ public class Conts {
 		return string;
 	}
 
-	public static Bitmap getBitmapFromContactId(Context context, String contactId) {
+	public static Bitmap getBitmapFromContactId(Context context, String contactId, File yourFile) {
 		Bitmap bitmap = null;
 		try {
 			Uri contactUri = ContentUris.withAppendedId(Contacts.CONTENT_URI, Long.parseLong(contactId));
 			Uri photoUri = Uri.withAppendedPath(contactUri, Contacts.Photo.CONTENT_DIRECTORY);
 			Cursor cursor = context.getContentResolver().query(photoUri, new String[] { Contacts.Photo.PHOTO }, null, null, null);
-			File yourFile = new File(Environment.getExternalStorageDirectory(), System.currentTimeMillis() + "");
+			// File yourFile = new
+			// File(Environment.getExternalStorageDirectory(),
+			// System.currentTimeMillis() + "");
 			if (cursor.moveToFirst()) {
 				byte[] data = cursor.getBlob(0);
 				if (data != null) {
@@ -738,22 +740,22 @@ public class Conts {
 		return bitmap;
 	}
 
-	public static void showAvatar(ImageView menu_right_item_img_icon, String avatar, String contact_id) {
-		if (Conts.isBlank(avatar)) {
-			if (Conts.isBlank(contact_id)) {
-				menu_right_item_img_icon.setImageResource(R.drawable.no_avatar);
-			} else {
-				Bitmap bitmap = Conts.getBitmapFromContactId(menu_right_item_img_icon.getContext(), contact_id);
-				if (bitmap == null) {
-					menu_right_item_img_icon.setImageResource(R.drawable.no_avatar);
-				} else {
-					menu_right_item_img_icon.setImageBitmap(bitmap);
-				}
-			}
-		} else {
-			ImageLoaderUtils.getInstance(menu_right_item_img_icon.getContext()).DisplayImage(avatar, menu_right_item_img_icon, R.drawable.no_avatar);
-		}
-	}
+//	public static void showAvatar(ImageView menu_right_item_img_icon, String avatar, String contact_id) {
+//		if (Conts.isBlank(avatar)) {
+//			if (Conts.isBlank(contact_id)) {
+//				menu_right_item_img_icon.setImageResource(R.drawable.no_avatar);
+//			} else {
+//				Bitmap bitmap = Conts.getBitmapFromContactId(menu_right_item_img_icon.getContext(), contact_id, f);
+//				if (bitmap == null) {
+//					menu_right_item_img_icon.setImageResource(R.drawable.no_avatar);
+//				} else {
+//					menu_right_item_img_icon.setImageBitmap(bitmap);
+//				}
+//			}
+//		} else {
+//			ImageLoaderUtils.getInstance(menu_right_item_img_icon.getContext()).DisplayImage(avatar, menu_right_item_img_icon, R.drawable.no_avatar);
+//		}
+//	}
 
 	public static void showAvatarNoImage(final ImageView menu_right_item_img_icon, final String avatar, final String contact_id) {
 		menu_right_item_img_icon.setImageResource(R.drawable.new_no_avatar);

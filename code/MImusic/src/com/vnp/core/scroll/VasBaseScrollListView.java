@@ -35,9 +35,10 @@ public abstract class VasBaseScrollListView implements OnTouchListener {
 			release();
 		} else if (event.getAction() == MotionEvent.ACTION_MOVE) {
 			int yCurrentTop = (int) event.getY();
-
-			update(ytop - yCurrentTop, yCurrentTop);
-			ytop = yCurrentTop;
+			if (Math.abs(ytop - yCurrentTop) > 5) {
+				update(ytop - yCurrentTop, yCurrentTop);
+				ytop = yCurrentTop;
+			}
 		}
 		return false;
 
