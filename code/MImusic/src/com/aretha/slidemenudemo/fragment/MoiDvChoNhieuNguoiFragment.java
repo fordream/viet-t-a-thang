@@ -9,6 +9,7 @@ import vnp.com.db.User;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.adapter.MoiDvChoNhieuNguoiAdaper;
+import vnp.com.mimusic.base.diablog.VasProgessDialog;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
 import vnp.com.mimusic.util.ImageLoaderUtils;
@@ -298,19 +299,22 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 
 			@Override
 			public void onStart() {
-				progressDialog = ProgressDialog.show(getActivity(), "", getString(R.string.loading));
+				if (progressDialog == null) {
+					progressDialog = new VasProgessDialog(getActivity());
+					progressDialog.show();
+				}
 			}
 
 			@Override
 			public void onError(String message) {
-				
-				if(!Conts.isBlank(message)){
-					if(message.contains("Phone")){
+
+				if (!Conts.isBlank(message)) {
+					if (message.contains("Phone")) {
 						message = getActivity().getString(R.string.sdtkhongphaicuabiettel);
 					}
 					Conts.showDialogThongbao(getActivity(), message);
 				}
-				
+
 				progressDialog.dismiss();
 			}
 
@@ -356,16 +360,17 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 			mkeyboard.setVisibility(View.VISIBLE);
 			mkeyboard.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.abc_alpha_in));
 		} else {
-//			Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.abc_alpha_out);
-//			animation.setAnimationListener(new VTAnimationListener() {
-//				@Override
-//				public void onAnimationEnd(Animation animation) {
-//					super.onAnimationEnd(animation);
-//					//mkeyboard.setVisibility(View.GONE);
-//				}
-//			});
-//			mkeyboard.startAnimation(animation);
-//			
+			// Animation animation = AnimationUtils.loadAnimation(getActivity(),
+			// R.anim.abc_alpha_out);
+			// animation.setAnimationListener(new VTAnimationListener() {
+			// @Override
+			// public void onAnimationEnd(Animation animation) {
+			// super.onAnimationEnd(animation);
+			// //mkeyboard.setVisibility(View.GONE);
+			// }
+			// });
+			// mkeyboard.startAnimation(animation);
+			//
 			mkeyboard.setVisibility(View.GONE);
 
 		}

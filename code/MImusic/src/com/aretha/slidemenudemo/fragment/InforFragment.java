@@ -13,6 +13,7 @@ import vnp.com.api.API;
 import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.User;
 import vnp.com.mimusic.R;
+import vnp.com.mimusic.base.diablog.VasProgessDialog;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
 import vnp.com.mimusic.util.Conts.IShowDateDialog;
@@ -68,9 +69,9 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 		if (!cacheDir.exists()) {
 			cacheDir.mkdirs();
 		}
-		
+
 		mFileTemp = new File(cacheDir, InternalStorageContentProvider.TEMP_PHOTO_FILE_NAME);
-		
+
 		// if (Environment.MEDIA_MOUNTED.equals(state)) {
 		// mFileTemp = new File(Environment.getExternalStorageDirectory(),
 		// InternalStorageContentProvider.TEMP_PHOTO_FILE_NAME);
@@ -240,8 +241,10 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 
 				@Override
 				public void onStart() {
-					if (progressDialog == null)
-						progressDialog = ProgressDialog.show(getActivity(), null, getActivity().getString(R.string.loading));
+					if (progressDialog == null) {
+						progressDialog = new VasProgessDialog(getActivity());
+						progressDialog.show();
+					}
 				}
 
 				@Override

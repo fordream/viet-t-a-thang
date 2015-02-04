@@ -7,6 +7,7 @@ import vnp.com.mimusic.R;
 import vnp.com.mimusic.VApplication;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.base.diablog.DangKyDialog;
+import vnp.com.mimusic.base.diablog.VasProgessDialog;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
 import vnp.com.mimusic.view.MenuLeftView;
@@ -225,7 +226,8 @@ public class NewMusicSlideMenuActivity extends TabActivity {
 					@Override
 					public void onStart() {
 						if (progressDialog == null) {
-							progressDialog = ProgressDialog.show(NewMusicSlideMenuActivity.this, null, getString(R.string.loading));
+							progressDialog = new VasProgessDialog(NewMusicSlideMenuActivity.this);
+							progressDialog.show();
 						}
 					}
 
@@ -269,9 +271,9 @@ public class NewMusicSlideMenuActivity extends TabActivity {
 
 	@Override
 	public void onBackPressed() {
-		//super.onBackPressed();
+		// super.onBackPressed();
 		finish(true);
-		
+
 	}
 
 	public void finish(boolean b) {

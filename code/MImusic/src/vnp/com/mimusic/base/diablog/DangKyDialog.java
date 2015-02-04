@@ -122,7 +122,10 @@ public class DangKyDialog extends BaseAdialog implements android.view.View.OnCli
 
 				@Override
 				public void onStart() {
-					progressDialog = ProgressDialog.show(getContext(), null, getContext().getString(R.string.loading));
+					if (progressDialog == null) {
+						progressDialog = new VasProgessDialog(getContext());
+						progressDialog.show();
+					}
 				}
 
 				@Override

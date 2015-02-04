@@ -1,5 +1,6 @@
 package vnp.com.api;
 
+import vnp.com.mimusic.base.diablog.VasProgessDialog;
 import vnp.com.mimusic.util.BynalProgressDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -44,7 +45,7 @@ public class ExeCallBackOption {
 						progressDialog = mConfig;
 						progressDialog.show();
 					} else {
-						progressDialog = new BynalProgressDialog(context);
+						progressDialog = new VasProgessDialog(context);
 						progressDialog.show();
 					}
 				}

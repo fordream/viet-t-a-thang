@@ -17,6 +17,7 @@ import vnp.com.db.User;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.VApplication;
 import vnp.com.mimusic.adapter.data.NewHomeItem;
+import vnp.com.mimusic.base.diablog.VasProgessDialog;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.DialogCallBack;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
@@ -460,8 +461,10 @@ public class RootMenuActivity extends FragmentActivity {
 
 			@Override
 			public void onStart() {
-				if (dialog == null)
-					dialog = ProgressDialog.show(getActivity(), null, getActivity().getString(R.string.loading));
+				if (dialog == null) {
+					dialog = new VasProgessDialog(getActivity());
+					dialog.show();
+				}
 			}
 
 			@Override

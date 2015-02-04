@@ -10,6 +10,7 @@ import vnp.com.db.BangXepHang;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.VApplication;
 import vnp.com.mimusic.adapter.BangXepHangCursorAdaper;
+import vnp.com.mimusic.base.diablog.VasProgessDialog;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
 import android.app.ProgressDialog;
@@ -83,7 +84,8 @@ public class BangXephangListView extends LinearLayout {
 			@Override
 			public void onStart() {
 				if (adaper.getCount() == 0) {
-					progressDialog = ProgressDialog.show(getContext(), null, getResources().getString(R.string.loading));
+					progressDialog = new VasProgessDialog(getContext());
+					progressDialog.show();
 				}
 			}
 
