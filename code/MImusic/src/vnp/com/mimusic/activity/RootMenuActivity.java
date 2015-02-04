@@ -10,6 +10,7 @@ import org.json.JSONObject;
 
 import vnp.com.api.API;
 import vnp.com.api.RestClient.RequestMethod;
+import vnp.com.db.BangXepHang;
 import vnp.com.db.DichVu;
 import vnp.com.db.TinTuc;
 import vnp.com.db.User;
@@ -230,19 +231,36 @@ public class RootMenuActivity extends FragmentActivity {
 	}
 
 	public void gotoChiTietCaNhanTungDichVu1(AdapterView<?> parent, View view, int position, long id, String xType) {
-		JSONObject jo = (JSONObject) parent.getItemAtPosition(position);
-		Intent intent = new Intent(this, RootMenuActivity.class);
-		intent.putExtra("type", Conts.CHITIETCANHANBANGXEPHANGTUNGDICHVU);
-		intent.putExtra("xType", xType);
-		intent.putExtra("position", Conts.getString(jo, "position"));
-		intent.putExtra("mtype", Conts.getString(jo, "type"));
-		intent.putExtra("avatar", Conts.getString(jo, "avatar"));
-		intent.putExtra("ranking_id", Conts.getString(jo, "id"));
-		intent.putExtra("nickname", Conts.getString(jo, "nickname"));
-		intent.putExtra("quantity", Conts.getString(jo, "quantity"));
-		intent.putExtra("commission", Conts.getString(jo, "commission"));
-		getParent().startActivity(intent);
-		overridePendingTransitionStartActivity();
+		Object object = parent.getItemAtPosition(position);
+		if (object instanceof Cursor) {
+			Cursor jo = (Cursor) parent.getItemAtPosition(position);
+			Intent intent = new Intent(this, RootMenuActivity.class);
+			intent.putExtra("type", Conts.CHITIETCANHANBANGXEPHANGTUNGDICHVU);
+			intent.putExtra("xType", xType);
+			intent.putExtra("position", "" + (jo.getPosition() + 1));
+			intent.putExtra("mtype", Conts.getStringCursor(jo, BangXepHang.type));
+			intent.putExtra("avatar", Conts.getStringCursor(jo, BangXepHang.avatar));
+			intent.putExtra("ranking_id", Conts.getStringCursor(jo, BangXepHang.ID));
+			intent.putExtra("nickname", Conts.getStringCursor(jo, BangXepHang.nickname));
+			intent.putExtra("quantity", Conts.getStringCursor(jo, BangXepHang.quantity));
+			intent.putExtra("commission", Conts.getStringCursor(jo, BangXepHang.commission));
+			getParent().startActivity(intent);
+			overridePendingTransitionStartActivity();
+		} else {
+			JSONObject jo = (JSONObject) parent.getItemAtPosition(position);
+			Intent intent = new Intent(this, RootMenuActivity.class);
+			intent.putExtra("type", Conts.CHITIETCANHANBANGXEPHANGTUNGDICHVU);
+			intent.putExtra("xType", xType);
+			intent.putExtra("position", Conts.getString(jo, "position"));
+			intent.putExtra("mtype", Conts.getString(jo, "type"));
+			intent.putExtra("avatar", Conts.getString(jo, "avatar"));
+			intent.putExtra("ranking_id", Conts.getString(jo, "id"));
+			intent.putExtra("nickname", Conts.getString(jo, "nickname"));
+			intent.putExtra("quantity", Conts.getString(jo, "quantity"));
+			intent.putExtra("commission", Conts.getString(jo, "commission"));
+			getParent().startActivity(intent);
+			overridePendingTransitionStartActivity();
+		}
 	}
 
 	public void gotoChiTietDichVu(AdapterView<?> parent, View view, int position, long id) {
