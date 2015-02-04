@@ -18,12 +18,11 @@ import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 //vnp.com.mimusic.view.BangXephangListView
 public class BangXephangListView extends LinearLayout {
-	// private vnp.com.mimusic.view.ChitietCaNhanBangXepHangTungDichVuView
-	// chitiet;
 	private vnp.com.mimusic.view.MusicListView list;
 	private String type = BangXepHang.typeDOANHTHU;
 	private String noDataText;
@@ -59,7 +58,6 @@ public class BangXephangListView extends LinearLayout {
 		((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.bangxephanglist, this);
 		list = (MusicListView) findViewById(R.id.list);
 		message = Conts.getView(this, R.id.message);
-
 	}
 
 	public void execute() {
@@ -115,6 +113,23 @@ public class BangXephangListView extends LinearLayout {
 
 	public String getType() {
 		return type;
+	}
+
+	public void addHeader(HeaderView headerbangxepdichvu) {
+		list.addHeaderView(headerbangxepdichvu);
+		this.headerbangxepdichvu = headerbangxepdichvu;
+	}
+
+	public ListView list() {
+		return list;
+	}
+
+	HeaderView headerbangxepdichvu;
+
+	public void updateHeader(boolean b) {
+		if (headerbangxepdichvu != null) {
+			headerbangxepdichvu.showHeader(b);
+		}
 	}
 
 }
