@@ -29,6 +29,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
 
@@ -134,8 +135,7 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 			}
 		});
 
-
-		new VasHomeScrollListView(getHeaderView().findViewById(R.id.header_main_content), headerView, list);
+		new VasHomeScrollListView(getHeaderView().findViewById(R.id.header_main_content), headerView, new ListView[] { list });
 		return view;
 	}
 

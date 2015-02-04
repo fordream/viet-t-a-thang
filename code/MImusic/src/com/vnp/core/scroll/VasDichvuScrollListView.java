@@ -10,8 +10,8 @@ public class VasDichvuScrollListView extends VasBaseScrollListView implements On
 	private View header;
 	private HeaderView listHeader;
 
-	public VasDichvuScrollListView(View header, HeaderView listHeader, ListView listView) {
-		super(listView);
+	public VasDichvuScrollListView(View header, HeaderView listHeader, ListView[] listView) {
+		super(listView, header);
 		this.header = header;
 		this.listHeader = listHeader;
 	}

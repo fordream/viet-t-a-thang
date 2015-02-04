@@ -6,7 +6,7 @@ import android.widget.ListView;
 
 public class VasChonDichvuScrollListView extends  VasDichvuScrollListView {
 
-	public VasChonDichvuScrollListView(View header, HeaderView listHeader, ListView listView) {
+	public VasChonDichvuScrollListView(View header, HeaderView listHeader, ListView[] listView) {
 		super(header, listHeader, listView);
 	}
 

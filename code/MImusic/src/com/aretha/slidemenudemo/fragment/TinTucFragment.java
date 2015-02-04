@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
 
 import com.vnp.core.scroll.VasTintucScrollListView;
 
@@ -99,7 +100,8 @@ public class TinTucFragment extends BaseFragment implements OnItemClickListener,
 			}
 		});
 
-		new VasTintucScrollListView(getHeaderView(), listHeader, bangxephang_list);
+		ListView listViews[] = new ListView[] { bangxephang_list };
+		new VasTintucScrollListView(getHeaderView(), listHeader, listViews);
 		return view;
 	}
 

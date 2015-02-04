@@ -9,8 +9,8 @@ public class VasHomeScrollListView extends VasBaseScrollListView implements OnTo
 	private View header;
 	private View top;
 
-	public VasHomeScrollListView(View header, View top, ListView listView) {
-		super(listView);
+	public VasHomeScrollListView(View header, View top, ListView[] listView) {
+		super(listView, header);
 		this.header = header;
 		this.top = top;
 	}

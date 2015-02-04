@@ -10,8 +10,8 @@ public class VasTintucScrollListView extends VasBaseScrollListView implements On
 	private View header;
 	private HeaderView top;
 
-	public VasTintucScrollListView(View header, HeaderView top, ListView listView) {
-		super(listView);
+	public VasTintucScrollListView(View header, HeaderView top, ListView[] listView) {
+		super(listView, header);
 		this.header = header;
 		this.top = top;
 	}

@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
+import android.widget.ListView;
 
 import com.vnp.core.scroll.VasChonDichvuScrollListView;
 
@@ -93,7 +94,8 @@ public class ChonDichvuFragment extends BaseFragment implements android.view.Vie
 			}
 		});
 
-		new VasChonDichvuScrollListView(chitietdichvu_headerview, headerView, bangxephang_list);
+		ListView listViews[] = new ListView[] { bangxephang_list };
+		new VasChonDichvuScrollListView(chitietdichvu_headerview, headerView, listViews);
 		return view;
 	}
 

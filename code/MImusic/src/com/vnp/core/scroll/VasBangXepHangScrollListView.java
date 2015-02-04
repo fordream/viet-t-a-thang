@@ -6,7 +6,7 @@ import android.widget.ListView;
 
 public class VasBangXepHangScrollListView extends  VasDichvuScrollListView {
 
-	public VasBangXepHangScrollListView(View header, HeaderView listHeader, ListView listView) {
+	public VasBangXepHangScrollListView(View header, HeaderView listHeader, ListView[] listView) {
 		super(header, listHeader, listView);
 	}
 }

@@ -1,7 +1,5 @@
 package com.aretha.slidemenudemo.fragment;
 
-import com.vnp.core.scroll.VasBangXepHangScrollListView;
-
 import vnp.com.db.BangXepHang;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
@@ -16,6 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
+
+import com.vnp.core.scroll.VasBangXepHangScrollListView;
 
 public class BangXepHangFragment extends BaseFragment implements OnItemClickListener, View.OnClickListener {
 	private View view;
@@ -68,8 +69,9 @@ public class BangXepHangFragment extends BaseFragment implements OnItemClickList
 		});
 		callData(true);
 
-		new VasBangXepHangScrollListView(getHeaderView(), headerbangxephangsoluong, bangxephangSoluong.list());
-		new VasBangXepHangScrollListView(getHeaderView(), headerbangxepdoanhthu, bangxephangDoanhthu.list());
+		new VasBangXepHangScrollListView(getHeaderView(), headerbangxephangsoluong, new ListView[] { bangxephangSoluong.list(), bangxephangDoanhthu.list() });
+		// new VasBangXepHangScrollListView(getHeaderView(),
+		// headerbangxepdoanhthu, bangxephangDoanhthu.list());
 
 		return view;
 	}
@@ -80,12 +82,14 @@ public class BangXepHangFragment extends BaseFragment implements OnItemClickList
 			bangxephangDoanhthu.setVisibility(View.GONE);
 			bangxephangSoluong.execute();
 
-			bangxephangSoluong.updateHeader(getHeaderView().getVisibility() == view.VISIBLE);
+			// bangxephangSoluong.updateHeader(getHeaderView().getVisibility()
+			// == view.VISIBLE);
 		} else {
 			bangxephangDoanhthu.setVisibility(View.VISIBLE);
 			bangxephangSoluong.setVisibility(View.GONE);
 			bangxephangDoanhthu.execute();
-			bangxephangDoanhthu.updateHeader(getHeaderView().getVisibility() == view.VISIBLE);
+			// bangxephangDoanhthu.updateHeader(getHeaderView().getVisibility()
+			// == view.VISIBLE);
 		}
 	}
 
