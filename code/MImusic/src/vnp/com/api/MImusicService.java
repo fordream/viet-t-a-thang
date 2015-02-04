@@ -11,6 +11,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import vnp.com.api.RestClient.RequestMethod;
+import vnp.com.db.BangXepHang;
 import vnp.com.db.DichVu;
 import vnp.com.db.HuongDanBanHang;
 import vnp.com.db.MauMoi;
@@ -479,6 +480,10 @@ public class MImusicService extends Service {
 							HuongDanBanHang.update(MImusicService.this, response);
 						} else if (API.API_R005.equals(api)) {
 							DichVu.updateService_content(MImusicService.this, response, bundle);
+						} else if (API.API_R024.equals(api)) {
+							BangXepHang.update(MImusicService.this, response, bundle, API.API_R024);
+						} else if (API.API_R025.equals(api)) {
+							BangXepHang.update(MImusicService.this, response, bundle, API.API_R025);
 						}
 
 						return null;

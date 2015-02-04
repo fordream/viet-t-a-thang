@@ -2,13 +2,20 @@ package vnp.com.db;
 
 import java.util.Map;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import vnp.com.api.API;
+import vnp.com.mimusic.util.Conts;
 import android.content.ContentUris;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
+import android.os.Bundle;
 import android.text.TextUtils;
 
 public class BangXepHang {
@@ -128,5 +135,54 @@ public class BangXepHang {
 		}
 
 		return null;
+	}
+
+	public static void update(Context context, JSONObject response, Bundle bundle, String api) {
+		// API.API_R024,API.API_R025
+		String type = bundle.getString(BangXepHang.type);
+		String user = bundle.getString(BangXepHang.USER);
+
+		if (API.API_R024.equals(api)) {
+			try {
+				JSONArray jsonArray = response.getJSONArray("data");
+				for (int i = 0; i < jsonArray.length(); i++) {
+					JSONObject object = jsonArray.getJSONObject(i);
+					ContentValues values = new ContentValues();
+					values.put(BangXepHang.USER, user);
+					values.put(BangXepHang.type, type);
+					values.put(BangXepHang.ID, Conts.getString(object, BangXepHang.ID));
+					values.put(BangXepHang.avatar, Conts.getString(object, BangXepHang.avatar));
+					values.put(BangXepHang.commission, Conts.getString(object, BangXepHang.commission));
+					values.put(BangXepHang.nickname, Conts.getString(object, BangXepHang.nickname));
+					values.put(BangXepHang.quantity, Conts.getString(object, BangXepHang.quantity));
+
+					boolean needInsert = true;
+					String selection = String.format("%s ='%s' and %s = '%s' and %s = '%s'", BangXepHang.USER, user, BangXepHang.type, type, BangXepHang.ID, Conts.getString(object, BangXepHang.ID));
+					Cursor cursor = getBangXepHang(context, type, Conts.getString(object, BangXepHang.ID));
+
+					if (cursor != null) {
+						if (cursor.getCount() >= 1) {
+							needInsert = false;
+						}
+						cursor.close();
+					}
+
+					if (needInsert) {
+						context.getContentResolver().insert(CONTENT_URI, values);
+					} else {
+						context.getContentResolver().update(CONTENT_URI, values, selection, null);
+					}
+				}
+			} catch (Exception exception) {
+			}
+		} else if (API.API_R025.equals(api)) {
+
+		}
+	}
+
+	public static Cursor getBangXepHang(Context context, String type, String id) {
+		String selection = String.format("%s ='%s' and %s = '%s' and %s = '%s'", BangXepHang.USER, Conts.getUser(context), BangXepHang.type, type, BangXepHang.ID, id);
+		Cursor cursor = context.getContentResolver().query(CONTENT_URI, null, selection, null, null);
+		return cursor;
 	}
 }

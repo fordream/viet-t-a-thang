@@ -1,5 +1,6 @@
 package com.aretha.slidemenudemo.fragment;
 
+import vnp.com.db.BangXepHang;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.main.NewMusicSlideMenuActivity;
@@ -36,15 +37,12 @@ public class BangXepHangFragment extends BaseFragment implements OnItemClickList
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.bangxephang, null);
-
 		createHeader(getString(R.string.bangxephang), true, true);
-
 		((LinearLayout) view.findViewById(R.id.header)).addView(getHeaderView());
-
 		bangxephangSoluong = (BangXephangListView) view.findViewById(R.id.bangxephang1);
 		bangxephangDoanhthu = (BangXephangListView) view.findViewById(R.id.bangxephang2);
-		bangxephangSoluong.setType("2");
-		bangxephangDoanhthu.setType("1");
+		bangxephangSoluong.setType(BangXepHang.typeSOLUONG);
+		bangxephangDoanhthu.setType(BangXepHang.typeDOANHTHU);
 
 		bangxephangSoluong.setOnItemClick(this);
 		bangxephangDoanhthu.setOnItemClick(this);
@@ -60,12 +58,13 @@ public class BangXepHangFragment extends BaseFragment implements OnItemClickList
 	}
 
 	private void callData(boolean isSoluong) {
-
-		bangxephangSoluong.setVisibility(isSoluong ? View.VISIBLE : View.GONE);
-		bangxephangDoanhthu.setVisibility(!isSoluong ? View.VISIBLE : View.GONE);
 		if (isSoluong) {
+			bangxephangSoluong.setVisibility(View.VISIBLE);
+			bangxephangDoanhthu.setVisibility(View.GONE);
 			bangxephangSoluong.execute();
 		} else {
+			bangxephangDoanhthu.setVisibility(View.VISIBLE);
+			bangxephangSoluong.setVisibility(View.GONE);
 			bangxephangDoanhthu.execute();
 		}
 	}
@@ -76,9 +75,9 @@ public class BangXepHangFragment extends BaseFragment implements OnItemClickList
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		String xType = "1";
-		if (bangxephangSoluong.getVisibility() == View.VISIBLE) {
-			xType = "2";
+		String xType = bangxephangSoluong.getType();
+		if (bangxephangSoluong.getVisibility() == View.GONE) {
+			xType = bangxephangDoanhthu.getType();
 		}
 		(((RootMenuActivity) getActivity())).gotoChiTietCaNhanTungDichVu1(parent, view, position, id, xType);
 	}

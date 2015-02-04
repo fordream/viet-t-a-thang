@@ -80,4 +80,15 @@ public class BangXepHangAdaper extends ArrayAdapter<JSONObject> {
 			}
 		});
 	}
+
+	public void changeData(JSONArray jsonArray) {
+		list.clear();
+		for (int i = 0; i < jsonArray.length(); i++) {
+			try {
+				list.add(jsonArray.getJSONObject(i));
+			} catch (JSONException e) {
+			}
+		}
+
+	}
 }

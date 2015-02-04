@@ -3,10 +3,12 @@ package vnp.com.mimusic.view;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import vnp.com.db.BangXepHang;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.ImageLoaderUtils;
 import android.content.Context;
+import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -106,5 +108,22 @@ public class BangXepHangItemView extends LinearLayout {
 		this.type = type;
 		// 2 so luong
 		// 1 dong thu
+	}
+
+	public void setData(Cursor cursor) {
+		TextView bxhItemSTT = (TextView) findViewById(R.id.bangxephang_item_tv_stt);
+		ImageView bxhItemImage = (ImageView) findViewById(R.id.bangxephang_item_img_icon);
+		TextView bxhItemName = (TextView) findViewById(R.id.bangxephang_item_tv_name);
+		TextView bxhItemValue = (TextView) findViewById(R.id.bangxephang_item);
+
+		bxhItemSTT.setText("" + (cursor.getPosition() + 1));
+		bxhItemName.setText(Conts.getStringCursor(cursor, BangXepHang.nickname));
+		if ("1".equals(Conts.getStringCursor(cursor, BangXepHang.type))) {
+			bxhItemValue.setText(Conts.getStringCursor(cursor, BangXepHang.commission));
+		} else {
+			bxhItemValue.setText(Conts.getStringCursor(cursor, BangXepHang.quantity));
+		}
+
+		ImageLoaderUtils.getInstance(getContext()).DisplayImage(Conts.getStringCursor(cursor, BangXepHang.avatar), bxhItemImage, R.drawable.no_avatar);
 	}
 }
