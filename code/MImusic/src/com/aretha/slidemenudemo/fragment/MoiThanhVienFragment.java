@@ -1,5 +1,7 @@
 package com.aretha.slidemenudemo.fragment;
 
+import com.vnp.core.scroll.VasDichvuScrollListView;
+
 import vnp.com.db.Recomment;
 import vnp.com.db.User;
 import vnp.com.mimusic.R;
@@ -40,12 +42,13 @@ public class MoiThanhVienFragment extends BaseFragment implements OnItemClickLis
 		super.onPause();
 	}
 
+	private HeaderView listHeader;
 	private ListView dichvu_list;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.moithanhvien, null);
-
+		listHeader = new HeaderView(getActivity());
 		HeaderView chitiettintuc_headerview = (HeaderView) view.findViewById(R.id.activity_login_header);
 		chitiettintuc_headerview.setTextHeader(R.string.moithanhvien);
 		chitiettintuc_headerview.setButtonLeftImage(true, R.drawable.btn_back);
@@ -58,6 +61,9 @@ public class MoiThanhVienFragment extends BaseFragment implements OnItemClickLis
 		chitiettintuc_headerview.setButtonRightImage(false, R.drawable.btn_back);
 
 		dichvu_list = (ListView) view.findViewById(R.id.dichvu_list);
+		dichvu_list.addHeaderView(listHeader);
+
+		listHeader.showHeadderSearch();
 		dichvu_list.setOnItemClickListener(this);
 
 		callSHowData();
@@ -78,10 +84,11 @@ public class MoiThanhVienFragment extends BaseFragment implements OnItemClickLis
 			public void afterTextChanged(Editable s) {
 				if (adapter != null) {
 					adapter.setTextSearch(dichvu_edittext_search.getText().toString().trim());
-//					adapter.notifyDataSetChanged();
+					// adapter.notifyDataSetChanged();
 				}
 			}
 		});
+		new VasDichvuScrollListView(chitiettintuc_headerview, listHeader, new ListView[] { dichvu_list });
 		return view;
 	}
 
@@ -106,7 +113,7 @@ public class MoiThanhVienFragment extends BaseFragment implements OnItemClickLis
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		Conts.hiddenKeyBoard(getActivity());
-		Cursor cursor = (Cursor)parent.getItemAtPosition(position);
+		Cursor cursor = (Cursor) parent.getItemAtPosition(position);
 		(((RootMenuActivity) getActivity())).moiContactUserFragment(Conts.getStringCursor(cursor, User._ID));
 	}
 }

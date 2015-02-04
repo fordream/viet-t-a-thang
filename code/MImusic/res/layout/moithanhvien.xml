@@ -5,6 +5,18 @@
     android:background="@drawable/new_dichvu_bg"
     android:orientation="vertical" >
 
+    <vnp.com.mimusic.view.MusicListView
+        android:id="@+id/dichvu_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@drawable/tranfer"
+        android:dividerHeight="0px"
+        android:listSelector="@drawable/tranfer"
+        android:scrollbarThumbHorizontal="@drawable/tranfer"
+        android:scrollbarThumbVertical="@drawable/tranfer"
+        android:scrollbars="none" >
+    </vnp.com.mimusic.view.MusicListView>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -19,6 +31,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/new_dichvu_bg"
             android:padding="@dimen/dimen_12dp" >
 
             <EditText
@@ -52,18 +65,6 @@
             android:layout_marginLeft="@dimen/dimen_12dp"
             android:layout_marginRight="@dimen/dimen_12dp"
             android:background="@drawable/new_dichvu_space" />
-
-        <vnp.com.mimusic.view.MusicListView
-            android:id="@+id/dichvu_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:divider="@drawable/tranfer"
-            android:listSelector="@drawable/tranfer"
-            android:dividerHeight="0px"
-            android:scrollbarThumbHorizontal="@drawable/tranfer"
-            android:scrollbarThumbVertical="@drawable/tranfer"
-            android:scrollbars="none" >
-        </vnp.com.mimusic.view.MusicListView>
     </LinearLayout>
 
 </RelativeLayout>

@@ -1,5 +1,7 @@
 package com.aretha.slidemenudemo.fragment;
 
+import com.vnp.core.scroll.VasDichvuScrollListView;
+
 import vnp.com.db.DichVu;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
@@ -28,6 +30,7 @@ public class DichVuHotFragment extends BaseFragment implements OnItemClickListen
 	}
 
 	private DichVuAdapter adapter;
+	private HeaderView listHeader;
 
 	@Override
 	public void onResume() {
@@ -45,7 +48,7 @@ public class DichVuHotFragment extends BaseFragment implements OnItemClickListen
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.dichvuhot, null);
-
+		listHeader = new HeaderView(getActivity());
 		HeaderView chitiettintuc_headerview = (HeaderView) view.findViewById(R.id.activity_login_header);
 		chitiettintuc_headerview.setTextHeader(R.string.dichvuhot);
 		chitiettintuc_headerview.setButtonLeftImage(true, R.drawable.btn_back);
@@ -58,6 +61,9 @@ public class DichVuHotFragment extends BaseFragment implements OnItemClickListen
 		chitiettintuc_headerview.setButtonRightImage(false, R.drawable.btn_back);
 
 		dichvu_list = (ListView) view.findViewById(R.id.dichvu_list);
+		dichvu_list.addHeaderView(listHeader);
+		listHeader.showHeadderSearch();
+
 		dichvu_list.setOnItemClickListener(this);
 
 		callSHowData();
@@ -82,6 +88,7 @@ public class DichVuHotFragment extends BaseFragment implements OnItemClickListen
 				}
 			}
 		});
+		new VasDichvuScrollListView(chitiettintuc_headerview, listHeader, new ListView[] { dichvu_list });
 		return view;
 	}
 
