@@ -197,6 +197,10 @@
     <string name="tinlienquan">Tin liên quan</string>
 
     <color name="f6f6f6">#f6f6f6</color>
+
     <string name="sdtkhongphaicuabiettel">Số điện thoại không phải của viettel.</string>
+    <string name="banphainhapngaybatdau">Bạn cần nhập ngày bắt đầu.</string>
+    <string name="banphainhapngaykethuc">Bạn cần nhập ngày kết thúc.</string>
+    <string name="ngayketthucphaisaungaybatdau">Bạn cần nhập ngày kết thúc sau ngày bắt đầu.</string>
 
 </resources>

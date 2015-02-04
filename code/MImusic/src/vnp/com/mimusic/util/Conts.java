@@ -806,4 +806,18 @@ public class Conts {
 		view.setAnimation(alphaAnimation);
 	}
 
+	public static int getDateToInt(String str) {
+		try {
+			StringTokenizer stringTokenizer = new StringTokenizer(str, "/");
+			String day = stringTokenizer.nextToken();
+			String month = stringTokenizer.nextToken();
+			String year = stringTokenizer.nextToken();
+			return Integer.parseInt(year) * 10000 + Integer.parseInt(month) * 100 + Integer.parseInt(day) * 1;
+		} catch (Exception exception) {
+
+		}
+
+		return 0;
+	}
+
 }

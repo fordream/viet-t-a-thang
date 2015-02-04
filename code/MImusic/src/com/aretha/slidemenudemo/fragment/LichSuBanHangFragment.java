@@ -64,15 +64,25 @@ public class LichSuBanHangFragment extends Fragment implements OnItemClickListen
 		lsbt_trangthai = (TextView) view.findViewById(R.id.lsbt_trangthai);
 		lsbt_trangthai.setOnClickListener(l);
 		lsbh_sdt = (TextView) view.findViewById(R.id.lsbh_sdt);
-		//updateTrangThai();
 
-		// lsbt_trangthai.setText(R.string.tatca);
-		// lsbt_dichvu.setText(R.string.tatca);
 		return view;
 	}
 
 	protected void gotoChiTietLichSuBanHang() {
-
+		if (Conts.isBlank(lsbt_tu.getText().toString())) {
+			Conts.showDialogThongbao(getActivity(), getActivity().getString(R.string.banphainhapngaybatdau));
+			return;
+		} else if (Conts.isBlank(lsbt_den.getText().toString())) {
+			Conts.showDialogThongbao(getActivity(), getActivity().getString(R.string.banphainhapngaykethuc));
+			return;
+		} else {
+			int dateStart = Conts.getDateToInt(lsbt_tu.getText().toString());
+			int dateEnd = Conts.getDateToInt(lsbt_den.getText().toString());
+			if (dateEnd < dateStart) {
+				Conts.showDialogThongbao(getActivity(), getActivity().getString(R.string.ngayketthucphaisaungaybatdau));
+				return;
+			}
+		}
 		Bundle bundle = new Bundle();
 		bundle.putString("from", lsbt_tu.getText().toString());
 		bundle.putString("to", lsbt_den.getText().toString());
@@ -117,7 +127,7 @@ public class LichSuBanHangFragment extends Fragment implements OnItemClickListen
 		Intent intent = new Intent(getActivity(), RootMenuActivity.class);
 		intent.putExtra("type", Conts.CHONDICHVU);
 		startActivityForResult(intent, 20001);
-		
+
 	}
 
 	private void showDanhBa() {
@@ -130,14 +140,13 @@ public class LichSuBanHangFragment extends Fragment implements OnItemClickListen
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		if (requestCode == 2000 && resultCode == Activity.RESULT_OK) {
-//			phoneContact = data.getStringExtra(User.USER);
-//			lsbh_sdt.setText(data.getStringExtra(User.NAME_CONTACT));
-//
-//			if (!Conts.isBlank(phoneContact)) {
-//				lsbh_sdt.setText(phoneContact);
-//			}
+			// phoneContact = data.getStringExtra(User.USER);
+			// lsbh_sdt.setText(data.getStringExtra(User.NAME_CONTACT));
+			//
+			// if (!Conts.isBlank(phoneContact)) {
+			// lsbh_sdt.setText(phoneContact);
+			// }
 			lsbh_sdt.setText(data.getStringExtra(User.USER));
-			
 
 			Conts.getSDT(lsbh_sdt);
 		} else if (requestCode == 20001 && resultCode == Activity.RESULT_OK) {
