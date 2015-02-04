@@ -12,8 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AlphabetIndexer;
 import android.widget.ArrayAdapter;
-import android.widget.Filter;
-import android.widget.FilterQueryProvider;
 import android.widget.SectionIndexer;
 
 public abstract class NewMenuRightAdaper extends ArrayAdapter<ContentValues> implements SectionIndexer {

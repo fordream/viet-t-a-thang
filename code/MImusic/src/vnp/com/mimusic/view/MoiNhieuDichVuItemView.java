@@ -1,15 +1,10 @@
 package vnp.com.mimusic.view;
 
-import java.util.List;
-
-import vnp.com.db.DichVu;
 import vnp.com.mimusic.R;
 import android.content.Context;
-import android.database.Cursor;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;

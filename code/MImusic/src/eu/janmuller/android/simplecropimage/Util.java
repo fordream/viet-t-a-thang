@@ -16,13 +16,17 @@ package eu.janmuller.android.simplecropimage;
  */
 
 
+import java.io.Closeable;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.graphics.*;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Matrix;
+import android.graphics.Rect;
 import android.os.Handler;
 import android.view.Surface;
-
-import java.io.Closeable;
 
 /**
  * Collection of utility functions used in this package.

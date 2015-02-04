@@ -1,7 +1,5 @@
 package com.aretha.slidemenudemo.fragment;
 
-import com.vnp.core.scroll.VasChonSdtScrollListView;
-
 import vnp.com.db.User;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.adapter.ChonSoDienThoaiAdaper;
@@ -18,6 +16,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
+
+import com.vnp.core.scroll.VasChonSdtScrollListView;
 
 public class ChonSoDienThoaiFragment extends BaseFragment implements android.view.View.OnClickListener {
 
@@ -40,7 +40,7 @@ public class ChonSoDienThoaiFragment extends BaseFragment implements android.vie
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				Intent intent = new Intent();
 				if (adaper != null) {
-					Cursor cursor = (Cursor) adaper.getItem(position);
+					Cursor cursor = (Cursor) adaper.getItem(position - 1);
 					intent.putExtra(User.NAME_CONTACT, cursor.getString(cursor.getColumnIndex(User.NAME_CONTACT)));
 					intent.putExtra(User.USER, cursor.getString(cursor.getColumnIndex(User.USER)));
 				}

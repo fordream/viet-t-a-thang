@@ -13,10 +13,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.util.EntityUtils;
 
-import vnp.com.mimusic.util.LogUtils;
-import android.net.Credentials;
-import android.util.Log;
-
 public class Test {
 	String MY_APP_TAG = "net.ajzele.beanstalk.stalkmanager";
 	String username = "brankoa1";

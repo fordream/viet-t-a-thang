@@ -1,24 +1,13 @@
 package com.aretha.slidemenudemo.fragment;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import vnp.com.api.API;
-import vnp.com.api.RestClient.RequestMethod;
-import vnp.com.db.DichVu;
 import vnp.com.mimusic.R;
-import vnp.com.mimusic.adapter.QuyDinhBanHangAdapter;
-import vnp.com.mimusic.util.Conts;
-import vnp.com.mimusic.util.Conts.IContsCallBack;
 import vnp.com.mimusic.view.HeaderView;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ListView;
 import android.widget.TextView;
 
 public class HuongDanBanHangOfDichVuFragment extends BaseFragment implements OnItemClickListener, View.OnClickListener {

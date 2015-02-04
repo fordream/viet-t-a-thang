@@ -1,23 +1,15 @@
 package vnp.com.mimusic.view;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import vnp.com.mimusic.R;
-import vnp.com.mimusic.adapter.MenuRightDetailAdaper;
 import android.content.ContentValues;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.EditText;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 //vnp.com.mimusic.view.MenuRightDetailView

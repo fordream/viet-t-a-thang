@@ -2,7 +2,6 @@ package com.aretha.slidemenudemo.fragment;
 
 import vnp.com.db.DichVu;
 import vnp.com.mimusic.R;
-import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.adapter.QuyDinhBanHangAdapter;
 import vnp.com.mimusic.view.HeaderView;
 import android.database.Cursor;

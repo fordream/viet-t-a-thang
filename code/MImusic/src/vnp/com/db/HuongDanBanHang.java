@@ -5,7 +5,6 @@ import java.util.Map;
 import org.json.JSONObject;
 
 import vnp.com.mimusic.util.Conts;
-import vnp.com.mimusic.util.LogUtils;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
@@ -14,7 +13,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
-import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 
 public class HuongDanBanHang {

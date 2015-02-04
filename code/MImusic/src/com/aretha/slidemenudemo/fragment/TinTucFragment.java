@@ -2,8 +2,6 @@ package com.aretha.slidemenudemo.fragment;
 
 import org.json.JSONObject;
 
-import com.vnp.core.scroll.VasTintucScrollListView;
-
 import vnp.com.api.API;
 import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.TinTuc;
@@ -22,6 +20,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+
+import com.vnp.core.scroll.VasTintucScrollListView;
 
 public class TinTucFragment extends BaseFragment implements OnItemClickListener, View.OnClickListener {
 

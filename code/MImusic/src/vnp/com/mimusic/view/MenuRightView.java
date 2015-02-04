@@ -1,12 +1,8 @@
 package vnp.com.mimusic.view;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import vnp.com.db.User;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.adapter.MenuRightAdaper;
-import vnp.com.mimusic.main.BaseMusicSlideMenuActivity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -15,19 +11,10 @@ import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.TextView;
 
 //vnp.com.mimusic.view.MenuRightView
 public class MenuRightView extends LinearLayout {

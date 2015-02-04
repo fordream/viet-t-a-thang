@@ -32,7 +32,6 @@ import org.apache.http.message.BasicNameValuePair;
 import vnp.com.api.RestClient.RequestMethod;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.os.Environment;
 
 public class HttpsRestClient {
 	public interface IHttpsRestClientLisner {

@@ -3,9 +3,6 @@ package vnp.com.mimusic.view;
 import vnp.com.mimusic.util.Conts;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Path;
-import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 

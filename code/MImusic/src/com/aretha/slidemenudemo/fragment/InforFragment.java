@@ -14,7 +14,6 @@ import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.User;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.util.Conts;
-import vnp.com.mimusic.util.LogUtils;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
 import vnp.com.mimusic.util.Conts.IShowDateDialog;
 import vnp.com.mimusic.view.HeaderView;
@@ -34,7 +33,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -236,7 +234,6 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 	private void uploadAvatar(final String path) {
 		// Conts.showDialogThongbao(getActivity(), path + " " + new
 		// File(path).exists());
-		LogUtils.e("A", new File(path).exists() + "");
 		if (!Conts.isBlank(path)) {
 			executeUpdateHttpsAvatar(path, new IContsCallBack() {
 				ProgressDialog progressDialog;

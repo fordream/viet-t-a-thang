@@ -3,11 +3,6 @@ package vnp.com.mimusic.view;
 import vnp.com.mimusic.view.add.OnTouchAnimation;
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.view.MotionEvent;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
-import android.view.animation.ScaleAnimation;
 import android.widget.Button;
 
 //vnp.com.mimusic.view.BaseButton

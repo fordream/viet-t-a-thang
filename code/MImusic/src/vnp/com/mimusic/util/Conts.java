@@ -69,7 +69,6 @@ public class Conts {
 				return pattern.matcher(temp).replaceAll("").replaceAll("Đ", "D").replaceAll("đ", "d").toUpperCase();
 			} catch (Exception exception) {
 
-				LogUtils.e("TABG", exception);
 				return str;
 			}
 		}
@@ -241,7 +240,6 @@ public class Conts {
 								}
 							}
 						} catch (Exception exception) {
-							LogUtils.e("response", exception);
 						}
 
 						try {
@@ -259,14 +257,12 @@ public class Conts {
 								}
 							}
 						} catch (Exception exception) {
-							LogUtils.e("response", exception);
 						}
 						if (contsCallBack != null) {
 							contsCallBack.onError(message);
 						}
 					}
 				} catch (Exception exception) {
-					LogUtils.e("response", exception);
 					if (contsCallBack != null) {
 						contsCallBack.onError();
 					}

@@ -21,14 +21,11 @@ public abstract class VasBaseScrollListView implements OnTouchListener {
 		if (event.getAction() == MotionEvent.ACTION_DOWN) {
 			ytop = (int) event.getY();
 		} else if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) {
-
 		} else if (event.getAction() == MotionEvent.ACTION_MOVE) {
-			// Log.e("VasScrollListView", event.getY() + "");
-
 			int yCurrentTop = (int) event.getY();
-			if (yCurrentTop + 1 < ytop) {
+			if (yCurrentTop + 5 < ytop) {
 				hidden();
-			} else if (yCurrentTop - 1 > ytop) {
+			} else if (yCurrentTop - 5 > ytop) {
 				show();
 			}
 

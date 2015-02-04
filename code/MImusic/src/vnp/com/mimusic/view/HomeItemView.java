@@ -2,18 +2,12 @@ package vnp.com.mimusic.view;
 
 import vnp.com.db.DichVu;
 import vnp.com.mimusic.R;
-import vnp.com.mimusic.base.diablog.DangKyDialog;
 import vnp.com.mimusic.util.ImageLoaderUtils;
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.text.Html;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;

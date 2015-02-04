@@ -6,14 +6,11 @@ import vnp.com.mimusic.VApplication.IServiceConfig;
 import vnp.com.mimusic.base.VTAnimationListener;
 import vnp.com.mimusic.main.BaseMusicSlideMenuActivity;
 import vnp.com.mimusic.util.Conts;
-import vnp.com.mimusic.util.VTAnimationUtils;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
+import vnp.com.mimusic.util.VTAnimationUtils;
 import vnp.com.mimusic.view.HeaderView;
 import vnp.com.mimusic.view.LoadingView;
 import vnp.com.mimusic.view.add.OnTouchAnimation;
-
-import com.vnp.core.crash.CrashExceptionHandler;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,6 +20,8 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.vnp.core.crash.CrashExceptionHandler;
 
 public class LoginTabletActivty extends Activity implements OnClickListener {
 	private LoadingView progressBar1;

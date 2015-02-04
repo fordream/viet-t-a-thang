@@ -20,7 +20,6 @@ import vnp.com.db.TinTuc;
 import vnp.com.db.User;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
-import vnp.com.mimusic.util.LogUtils;
 import android.app.Service;
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -517,7 +516,6 @@ public class MImusicService extends Service {
 	}
 
 	private void updateKiemTraDieuKienThueBao(JSONObject response) {
-		LogUtils.e("updateKiemTraDieuKienThueBao", response.toString());
 	}
 
 	private void updateMauMoi(JSONObject response, String service_code) {

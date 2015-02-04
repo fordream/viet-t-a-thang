@@ -1,6 +1,5 @@
 package vnp.com.api;
 
-import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -36,7 +35,6 @@ import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
 import vnp.com.mimusic.util.Conts;
-import vnp.com.mimusic.util.LogUtils;
 import android.content.Context;
 
 import com.vnp.core.common.https.RunSSL;
@@ -115,7 +113,6 @@ public class RestClient {
 					}
 				}
 			} catch (Exception exception) {
-				LogUtils.e("response", exception);
 			}
 			request = new HttpGet(url + combinedParams);
 			// add headers
@@ -212,9 +209,7 @@ public class RestClient {
 			}
 		} catch (ClientProtocolException e) {
 			client.getConnectionManager().shutdown();
-			LogUtils.e("response", e);
 		} catch (IOException e) {
-			LogUtils.e("response", e);
 			client.getConnectionManager().shutdown();
 		}
 	}

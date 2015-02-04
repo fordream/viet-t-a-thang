@@ -1,6 +1,5 @@
 package vnp.com.mimusic.view;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import vnp.com.db.BangXepHang;
@@ -9,7 +8,6 @@ import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.ImageLoaderUtils;
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.AttributeSet;

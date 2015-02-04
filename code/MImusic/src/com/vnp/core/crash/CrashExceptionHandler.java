@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Calendar;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import vnp.com.api.CallBack;
@@ -15,10 +14,8 @@ import vnp.com.api.ExeCallBack;
 import vnp.com.api.RestClient;
 import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.mimusic.util.Conts;
-import vnp.com.mimusic.util.LogUtils;
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 
 public class CrashExceptionHandler implements Thread.UncaughtExceptionHandler {
 	public static final void onCreate(Activity activity) {

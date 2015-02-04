@@ -1,6 +1,5 @@
 package vnp.com.mimusic.view;
 
-import vnp.com.mimusic.R;
 import android.content.Context;
 import android.graphics.Color;
 import android.text.Spanned;

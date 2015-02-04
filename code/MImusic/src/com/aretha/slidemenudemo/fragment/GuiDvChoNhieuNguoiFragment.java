@@ -1,7 +1,6 @@
 package com.aretha.slidemenudemo.fragment;
 
 import vnp.com.mimusic.R;
-import vnp.com.mimusic.adapter.BangXepHangAdaper;
 import vnp.com.mimusic.adapter.GuiDivhVuChoNhieuNguoiAdaper;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,8 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
 
 public class GuiDvChoNhieuNguoiFragment extends Fragment implements OnItemClickListener, View.OnClickListener {
 	@Override

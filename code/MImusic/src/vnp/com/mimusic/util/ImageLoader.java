@@ -15,9 +15,6 @@ import java.util.WeakHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import com.vnp.core.common.https.HttpsRestClient;
-
-import vnp.com.api.RestClient;
 import vnp.com.api.RestClient.RequestMethod;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -26,6 +23,8 @@ import android.net.Uri;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.widget.ImageView;
+
+import com.vnp.core.common.https.HttpsRestClient;
 
 public class ImageLoader {
 

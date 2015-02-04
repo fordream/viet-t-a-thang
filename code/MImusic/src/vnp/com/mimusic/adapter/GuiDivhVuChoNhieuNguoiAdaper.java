@@ -1,6 +1,5 @@
 package vnp.com.mimusic.adapter;
 
-import vnp.com.mimusic.view.BangXepHangItemView;
 import vnp.com.mimusic.view.GuiDichVuChoNhieuNguoiItemView;
 import android.content.Context;
 import android.view.View;

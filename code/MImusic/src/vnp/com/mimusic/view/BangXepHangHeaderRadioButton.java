@@ -3,10 +3,7 @@ package vnp.com.mimusic.view;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.util.FontsUtils;
 import android.content.Context;
-import android.content.res.ColorStateList;
-import android.graphics.Typeface;
 import android.util.AttributeSet;
-import android.view.animation.AlphaAnimation;
 import android.widget.RadioButton;
 
 //vnp.com.mimusic.view.BangXepHangHeaderRadioButton

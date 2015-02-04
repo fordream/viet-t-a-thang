@@ -10,7 +10,6 @@ import vnp.com.mimusic.util.ImageLoaderUtils;
 import vnp.com.mimusic.view.MenuRightItemView;
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;

@@ -2,8 +2,6 @@ package com.aretha.slidemenudemo.fragment;
 
 import org.json.JSONObject;
 
-import com.vnp.core.scroll.VasHomeScrollListView;
-
 import vnp.com.api.API;
 import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.DichVu;
@@ -33,6 +31,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
+
+import com.vnp.core.scroll.VasHomeScrollListView;
 
 public class HomeFragment extends BaseFragment implements OnItemClickListener, View.OnClickListener {
 	private vnp.com.mimusic.view.MusicListView list;

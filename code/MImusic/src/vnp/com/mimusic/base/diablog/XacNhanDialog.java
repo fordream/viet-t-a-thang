@@ -1,24 +1,13 @@
 package vnp.com.mimusic.base.diablog;
 
-import org.json.JSONObject;
-
-import vnp.com.api.API;
-import vnp.com.api.RestClient.RequestMethod;
-import vnp.com.db.DichVu;
 import vnp.com.mimusic.R;
-import vnp.com.mimusic.VApplication;
 import vnp.com.mimusic.base.BaseAdialog;
-import vnp.com.mimusic.util.Conts;
-import vnp.com.mimusic.util.Conts.IContsCallBack;
-import android.app.ProgressDialog;
-import android.content.ContentValues;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.TextView;
 
 public class XacNhanDialog extends BaseAdialog implements android.view.View.OnClickListener {

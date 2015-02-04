@@ -3,11 +3,9 @@ package vnp.com.db;
 import java.util.Map;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import vnp.com.mimusic.util.Conts;
-import vnp.com.mimusic.util.LogUtils;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;

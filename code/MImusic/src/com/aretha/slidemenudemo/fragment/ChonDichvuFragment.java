@@ -1,7 +1,5 @@
 package com.aretha.slidemenudemo.fragment;
 
-import com.vnp.core.scroll.VasChonDichvuScrollListView;
-
 import vnp.com.db.DichVu;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.adapter.ChonDichVuAdapter;
@@ -20,6 +18,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
+
+import com.vnp.core.scroll.VasChonDichvuScrollListView;
 
 public class ChonDichvuFragment extends BaseFragment implements android.view.View.OnClickListener {
 
@@ -44,7 +44,7 @@ public class ChonDichvuFragment extends BaseFragment implements android.view.Vie
 
 				Intent intent = new Intent();
 				if (adaper != null) {
-					Cursor cursor = (Cursor) adaper.getItem(position);
+					Cursor cursor = (Cursor) adaper.getItem(position - 1);
 					intent.putExtra(DichVu.ID, cursor.getString(cursor.getColumnIndex(DichVu.ID)));
 					intent.putExtra(DichVu.service_name, cursor.getString(cursor.getColumnIndex(DichVu.service_name)));
 				}

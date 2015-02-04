@@ -7,7 +7,6 @@ import org.json.JSONObject;
 
 import vnp.com.api.API;
 import vnp.com.mimusic.util.Conts;
-import vnp.com.mimusic.util.LogUtils;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
@@ -127,14 +126,12 @@ public class BangXepHang {
 			if (rowID > 0) {
 				Uri _uri = ContentUris.withAppendedId(User.CONTENT_URI, rowID);
 
-				LogUtils.e("AAAAA", (_uri == null) + "sx");
 				return _uri;
 			}
 		} else if (DICHVU_MATCHER_ID == match) {
 			long rowID = db.insert(TABLE_NAME, "", values);
 			if (rowID > 0) {
 				Uri _uri = ContentUris.withAppendedId(User.CONTENT_URI, rowID);
-				LogUtils.e("AAAAA", (_uri == null) + "sx");
 				return _uri;
 			}
 		}
@@ -147,7 +144,6 @@ public class BangXepHang {
 		String type = bundle.getString(BangXepHang.type);
 		String user = Conts.getUser(context);
 
-		LogUtils.e("AAAAA", type + " " + user);
 		if (API.API_R024.equals(api)) {
 
 			try {
@@ -181,7 +177,6 @@ public class BangXepHang {
 					}
 				}
 			} catch (Exception exception) {
-				LogUtils.e("AAAAA", exception);
 			}
 		} else if (API.API_R025.equals(api)) {
 

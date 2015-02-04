@@ -6,7 +6,6 @@ import vnp.com.mimusic.LoginActivty;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.VApplication;
 import vnp.com.mimusic.VApplication.IServiceConfig;
-import vnp.com.mimusic.main.BaseMusicSlideMenuActivity;
 import vnp.com.mimusic.main.NewMusicSlideMenuActivity;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
@@ -15,8 +14,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
-import android.widget.Toast;
 
 import com.vnp.core.crash.CrashExceptionHandler;
 

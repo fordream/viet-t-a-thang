@@ -1,7 +1,6 @@
 package vnp.com.mimusic.adapter;
 
 import vnp.com.db.BangXepHang;
-import vnp.com.db.User;
 import vnp.com.mimusic.view.BangXepHangItemView;
 import android.app.Activity;
 import android.content.Context;

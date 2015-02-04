@@ -12,13 +12,11 @@ import vnp.com.mimusic.util.ImageLoaderUtils;
 import vnp.com.mimusic.view.MoiNhieuDichVuItemView;
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.BitmapFactory;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.CursorAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 public abstract class MoiNhieuDichVuAdapter extends CursorAdapter {
 	private List<String> listSelect = new ArrayList<String>();

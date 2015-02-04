@@ -22,8 +22,6 @@ import javax.net.ssl.X509TrustManager;
 
 import org.apache.http.NameValuePair;
 
-import vnp.com.mimusic.util.LogUtils;
-
 public class RunSSL2 {
 
 	public final static HostnameVerifier DO_NOT_VERIFY = new HostnameVerifier() {

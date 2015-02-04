@@ -1,11 +1,9 @@
 package vnp.com.mimusic.view.textview;
 
-import vnp.com.mimusic.R;
 import vnp.com.mimusic.util.FontsUtils;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.Button;
-import android.widget.TextView;
 
 /**
  * vnp.com.mimusic.view.textview.ButtonRegular

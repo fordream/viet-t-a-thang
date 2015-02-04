@@ -1,7 +1,5 @@
 package vnp.com.mimusic.adapter;
 
-import vnp.com.mimusic.view.MauMoiItemView;
-import vnp.com.mimusic.view.ChonlistContactItemView;
 import vnp.com.mimusic.view.MoiDanhBaItemView;
 import android.content.Context;
 import android.view.View;
