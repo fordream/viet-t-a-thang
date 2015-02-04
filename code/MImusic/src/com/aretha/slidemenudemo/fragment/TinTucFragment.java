@@ -2,6 +2,8 @@ package com.aretha.slidemenudemo.fragment;
 
 import org.json.JSONObject;
 
+import com.vnp.core.scroll.VasTintucScrollListView;
+
 import vnp.com.api.API;
 import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.TinTuc;
@@ -11,6 +13,7 @@ import vnp.com.mimusic.adapter.TintucAdaper;
 import vnp.com.mimusic.main.NewMusicSlideMenuActivity;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
+import vnp.com.mimusic.view.HeaderView;
 import vnp.com.mimusic.view.LoadingView;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -42,19 +45,21 @@ public class TinTucFragment extends BaseFragment implements OnItemClickListener,
 		((NewMusicSlideMenuActivity) getActivity().getParent()).openMenuRight();
 	}
 
+	private HeaderView listHeader;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.tintuc, null);
-		createHeader(getString(R.string.tintuc), true, true);
+		loadHeader(view, R.id.header, R.string.tintuc, true, true);
+		listHeader = new HeaderView(getActivity());
+		listHeader.showHeader(true);
 		loadingView1 = (LoadingView) view.findViewById(R.id.loadingView1);
 		Conts.showView(loadingView1, false);
 		bangxephang_list = (vnp.com.mimusic.view.MusicListView) view.findViewById(R.id.tintuc_list);
-		bangxephang_list.addHeaderView(getHeaderView());
+		bangxephang_list.addHeaderView(listHeader);
 		bangxephang_list.setOnItemClickListener(this);
 		tintucAdaper = new TintucAdaper(getActivity(), TinTuc.queryFromId(getActivity(), null));
-
 		bangxephang_list.setAdapter(tintucAdaper);
-
 		executeHttps(RequestMethod.GET, API.API_R027, new Bundle(), new IContsCallBack() {
 
 			@Override
@@ -94,6 +99,7 @@ public class TinTucFragment extends BaseFragment implements OnItemClickListener,
 			}
 		});
 
+		new VasTintucScrollListView(getHeaderView(), listHeader, bangxephang_list);
 		return view;
 	}
 

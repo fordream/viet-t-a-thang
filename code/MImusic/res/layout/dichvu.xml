@@ -5,21 +5,35 @@
     android:background="@drawable/new_dichvu_bg"
     android:orientation="vertical" >
 
-    <LinearLayout
+    <vnp.com.mimusic.view.MusicListView
+        android:id="@+id/dichvu_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:divider="@drawable/tranfer"
+        android:dividerHeight="0px"
+        android:scrollbarThumbHorizontal="@drawable/tranfer"
+        android:scrollbarThumbVertical="@drawable/tranfer"
+        android:scrollbars="none" >
+    </vnp.com.mimusic.view.MusicListView>
+
+    <LinearLayout
+        android:id="@+id/dichvu_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical" >
 
-        <LinearLayout
+        <vnp.com.mimusic.view.HeaderView
             android:id="@+id/header"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" >
-        </LinearLayout>
+            android:layout_height="wrap_content" >
+        </vnp.com.mimusic.view.HeaderView>
+
+      
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+             android:background="@drawable/new_dichvu_bg"
             android:padding="@dimen/dimen_12dp" >
 
             <vnp.com.mimusic.view.textview.EditextTextThin
@@ -54,17 +68,6 @@
             android:layout_marginLeft="@dimen/dimen_12dp"
             android:layout_marginRight="@dimen/dimen_12dp"
             android:background="@drawable/new_dichvu_space" />
-
-        <vnp.com.mimusic.view.MusicListView
-            android:id="@+id/dichvu_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:divider="@drawable/tranfer"
-            android:dividerHeight="0px"
-            android:scrollbarThumbHorizontal="@drawable/tranfer"
-            android:scrollbarThumbVertical="@drawable/tranfer"
-            android:scrollbars="none" >
-        </vnp.com.mimusic.view.MusicListView>
     </LinearLayout>
 
     <vnp.com.mimusic.view.LoadingView

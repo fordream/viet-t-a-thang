@@ -2,7 +2,7 @@ package com.aretha.slidemenudemo.fragment;
 
 import org.json.JSONObject;
 
-import com.vnp.core.scroll.VasScrollListView;
+import com.vnp.core.scroll.VasHomeScrollListView;
 
 import vnp.com.api.API;
 import vnp.com.api.RestClient.RequestMethod;
@@ -134,8 +134,8 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 			}
 		});
 
-		list.setOnScrollListener(new VasScrollListView(getHeaderView().findViewById(R.id.header_main_content), headerView));
 
+		new VasHomeScrollListView(getHeaderView().findViewById(R.id.header_main_content), headerView, list);
 		return view;
 	}
 

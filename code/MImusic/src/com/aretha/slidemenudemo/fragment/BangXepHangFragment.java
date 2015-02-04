@@ -13,11 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.LinearLayout;
 
 public class BangXepHangFragment extends BaseFragment implements OnItemClickListener, View.OnClickListener {
 	private View view;
 	private vnp.com.mimusic.view.BangXephangListView bangxephangSoluong, bangxephangDoanhthu;
+//	private HeaderView bxkHeader;
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
@@ -37,13 +37,17 @@ public class BangXepHangFragment extends BaseFragment implements OnItemClickList
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.bangxephang, null);
-		createHeader(getString(R.string.bangxephang), true, true);
-		((LinearLayout) view.findViewById(R.id.header)).addView(getHeaderView());
+		
+		//bxkHeader = new HeaderView(getActivity());
+		
+		//bxkHeader.showHeadderSearch();
+		
+		loadHeader(view, R.id.header, R.string.bangxephang, true, true);
+
 		bangxephangSoluong = (BangXephangListView) view.findViewById(R.id.bangxephang1);
 		bangxephangDoanhthu = (BangXephangListView) view.findViewById(R.id.bangxephang2);
 		bangxephangSoluong.setType(BangXepHang.typeSOLUONG);
 		bangxephangDoanhthu.setType(BangXepHang.typeDOANHTHU);
-
 		bangxephangSoluong.setOnItemClick(this);
 		bangxephangDoanhthu.setOnItemClick(this);
 		BangXepHangHeaderView bangxephang_bangxephangheader = (BangXepHangHeaderView) view.findViewById(R.id.bangxephang_bangxephangheader);

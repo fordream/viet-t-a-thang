@@ -17,6 +17,12 @@
         android:scrollbars="none" >
     </vnp.com.mimusic.view.MusicListView>
 
+    <vnp.com.mimusic.view.HeaderView
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </vnp.com.mimusic.view.HeaderView>
+
     <vnp.com.mimusic.view.LoadingView
         android:id="@+id/loadingView1"
         android:layout_width="match_parent"

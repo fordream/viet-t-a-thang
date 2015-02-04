@@ -7,6 +7,7 @@ import vnp.com.mimusic.adapter.DichVuAdapter;
 import vnp.com.mimusic.base.diablog.DangKyDialog;
 import vnp.com.mimusic.main.NewMusicSlideMenuActivity;
 import vnp.com.mimusic.util.Conts;
+import vnp.com.mimusic.view.HeaderView;
 import vnp.com.mimusic.view.LoadingView;
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -19,8 +20,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
+
+import com.vnp.core.scroll.VasDichvuScrollListView;
 
 public class DichVuFragment extends BaseFragment implements OnItemClickListener, View.OnClickListener {
 	@Override
@@ -28,17 +30,13 @@ public class DichVuFragment extends BaseFragment implements OnItemClickListener,
 		super.onActivityCreated(savedInstanceState);
 	}
 
+	private HeaderView listHeader;
 	private DichVuAdapter adapter;
 
 	@Override
 	public void onResume() {
 		super.onResume();
 		callSHowData();
-	}
-
-	@Override
-	public void onPause() {
-		super.onPause();
 	}
 
 	private ListView dichvu_list;
@@ -57,12 +55,15 @@ public class DichVuFragment extends BaseFragment implements OnItemClickListener,
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.dichvu, null);
-		createHeader(getString(R.string.dichvu), true, true);
-
-		((LinearLayout) view.findViewById(R.id.header)).addView(getHeaderView());
-
+		loadHeader(view, R.id.header, R.string.dichvu, true, true);
+		Conts.getView(view, R.id.dichvu_header).setOnClickListener(null);
+		listHeader = new HeaderView(getActivity());
 		loadingView1 = (LoadingView) view.findViewById(R.id.loadingView1);
 		dichvu_list = (ListView) view.findViewById(R.id.dichvu_list);
+
+		dichvu_list.addHeaderView(listHeader);
+
+		listHeader.showHeadderSearch();
 		dichvu_list.setOnItemClickListener(this);
 
 		callSHowData();
@@ -88,6 +89,8 @@ public class DichVuFragment extends BaseFragment implements OnItemClickListener,
 				}
 			}
 		});
+
+		new VasDichvuScrollListView(getHeaderView(), listHeader, dichvu_list);
 		return view;
 	}
 

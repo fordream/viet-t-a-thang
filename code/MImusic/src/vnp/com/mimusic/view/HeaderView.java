@@ -58,4 +58,13 @@ public class HeaderView extends LinearLayout {
 	public void setTextHeader(String title) {
 		((TextView) findViewById(R.id.header_tv)).setText(title);
 	}
+
+	public void showHeadderSearch() {
+		findViewById(R.id.header_search).setVisibility(View.VISIBLE);
+		showHeader(true);
+	}
+
+	public void showHeader(boolean b) {
+		findViewById(R.id.header_main_content).setVisibility(b ? INVISIBLE : GONE);
+	}
 }
