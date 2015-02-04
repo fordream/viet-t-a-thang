@@ -1,5 +1,7 @@
 package vnp.com.mimusic.view;
 
+import java.util.Random;
+
 import org.json.JSONObject;
 
 import vnp.com.api.API;
@@ -34,7 +36,6 @@ public class BangXephangListView extends LinearLayout {
 		adaper.setType(type);
 		list.setAdapter(adaper);
 		message.setText("");
-
 		if (BangXepHang.typeSOLUONG.equals(type)) {
 			noDataText = getResources().getString(R.string.bangxephang_so_luong_no_data);
 		} else {
@@ -60,10 +61,6 @@ public class BangXephangListView extends LinearLayout {
 	}
 
 	public void execute() {
-		// adaper.setType(type);
-		// adaper.changeData(new JSONArray());
-		// adaper.notifyDataSetChanged();
-
 		Bundle bxhParamBundle = new Bundle();
 		bxhParamBundle.putString("type", type);
 		((VApplication) getContext().getApplicationContext()).executeHttps(RequestMethod.GET, API.API_R024, bxhParamBundle, new IContsCallBack() {
@@ -71,25 +68,7 @@ public class BangXephangListView extends LinearLayout {
 
 			@Override
 			public void onSuscess(JSONObject response) {
-				// try {
-				// JSONArray jsonArray = response.getJSONArray("data");
-				// adaper.changeData(jsonArray);
-				// adaper.notifyDataSetChanged();
-				//
-				// if (jsonArray.length() == 0) {
-				// if (list.getCount() <= 0) {
-				// message.setText(noDataText);
-				// } else {
-				// message.setText("");
-				// }
-				//
-				// } else {
-				// message.setText("");
-				// }
-				// } catch (Exception exception) {
-				//
-				// }
-				adaper.getFilter().filter("");
+				adaper.getFilter().filter("" + new Random().nextDouble());
 				progressDialog.dismiss();
 			}
 

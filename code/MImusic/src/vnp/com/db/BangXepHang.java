@@ -7,6 +7,7 @@ import org.json.JSONObject;
 
 import vnp.com.api.API;
 import vnp.com.mimusic.util.Conts;
+import vnp.com.mimusic.util.LogUtils;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
@@ -121,12 +122,14 @@ public class BangXepHang {
 
 	public static Uri insert(int match, SQLiteDatabase db, Uri uri, ContentValues values) {
 		if (DICHVU_MATCHER == match) {
+			LogUtils.d("AAAAA", "sx");
 			long rowID = db.insert(TABLE_NAME, "", values);
 			if (rowID > 0) {
 				Uri _uri = ContentUris.withAppendedId(User.CONTENT_URI, rowID);
 				return _uri;
 			}
 		} else if (DICHVU_MATCHER_ID == match) {
+			LogUtils.d("AAAAA", "sx");
 			long rowID = db.insert(TABLE_NAME, "", values);
 			if (rowID > 0) {
 				Uri _uri = ContentUris.withAppendedId(User.CONTENT_URI, rowID);
@@ -141,8 +144,9 @@ public class BangXepHang {
 		// API.API_R024,API.API_R025
 		String type = bundle.getString(BangXepHang.type);
 		String user = bundle.getString(BangXepHang.USER);
-
+		LogUtils.d("AAAAA", "x");
 		if (API.API_R024.equals(api)) {
+
 			try {
 				JSONArray jsonArray = response.getJSONArray("data");
 				for (int i = 0; i < jsonArray.length(); i++) {
@@ -174,6 +178,7 @@ public class BangXepHang {
 					}
 				}
 			} catch (Exception exception) {
+				LogUtils.e("AAAAA", exception);
 			}
 		} else if (API.API_R025.equals(api)) {
 
