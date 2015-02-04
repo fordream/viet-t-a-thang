@@ -122,17 +122,19 @@ public class BangXepHang {
 
 	public static Uri insert(int match, SQLiteDatabase db, Uri uri, ContentValues values) {
 		if (DICHVU_MATCHER == match) {
-			LogUtils.d("AAAAA", "sx");
+
 			long rowID = db.insert(TABLE_NAME, "", values);
 			if (rowID > 0) {
 				Uri _uri = ContentUris.withAppendedId(User.CONTENT_URI, rowID);
+
+				LogUtils.e("AAAAA", (_uri == null) + "sx");
 				return _uri;
 			}
 		} else if (DICHVU_MATCHER_ID == match) {
-			LogUtils.d("AAAAA", "sx");
 			long rowID = db.insert(TABLE_NAME, "", values);
 			if (rowID > 0) {
 				Uri _uri = ContentUris.withAppendedId(User.CONTENT_URI, rowID);
+				LogUtils.e("AAAAA", (_uri == null) + "sx");
 				return _uri;
 			}
 		}
@@ -143,8 +145,9 @@ public class BangXepHang {
 	public static void update(Context context, JSONObject response, Bundle bundle, String api) {
 		// API.API_R024,API.API_R025
 		String type = bundle.getString(BangXepHang.type);
-		String user = bundle.getString(BangXepHang.USER);
-		LogUtils.d("AAAAA", "x");
+		String user = Conts.getUser(context);
+
+		LogUtils.e("AAAAA", type + " " + user);
 		if (API.API_R024.equals(api)) {
 
 			try {
@@ -186,14 +189,17 @@ public class BangXepHang {
 	}
 
 	public static Cursor getBangXepHang(Context context, String type, String id) {
-		String selection = String.format("%s ='%s' and %s = '%s' and %s = '%s'", BangXepHang.USER, Conts.getUser(context), BangXepHang.type, type, BangXepHang.ID, id);
+		String selection = String.format("%s ='%s' and %s = '%s' and %s = '%s'"//
+				, BangXepHang.USER, Conts.getUser(context)//
+				, BangXepHang.type, type//
+				, BangXepHang.ID, id);//
 		Cursor cursor = context.getContentResolver().query(CONTENT_URI, null, selection, null, null);
 		return cursor;
 	}
 
 	public static Cursor getBangXepHang(Context context, String type) {
 		String selection = String.format("%s ='%s' and %s = '%s'", BangXepHang.USER, Conts.getUser(context), BangXepHang.type, type);
-		Cursor cursor = context.getContentResolver().query(CONTENT_URI, null, selection, null, typeSOLUONG.equals(type) ? quantity : commission);
+		Cursor cursor = context.getContentResolver().query(CONTENT_URI, null, selection, null, (typeSOLUONG.equals(type) ? quantity : commission ) + " DESC");
 		return cursor;
 	}
 }
