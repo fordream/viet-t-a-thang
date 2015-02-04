@@ -172,7 +172,7 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 					moinhieudichvu_dialog_list_hor.addView(addItemView);
 					Conts.showAlpha(MoiDvChoNhieuNguoiFragment.this.getView().findViewById(R.id.moi), (moinhieudichvu_dialog_list_hor.getChildCount() == 0));
 					Conts.addViewScale(addItemView);
-					addItemView.findViewById(R.id.x).setOnClickListener(new View.OnClickListener() {
+					addItemView.setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
 
@@ -238,7 +238,7 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 					moinhieudichvu_dialog_list_hor.addView(addItemView);
 					Conts.showAlpha(MoiDvChoNhieuNguoiFragment.this.getView().findViewById(R.id.moi), (moinhieudichvu_dialog_list_hor.getChildCount() == 0));
 
-					addItemView.findViewById(R.id.x).setOnClickListener(new View.OnClickListener() {
+					addItemView.setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
 
@@ -258,7 +258,6 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 								public void onAnimationEnd(Animation animation) {
 									moinhieudichvu_dialog_list_hor.removeView(addItemView);
 									Conts.showAlpha(MoiDvChoNhieuNguoiFragment.this.getView().findViewById(R.id.moi), (moinhieudichvu_dialog_list_hor.getChildCount() == 0));
-
 								}
 							});
 							adaper.remove(sdt);
@@ -304,7 +303,14 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 
 			@Override
 			public void onError(String message) {
-				Conts.showDialogThongbao(getActivity(), message);
+				
+				if(!Conts.isBlank(message)){
+					if(message.contains("Phone")){
+						message = getActivity().getString(R.string.sdtkhongphaicuabiettel);
+					}
+					Conts.showDialogThongbao(getActivity(), message);
+				}
+				
 				progressDialog.dismiss();
 			}
 

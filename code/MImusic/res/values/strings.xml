@@ -197,5 +197,6 @@
     <string name="tinlienquan">Tin liên quan</string>
 
     <color name="f6f6f6">#f6f6f6</color>
+    <string name="sdtkhongphaicuabiettel">Số điện thoại không phải của viettel.</string>
 
 </resources>

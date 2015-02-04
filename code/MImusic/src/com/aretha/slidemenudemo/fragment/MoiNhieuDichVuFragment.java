@@ -126,7 +126,7 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 					addItemView.setMId(_id);
 					addItemView.setIcon(icon);
 
-					addItemView.findViewById(R.id.x).setOnClickListener(new View.OnClickListener() {
+					addItemView.setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
 

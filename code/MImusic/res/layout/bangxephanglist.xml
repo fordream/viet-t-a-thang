@@ -9,7 +9,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="@drawable/tranfer"
-        android:dividerHeight="0px" >
+        android:dividerHeight="0px"
+        android:scrollbarThumbHorizontal="@drawable/tranfer"
+        android:scrollbarThumbVertical="@drawable/tranfer"
+        android:scrollbars="none" >
     </vnp.com.mimusic.view.MusicListView>
 
     <vnp.com.mimusic.view.textview.TextViewLightHeight
@@ -20,11 +23,5 @@
         android:padding="@dimen/dimen_12dp"
         android:textColor="#353f45"
         android:textSize="@dimen/dimen_11dp" />
-<!-- 
-    <vnp.com.mimusic.view.ChitietCaNhanBangXepHangTungDichVuView
-        android:id="@+id/chitiet"
-        android:visibility="gone"
-        android:layout_width="fill_parent"
-        android:layout_height="match_parent" />
- -->
+
 </RelativeLayout>

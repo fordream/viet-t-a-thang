@@ -12,6 +12,7 @@
         android:divider="@drawable/tranfer"
         android:dividerHeight="0px"
         android:listSelector="@drawable/tranfer"
+        
         android:scrollbarThumbHorizontal="@drawable/tranfer"
         android:scrollbarThumbVertical="@drawable/tranfer"
         android:scrollbars="none" >
