@@ -33,7 +33,7 @@ import android.widget.LinearLayout;
 
 public class HomeFragment extends BaseFragment implements OnItemClickListener, View.OnClickListener {
 	private vnp.com.mimusic.view.MusicListView list;
-	private View home_header;
+	private HomeHeaderView home_header;
 	private LoadingView loadingView;
 
 	@Override
@@ -55,7 +55,7 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 	public void onResume() {
 		super.onResume();
 		if (loadingView.getVisibility() == View.GONE) {
-			//updateUI(updateSuccess);
+			// updateUI(updateSuccess);
 		}
 	}
 
@@ -68,9 +68,7 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 		list = (MusicListView) view.findViewById(R.id.list);
 
 		list.setOnItemClickListener(this);
-		home_header = ((LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.new_home_header, null);
-
-		Conts.showView(home_header.findViewById(R.id.home_header_main), false);
+		home_header = new HomeHeaderView(getActivity());
 
 		home_header.findViewById(R.id.dichvubanchay).setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -148,48 +146,17 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 
 	private void updateUI(UpdateSuccess updateSuceess) {
 		// int current = list.getFirstVisiblePosition();
-		final LinearLayout gallery = Conts.getView(home_header, R.id.gallery1);
 
-		((ReCommentDichVuItemView) Conts.getView(gallery, R.id.recommen1)).setData(null);
-		((ReCommentDichVuItemView) Conts.getView(gallery, R.id.recommen2)).setData(null);
-		((ReCommentDichVuItemView) Conts.getView(gallery, R.id.recommen3)).setData(null);
-		((ReCommentDichVuItemView) Conts.getView(gallery, R.id.recommen4)).setData(null);
-		new AsyncTask<String, String, String>() {
-			Cursor cursor;
+		// ((ReCommentDichVuItemView) Conts.getView(gallery,
+		// R.id.recommen1)).setData(null);
+		// ((ReCommentDichVuItemView) Conts.getView(gallery,
+		// R.id.recommen2)).setData(null);
+		// ((ReCommentDichVuItemView) Conts.getView(gallery,
+		// R.id.recommen3)).setData(null);
+		// ((ReCommentDichVuItemView) Conts.getView(gallery,
+		// R.id.recommen4)).setData(null);
+		home_header.updateData();
 
-			protected String doInBackground(String[] params) {
-				cursor = Recomment.getCursorFromDichvu(getActivity(), 3);
-				return null;
-			};
-
-			protected void onPostExecute(String result) {
-				if (cursor != null) {
-					if (cursor.getCount() > 0) {
-						Conts.showView(home_header.findViewById(R.id.home_header_main), true);
-						while (cursor.moveToNext()) {
-							ReCommentDichVuItemView dichVuItemView = null;
-							if (cursor.getPosition() == 0) {
-								dichVuItemView = Conts.getView(gallery, R.id.recommen1);
-							} else if (cursor.getPosition() == 1) {
-								dichVuItemView = Conts.getView(gallery, R.id.recommen2);
-							} else if (cursor.getPosition() == 2) {
-								dichVuItemView = Conts.getView(gallery, R.id.recommen3);
-							}
-
-							if (dichVuItemView != null) {
-								dichVuItemView.setData(cursor);
-								dichVuItemView.setOnClickListener(new RecomendDvOnClickListener(Conts.getStringCursor(cursor, DichVu.ID)));
-							}
-						}
-					} else {
-						Conts.showView(home_header.findViewById(R.id.home_header_main), false);
-					}
-					cursor.close();
-				} else {
-					Conts.showView(home_header.findViewById(R.id.home_header_main), true);
-				}
-			};
-		}.execute("");
 		// Cursor cursor = Recomment.getCursorFromDichvu(getActivity(), 3);
 		homeAdapter.update(updateSuceess);
 
@@ -223,6 +190,50 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 		public void onClick(View v) {
 			(((RootMenuActivity) getActivity())).gotoChiTietDichVuFromHome(id);
 		}
-
 	}
+
+	private class HomeHeaderView extends LinearLayout {
+
+		public HomeHeaderView(Context context) {
+			super(context);
+			((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.new_home_header, this);
+			Conts.showView(findViewById(R.id.home_header_main), false);
+		}
+
+		public void updateData() {
+
+			new AsyncTask<String, String, String>() {
+				Cursor cursor;
+
+				protected String doInBackground(String[] params) {
+					cursor = Recomment.getCursorFromDichvu(getActivity(), -1);
+					return null;
+				};
+
+				protected void onPostExecute(String result) {
+					LinearLayout gallery1 = Conts.getView(HomeHeaderView.this, R.id.gallery1);
+					gallery1.removeAllViews();
+
+					if (cursor != null) {
+						if (cursor.getCount() > 0) {
+							Conts.showView(home_header.findViewById(R.id.home_header_main), true);
+							while (cursor.moveToNext()) {
+								ReCommentDichVuItemView dichVuItemView = new ReCommentDichVuItemView(getContext());
+								gallery1.addView(dichVuItemView);
+								dichVuItemView.setData(cursor);
+								dichVuItemView.setOnClickListener(new RecomendDvOnClickListener(Conts.getStringCursor(cursor, DichVu.ID)));
+							}
+						} else {
+							Conts.showView(findViewById(R.id.home_header_main), false);
+						}
+						cursor.close();
+					} else {
+						Conts.showView(findViewById(R.id.home_header_main), true);
+					}
+				};
+			}.execute("");
+
+		}
+	}
+
 }

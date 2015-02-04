@@ -39,7 +39,7 @@
                 android:textSize="@dimen/dimen_11dp" />
         </RelativeLayout>
 
-        <RelativeLayout
+        <HorizontalScrollView
             android:id="@+id/horizontalScrollView1"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/dimen_138dp"
@@ -52,30 +52,33 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal" >
-
+<!-- 
                 <vnp.com.mimusic.view.ReCommentDichVuItemView
                     android:id="@+id/recommen1"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" >
+                </vnp.com.mimusic.view.ReCommentDichVuItemView>
 
-                </vnp.com.mimusic.view.ReCommentDichVuItemView>
-                  <vnp.com.mimusic.view.ReCommentDichVuItemView
-                       android:id="@+id/recommen2"
+                <vnp.com.mimusic.view.ReCommentDichVuItemView
+                    android:id="@+id/recommen2"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" >
                 </vnp.com.mimusic.view.ReCommentDichVuItemView>
-                  <vnp.com.mimusic.view.ReCommentDichVuItemView
-                       android:id="@+id/recommen3"
+
+                <vnp.com.mimusic.view.ReCommentDichVuItemView
+                    android:id="@+id/recommen3"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" >
                 </vnp.com.mimusic.view.ReCommentDichVuItemView>
-                  <vnp.com.mimusic.view.ReCommentDichVuItemView
-                       android:id="@+id/recommen4"
+
+                <vnp.com.mimusic.view.ReCommentDichVuItemView
+                    android:id="@+id/recommen4"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" >
                 </vnp.com.mimusic.view.ReCommentDichVuItemView>
+                 -->
             </LinearLayout>
-        </RelativeLayout>
+        </HorizontalScrollView>
 
         <View
             android:layout_width="match_parent"

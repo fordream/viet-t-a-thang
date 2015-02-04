@@ -39,14 +39,14 @@ public class ReCommentDichVuItemView extends LinearLayout {
 			ImageLoaderUtils.getInstance(getContext()).DisplayImage(service_icon, home_item_img_icon, R.drawable.no_image);
 			Conts.setTextViewCursor(findViewById(R.id.name), cursor, DichVu.service_name);
 
-			int position = cursor.getPosition();
-			if (position % 3 == 0) {
-				home_item_img_icon.setBackgroundResource(R.drawable.new_home_dv_bg_1);
-			} else if (position % 3 == 1) {
-				home_item_img_icon.setBackgroundResource(R.drawable.new_home_dv_bg_2);
-			} else if (position % 3 == 2) {
-				home_item_img_icon.setBackgroundResource(R.drawable.new_home_dv_bg_3);
-			}
+//			int position = cursor.getPosition();
+//			if (position % 3 == 0) {
+//				home_item_img_icon.setBackgroundResource(R.drawable.new_home_dv_bg_1);
+//			} else if (position % 3 == 1) {
+//				home_item_img_icon.setBackgroundResource(R.drawable.new_home_dv_bg_2);
+//			} else if (position % 3 == 2) {
+//				home_item_img_icon.setBackgroundResource(R.drawable.new_home_dv_bg_3);
+//			}
 
 			int poistion = cursor.getPosition();
 
