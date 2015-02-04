@@ -150,7 +150,6 @@ public class HuongDanBanHang {
 				context.getContentResolver().update(CONTENT_URI, values, selection, null);
 			}
 
-			LogUtils.e("aaaaaaa", inesrt + "");
 		}
 	}
 

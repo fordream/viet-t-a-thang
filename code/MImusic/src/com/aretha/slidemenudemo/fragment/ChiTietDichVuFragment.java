@@ -10,6 +10,7 @@ import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.base.diablog.DangKyDialog;
 import vnp.com.mimusic.util.Conts;
+import vnp.com.mimusic.util.LogUtils;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
 import vnp.com.mimusic.view.ChiTietDichVuNoFeatureView;
 import vnp.com.mimusic.view.HeaderView;
@@ -30,14 +31,10 @@ public class ChiTietDichVuFragment extends BaseFragment implements View.OnClickL
 
 	private String service_guide = "";
 	private LoadingView loadingView;
+	private TextView mchitiet;
 
 	private void update(String service_content) {
-		try {
-			TextView textView = (TextView) getView().findViewById(R.id.mchitiet);
-			textView.setText(service_content);
-		} catch (Exception exception) {
-
-		}
+		mchitiet.setText(service_content);
 	}
 
 	private String id = "";
@@ -45,6 +42,7 @@ public class ChiTietDichVuFragment extends BaseFragment implements View.OnClickL
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.chitietdichvu, null);
+		mchitiet = Conts.getView(view, R.id.mchitiet);
 		view.findViewById(R.id.chitietdichvu_main).setOnClickListener(null);
 		loadingView = (LoadingView) view.findViewById(R.id.loadingView1);
 		Conts.showView(loadingView, false);
@@ -87,7 +85,7 @@ public class ChiTietDichVuFragment extends BaseFragment implements View.OnClickL
 		}
 
 		final Cursor cursor = getActivity().getContentResolver().query(DichVu.CONTENT_URI, null, selection, null, null);
-
+		String service_content = "";
 		if (cursor != null && cursor.getCount() >= 1) {
 			cursor.moveToNext();
 			service_code = cursor.getString(cursor.getColumnIndex(DichVu.service_code));
@@ -127,42 +125,46 @@ public class ChiTietDichVuFragment extends BaseFragment implements View.OnClickL
 					(((RootMenuActivity) getActivity())).gotoMoiDvChoNhieuNguoiFragment(id);
 				}
 			});
+
+			service_content = Conts.getStringCursor(cursor, DichVu.service_content);
+			service_guide = Conts.getStringCursor(cursor, DichVu.service_guide);
+			update(service_content);
 			cursor.close();
 		}
+		if (Conts.isBlank(service_content)) {
+			Bundle bundles = new Bundle();
+			bundles.putString("service_code", service_code);
+			execute(RequestMethod.GET, API.API_R005, bundles, new IContsCallBack() {
 
-		Bundle bundles = new Bundle();
-		bundles.putString("service_code", service_code);
-		execute(RequestMethod.GET, API.API_R005, bundles, new IContsCallBack() {
-
-			@Override
-			public void onSuscess(JSONObject response) {
-				try {
-					final String service_content = response.getString("service_content");
-					service_guide = response.getString("service_guide");
-					update(service_content);
-				} catch (JSONException e) {
+				@Override
+				public void onSuscess(JSONObject response) {
+					try {
+						final String service_content = response.getString("service_content");
+						// service_guide = response.getString("service_guide");
+						update(service_content);
+					} catch (JSONException e) {
+					}
+					Conts.showView(loadingView, false);
 				}
-				Conts.showView(loadingView, false);
-			}
 
-			@Override
-			public void onError(String message) {
-				Conts.toast(getActivity(), message);
-				Conts.showView(loadingView, false);
-			}
+				@Override
+				public void onError(String message) {
+					Conts.toast(getActivity(), message);
+					Conts.showView(loadingView, false);
+				}
 
-			@Override
-			public void onError() {
-				Conts.toast(getActivity(), "onError");
-				Conts.showView(loadingView, false);
-			}
+				@Override
+				public void onError() {
+					Conts.toast(getActivity(), "onError");
+					Conts.showView(loadingView, false);
+				}
 
-			@Override
-			public void onStart() {
-				Conts.showView(loadingView, true);
-			}
-		});
-
+				@Override
+				public void onStart() {
+					Conts.showView(loadingView, true);
+				}
+			});
+		}
 		return view;
 	}
 

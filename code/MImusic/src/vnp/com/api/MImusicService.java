@@ -233,35 +233,6 @@ public class MImusicService extends Service {
 		});
 	}
 
-	// private void callRecocmment(final IContsCallBack contsCallBack) {
-	// execute(RequestMethod.GET, API.API_R026, new Bundle(), new
-	// IContsCallBack() {
-	//
-	// @Override
-	// public void onSuscess(JSONObject response) {
-	// if (contsCallBack != null)
-	// contsCallBack.onSuscess(null);
-	// }
-	//
-	// @Override
-	// public void onStart() {
-	// // contsCallBack.onSuscess(null);
-	// }
-	//
-	// @Override
-	// public void onError(String message) {
-	// if (contsCallBack != null)
-	// contsCallBack.onSuscess(null);
-	// }
-	//
-	// @Override
-	// public void onError() {
-	// if (contsCallBack != null)
-	// contsCallBack.onSuscess(null);
-	// }
-	// });
-	// }
-
 	private void callUpdateData() {
 
 		/**
@@ -506,6 +477,8 @@ public class MImusicService extends Service {
 							TinTuc.updateTintuc(MImusicService.this, response);
 						} else if (API.API_R010.equals(api)) {
 							HuongDanBanHang.update(MImusicService.this, response);
+						} else if (API.API_R005.equals(api)) {
+							DichVu.updateService_content(MImusicService.this, response, bundle);
 						}
 
 						return null;
@@ -684,6 +657,13 @@ public class MImusicService extends Service {
 				contentValues.put(DichVu.service_content, Conts.getString(jsonObject, DichVu.service_content));
 				contentValues.put(DichVu.service_price, Conts.getString(jsonObject, DichVu.service_price));
 				contentValues.put(DichVu.service_status, Conts.getString(jsonObject, DichVu.service_status));
+
+				String service_guide = Conts.getString(jsonObject, DichVu.service_guide);
+
+				if (!Conts.isBlank(service_guide)) {
+					contentValues.put(DichVu.service_guide, service_guide);
+				}
+
 				String selection = String.format("%s='%s'", DichVu.service_code, jsonObject.getString(DichVu.service_code));
 				Cursor cursor = getContentResolver().query(DichVu.CONTENT_URI, null, selection, null, null);
 

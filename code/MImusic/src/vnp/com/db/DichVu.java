@@ -13,6 +13,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
+import android.os.Bundle;
 import android.text.TextUtils;
 
 public class DichVu {
@@ -31,13 +32,15 @@ public class DichVu {
 	 */
 	public static final String service_status = "service_status";
 
+	public static String service_guide = "service_guide";
+
 	public static final String CREATE_DB_TABLE() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("CREATE TABLE ").append(DICHVU_TABLE_NAME);
 		builder.append("(");
 		builder.append(_ID).append(" INTEGER PRIMARY KEY AUTOINCREMENT").append(",");
 		String[] colums = new String[] {//
-		ID, service_name, service_icon, service_code, service_content, service_price, service_status ,service_name_eng//
+		ID, service_name, service_icon, service_code, service_content, service_price, service_guide, service_status, service_name_eng //
 		};//
 
 		for (int i = 0; i < colums.length; i++) {
@@ -160,11 +163,22 @@ public class DichVu {
 
 	public static Cursor getCursorFromUser(Context context, int maxColum) {
 		String limit = null;
-		
+
 		if (maxColum > 0) {
 			limit = String.format("%s limit %s ", DichVu.service_name, maxColum);
 		}
 
 		return context.getContentResolver().query(DichVu.CONTENT_URI, null, null, null, limit);
+	}
+
+	public static void updateService_content(Context context, JSONObject response, Bundle bundle) {
+		if (bundle.containsKey(DichVu.service_code)) {
+			String strService_code = bundle.getString(DichVu.service_code);
+			ContentValues values = new ContentValues();
+			values.put(service_content, Conts.getString(response, service_content));
+
+			context.getContentResolver().update(CONTENT_URI, values, String.format("%s = '%s'", DichVu.service_code, strService_code), null);
+		}
+
 	}
 }
