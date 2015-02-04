@@ -62,7 +62,7 @@ public class ThongTinCaNhanFragment extends BaseFragment implements OnItemClickL
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		final View view = inflater.inflate(R.layout.thongtincanhan, null);
 		loadingView = (LoadingView) view.findViewById(R.id.loadingView1);
-
+		Conts.showView(loadingView, false);
 		menu_left_img_cover = (ImageView) view.findViewById(R.id.menu_left_img_cover);
 		menu_left_img_avatar = (ImageView) view.findViewById(R.id.menu_left_img_avatar);
 		HeaderView headerView = (HeaderView) view.findViewById(R.id.activity_login_header);
@@ -95,7 +95,7 @@ public class ThongTinCaNhanFragment extends BaseFragment implements OnItemClickL
 
 			@Override
 			public void onStart() {
-				Conts.showView(loadingView, true);
+				// Conts.showView(loadingView, true);
 			}
 
 			@Override
@@ -128,19 +128,17 @@ public class ThongTinCaNhanFragment extends BaseFragment implements OnItemClickL
 				((TextView) view.findViewById(R.id.text_diachi)).setText(cursor.getString(cursor.getColumnIndex(User.address)));
 				((TextView) view.findViewById(R.id.text_sogiaodichthanhcongtrongthang)).setText(getText(cursor.getString(cursor.getColumnIndex(User.exchange_number_month))));
 				((TextView) view.findViewById(R.id.text_sogiaodichthanhcong)).setText(getText(cursor.getString(cursor.getColumnIndex(User.exchange_number))));
-				((TextView) view.findViewById(R.id.text_sotienhoahongtrongthang)).setText(getText(cursor.getString(cursor.getColumnIndex(User.poundage_month))) + " "+getString(R.string.vnd));
-				((TextView) view.findViewById(R.id.text_sotienhoahong)).setText(getText(cursor.getString(cursor.getColumnIndex(User.poundage))) + " "+getString(R.string.vnd));
+				((TextView) view.findViewById(R.id.text_sotienhoahongtrongthang)).setText(getText(cursor.getString(cursor.getColumnIndex(User.poundage_month))) + " " + getString(R.string.vnd));
+				((TextView) view.findViewById(R.id.text_sotienhoahong)).setText(getText(cursor.getString(cursor.getColumnIndex(User.poundage))) + " " + getString(R.string.vnd));
 				String cover = cursor.getString(cursor.getColumnIndex(User.COVER));
 				Conts.showImage(cover, menu_left_img_cover, 0);
 
 				String avatar = cursor.getString(cursor.getColumnIndex(User.AVATAR));
 				Conts.showImage(avatar, menu_left_img_avatar, R.drawable.new_no_avatar);
-				
+
 				TextView menu_left_tv_name = (TextView) view.findViewById(R.id.menu_left_tv_name);
 				menu_left_tv_name.setText(String.format("%s (%s)", Conts.getName(cursor), Conts.getSDT(cursor.getString(cursor.getColumnIndex(User.USER)))));
 
-				
-				
 				cursor.close();
 			}
 		} catch (Exception exception) {
@@ -161,6 +159,8 @@ public class ThongTinCaNhanFragment extends BaseFragment implements OnItemClickL
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		//(((RootMenuActivity) getActivity())).gotoChiTietCaNhanTungDichVu1(parent, view, position, id);
+		// (((RootMenuActivity)
+		// getActivity())).gotoChiTietCaNhanTungDichVu1(parent, view, position,
+		// id);
 	}
 }

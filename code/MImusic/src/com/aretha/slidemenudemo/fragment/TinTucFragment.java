@@ -21,6 +21,9 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class TinTucFragment extends BaseFragment implements OnItemClickListener, View.OnClickListener {
+
+	private TintucAdaper tintucAdaper;
+
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
@@ -31,13 +34,11 @@ public class TinTucFragment extends BaseFragment implements OnItemClickListener,
 
 	@Override
 	public void onCLickButtonLeft() {
-		// super.onCLickButtonLeft();
 		((NewMusicSlideMenuActivity) getActivity().getParent()).openMenuLeft();
 	}
 
 	@Override
 	public void onCLickButtonRight() {
-		// super.onCLickButtonRight();
 		((NewMusicSlideMenuActivity) getActivity().getParent()).openMenuRight();
 	}
 
@@ -46,33 +47,21 @@ public class TinTucFragment extends BaseFragment implements OnItemClickListener,
 		View view = inflater.inflate(R.layout.tintuc, null);
 		createHeader(getString(R.string.tintuc), true, true);
 		loadingView1 = (LoadingView) view.findViewById(R.id.loadingView1);
+		Conts.showView(loadingView1, false);
 		bangxephang_list = (vnp.com.mimusic.view.MusicListView) view.findViewById(R.id.tintuc_list);
 		bangxephang_list.addHeaderView(getHeaderView());
 		bangxephang_list.setOnItemClickListener(this);
+		tintucAdaper = new TintucAdaper(getActivity(), TinTuc.queryFromId(getActivity(), null));
 
-		// bangxephang_list.setAdapter(new TintucAdaper(getActivity(), new
-		// JSONArray()));
+		bangxephang_list.setAdapter(tintucAdaper);
 
 		executeHttps(RequestMethod.GET, API.API_R027, new Bundle(), new IContsCallBack() {
 
 			@Override
 			public void onSuscess(JSONObject response) {
 				Conts.showView(loadingView1, false);
-				// if (response != null) {
-				//
-				// try {
-				// JSONArray jsonArray = response.getJSONArray("data");
-				// if (jsonArray.length() == 0) {
-				// bangxephang_list.setTextNoData(true, R.string.nodata);
-				// } else {
-				// bangxephang_list.setAdapter(new TintucAdaper(getActivity(),
-				// jsonArray));
-				// }
-				// } catch (Exception exception) {
-				// }
-				// }
 				Cursor cursor = TinTuc.queryFromId(getActivity(), null);
-
+				tintucAdaper.changeCursor(cursor);
 				if (cursor == null) {
 					bangxephang_list.setTextNoData(true, R.string.nodata);
 				} else {
@@ -86,14 +75,17 @@ public class TinTucFragment extends BaseFragment implements OnItemClickListener,
 
 			@Override
 			public void onStart() {
-				Conts.showView(loadingView1, true);
+
+				if (tintucAdaper.getCount() == 0) {
+					Conts.showView(loadingView1, true);
+				}
 			}
 
 			@Override
 			public void onError(String message) {
-				bangxephang_list.setTextNoData(true, message);
-				// Conts.showDialogThongbao(getActivity(), message);
-				Conts.showView(loadingView1, false);
+				// bangxephang_list.setTextNoData(true, message);
+				// Conts.showView(loadingView1, false);
+				onSuscess(null);
 			}
 
 			@Override

@@ -12,6 +12,7 @@ import org.json.JSONObject;
 
 import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.DichVu;
+import vnp.com.db.HuongDanBanHang;
 import vnp.com.db.MauMoi;
 import vnp.com.db.Recomment;
 import vnp.com.db.TinTuc;
@@ -503,6 +504,8 @@ public class MImusicService extends Service {
 							TinTuc.updateTintuc(MImusicService.this, response);
 						} else if (API.API_R028.equals(api)) {
 							TinTuc.updateTintuc(MImusicService.this, response);
+						} else if (API.API_R010.equals(api)) {
+							HuongDanBanHang.update(MImusicService.this, response);
 						}
 
 						return null;
@@ -536,7 +539,7 @@ public class MImusicService extends Service {
 	}
 
 	private void updateKiemTraDieuKienThueBao(JSONObject response) {
-		 LogUtils.e("updateKiemTraDieuKienThueBao", response.toString());
+		LogUtils.e("updateKiemTraDieuKienThueBao", response.toString());
 	}
 
 	private void updateMauMoi(JSONObject response, String service_code) {

@@ -23,7 +23,6 @@ public class BangXepHangAdaper extends ArrayAdapter<JSONObject> {
 
 	public BangXepHangAdaper(Context context, JSONArray jA) {
 		super(context, 0, new JSONObject[] {});
-		// this.jsonArray = jA;
 
 		for (int i = 0; i < jA.length(); i++) {
 			try {
@@ -62,16 +61,6 @@ public class BangXepHangAdaper extends ArrayAdapter<JSONObject> {
 		((BangXepHangItemView) convertView).setDataColor(position);
 		return convertView;
 	}
-
-	// public void setJSOnArray(JSONArray jA) {
-	// list.clear();
-	// for (int i = 0; i < jA.length(); i++) {
-	// try {
-	// list.add(jA.getJSONObject(i));
-	// } catch (JSONException e) {
-	// }
-	// }
-	// }
 
 	public void setType(String t) {
 		type = t;

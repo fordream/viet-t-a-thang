@@ -21,8 +21,7 @@ public class BangXepHangChiTiet {
 	public static final String IDDICHVU = "iddichvu";
 	public static final String DOANHTHU = "doanhthu";
 	public static final String SOLUONG = "soluong";
-	
-	
+
 	public static final String SUONGLUONGGIAODICHTHANHCONGTRONGTHANG = "sogiaodichthanhcongtrongthang";
 	public static final String SOGIAODICHTHANHCONG = "sogiaodichthanhcong";
 	public static final String SOTIENHOAHONGTROGNTHANG = "sotienhoahongtrongthang";

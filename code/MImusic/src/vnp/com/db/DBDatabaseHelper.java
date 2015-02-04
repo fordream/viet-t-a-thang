@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DBDatabaseHelper extends SQLiteOpenHelper {
 	private static final String DATABASE_NAME = "midb";
 
-	private static final int DATABASE_VERSION = 3;
+	private static final int DATABASE_VERSION = 4;
 
 	public DBDatabaseHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -21,6 +21,7 @@ public class DBDatabaseHelper extends SQLiteOpenHelper {
 		db.execSQL(Recomment.CREATE_DB_TABLE());
 		db.execSQL(BangXepHangChiTiet.CREATE_DB_TABLE());
 		db.execSQL(MauMoi.CREATE_DB_TABLE());
+		db.execSQL(HuongDanBanHang.CREATE_DB_TABLE());
 	}
 
 	@Override
@@ -31,6 +32,7 @@ public class DBDatabaseHelper extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXISTS " + BangXepHangChiTiet.BANGXEPHANGCHITIET_TABLE_NAME);
 		db.execSQL("DROP TABLE IF EXISTS " + MauMoi.TABLE_NAME);
 		db.execSQL("DROP TABLE IF EXISTS " + TinTuc.TABLE_NAME);
+		db.execSQL("DROP TABLE IF EXISTS " + HuongDanBanHang.TABLE_NAME);
 		onCreate(db);
 	}
 }
