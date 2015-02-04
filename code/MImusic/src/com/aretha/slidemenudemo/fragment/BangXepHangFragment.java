@@ -81,5 +81,4 @@ public class BangXepHangFragment extends BaseFragment implements OnItemClickList
 		}
 		(((RootMenuActivity) getActivity())).gotoChiTietCaNhanTungDichVu1(parent, view, position, id, xType);
 	}
-
 }

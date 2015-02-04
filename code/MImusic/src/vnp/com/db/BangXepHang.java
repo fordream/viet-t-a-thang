@@ -44,7 +44,7 @@ public class BangXepHang {
 		builder.append("(");
 		builder.append(_ID).append(" INTEGER PRIMARY KEY AUTOINCREMENT").append(",");
 		String[] colums = new String[] {//
-		USER, ID, position, type, quantity_in_duration, commission_in_duration //
+		USER, ID, position, nickname, avatar, type, quantity, commission, quantity_in_duration, commission_in_duration //
 		};//
 
 		for (int i = 0; i < colums.length; i++) {
@@ -183,6 +183,12 @@ public class BangXepHang {
 	public static Cursor getBangXepHang(Context context, String type, String id) {
 		String selection = String.format("%s ='%s' and %s = '%s' and %s = '%s'", BangXepHang.USER, Conts.getUser(context), BangXepHang.type, type, BangXepHang.ID, id);
 		Cursor cursor = context.getContentResolver().query(CONTENT_URI, null, selection, null, null);
+		return cursor;
+	}
+
+	public static Cursor getBangXepHang(Context context, String type) {
+		String selection = String.format("%s ='%s' and %s = '%s'", BangXepHang.USER, Conts.getUser(context), BangXepHang.type, type);
+		Cursor cursor = context.getContentResolver().query(CONTENT_URI, null, selection, null, typeSOLUONG.equals(type) ? quantity : commission);
 		return cursor;
 	}
 }

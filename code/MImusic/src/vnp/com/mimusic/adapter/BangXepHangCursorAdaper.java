@@ -1,34 +1,25 @@
 package vnp.com.mimusic.adapter;
 
+import vnp.com.db.BangXepHang;
+import vnp.com.db.User;
 import vnp.com.mimusic.view.BangXepHangItemView;
+import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.support.v4.widget.CursorAdapter;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
 
 public class BangXepHangCursorAdaper extends CursorAdapter {
 	public BangXepHangCursorAdaper(Context context, Cursor c) {
 		super(context, c);
 	}
 
-	// private JSONArray jsonArray;
-	private String type = "1";
+	private String type = BangXepHang.typeDOANHTHU;
 
-	// @Override
-	// public View getView(int position, View convertView, ViewGroup parent) {
-	//
-	// if (convertView == null) {
-	// convertView = new BangXepHangItemView(parent.getContext());
-	// }
-	//
-	// ((BangXepHangItemView) convertView).setData(getItem(position));
-	// ((BangXepHangItemView) convertView).setDataColor(position);
-	// return convertView;
-	// }
-
-	public void setType(String t) {
-		type = t;
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	@Override
@@ -44,8 +35,32 @@ public class BangXepHangCursorAdaper extends CursorAdapter {
 
 	@Override
 	public View newView(Context arg0, Cursor arg1, ViewGroup arg2) {
-		// TODO Auto-generated method stub
 		return new BangXepHangItemView(arg0);
 	}
 
+	@Override
+	public Filter getFilter() {
+		return new Filter() {
+
+			@Override
+			protected void publishResults(final CharSequence constraint, final FilterResults results) {
+				((Activity) mContext).runOnUiThread(new Runnable() {
+
+					@Override
+					public void run() {
+						changeCursor((Cursor) results.values);
+
+					}
+				});
+
+			}
+
+			@Override
+			protected FilterResults performFiltering(CharSequence constraint) {
+				final FilterResults oReturn = new FilterResults();
+				oReturn.values = BangXepHang.getBangXepHang(mContext, type);
+				return oReturn;
+			}
+		};
+	}
 }

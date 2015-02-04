@@ -1,13 +1,13 @@
 package vnp.com.mimusic.view;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import vnp.com.api.API;
 import vnp.com.api.RestClient.RequestMethod;
+import vnp.com.db.BangXepHang;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.VApplication;
-import vnp.com.mimusic.adapter.BangXepHangAdaper;
+import vnp.com.mimusic.adapter.BangXepHangCursorAdaper;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
 import android.app.ProgressDialog;
@@ -23,16 +23,19 @@ public class BangXephangListView extends LinearLayout {
 	// private vnp.com.mimusic.view.ChitietCaNhanBangXepHangTungDichVuView
 	// chitiet;
 	private vnp.com.mimusic.view.MusicListView list;
-	private String type = "1";
+	private String type = BangXepHang.typeDOANHTHU;
 	private String noDataText;
 	private TextView message;
-	private BangXepHangAdaper adaper;
+	private BangXepHangCursorAdaper adaper;
 
 	public void setType(String type) {
 		this.type = type;
+		adaper = new BangXepHangCursorAdaper(getContext(), BangXepHang.getBangXepHang(getContext(), type));
+		adaper.setType(type);
+		list.setAdapter(adaper);
 		message.setText("");
 
-		if ("2".equals(type)) {
+		if (BangXepHang.typeSOLUONG.equals(type)) {
 			noDataText = getResources().getString(R.string.bangxephang_so_luong_no_data);
 		} else {
 			noDataText = getResources().getString(R.string.bangxephang_doanh_thu_no_data);
@@ -54,14 +57,12 @@ public class BangXephangListView extends LinearLayout {
 		list = (MusicListView) findViewById(R.id.list);
 		message = Conts.getView(this, R.id.message);
 
-		adaper = new BangXepHangAdaper(getContext(), new JSONArray());
-		list.setAdapter(adaper);
 	}
 
 	public void execute() {
-		adaper.setType(type);
-		adaper.changeData(new JSONArray());
-		adaper.notifyDataSetChanged();
+		// adaper.setType(type);
+		// adaper.changeData(new JSONArray());
+		// adaper.notifyDataSetChanged();
 
 		Bundle bxhParamBundle = new Bundle();
 		bxhParamBundle.putString("type", type);
@@ -70,25 +71,25 @@ public class BangXephangListView extends LinearLayout {
 
 			@Override
 			public void onSuscess(JSONObject response) {
-				try {
-					JSONArray jsonArray = response.getJSONArray("data");
-					adaper.changeData(jsonArray);
-					adaper.notifyDataSetChanged();
-
-					if (jsonArray.length() == 0) {
-						if (list.getCount() <= 0) {
-							message.setText(noDataText);
-						} else {
-							message.setText("");
-						}
-
-					} else {
-						message.setText("");
-					}
-				} catch (Exception exception) {
-
-				}
-
+				// try {
+				// JSONArray jsonArray = response.getJSONArray("data");
+				// adaper.changeData(jsonArray);
+				// adaper.notifyDataSetChanged();
+				//
+				// if (jsonArray.length() == 0) {
+				// if (list.getCount() <= 0) {
+				// message.setText(noDataText);
+				// } else {
+				// message.setText("");
+				// }
+				//
+				// } else {
+				// message.setText("");
+				// }
+				// } catch (Exception exception) {
+				//
+				// }
+				adaper.getFilter().filter("");
 				progressDialog.dismiss();
 			}
 
@@ -110,7 +111,7 @@ public class BangXephangListView extends LinearLayout {
 
 			@Override
 			public void onError() {
-				onError("check network");
+				onError("");
 			}
 		});
 	}
