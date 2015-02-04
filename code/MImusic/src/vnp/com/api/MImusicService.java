@@ -757,9 +757,7 @@ public class MImusicService extends Service {
 				for (int i = 0; i < array.length(); i++) {
 					final JSONObject jsonObject = array.getJSONObject(i);
 					String service_code = Conts.getString(jsonObject, Recomment.service_code);
-
 					JSONArray contacts = jsonObject.getJSONArray("contacts");
-
 					for (int index = 0; index < contacts.length(); index++) {
 						final JSONObject cotnact = contacts.getJSONObject(index);
 						String phone = Conts.getString(cotnact, Recomment.phone);

@@ -77,7 +77,8 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 		});
 
 		headerView = new HeaderView(getActivity());
-		headerView.setVisibility(View.INVISIBLE);
+		headerView.showHeader(false);
+
 		list.addHeaderView(headerView);
 
 		list.addHeaderView(home_header);
@@ -110,6 +111,9 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 		};
 
 		list.setAdapter(homeAdapter);
+
+		homeAdapter.update(updateSuccess);
+
 		Bundle bundle = new Bundle();
 		execute(RequestMethod.GET, API.API_R026, bundle, new IContsCallBack() {
 			@Override
