@@ -25,6 +25,7 @@ public class FontsUtils {
 	public static final String TOBOTO_Regular = "Roboto-Regular.ttf";
 	public static final String TOBOTO_Medium = "Roboto-Medium.ttf";
 	public static final String TOBOTO_Thin = "Roboto-Thin.ttf";
+	private static final String TOBOTO_Bold = "Roboto-Bold.ttf";
 
 	public void setTextFontsRobotoLight(TextView textView) {
 		if (map.containsKey(TOBOTO_LIGHT))
@@ -55,6 +56,7 @@ public class FontsUtils {
 		addFont(TOBOTO_Regular);
 		addFont(TOBOTO_Medium);
 		addFont(TOBOTO_Thin);
+		addFont(TOBOTO_Bold);
 	}
 
 	private void addFont(String fontName) {
@@ -78,5 +80,11 @@ public class FontsUtils {
 		} catch (Exception e) {
 			return null;
 		}
+	}
+
+	public void setTextFontsRobotoBold(TextView textView) {
+		if (map.containsKey(TOBOTO_Bold))
+			textView.setTypeface(map.get(TOBOTO_Bold));
+
 	}
 }

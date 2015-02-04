@@ -1,92 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dimen_45dp"
-    android:background="@drawable/new_header_bg"
+    android:layout_height="wrap_content"
     android:orientation="vertical" >
 
-    <ImageButton
-        android:id="@+id/header_btn_left"
-        android:layout_width="@dimen/dimen_45dp"
-        android:layout_height="@dimen/dimen_45dp"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:background="@drawable/xml_btn2"
-        android:padding="@dimen/dimen_12dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/header_home_1" />
-
-    <ImageButton
-        android:id="@+id/header_btn_right"
-        android:layout_width="@dimen/dimen_45dp"
-        android:layout_height="@dimen/dimen_45dp"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:background="@drawable/xml_btn2"
-        android:padding="@dimen/dimen_12dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/header_home_2" />
-
-    <vnp.com.mimusic.view.textview.TextViewMedium
-        android:id="@+id/header_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/trangchu"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/dimen_18dp"
-        android:textStyle="bold" />
-
     <RelativeLayout
-        android:id="@+id/header_btn_right_moi"
-        android:layout_width="@dimen/dimen_71dp"
+        android:id="@+id/header_main_content"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_45dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginRight="@dimen/dimen_10dp"
-        android:orientation="horizontal"
-        android:scaleType="fitXY"
-        android:visibility="gone" >
+        android:background="@drawable/new_header_bg"
+        android:orientation="vertical" >
 
-        <ImageView
-            android:layout_width="@dimen/dimen_71dp"
-            android:layout_height="@dimen/dimen_35dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:background="@drawable/header_btn_moi" />
-
-        <TextView
-            android:id="@+id/TextView01"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/dimen_15dp"
-            android:text="@string/moi"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/dimen_15dp" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/header_btn_right__done"
-        android:layout_width="@dimen/dimen_45dp"
-        android:layout_height="@dimen/dimen_45dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:orientation="horizontal"
-        android:scaleType="fitXY"
-        android:visibility="gone" >
-
-        <ImageView
-            android:id="@+id/date_done"
+        <ImageButton
+            android:id="@+id/header_btn_left"
             android:layout_width="@dimen/dimen_45dp"
             android:layout_height="@dimen/dimen_45dp"
-            android:layout_centerInParent="true"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
             android:background="@drawable/xml_btn2"
             android:padding="@dimen/dimen_12dp"
             android:scaleType="fitXY"
-            android:src="@drawable/date_done" />
+            android:src="@drawable/header_home_1" />
+
+        <ImageButton
+            android:id="@+id/header_btn_right"
+            android:layout_width="@dimen/dimen_45dp"
+            android:layout_height="@dimen/dimen_45dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/xml_btn2"
+            android:padding="@dimen/dimen_12dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/header_home_2" />
+
+        <vnp.com.mimusic.view.textview.TextViewMedium
+            android:id="@+id/header_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="@string/trangchu"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/dimen_18dp"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:id="@+id/header_btn_right_moi"
+            android:layout_width="@dimen/dimen_71dp"
+            android:layout_height="@dimen/dimen_45dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="@dimen/dimen_10dp"
+            android:orientation="horizontal"
+            android:scaleType="fitXY"
+            android:visibility="gone" >
+
+            <ImageView
+                android:layout_width="@dimen/dimen_71dp"
+                android:layout_height="@dimen/dimen_35dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/header_btn_moi" />
+
+            <TextView
+                android:id="@+id/TextView01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dimen_15dp"
+                android:text="@string/moi"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/dimen_15dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/header_btn_right__done"
+            android:layout_width="@dimen/dimen_45dp"
+            android:layout_height="@dimen/dimen_45dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:orientation="horizontal"
+            android:scaleType="fitXY"
+            android:visibility="gone" >
+
+            <ImageView
+                android:id="@+id/date_done"
+                android:layout_width="@dimen/dimen_45dp"
+                android:layout_height="@dimen/dimen_45dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/xml_btn2"
+                android:padding="@dimen/dimen_12dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/date_done" />
+        </RelativeLayout>
     </RelativeLayout>
 
 </RelativeLayout>

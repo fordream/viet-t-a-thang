@@ -4,17 +4,30 @@
     android:layout_height="match_parent"
     android:background="@drawable/home_bg" >
 
-    <vnp.com.mimusic.view.MusicListView
-        android:id="@+id/list"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/home_bg"
-        android:listSelector="@drawable/tranfer"
-        android:orientation="vertical"
-        android:scrollbarThumbHorizontal="@drawable/tranfer"
-        android:scrollbarThumbVertical="@drawable/tranfer"
-        android:scrollbars="none" >
-    </vnp.com.mimusic.view.MusicListView>
+        android:orientation="vertical" >
+
+        <vnp.com.mimusic.view.MusicListView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/home_bg"
+            android:listSelector="@drawable/tranfer"
+            android:orientation="vertical"
+            android:scrollbarThumbHorizontal="@drawable/tranfer"
+            android:scrollbarThumbVertical="@drawable/tranfer"
+            android:scrollbars="none" >
+        </vnp.com.mimusic.view.MusicListView>
+
+    </LinearLayout>
+
+    <vnp.com.mimusic.view.HeaderView
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </vnp.com.mimusic.view.HeaderView>
 
     <vnp.com.mimusic.view.LoadingView
         android:id="@+id/loadingView1"

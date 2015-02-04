@@ -3,6 +3,7 @@ package com.aretha.slidemenudemo.fragment;
 import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.VApplication;
+import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
 import vnp.com.mimusic.view.HeaderView;
 import android.os.Bundle;
@@ -39,6 +40,27 @@ public class BaseFragment extends Fragment {
 
 	public HeaderView getHeaderView() {
 		return header;
+	}
+
+	public void loadHeader(View view, int id, int title, boolean leftShow, boolean rightShow) {
+		View.OnClickListener homeOnClick = new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				if (v.getId() == R.id.header_btn_left) {
+					onCLickButtonLeft();
+				} else if (v.getId() == R.id.header_btn_right) {
+					onCLickButtonRight();
+				}
+			}
+		};
+		header = Conts.getView(view, id);
+		header.setTextHeader(title);
+		header.showButton(leftShow, rightShow);
+
+		header.findViewById(R.id.header_btn_left).setOnClickListener(homeOnClick);
+		header.findViewById(R.id.header_btn_right).setOnClickListener(homeOnClick);
+
 	}
 
 	public void createHeader(String title, boolean leftShow, boolean rightShow) {

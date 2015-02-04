@@ -30,7 +30,7 @@
               android:id="@+id/xemall"
             android:padding="@dimen/dimen_12dp" >
 
-            <vnp.com.mimusic.view.textview.TextViewRegular
+            <vnp.com.mimusic.view.textview.TextViewBold
                 android:id="@+id/name_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

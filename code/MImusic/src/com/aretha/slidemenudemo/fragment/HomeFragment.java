@@ -2,6 +2,8 @@ package com.aretha.slidemenudemo.fragment;
 
 import org.json.JSONObject;
 
+import com.vnp.core.scroll.VasScrollListView;
+
 import vnp.com.api.API;
 import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.DichVu;
@@ -15,6 +17,7 @@ import vnp.com.mimusic.base.diablog.DangKyDialog;
 import vnp.com.mimusic.main.NewMusicSlideMenuActivity;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
+import vnp.com.mimusic.view.HeaderView;
 import vnp.com.mimusic.view.LoadingView;
 import vnp.com.mimusic.view.MusicListView;
 import vnp.com.mimusic.view.ReCommentDichVuItemView;
@@ -35,6 +38,7 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 	private vnp.com.mimusic.view.MusicListView list;
 	private HomeHeaderView home_header;
 	private LoadingView loadingView;
+	private HeaderView headerView;
 
 	@Override
 	public void onCLickButtonLeft() {
@@ -52,22 +56,16 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 	}
 
 	@Override
-	public void onResume() {
-		super.onResume();
-		if (loadingView.getVisibility() == View.GONE) {
-			// updateUI(updateSuccess);
-		}
-	}
-
-	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.home, null);
 
-		createHeader(getString(R.string.kenhbanvas), true, true);
+		loadHeader(view, R.id.header, R.string.kenhbanvas, true, true);
+
 		loadingView = Conts.getView(view, R.id.loadingView1);
 		list = (MusicListView) view.findViewById(R.id.list);
 
 		list.setOnItemClickListener(this);
+
 		home_header = new HomeHeaderView(getActivity());
 
 		home_header.findViewById(R.id.dichvubanchay).setOnClickListener(new View.OnClickListener() {
@@ -77,8 +75,12 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 			}
 		});
 
-		list.addHeaderView(getHeaderView());
+		headerView = new HeaderView(getActivity());
+		headerView.setVisibility(View.INVISIBLE);
+		list.addHeaderView(headerView);
+
 		list.addHeaderView(home_header);
+
 		homeAdapter = new NewHomeAdapter(getActivity()) {
 
 			@Override
@@ -98,7 +100,6 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 			@Override
 			public void xemall(String name) {
 				(((RootMenuActivity) getActivity())).homeXemall(name);
-
 			}
 
 			@Override
@@ -133,6 +134,8 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 			}
 		});
 
+		list.setOnScrollListener(new VasScrollListView(getHeaderView().findViewById(R.id.header_main_content), headerView));
+
 		return view;
 	}
 
@@ -145,21 +148,8 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 	};
 
 	private void updateUI(UpdateSuccess updateSuceess) {
-		// int current = list.getFirstVisiblePosition();
-
-		// ((ReCommentDichVuItemView) Conts.getView(gallery,
-		// R.id.recommen1)).setData(null);
-		// ((ReCommentDichVuItemView) Conts.getView(gallery,
-		// R.id.recommen2)).setData(null);
-		// ((ReCommentDichVuItemView) Conts.getView(gallery,
-		// R.id.recommen3)).setData(null);
-		// ((ReCommentDichVuItemView) Conts.getView(gallery,
-		// R.id.recommen4)).setData(null);
 		home_header.updateData();
-
-		// Cursor cursor = Recomment.getCursorFromDichvu(getActivity(), 3);
 		homeAdapter.update(updateSuceess);
-
 	}
 
 	private NewHomeAdapter homeAdapter;
@@ -173,7 +163,6 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		NewHomeItem homeItem = (NewHomeItem) parent.getItemAtPosition(position);
 		if (homeItem.type == 2) {
-			// call to dich vu
 			(((RootMenuActivity) getActivity())).gotoChiTietDichVuFromHome(parent, view, position, id);
 		}
 	}

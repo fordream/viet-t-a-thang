@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/dimen_12dp" >
 
-            <vnp.com.mimusic.view.textview.TextViewRegular
+            <vnp.com.mimusic.view.textview.TextViewBold
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
