@@ -5,6 +5,7 @@ package vnp.com.mimusic.activity;
 
 import java.util.List;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -12,10 +13,12 @@ import vnp.com.api.API;
 import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.BangXepHang;
 import vnp.com.db.DichVu;
+import vnp.com.db.MauMoi;
 import vnp.com.db.TinTuc;
 import vnp.com.db.User;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.VApplication;
+import vnp.com.mimusic.adapter.MauMoiAdaper;
 import vnp.com.mimusic.adapter.data.NewHomeItem;
 import vnp.com.mimusic.base.diablog.VasProgessDialog;
 import vnp.com.mimusic.util.Conts;
@@ -363,24 +366,84 @@ public class RootMenuActivity extends FragmentActivity {
 	 * @param service_code
 	 * @param service_codes
 	 */
-	public void gotoLoiMoi(String sdt, String service_code, String service_codes) {
+	public void gotoLoiMoiNhieuDichVU(final String sdt, final String service_code, final String service_codes) {
 		Conts.hiddenKeyBoard(this);
-		FragmentManager fragmentManager = getSupportFragmentManager();
-		android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
-		MauMoiFragment mauMoiFragment = new MauMoiFragment();
-		Bundle args = new Bundle();
-		args.putBoolean("type", true);
-		args.putString("id", "");
-		args.putString("customers", "");
-		args.putString("sdt", sdt);
-		args.putString("service_code", service_code);
-		args.putString("service_codes", service_codes);
-		mauMoiFragment.setArguments(args);
-		transaction.setCustomAnimations(R.anim.abc_alpha_in, R.anim.abc_alpha_in, R.anim.abc_alpha_out, R.anim.abc_alpha_out);
-		transaction.add(R.id.root_main_fragment, mauMoiFragment, "" + System.currentTimeMillis());
-		transaction.addToBackStack(null);
 
-		transaction.commit();
+		String idMauMoi = MauMoi.getCursorMauMoiListJson0(getActivity(), service_code);
+
+		if (!Conts.isBlank(idMauMoi)) {
+			Bundle bundle = new Bundle();
+			bundle.putString("template_id", idMauMoi);
+			bundle.putString("customers", sdt);
+			bundle.putString("service_code", service_codes);
+			moi(true, bundle);
+		} else {
+			Bundle bundle = new Bundle();
+			bundle.putString("service_code", service_code);
+			execute(RequestMethod.GET, API.API_R022, bundle, new IContsCallBack() {
+				ProgressDialog progressDialog;
+
+				@Override
+				public void onSuscess(JSONObject response) {
+
+					if (progressDialog != null) {
+						progressDialog.dismiss();
+					}
+
+					String idMauMoi = MauMoi.getCursorMauMoiListJson0(getActivity(), service_code);
+					if (!Conts.isBlank(idMauMoi)) {
+						Bundle bundle = new Bundle();
+						bundle.putString("template_id", idMauMoi);
+						bundle.putString("customers", sdt);
+						bundle.putString("service_code", service_codes);
+						moi(true, bundle);
+					} else {
+						Conts.showDialogThongbao(RootMenuActivity.this, getString(R.string.khongthelayduocmaumoi));
+					}
+				}
+
+				@Override
+				public void onStart() {
+					if (progressDialog == null) {
+						progressDialog = new VasProgessDialog(RootMenuActivity.this);
+						progressDialog.show();
+					}
+				}
+
+				@Override
+				public void onError(String message) {
+					if (progressDialog != null) {
+						progressDialog.dismiss();
+					}
+
+					Conts.showDialogThongbao(RootMenuActivity.this, message);
+				}
+
+				@Override
+				public void onError() {
+					onError("");
+				}
+			});
+		}
+		// FragmentManager fragmentManager = getSupportFragmentManager();
+		// android.support.v4.app.FragmentTransaction transaction =
+		// fragmentManager.beginTransaction();
+		// MauMoiFragment mauMoiFragment = new MauMoiFragment();
+		// Bundle args = new Bundle();
+		// args.putBoolean("type", true);
+		// args.putString("id", "");
+		// args.putString("customers", "");
+		// args.putString("sdt", sdt);
+		// args.putString("service_code", service_code);
+		// args.putString("service_codes", service_codes);
+		// mauMoiFragment.setArguments(args);
+		// transaction.setCustomAnimations(R.anim.abc_alpha_in,
+		// R.anim.abc_alpha_in, R.anim.abc_alpha_out, R.anim.abc_alpha_out);
+		// transaction.add(R.id.root_main_fragment, mauMoiFragment, "" +
+		// System.currentTimeMillis());
+		// transaction.addToBackStack(null);
+		//
+		// transaction.commit();
 	}
 
 	public void gotoHuongDanBanHang() {
@@ -427,9 +490,9 @@ public class RootMenuActivity extends FragmentActivity {
 		((VApplication) getApplication()).execute(requestMethod, api, bundle, contsCallBack);
 	}
 
-	public void moi(boolean type, Bundle bundle) {
+	public void moi(boolean isMoiTheoThueBao, Bundle bundle) {
 		onBackPressed();
-		String api = !type ? API.API_R015 : API.API_R016;
+		String api = !isMoiTheoThueBao ? API.API_R015 : API.API_R016;
 
 		// Conts.showDialogThongbao(this, api + " : " + bundle.toString());
 		execute(RequestMethod.POST, api, bundle, new IContsCallBack() {

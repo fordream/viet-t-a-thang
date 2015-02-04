@@ -6,6 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import vnp.com.mimusic.util.Conts;
+import android.app.Activity;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
@@ -147,5 +148,18 @@ public class MauMoi {
 			cursor.close();
 		}
 		return list;
+	}
+
+	public static String getCursorMauMoiListJson0(Context activity, String service_code) {
+		String id = "";
+		String where = String.format("%s = '%s' and %s = '%s'", MauMoi.user, Conts.getUser(activity), MauMoi.service_code, service_code);
+		Cursor cursor = activity.getContentResolver().query(MauMoi.CONTENT_URI, null, where, null, null);
+		if (cursor != null) {
+			if (cursor.moveToNext()) {
+				id = Conts.getStringCursor(cursor, MauMoi.ID);
+			}
+		}
+
+		return id;
 	}
 }

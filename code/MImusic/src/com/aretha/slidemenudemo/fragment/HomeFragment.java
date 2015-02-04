@@ -112,7 +112,7 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 
 		list.setAdapter(homeAdapter);
 
-		homeAdapter.update(updateSuccess);
+//		homeAdapter.update(updateSuccess);
 
 		Bundle bundle = new Bundle();
 		execute(RequestMethod.GET, API.API_R026, bundle, new IContsCallBack() {

@@ -207,7 +207,7 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 				}
 			}
 
-			(((RootMenuActivity) getActivity())).gotoLoiMoi(sdt, adapter.getService_code(adapter.getListSelect().get(0)), service_codes);
+			(((RootMenuActivity) getActivity())).gotoLoiMoiNhieuDichVU(sdt, adapter.getService_code(adapter.getListSelect().get(0)), service_codes);
 		}
 	}
 
