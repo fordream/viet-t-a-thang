@@ -237,7 +237,7 @@ public class RootMenuActivity extends FragmentActivity {
 			Intent intent = new Intent(this, RootMenuActivity.class);
 			intent.putExtra("type", Conts.CHITIETCANHANBANGXEPHANGTUNGDICHVU);
 			intent.putExtra("xType", xType);
-			intent.putExtra("position", "" + (jo.getPosition() + 1));
+			intent.putExtra("position", "" + (jo.getPosition()));
 			intent.putExtra("mtype", Conts.getStringCursor(jo, BangXepHang.type));
 			intent.putExtra("avatar", Conts.getStringCursor(jo, BangXepHang.avatar));
 			intent.putExtra("ranking_id", Conts.getStringCursor(jo, BangXepHang.ID));
