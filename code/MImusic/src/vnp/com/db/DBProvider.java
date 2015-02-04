@@ -32,7 +32,7 @@ public class DBProvider extends ContentProvider {
 			TinTuc.addUriMatcher(uriMatcher, PROVIDER_NAME);
 			DichVu.addUriMatcher(uriMatcher, PROVIDER_NAME);
 			Recomment.addUriMatcher(uriMatcher, PROVIDER_NAME);
-			BangXepHangChiTiet.addUriMatcher(uriMatcher, PROVIDER_NAME);
+			BangXepHang.addUriMatcher(uriMatcher, PROVIDER_NAME);
 			MauMoi.addUriMatcher(uriMatcher, PROVIDER_NAME);
 		}
 
@@ -61,7 +61,7 @@ public class DBProvider extends ContentProvider {
 		}
 
 		if (_uri == null) {
-			_uri = BangXepHangChiTiet.insert(match, db, _uri, values);
+			_uri = BangXepHang.insert(match, db, _uri, values);
 		}
 
 		if (_uri == null) {
@@ -97,7 +97,7 @@ public class DBProvider extends ContentProvider {
 		}
 
 		if (c == null) {
-			c = BangXepHangChiTiet.query(match, db, uri, projection, selection, selectionArgs, sortOrder);
+			c = BangXepHang.query(match, db, uri, projection, selection, selectionArgs, sortOrder);
 		}
 		if (c == null) {
 			c = MauMoi.query(match, db, uri, projection, selection, selectionArgs, sortOrder);
@@ -137,7 +137,7 @@ public class DBProvider extends ContentProvider {
 		}
 
 		if (count == -2) {
-			count = BangXepHangChiTiet.delete(match, db, uri, selection, selectionArgs);
+			count = BangXepHang.delete(match, db, uri, selection, selectionArgs);
 		}
 
 		if (count == -2) {
@@ -175,7 +175,7 @@ public class DBProvider extends ContentProvider {
 		}
 
 		if (count == -2) {
-			count = BangXepHangChiTiet.update(match, db, uri, values, selection, selectionArgs);
+			count = BangXepHang.update(match, db, uri, values, selection, selectionArgs);
 		}
 		if (count == -2) {
 			count = MauMoi.update(match, db, uri, values, selection, selectionArgs);
@@ -196,7 +196,7 @@ public class DBProvider extends ContentProvider {
 		Recomment.getType(mMap);
 		TinTuc.getType(mMap);
 		HuongDanBanHang.getType(mMap);
-		BangXepHangChiTiet.getType(mMap);
+		BangXepHang.getType(mMap);
 		MauMoi.getType(mMap);
 		String type = mMap.get(uriMatcher.match(uri));
 

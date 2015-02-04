@@ -11,30 +11,33 @@ import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.text.TextUtils;
 
-public class BangXepHangChiTiet {
-	public static final String BANGXEPHANGCHITIET_TABLE_NAME = "bangxepHangchitiet";
+public class BangXepHang {
+	public static final String TABLE_NAME = "bangxephang";
 
 	public static final String _ID = "_id";
 	public static final String ID = "id";
-	public static final String IDUSER = "iduser";
+	public static final String USER = "user";
+	public static final String position = "position";
 
-	public static final String IDDICHVU = "iddichvu";
-	public static final String DOANHTHU = "doanhthu";
-	public static final String SOLUONG = "soluong";
+	public static final String type = "type";
+	public static final String typeDOANHTHU = "1";
+	public static final String typeSOLUONG = "2";
 
-	public static final String SUONGLUONGGIAODICHTHANHCONGTRONGTHANG = "sogiaodichthanhcongtrongthang";
-	public static final String SOGIAODICHTHANHCONG = "sogiaodichthanhcong";
-	public static final String SOTIENHOAHONGTROGNTHANG = "sotienhoahongtrongthang";
-	public static final String SOTIENHOAHONG = "sotienhoahong";
+	public static final String commission = "commission";
+	public static final String quantity = "quantity";
+	public static final String nickname = "nickname";
+	public static final String avatar = "avatar";
+	public static final String quantity_in_duration = "quantity_in_duration";
+	public static final String commission_in_duration = "commission_in_duration";
 
 	public static final String CREATE_DB_TABLE() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("CREATE TABLE ").append(BANGXEPHANGCHITIET_TABLE_NAME);
+		builder.append("CREATE TABLE ").append(TABLE_NAME);
 
 		builder.append("(");
 		builder.append(_ID).append(" INTEGER PRIMARY KEY AUTOINCREMENT").append(",");
 		String[] colums = new String[] {//
-		IDUSER, ID, IDDICHVU, SOLUONG, DOANHTHU //
+		USER, ID, position, type, quantity_in_duration, commission_in_duration //
 		};//
 
 		for (int i = 0; i < colums.length; i++) {
@@ -55,10 +58,10 @@ public class BangXepHangChiTiet {
 	 * 
 	 */
 
-	public static final String CONTENT_URI_STR = "content://" + DBProvider.PROVIDER_NAME + "/" + BANGXEPHANGCHITIET_TABLE_NAME;
+	public static final String CONTENT_URI_STR = "content://" + DBProvider.PROVIDER_NAME + "/" + TABLE_NAME;
 	public static final Uri CONTENT_URI = Uri.parse(CONTENT_URI_STR);
 
-	public BangXepHangChiTiet() {
+	public BangXepHang() {
 	}
 
 	// matcher
@@ -66,8 +69,8 @@ public class BangXepHangChiTiet {
 	public static final int DICHVU_MATCHER_ID = 8;
 
 	public static final void addUriMatcher(UriMatcher uriMatcher, String PROVIDER_NAME) {
-		uriMatcher.addURI(PROVIDER_NAME, BANGXEPHANGCHITIET_TABLE_NAME, DICHVU_MATCHER);
-		uriMatcher.addURI(PROVIDER_NAME, BANGXEPHANGCHITIET_TABLE_NAME + "/#", DICHVU_MATCHER_ID);
+		uriMatcher.addURI(PROVIDER_NAME, TABLE_NAME, DICHVU_MATCHER);
+		uriMatcher.addURI(PROVIDER_NAME, TABLE_NAME + "/#", DICHVU_MATCHER_ID);
 	}
 
 	public static final void getType(Map<Integer, String> mMap) {
@@ -77,9 +80,9 @@ public class BangXepHangChiTiet {
 
 	public static final int update(int match, SQLiteDatabase db, Uri uri, ContentValues values, String selection, String[] selectionArgs) {
 		if (DICHVU_MATCHER == match) {
-			return db.update(BANGXEPHANGCHITIET_TABLE_NAME, values, selection, selectionArgs);
+			return db.update(TABLE_NAME, values, selection, selectionArgs);
 		} else if (DICHVU_MATCHER_ID == match) {
-			return db.update(BANGXEPHANGCHITIET_TABLE_NAME, values, _ID + " = " + uri.getPathSegments().get(1) + (!TextUtils.isEmpty(selection) ? " AND (" + selection + ')' : ""), selectionArgs);
+			return db.update(TABLE_NAME, values, _ID + " = " + uri.getPathSegments().get(1) + (!TextUtils.isEmpty(selection) ? " AND (" + selection + ')' : ""), selectionArgs);
 		} else {
 			return -2;
 		}
@@ -87,10 +90,10 @@ public class BangXepHangChiTiet {
 
 	public static int delete(int match, SQLiteDatabase db, Uri uri, String selection, String[] selectionArgs) {
 		if (DICHVU_MATCHER == match) {
-			return db.delete(BANGXEPHANGCHITIET_TABLE_NAME, selection, selectionArgs);
+			return db.delete(TABLE_NAME, selection, selectionArgs);
 		} else if (DICHVU_MATCHER_ID == match) {
 			String id = uri.getPathSegments().get(1);
-			return db.delete(BANGXEPHANGCHITIET_TABLE_NAME, _ID + " = " + id + (!TextUtils.isEmpty(selection) ? " AND (" + selection + ')' : ""), selectionArgs);
+			return db.delete(TABLE_NAME, _ID + " = " + id + (!TextUtils.isEmpty(selection) ? " AND (" + selection + ')' : ""), selectionArgs);
 		} else {
 			return -2;
 		}
@@ -98,7 +101,7 @@ public class BangXepHangChiTiet {
 
 	public static Cursor query(int match, SQLiteDatabase db, Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
 		SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
-		qb.setTables(BANGXEPHANGCHITIET_TABLE_NAME);
+		qb.setTables(TABLE_NAME);
 		if (DICHVU_MATCHER == match) {
 			return qb.query(db, projection, selection, selectionArgs, null, null, sortOrder);
 		} else if (DICHVU_MATCHER_ID == match) {
@@ -111,13 +114,13 @@ public class BangXepHangChiTiet {
 
 	public static Uri insert(int match, SQLiteDatabase db, Uri uri, ContentValues values) {
 		if (DICHVU_MATCHER == match) {
-			long rowID = db.insert(BANGXEPHANGCHITIET_TABLE_NAME, "", values);
+			long rowID = db.insert(TABLE_NAME, "", values);
 			if (rowID > 0) {
 				Uri _uri = ContentUris.withAppendedId(User.CONTENT_URI, rowID);
 				return _uri;
 			}
 		} else if (DICHVU_MATCHER_ID == match) {
-			long rowID = db.insert(BANGXEPHANGCHITIET_TABLE_NAME, "", values);
+			long rowID = db.insert(TABLE_NAME, "", values);
 			if (rowID > 0) {
 				Uri _uri = ContentUris.withAppendedId(User.CONTENT_URI, rowID);
 				return _uri;

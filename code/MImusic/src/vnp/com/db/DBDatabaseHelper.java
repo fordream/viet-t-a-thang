@@ -19,7 +19,7 @@ public class DBDatabaseHelper extends SQLiteOpenHelper {
 		db.execSQL(TinTuc.CREATE_DB_TABLE());
 		db.execSQL(DichVu.CREATE_DB_TABLE());
 		db.execSQL(Recomment.CREATE_DB_TABLE());
-		db.execSQL(BangXepHangChiTiet.CREATE_DB_TABLE());
+		db.execSQL(BangXepHang.CREATE_DB_TABLE());
 		db.execSQL(MauMoi.CREATE_DB_TABLE());
 		db.execSQL(HuongDanBanHang.CREATE_DB_TABLE());
 	}
@@ -29,7 +29,7 @@ public class DBDatabaseHelper extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXISTS " + User.USER_TABLE_NAME);
 		db.execSQL("DROP TABLE IF EXISTS " + DichVu.DICHVU_TABLE_NAME);
 		db.execSQL("DROP TABLE IF EXISTS " + Recomment.RECOMMENT_TABLE_NAME);
-		db.execSQL("DROP TABLE IF EXISTS " + BangXepHangChiTiet.BANGXEPHANGCHITIET_TABLE_NAME);
+		db.execSQL("DROP TABLE IF EXISTS " + BangXepHang.TABLE_NAME);
 		db.execSQL("DROP TABLE IF EXISTS " + MauMoi.TABLE_NAME);
 		db.execSQL("DROP TABLE IF EXISTS " + TinTuc.TABLE_NAME);
 		db.execSQL("DROP TABLE IF EXISTS " + HuongDanBanHang.TABLE_NAME);
