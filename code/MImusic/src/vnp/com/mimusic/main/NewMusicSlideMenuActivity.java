@@ -8,6 +8,7 @@ import vnp.com.mimusic.VApplication;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.base.diablog.DangKyDialog;
 import vnp.com.mimusic.util.Conts;
+import vnp.com.mimusic.util.LogUtils;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
 import vnp.com.mimusic.view.MenuLeftView;
 import vnp.com.mimusic.view.MenuRightView;
@@ -261,34 +262,17 @@ public class NewMusicSlideMenuActivity extends TabActivity {
 				overridePendingTransitionStartActivity();
 			}
 		});
-		// getSlideMenu().setiSlideMenuListener(new ISlideMenuListener() {
-		//
-		// @Override
-		// public boolean canUseBackMenu() {
-		// if (getSlideMenu().getCurrentState() == SlideMenu.STATE_OPEN_RIGHT) {
-		// return !mactivity_menu_right.needBack();
-		// }
-		//
-		// return true;
-		// }
-		// });
-
-		// getSlideMenu().setOnSlideStateChangeListener(new
-		// OnSlideStateChangeListener() {
-		//
-		// @Override
-		// public void onSlideStateChange(int slideState) {
-		// Conts.hiddenKeyBoard(BaseMusicSlideMenuActivity.this);
-		// }
-		//
-		// @Override
-		// public void onSlideOffsetChange(float offsetPercent) {
-		// }
-		// });
 	}
 
 	protected void closeMenu() {
 		drawerLayout.closeDrawers();
+	}
+
+	@Override
+	public void onBackPressed() {
+		//super.onBackPressed();
+		finish(true);
+		
 	}
 
 	public void finish(boolean b) {
@@ -298,7 +282,6 @@ public class NewMusicSlideMenuActivity extends TabActivity {
 			return;
 		}
 
-		// Toast.makeText(this, "out", Toast.LENGTH_SHORT).show();
 		ContentValues contentValues = new ContentValues();
 		contentValues.put("btn_right", getString(R.string.dongy));
 		contentValues.put("name", getString(R.string.banmuondongugndung));

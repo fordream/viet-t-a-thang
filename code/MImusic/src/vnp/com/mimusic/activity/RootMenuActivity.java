@@ -18,6 +18,7 @@ import vnp.com.mimusic.VApplication;
 import vnp.com.mimusic.adapter.data.NewHomeItem;
 import vnp.com.mimusic.main.BaseMusicSlideMenuActivity;
 import vnp.com.mimusic.util.Conts;
+import vnp.com.mimusic.util.LogUtils;
 import vnp.com.mimusic.util.Conts.DialogCallBack;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
 import android.app.Activity;
@@ -175,6 +176,7 @@ public class RootMenuActivity extends FragmentActivity {
 		int count = fragmentManager.getBackStackEntryCount();
 
 		List<Fragment> list = fragmentManager.getFragments();
+		LogUtils.e("aaaaaaa", count + "");
 		if (list.size() > 0) {
 			Fragment fragment = list.get(list.size() - 1);
 			if (fragment instanceof MoiDvChoNhieuNguoiFragment && ((MoiDvChoNhieuNguoiFragment) fragment).onBackPressed()) {

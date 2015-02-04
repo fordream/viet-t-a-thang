@@ -38,7 +38,7 @@ public class BangXepHangFragment extends BaseFragment implements OnItemClickList
 		view = inflater.inflate(R.layout.bangxephang, null);
 
 		createHeader(getString(R.string.bangxephang), true, true);
-		
+
 		((LinearLayout) view.findViewById(R.id.header)).addView(getHeaderView());
 
 		bangxephangSoluong = (BangXephangListView) view.findViewById(R.id.bangxephang1);
@@ -83,14 +83,4 @@ public class BangXepHangFragment extends BaseFragment implements OnItemClickList
 		(((RootMenuActivity) getActivity())).gotoChiTietCaNhanTungDichVu1(parent, view, position, id, xType);
 	}
 
-	// public boolean onBackPressed() {
-	// if (bangxephangSoluong.getVisibility() == View.VISIBLE) {
-	// return bangxephangSoluong.onBackPressed();
-	// }
-	//
-	// if (bangxephangDoanhthu.getVisibility() == View.VISIBLE) {
-	// return bangxephangDoanhthu.onBackPressed();
-	// }
-	// return false;
-	// }
 }
