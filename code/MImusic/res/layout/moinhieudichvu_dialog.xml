@@ -30,7 +30,8 @@
             android:layout_height="@dimen/dimen_26dp"
             android:layout_marginRight="@dimen/dimen_12dp"
             android:background="@drawable/a_est" >
-
+<!--    android:textColor="#475055"
+                android:textColorHint="#475055" -->
             <vnp.com.mimusic.view.textview.EditextTextThin
                  android:inputType="textNoSuggestions"
                 android:id="@+id/moinhieudichvu_dialog_search"
@@ -41,8 +42,11 @@
                 android:hint="@string/timkiemdichvu"
                 android:paddingLeft="@dimen/dimen_15dp"
                 android:singleLine="true"
-                android:textColor="#475055"
-                android:textColorHint="#475055"
+             
+                
+                
+                  android:textColor="@android:color/black"
+                        android:textColorHint="@android:color/black"
                 android:textSize="@dimen/dimen_12dp"
                 android:textStyle="bold" >
             </vnp.com.mimusic.view.textview.EditextTextThin>

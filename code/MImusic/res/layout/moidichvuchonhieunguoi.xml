@@ -39,7 +39,8 @@
                     android:layout_height="@dimen/dimen_28dp"
                     android:layout_toLeftOf="@+id/moidichvuchonhieunguoi_contact"
                     android:background="@drawable/a_est" >
-
+<!--   android:textColor="#475055"
+                        android:textColorHint="#475055" -->
                     <vnp.com.mimusic.view.textview.EditextTextThin
                         android:id="@+id/search"
                         android:layout_width="match_parent"
@@ -50,8 +51,8 @@
                         android:inputType="textNoSuggestions"
                         android:paddingLeft="@dimen/dimen_15dp"
                         android:singleLine="true"
-                        android:textColor="#475055"
-                        android:textColorHint="#475055"
+                        android:textColor="@android:color/black"
+                        android:textColorHint="@android:color/black"
                         android:textSize="@dimen/dimen_14dp"
                         android:textStyle="bold" >
                     </vnp.com.mimusic.view.textview.EditextTextThin>
