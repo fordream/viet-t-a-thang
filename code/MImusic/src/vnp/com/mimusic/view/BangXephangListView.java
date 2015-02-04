@@ -61,6 +61,7 @@ public class BangXephangListView extends LinearLayout {
 	}
 
 	public void execute() {
+		message.setText("");
 		Bundle bxhParamBundle = new Bundle();
 		bxhParamBundle.putString("type", type);
 		((VApplication) getContext().getApplicationContext()).executeHttps(RequestMethod.GET, API.API_R024, bxhParamBundle, new IContsCallBack() {
@@ -69,17 +70,27 @@ public class BangXephangListView extends LinearLayout {
 			@Override
 			public void onSuscess(JSONObject response) {
 				adaper.getFilter().filter("" + new Random().nextDouble());
-				progressDialog.dismiss();
+				if (progressDialog != null)
+					progressDialog.dismiss();
+				message.setText("");
+				if (adaper.getCount() == 0) {
+					message.setText(noDataText);
+				} else {
+					message.setText("");
+				}
 			}
 
 			@Override
 			public void onStart() {
-				progressDialog = ProgressDialog.show(getContext(), null, getResources().getString(R.string.loading));
+				if (adaper.getCount() == 0) {
+					progressDialog = ProgressDialog.show(getContext(), null, getResources().getString(R.string.loading));
+				}
 			}
 
 			@Override
 			public void onError(String xmessage) {
-				progressDialog.dismiss();
+				if (progressDialog != null)
+					progressDialog.dismiss();
 
 				if (list.getCount() <= 0) {
 					message.setText(noDataText);
