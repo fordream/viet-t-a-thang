@@ -117,7 +117,6 @@ public class RestClient {
 			} catch (Exception exception) {
 				LogUtils.e("response", exception);
 			}
-			LogUtils.e("mxUrl", url + combinedParams);
 			request = new HttpGet(url + combinedParams);
 			// add headers
 			for (NameValuePair h : headers) {

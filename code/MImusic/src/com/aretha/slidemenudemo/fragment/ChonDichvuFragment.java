@@ -1,9 +1,10 @@
 package com.aretha.slidemenudemo.fragment;
 
+import com.vnp.core.scroll.VasChonDichvuScrollListView;
+
 import vnp.com.db.DichVu;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.adapter.ChonDichVuAdapter;
-import vnp.com.mimusic.view.ChonTatCaView;
 import vnp.com.mimusic.view.HeaderView;
 import vnp.com.mimusic.view.MusicListView;
 import android.app.Activity;
@@ -15,7 +16,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -27,27 +27,16 @@ public class ChonDichvuFragment extends BaseFragment implements android.view.Vie
 	private ChonDichVuAdapter adaper;
 	private View view;
 
-	// private ChonTatCaView header;
+	private HeaderView headerView;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.chondv_dialog, null);
+		headerView = new HeaderView(getActivity());
+		headerView.showHeadderSearch();
+		bangxephang_list = (MusicListView) view.findViewById(R.id.list);
 
-		// header = new ChonTatCaView(container.getContext());
-		bangxephang_list = (MusicListView) view.findViewById(R.id.dichvu_list);
-		// bangxephang_list.addHeaderView(header);
-
-		// header.setOnClickListener(new OnClickListener() {
-		//
-		// @Override
-		// public void onClick(View v) {
-		// Intent intent = new Intent();
-		// intent.putExtra(DichVu.ID, "");
-		// intent.putExtra(DichVu.service_name, getString(R.string.tatca));
-		// getActivity().setResult(Activity.RESULT_OK, intent);
-		// getActivity().onBackPressed();
-		// }
-		// });
+		bangxephang_list.addHeaderView(headerView);
 		bangxephang_list.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -103,6 +92,8 @@ public class ChonDichvuFragment extends BaseFragment implements android.view.Vie
 				}
 			}
 		});
+
+		new VasChonDichvuScrollListView(chitietdichvu_headerview, headerView, bangxephang_list);
 		return view;
 	}
 

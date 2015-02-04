@@ -648,7 +648,6 @@ public class MImusicService extends Service {
 	}
 
 	private void updateDichVu(JSONObject response) {
-		LogUtils.e("updateDichVu", response.toString());
 		try {
 			JSONArray jsonArray = response.getJSONArray("data");
 			for (int i = 0; i < jsonArray.length(); i++) {

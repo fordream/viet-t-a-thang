@@ -1,5 +1,7 @@
 package com.aretha.slidemenudemo.fragment;
 
+import com.vnp.core.scroll.VasChonSdtScrollListView;
+
 import vnp.com.db.User;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.adapter.ChonSoDienThoaiAdaper;
@@ -22,28 +24,16 @@ public class ChonSoDienThoaiFragment extends BaseFragment implements android.vie
 	private com.woozzu.android.widget.IndexableListView bangxephang_list;
 	private ChonSoDienThoaiAdaper adaper;
 	private View view;
-
-	// private ChonTatCaView header;
+	private HeaderView headerView;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.chonsodienthoai, null);
+		headerView = new HeaderView(getActivity());
+		headerView.showHeadderSearch();
+		bangxephang_list = (com.woozzu.android.widget.IndexableListView) view.findViewById(R.id.list);
+		bangxephang_list.addHeaderView(headerView);
 
-		// header = new ChonTatCaView(container.getContext());
-		bangxephang_list = (com.woozzu.android.widget.IndexableListView) view.findViewById(R.id.dichvu_list);
-		// bangxephang_list.addHeaderView(header);
-		//
-		// header.setOnClickListener(new OnClickListener() {
-		//
-		// @Override
-		// public void onClick(View v) {
-		// Intent intent = new Intent();
-		// intent.putExtra(User.NAME_CONTACT, getString(R.string.tatca));
-		// intent.putExtra(User.USER, "");
-		// getActivity().setResult(Activity.RESULT_OK, intent);
-		// getActivity().onBackPressed();
-		// }
-		// });
 		bangxephang_list.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -101,12 +91,14 @@ public class ChonSoDienThoaiFragment extends BaseFragment implements android.vie
 			public void afterTextChanged(Editable s) {
 				try {
 					adaper.setTextSearch(menu_right_editext.getText().toString());
-					//adaper.notifyDataSetChanged();
+					// adaper.notifyDataSetChanged();
 				} catch (Exception exception) {
 
 				}
 			}
 		});
+
+		new VasChonSdtScrollListView(chitietdichvu_headerview, headerView, bangxephang_list);
 		return view;
 	}
 
