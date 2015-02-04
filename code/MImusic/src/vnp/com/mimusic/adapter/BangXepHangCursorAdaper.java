@@ -10,6 +10,7 @@ import android.support.v4.widget.CursorAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
+import android.widget.TextView;
 
 public class BangXepHangCursorAdaper extends CursorAdapter {
 	public BangXepHangCursorAdaper(Context context, Cursor c) {
@@ -48,6 +49,11 @@ public class BangXepHangCursorAdaper extends CursorAdapter {
 
 					@Override
 					public void run() {
+						if (((Cursor) results.values).getCount() == 0) {
+							message.setText(noDataText);
+						} else {
+							message.setText("");
+						}
 						changeCursor((Cursor) results.values);
 
 					}
@@ -62,5 +68,13 @@ public class BangXepHangCursorAdaper extends CursorAdapter {
 				return oReturn;
 			}
 		};
+	}
+
+	private TextView message;
+	String noDataText;
+
+	public void setText(TextView message, String noDataText) {
+		this.message = message;
+		this.noDataText = noDataText;
 	}
 }

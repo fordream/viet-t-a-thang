@@ -41,6 +41,8 @@ public class BangXephangListView extends LinearLayout {
 		} else {
 			noDataText = getResources().getString(R.string.bangxephang_doanh_thu_no_data);
 		}
+
+		adaper.setText(message, noDataText);
 	}
 
 	public BangXephangListView(Context context) {
@@ -74,7 +76,7 @@ public class BangXephangListView extends LinearLayout {
 					progressDialog.dismiss();
 				message.setText("");
 				if (adaper.getCount() == 0) {
-					message.setText(noDataText);
+					// message.setText(noDataText);
 				} else {
 					message.setText("");
 				}
