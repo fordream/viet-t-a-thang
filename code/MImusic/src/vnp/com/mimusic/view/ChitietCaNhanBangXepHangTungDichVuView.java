@@ -73,7 +73,7 @@ public class ChitietCaNhanBangXepHangTungDichVuView extends LinearLayout impleme
 		findViewById(R.id.mainx).setOnClickListener(this);
 
 		loadingView = Conts.getView(this, R.id.loadingView1);
-
+		Conts.showView(loadingView, false);
 		bXHItemView = (BangXepHangItemView) findViewById(R.id.bangxephangitemview);
 		bangxephangItemTvStt = (TextView) bXHItemView.findViewById(R.id.bangxephang_item_tv_stt);
 		bxhHeader = Conts.getView(this, R.id.bxhheader);
@@ -115,7 +115,7 @@ public class ChitietCaNhanBangXepHangTungDichVuView extends LinearLayout impleme
 			@Override
 			public void onStart() {
 				if (positionChecked == indexApi)
-					Conts.showView(loadingView, true);
+					Conts.showView(loadingView, false);
 			}
 
 			@Override
