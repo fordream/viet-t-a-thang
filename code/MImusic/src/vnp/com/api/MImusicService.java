@@ -752,11 +752,26 @@ public class MImusicService extends Service {
 	public void saveRecomend(JSONObject response) {
 		if (response != null && response.has("data")) {
 			try {
+				String serviceCodes = "";
+				String phones = "";
 				String user = Conts.getUser(this);
+
 				JSONArray array = response.getJSONArray("data");
 				for (int i = 0; i < array.length(); i++) {
 					final JSONObject jsonObject = array.getJSONObject(i);
 					String service_code = Conts.getString(jsonObject, Recomment.service_code);
+
+					// create service code
+
+					if (Conts.isBlank(serviceCodes)) {
+						if (!Conts.isBlank(service_code)) {
+							serviceCodes = "'" + service_code + "'";
+						}
+					} else {
+						if (!Conts.isBlank(service_code)) {
+							serviceCodes = serviceCodes + "," + "'" + service_code + "'";
+						}
+					}
 					JSONArray contacts = jsonObject.getJSONArray("contacts");
 					for (int index = 0; index < contacts.length(); index++) {
 						final JSONObject cotnact = contacts.getJSONObject(index);
@@ -769,11 +784,25 @@ public class MImusicService extends Service {
 						values.put(Recomment.name, name);
 						values.put(Recomment.user, user);
 
-						getContentResolver().insert(Recomment.CONTENT_URI, values);
+						if (Conts.isBlank(phones)) {
+							if (!Conts.isBlank(phone)) {
+								phones = "'" + phone + "'";
+							}
+						} else {
+							if (!Conts.isBlank(phone)) {
+								phones = phones + "," + "'" + phone + "'";
+							}
+						}
 
+						//getContentResolver().insert(Recomment.CONTENT_URI, values);
 						updateDongBoXuongRecomment(phone, name);
 					}
 				}
+
+				// save service code
+
+				Recomment.saveServiceCodeList(MImusicService.this, serviceCodes);
+				Recomment.savePhoneList(MImusicService.this, phones);
 			} catch (JSONException e) {
 			}
 		}

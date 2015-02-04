@@ -126,52 +126,62 @@ public class Recomment {
 	}
 
 	public static String getListReCommentDichvu(Context context) {
-		String selection = String.format("%s = '%s') GROUP BY ( %s", Recomment.user, Conts.getUser(context), Recomment.service_code);
-		if (context == null) {
-			return "";
-		}
-		Cursor cursor = context.getContentResolver().query(Recomment.CONTENT_URI, null, selection, null, String.format("%s", Recomment.service_code));
-		String dichvu = "";
-		if (cursor != null) {
-			while (cursor.moveToNext()) {
-				String service_code = Conts.getStringCursor(cursor, Recomment.service_code);
+//		String selection = String.format("%s = '%s') GROUP BY ( %s", Recomment.user, Conts.getUser(context), Recomment.service_code);
+//		if (context == null) {
+//			return "";
+//		}
+		// Cursor cursor =
+		// context.getContentResolver().query(Recomment.CONTENT_URI, null,
+		// selection, null, String.format("%s", Recomment.service_code));
+		// String dichvu = "";
+		// if (cursor != null) {
+		// while (cursor.moveToNext()) {
+		// String service_code = Conts.getStringCursor(cursor,
+		// Recomment.service_code);
+		//
+		// if (!Conts.isBlank(service_code)) {
+		// if (Conts.isBlank(dichvu)) {
+		// dichvu = String.format("'%s'", service_code);
+		// } else {
+		// dichvu = String.format("%s,'%s'", dichvu, service_code);
+		// }
+		// }
+		// }
+		//
+		// cursor.close();
+		// }
+		//
+		// return String.format("%s", dichvu);
 
-				if (!Conts.isBlank(service_code)) {
-					if (Conts.isBlank(dichvu)) {
-						dichvu = String.format("'%s'", service_code);
-					} else {
-						dichvu = String.format("%s,'%s'", dichvu, service_code);
-					}
-				}
-			}
-
-			cursor.close();
-		}
-
-		return String.format("%s", dichvu);
+		return getServiceList(context);
 	}
 
 	public static String getListPhone(Context context) {
-		String selection = String.format("%s = '%s') GROUP BY ( %s", Recomment.user, Conts.getUser(context), Recomment.phone);
-		Cursor cursor = context.getContentResolver().query(Recomment.CONTENT_URI, null, selection, null, String.format("%s", Recomment.service_code));
-		String dichvu = "";
-		if (cursor != null) {
-			while (cursor.moveToNext()) {
-				String service_code = Conts.getStringCursor(cursor, Recomment.phone);
+		// String selection = String.format("%s = '%s') GROUP BY ( %s",
+		// Recomment.user, Conts.getUser(context), Recomment.phone);
+		// Cursor cursor =
+		// context.getContentResolver().query(Recomment.CONTENT_URI, null,
+		// selection, null, String.format("%s", Recomment.service_code));
+		// String dichvu = "";
+		// if (cursor != null) {
+		// while (cursor.moveToNext()) {
+		// String service_code = Conts.getStringCursor(cursor, Recomment.phone);
+		//
+		// if (!Conts.isBlank(service_code)) {
+		// if (Conts.isBlank(dichvu)) {
+		// dichvu = String.format("'%s'", service_code);
+		// } else {
+		// dichvu = String.format("%s,'%s'", dichvu, service_code);
+		// }
+		// }
+		// }
+		//
+		// cursor.close();
+		// }
+		//
+		// return String.format("(%s)", dichvu);
 
-				if (!Conts.isBlank(service_code)) {
-					if (Conts.isBlank(dichvu)) {
-						dichvu = String.format("'%s'", service_code);
-					} else {
-						dichvu = String.format("%s,'%s'", dichvu, service_code);
-					}
-				}
-			}
-
-			cursor.close();
-		}
-
-		return String.format("(%s)", dichvu);
+		return getPhoneList(context);
 	}
 
 	public static Cursor getCursorFromDichvu(Context context, int maxColum) {
@@ -186,7 +196,7 @@ public class Recomment {
 	}
 
 	public static Cursor getCursorFromUser(Context context, int maxColum) {
-		String selection = String.format("%s in %s", User.USER, getListPhone(context));
+		String selection = String.format("%s in (%s)", User.USER, getListPhone(context));
 		String limit = null;
 		if (maxColum > 0) {
 			limit = String.format("%s limit %s ", User.NAME_CONTACT, maxColum);
@@ -196,4 +206,25 @@ public class Recomment {
 
 		return context.getContentResolver().query(User.CONTENT_URI, null, selection, null, limit);
 	}
+
+	public static void saveServiceCodeList(Context context, String serviceCodes) {
+		DataStore.getInstance().init(context);
+		DataStore.getInstance().save("saveServiceCodeList", serviceCodes);
+	}
+
+	public static String getServiceList(Context context) {
+		DataStore.getInstance().init(context);
+		return DataStore.getInstance().get("saveServiceCodeList", "");
+	}
+
+	public static void savePhoneList(Context mImusicService, String phones) {
+		DataStore.getInstance().init(mImusicService);
+		DataStore.getInstance().save("savePhoneList", phones);
+	}
+
+	public static String getPhoneList(Context context) {
+		DataStore.getInstance().init(context);
+		return DataStore.getInstance().get("savePhoneList", "");
+	}
+
 }

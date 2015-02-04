@@ -80,7 +80,6 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 		headerView.showHeader(false);
 
 		list.addHeaderView(headerView);
-
 		list.addHeaderView(home_header);
 
 		homeAdapter = new NewHomeAdapter(getActivity()) {
@@ -111,7 +110,7 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 		};
 
 		list.setAdapter(homeAdapter);
-
+		//updateUI(updateSuccess);
 //		homeAdapter.update(updateSuccess);
 
 		Bundle bundle = new Bundle();
