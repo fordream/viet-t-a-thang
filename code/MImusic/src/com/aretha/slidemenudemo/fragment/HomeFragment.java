@@ -110,8 +110,7 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 		};
 
 		list.setAdapter(homeAdapter);
-		//updateUI(updateSuccess);
-//		homeAdapter.update(updateSuccess);
+		updateUI(updateSuccess);
 
 		Bundle bundle = new Bundle();
 		execute(RequestMethod.GET, API.API_R026, bundle, new IContsCallBack() {

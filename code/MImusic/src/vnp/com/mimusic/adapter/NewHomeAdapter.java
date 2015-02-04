@@ -249,7 +249,6 @@ public abstract class NewHomeAdapter extends ArrayAdapter<NewHomeItem> {
 	}
 
 	public void update(final UpdateSuccess updateSuccess) {
-		list.clear();
 		new AsyncTask<String, String, String>() {
 			private List<NewHomeItem> xlist = new ArrayList<NewHomeItem>();
 
@@ -314,6 +313,7 @@ public abstract class NewHomeAdapter extends ArrayAdapter<NewHomeItem> {
 			}
 
 			protected void onPostExecute(String result) {
+				list.clear();
 				list.addAll(xlist);
 				notifyDataSetChanged();
 				updateSuccess.onUpdateSuccess();
