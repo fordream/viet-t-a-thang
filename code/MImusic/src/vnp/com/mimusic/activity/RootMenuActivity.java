@@ -491,7 +491,8 @@ public class RootMenuActivity extends FragmentActivity {
 	}
 
 	public void moi(boolean isMoiTheoThueBao, Bundle bundle) {
-		onBackPressed();
+		if (!isMoiTheoThueBao)
+			onBackPressed();
 		String api = !isMoiTheoThueBao ? API.API_R015 : API.API_R016;
 
 		// Conts.showDialogThongbao(this, api + " : " + bundle.toString());
