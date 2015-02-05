@@ -2,6 +2,7 @@ package com.aretha.slidemenudemo.fragment;
 
 import com.vnp.core.scroll.VasDichvuScrollListView;
 
+import vnp.com.db.DichVu;
 import vnp.com.db.Recomment;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
@@ -121,9 +122,10 @@ public class DichVuBanChayFragment extends BaseFragment implements OnItemClickLi
 				}
 
 				@Override
-				public void dangKy(ContentValues values) {
+				public void dangKy(final ContentValues values) {
 					new DangKyDialog(getActivity(), values) {
 						public void updateUiDangKy() {
+							Conts.showDialogThongbao(getContext(), String.format(getContext().getString(R.string.bandangkythanhcongdichvu), values.getAsString(DichVu.service_name)));
 							callSHowData();
 						};
 					}.show();

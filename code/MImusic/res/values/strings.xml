@@ -203,5 +203,6 @@
     <string name="banphainhapngaykethuc">Bạn cần nhập ngày kết thúc.</string>
     <string name="ngayketthucphaisaungaybatdau">Bạn cần nhập ngày kết thúc sau ngày bắt đầu.</string>
     <string name="khongthelayduocmaumoi">Có lỗi xay ra, bạn không thể thực hiện lời mời.</string>
+    <string name="bandangkythanhcongdichvu">Bạn đăng ký thành công dịch vụ %s</string>
 
 </resources>

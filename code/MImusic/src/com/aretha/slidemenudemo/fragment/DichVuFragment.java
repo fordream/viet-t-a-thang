@@ -104,9 +104,11 @@ public class DichVuFragment extends BaseFragment implements OnItemClickListener,
 				}
 
 				@Override
-				public void dangKy(ContentValues values) {
+				public void dangKy(final ContentValues values) {
 					new DangKyDialog(getActivity(), values) {
 						public void updateUiDangKy() {
+							Conts.showDialogThongbao(getContext(), String.format(getContext().getString(R.string.bandangkythanhcongdichvu), values.getAsString(DichVu.service_name)));
+
 							callSHowData();
 						};
 					}.show();

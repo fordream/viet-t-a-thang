@@ -59,4 +59,8 @@ public class ChiTietDichVuNoFeatureView extends LinearLayout {
 
 	public void center() {
 	}
+
+	public void updateDangDung() {
+		((TextView) findViewById(R.id.home_item_right_control_1_tv)).setText(R.string.dangdung);
+	}
 }

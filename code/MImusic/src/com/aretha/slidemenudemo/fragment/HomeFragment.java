@@ -57,6 +57,12 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 	}
 
 	@Override
+	public void onResume() {
+		super.onResume();
+		updateUI(updateSuccess);
+	}
+
+	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.home, null);
 
@@ -113,7 +119,6 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 		};
 
 		list.setAdapter(homeAdapter);
-		updateUI(updateSuccess);
 
 		Bundle bundle = new Bundle();
 		execute(RequestMethod.GET, API.API_R026, bundle, new IContsCallBack() {

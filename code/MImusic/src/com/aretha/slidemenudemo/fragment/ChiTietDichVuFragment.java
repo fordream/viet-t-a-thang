@@ -105,11 +105,14 @@ public class ChiTietDichVuFragment extends BaseFragment implements View.OnClickL
 				chitietdichvu_chitietdichvunofeatureview.findViewById(R.id.home_item_right_control_1).setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						// TODO
 						new DangKyDialog(v.getContext(), values) {
 							@Override
 							public void updateUiDangKy() {
 								super.updateUiDangKy();
+								Conts.showDialogThongbao(getContext(), String.format(getContext().getString(R.string.bandangkythanhcongdichvu), values.getAsString(DichVu.service_name)));
+								
+								chitietdichvu_chitietdichvunofeatureview.findViewById(R.id.home_item_right_control_1).setOnClickListener(null);
+								chitietdichvu_chitietdichvunofeatureview.updateDangDung();
 								chitietdichvu_chitietdichvunofeatureview.hiddenChitietdichvu_no_feature_dangky();
 							}
 						}.show();
