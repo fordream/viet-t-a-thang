@@ -185,6 +185,9 @@ public class Recomment {
 	}
 
 	public static Cursor getCursorFromDichvu(Context context, int maxColum) {
+		if(context == null){
+			return null;
+		}
 		String selection = String.format("%s in (%s)", DichVu.service_code, getListReCommentDichvu(context));
 		String limit = null;
 		if (maxColum > 0) {
