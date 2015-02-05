@@ -62,13 +62,14 @@ public class MauMoiFragment extends BaseFragment implements android.view.View.On
 			}
 		});
 
-//		view.findViewById(R.id.recomment_icon_bottom).setOnClickListener(new View.OnClickListener() {
-//
-//			@Override
-//			public void onClick(View v) {
-//				getActivity().onBackPressed();
-//			}
-//		});
+		// view.findViewById(R.id.recomment_icon_bottom).setOnClickListener(new
+		// View.OnClickListener() {
+		//
+		// @Override
+		// public void onClick(View v) {
+		// getActivity().onBackPressed();
+		// }
+		// });
 
 		if (!type) {
 			String selection = DichVu.ID + "='" + id + "'";
@@ -170,15 +171,17 @@ public class MauMoiFragment extends BaseFragment implements android.view.View.On
 		}
 		Bundle bundle = new Bundle();
 		bundle.putString("template_id", adaper.getTemplate_id());
-		if (!type) {
-			bundle.putString("service_code", service_code);
-			bundle.putString("customers", customers);
-		} else {
-			bundle.putString("customers", sdt);
-			bundle.putString("service_code", service_codes);
-		}
+//		if (!type) {
+//			bundle.putString("service_code", service_code);
+//			bundle.putString("customers", customers);
+//		} else {
+//			bundle.putString("customers", sdt);
+//			bundle.putString("service_code", service_codes);
+//		}
 
-		((RootMenuActivity) getActivity()).moi(type, bundle);
+		bundle.putString("service_code", service_code);
+		bundle.putString("customers", customers);
+		((RootMenuActivity) getActivity()).moiTheoDichVu(bundle);
 
 	}
 

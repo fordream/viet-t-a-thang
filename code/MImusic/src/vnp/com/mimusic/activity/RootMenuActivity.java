@@ -499,11 +499,12 @@ public class RootMenuActivity extends FragmentActivity {
 	}
 
 	public void moi(boolean isMoiTheoThueBao, Bundle bundle) {
-		if (!isMoiTheoThueBao)
+		if (!isMoiTheoThueBao) {
 			onBackPressed();
+		}
+
 		String api = !isMoiTheoThueBao ? API.API_R015 : API.API_R016;
 
-		// Conts.showDialogThongbao(this, api + " : " + bundle.toString());
 		execute(RequestMethod.POST, api, bundle, new IContsCallBack() {
 			ProgressDialog dialog;
 
@@ -523,7 +524,58 @@ public class RootMenuActivity extends FragmentActivity {
 				Conts.showDialogDongYCallBack(getActivity(), message, new DialogCallBack() {
 					@Override
 					public void callback(Object object) {
-						// ((RootMenuActivity) getActivity()).closeActivity();
+						closeActivity();
+					}
+				});
+				if (dialog != null)
+					dialog.dismiss();
+			}
+
+			@Override
+			public void onStart() {
+				if (dialog == null) {
+					dialog = new VasProgessDialog(getActivity());
+					dialog.show();
+				}
+			}
+
+			@Override
+			public void onError(String message) {
+				Conts.showDialogThongbao(getActivity(), message);
+				if (dialog != null)
+					dialog.dismiss();
+			}
+
+			@Override
+			public void onError() {
+				onError("onError");
+			}
+		});
+	}
+
+	public void moiTheoDichVu(Bundle bundle) {
+
+		String api = API.API_R015;
+		
+		execute(RequestMethod.POST, api, bundle, new IContsCallBack() {
+			ProgressDialog dialog;
+
+			@Override
+			public void onSuscess(JSONObject response) {
+				String message = "";
+				try {
+					message = response.getString("message");
+				} catch (JSONException e1) {
+				}
+
+				if (Conts.isBlank(message)) {
+					message = getActivity().getString(R.string.success_moi);
+				} else {
+					message = String.format("%s\n%s", message, getActivity().getString(R.string.success_moi));
+				}
+				Conts.showDialogDongYCallBack(getActivity(), message, new DialogCallBack() {
+					@Override
+					public void callback(Object object) {
 						closeActivity();
 					}
 				});
