@@ -141,8 +141,8 @@ public class NewMusicSlideMenuActivity extends TabActivity {
 			@Override
 			public void onClick(View v) {
 				closeMenu();
-				Intent browserIntent = new Intent("android.intent.action.VIEW", Uri.parse("https://www.facebook.com/Idea.Sinhvu"));
-				startActivity(browserIntent);
+//				Intent browserIntent = new Intent("android.intent.action.VIEW", Uri.parse("https://www.facebook.com/Idea.Sinhvu"));
+//				startActivity(browserIntent);
 			}
 		});
 

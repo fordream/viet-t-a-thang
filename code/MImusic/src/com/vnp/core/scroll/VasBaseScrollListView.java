@@ -1,5 +1,6 @@
 package com.vnp.core.scroll;
 
+import vnp.com.mimusic.R;
 import vnp.com.mimusic.view.HeaderView;
 import android.view.MotionEvent;
 import android.view.View;
@@ -57,12 +58,13 @@ public abstract class VasBaseScrollListView implements OnTouchListener {
 
 		if (marginTop < -height / 2) {
 			marginTop = -height;
-			hidden(true);
+			// hidden(true);
 		} else {
 			marginTop = 0;
-			hidden(false);
+			// hidden(false);
 		}
 
+		update(marginTop);
 		if (layoutParams instanceof LinearLayout.LayoutParams) {
 			((LinearLayout.LayoutParams) layoutParams).topMargin = marginTop;
 		} else if (layoutParams instanceof RelativeLayout.LayoutParams) {
@@ -88,12 +90,14 @@ public abstract class VasBaseScrollListView implements OnTouchListener {
 		if (marginTop <= -height) {
 			marginTop = -height;
 			// ytop = yCurrentTop;
-			hidden(true);
+			// hidden(true);
 		} else if (marginTop > 0) {
 			marginTop = 0;
-			hidden(false);
+			// hidden(false);
 			// ytop = yCurrentTop;
 		}
+
+		update(marginTop);
 		if (layoutParams instanceof LinearLayout.LayoutParams) {
 			((LinearLayout.LayoutParams) layoutParams).topMargin = marginTop;
 		} else if (layoutParams instanceof RelativeLayout.LayoutParams) {
@@ -103,16 +107,37 @@ public abstract class VasBaseScrollListView implements OnTouchListener {
 		header.setLayoutParams(layoutParams);
 	}
 
-	private void hidden(boolean b) {
-		for (ListView listView : listViews)
+	private void update(int marginTop) {
+		for (ListView listView : listViews) {
 			if (listView.getHeaderViewsCount() > 0) {
 				View view = listView.getChildAt(0);
-
 				if (view instanceof HeaderView) {
-					((HeaderView) view).showHeader(!b);
+					HeaderView headerView = ((HeaderView) view);
+
+					ViewGroup.LayoutParams layoutParams = headerView.findViewById(R.id.header_main_content).getLayoutParams();
+					int height = header.getHeight();
+					if (layoutParams instanceof LinearLayout.LayoutParams) {
+						((LinearLayout.LayoutParams) layoutParams).topMargin = marginTop;
+					} else if (layoutParams instanceof RelativeLayout.LayoutParams) {
+						((RelativeLayout.LayoutParams) layoutParams).topMargin = marginTop;
+					}
+
+					headerView.findViewById(R.id.header_main_content).setLayoutParams(layoutParams);
 				}
 			}
+		}
 	}
+
+	// private void hidden(boolean b) {
+	// for (ListView listView : listViews)
+	// if (listView.getHeaderViewsCount() > 0) {
+	// View view = listView.getChildAt(0);
+	//
+	// if (view instanceof HeaderView) {
+	// ((HeaderView) view).showHeader(!b);
+	// }
+	// }
+	// }
 
 	public abstract void hidden();
 
