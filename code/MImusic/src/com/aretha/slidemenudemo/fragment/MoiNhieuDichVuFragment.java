@@ -15,7 +15,9 @@ import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
@@ -24,7 +26,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
-public class MoiNhieuDichVuFragment extends Fragment implements android.view.View.OnClickListener {
+public class MoiNhieuDichVuFragment extends Fragment implements android.view.View.OnClickListener, OnTouchListener {
 
 	private View moi;
 	private LinearLayout moinhieudichvu_dialog_list_hor;
@@ -43,7 +45,7 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.moinhieudichvu_dialog, null);
 		ListView maumoi_list = (ListView) view.findViewById(R.id.moinhieudichvu_dialog_list);
-
+		maumoi_list.setOnTouchListener(this);
 		moi = Conts.getView(view, R.id.moi);
 		moiNhieuDichVuHeader = new MoiNhieuDichVuHeader(getActivity());
 		maumoi_list.addHeaderView(moiNhieuDichVuHeader);
@@ -251,5 +253,11 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 			((MenuRightItemView) findViewById(R.id.menurightitem)).initData(string);
 		}
 
+	}
+
+	@Override
+	public boolean onTouch(View v, MotionEvent event) {
+		Conts.hiddenKeyBoard(getActivity());
+		return false;
 	}
 }

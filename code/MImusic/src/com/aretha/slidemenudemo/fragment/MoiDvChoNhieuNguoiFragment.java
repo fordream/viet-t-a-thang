@@ -21,8 +21,10 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
@@ -36,7 +38,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
-public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemClickListener, View.OnClickListener {
+public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemClickListener, View.OnClickListener, OnTouchListener {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
@@ -130,6 +132,7 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 		view.findViewById(R.id.back).setOnClickListener(this);
 
 		moi_list = (ListView) view.findViewById(R.id.list);
+		moi_list.setOnTouchListener(this);
 		moi_list.addHeaderView(nhieuNgoiHeaderView);
 		/**
 		 * show data
@@ -469,6 +472,12 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 			Conts.showView(mkeyboard, false);
 			return true;
 		}
+		return false;
+	}
+
+	@Override
+	public boolean onTouch(View v, MotionEvent event) {
+		Conts.hiddenKeyBoard(getActivity());
 		return false;
 	}
 }
