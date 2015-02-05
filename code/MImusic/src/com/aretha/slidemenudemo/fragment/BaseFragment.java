@@ -95,4 +95,8 @@ public class BaseFragment extends Fragment {
 	public void onCLickButtonRight() {
 
 	}
+
+	public void onBackFromFragment() {
+
+	}
 }

@@ -8,6 +8,7 @@ import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.adapter.DichVuAdapter;
 import vnp.com.mimusic.base.diablog.DangKyDialog;
 import vnp.com.mimusic.util.Conts;
+import vnp.com.mimusic.util.LogUtils;
 import vnp.com.mimusic.view.HeaderView;
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -39,11 +40,28 @@ public class DichVuHotFragment extends BaseFragment implements OnItemClickListen
 	}
 
 	@Override
+	public void onBackFromFragment() {
+		super.onBackFromFragment();
+		// if (adapter != null) {
+		// adapter.setTextSearch(dichvu_edittext_search.getText().toString().trim());
+		// adapter.notifyDataSetChanged();
+		// }
+
+		callSHowData();
+		dichvu_list.setAdapter(adapter);
+		if (adapter != null) {
+			adapter.setTextSearch(dichvu_edittext_search.getText().toString().trim());
+			adapter.notifyDataSetChanged();
+		}
+	}
+
+	@Override
 	public void onPause() {
 		super.onPause();
 	}
 
 	private ListView dichvu_list;
+	EditText dichvu_edittext_search;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -67,7 +85,7 @@ public class DichVuHotFragment extends BaseFragment implements OnItemClickListen
 		dichvu_list.setOnItemClickListener(this);
 
 		callSHowData();
-		final EditText dichvu_edittext_search = (EditText) view.findViewById(R.id.dichvu_edittext_search);
+		dichvu_edittext_search = (EditText) view.findViewById(R.id.dichvu_edittext_search);
 		dichvu_edittext_search.addTextChangedListener(new TextWatcher() {
 
 			@Override

@@ -11,13 +11,15 @@ import vnp.com.mimusic.view.add.OnTouchAnimation;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.widget.TextView;
 
 import com.vnp.core.crash.CrashExceptionHandler;
 
-public class LoginActivty extends Activity implements OnClickListener {
+public class LoginActivty extends Activity implements OnClickListener, OnTouchListener {
 	private LoadingView progressBar1;
 
 	@Override
@@ -37,6 +39,7 @@ public class LoginActivty extends Activity implements OnClickListener {
 		findViewById(R.id.activity_login_soantin).setOnClickListener(this);
 		findViewById(R.id.activity_login_soantin).setOnTouchListener(new OnTouchAnimation());
 
+		findViewById(R.id.activity_login_main).setOnTouchListener(this);
 		init();
 	}
 
@@ -158,5 +161,11 @@ public class LoginActivty extends Activity implements OnClickListener {
 
 			Conts.showDialogThongbao(LoginActivty.this, getString(R.string.bancannhapsdtvamatkkau));
 		}
+	}
+
+	@Override
+	public boolean onTouch(View v, MotionEvent event) {
+		Conts.hiddenKeyBoard(this);
+		return false;
 	}
 }

@@ -136,13 +136,27 @@ public class NewMusicSlideMenuActivity extends TabActivity {
 		}
 
 		MenuLeftView mactivity_slidemenu_menuleft = (MenuLeftView) findViewById(R.id.mactivity_slidemenu_menuleft);
+
+		mactivity_slidemenu_menuleft.findViewById(R.id.menu_footer_t).setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				closeMenu();
+				// Intent browserIntent = new
+				// Intent("android.intent.action.VIEW",
+				// Uri.parse("https://www.facebook.com/Idea.Sinhvu"));
+				// startActivity(browserIntent);
+			}
+		});
 		mactivity_slidemenu_menuleft.findViewById(R.id.menu_footer_f).setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				closeMenu();
-//				Intent browserIntent = new Intent("android.intent.action.VIEW", Uri.parse("https://www.facebook.com/Idea.Sinhvu"));
-//				startActivity(browserIntent);
+				// Intent browserIntent = new
+				// Intent("android.intent.action.VIEW",
+				// Uri.parse("https://www.facebook.com/Idea.Sinhvu"));
+				// startActivity(browserIntent);
 			}
 		});
 

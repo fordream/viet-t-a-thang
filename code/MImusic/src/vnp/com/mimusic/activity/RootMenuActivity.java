@@ -37,6 +37,7 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import com.aretha.slidemenudemo.fragment.BangXepHangFragment;
+import com.aretha.slidemenudemo.fragment.BaseFragment;
 import com.aretha.slidemenudemo.fragment.ChiTietCaNhanBangXepHangFragment;
 import com.aretha.slidemenudemo.fragment.ChiTietCaNhanBangXepHangTungDichVuFragment;
 import com.aretha.slidemenudemo.fragment.ChiTietCaNhanDichVuFragment;
@@ -185,8 +186,15 @@ public class RootMenuActivity extends FragmentActivity {
 				return;
 			}
 		}
+
 		if (count > 1) {
+			Fragment backFragment = list.get(list.size() - 2);
+
 			fragmentManager.popBackStack();
+
+			if (backFragment instanceof BaseFragment) {
+				((BaseFragment) backFragment).onBackFromFragment();
+			}
 		} else if (count == 1) {
 			try {
 				((vnp.com.mimusic.main.NewMusicSlideMenuActivity) getParent()).finish(true);

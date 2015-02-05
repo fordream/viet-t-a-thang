@@ -29,7 +29,24 @@ public class DichVuBanChayFragment extends BaseFragment implements OnItemClickLi
 		super.onActivityCreated(savedInstanceState);
 	}
 
+	EditText dichvu_edittext_search;
 	private DichVuAdapter adapter;
+
+	@Override
+	public void onBackFromFragment() {
+		super.onBackFromFragment();
+		// if (adapter != null) {
+		// adapter.setTextSearch(dichvu_edittext_search.getText().toString().trim());
+		// adapter.notifyDataSetChanged();
+		// }
+
+		callSHowData();
+		dichvu_list.setAdapter(adapter);
+		if (adapter != null) {
+			adapter.setTextSearch(dichvu_edittext_search.getText().toString().trim());
+			adapter.notifyDataSetChanged();
+		}
+	}
 
 	@Override
 	public void onResume() {
@@ -44,6 +61,7 @@ public class DichVuBanChayFragment extends BaseFragment implements OnItemClickLi
 
 	private ListView dichvu_list;
 	private HeaderView listHeader;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.dichvuhot, null);
@@ -66,7 +84,7 @@ public class DichVuBanChayFragment extends BaseFragment implements OnItemClickLi
 		dichvu_list.setOnItemClickListener(this);
 
 		callSHowData();
-		final EditText dichvu_edittext_search = (EditText) view.findViewById(R.id.dichvu_edittext_search);
+		dichvu_edittext_search = (EditText) view.findViewById(R.id.dichvu_edittext_search);
 		dichvu_edittext_search.addTextChangedListener(new TextWatcher() {
 
 			@Override
