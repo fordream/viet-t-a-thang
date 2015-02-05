@@ -88,7 +88,7 @@ public class MoiThanhVienFragment extends BaseFragment implements OnItemClickLis
 				}
 			}
 		});
-		new VasDichvuScrollListView(chitiettintuc_headerview, listHeader, new ListView[] { dichvu_list });
+		new VasDichvuScrollListView(chitiettintuc_headerview, listHeader, new ListView[] { dichvu_list }, getActivity());
 		return view;
 	}
 

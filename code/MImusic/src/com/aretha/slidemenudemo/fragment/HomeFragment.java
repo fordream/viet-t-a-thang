@@ -65,6 +65,9 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 		loadingView = Conts.getView(view, R.id.loadingView1);
 		list = (MusicListView) view.findViewById(R.id.list);
 
+		HeaderView headerView = new HeaderView(getActivity());
+		headerView.showHeader(true);
+		list.addHeaderView(headerView);
 		list.setOnItemClickListener(this);
 
 		home_header = new HomeHeaderView(getActivity());
@@ -137,7 +140,7 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 			}
 		});
 
-		new VasHomeScrollListView(getHeaderView().findViewById(R.id.header_main_content), headerView, new ListView[] { list });
+		new VasHomeScrollListView(getHeaderView().findViewById(R.id.header_main_content), headerView, new ListView[] { list }, getActivity());
 		return view;
 	}
 

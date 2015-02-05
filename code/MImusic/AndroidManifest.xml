@@ -29,7 +29,9 @@
         <activity
             android:name="LoginActivty"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"
+           >
         </activity>
         <activity
             android:name="LoginTabletActivty"
@@ -55,8 +57,7 @@
             android:name="vnp.com.mimusic.activity.RootMenuActivity"
             android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|fontScale"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"
-           >
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" >
         </activity>
 
         <provider
@@ -77,15 +78,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
+
         <!-- crop image -->
-         <activity android:name="eu.janmuller.android.simplecropimage.CropImage" />
-      <!-- 
+        <activity android:name="eu.janmuller.android.simplecropimage.CropImage" />
+        <!--
          <provider
             android:name="eu.janmuller.android.simplecropimage.example.InternalStorageContentProvider"
             android:authorities="eu.janmuller.android.simplecropimage.example"
             android:exported="true" />
-             -->
+        -->
     </application>
 
 </manifest>

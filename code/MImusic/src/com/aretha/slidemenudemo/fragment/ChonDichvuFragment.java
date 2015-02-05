@@ -95,7 +95,7 @@ public class ChonDichvuFragment extends BaseFragment implements android.view.Vie
 		});
 
 		ListView listViews[] = new ListView[] { bangxephang_list };
-		new VasChonDichvuScrollListView(chitietdichvu_headerview, headerView, listViews);
+		new VasChonDichvuScrollListView(chitietdichvu_headerview, headerView, listViews, getActivity());
 		return view;
 	}
 

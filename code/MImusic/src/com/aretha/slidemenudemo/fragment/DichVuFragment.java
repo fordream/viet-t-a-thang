@@ -90,7 +90,7 @@ public class DichVuFragment extends BaseFragment implements OnItemClickListener,
 			}
 		});
 
-		new VasDichvuScrollListView(getHeaderView(), listHeader, new ListView[] { dichvu_list });
+		new VasDichvuScrollListView(getHeaderView(), listHeader, new ListView[] { dichvu_list }, getActivity());
 		return view;
 	}
 

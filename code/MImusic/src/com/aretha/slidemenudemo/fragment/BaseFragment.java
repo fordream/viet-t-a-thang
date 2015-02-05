@@ -55,6 +55,8 @@ public class BaseFragment extends Fragment {
 			}
 		};
 		header = Conts.getView(view, id);
+
+		header.setOnClickListener(null);
 		header.setTextHeader(title);
 		header.showButton(leftShow, rightShow);
 

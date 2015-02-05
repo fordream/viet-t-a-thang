@@ -69,7 +69,7 @@ public class BangXepHangFragment extends BaseFragment implements OnItemClickList
 		});
 		callData(true);
 
-		new VasBangXepHangScrollListView(getHeaderView(), headerbangxephangsoluong, new ListView[] { bangxephangSoluong.list(), bangxephangDoanhthu.list() });
+		new VasBangXepHangScrollListView(getHeaderView(), headerbangxephangsoluong, new ListView[] { bangxephangSoluong.list(), bangxephangDoanhthu.list() }, getActivity());
 		// new VasBangXepHangScrollListView(getHeaderView(),
 		// headerbangxepdoanhthu, bangxephangDoanhthu.list());
 

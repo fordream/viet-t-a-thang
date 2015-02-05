@@ -29,6 +29,8 @@ public class HeaderView extends LinearLayout {
 
 	private void init() {
 		((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.header, this);
+
+		setOnClickListener(null);
 	}
 
 	public void setTextHeader(int dangnhap) {

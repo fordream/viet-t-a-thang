@@ -99,7 +99,7 @@ public class ChonSoDienThoaiFragment extends BaseFragment implements android.vie
 			}
 		});
 
-		new VasChonSdtScrollListView(chitietdichvu_headerview, headerView, new ListView[] { bangxephang_list });
+		new VasChonSdtScrollListView(chitietdichvu_headerview, headerView, new ListView[] { bangxephang_list }, getActivity());
 		return view;
 	}
 

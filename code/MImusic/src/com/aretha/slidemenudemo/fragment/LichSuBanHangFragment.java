@@ -15,7 +15,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -64,7 +66,14 @@ public class LichSuBanHangFragment extends Fragment implements OnItemClickListen
 		lsbt_trangthai = (TextView) view.findViewById(R.id.lsbt_trangthai);
 		lsbt_trangthai.setOnClickListener(l);
 		lsbh_sdt = (TextView) view.findViewById(R.id.lsbh_sdt);
+		view.findViewById(R.id.scrollView1).setOnTouchListener(new OnTouchListener() {
 
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				Conts.hiddenKeyBoard(getActivity());
+				return false;
+			}
+		});
 		return view;
 	}
 
@@ -196,6 +205,9 @@ public class LichSuBanHangFragment extends Fragment implements OnItemClickListen
 
 	@Override
 	public void onClick(View v) {
+		if (v.getId() == R.id.scrollView1) {
+			// Conts.hiddenKeyBoard(getActivity());
+		}
 	}
 
 	protected void showTrangThai() {

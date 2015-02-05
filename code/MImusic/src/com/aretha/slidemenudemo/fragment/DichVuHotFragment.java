@@ -88,7 +88,7 @@ public class DichVuHotFragment extends BaseFragment implements OnItemClickListen
 				}
 			}
 		});
-		new VasDichvuScrollListView(chitiettintuc_headerview, listHeader, new ListView[] { dichvu_list });
+		new VasDichvuScrollListView(chitiettintuc_headerview, listHeader, new ListView[] { dichvu_list }, getActivity());
 		return view;
 	}
 

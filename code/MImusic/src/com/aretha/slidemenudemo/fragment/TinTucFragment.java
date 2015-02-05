@@ -101,7 +101,7 @@ public class TinTucFragment extends BaseFragment implements OnItemClickListener,
 		});
 
 		ListView listViews[] = new ListView[] { bangxephang_list };
-		new VasTintucScrollListView(getHeaderView(), listHeader, listViews);
+		new VasTintucScrollListView(getHeaderView(), listHeader, listViews, getActivity());
 		return view;
 	}
 

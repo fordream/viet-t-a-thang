@@ -1,7 +1,9 @@
 package com.vnp.core.scroll;
 
 import vnp.com.mimusic.R;
+import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.view.HeaderView;
+import android.app.Activity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
@@ -14,9 +16,11 @@ public abstract class VasBaseScrollListView implements OnTouchListener {
 	private ListView listViews[];
 	private int ytop = 0;
 	private View header;
+	private Activity activity;
 
-	public VasBaseScrollListView(ListView[] listView, View header) {
+	public VasBaseScrollListView(ListView[] listView, View header, Activity activity) {
 		this.listViews = listView;
+		this.activity = activity;
 		this.header = header;
 		for (ListView listView2 : listViews)
 			listView2.setOnTouchListener(this);
@@ -24,12 +28,17 @@ public abstract class VasBaseScrollListView implements OnTouchListener {
 
 	@Override
 	public final boolean onTouch(View v, MotionEvent event) {
-		for (ListView listView : listViews)
-			if (listView.getAdapter() != null && listView.getVisibility() == View.VISIBLE) {
-				if (listView.getAdapter().getCount() < 5) {
-					return false;
-				}
-			}
+		if (activity != null) {
+			Conts.hiddenKeyBoard(activity);
+		}
+		for (ListView listView : listViews) {
+			// if (listView.getAdapter() != null && listView.getVisibility() ==
+			// View.VISIBLE) {
+			// if (listView.getAdapter().getCount() < 5) {
+			// return false;
+			// }
+			// }
+		}
 		if (event.getAction() == MotionEvent.ACTION_DOWN) {
 			ytop = (int) event.getY();
 		} else if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) {
@@ -115,7 +124,6 @@ public abstract class VasBaseScrollListView implements OnTouchListener {
 					HeaderView headerView = ((HeaderView) view);
 
 					ViewGroup.LayoutParams layoutParams = headerView.findViewById(R.id.header_main_content).getLayoutParams();
-					int height = header.getHeight();
 					if (layoutParams instanceof LinearLayout.LayoutParams) {
 						((LinearLayout.LayoutParams) layoutParams).topMargin = marginTop;
 					} else if (layoutParams instanceof RelativeLayout.LayoutParams) {
@@ -127,17 +135,6 @@ public abstract class VasBaseScrollListView implements OnTouchListener {
 			}
 		}
 	}
-
-	// private void hidden(boolean b) {
-	// for (ListView listView : listViews)
-	// if (listView.getHeaderViewsCount() > 0) {
-	// View view = listView.getChildAt(0);
-	//
-	// if (view instanceof HeaderView) {
-	// ((HeaderView) view).showHeader(!b);
-	// }
-	// }
-	// }
 
 	public abstract void hidden();
 

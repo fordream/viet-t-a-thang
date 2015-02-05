@@ -57,7 +57,7 @@
                         android:textSize="@dimen/dimen_13dp" />
                 </LinearLayout>
 
-                <vnp.com.mimusic.view.textview.EditextTextThin
+                <vnp.com.mimusic.view.textview.EditextTextRegular
                     android:id="@+id/lsbh_sdt"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -68,7 +68,7 @@
                     android:paddingLeft="@dimen/dimen_10dp"
                     android:paddingRight="@dimen/dimen_10dp"
                     android:singleLine="true"
-                    android:textColor="@android:color/black"
+                    android:textColor="#727a7e"
                     android:textColorHint="#727a7e"
                     android:textSize="@dimen/dimen_13dp" />
             </LinearLayout>
@@ -79,7 +79,7 @@
                 android:layout_marginBottom="@dimen/dimen_25dp"
                 android:layout_marginTop="@dimen/dimen_25dp" >
 
-                <vnp.com.mimusic.view.textview.TextViewThin
+                <vnp.com.mimusic.view.textview.TextViewRegular
                     android:id="@+id/lsbt_tu"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -89,7 +89,7 @@
                     android:paddingLeft="@dimen/dimen_10dp"
                     android:paddingRight="@dimen/dimen_10dp"
                     android:singleLine="true"
-                    android:textColor="#333333"
+                  android:textColor="#727a7e"
                     android:textColorHint="#727a7e"
                     android:textSize="@dimen/dimen_13dp" />
 
@@ -107,7 +107,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_32dp" >
 
-                <vnp.com.mimusic.view.textview.TextViewThin
+                <vnp.com.mimusic.view.textview.TextViewRegular
                     android:id="@+id/lsbt_den"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -117,7 +117,7 @@
                     android:paddingLeft="@dimen/dimen_10dp"
                     android:paddingRight="@dimen/dimen_10dp"
                     android:singleLine="true"
-                    android:textColor="#333333"
+                     android:textColor="#727a7e"
                     android:textColorHint="#727a7e"
                     android:textSize="@dimen/dimen_13dp" />
 
@@ -137,7 +137,7 @@
                 android:layout_marginBottom="@dimen/dimen_25dp"
                 android:layout_marginTop="@dimen/dimen_25dp" >
 
-                <vnp.com.mimusic.view.textview.TextViewThin
+                <vnp.com.mimusic.view.textview.TextViewRegular
                     android:id="@+id/lsbt_dichvu"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -147,7 +147,7 @@
                     android:paddingLeft="@dimen/dimen_10dp"
                     android:paddingRight="@dimen/dimen_10dp"
                     android:singleLine="true"
-                    android:textColor="#333333"
+                   android:textColor="#727a7e"
                     android:textColorHint="#727a7e"
                     android:textSize="@dimen/dimen_13dp" />
 
@@ -166,7 +166,7 @@
                 android:layout_height="@dimen/dimen_32dp"
                 android:layout_marginBottom="@dimen/dimen_35dp" >
 
-                <vnp.com.mimusic.view.textview.TextViewThin
+                <vnp.com.mimusic.view.textview.TextViewRegular
                     android:id="@+id/lsbt_trangthai"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -176,7 +176,7 @@
                     android:paddingLeft="@dimen/dimen_10dp"
                     android:paddingRight="@dimen/dimen_10dp"
                     android:singleLine="true"
-                    android:textColor="#333333"
+                   android:textColor="#727a7e"
                     android:textColorHint="#727a7e"
                     android:textSize="@dimen/dimen_13dp" />
 
