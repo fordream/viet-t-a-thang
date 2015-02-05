@@ -337,7 +337,20 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 						startActivityForResult(i, 100);
 					} else {
 						Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-						path = Uri.fromFile(new File(Environment.getExternalStorageDirectory(), "tmp_avatar_" + System.currentTimeMillis() + ".jpg"));
+
+						File cacheDir = null;
+						String xpath = "Android/data/" + getActivity().getPackageName() + "/LazyList";
+						if (android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED)) {
+							// LazyList
+							cacheDir = new File(android.os.Environment.getExternalStorageDirectory(), xpath);
+						} else {
+							cacheDir = getActivity().getCacheDir();
+						}
+						if (!cacheDir.exists()) {
+							cacheDir.mkdirs();
+						}
+
+						path = Uri.fromFile(new File(cacheDir, "tmp_avatar_" + System.currentTimeMillis() + ".jpg"));
 						cameraIntent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, path);
 						cameraIntent.putExtra("return-data", true);
 						startActivityForResult(cameraIntent, 101);
