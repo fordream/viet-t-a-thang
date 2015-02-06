@@ -70,7 +70,7 @@ public class MenuRightItemView extends LinearLayout {
 			String avatar = cursor.getString(cursor.getColumnIndex(User.AVATAR));
 			String contact_id = Conts.getStringCursor(cursor, User.contact_id);
 
-			Conts.showAvatarNoImage(menu_right_item_img_icon, avatar, contact_id);
+			Conts.showAvatarNoImage(menu_right_item_img_icon, avatar, contact_id, Conts.resavatar()[cursor.getPosition() % Conts.resavatar().length]);
 
 			menu_right_item_tv_link.setText(Conts.getStringCursor(cursor, User.USER));
 			Conts.getSDT(menu_right_item_tv_link);

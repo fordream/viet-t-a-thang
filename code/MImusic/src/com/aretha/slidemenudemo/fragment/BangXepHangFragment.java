@@ -48,11 +48,11 @@ public class BangXepHangFragment extends BaseFragment implements OnItemClickList
 		bangxephangDoanhthu = (BangXephangListView) view.findViewById(R.id.bangxephang2);
 
 		headerbangxephangsoluong = new HeaderView(getActivity());
-		headerbangxephangsoluong.showHeadderSearch();
+		headerbangxephangsoluong.showHeadderBxh();
 		bangxephangSoluong.addHeader(headerbangxephangsoluong);
 
 		headerbangxepdoanhthu = new HeaderView(getActivity());
-		headerbangxepdoanhthu.showHeadderSearch();
+		headerbangxepdoanhthu.showHeadderBxh();
 		bangxephangDoanhthu.addHeader(headerbangxepdoanhthu);
 
 		bangxephangSoluong.setType(BangXepHang.typeSOLUONG);

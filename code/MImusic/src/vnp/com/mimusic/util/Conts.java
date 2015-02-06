@@ -740,38 +740,44 @@ public class Conts {
 		return bitmap;
 	}
 
-//	public static void showAvatar(ImageView menu_right_item_img_icon, String avatar, String contact_id) {
-//		if (Conts.isBlank(avatar)) {
-//			if (Conts.isBlank(contact_id)) {
-//				menu_right_item_img_icon.setImageResource(R.drawable.no_avatar);
-//			} else {
-//				Bitmap bitmap = Conts.getBitmapFromContactId(menu_right_item_img_icon.getContext(), contact_id, f);
-//				if (bitmap == null) {
-//					menu_right_item_img_icon.setImageResource(R.drawable.no_avatar);
-//				} else {
-//					menu_right_item_img_icon.setImageBitmap(bitmap);
-//				}
-//			}
-//		} else {
-//			ImageLoaderUtils.getInstance(menu_right_item_img_icon.getContext()).DisplayImage(avatar, menu_right_item_img_icon, R.drawable.no_avatar);
-//		}
-//	}
+	// public static void showAvatar(ImageView menu_right_item_img_icon, String
+	// avatar, String contact_id) {
+	// if (Conts.isBlank(avatar)) {
+	// if (Conts.isBlank(contact_id)) {
+	// menu_right_item_img_icon.setImageResource(R.drawable.no_avatar);
+	// } else {
+	// Bitmap bitmap =
+	// Conts.getBitmapFromContactId(menu_right_item_img_icon.getContext(),
+	// contact_id, f);
+	// if (bitmap == null) {
+	// menu_right_item_img_icon.setImageResource(R.drawable.no_avatar);
+	// } else {
+	// menu_right_item_img_icon.setImageBitmap(bitmap);
+	// }
+	// }
+	// } else {
+	// ImageLoaderUtils.getInstance(menu_right_item_img_icon.getContext()).DisplayImage(avatar,
+	// menu_right_item_img_icon, R.drawable.no_avatar);
+	// }
+	// }
 
 	public static void showAvatarNoImage(final ImageView menu_right_item_img_icon, final String avatar, final String contact_id) {
 		menu_right_item_img_icon.setImageResource(R.drawable.new_no_avatar);
 		if (Conts.isBlank(avatar)) {
 			if (Conts.isBlank(contact_id)) {
-				// menu_right_item_img_icon.setImageResource(R.drawable.new_no_avatar);
 			} else {
-				// Bitmap bitmap =
-				// Conts.getBitmapFromContactId(menu_right_item_img_icon.getContext(),
-				// contact_id);
-				// if (bitmap == null) {
-				// menu_right_item_img_icon.setImageResource(R.drawable.new_no_avatar);
-				// } else {
-				// menu_right_item_img_icon.setImageBitmap(bitmap);
-				// }
+				ImageLoaderUtils.getInstance(menu_right_item_img_icon.getContext()).DisplayImage(contact_id, menu_right_item_img_icon, 0);
+			}
+		} else {
+			ImageLoaderUtils.getInstance(menu_right_item_img_icon.getContext()).DisplayImage(avatar, menu_right_item_img_icon, 0);
+		}
+	}
 
+	public static void showAvatarNoImage(final ImageView menu_right_item_img_icon, final String avatar, final String contact_id, int resAvatar) {
+		menu_right_item_img_icon.setImageResource(resAvatar);
+		if (Conts.isBlank(avatar)) {
+			if (Conts.isBlank(contact_id)) {
+			} else {
 				ImageLoaderUtils.getInstance(menu_right_item_img_icon.getContext()).DisplayImage(contact_id, menu_right_item_img_icon, 0);
 			}
 		} else {
@@ -820,6 +826,12 @@ public class Conts {
 		}
 
 		return 0;
+	}
+
+	public static int[] resavatar() {
+		int resavatar[] = new int[] { R.drawable.avartar_1, R.drawable.avartar_2, R.drawable.avartar_3, R.drawable.avartar_4, R.drawable.avartar_5, R.drawable.avartar_6, R.drawable.avartar_7,
+				R.drawable.avartar_8, R.drawable.avartar_9, R.drawable.avartar_10, R.drawable.avartar_11, R.drawable.avartar_12 };
+		return resavatar;
 	}
 
 }

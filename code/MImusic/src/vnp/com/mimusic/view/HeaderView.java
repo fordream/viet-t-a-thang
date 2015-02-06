@@ -69,4 +69,9 @@ public class HeaderView extends LinearLayout {
 	public void showHeader(boolean b) {
 		findViewById(R.id.header_main_content).setVisibility(b ? INVISIBLE : GONE);
 	}
+
+	public void showHeadderBxh() {
+		findViewById(R.id.header_bxhx).setVisibility(VISIBLE);
+		showHeader(true);
+	}
 }
