@@ -33,6 +33,14 @@
             android:scaleType="fitXY"
             android:src="@drawable/header_home_2" />
 
+        <ImageView
+            android:id="@+id/img_headder_logo"
+            android:layout_width="@dimen/dimen_100dp"
+            android:layout_height="@dimen/dimen_21dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/logo_hrader"
+            android:visibility="gone" />
+
         <vnp.com.mimusic.view.textview.TextViewMedium
             android:id="@+id/header_tv"
             android:layout_width="wrap_content"
