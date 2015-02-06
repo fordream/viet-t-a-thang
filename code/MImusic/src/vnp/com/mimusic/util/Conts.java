@@ -182,7 +182,7 @@ public class Conts {
 		// BitmapFactory.decodeResource(img.getContext().getResources(),
 		// no_image);
 		// }
-		ImageLoaderUtils.getInstance(img.getContext()).DisplayImage(path, img, no_image);
+		ImageLoaderUtils.getInstance(img.getContext()).displayImage(path, img, no_image);
 
 	}
 
@@ -766,10 +766,10 @@ public class Conts {
 		if (Conts.isBlank(avatar)) {
 			if (Conts.isBlank(contact_id)) {
 			} else {
-				ImageLoaderUtils.getInstance(menu_right_item_img_icon.getContext()).DisplayImage(contact_id, menu_right_item_img_icon, 0);
+				ImageLoaderUtils.getInstance(menu_right_item_img_icon.getContext()).displayImage(contact_id, menu_right_item_img_icon, 0);
 			}
 		} else {
-			ImageLoaderUtils.getInstance(menu_right_item_img_icon.getContext()).DisplayImage(avatar, menu_right_item_img_icon, 0);
+			ImageLoaderUtils.getInstance(menu_right_item_img_icon.getContext()).displayImage(avatar, menu_right_item_img_icon, 0);
 		}
 	}
 
@@ -778,10 +778,10 @@ public class Conts {
 		if (Conts.isBlank(avatar)) {
 			if (Conts.isBlank(contact_id)) {
 			} else {
-				ImageLoaderUtils.getInstance(menu_right_item_img_icon.getContext()).DisplayImage(contact_id, menu_right_item_img_icon, 0);
+				ImageLoaderUtils.getInstance(menu_right_item_img_icon.getContext()).displayImage(contact_id, menu_right_item_img_icon, 0);
 			}
 		} else {
-			ImageLoaderUtils.getInstance(menu_right_item_img_icon.getContext()).DisplayImage(avatar, menu_right_item_img_icon, 0);
+			ImageLoaderUtils.getInstance(menu_right_item_img_icon.getContext()).displayImage(avatar, menu_right_item_img_icon, 0);
 		}
 	}
 

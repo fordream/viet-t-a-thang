@@ -35,7 +35,7 @@ public class ReCommentDichVuItemView extends LinearLayout {
 
 		if (cursor != null) {
 			String service_icon = cursor.getString(cursor.getColumnIndex(DichVu.service_icon)) + "";
-			ImageLoaderUtils.getInstance(getContext()).DisplayImage(service_icon, home_item_img_icon, R.drawable.no_image);
+			ImageLoaderUtils.getInstance(getContext()).displayImage(service_icon, home_item_img_icon, R.drawable.no_image);
 			Conts.setTextViewCursor(findViewById(R.id.name), cursor, DichVu.service_name);
 
 //			int position = cursor.getPosition();

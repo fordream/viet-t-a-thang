@@ -39,6 +39,6 @@ public class TintucItemView extends LinearLayout {
 
 		String images = Conts.getStringCursor(item, TinTuc.images);
 
-		ImageLoaderUtils.getInstance(getContext()).DisplayImage(images, tintuc_item_img_icon, R.drawable.no_avatar);
+		ImageLoaderUtils.getInstance(getContext()).displayImage(images, tintuc_item_img_icon, R.drawable.no_avatar);
 	}
 }

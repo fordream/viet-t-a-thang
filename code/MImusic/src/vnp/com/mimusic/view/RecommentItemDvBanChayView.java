@@ -38,7 +38,7 @@ public class RecommentItemDvBanChayView extends LinearLayout {
 		ImageView icondichvuc = (ImageView) findViewById(R.id.icondichvuc);
 		String url = Conts.getString(jsonObject, DichVu.service_icon);
 
-		ImageLoaderUtils.getInstance(getContext()).DisplayImage(url, icondichvuc, R.drawable.no_image);
+		ImageLoaderUtils.getInstance(getContext()).displayImage(url, icondichvuc, R.drawable.no_image);
 		((TextView) findViewById(R.id.dangky_dialog_content)).setText(Conts.getString(jsonObject, DichVu.service_name));
 	}
 }

@@ -1,7 +1,6 @@
 package vnp.com.mimusic.util;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.widget.ImageView;
 
 public class ImageLoaderUtils {
@@ -14,9 +13,7 @@ public class ImageLoaderUtils {
 
 	private ImageLoaderUtils init(Context context) {
 		if (imageLoader == null) {
-			// imageLoader = new ImageLoader(context);
 			imageLoader = new ImageLoader(context);
-			// imageLoader.init(context);
 		}
 		imageLoader.updateContext(context);
 		return this;
@@ -26,21 +23,14 @@ public class ImageLoaderUtils {
 
 	}
 
-	public void DisplayImageXX(String url, ImageView imageView, Bitmap bitmap) {
-		if (bitmap != null)
-			imageView.setImageBitmap(bitmap);
+	public void displayImage(String url, ImageView imageView, int res) {
+		
+		if (res != 0) {
+			imageView.setImageResource(res);
+		}
+		
 		if (!Conts.isBlank(url)) {
 			imageLoader.DisplayImage(url, imageView);
 		}
-
-	}
-
-	public void DisplayImage(String url, ImageView imageView, int bitmap) {
-		if (bitmap != 0)
-			imageView.setImageResource(bitmap);
-		if (!Conts.isBlank(url)) {
-			imageLoader.DisplayImage(url, imageView);
-		}
-
 	}
 }

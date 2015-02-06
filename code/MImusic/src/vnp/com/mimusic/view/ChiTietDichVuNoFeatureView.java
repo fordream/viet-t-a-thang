@@ -44,7 +44,7 @@ public class ChiTietDichVuNoFeatureView extends LinearLayout {
 		home_item_img_icon.setImageResource(R.drawable.no_avatar);
 		// show image
 		String service_icon = cursor.getString(cursor.getColumnIndex(DichVu.service_icon)) + "";
-		ImageLoaderUtils.getInstance(getContext()).DisplayImage(service_icon, home_item_img_icon, R.drawable.no_image);
+		ImageLoaderUtils.getInstance(getContext()).displayImage(service_icon, home_item_img_icon, R.drawable.no_image);
 
 		((TextView) findViewById(R.id.home_item_right_control_1_tv)).setText(isDangKy ? R.string.dangdung : R.string.dangky);
 

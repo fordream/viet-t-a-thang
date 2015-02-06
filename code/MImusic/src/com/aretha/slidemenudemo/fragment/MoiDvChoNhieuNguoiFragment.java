@@ -157,7 +157,7 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 			ImageView home_item_img_icon = (ImageView) view.findViewById(R.id.icon);
 			
 			String service_icon = Conts.getStringCursor(mcursor, DichVu.service_icon);
-			ImageLoaderUtils.getInstance(getActivity()).DisplayImage(service_icon, home_item_img_icon, R.drawable.no_image);
+			ImageLoaderUtils.getInstance(getActivity()).displayImage(service_icon, home_item_img_icon, R.drawable.no_image);
 			//
 
 			nhieuNgoiHeaderView.setData(mcursor);
@@ -464,7 +464,7 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 			Conts.setTextViewCursor(findViewById(R.id.gia), mcursor, DichVu.service_price);
 			ImageView home_item_img_icon = (ImageView) findViewById(R.id.icon);
 			String service_icon = Conts.getStringCursor(mcursor, DichVu.service_icon);
-			ImageLoaderUtils.getInstance(getActivity()).DisplayImage(service_icon, home_item_img_icon, R.drawable.no_image);
+			ImageLoaderUtils.getInstance(getActivity()).displayImage(service_icon, home_item_img_icon, R.drawable.no_image);
 		}
 
 	}

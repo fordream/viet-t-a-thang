@@ -94,7 +94,7 @@ public abstract class DichVuDialog extends BaseAdialog implements android.view.V
 				if (Conts.isBlank(id)) {
 					imageView.setImageBitmap(null);
 				} else {
-					ImageLoaderUtils.getInstance(parent.getContext()).DisplayImage(values.getAsString(DichVu.service_icon), imageView, R.drawable.no_image);
+					ImageLoaderUtils.getInstance(parent.getContext()).displayImage(values.getAsString(DichVu.service_icon), imageView, R.drawable.no_image);
 				}
 				return convertView;
 			}

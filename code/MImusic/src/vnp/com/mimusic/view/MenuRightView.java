@@ -3,6 +3,7 @@ package vnp.com.mimusic.view;
 import vnp.com.db.User;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.adapter.MenuRightAdaper;
+import vnp.com.mimusic.util.Conts;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -39,9 +40,9 @@ public class MenuRightView extends LinearLayout {
 	private void init() {
 		((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.menu_right, this);
 		findViewById(R.id.xleft).setOnClickListener(null);
-		
+
 		findViewById(R.id.menu_right_search).setOnClickListener(null);
-		
+
 	}
 
 	private MenuRightAdaper adaper;
@@ -52,7 +53,7 @@ public class MenuRightView extends LinearLayout {
 		// findViewById(R.id.menu_right_img_search);
 		com.woozzu.android.widget.IndexableListView menu_right_list = (com.woozzu.android.widget.IndexableListView) findViewById(R.id.menu_right_list);
 		if (adaper == null || adaper != null && adaper.getCount() == 0) {
-			String where = String.format("%s = '0'", User.STATUS);
+			String where = String.format("%s = '0'  ", User.STATUS);
 			Cursor cursor = getContext().getContentResolver().query(User.CONTENT_URI, null, where, null, User.NAME_CONTACT_ENG);
 
 			if (adaper == null) {

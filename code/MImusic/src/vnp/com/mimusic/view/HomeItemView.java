@@ -144,6 +144,6 @@ public class HomeItemView extends LinearLayout {
 		// show image
 		String service_icon = cursor.getString(cursor.getColumnIndex(DichVu.service_icon)) + "";
 
-		ImageLoaderUtils.getInstance(getContext()).DisplayImage(service_icon, home_item_img_icon, R.drawable.no_image);
+		ImageLoaderUtils.getInstance(getContext()).displayImage(service_icon, home_item_img_icon, R.drawable.no_image);
 	}
 }

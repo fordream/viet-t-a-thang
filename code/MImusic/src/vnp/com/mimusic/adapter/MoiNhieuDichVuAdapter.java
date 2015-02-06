@@ -67,7 +67,7 @@ public abstract class MoiNhieuDichVuAdapter extends CursorAdapter {
 		// show image
 		final String service_icon = cursor.getString(cursor.getColumnIndex(DichVu.service_icon)) + "";
 
-		ImageLoaderUtils.getInstance(context).DisplayImage(service_icon, moinhieudichvu_item_icon, R.drawable.no_image);
+		ImageLoaderUtils.getInstance(context).displayImage(service_icon, moinhieudichvu_item_icon, R.drawable.no_image);
 
 		String service_code = cursor.getString(cursor.getColumnIndex(DichVu.service_code));
 		View main = convertView.findViewById(R.id.moinhieudichvu_item_main);
