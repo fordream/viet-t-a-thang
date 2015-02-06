@@ -98,7 +98,7 @@ public class ChiTietDichVuFragment extends BaseFragment implements View.OnClickL
 
 			String content = String.format(getString(R.string.xacnhandangky_form), Conts.getStringCursor(cursor, DichVu.service_name), Conts.getStringCursor(cursor, DichVu.service_price));
 			values.put("content", content);
-
+			final String name = Conts.getStringCursor(cursor, DichVu.service_name);
 			boolean isDangKy = "0".equals(cursor.getString(cursor.getColumnIndex(DichVu.service_status)));
 
 			if (!isDangKy) {
@@ -109,8 +109,8 @@ public class ChiTietDichVuFragment extends BaseFragment implements View.OnClickL
 							@Override
 							public void updateUiDangKy() {
 								super.updateUiDangKy();
-								Conts.showDialogThongbao(getContext(), String.format(getContext().getString(R.string.bandangkythanhcongdichvu), values.getAsString(DichVu.service_name)));
-								
+								Conts.showDialogThongbao(getContext(), String.format(getContext().getString(R.string.bandangkythanhcongdichvu), name));
+
 								chitietdichvu_chitietdichvunofeatureview.findViewById(R.id.home_item_right_control_1).setOnClickListener(null);
 								chitietdichvu_chitietdichvunofeatureview.updateDangDung();
 								chitietdichvu_chitietdichvunofeatureview.hiddenChitietdichvu_no_feature_dangky();

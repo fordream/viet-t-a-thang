@@ -44,6 +44,7 @@ import android.os.Environment;
 import android.os.IBinder;
 import android.provider.ContactsContract.Contacts;
 import android.provider.MediaStore;
+import android.support.v4.app.FragmentActivity;
 import android.util.Base64;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -862,6 +863,24 @@ public class Conts {
 		// tintuc_item_img_icon.setImageResource(R.drawable.no_image);
 		// ImageLoaderUtils.getInstance(tintuc_item_img_icon.getContext()).displayImage(images,
 		// tintuc_item_img_icon, 0);
+	}
+
+	public static File cacheDir(Context activity) {
+		String state = Environment.getExternalStorageState();
+		File cacheDir = null;
+		String path = "Android/data/" + activity.getPackageName() + "/LazyList";
+
+		if (android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED)) {
+			cacheDir = new File(android.os.Environment.getExternalStorageDirectory(), path);
+		} else {
+			cacheDir = activity.getCacheDir();
+		}
+		if (!cacheDir.exists()) {
+			cacheDir.mkdirs();
+		}
+
+		return cacheDir;
+
 	}
 
 }

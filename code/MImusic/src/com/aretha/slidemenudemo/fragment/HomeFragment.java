@@ -67,7 +67,7 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 		View view = inflater.inflate(R.layout.home, null);
 
 		loadHeader(view, R.id.header, R.string.kenhbanvas, true, true);
-
+		
 		loadingView = Conts.getView(view, R.id.loadingView1);
 		list = (MusicListView) view.findViewById(R.id.list);
 

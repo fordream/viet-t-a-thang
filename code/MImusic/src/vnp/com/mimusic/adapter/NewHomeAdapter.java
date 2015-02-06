@@ -56,6 +56,7 @@ public abstract class NewHomeAdapter extends ArrayAdapter<NewHomeItem> {
 
 		ContentValues values = new ContentValues();
 		values.put("name", String.format(getContext().getString(R.string.title_dangky), getItem(position).name));
+		values.put(DichVu.service_name, getItem(position).name);
 		values.put(DichVu.service_code, getItem(position).service_code);
 		String content = String.format(getContext().getString(R.string.xacnhandangky_form), getItem(position).name, getItem(position).service_price);
 		values.put("content", content);

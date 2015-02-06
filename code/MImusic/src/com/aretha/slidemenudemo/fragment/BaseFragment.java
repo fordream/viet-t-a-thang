@@ -63,6 +63,11 @@ public class BaseFragment extends Fragment {
 		header.findViewById(R.id.header_btn_left).setOnClickListener(homeOnClick);
 		header.findViewById(R.id.header_btn_right).setOnClickListener(homeOnClick);
 
+		if (title == R.string.kenhbanvas) {
+			header.findViewById(R.id.img_headder_logo).setVisibility(View.VISIBLE);
+			header.setTextHeader("");
+		}
+
 	}
 
 	public void createHeader(String title, boolean leftShow, boolean rightShow) {

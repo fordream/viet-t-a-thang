@@ -30,7 +30,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -57,28 +59,14 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.infor, null);
-		String state = Environment.getExternalStorageState();
-		File cacheDir = null;
-		String path = "Android/data/" + getActivity().getPackageName() + "/LazyList";
-		if (android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED)) {
-			// LazyList
-			cacheDir = new File(android.os.Environment.getExternalStorageDirectory(), path);
-		} else {
-			cacheDir = getActivity().getCacheDir();
-		}
-		if (!cacheDir.exists()) {
-			cacheDir.mkdirs();
-		}
+		view.findViewById(R.id.scrollview).setOnTouchListener(new OnTouchListener() {
 
-		mFileTemp = new File(cacheDir, InternalStorageContentProvider.TEMP_PHOTO_FILE_NAME);
-
-		// if (Environment.MEDIA_MOUNTED.equals(state)) {
-		// mFileTemp = new File(Environment.getExternalStorageDirectory(),
-		// InternalStorageContentProvider.TEMP_PHOTO_FILE_NAME);
-		// } else {
-		// mFileTemp = new File(getActivity().getFilesDir(),
-		// InternalStorageContentProvider.TEMP_PHOTO_FILE_NAME);
-		// }
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				Conts.hiddenKeyBoard(getActivity());
+				return false;
+			}
+		});
 
 		loadingView = (LoadingView) view.findViewById(R.id.loadingView1);
 		Conts.showView(loadingView, false);
@@ -92,6 +80,7 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 				getActivity().onBackPressed();
 			}
 		});
+
 		infor_cover_click_change = (ImageView) view.findViewById(R.id.infor_cover_click_change);
 		menu_left_img_cover = (ImageView) view.findViewById(R.id.menu_left_img_cover);
 		menu_left_img_avatar = (ImageView) view.findViewById(R.id.menu_left_img_avatar);
@@ -126,9 +115,7 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 
 			String cover = cursor.getString(cursor.getColumnIndex(User.COVER));
 			Conts.displayImageCover(cover, menu_left_img_cover);
-
 			String avatar = cursor.getString(cursor.getColumnIndex(User.AVATAR));
-
 			Conts.showInforAvatar(avatar, menu_left_img_avatar);
 			cursor.close();
 		}
@@ -154,7 +141,7 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 				Toast.makeText(getActivity(), getActivity().getString(R.string.khongthelayduocduongdan), Toast.LENGTH_SHORT).show();
 			}
 		} else if (requestCode == 101 && resultCode == Activity.RESULT_OK) {
-			String path = this.path.toString();
+			String path = mFileTemp.getPath();
 			if (path != null) {
 				ContentValues contentValues = new ContentValues();
 				contentValues.put(User.COVER, path);
@@ -170,18 +157,9 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 			}
 
 		} else if (requestCode == REQUEST_CODE_GALLERY && resultCode == Activity.RESULT_OK) {
-			// if (path == null) {
-			// Conts.showDialogThongbao(getActivity(),
-			// getActivity().getString(R.string.khonglayduocanh));
-			// return;
-			// }
-
-			// beginCrop(data.getData());
-			// String path = data.getData().toString();
-			// uploadAvatar(path);
-
 			try {
 				InputStream inputStream = getActivity().getContentResolver().openInputStream(data.getData());
+				mFileTemp = new File(Conts.cacheDir(getActivity()), InternalStorageContentProvider.TEMP_PHOTO_FILE_NAME + System.currentTimeMillis());
 				FileOutputStream fileOutputStream = new FileOutputStream(mFileTemp);
 				copyStream(inputStream, fileOutputStream);
 				fileOutputStream.close();
@@ -191,15 +169,6 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 
 			}
 		} else if (requestCode == REQUEST_CODE_TAKE_PICTURE && resultCode == Activity.RESULT_OK) {
-
-			// if (path == null) {
-			// Conts.showDialogThongbao(getActivity(),
-			// getActivity().getString(R.string.khonglayduocanh));
-			// return;
-			// }
-			// String path = this.path.toString();
-			// uploadAvatar(path);
-
 			startCropImage();
 		} else if (REQUEST_CODE_CROP_IMAGE == requestCode && resultCode == Activity.RESULT_OK) {
 			String path = data.getStringExtra(CropImage.IMAGE_PATH);
@@ -221,20 +190,15 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 	}
 
 	private void startCropImage() {
-
 		Intent intent = new Intent(getActivity(), CropImage.class);
 		intent.putExtra(CropImage.IMAGE_PATH, mFileTemp.getPath());
 		intent.putExtra(CropImage.SCALE, true);
-
 		intent.putExtra(CropImage.ASPECT_X, 2);
 		intent.putExtra(CropImage.ASPECT_Y, 2);
-
 		startActivityForResult(intent, REQUEST_CODE_CROP_IMAGE);
 	}
 
 	private void uploadAvatar(final String path) {
-		// Conts.showDialogThongbao(getActivity(), path + " " + new
-		// File(path).exists());
 		if (!Conts.isBlank(path)) {
 			executeUpdateHttpsAvatar(path, new IContsCallBack() {
 				ProgressDialog progressDialog;
@@ -278,7 +242,7 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 		}
 	}
 
-	private Uri path;
+	// private Uri path;
 
 	@Override
 	public void onClick(View v) {
@@ -296,22 +260,12 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					if (which == 1) {
-						// ACTION_GET_CONTENT
 						Intent intent = new Intent(Intent.ACTION_PICK);
 						intent.setType("image/*");
 						startActivityForResult(Intent.createChooser(intent, getActivity().getString(R.string.chonanh)), REQUEST_CODE_GALLERY);
-
 					} else {
+						mFileTemp = new File(Conts.cacheDir(getActivity()), InternalStorageContentProvider.TEMP_PHOTO_FILE_NAME + System.currentTimeMillis());
 						Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-						// path = Uri.fromFile(new
-						// File(Environment.getExternalStorageDirectory(),
-						// "tmp_avatar_" + System.currentTimeMillis() +
-						// ".jpg"));
-						// cameraIntent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT,
-						// path);
-						// cameraIntent.putExtra("return-data", true);
-						// startActivityForResult(cameraIntent, 103);
-
 						Uri mImageCaptureUri = null;
 						String state = Environment.getExternalStorageState();
 						if (Environment.MEDIA_MOUNTED.equals(state)) {
@@ -336,22 +290,17 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 						Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 						startActivityForResult(i, 100);
 					} else {
+
+						mFileTemp = new File(Conts.cacheDir(getActivity()), InternalStorageContentProvider.TEMP_PHOTO_FILE_NAME + System.currentTimeMillis());
 						Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-
-						File cacheDir = null;
-						String xpath = "Android/data/" + getActivity().getPackageName() + "/LazyList";
-						if (android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED)) {
-							// LazyList
-							cacheDir = new File(android.os.Environment.getExternalStorageDirectory(), xpath);
+						Uri mImageCaptureUri = null;
+						String state = Environment.getExternalStorageState();
+						if (Environment.MEDIA_MOUNTED.equals(state)) {
+							mImageCaptureUri = Uri.fromFile(mFileTemp);
 						} else {
-							cacheDir = getActivity().getCacheDir();
+							mImageCaptureUri = InternalStorageContentProvider.CONTENT_URI;
 						}
-						if (!cacheDir.exists()) {
-							cacheDir.mkdirs();
-						}
-
-						path = Uri.fromFile(new File(cacheDir, "tmp_avatar_" + System.currentTimeMillis() + ".jpg"));
-						cameraIntent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, path);
+						cameraIntent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, mImageCaptureUri);
 						cameraIntent.putExtra("return-data", true);
 						startActivityForResult(cameraIntent, 101);
 					}

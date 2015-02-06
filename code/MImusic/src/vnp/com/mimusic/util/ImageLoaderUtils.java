@@ -45,9 +45,7 @@ public class ImageLoaderUtils {
 	// **
 
 	public void displayImageInfor(String url, ImageView imageView) {
-
 		imageView.setImageResource(R.drawable.new_no_avatar);
-
 		if (!Conts.isBlank(url)) {
 			imageLoader.displayImage(url, imageView, true);
 		}

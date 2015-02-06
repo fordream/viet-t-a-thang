@@ -25,9 +25,10 @@ public class CustomImageView extends ImageView {
 
 	@Override
 	public void setImageBitmap(Bitmap bm) {
-		try {
-			super.setImageBitmap(Conts.getRoundedCornerBitmap(bm));
-		} catch (Exception exception) {
-		}
+		super.setImageBitmap(bm);
+//		try {
+//			super.setImageBitmap(Conts.getRoundedCornerBitmap(bm));
+//		} catch (Exception exception) {
+//		}
 	}
 }

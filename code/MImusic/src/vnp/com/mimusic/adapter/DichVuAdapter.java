@@ -42,6 +42,7 @@ public abstract class DichVuAdapter extends CursorAdapter {
 		 */
 		ContentValues values = new ContentValues();
 		values.put("name", String.format(context.getString(R.string.title_dangky), cursor.getString(cursor.getColumnIndex(DichVu.service_name))));
+		values.put(DichVu.service_name, cursor.getString(cursor.getColumnIndex(DichVu.service_name)));
 		values.put(DichVu.service_code, cursor.getString(cursor.getColumnIndex(DichVu.service_code)));
 		String content = String.format(context.getString(R.string.xacnhandangky_form), Conts.getStringCursor(cursor, DichVu.service_name), Conts.getStringCursor(cursor, DichVu.service_price));
 		values.put("content", content);
