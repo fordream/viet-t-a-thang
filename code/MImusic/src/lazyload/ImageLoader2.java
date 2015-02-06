@@ -210,7 +210,7 @@ public class ImageLoader2 {
 		// from SD cache
 		Bitmap b = decodeFile(f);
 		if (b != null) {
-			b = createScaledBitmap(b, MAX_WIDTH, MAX_WIDTH, ScalingLogic.FIT);
+//			b = createScaledBitmap(b, MAX_WIDTH, MAX_WIDTH, ScalingLogic.FIT);
 			return b;
 		}
 
@@ -229,24 +229,24 @@ public class ImageLoader2 {
 				os.close();
 				conn.disconnect();
 				bitmap = decodeFile(f);
-				bitmap = createScaledBitmap(bitmap, MAX_WIDTH, MAX_WIDTH, ScalingLogic.FIT);
+				//bitmap = createScaledBitmap(bitmap, MAX_WIDTH, MAX_WIDTH, ScalingLogic.FIT);
 				return bitmap;
 			} else if (url.startsWith("https:")) {
 				HttpsRestClient client = new HttpsRestClient(ctx, url);
 				Bitmap bitmap = decodeFile(client.executeDownloadFile(RequestMethod.GET, f));
-				bitmap = createScaledBitmap(bitmap, MAX_WIDTH, MAX_WIDTH, ScalingLogic.FIT);
+			//	bitmap = createScaledBitmap(bitmap, MAX_WIDTH, MAX_WIDTH, ScalingLogic.FIT);
 				return bitmap;
 
 			} else if (url != null && url.startsWith("file://")) {
 				url = url.substring(url.indexOf("file://") + 7, url.length());
 				copy(new File(url), f);
 				Bitmap bitmap = decodeFile(f);
-				bitmap = createScaledBitmap(bitmap, MAX_WIDTH, MAX_WIDTH, ScalingLogic.FIT);
+				//bitmap = createScaledBitmap(bitmap, MAX_WIDTH, MAX_WIDTH, ScalingLogic.FIT);
 				return bitmap;
 			} else if (url != null && url.startsWith("content://")) {
 				try {
 					Bitmap bitmap = MediaStore.Images.Media.getBitmap(ctx.getContentResolver(), Uri.parse(url));
-					bitmap = createScaledBitmap(bitmap, MAX_WIDTH, MAX_WIDTH, ScalingLogic.FIT);
+					//bitmap = createScaledBitmap(bitmap, MAX_WIDTH, MAX_WIDTH, ScalingLogic.FIT);
 					return bitmap;
 				} catch (Exception e) {
 					return null;
