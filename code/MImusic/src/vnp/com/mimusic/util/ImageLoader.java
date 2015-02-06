@@ -84,17 +84,16 @@ public class ImageLoader {
 				os.close();
 				return decodeFile(f);
 			} else if (url.startsWith("https:")) {
+				// RestClient restClient = new RestClient(url);
+				// File file = restClient.exeDownloadFile(context);
 				HttpsRestClient client = new HttpsRestClient(context, url);
 				return decodeFile(client.executeDownloadFile(RequestMethod.GET, f));
 			} else if (url != null && url.startsWith("file://")) {
 				url = url.substring(url.indexOf("file://") + 7, url.length());
-				copy(new File(url), f);
-				Bitmap bitmap = decodeFile(f);
-				return bitmap;
+				return decodeFile(new File(url));
 			} else if (url != null && url.startsWith("content://")) {
 				try {
-					Bitmap bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), Uri.parse(url));
-					return bitmap;
+					return MediaStore.Images.Media.getBitmap(context.getContentResolver(), Uri.parse(url));
 				} catch (Exception e) {
 					return null;
 				}
