@@ -15,7 +15,7 @@ import android.widget.RelativeLayout;
 
 public abstract class VasBaseScrollListView implements OnTouchListener {
 	private ListView listViews[];
-	private int ytop = 0;
+	private int ytop = -1000;
 	private View header;
 	private Activity activity;
 
@@ -37,8 +37,14 @@ public abstract class VasBaseScrollListView implements OnTouchListener {
 			ytop = (int) event.getY();
 		} else if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) {
 			release();
+			ytop = -1000;
 		} else if (event.getAction() == MotionEvent.ACTION_MOVE) {
 			int yCurrentTop = (int) event.getY();
+			if (ytop == -1000) {
+				ytop = yCurrentTop;
+				return false;
+			}
+
 			if (Math.abs(ytop - yCurrentTop) > 10) {
 				update(ytop - yCurrentTop, yCurrentTop);
 				ytop = yCurrentTop;
