@@ -74,11 +74,13 @@ public abstract class NewHomeBlogView extends LinearLayout implements OnClickLis
 
 	public void update() {
 		if (type() == 0) {
-			
+
 			if (mHlvSimpleList.getAdapter() != null) {
-				return;
+				if (mHlvSimpleList.getAdapter().getCount() > 0) {
+					return;
+				}
 			}
-			
+
 			Cursor cursor = Recomment.getCursorFromDichvu(getContext(), -1);
 			mHlvSimpleList.setAdapter(new CursorAdapter(getContext(), cursor) {
 				@Override
