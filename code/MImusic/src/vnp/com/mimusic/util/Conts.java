@@ -852,17 +852,11 @@ public class Conts {
 	}
 
 	public static void showLogoDichvu(final ImageView menu_right_item_img_icon, final String avatar) {
-		// menu_right_item_img_icon.setImageResource(R.drawable.no_image);
-		// ImageLoaderUtils.getInstance(menu_right_item_img_icon.getContext()).displayImage(avatar,
-		// menu_right_item_img_icon, 0);
 		ImageLoaderUtils.getInstance(menu_right_item_img_icon.getContext()).showLogoDichvu(menu_right_item_img_icon, avatar);
 	}
 
 	public static void showLogoTinTuc(ImageView tintuc_item_img_icon, String images) {
 		ImageLoaderUtils.getInstance(tintuc_item_img_icon.getContext()).showLogoTinTuc(tintuc_item_img_icon, images);
-		// tintuc_item_img_icon.setImageResource(R.drawable.no_image);
-		// ImageLoaderUtils.getInstance(tintuc_item_img_icon.getContext()).displayImage(images,
-		// tintuc_item_img_icon, 0);
 	}
 
 	public static File cacheDir(Context activity) {

@@ -159,7 +159,8 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 		} else if (requestCode == REQUEST_CODE_GALLERY && resultCode == Activity.RESULT_OK) {
 			try {
 				InputStream inputStream = getActivity().getContentResolver().openInputStream(data.getData());
-				mFileTemp = new File(Conts.cacheDir(getActivity()), InternalStorageContentProvider.TEMP_PHOTO_FILE_NAME + System.currentTimeMillis());
+				createMFileTemp();
+				
 				FileOutputStream fileOutputStream = new FileOutputStream(mFileTemp);
 				copyStream(inputStream, fileOutputStream);
 				fileOutputStream.close();
@@ -264,7 +265,8 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 						intent.setType("image/*");
 						startActivityForResult(Intent.createChooser(intent, getActivity().getString(R.string.chonanh)), REQUEST_CODE_GALLERY);
 					} else {
-						mFileTemp = new File(Conts.cacheDir(getActivity()), InternalStorageContentProvider.TEMP_PHOTO_FILE_NAME + System.currentTimeMillis());
+						createMFileTemp();
+
 						Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
 						Uri mImageCaptureUri = null;
 						String state = Environment.getExternalStorageState();
@@ -278,6 +280,7 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 						startActivityForResult(cameraIntent, REQUEST_CODE_TAKE_PICTURE);
 					}
 				}
+
 			});
 			builder.show();
 		} else if (v.equals(infor_cover_click_change)) {
@@ -291,7 +294,7 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 						startActivityForResult(i, 100);
 					} else {
 
-						mFileTemp = new File(Conts.cacheDir(getActivity()), InternalStorageContentProvider.TEMP_PHOTO_FILE_NAME + System.currentTimeMillis());
+						createMFileTemp();
 						Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
 						Uri mImageCaptureUri = null;
 						String state = Environment.getExternalStorageState();
@@ -349,5 +352,9 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+	}
+
+	private void createMFileTemp() {
+		mFileTemp = new File(Conts.cacheDir(getActivity()), System.currentTimeMillis() + InternalStorageContentProvider.TEMP_PHOTO_FILE_NAME);
 	}
 }
