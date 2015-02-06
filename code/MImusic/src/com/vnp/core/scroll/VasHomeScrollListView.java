@@ -7,23 +7,19 @@ import android.view.View.OnTouchListener;
 import android.widget.ListView;
 
 public class VasHomeScrollListView extends VasBaseScrollListView implements OnTouchListener {
-	private View header;
-	private View top;
 
 	public VasHomeScrollListView(View header, View top, ListView[] listView, Activity activity) {
-		super(listView, header,activity);
-		this.header = header;
-		this.top = top;
+		super(listView, header, activity);
 	}
 
 	@Override
 	public void hidden() {
-		Conts.showView(header, false);
+		// Conts.showView(header, false);
 	}
 
 	@Override
 	public void show() {
-		Conts.showView(header, true);
+		// Conts.showView(header, true);
 	}
 
 }

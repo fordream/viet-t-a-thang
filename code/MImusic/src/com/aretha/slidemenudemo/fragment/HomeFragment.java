@@ -18,26 +18,31 @@ import vnp.com.mimusic.util.Conts.IContsCallBack;
 import vnp.com.mimusic.view.HeaderView;
 import vnp.com.mimusic.view.LoadingView;
 import vnp.com.mimusic.view.MusicListView;
+import vnp.com.mimusic.view.NewHomeBlogView;
 import vnp.com.mimusic.view.ReCommentDichVuItemView;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
 
+import com.meetme.android.horizontallistview.HorizontalListView;
 import com.vnp.core.scroll.VasHomeScrollListView;
 
 public class HomeFragment extends BaseFragment implements OnItemClickListener, View.OnClickListener {
 	private vnp.com.mimusic.view.MusicListView list;
-	private HomeHeaderView home_header;
+	// private HomeHeaderView home_header;
 	private LoadingView loadingView;
 	private HeaderView headerView;
 
@@ -65,71 +70,33 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.home, null);
-
 		loadHeader(view, R.id.header, R.string.kenhbanvas, true, true);
-		
+
 		loadingView = Conts.getView(view, R.id.loadingView1);
 		list = (MusicListView) view.findViewById(R.id.list);
 
 		HeaderView headerView = new HeaderView(getActivity());
 		headerView.showHeader(true);
 		list.addHeaderView(headerView);
-		list.setOnItemClickListener(this);
 
-		home_header = new HomeHeaderView(getActivity());
+		addDichvuDexuat(list);
+		addSothuebaonenmoi(list);
+		addDichvuBanChay(list);
 
-		home_header.findViewById(R.id.dichvubanchay).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				(((RootMenuActivity) getActivity())).homeXemall(getString(R.string.dichvudexuat));
-			}
-		});
+		list.setAdapter(new ArrayAdapter<String>(getActivity(), 0, new String[] {}));
 
-		headerView = new HeaderView(getActivity());
-		headerView.showHeader(false);
-
-		list.addHeaderView(headerView);
-		list.addHeaderView(home_header);
-
-		homeAdapter = new NewHomeAdapter(getActivity()) {
-
-			@Override
-			public void moiDVChoNhieuNguoi(String id, int position) {
-				(((RootMenuActivity) getActivity())).gotoMoiDvChoNhieuNguoi(id,position);
-			}
-
-			@Override
-			public void dangKy(final ContentValues values) {
-				new DangKyDialog(getActivity(), values) {
-					public void updateUiDangKy() {
-						Conts.showDialogThongbao(getContext(), String.format(getContext().getString(R.string.bandangkythanhcongdichvu), values.getAsString(DichVu.service_name)));
-						updateUI(updateSuccess);
-					};
-				}.show();
-			}
-
-			@Override
-			public void xemall(String name) {
-				(((RootMenuActivity) getActivity())).homeXemall(name);
-			}
-
-			@Override
-			public void moiContactUser(String user, String name, int position) {
-				(((RootMenuActivity) getActivity())).moiContactUser(user, name,position);
-			}
-		};
-
-		list.setAdapter(homeAdapter);
+		updateUI(updateSuccess);
 
 		Bundle bundle = new Bundle();
 		execute(RequestMethod.GET, API.API_R026, bundle, new IContsCallBack() {
 			@Override
 			public void onStart() {
-				Conts.showView(loadingView, true);
+				Conts.showView(loadingView, false);
 			}
 
 			@Override
 			public void onSuscess(JSONObject response) {
+				Conts.showView(loadingView, false);
 				updateUI(updateSuccess);
 
 			}
@@ -146,8 +113,71 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 			}
 		});
 
-		new VasHomeScrollListView(getHeaderView().findViewById(R.id.header_main_content), headerView, new ListView[] { list }, getActivity());
+		new VasHomeScrollListView(getHeaderView(), headerView, new ListView[] { list }, getActivity());
+
 		return view;
+	}
+
+	private NewHomeBlogView dichcudexuat, dichvubanchay, sothuebaonenmoi;
+
+	private void addDichvuDexuat(MusicListView list2) {
+		dichcudexuat = new NewHomeBlogView(getActivity()) {
+
+			@Override
+			public int type() {
+				return 0;
+			}
+
+			@Override
+			public void onClickHeader() {
+				(((RootMenuActivity) getActivity())).homeXemall(getString(R.string.dichvudexuat));
+			}
+		};
+		list.addHeaderView(dichcudexuat);
+	}
+
+	private void addDichvuBanChay(MusicListView list2) {
+		dichvubanchay = new NewHomeBlogView(getActivity()) {
+
+			@Override
+			public int type() {
+				return 2;
+			}
+
+			@Override
+			public void onClickHeader() {
+				(((RootMenuActivity) getActivity())).homeXemall(getString(R.string.dichvubanchay));
+			}
+
+			@Override
+			public void dangky(final ContentValues values) {
+				super.dangky(values);
+				new DangKyDialog(getActivity(), values) {
+					public void updateUiDangKy() {
+						Conts.showDialogThongbao(getContext(), String.format(getContext().getString(R.string.bandangkythanhcongdichvu), values.getAsString(DichVu.service_name)));
+						updateUI(updateSuccess);
+					};
+				}.show();
+			}
+		};
+		list.addHeaderView(dichvubanchay);
+	}
+
+	private void addSothuebaonenmoi(MusicListView list) {
+		sothuebaonenmoi = new NewHomeBlogView(getActivity()) {
+
+			@Override
+			public int type() {
+				return 1;
+			}
+
+			@Override
+			public void onClickHeader() {
+				(((RootMenuActivity) getActivity())).homeXemall(getString(R.string.moithanhvien));
+			}
+		};
+
+		list.addHeaderView(sothuebaonenmoi);
 	}
 
 	private UpdateSuccess updateSuccess = new UpdateSuccess() {
@@ -159,11 +189,11 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 	};
 
 	private void updateUI(UpdateSuccess updateSuceess) {
-		home_header.updateData();
-		homeAdapter.update(updateSuceess);
-	}
 
-	private NewHomeAdapter homeAdapter;
+		sothuebaonenmoi.update();
+		dichvubanchay.update();
+		dichcudexuat.update();
+	}
 
 	@Override
 	public void onClick(View v) {
@@ -175,64 +205,6 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 		NewHomeItem homeItem = (NewHomeItem) parent.getItemAtPosition(position);
 		if (homeItem.type == 2) {
 			(((RootMenuActivity) getActivity())).gotoChiTietDichVuFromHome(parent, view, position, id);
-		}
-	}
-
-	private class RecomendDvOnClickListener implements OnClickListener {
-		private String id = "";
-
-		public RecomendDvOnClickListener(String id) {
-			this.id = id;
-
-		}
-
-		@Override
-		public void onClick(View v) {
-			(((RootMenuActivity) getActivity())).gotoChiTietDichVuFromHome(id);
-		}
-	}
-
-	private class HomeHeaderView extends LinearLayout {
-
-		public HomeHeaderView(Context context) {
-			super(context);
-			((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.new_home_header, this);
-			Conts.showView(findViewById(R.id.home_header_main), false);
-		}
-
-		public void updateData() {
-
-			new AsyncTask<String, String, String>() {
-				Cursor cursor;
-
-				protected String doInBackground(String[] params) {
-					cursor = Recomment.getCursorFromDichvu(getActivity(), -1);
-					return null;
-				};
-
-				protected void onPostExecute(String result) {
-					LinearLayout gallery1 = Conts.getView(HomeHeaderView.this, R.id.gallery1);
-					gallery1.removeAllViews();
-
-					if (cursor != null) {
-						if (cursor.getCount() > 0) {
-							Conts.showView(home_header.findViewById(R.id.home_header_main), true);
-							while (cursor.moveToNext()) {
-								ReCommentDichVuItemView dichVuItemView = new ReCommentDichVuItemView(getContext());
-								gallery1.addView(dichVuItemView);
-								dichVuItemView.setData(cursor);
-								dichVuItemView.setOnClickListener(new RecomendDvOnClickListener(Conts.getStringCursor(cursor, DichVu.ID)));
-							}
-						} else {
-							Conts.showView(findViewById(R.id.home_header_main), false);
-						}
-						cursor.close();
-					} else {
-						Conts.showView(findViewById(R.id.home_header_main), true);
-					}
-				};
-			}.execute("");
-
 		}
 	}
 

@@ -2,6 +2,7 @@ package com.vnp.core.scroll;
 
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.util.Conts;
+import vnp.com.mimusic.util.LogUtils;
 import vnp.com.mimusic.view.HeaderView;
 import android.app.Activity;
 import android.view.MotionEvent;
@@ -31,21 +32,14 @@ public abstract class VasBaseScrollListView implements OnTouchListener {
 		if (activity != null) {
 			Conts.hiddenKeyBoard(activity);
 		}
-		for (ListView listView : listViews) {
-			// if (listView.getAdapter() != null && listView.getVisibility() ==
-			// View.VISIBLE) {
-			// if (listView.getAdapter().getCount() < 5) {
-			// return false;
-			// }
-			// }
-		}
+
 		if (event.getAction() == MotionEvent.ACTION_DOWN) {
 			ytop = (int) event.getY();
 		} else if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) {
 			release();
 		} else if (event.getAction() == MotionEvent.ACTION_MOVE) {
 			int yCurrentTop = (int) event.getY();
-			if (Math.abs(ytop - yCurrentTop) > 5) {
+			if (Math.abs(ytop - yCurrentTop) > 10) {
 				update(ytop - yCurrentTop, yCurrentTop);
 				ytop = yCurrentTop;
 			}
@@ -67,10 +61,8 @@ public abstract class VasBaseScrollListView implements OnTouchListener {
 
 		if (marginTop < -height / 2) {
 			marginTop = -height;
-			// hidden(true);
 		} else {
 			marginTop = 0;
-			// hidden(false);
 		}
 
 		update(marginTop);
@@ -83,27 +75,28 @@ public abstract class VasBaseScrollListView implements OnTouchListener {
 		header.setLayoutParams(layoutParams);
 	}
 
+	private int height;
+
 	private void update(int dy, int yCurrentTop) {
 		ViewGroup.LayoutParams layoutParams = header.getLayoutParams();
 		int marginTop = 0;
-		int height = header.getHeight();
+		if (height == 0) {
+			height = header.getHeight();
+		}
+
 		if (layoutParams instanceof LinearLayout.LayoutParams) {
 			marginTop = ((LinearLayout.LayoutParams) layoutParams).topMargin;
 		} else if (layoutParams instanceof RelativeLayout.LayoutParams) {
 			marginTop = ((RelativeLayout.LayoutParams) layoutParams).topMargin;
 		}
 
-		// marginTop = height - dy;
 		marginTop = marginTop - dy;
 
-		if (marginTop <= -height) {
+		LogUtils.e("dy", dy + "");
+		if (marginTop < -height) {
 			marginTop = -height;
-			// ytop = yCurrentTop;
-			// hidden(true);
 		} else if (marginTop > 0) {
 			marginTop = 0;
-			// hidden(false);
-			// ytop = yCurrentTop;
 		}
 
 		update(marginTop);
