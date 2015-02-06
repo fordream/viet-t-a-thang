@@ -810,26 +810,21 @@ public class Conts {
 	}
 
 	public static void showAvatarContact(final ImageView menu_right_item_img_icon, final String avatar, final String contact_id, int resAvatar) {
-		menu_right_item_img_icon.setImageResource(resAvatar);
-		if (Conts.isBlank(avatar)) {
-			if (Conts.isBlank(contact_id)) {
-			} else {
-				ImageLoaderUtils.getInstance(menu_right_item_img_icon.getContext()).displayImage(contact_id, menu_right_item_img_icon, 0);
-			}
-		} else {
-			ImageLoaderUtils.getInstance(menu_right_item_img_icon.getContext()).displayImage(avatar, menu_right_item_img_icon, 0);
-		}
+		ImageLoaderUtils.getInstance(menu_right_item_img_icon.getContext()).showAvatarContact(menu_right_item_img_icon, avatar, contact_id, resAvatar);
 	}
 
 	public static void showLogoDichvu(final ImageView menu_right_item_img_icon, final String avatar) {
-		menu_right_item_img_icon.setImageResource(R.drawable.no_image);
-		ImageLoaderUtils.getInstance(menu_right_item_img_icon.getContext()).displayImage(avatar, menu_right_item_img_icon, 0);
-
+		// menu_right_item_img_icon.setImageResource(R.drawable.no_image);
+		// ImageLoaderUtils.getInstance(menu_right_item_img_icon.getContext()).displayImage(avatar,
+		// menu_right_item_img_icon, 0);
+		ImageLoaderUtils.getInstance(menu_right_item_img_icon.getContext()).showLogoDichvu(menu_right_item_img_icon, avatar);
 	}
 
 	public static void showLogoTinTuc(ImageView tintuc_item_img_icon, String images) {
-		tintuc_item_img_icon.setImageResource(R.drawable.no_image);
-		ImageLoaderUtils.getInstance(tintuc_item_img_icon.getContext()).displayImage(images, tintuc_item_img_icon, 0);
+		ImageLoaderUtils.getInstance(tintuc_item_img_icon.getContext()).showLogoTinTuc(tintuc_item_img_icon, images);
+		// tintuc_item_img_icon.setImageResource(R.drawable.no_image);
+		// ImageLoaderUtils.getInstance(tintuc_item_img_icon.getContext()).displayImage(images,
+		// tintuc_item_img_icon, 0);
 	}
 
 }
