@@ -151,8 +151,9 @@ public abstract class NewHomeAdapter extends ArrayAdapter<NewHomeItem> {
 			Conts.setTextView(findViewById(R.id.home_item_tv_name), item.name);
 			Conts.getSDT(findViewById(R.id.menu_right_item_tv_name));
 
-			Conts.showAvatarNoImage((ImageView) findViewById(R.id.menu_right_item_img_icon), item.avatar, item.contact_id, Conts.resavatar()[position % Conts.resavatar().length]);
-			ImageLoaderUtils.getInstance(getContext()).displayImage(item.avatar, (ImageView) findViewById(R.id.home_item_img_icon), R.drawable.no_image);
+			Conts.showAvatarContact((ImageView) findViewById(R.id.menu_right_item_img_icon), item.avatar, item.contact_id, Conts.resavatar()[position % Conts.resavatar().length]);
+//			ImageLoaderUtils.getInstance(getContext()).displayImage(item.avatar, (ImageView) findViewById(R.id.home_item_img_icon), R.drawable.no_image);
+			Conts.showLogoDichvu( (ImageView) findViewById(R.id.home_item_img_icon), item.avatar);
 			/**
 			 * content
 			 */

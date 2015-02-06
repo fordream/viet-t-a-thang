@@ -40,9 +40,9 @@ public class CoverAvatarView extends LinearLayout {
 				menu_left_tv_name.setText(String.format("%s (%s)", Conts.getName(cursor), Conts.getSDT(cursor.getString(cursor.getColumnIndex(User.USER)))));
 
 				String cover = cursor.getString(cursor.getColumnIndex(User.COVER));
-				Conts.showImage(cover, menu_left_img_cover, 0);
+				Conts.displayImageCover(cover, menu_left_img_cover);
 				String avatar = cursor.getString(cursor.getColumnIndex(User.AVATAR));
-				Conts.showImage(avatar, menu_left_img_avatar, R.drawable.no_avatar);
+				Conts.showInforAvatar(avatar, menu_left_img_avatar);
 			}
 		}
 

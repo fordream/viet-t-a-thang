@@ -1,5 +1,6 @@
 package vnp.com.mimusic.util;
 
+import vnp.com.mimusic.R;
 import android.content.Context;
 import android.widget.ImageView;
 
@@ -23,14 +24,30 @@ public class ImageLoaderUtils {
 
 	}
 
-	public void displayImage(String url, ImageView imageView, int res) {
-		
-		if (res != 0) {
-			imageView.setImageResource(res);
-		}
-		
+	public void displayImageInfor(String url, ImageView imageView) {
+
+		imageView.setImageResource(R.drawable.new_no_avatar);
+
 		if (!Conts.isBlank(url)) {
 			imageLoader.DisplayImage(url, imageView);
 		}
 	}
+
+	public void displayImageCover(String url, ImageView imageView) {
+		if (!Conts.isBlank(url)) {
+			imageLoader.DisplayImage(url, imageView);
+		}
+	}
+
+	public void displayImage(String url, ImageView imageView, int res) {
+
+		if (res != 0) {
+			imageView.setImageResource(res);
+		}
+
+		if (!Conts.isBlank(url)) {
+			imageLoader.DisplayImage(url, imageView);
+		}
+	}
+
 }

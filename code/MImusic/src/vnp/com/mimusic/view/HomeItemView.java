@@ -2,6 +2,7 @@ package vnp.com.mimusic.view;
 
 import vnp.com.db.DichVu;
 import vnp.com.mimusic.R;
+import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.ImageLoaderUtils;
 import android.content.Context;
 import android.database.Cursor;
@@ -144,6 +145,8 @@ public class HomeItemView extends LinearLayout {
 		// show image
 		String service_icon = cursor.getString(cursor.getColumnIndex(DichVu.service_icon)) + "";
 
-		ImageLoaderUtils.getInstance(getContext()).displayImage(service_icon, home_item_img_icon, R.drawable.no_image);
+//		ImageLoaderUtils.getInstance(getContext()).displayImage(service_icon, home_item_img_icon, R.drawable.no_image);
+		
+		Conts.showLogoDichvu(home_item_img_icon, service_icon);
 	}
 }

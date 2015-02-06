@@ -71,7 +71,8 @@ public class ChiTietListSuBanHangAdaper extends ArrayAdapter<JSONObject> {
 
 		String xAvatar = Conts.getString(jsonObject, "avatar");
 		if (!Conts.isBlank(xAvatar)) {
-			ImageLoaderUtils.getInstance(getContext()).displayImage(xAvatar, avatar, R.drawable.new_no_avatar);
+//			ImageLoaderUtils.getInstance(getContext()).displayImage(xAvatar, avatar, R.drawable.new_no_avatar);
+			Conts.showAvatarContact(avatar, xAvatar, "", Conts.resavatar()[position % Conts.resavatar().length]);
 		} else {
 			String selection = String.format("%s ='%s'", User.USER, Conts.getString(jsonObject, "phone_custom"));
 			Cursor cursor = getContext().getContentResolver().query(User.CONTENT_URI, null, selection, null, null);
@@ -80,13 +81,7 @@ public class ChiTietListSuBanHangAdaper extends ArrayAdapter<JSONObject> {
 				String mavatar = cursor.getString(cursor.getColumnIndex(User.AVATAR));
 				String contact_id = Conts.getStringCursor(cursor, User.contact_id);
 
-				//if (!Conts.isBlank(mavatar)) {
-					//ImageLoaderUtils.getInstance(getContext()).DisplayImage(mavatar, avatar, R.drawable.new_no_avatar);
-					//Conts.showAvatarNoImage(avatar, mavatar, contact_id, Conts.resavatar()[cursor.getPosition() % Conts.resavatar().length]);
-				//} else {
-					//ImageLoaderUtils.getInstance(getContext()).DisplayImage(contact_id, avatar, R.drawable.new_no_avatar);
-					Conts.showAvatarNoImage(avatar, mavatar, contact_id, Conts.resavatar()[cursor.getPosition() % Conts.resavatar().length]);
-				//}
+				Conts.showAvatarContact(avatar, mavatar, contact_id, Conts.resavatar()[cursor.getPosition() % Conts.resavatar().length]);
 			}
 
 			if (cursor != null) {

@@ -128,10 +128,10 @@ public class ThongTinCaNhanFragment extends BaseFragment implements OnItemClickL
 				((TextView) view.findViewById(R.id.text_sotienhoahongtrongthang)).setText(getText(cursor.getString(cursor.getColumnIndex(User.poundage_month))) + " " + getString(R.string.vnd));
 				((TextView) view.findViewById(R.id.text_sotienhoahong)).setText(getText(cursor.getString(cursor.getColumnIndex(User.poundage))) + " " + getString(R.string.vnd));
 				String cover = cursor.getString(cursor.getColumnIndex(User.COVER));
-				Conts.showImage(cover, menu_left_img_cover, 0);
+				Conts.displayImageCover(cover, menu_left_img_cover);
 
 				String avatar = cursor.getString(cursor.getColumnIndex(User.AVATAR));
-				Conts.showImage(avatar, menu_left_img_avatar, R.drawable.new_no_avatar);
+				Conts.showInforAvatar(avatar, menu_left_img_avatar);
 
 				TextView menu_left_tv_name = (TextView) view.findViewById(R.id.menu_left_tv_name);
 				menu_left_tv_name.setText(String.format("%s (%s)", Conts.getName(cursor), Conts.getSDT(cursor.getString(cursor.getColumnIndex(User.USER)))));

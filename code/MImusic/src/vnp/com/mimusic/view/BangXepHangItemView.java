@@ -54,7 +54,8 @@ public class BangXepHangItemView extends LinearLayout {
 			bxhItemValue.setText(Conts.getString(item, "quantity"));
 		}
 
-		ImageLoaderUtils.getInstance(getContext()).displayImage(Conts.getString(item, "avatar"), bxhItemImage, R.drawable.no_avatar);
+//		ImageLoaderUtils.getInstance(getContext()).displayImage(Conts.getString(item, "avatar"), bxhItemImage, R.drawable.no_avatar);
+		Conts.showAvatarContact(bxhItemImage, Conts.getString(item, "avatar"), "", Conts.resavatar()[0 % Conts.resavatar().length]);
 	}
 
 	public void setDataColor(int position) {
@@ -84,7 +85,10 @@ public class BangXepHangItemView extends LinearLayout {
 		Conts.setTextView(findViewById(R.id.chitietsoluong1dichvu), arguments.getString("quantity"));
 		Conts.setTextView(findViewById(R.id.chitietdoanhthu1dichvu), arguments.getString("commission"));
 		ImageView bxhItemImage = (ImageView) findViewById(R.id.bangxephang_item_img_icon);
-		ImageLoaderUtils.getInstance(getContext()).displayImage(arguments.getString("avatar"), bxhItemImage, R.drawable.no_avatar);
+//		ImageLoaderUtils.getInstance(getContext()).displayImage(arguments.getString("avatar"), bxhItemImage, R.drawable.no_avatar);
+		
+		Conts.showAvatarContact(bxhItemImage,arguments.getString("avatar"), "", Conts.resavatar()[0 % Conts.resavatar().length]);
+		
 		((TextView) findViewById(R.id.chitietdoanhthu1dichvu)).setText(String.format(getContext().getString(R.string.format_tien), arguments.getString("commission")));
 
 		if ("1".equals(type)) {
@@ -122,6 +126,9 @@ public class BangXepHangItemView extends LinearLayout {
 			bxhItemValue.setText(Conts.getStringCursor(cursor, BangXepHang.quantity));
 		}
 
-		ImageLoaderUtils.getInstance(getContext()).displayImage(Conts.getStringCursor(cursor, BangXepHang.avatar), bxhItemImage, R.drawable.no_avatar);
+//		ImageLoaderUtils.getInstance(getContext()).displayImage(Conts.getStringCursor(cursor, BangXepHang.avatar), bxhItemImage, R.drawable.no_avatar);
+	
+		Conts.showAvatarContact(bxhItemImage,Conts.getStringCursor(cursor, BangXepHang.avatar), "", Conts.resavatar()[0 % Conts.resavatar().length]);
+		
 	}
 }

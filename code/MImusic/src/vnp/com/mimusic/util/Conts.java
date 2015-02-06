@@ -173,19 +173,6 @@ public class Conts {
 		return targetBitmap;
 	}
 
-	public static void showImage(String path, ImageView img, int no_image) {
-
-		// Bitmap bitmap = null;
-		//
-		// if (no_image != 0) {
-		// bitmap =
-		// BitmapFactory.decodeResource(img.getContext().getResources(),
-		// no_image);
-		// }
-		ImageLoaderUtils.getInstance(img.getContext()).displayImage(path, img, no_image);
-
-	}
-
 	public static String getToken(Context activity) {
 		String token = null;
 		String selection = User.STATUS + "='1'";
@@ -761,30 +748,6 @@ public class Conts {
 	// }
 	// }
 
-	public static void showAvatarNoImage(final ImageView menu_right_item_img_icon, final String avatar, final String contact_id) {
-		menu_right_item_img_icon.setImageResource(R.drawable.new_no_avatar);
-		if (Conts.isBlank(avatar)) {
-			if (Conts.isBlank(contact_id)) {
-			} else {
-				ImageLoaderUtils.getInstance(menu_right_item_img_icon.getContext()).displayImage(contact_id, menu_right_item_img_icon, 0);
-			}
-		} else {
-			ImageLoaderUtils.getInstance(menu_right_item_img_icon.getContext()).displayImage(avatar, menu_right_item_img_icon, 0);
-		}
-	}
-
-	public static void showAvatarNoImage(final ImageView menu_right_item_img_icon, final String avatar, final String contact_id, int resAvatar) {
-		menu_right_item_img_icon.setImageResource(resAvatar);
-		if (Conts.isBlank(avatar)) {
-			if (Conts.isBlank(contact_id)) {
-			} else {
-				ImageLoaderUtils.getInstance(menu_right_item_img_icon.getContext()).displayImage(contact_id, menu_right_item_img_icon, 0);
-			}
-		} else {
-			ImageLoaderUtils.getInstance(menu_right_item_img_icon.getContext()).displayImage(avatar, menu_right_item_img_icon, 0);
-		}
-	}
-
 	public static void setTextResource(View view, int res) {
 		if (view != null && view instanceof TextView) {
 			((TextView) view).setText(res);
@@ -828,9 +791,45 @@ public class Conts {
 		return 0;
 	}
 
+	/**
+	 * avatar
+	 * 
+	 * @return
+	 */
 	public static int[] resavatar() {
 		int resavatar[] = new int[] { R.drawable.avatar_1, R.drawable.avatar_2, R.drawable.avatar_3, R.drawable.avatar_4, R.drawable.avatar_5 };
 		return resavatar;
+	}
+
+	public static void showInforAvatar(String path, ImageView img) {
+		ImageLoaderUtils.getInstance(img.getContext()).displayImageInfor(path, img);
+	}
+
+	public static void displayImageCover(String path, ImageView img) {
+		ImageLoaderUtils.getInstance(img.getContext()).displayImageCover(path, img);
+	}
+
+	public static void showAvatarContact(final ImageView menu_right_item_img_icon, final String avatar, final String contact_id, int resAvatar) {
+		menu_right_item_img_icon.setImageResource(resAvatar);
+		if (Conts.isBlank(avatar)) {
+			if (Conts.isBlank(contact_id)) {
+			} else {
+				ImageLoaderUtils.getInstance(menu_right_item_img_icon.getContext()).displayImage(contact_id, menu_right_item_img_icon, 0);
+			}
+		} else {
+			ImageLoaderUtils.getInstance(menu_right_item_img_icon.getContext()).displayImage(avatar, menu_right_item_img_icon, 0);
+		}
+	}
+
+	public static void showLogoDichvu(final ImageView menu_right_item_img_icon, final String avatar) {
+		menu_right_item_img_icon.setImageResource(R.drawable.no_image);
+		ImageLoaderUtils.getInstance(menu_right_item_img_icon.getContext()).displayImage(avatar, menu_right_item_img_icon, 0);
+
+	}
+
+	public static void showLogoTinTuc(ImageView tintuc_item_img_icon, String images) {
+		tintuc_item_img_icon.setImageResource(R.drawable.no_image);
+		ImageLoaderUtils.getInstance(tintuc_item_img_icon.getContext()).displayImage(images, tintuc_item_img_icon, 0);
 	}
 
 }

@@ -223,8 +223,8 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 		public void setIcon(String icon) {
 			ImageView moinhieudichvu_img_icon = (ImageView) findViewById(R.id.imageView1);
 			moinhieudichvu_img_icon.setImageResource(R.drawable.no_avatar);
-			ImageLoaderUtils.getInstance(getActivity()).displayImage(icon, moinhieudichvu_img_icon, R.drawable.no_image);
-
+//			ImageLoaderUtils.getInstance(getActivity()).displayImage(icon, moinhieudichvu_img_icon, R.drawable.no_image);
+			Conts.showLogoDichvu(moinhieudichvu_img_icon, icon);
 		}
 
 		private String mId = "";
