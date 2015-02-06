@@ -24,18 +24,32 @@ public class ImageLoaderUtils {
 
 	}
 
+	public void displayImageCover(String url, ImageView imageView) {
+		if (!Conts.isBlank(url)) {
+			imageLoader.displayImage(url, imageView, false);
+		}
+	}
+
+	public void showLogoDichvu(final ImageView menu_right_item_img_icon, final String avatar) {
+		menu_right_item_img_icon.setImageResource(R.drawable.no_image);
+		imageLoader.displayImage(avatar, menu_right_item_img_icon, false);
+
+	}
+
+	public void showLogoTinTuc(ImageView tintuc_item_img_icon, String images) {
+		tintuc_item_img_icon.setImageResource(R.drawable.no_image);
+		imageLoader.displayImage(images, tintuc_item_img_icon, false);
+
+	}
+
+	// **
+
 	public void displayImageInfor(String url, ImageView imageView) {
 
 		imageView.setImageResource(R.drawable.new_no_avatar);
 
 		if (!Conts.isBlank(url)) {
-			imageLoader.DisplayImage(url, imageView);
-		}
-	}
-
-	public void displayImageCover(String url, ImageView imageView) {
-		if (!Conts.isBlank(url)) {
-			imageLoader.DisplayImage(url, imageView);
+			imageLoader.displayImage(url, imageView, true);
 		}
 	}
 
@@ -45,33 +59,11 @@ public class ImageLoaderUtils {
 		if (Conts.isBlank(avatar)) {
 			if (Conts.isBlank(contact_id)) {
 			} else {
-				imageLoader.DisplayImage(contact_id, menu_right_item_img_icon);
+				imageLoader.displayImage(contact_id, menu_right_item_img_icon, true);
 			}
 		} else {
-			imageLoader.DisplayImage(avatar, menu_right_item_img_icon);
+			imageLoader.displayImage(avatar, menu_right_item_img_icon, true);
 		}
 	}
-
-	public void showLogoDichvu(final ImageView menu_right_item_img_icon, final String avatar) {
-		menu_right_item_img_icon.setImageResource(R.drawable.no_image);
-		imageLoader.DisplayImage(avatar, menu_right_item_img_icon);
-
-	}
-
-	public void showLogoTinTuc(ImageView tintuc_item_img_icon, String images) {
-		tintuc_item_img_icon.setImageResource(R.drawable.no_image);
-		imageLoader.DisplayImage(images, tintuc_item_img_icon);
-
-	}
-	// public void displayImage(String url, ImageView imageView, int res) {
-	//
-	// if (res != 0) {
-	// imageView.setImageResource(res);
-	// }
-	//
-	// if (!Conts.isBlank(url)) {
-	// imageLoader.DisplayImage(url, imageView);
-	// }
-	// }
 
 }

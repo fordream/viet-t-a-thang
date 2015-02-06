@@ -400,7 +400,6 @@ public class ImageLoader2 {
 		Bitmap scaledBitmap = Bitmap.createBitmap(dstRect.width(), dstRect.height(), Config.ARGB_8888);
 		Canvas canvas = new Canvas(scaledBitmap);
 		canvas.drawBitmap(unscaledBitmap, srcRect, dstRect, new Paint(Paint.FILTER_BITMAP_FLAG));
-
 		return scaledBitmap;
 	}
 

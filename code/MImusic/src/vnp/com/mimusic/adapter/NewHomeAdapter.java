@@ -29,70 +29,6 @@ public abstract class NewHomeAdapter extends ArrayAdapter<NewHomeItem> {
 	public NewHomeAdapter(Context context) {
 		super(context, 0);
 
-		// Cursor cursorUserRecomment = Recomment.getCursorFromUser(context, 5);
-		//
-		// if (cursorUserRecomment != null) {
-		// if (cursorUserRecomment.getCount() > 0) {
-		// NewHomeItem item = new NewHomeItem();
-		// item.type = 0;
-		// item.name = context.getString(R.string.moithanhvien);
-		//
-		// list.add(item);
-		// }
-		//
-		// while (cursorUserRecomment.moveToNext()) {
-		// NewHomeItem item = new NewHomeItem();
-		// item.type = 1;
-		// item.name = Conts.getStringCursor(cursorUserRecomment,
-		// User.NAME_CONTACT);
-		// item.content = Conts.getStringCursor(cursorUserRecomment, User.USER);
-		// item.avatar = Conts.getStringCursor(cursorUserRecomment,
-		// User.AVATAR);
-		// item.contact_id = Conts.getStringCursor(cursorUserRecomment,
-		// User.contact_id);
-		//
-		// list.add(item);
-		// }
-		//
-		// cursorUserRecomment.close();
-		// }
-		//
-		// Cursor cursorDVHot = DichVu.getCursorFromUser(context, 3);
-		// if (cursorDVHot != null) {
-		// if (cursorDVHot.getCount() > 0) {
-		// NewHomeItem item = new NewHomeItem();
-		// item.type = 0;
-		// item.name = context.getString(R.string.dichvuhot);
-		// list.add(item);
-		// }
-		// int index = 0;
-		// while (cursorDVHot.moveToNext()) {
-		// NewHomeItem item = new NewHomeItem();
-		// item.type = 2;
-		// item.id = Conts.getStringCursor(cursorDVHot, DichVu.ID);
-		// item.name = Conts.getStringCursor(cursorDVHot, DichVu.service_name);
-		// item.content = Conts.getStringCursor(cursorDVHot,
-		// DichVu.service_content);
-		// item.avatar = Conts.getStringCursor(cursorDVHot,
-		// DichVu.service_icon);
-		// item.service_code = Conts.getStringCursor(cursorDVHot,
-		// DichVu.service_code);
-		// item.service_price = Conts.getStringCursor(cursorDVHot,
-		// DichVu.service_price);
-		// item.isDangky = "0".equals(Conts.getStringCursor(cursorDVHot,
-		// DichVu.service_status));
-		// item.index = index;
-		//
-		// if (index == 0) {
-		// index = 1;
-		// } else {
-		// index = 0;
-		// }
-		// list.add(item);
-		// }
-		//
-		// cursorDVHot.close();
-		// }
 	}
 
 	@Override
@@ -115,7 +51,7 @@ public abstract class NewHomeAdapter extends ArrayAdapter<NewHomeItem> {
 
 		Conts.getView(convertView, R.id.new_home_header_spacing).setVisibility(getItem(position).type == 0 && position > 0 ? View.VISIBLE : View.GONE);
 
-		convertView.findViewById(R.id.moi).setOnClickListener(new MoiOnClickListener(getItem(position).content, getItem(position).name,position));
+		convertView.findViewById(R.id.moi).setOnClickListener(new MoiOnClickListener(getItem(position).content, getItem(position).name, position));
 		convertView.findViewById(R.id.xemall).setOnClickListener(new XemAllClickListener(getItem(position).name));
 
 		ContentValues values = new ContentValues();
@@ -151,9 +87,11 @@ public abstract class NewHomeAdapter extends ArrayAdapter<NewHomeItem> {
 			Conts.setTextView(findViewById(R.id.home_item_tv_name), item.name);
 			Conts.getSDT(findViewById(R.id.menu_right_item_tv_name));
 
-			Conts.showAvatarContact((ImageView) findViewById(R.id.menu_right_item_img_icon), item.avatar, item.contact_id, Conts.resavatar()[position % Conts.resavatar().length]);
-//			ImageLoaderUtils.getInstance(getContext()).displayImage(item.avatar, (ImageView) findViewById(R.id.home_item_img_icon), R.drawable.no_image);
-			Conts.showLogoDichvu( (ImageView) findViewById(R.id.home_item_img_icon), item.avatar);
+			if (type == 1) {
+				Conts.showAvatarContact((ImageView) findViewById(R.id.menu_right_item_img_icon), item.avatar, item.contact_id, Conts.resavatar()[position % Conts.resavatar().length]);
+			} else {
+				Conts.showLogoDichvu((ImageView) findViewById(R.id.home_item_img_icon), item.avatar);
+			}
 			/**
 			 * content
 			 */

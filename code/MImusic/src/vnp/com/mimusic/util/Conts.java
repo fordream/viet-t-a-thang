@@ -3,6 +3,7 @@ package vnp.com.mimusic.util;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.text.Normalizer;
 import java.util.Set;
@@ -24,6 +25,7 @@ import vnp.com.db.DataStore;
 import vnp.com.db.User;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.base.diablog.DangKyDialog;
+import vnp.com.mimusic.util.ImageLoader.ScalingLogic;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.ContentUris;
@@ -665,9 +667,9 @@ public class Conts {
 				}
 			} else if (url != null && url.startsWith("file://")) {
 				url = url.substring(url.indexOf("file://") + 7, url.length());
-				bitmap = ImageLoader.decodeFile(new File(url));
+				bitmap = Conts.decodeFile(new File(url));
 			} else {
-				bitmap = ImageLoader.decodeFile(new File(url));
+				bitmap = Conts.decodeFile(new File(url));
 			}
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 			bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos); // bm is the
@@ -679,6 +681,41 @@ public class Conts {
 			return "";
 			// TODO: handle exception
 		}
+	}
+
+	// decodes image and scales it to reduce memory consumption
+	public static Bitmap decodeFile(File f) {
+		try {
+			// decode image size
+			BitmapFactory.Options o = new BitmapFactory.Options();
+			o.inJustDecodeBounds = true;
+			FileInputStream stream1 = new FileInputStream(f);
+			BitmapFactory.decodeStream(stream1, null, o);
+			stream1.close();
+
+			// Find the correct scale value. It should be the power of 2.
+			final int REQUIRED_SIZE = 480;
+			int width_tmp = o.outWidth, height_tmp = o.outHeight;
+			int scale = 1;
+			while (true) {
+				if (width_tmp / 2 < REQUIRED_SIZE | height_tmp / 2 < REQUIRED_SIZE)
+					break;
+				width_tmp /= 2;
+				height_tmp /= 2;
+				scale *= 2;
+			}
+
+			// decode with inSampleSize
+			BitmapFactory.Options o2 = new BitmapFactory.Options();
+			o2.inSampleSize = scale;
+			FileInputStream stream2 = new FileInputStream(f);
+			Bitmap bitmap = BitmapFactory.decodeStream(stream2, null, o2);
+			stream2.close();
+
+			return bitmap;
+		} catch (Exception e) {
+		}
+		return null;
 	}
 
 	public static void getSDT(View textView) {
@@ -717,7 +754,7 @@ public class Conts {
 				}
 			}
 
-			bitmap = ImageLoader.decodeFile(yourFile);
+			bitmap = decodeFile(yourFile);
 			if (cursor != null) {
 				cursor.close();
 			}
