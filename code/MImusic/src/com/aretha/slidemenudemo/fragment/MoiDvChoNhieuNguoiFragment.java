@@ -145,6 +145,8 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 			String mService_code = getArguments().getString(DichVu.service_code);
 			selection = DichVu.service_code + "='" + mService_code + "'";
 		}
+		
+		
 		final Cursor mcursor = getActivity().getContentResolver().query(DichVu.CONTENT_URI, null, selection, null, null);
 
 		if (mcursor != null && mcursor.getCount() >= 1) {
@@ -153,6 +155,7 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 			Conts.setTextViewCursor(view.findViewById(R.id.name), mcursor, DichVu.service_name);
 			Conts.setTextViewCursor(view.findViewById(R.id.gia), mcursor, DichVu.service_price);
 			ImageView home_item_img_icon = (ImageView) view.findViewById(R.id.icon);
+			
 			String service_icon = Conts.getStringCursor(mcursor, DichVu.service_icon);
 			ImageLoaderUtils.getInstance(getActivity()).DisplayImage(service_icon, home_item_img_icon, R.drawable.no_image);
 			//
@@ -168,10 +171,10 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 		adaper = new MoiDvChoNhieuNguoiAdaper(getActivity(), cursor, service_code) {
 
 			@Override
-			public void addOrRemove(final String _id, boolean isAdd) {
+			public void addOrRemove(final String _id, boolean isAdd, int postition) {
 				if (isAdd) {
 					final MoiNhieuSDTAddItemView addItemView = new MoiNhieuSDTAddItemView(getActivity());
-					addItemView.setMId(_id);
+					addItemView.setMId(_id, postition);
 
 					moinhieudichvu_dialog_list_hor.addView(addItemView);
 					Conts.showAlpha(MoiDvChoNhieuNguoiFragment.this.getView().findViewById(R.id.moi), (moinhieudichvu_dialog_list_hor.getChildCount() == 0));
@@ -234,10 +237,10 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 			}
 
 			@Override
-			public void addOrRemoveSdt(boolean isAdd, final String sdt) {
+			public void addOrRemoveSdt(boolean isAdd, final String sdt, int position) {
 				if (isAdd) {
 					final MoiNhieuSDTAddItemView addItemView = new MoiNhieuSDTAddItemView(getActivity());
-					addItemView.setMId(sdt);
+					addItemView.setMId(sdt, position);
 
 					moinhieudichvu_dialog_list_hor.addView(addItemView);
 					Conts.showAlpha(MoiDvChoNhieuNguoiFragment.this.getView().findViewById(R.id.moi), (moinhieudichvu_dialog_list_hor.getChildCount() == 0));
@@ -430,7 +433,7 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 			return mId;
 		}
 
-		public void setMId(String _id) {
+		public void setMId(String _id, int position) {
 			mId = _id;
 
 			Cursor cursor = getActivity().getContentResolver().query(User.CONTENT_URI, null, String.format("%s =='%s'", User._ID, mId), null, null);
@@ -439,7 +442,7 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 				((TextView) findViewById(R.id.moinhieudichvu_item_tv_name)).setText(Conts.getName(cursor));
 				String avatar = cursor.getString(cursor.getColumnIndex(User.AVATAR));
 				String contact_id = Conts.getStringCursor(cursor, User.contact_id);
-				Conts.showAvatarNoImage(((ImageView) findViewById(R.id.imageView1)), avatar, contact_id);
+				Conts.showAvatarNoImage(((ImageView) findViewById(R.id.imageView1)), avatar, contact_id, Conts.resavatar()[position % Conts.resavatar().length]);
 			} else {
 				((TextView) findViewById(R.id.moinhieudichvu_item_tv_name)).setText(_id);
 			}

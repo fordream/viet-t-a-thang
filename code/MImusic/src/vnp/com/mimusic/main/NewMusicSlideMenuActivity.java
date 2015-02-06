@@ -68,7 +68,6 @@ public class NewMusicSlideMenuActivity extends TabActivity {
 		registerReceiver(broadcastReceiver, new IntentFilter("broadcastReceivermactivity_slidemenu_menuleft"));
 		registerReceiver(broadcastReceiverDongBoDanhBa, new IntentFilter("dongbodanhba"));
 		((MenuLeftView) findViewById(R.id.mactivity_slidemenu_menuleft)).showData();
-		// ((MenuRightView) findViewById(R.id.mactivity_menu_right)).initData();
 	}
 
 	@Override
@@ -273,6 +272,7 @@ public class NewMusicSlideMenuActivity extends TabActivity {
 				Intent intent = new Intent(NewMusicSlideMenuActivity.this, RootMenuActivity.class);
 				intent.putExtra("type", Conts.NHIEUDICHVU);
 				intent.putExtra(User._ID, _id + "");
+				intent.putExtra("getPosition", cursor.getPosition());
 				startActivity(intent);
 				overridePendingTransitionStartActivity();
 			}

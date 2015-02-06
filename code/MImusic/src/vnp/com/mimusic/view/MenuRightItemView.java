@@ -95,4 +95,43 @@ public class MenuRightItemView extends LinearLayout {
 		menu_right_item_tv_link.setText(sdt);
 		Conts.getSDT(menu_right_item_tv_link);
 	}
+
+	public void initData(Cursor cursor, String textSearch, int getPosition) {
+		try {
+			String name = "";
+			if (cursor.getString(cursor.getColumnIndex(User.NAME)) != null) {
+				name = cursor.getString(cursor.getColumnIndex(User.NAME));
+			}
+
+			if (cursor.getString(cursor.getColumnIndex(User.NAME_CONTACT)) != null) {
+				if (name == null || name != null && name.trim().equals("")) {
+					name = cursor.getString(cursor.getColumnIndex(User.NAME_CONTACT));
+				}
+			}
+
+			if (name == null || name != null && name.trim().equals("")) {
+				name = cursor.getString(cursor.getColumnIndex(User.USER));
+			}
+
+			if (name == null)
+				name = "";
+
+			menurightitem_main.setVisibility(Conts.xDontains(textSearch, true, new String[] { name, Conts.getStringCursor(cursor, User.USER) }) ? View.VISIBLE : View.GONE);
+			menu_right_item_tv_name.setText(name);
+
+			String avatar = cursor.getString(cursor.getColumnIndex(User.AVATAR));
+			String contact_id = Conts.getStringCursor(cursor, User.contact_id);
+
+			Conts.showAvatarNoImage(menu_right_item_img_icon, avatar, contact_id, Conts.resavatar()[getPosition % Conts.resavatar().length]);
+
+			menu_right_item_tv_link.setText(Conts.getStringCursor(cursor, User.USER));
+			Conts.getSDT(menu_right_item_tv_link);
+			Conts.getSDT(menu_right_item_tv_name);
+			String dvDaSuDung = cursor.getString(cursor.getColumnIndex(User.LISTIDDVSUDUNG));
+
+		} catch (Exception exception) {
+
+		}
+
+	}
 }

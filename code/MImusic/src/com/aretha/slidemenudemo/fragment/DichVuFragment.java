@@ -100,7 +100,7 @@ public class DichVuFragment extends BaseFragment implements OnItemClickListener,
 			dichvu_list.setAdapter(adapter = new DichVuAdapter(getActivity(), cursor) {
 				@Override
 				public void moiDVChoNhieuNguoi(String id) {
-					(((RootMenuActivity) getActivity())).gotoMoiDvChoNhieuNguoi(id);
+					(((RootMenuActivity) getActivity())).gotoMoiDvChoNhieuNguoi(id, 0);
 				}
 
 				@Override

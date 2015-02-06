@@ -57,6 +57,7 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 		view.findViewById(R.id.moi).setOnClickListener(this);
 
 		menuright_item = (MenuRightItemView) view.findViewById(R.id.menurightitem);
+		int getPosition = getArguments().getInt("getPosition");
 
 		String where = String.format("%s = '%s'", User._ID, getArguments().getString(User._ID));
 		if (Conts.isBlank(getArguments().getString(User._ID))) {
@@ -65,16 +66,15 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 			menuright_item.initData(getArguments().getString("name"));
 			moiNhieuDichVuHeader.initData(getArguments().getString("name"));
 			where = String.format("%s = '%s'", User.USER, sdt);
-
 			Cursor cursor = getActivity().getContentResolver().query(User.CONTENT_URI, null, where, null, null);
 			if (cursor != null && cursor.getCount() >= 1) {
 				cursor.moveToNext();
 				LISTIDDVSUDUNG = cursor.getString(cursor.getColumnIndex(User.LISTIDDVSUDUNG));
 				sdt = cursor.getString(cursor.getColumnIndex(User.USER));
 
-				menuright_item.initData(cursor, "");
+				menuright_item.initData(cursor, "", getPosition);
 
-				moiNhieuDichVuHeader.initData(cursor, "");
+				moiNhieuDichVuHeader.initData(cursor, "", getPosition);
 			}
 
 			if (cursor != null) {
@@ -88,8 +88,8 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 				LISTIDDVSUDUNG = cursor.getString(cursor.getColumnIndex(User.LISTIDDVSUDUNG));
 				sdt = cursor.getString(cursor.getColumnIndex(User.USER));
 
-				menuright_item.initData(cursor, "");
-				moiNhieuDichVuHeader.initData(cursor, "");
+				menuright_item.initData(cursor, "", getPosition);
+				moiNhieuDichVuHeader.initData(cursor, "", getPosition);
 			}
 
 			if (cursor != null) {
@@ -243,6 +243,10 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 		public MoiNhieuDichVuHeader(Context context) {
 			super(context);
 			((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.moinhieudv_header, this);
+		}
+
+		public void initData(Cursor cursor, String string, int getPosition) {
+			((MenuRightItemView) findViewById(R.id.menurightitem)).initData(cursor, string, getPosition);
 		}
 
 		public void initData(Cursor cursor, String string) {

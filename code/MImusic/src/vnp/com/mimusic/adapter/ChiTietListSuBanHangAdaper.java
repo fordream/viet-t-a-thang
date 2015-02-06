@@ -80,11 +80,13 @@ public class ChiTietListSuBanHangAdaper extends ArrayAdapter<JSONObject> {
 				String mavatar = cursor.getString(cursor.getColumnIndex(User.AVATAR));
 				String contact_id = Conts.getStringCursor(cursor, User.contact_id);
 
-				if (!Conts.isBlank(mavatar)) {
-					ImageLoaderUtils.getInstance(getContext()).DisplayImage(mavatar, avatar, R.drawable.new_no_avatar);
-				} else {
-					ImageLoaderUtils.getInstance(getContext()).DisplayImage(contact_id, avatar, R.drawable.new_no_avatar);
-				}
+				//if (!Conts.isBlank(mavatar)) {
+					//ImageLoaderUtils.getInstance(getContext()).DisplayImage(mavatar, avatar, R.drawable.new_no_avatar);
+					//Conts.showAvatarNoImage(avatar, mavatar, contact_id, Conts.resavatar()[cursor.getPosition() % Conts.resavatar().length]);
+				//} else {
+					//ImageLoaderUtils.getInstance(getContext()).DisplayImage(contact_id, avatar, R.drawable.new_no_avatar);
+					Conts.showAvatarNoImage(avatar, mavatar, contact_id, Conts.resavatar()[cursor.getPosition() % Conts.resavatar().length]);
+				//}
 			}
 
 			if (cursor != null) {

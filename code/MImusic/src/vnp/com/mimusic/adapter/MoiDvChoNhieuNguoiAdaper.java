@@ -29,7 +29,7 @@ public abstract class MoiDvChoNhieuNguoiAdaper extends CursorAdapter {
 		return listAdd;
 	}
 
-	public abstract void addOrRemove(String _id, boolean isAdd);
+	public abstract void addOrRemove(String _id, boolean isAdd, int position);
 
 	public void remove(String _id) {
 		if (listSelect.contains(_id)) {
@@ -42,10 +42,11 @@ public abstract class MoiDvChoNhieuNguoiAdaper extends CursorAdapter {
 	public void addSdt(String sdt, Context context) {
 		String selection = String.format("%s = '%s'", User.USER, sdt);
 		Cursor cursor = context.getContentResolver().query(User.CONTENT_URI, null, selection, null, null);
-
+		int position = 0;
 		String _id = null;
 		String user = null;
 		if (cursor != null && cursor.moveToNext()) {
+			position = cursor.getPosition();
 			if (!listSelect.contains(cursor.getString(cursor.getColumnIndex(User._ID)))) {
 				_id = cursor.getString(cursor.getColumnIndex(User._ID));
 				user = cursor.getString(cursor.getColumnIndex(User.USER));
@@ -58,27 +59,27 @@ public abstract class MoiDvChoNhieuNguoiAdaper extends CursorAdapter {
 		if (cursor != null)
 			cursor.close();
 		if (_id != null) {
-			add(_id, user);
+			add(_id, user, position);
 		} else {
 			if (listAdd.contains(sdt)) {
 				Conts.toast(context, mContext.getString(R.string.daaddsdt));
 			} else {
 				listAdd.add(sdt);
-				addOrRemoveSdt(true, sdt);
+				addOrRemoveSdt(true, sdt, position);
 			}
 		}
 	}
 
-	public abstract void addOrRemoveSdt(boolean isAdd, String sdt);
+	public abstract void addOrRemoveSdt(boolean isAdd, String sdt, int position);
 
-	private void add(String _id, String user) {
+	private void add(String _id, String user, int position) {
 		map.put(_id, user);
 		if (listSelect.contains(_id)) {
 			listSelect.remove(_id);
-			addOrRemove(_id, false);
+			addOrRemove(_id, false, position);
 		} else {
 			listSelect.add(_id);
-			addOrRemove(_id, true);
+			addOrRemove(_id, true, position);
 		}
 
 		notifyDataSetChanged();
@@ -100,7 +101,7 @@ public abstract class MoiDvChoNhieuNguoiAdaper extends CursorAdapter {
 			convertView = new MoiDvChoNhieuNguoiItemView(context);
 		}
 
-		((MoiDvChoNhieuNguoiItemView) convertView).initData(cursor, textSearch,service_code);
+		((MoiDvChoNhieuNguoiItemView) convertView).initData(cursor, textSearch, service_code);
 
 		CheckBox menu_right_detail_checkbox = (CheckBox) ((MoiDvChoNhieuNguoiItemView) convertView).findViewById(R.id.menu_right_detail_checkbox);
 		menu_right_detail_checkbox.setOnCheckedChangeListener(null);
@@ -108,10 +109,11 @@ public abstract class MoiDvChoNhieuNguoiAdaper extends CursorAdapter {
 		final String _id = cursor.getString(cursor.getColumnIndex(User._ID));
 		final String user = cursor.getString(cursor.getColumnIndex(User.USER));
 		menu_right_detail_checkbox.setChecked(listSelect.contains(_id));
+		final int position = cursor.getPosition();
 		menu_right_detail_checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				add(_id, user);
+				add(_id, user, position);
 			}
 		});
 
@@ -119,10 +121,10 @@ public abstract class MoiDvChoNhieuNguoiAdaper extends CursorAdapter {
 
 			@Override
 			public void onClick(View v) {
-				add(_id, user);
+				add(_id, user, position);
 			}
 		});
-		
+
 		((MoiDvChoNhieuNguoiItemView) convertView).updateBackground(cursor.getPosition());
 
 	}
@@ -135,7 +137,7 @@ public abstract class MoiDvChoNhieuNguoiAdaper extends CursorAdapter {
 	private String textSearch = "";
 
 	public void setTextSearch(String textSearh) {
-		//Conts.toast(mContext, textSearh);
+		// Conts.toast(mContext, textSearh);
 		this.textSearch = textSearh;
 	}
 

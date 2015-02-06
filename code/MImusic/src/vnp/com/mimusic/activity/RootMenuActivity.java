@@ -107,6 +107,8 @@ public class RootMenuActivity extends FragmentActivity {
 			bundle.putString(User._ID, _id);
 			bundle.putString("msisdn", getIntent().getStringExtra("msisdn"));
 			bundle.putString("name", getIntent().getStringExtra("name"));
+			bundle.putInt("getPosition", getIntent().getIntExtra("getPosition", 0));
+
 			MoiNhieuDichVuFragment moiNhieuDichVuFragment = new MoiNhieuDichVuFragment();
 			moiNhieuDichVuFragment.setArguments(bundle);
 			changeFragemt(R.id.root_main_fragment, moiNhieuDichVuFragment);
@@ -121,6 +123,7 @@ public class RootMenuActivity extends FragmentActivity {
 			MoiDvChoNhieuNguoiFragment chiTietTintucFragment = new MoiDvChoNhieuNguoiFragment();
 			Bundle args = new Bundle();
 			args.putString("id", getIntent().getStringExtra("id") + "");
+			args.putInt("getPosition", getIntent().getIntExtra("getPosition", 0));
 			chiTietTintucFragment.setArguments(args);
 			changeFragemt(R.id.root_main_fragment, chiTietTintucFragment);
 		} else if (Conts.CHITIETDICHVU.equals(type)) {
@@ -292,11 +295,12 @@ public class RootMenuActivity extends FragmentActivity {
 		overridePendingTransitionStartActivity();
 	}
 
-	public void gotoMoiDvChoNhieuNguoi(String id) {
+	public void gotoMoiDvChoNhieuNguoi(String id, int position) {
 		Conts.hiddenKeyBoard(this);
 		Intent intent = new Intent(this, RootMenuActivity.class);
 		intent.putExtra("type", Conts.MOIDICHVUCHONHIEUNGUOI);
 		intent.putExtra("id", id);
+		intent.putExtra("getPosition", position);
 		getParent().startActivity(intent);
 		overridePendingTransitionStartActivity();
 	}
@@ -556,7 +560,7 @@ public class RootMenuActivity extends FragmentActivity {
 	public void moiTheoDichVu(Bundle bundle) {
 
 		String api = API.API_R015;
-		
+
 		execute(RequestMethod.POST, api, bundle, new IContsCallBack() {
 			ProgressDialog dialog;
 
@@ -605,10 +609,11 @@ public class RootMenuActivity extends FragmentActivity {
 		});
 	}
 
-	public void moiContactUser(String user, String name) {
+	public void moiContactUser(String user, String name, int position) {
 		Intent intent = new Intent(this, RootMenuActivity.class);
 		intent.putExtra("type", Conts.NHIEUDICHVU);
 		intent.putExtra("msisdn", user);
+		intent.putExtra("getPosition", position);
 		intent.putExtra("name", name);
 		intent.putExtra(User._ID, "");
 		startActivity(intent);

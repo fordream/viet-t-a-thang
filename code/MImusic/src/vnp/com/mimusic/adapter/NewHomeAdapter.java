@@ -115,7 +115,7 @@ public abstract class NewHomeAdapter extends ArrayAdapter<NewHomeItem> {
 
 		Conts.getView(convertView, R.id.new_home_header_spacing).setVisibility(getItem(position).type == 0 && position > 0 ? View.VISIBLE : View.GONE);
 
-		convertView.findViewById(R.id.moi).setOnClickListener(new MoiOnClickListener(getItem(position).content, getItem(position).name));
+		convertView.findViewById(R.id.moi).setOnClickListener(new MoiOnClickListener(getItem(position).content, getItem(position).name,position));
 		convertView.findViewById(R.id.xemall).setOnClickListener(new XemAllClickListener(getItem(position).name));
 
 		ContentValues values = new ContentValues();
@@ -126,7 +126,7 @@ public abstract class NewHomeAdapter extends ArrayAdapter<NewHomeItem> {
 		values.put(DichVu.ID, getItem(position).id);
 		values.put("type", "dangky");
 		convertView.findViewById(R.id.home_item_right_control_1).setOnClickListener(new DangKyClickListener(values, getItem(position).isDangky));
-		convertView.findViewById(R.id.home_item_right_control_2).setOnClickListener(new MoiDichVuClickListener(getItem(position).id));
+		convertView.findViewById(R.id.home_item_right_control_2).setOnClickListener(new MoiDichVuClickListener(getItem(position).id, position));
 		return convertView;
 	}
 
@@ -180,15 +180,17 @@ public abstract class NewHomeAdapter extends ArrayAdapter<NewHomeItem> {
 	private class MoiOnClickListener implements OnClickListener {
 		private String user = "";
 		private String name = "";
+		private int position = 0;
 
-		public MoiOnClickListener(String user, String name) {
+		public MoiOnClickListener(String user, String name, int position) {
 			this.user = user;
 			this.name = name;
+			this.position = position;
 		}
 
 		@Override
 		public void onClick(View v) {
-			moiContactUser(user, name);
+			moiContactUser(user, name, position);
 		}
 
 	}
@@ -225,24 +227,26 @@ public abstract class NewHomeAdapter extends ArrayAdapter<NewHomeItem> {
 
 	private class MoiDichVuClickListener implements OnClickListener {
 		private String id;
+		int position;
 
-		public MoiDichVuClickListener(String id) {
+		public MoiDichVuClickListener(String id, int position) {
 			this.id = id;
+			this.position = position;
 		}
 
 		@Override
 		public void onClick(View v) {
-			moiDVChoNhieuNguoi(id);
+			moiDVChoNhieuNguoi(id, position);
 		}
 	}
 
-	public abstract void moiDVChoNhieuNguoi(String id);
+	public abstract void moiDVChoNhieuNguoi(String id, int position);
 
 	public abstract void dangKy(ContentValues values);
 
 	public abstract void xemall(String name);
 
-	public abstract void moiContactUser(String user, String name);
+	public abstract void moiContactUser(String user, String name, int position);
 
 	public interface UpdateSuccess {
 		public void onUpdateSuccess();

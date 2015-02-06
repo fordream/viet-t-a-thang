@@ -94,8 +94,8 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 		homeAdapter = new NewHomeAdapter(getActivity()) {
 
 			@Override
-			public void moiDVChoNhieuNguoi(String id) {
-				(((RootMenuActivity) getActivity())).gotoMoiDvChoNhieuNguoi(id);
+			public void moiDVChoNhieuNguoi(String id, int position) {
+				(((RootMenuActivity) getActivity())).gotoMoiDvChoNhieuNguoi(id,position);
 			}
 
 			@Override
@@ -114,8 +114,8 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 			}
 
 			@Override
-			public void moiContactUser(String user, String name) {
-				(((RootMenuActivity) getActivity())).moiContactUser(user, name);
+			public void moiContactUser(String user, String name, int position) {
+				(((RootMenuActivity) getActivity())).moiContactUser(user, name,position);
 			}
 		};
 

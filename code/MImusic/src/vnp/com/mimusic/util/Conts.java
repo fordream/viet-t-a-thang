@@ -829,8 +829,7 @@ public class Conts {
 	}
 
 	public static int[] resavatar() {
-		int resavatar[] = new int[] { R.drawable.avartar_1, R.drawable.avartar_2, R.drawable.avartar_3, R.drawable.avartar_4, R.drawable.avartar_5, R.drawable.avartar_6, R.drawable.avartar_7,
-				R.drawable.avartar_8, R.drawable.avartar_9, R.drawable.avartar_10, R.drawable.avartar_11, R.drawable.avartar_12 };
+		int resavatar[] = new int[] { R.drawable.avatar_1, R.drawable.avatar_2, R.drawable.avatar_3, R.drawable.avatar_4, R.drawable.avatar_5 };
 		return resavatar;
 	}
 
