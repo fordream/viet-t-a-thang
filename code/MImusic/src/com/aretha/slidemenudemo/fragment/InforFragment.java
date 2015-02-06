@@ -15,6 +15,7 @@ import vnp.com.db.User;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.base.diablog.VasProgessDialog;
 import vnp.com.mimusic.util.Conts;
+import vnp.com.mimusic.util.LogUtils;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
 import vnp.com.mimusic.util.Conts.IShowDateDialog;
 import vnp.com.mimusic.view.HeaderView;
@@ -201,6 +202,8 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 
 	private void uploadAvatar(final String path) {
 		if (!Conts.isBlank(path)) {
+			
+			
 			executeUpdateHttpsAvatar(path, new IContsCallBack() {
 				ProgressDialog progressDialog;
 
@@ -293,7 +296,6 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 						Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 						startActivityForResult(i, 100);
 					} else {
-
 						createMFileTemp();
 						Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
 						Uri mImageCaptureUri = null;

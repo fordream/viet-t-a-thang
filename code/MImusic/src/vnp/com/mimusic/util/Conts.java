@@ -680,7 +680,6 @@ public class Conts {
 			return Base64.encodeToString(b, Base64.DEFAULT);
 		} catch (Exception e) {
 			return "";
-			// TODO: handle exception
 		}
 	}
 

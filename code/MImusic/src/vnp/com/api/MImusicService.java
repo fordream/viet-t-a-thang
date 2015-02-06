@@ -19,6 +19,7 @@ import vnp.com.db.Recomment;
 import vnp.com.db.TinTuc;
 import vnp.com.db.User;
 import vnp.com.mimusic.util.Conts;
+import vnp.com.mimusic.util.LogUtils;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
 import android.app.Service;
 import android.content.ContentResolver;
@@ -794,7 +795,8 @@ public class MImusicService extends Service {
 							}
 						}
 
-						//getContentResolver().insert(Recomment.CONTENT_URI, values);
+						// getContentResolver().insert(Recomment.CONTENT_URI,
+						// values);
 						updateDongBoXuongRecomment(phone, name);
 					}
 				}
@@ -819,9 +821,8 @@ public class MImusicService extends Service {
 
 	public void executeUpdateHttpsAvatar(String path, IContsCallBack iContsCallBack) {
 		Bundle bundle = new Bundle();
-		bundle.putString("images", Conts.encodeToString(this, path));// path
-		// todo
-		// bundle.putString("file", path);// path
+		String images = Conts.encodeToString(this, path);
+		bundle.putString("images", images);// path
 		execute(RequestMethod.POST, API.API_R023, bundle, iContsCallBack);
 	}
 
