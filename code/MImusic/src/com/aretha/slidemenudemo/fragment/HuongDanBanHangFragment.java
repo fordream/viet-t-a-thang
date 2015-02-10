@@ -57,11 +57,13 @@ public class HuongDanBanHangFragment extends BaseFragment implements OnItemClick
 
 			@Override
 			public void onSuscess(JSONObject response) {
-				textHuongDanBanHang = HuongDanBanHang.getTextHuongDanBanHang(getActivity());
-				if (!Conts.isBlank(textHuongDanBanHang)) {
-					dichvu_list.setTextNoDataX(true, Html.fromHtml(textHuongDanBanHang));
+				if (getActivity() != null) {
+					textHuongDanBanHang = HuongDanBanHang.getTextHuongDanBanHang(getActivity());
+					if (!Conts.isBlank(textHuongDanBanHang)) {
+						dichvu_list.setTextNoDataX(true, Html.fromHtml(textHuongDanBanHang));
+					}
+					Conts.showView(loadingView, false);
 				}
-				Conts.showView(loadingView, false);
 			}
 
 			@Override

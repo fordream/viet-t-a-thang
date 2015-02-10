@@ -323,6 +323,11 @@ public class Conts {
 		}
 	}
 
+	public static void hiddenKeyBoard(EditText edt) {
+		InputMethodManager imm = (InputMethodManager) edt.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+		imm.hideSoftInputFromWindow(edt.getWindowToken(), 0);
+	}
+
 	public static void disableView(View view[]) {
 		for (View v : view) {
 			v.setEnabled(false);

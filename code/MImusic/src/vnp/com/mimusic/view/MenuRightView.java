@@ -11,6 +11,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -52,6 +53,8 @@ public class MenuRightView extends LinearLayout {
 		// ImageView menu_right_img_search = (ImageView)
 		// findViewById(R.id.menu_right_img_search);
 		com.woozzu.android.widget.IndexableListView menu_right_list = (com.woozzu.android.widget.IndexableListView) findViewById(R.id.menu_right_list);
+
+		menu_right_list.setOnTouchListener(onTouchListener);
 		if (adaper == null || adaper != null && adaper.getCount() == 0) {
 			String where = String.format("%s = '0'  ", User.STATUS);
 			Cursor cursor = getContext().getContentResolver().query(User.CONTENT_URI, null, where, null, User.NAME_CONTACT_ENG);
@@ -106,4 +109,15 @@ public class MenuRightView extends LinearLayout {
 		// }
 
 	}
+
+	private OnTouchListener onTouchListener = new OnTouchListener() {
+
+		@Override
+		public boolean onTouch(View v, MotionEvent event) {
+			final EditText menu_right_editext = (EditText) findViewById(R.id.menu_right_editext);
+
+			Conts.hiddenKeyBoard(menu_right_editext);
+			return false;
+		}
+	};
 }
