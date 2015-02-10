@@ -28,6 +28,7 @@ public class DBProvider extends ContentProvider {
 		if (uriMatcher == null) {
 			uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 			User.addUriMatcher(uriMatcher, PROVIDER_NAME);
+			Account.addUriMatcher(uriMatcher, PROVIDER_NAME);
 			HuongDanBanHang.addUriMatcher(uriMatcher, PROVIDER_NAME);
 			TinTuc.addUriMatcher(uriMatcher, PROVIDER_NAME);
 			DichVu.addUriMatcher(uriMatcher, PROVIDER_NAME);
@@ -44,7 +45,9 @@ public class DBProvider extends ContentProvider {
 		// openDB();
 		int match = uriMatcher.match(uri);
 		Uri _uri = User.insert(match, db, uri, values);
-
+		if (_uri == null) {
+			_uri = Account.insert(match, db, _uri, values);
+		}
 		if (_uri == null) {
 			_uri = DichVu.insert(match, db, _uri, values);
 		}
@@ -79,7 +82,10 @@ public class DBProvider extends ContentProvider {
 		// openDB();
 		int match = uriMatcher.match(uri);
 		Cursor c = User.query(match, db, uri, projection, selection, selectionArgs, sortOrder);
-
+		// cursor == null --> request othr
+		if (c == null) {
+			c = Account.query(match, db, uri, projection, selection, selectionArgs, sortOrder);
+		}
 		// cursor == null --> request othr
 		if (c == null) {
 			c = DichVu.query(match, db, uri, projection, selection, selectionArgs, sortOrder);
@@ -121,6 +127,9 @@ public class DBProvider extends ContentProvider {
 		int match = uriMatcher.match(uri);
 
 		count = User.delete(match, db, uri, selection, selectionArgs);
+		if (count == -2) {
+			count = Account.delete(match, db, uri, selection, selectionArgs);
+		}
 		// count == -2 delete other
 		if (count == -2) {
 			count = DichVu.delete(match, db, uri, selection, selectionArgs);
@@ -160,6 +169,9 @@ public class DBProvider extends ContentProvider {
 		int match = uriMatcher.match(uri);
 
 		count = User.update(match, db, uri, values, selection, selectionArgs);
+		if (count == -2) {
+			count = Account.update(match, db, uri, values, selection, selectionArgs);
+		}
 		// count == -2 update other
 		if (count == -2) {
 			count = DichVu.update(match, db, uri, values, selection, selectionArgs);
@@ -192,6 +204,7 @@ public class DBProvider extends ContentProvider {
 	public String getType(Uri uri) {
 		Map<Integer, String> mMap = new HashMap<Integer, String>();
 		User.getType(mMap);
+		Account.getType(mMap);
 		DichVu.getType(mMap);
 		Recomment.getType(mMap);
 		TinTuc.getType(mMap);

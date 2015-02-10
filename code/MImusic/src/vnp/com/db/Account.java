@@ -13,8 +13,8 @@ import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.text.TextUtils;
 
-public class User {
-	public static final String USER_TABLE_NAME = "users";
+public class Account {
+	public static final String USER_TABLE_NAME = "account";
 
 	public static final String _ID = "_id";
 	public static final String ID = "id";
@@ -81,12 +81,12 @@ public class User {
 	public static final String URL = "content://" + DBProvider.PROVIDER_NAME + "/" + USER_TABLE_NAME;
 	public static final Uri CONTENT_URI = Uri.parse(URL);
 
-	public User() {
+	public Account() {
 	}
 
 	// matcher
-	public static final int USER_MATCHER = 1;
-	public static final int USER_MATCHER_ID = 2;
+	public static final int USER_MATCHER = 11;
+	public static final int USER_MATCHER_ID = 12;
 
 	public static final void addUriMatcher(UriMatcher uriMatcher, String PROVIDER_NAME) {
 		uriMatcher.addURI(PROVIDER_NAME, USER_TABLE_NAME, USER_MATCHER);
@@ -136,13 +136,13 @@ public class User {
 		if (USER_MATCHER == match) {
 			long rowID = db.insert(USER_TABLE_NAME, "", values);
 			if (rowID > 0) {
-				Uri _uri = ContentUris.withAppendedId(User.CONTENT_URI, rowID);
+				Uri _uri = ContentUris.withAppendedId(Account.CONTENT_URI, rowID);
 				return _uri;
 			}
 		} else if (USER_MATCHER_ID == match) {
 			long rowID = db.insert(USER_TABLE_NAME, "", values);
 			if (rowID > 0) {
-				Uri _uri = ContentUris.withAppendedId(User.CONTENT_URI, rowID);
+				Uri _uri = ContentUris.withAppendedId(Account.CONTENT_URI, rowID);
 				return _uri;
 			}
 		}
@@ -157,30 +157,16 @@ public class User {
 		return mContext.getContentResolver().query(CONTENT_URI, null, selection.toString(), null, NAME_CONTACT_ENG);
 	}
 
-	public static boolean haveContact(String phone, Context context) {
-		boolean hasContact = false;
-		Cursor cursor = context.getContentResolver().query(User.CONTENT_URI, null, String.format("%s='%s'", User.USER, phone), null, null);
-
-		if (cursor != null) {
-			if (cursor.moveToNext()) {
-				hasContact = true;
-			}
-			cursor.close();
-		}
-
-		return hasContact;
-	}
-
 	public static String getName(Cursor cursor) {
-		String name = cursor.getString(cursor.getColumnIndex(User.fullname));
+		String name = cursor.getString(cursor.getColumnIndex(Account.fullname));
 
 		if (name == null || name != null && name.trim().equals("")) {
-			name = cursor.getString(cursor.getColumnIndex(User.NAME_CONTACT));
+			name = cursor.getString(cursor.getColumnIndex(Account.NAME_CONTACT));
 		}
 
 		if (name != null && !name.trim().equals("")) {
 		} else {
-			name = cursor.getString(cursor.getColumnIndex(User.USER));
+			name = cursor.getString(cursor.getColumnIndex(Account.USER));
 		}
 
 		if (cursor != null) {
@@ -192,11 +178,11 @@ public class User {
 
 	public static String getToken(Context activity) {
 		String token = null;
-		String selection = User.STATUS + "='1'";
-		Cursor cursor = activity.getContentResolver().query(User.CONTENT_URI, null, selection, null, null);
+		String selection = Account.STATUS + "='1'";
+		Cursor cursor = activity.getContentResolver().query(Account.CONTENT_URI, null, selection, null, null);
 		if (cursor != null && cursor.getCount() >= 1) {
 			if (cursor.moveToNext()) {
-				token = Conts.getStringCursor(cursor, User.TOKEN);
+				token = Conts.getStringCursor(cursor, Account.TOKEN);
 			}
 		}
 
@@ -206,15 +192,29 @@ public class User {
 		return token;
 	}
 
+	public static boolean haveContact(String phone, Context context) {
+		boolean hasContact = false;
+		Cursor cursor = context.getContentResolver().query(Account.CONTENT_URI, null, String.format("%s='%s'", Account.USER, phone), null, null);
+
+		if (cursor != null) {
+			if (cursor.moveToNext()) {
+				hasContact = true;
+			}
+			cursor.close();
+		}
+
+		return hasContact;
+	}
+
 	public static String getUser(Context context) {
 		if (context == null) {
 			return "";
 		}
 		String user = "";
-		Cursor cursor = context.getContentResolver().query(User.CONTENT_URI, null, User.STATUS + "='1'", null, null);
+		Cursor cursor = context.getContentResolver().query(Account.CONTENT_URI, null, Account.STATUS + "='1'", null, null);
 		if (cursor != null && cursor.getCount() >= 1) {
 			cursor.moveToNext();
-			user = cursor.getString(cursor.getColumnIndex(User.USER));
+			user = cursor.getString(cursor.getColumnIndex(Account.USER));
 		}
 
 		if (cursor != null) {
@@ -225,10 +225,10 @@ public class User {
 
 	public static String getPassword(Context context) {
 		String user = "";
-		Cursor cursor = context.getContentResolver().query(User.CONTENT_URI, null, User.STATUS + "='1'", null, null);
+		Cursor cursor = context.getContentResolver().query(Account.CONTENT_URI, null, Account.STATUS + "='1'", null, null);
 		if (cursor != null && cursor.getCount() >= 1) {
 			cursor.moveToNext();
-			user = cursor.getString(cursor.getColumnIndex(User.PASSWORD));
+			user = cursor.getString(cursor.getColumnIndex(Account.PASSWORD));
 		}
 
 		if (cursor != null) {
@@ -240,11 +240,11 @@ public class User {
 
 	public static String getRefreshToken(Context context) {
 		String token = null;
-		String selection = User.STATUS + "='1'";
-		Cursor cursor = context.getContentResolver().query(User.CONTENT_URI, null, selection, null, null);
+		String selection = Account.STATUS + "='1'";
+		Cursor cursor = context.getContentResolver().query(Account.CONTENT_URI, null, selection, null, null);
 		if (cursor != null && cursor.getCount() >= 1) {
 			cursor.moveToNext();
-			token = cursor.getString(cursor.getColumnIndex(User.KEYREFRESH));
+			token = cursor.getString(cursor.getColumnIndex(Account.KEYREFRESH));
 		}
 
 		if (cursor != null) {
