@@ -191,7 +191,7 @@ public class Conts {
 		return token;
 	}
 
-	public static void executeNoProgressBar(final RequestMethod requestMethod, final String api, final MImusicService activity, Bundle bundles, final IContsCallBack contsCallBack) {
+	public static void executeNoProgressBar(final RequestMethod requestMethod, final String api, final MImusicService activity, final Bundle bundles, final IContsCallBack contsCallBack) {
 		if (contsCallBack != null)
 			contsCallBack.onStart();
 		ResClientCallBack resClientCallBack = new ResClientCallBack(activity) {
@@ -210,6 +210,16 @@ public class Conts {
 				String response = restClient.getResponse();
 
 				try {
+
+					if (API.API_R015.equals(api)) {
+						Set<String> keys = bundles.keySet();
+						for (String key : keys) {
+							LogUtils.e("AAAAA", key + " " + bundles.getString(key));
+						}
+
+						LogUtils.e("AAAAA", response + "");
+					}
+
 					if (Conts.isBlank(response)) {
 						response = activity.getString(R.string.default_error);
 					}

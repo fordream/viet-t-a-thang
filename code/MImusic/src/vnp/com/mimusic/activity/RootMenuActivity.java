@@ -561,7 +561,7 @@ public class RootMenuActivity extends FragmentActivity {
 
 		String api = API.API_R015;
 
-		execute(RequestMethod.GET, api, bundle, new IContsCallBack() {
+		execute(RequestMethod.POST, api, bundle, new IContsCallBack() {
 			ProgressDialog dialog;
 
 			@Override

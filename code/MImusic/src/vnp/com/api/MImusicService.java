@@ -484,6 +484,8 @@ public class MImusicService extends Service {
 							BangXepHang.update(MImusicService.this, response, bundle, API.API_R024);
 						} else if (API.API_R025.equals(api)) {
 							BangXepHang.update(MImusicService.this, response, bundle, API.API_R025);
+						} else if (API.API_R015.equals(api)) {
+//							LogUtils.e("AAAAA", response.toString());
 						}
 
 						return null;

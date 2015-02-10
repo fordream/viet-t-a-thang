@@ -171,12 +171,10 @@ public class MauMoiFragment extends BaseFragment implements android.view.View.On
 		}
 		Bundle bundle = new Bundle();
 		bundle.putString("template_id", adaper.getTemplate_id());
-
-
 		bundle.putString("service_code", service_code);
-		bundle.putString("customers", customers);
-		
-//		Conts.showDialogDongYCallBack(getActivity(), adaper.getTemplate_id() + " " + service_code  + " " + customers, null);
+		bundle.putString("customers", customers.replace("{", "").replace("}", "").replace("\"", ""));
+		// • customers
+//		Conts.showDialogThongbao(getActivity(), String.format("contacts_list:%s", customers));
 		((RootMenuActivity) getActivity()).moiTheoDichVu(bundle);
 
 	}
