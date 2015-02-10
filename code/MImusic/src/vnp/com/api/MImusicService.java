@@ -143,9 +143,9 @@ public class MImusicService extends Service {
 	 * @param contsCallBack
 	 */
 	public void login(boolean is3G, final String u, final String p, final IContsCallBack contsCallBack) {
-		ContentValues contentValues = new ContentValues();
-		contentValues.put(User.STATUS, "0");
-		getContentResolver().update(User.CONTENT_URI, contentValues, null, null);
+//		ContentValues contentValues = new ContentValues();
+//		contentValues.put(User.STATUS, "0");
+//		getContentResolver().update(User.CONTENT_URI, contentValues, null, null);
 		Bundle bundle = new Bundle();
 		if (!Conts.isBlank(u)) {
 			bundle.putString("u", u);
@@ -582,7 +582,7 @@ public class MImusicService extends Service {
 				contentValues.put(User.USER, phone);
 				contentValues.put(User.NAME_CONTACT, name);
 				contentValues.put(User.NAME_CONTACT_ENG, Conts.StringConnvert.convertVNToAlpha(name));
-				contentValues.put(User.STATUS, user.equals(phone) ? "1" : "0");
+//				contentValues.put(User.STATUS, user.equals(phone) ? "1" : "0");
 
 				String contact_id = "";
 				if (avatarHashmap.containsKey(phone)) {
@@ -704,13 +704,8 @@ public class MImusicService extends Service {
 		accountStore.save(response, "");
 
 		// {"message":"Refresh token success","errorCode":0,"phone":null,"keyRefresh":"1E5571EE-CEF5-483A-50DF-20A6A1D57489","token":"57D4A6E1-B325-A2D6-3CC1-036C6730D1A3"}
-		ContentValues contentValues = new ContentValues();
-		try {
-			contentValues.put(User.KEYREFRESH, response.getString(User.KEYREFRESH));
-			contentValues.put(User.TOKEN, response.getString(User.TOKEN));
-			getContentResolver().update(User.CONTENT_URI, contentValues, String.format("%s=='1'", User.STATUS), null);
-		} catch (JSONException e) {
-		}
+//		User.updateReGetToken(this, response);
+		
 
 	}
 

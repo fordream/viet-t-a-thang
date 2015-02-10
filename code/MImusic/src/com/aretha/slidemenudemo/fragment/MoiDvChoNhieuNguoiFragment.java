@@ -167,7 +167,7 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 
 		moi_list.setOnItemClickListener(this);
 
-		Cursor cursor = getActivity().getContentResolver().query(User.CONTENT_URI, null, String.format("%s ='0'", User.STATUS), null, User.NAME_CONTACT);
+		Cursor cursor = getActivity().getContentResolver().query(User.CONTENT_URI, null, null, null, User.NAME_CONTACT);
 		adaper = new MoiDvChoNhieuNguoiAdaper(getActivity(), cursor, service_code) {
 
 			@Override

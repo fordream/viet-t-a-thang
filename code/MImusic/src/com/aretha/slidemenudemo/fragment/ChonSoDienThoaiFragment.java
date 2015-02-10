@@ -104,8 +104,8 @@ public class ChonSoDienThoaiFragment extends BaseFragment implements android.vie
 	}
 
 	private void callSHowData() {
-		String where = String.format("%s = '0'", User.STATUS);
-		Cursor cursor = getActivity().getContentResolver().query(User.CONTENT_URI, null, where, null, User.NAME_CONTACT);
+//		String where = String.format("%s = '0'", User.STATUS);
+		Cursor cursor = getActivity().getContentResolver().query(User.CONTENT_URI, null, null, null, User.NAME_CONTACT);
 
 		if (cursor != null) {
 			adaper = new ChonSoDienThoaiAdaper(getActivity(), cursor);

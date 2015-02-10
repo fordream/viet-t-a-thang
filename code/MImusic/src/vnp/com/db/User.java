@@ -3,6 +3,7 @@ package vnp.com.db;
 import java.util.Map;
 import java.util.Set;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import vnp.com.mimusic.util.Conts;
@@ -25,7 +26,7 @@ public class User {
 	public static final String USER = "user";
 
 	public static final String PASSWORD = "password";
-	public static final String STATUS = "status";
+//	public static final String STATUS = "status";
 	public static final String NAME = "name";
 	public static final String NAME_CONTACT = "name_contact";
 	public static final String NAME_CONTACT_ENG = "name_contact_ENG";
@@ -61,7 +62,9 @@ public class User {
 		String[] colums = new String[] {//
 		nickname, fullname, exchange_number, exchange_number_month, poundage, poundage_month, TOKEN, KEYREFRESH,
 
-		USER, PASSWORD, STATUS, COVER, NAME_CONTACT_ENG, ID, birthday, address, NAME, NAME_CONTACT, contact_id,//
+		USER, PASSWORD
+//		, STATUS
+		, COVER, NAME_CONTACT_ENG, ID, birthday, address, NAME, NAME_CONTACT, contact_id,//
 				EMAIL, AVATAR, LISTIDDVSUDUNG, SOLUONG, DOANHTHU, LISTIDUSERDAMOI, LISTIDTENDVSUDUNG //
 		};
 		for (int i = 0; i < colums.length; i++) {
@@ -193,6 +196,18 @@ public class User {
 
 		return name;
 	}
+
+//	public static void updateReGetToken(Context mImusicService, JSONObject response) {
+//		// TODO Auto-generated method stub
+//		ContentValues contentValues = new ContentValues();
+//		try {
+//			contentValues.put(User.KEYREFRESH, response.getString(User.KEYREFRESH));
+//			contentValues.put(User.TOKEN, response.getString(User.TOKEN));
+//			mImusicService.getContentResolver().update(User.CONTENT_URI, contentValues, String.format("%s=='1'", User.STATUS), null);
+//		} catch (JSONException e) {
+//		}
+//		
+//	}
 
 	// public static String getToken(Context activity) {
 	// String token = null;
