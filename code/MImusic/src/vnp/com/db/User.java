@@ -190,68 +190,68 @@ public class User {
 		return name;
 	}
 
-	public static String getToken(Context activity) {
-		String token = null;
-		String selection = User.STATUS + "='1'";
-		Cursor cursor = activity.getContentResolver().query(User.CONTENT_URI, null, selection, null, null);
-		if (cursor != null && cursor.getCount() >= 1) {
-			if (cursor.moveToNext()) {
-				token = Conts.getStringCursor(cursor, User.TOKEN);
-			}
-		}
+//	public static String getToken(Context activity) {
+//		String token = null;
+//		String selection = User.STATUS + "='1'";
+//		Cursor cursor = activity.getContentResolver().query(User.CONTENT_URI, null, selection, null, null);
+//		if (cursor != null && cursor.getCount() >= 1) {
+//			if (cursor.moveToNext()) {
+//				token = Conts.getStringCursor(cursor, User.TOKEN);
+//			}
+//		}
+//
+//		if (cursor != null) {
+//			cursor.close();
+//		}
+//		return token;
+//	}
 
-		if (cursor != null) {
-			cursor.close();
-		}
-		return token;
-	}
+//	public static String getUser(Context context) {
+//		if (context == null) {
+//			return "";
+//		}
+//		String user = "";
+//		Cursor cursor = context.getContentResolver().query(User.CONTENT_URI, null, User.STATUS + "='1'", null, null);
+//		if (cursor != null && cursor.getCount() >= 1) {
+//			cursor.moveToNext();
+//			user = cursor.getString(cursor.getColumnIndex(User.USER));
+//		}
+//
+//		if (cursor != null) {
+//			cursor.close();
+//		}
+//		return user;
+//	}
 
-	public static String getUser(Context context) {
-		if (context == null) {
-			return "";
-		}
-		String user = "";
-		Cursor cursor = context.getContentResolver().query(User.CONTENT_URI, null, User.STATUS + "='1'", null, null);
-		if (cursor != null && cursor.getCount() >= 1) {
-			cursor.moveToNext();
-			user = cursor.getString(cursor.getColumnIndex(User.USER));
-		}
+//	public static String getPassword(Context context) {
+//		String user = "";
+//		Cursor cursor = context.getContentResolver().query(User.CONTENT_URI, null, User.STATUS + "='1'", null, null);
+//		if (cursor != null && cursor.getCount() >= 1) {
+//			cursor.moveToNext();
+//			user = cursor.getString(cursor.getColumnIndex(User.PASSWORD));
+//		}
+//
+//		if (cursor != null) {
+//			cursor.close();
+//		}
+//		return user;
+//
+//	}
 
-		if (cursor != null) {
-			cursor.close();
-		}
-		return user;
-	}
-
-	public static String getPassword(Context context) {
-		String user = "";
-		Cursor cursor = context.getContentResolver().query(User.CONTENT_URI, null, User.STATUS + "='1'", null, null);
-		if (cursor != null && cursor.getCount() >= 1) {
-			cursor.moveToNext();
-			user = cursor.getString(cursor.getColumnIndex(User.PASSWORD));
-		}
-
-		if (cursor != null) {
-			cursor.close();
-		}
-		return user;
-
-	}
-
-	public static String getRefreshToken(Context context) {
-		String token = null;
-		String selection = User.STATUS + "='1'";
-		Cursor cursor = context.getContentResolver().query(User.CONTENT_URI, null, selection, null, null);
-		if (cursor != null && cursor.getCount() >= 1) {
-			cursor.moveToNext();
-			token = cursor.getString(cursor.getColumnIndex(User.KEYREFRESH));
-		}
-
-		if (cursor != null) {
-			cursor.close();
-		}
-		return token;
-	}
+//	public static String getRefreshToken(Context context) {
+//		String token = null;
+//		String selection = User.STATUS + "='1'";
+//		Cursor cursor = context.getContentResolver().query(User.CONTENT_URI, null, selection, null, null);
+//		if (cursor != null && cursor.getCount() >= 1) {
+//			cursor.moveToNext();
+//			token = cursor.getString(cursor.getColumnIndex(User.KEYREFRESH));
+//		}
+//
+//		if (cursor != null) {
+//			cursor.close();
+//		}
+//		return token;
+//	}
 
 	public static Cursor queryUser(Context context) {
 		return context.getContentResolver().query(User.CONTENT_URI, null, String.format("%s = '1'", User.STATUS), null, null);

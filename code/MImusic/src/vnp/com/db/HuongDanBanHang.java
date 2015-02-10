@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.json.JSONObject;
 
+import vnp.com.db.datastore.AccountStore;
 import vnp.com.mimusic.util.Conts;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -125,7 +126,7 @@ public class HuongDanBanHang {
 	public static void update(Context context, JSONObject response) {
 		String strGuide_text = Conts.getString(response, guide_text);
 		if (!Conts.isBlank(strGuide_text)) {
-			String strUser = User.getUser(context);
+			String strUser = new AccountStore(context).getUser();
 			String selection = String.format("%s = '%s'", user, strUser);
 			Cursor cursor = context.getContentResolver().query(CONTENT_URI, null, selection, null, null);
 
@@ -153,7 +154,7 @@ public class HuongDanBanHang {
 
 	public static String getTextHuongDanBanHang(Context context) {
 		String strGuide_text = "";
-		String strUser = User.getUser(context);
+		String strUser = new AccountStore(context).getUser();
 		String selection = String.format("%s = '%s'", user, strUser);
 		Cursor cursor = context.getContentResolver().query(CONTENT_URI, null, selection, null, null);
 

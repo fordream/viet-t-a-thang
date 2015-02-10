@@ -3,6 +3,7 @@ package vnp.com.mimusic;
 import org.json.JSONObject;
 
 import vnp.com.db.User;
+import vnp.com.db.datastore.AccountStore;
 import vnp.com.mimusic.VApplication.IServiceConfig;
 import vnp.com.mimusic.base.VTAnimationListener;
 import vnp.com.mimusic.main.BaseMusicSlideMenuActivity;
@@ -83,13 +84,14 @@ public class LoginTabletActivty extends Activity implements OnClickListener {
 	}
 
 	private void callInitSetting() {
-		((TextView) findViewById(R.id.activity_login_number_phone)).setText(User.getUser(this));
-		((TextView) findViewById(R.id.activity_login_password)).setText(User.getPassword(this));
+		AccountStore accountStore = new AccountStore(this);
+		((TextView) findViewById(R.id.activity_login_number_phone)).setText(accountStore.getUser());
+		((TextView) findViewById(R.id.activity_login_password)).setText(accountStore.getPassword());
 
 		((TextView) findViewById(R.id.activity_login_number_phone)).setText("0964506972");
 		((TextView) findViewById(R.id.activity_login_password)).setText("265376");
 
-		if (Conts.isBlank(User.getUser(this))) {
+		if (Conts.isBlank(accountStore.getUser())) {
 			if (Conts.is3GConnected(LoginTabletActivty.this)) {
 				login(true, "", "");
 			}

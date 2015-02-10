@@ -3,6 +3,7 @@ package vnp.com.mimusic;
 import org.json.JSONObject;
 
 import vnp.com.db.User;
+import vnp.com.db.datastore.AccountStore;
 import vnp.com.mimusic.main.NewMusicSlideMenuActivity;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
@@ -45,12 +46,12 @@ public class LoginActivty extends Activity implements OnClickListener, OnTouchLi
 	}
 
 	private void init() {
-		((TextView) findViewById(R.id.activity_login_number_phone)).setText(User.getUser(this));
-		((TextView) findViewById(R.id.activity_login_password)).setText(User.getPassword(this));
+		((TextView) findViewById(R.id.activity_login_number_phone)).setText(new AccountStore(this).getUser());
+		((TextView) findViewById(R.id.activity_login_password)).setText(new AccountStore(this).getPassword());
 		((TextView) findViewById(R.id.activity_login_number_phone)).setText("0964506972");
 		((TextView) findViewById(R.id.activity_login_password)).setText("265376");
 
-		if (!Conts.isBlank(User.getUser(this))) {
+		if (!Conts.isBlank(new AccountStore(this).getUser())) {
 			((VApplication) getApplication()).refreshToken(new IContsCallBack() {
 				@Override
 				public void onStart() {

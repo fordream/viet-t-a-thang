@@ -5,6 +5,7 @@ import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import vnp.com.db.datastore.AccountStore;
 import vnp.com.mimusic.util.Conts;
 import android.app.Activity;
 import android.content.ContentUris;
@@ -125,13 +126,13 @@ public class MauMoi {
 	}
 
 	public static Cursor getCursorMauMoi(Context activity, String service_code) {
-		String where = String.format("%s = '%s' and %s = '%s'", MauMoi.user, User.getUser(activity), MauMoi.service_code, service_code);
+		String where = String.format("%s = '%s' and %s = '%s'", MauMoi.user, new AccountStore(activity).getUser(), MauMoi.service_code, service_code);
 		return activity.getContentResolver().query(MauMoi.CONTENT_URI, null, where, null, null);
 	}
 
 	public static JSONArray getCursorMauMoiListJson(Context activity, String service_code) {
 		JSONArray list = new JSONArray();
-		String where = String.format("%s = '%s' and %s = '%s'", MauMoi.user, User.getUser(activity), MauMoi.service_code, service_code);
+		String where = String.format("%s = '%s' and %s = '%s'", MauMoi.user, new AccountStore(activity).getUser(), MauMoi.service_code, service_code);
 
 		Cursor cursor = activity.getContentResolver().query(MauMoi.CONTENT_URI, null, where, null, null);
 
@@ -152,7 +153,7 @@ public class MauMoi {
 
 	public static String getCursorMauMoiListJson0(Context activity, String service_code) {
 		String id = "";
-		String where = String.format("%s = '%s' and %s = '%s'", MauMoi.user, User.getUser(activity), MauMoi.service_code, service_code);
+		String where = String.format("%s = '%s' and %s = '%s'", MauMoi.user, new AccountStore(activity).getUser(), MauMoi.service_code, service_code);
 		Cursor cursor = activity.getContentResolver().query(MauMoi.CONTENT_URI, null, where, null, null);
 		if (cursor != null) {
 			if (cursor.moveToNext()) {

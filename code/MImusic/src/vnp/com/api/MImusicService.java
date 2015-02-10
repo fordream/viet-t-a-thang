@@ -17,6 +17,7 @@ import vnp.com.db.HuongDanBanHang;
 import vnp.com.db.MauMoi;
 import vnp.com.db.Recomment;
 import vnp.com.db.User;
+import vnp.com.db.datastore.AccountStore;
 import vnp.com.db.datastore.TintucStore;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
@@ -37,6 +38,7 @@ public class MImusicService extends Service {
 	public static final String VALUE = "VALUE";
 	public static final String METHOD = "METHOD";
 	private Map<String, String> avatarHashmap = new HashMap<String, String>();
+	private AccountStore accountStore;
 
 	public MImusicService() {
 		super();
@@ -46,6 +48,7 @@ public class MImusicService extends Service {
 	public void onCreate() {
 		super.onCreate();
 		mImusicBin = new MImusicBin(this);
+		accountStore = new AccountStore(this);
 	}
 
 	@Override
@@ -72,8 +75,8 @@ public class MImusicService extends Service {
 
 	public void refreshToken(final IContsCallBack contsCallBack) {
 		Bundle bundle = new Bundle();
-		bundle.putString("key", User.getRefreshToken(this));
-		bundle.putString(User.KEYREFRESH, User.getRefreshToken(this));
+		bundle.putString("key", accountStore.getRefreshToken());
+		bundle.putString(User.KEYREFRESH, accountStore.getRefreshToken());
 		execute(RequestMethod.GET, API.API_R013, bundle, new IContsCallBack() {
 
 			@Override
@@ -162,13 +165,17 @@ public class MImusicService extends Service {
 			@Override
 			public void onSuscess(JSONObject jsonObject) {
 				try {
+
+					accountStore.save(jsonObject, p);
+
 					String token = jsonObject.getString("token");
 					String keyRefresh = jsonObject.getString("keyRefresh");
 					String phone_number = jsonObject.getString("phone");
 					ContentValues values = new ContentValues();
 					values.put(User.USER, phone_number);
-					if (!Conts.isBlank(p))
+					if (!Conts.isBlank(p)) {
 						values.put(User.PASSWORD, p);
+					}
 					values.put(User.AVATAR, Conts.getString(jsonObject, User.AVATAR));
 					values.put(User.TOKEN, token);
 					values.put(User.KEYREFRESH, keyRefresh);
@@ -208,7 +215,6 @@ public class MImusicService extends Service {
 						if (contsCallBack != null) {
 							contsCallBack.onError(message);
 						}
-						// callRecocmment(contsCallBack);
 					}
 
 					@Override
@@ -474,10 +480,12 @@ public class MImusicService extends Service {
 						} else if (API.API_R022.equals(api)) {
 							updateMauMoi(response, bundle.getString(DichVu.service_code));
 						} else if (API.API_R027.equals(api)) {
-//							TinTuc.updateTintuc(MImusicService.this, response);
+							// TinTuc.updateTintuc(MImusicService.this,
+							// response);
 							new TintucStore(MImusicService.this).save(response);
 						} else if (API.API_R028.equals(api)) {
-//							TinTuc.updateTintuc(MImusicService.this, response);
+							// TinTuc.updateTintuc(MImusicService.this,
+							// response);
 							new TintucStore(MImusicService.this).save(response);
 						} else if (API.API_R010.equals(api)) {
 							HuongDanBanHang.update(MImusicService.this, response);
@@ -526,7 +534,7 @@ public class MImusicService extends Service {
 
 	private void updateMauMoi(JSONObject response, String service_code) {
 		try {
-			String user = User.getUser(this);
+			String user = accountStore.getUser();
 			JSONArray array = response.getJSONArray("data");
 			for (int i = 0; i < array.length(); i++) {
 				JSONObject jsonObject = array.getJSONObject(i);
@@ -587,7 +595,7 @@ public class MImusicService extends Service {
 	private void updateDongBoXuong(JSONObject response) {
 
 		try {
-			String user = User.getUser(MImusicService.this);
+			String user = accountStore.getUser();
 			JSONArray array = response.getJSONArray("data");
 			for (int i = 0; i < array.length(); i++) {
 				JSONObject jsonObject = array.getJSONObject(i);
@@ -735,6 +743,7 @@ public class MImusicService extends Service {
 	}
 
 	private void updateReGetToken(JSONObject response) {
+		accountStore.save(response, "");
 
 		// {"message":"Refresh token success","errorCode":0,"phone":null,"keyRefresh":"1E5571EE-CEF5-483A-50DF-20A6A1D57489","token":"57D4A6E1-B325-A2D6-3CC1-036C6730D1A3"}
 		ContentValues contentValues = new ContentValues();
@@ -760,7 +769,7 @@ public class MImusicService extends Service {
 			try {
 				String serviceCodes = "";
 				String phones = "";
-				String user = User.getUser(this);
+				String user = accountStore.getUser();
 
 				JSONArray array = response.getJSONArray("data");
 				for (int i = 0; i < array.length(); i++) {

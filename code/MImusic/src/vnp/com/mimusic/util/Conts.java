@@ -23,6 +23,7 @@ import vnp.com.api.RestClient;
 import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.DataStore;
 import vnp.com.db.User;
+import vnp.com.db.datastore.AccountStore;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.base.diablog.DangKyDialog;
 import vnp.com.mimusic.util.ImageLoader.ScalingLogic;
@@ -255,7 +256,7 @@ public class Conts {
 		};
 
 		if (!API.API_R013.equals(resClientCallBack.getApiName())) {
-			bundles.putString("token", User.getToken(activity));
+			bundles.putString("token", new AccountStore(activity).getToken());
 		}
 
 		Set<String> keys = bundles.keySet();

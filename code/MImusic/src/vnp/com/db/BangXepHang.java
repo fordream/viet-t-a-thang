@@ -6,6 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import vnp.com.api.API;
+import vnp.com.db.datastore.AccountStore;
 import vnp.com.mimusic.util.Conts;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -142,10 +143,8 @@ public class BangXepHang {
 	public static void update(Context context, JSONObject response, Bundle bundle, String api) {
 		// API.API_R024,API.API_R025
 		String type = bundle.getString(BangXepHang.type);
-		String user = User.getUser(context);
-
+		String user = new AccountStore(context).getUser();
 		if (API.API_R024.equals(api)) {
-
 			try {
 				JSONArray jsonArray = response.getJSONArray("data");
 				for (int i = 0; i < jsonArray.length(); i++) {
@@ -185,7 +184,7 @@ public class BangXepHang {
 
 	public static Cursor getBangXepHang(Context context, String type, String id) {
 		String selection = String.format("%s ='%s' and %s = '%s' and %s = '%s'"//
-				, BangXepHang.USER, User.getUser(context)//
+				, BangXepHang.USER, new AccountStore(context).getUser()//
 				, BangXepHang.type, type//
 				, BangXepHang.ID, id);//
 		Cursor cursor = context.getContentResolver().query(CONTENT_URI, null, selection, null, null);
@@ -193,7 +192,7 @@ public class BangXepHang {
 	}
 
 	public static Cursor getBangXepHang(Context context, String type) {
-		String selection = String.format("%s ='%s' and %s = '%s'", BangXepHang.USER, User.getUser(context), BangXepHang.type, type);
+		String selection = String.format("%s ='%s' and %s = '%s'", BangXepHang.USER, new AccountStore(context).getUser(), BangXepHang.type, type);
 		Cursor cursor = context.getContentResolver().query(CONTENT_URI, null, selection, null, (typeSOLUONG.equals(type) ? quantity : commission) + " DESC");
 		return cursor;
 	}
