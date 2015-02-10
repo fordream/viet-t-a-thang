@@ -44,7 +44,7 @@
         <com.meetme.android.horizontallistview.HorizontalListView
             android:id="@+id/hlvSimpleList"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_138dp"
+            android:layout_height="@dimen/dimen_105dp"
             android:visibility="gone" />
 
         <LinearLayout

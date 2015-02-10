@@ -26,7 +26,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_50dp"
+            android:gravity="center"
+            android:layout_height="@dimen/dimen_25dp"
             android:orientation="vertical" >
 
             <vnp.com.mimusic.view.textview.TextViewRegular
@@ -34,7 +35,6 @@
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_12dp"
                 android:ellipsize="end"
                 android:paddingLeft="@dimen/dimen_5dp"
                 android:paddingRight="@dimen/dimen_5dp"

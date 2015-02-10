@@ -171,16 +171,12 @@ public class MauMoiFragment extends BaseFragment implements android.view.View.On
 		}
 		Bundle bundle = new Bundle();
 		bundle.putString("template_id", adaper.getTemplate_id());
-//		if (!type) {
-//			bundle.putString("service_code", service_code);
-//			bundle.putString("customers", customers);
-//		} else {
-//			bundle.putString("customers", sdt);
-//			bundle.putString("service_code", service_codes);
-//		}
+
 
 		bundle.putString("service_code", service_code);
 		bundle.putString("customers", customers);
+		
+//		Conts.showDialogDongYCallBack(getActivity(), adaper.getTemplate_id() + " " + service_code  + " " + customers, null);
 		((RootMenuActivity) getActivity()).moiTheoDichVu(bundle);
 
 	}
