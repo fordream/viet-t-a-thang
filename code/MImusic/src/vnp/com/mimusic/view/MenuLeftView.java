@@ -1,6 +1,7 @@
 package vnp.com.mimusic.view;
 
 import vnp.com.db.User;
+import vnp.com.db.datastore.AccountStore;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.adapter.MenuLeftAdaper;
 import vnp.com.mimusic.util.Conts;
@@ -17,6 +18,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class MenuLeftView extends LinearLayout {
+	private AccountStore accountStore;
 
 	public MenuLeftView(Context context) {
 		super(context);
@@ -35,6 +37,7 @@ public class MenuLeftView extends LinearLayout {
 	}
 
 	private void init() {
+		accountStore = new AccountStore(getContext());
 		((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.menu_left, this);
 		findViewById(R.id.xleft).setOnClickListener(null);
 		findViewById(R.id.menu_left_header).setOnClickListener(null);
@@ -56,23 +59,12 @@ public class MenuLeftView extends LinearLayout {
 		ImageView menu_left_img_avatar = (ImageView) findViewById(R.id.menu_left_img_avatar);
 		ImageView menu_left_img_cover = (ImageView) findViewById(R.id.menu_left_img_cover);
 		TextView menu_left_tv_name = (TextView) findViewById(R.id.menu_left_tv_name);
-
-		// Cursor cursor =
-		// getContext().getContentResolver().query(User.CONTENT_URI, null,
-		// String.format("%s = '1'", User.STATUS), null, null);
-
-		Cursor cursor = User.queryUser(getContext());
-		if (cursor != null && cursor.getCount() >= 1) {
-			cursor.moveToNext();
-			menu_left_tv_name.setText(String.format("%s (%s)", User.getName(cursor), Conts.getSDT(cursor.getString(cursor.getColumnIndex(User.USER)))));
-			String cover = cursor.getString(cursor.getColumnIndex(User.COVER));
-			Conts.displayImageCover(cover, menu_left_img_cover);
-			String avatar = cursor.getString(cursor.getColumnIndex(User.AVATAR));
-			Conts.showInforAvatar(avatar, menu_left_img_avatar);
-		}
-
-		if (cursor != null) {
-			cursor.close();
-		}
+		menu_left_tv_name.setText(String.format("%s (%s)"
+				, accountStore.getStringInFor(AccountStore.fullname)
+				, Conts.getSDT(accountStore.getUser())));
+		String cover = accountStore.getStringInFor(AccountStore.cover);
+		Conts.displayImageCover(cover, menu_left_img_cover);
+		String avatar = accountStore.getStringInFor(AccountStore.avatar);
+		Conts.showInforAvatar(avatar, menu_left_img_avatar);
 	}
 }

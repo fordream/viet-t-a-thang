@@ -5,6 +5,7 @@ import org.json.JSONObject;
 import vnp.com.api.API;
 import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.User;
+import vnp.com.db.datastore.AccountStore;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.util.Conts;
@@ -112,35 +113,26 @@ public class ThongTinCaNhanFragment extends BaseFragment implements OnItemClickL
 	}
 
 	private void showData(View view) {
-		try {
-			if (view == null)
-				view = getView();
-			Cursor cursor = getActivity().getContentResolver().query(User.CONTENT_URI, null, String.format("%s = '1'", User.STATUS), null, null);
-			if (cursor != null && cursor.getCount() >= 1) {
-				cursor.moveToNext();
+		if (view == null)
+			view = getView();
 
-				((TextView) view.findViewById(R.id.text_name)).setText(User.getName(cursor));
-				((TextView) view.findViewById(R.id.text_bidanh)).setText(cursor.getString(cursor.getColumnIndex(User.nickname)));
-				((TextView) view.findViewById(R.id.text_ngaysinh)).setText(cursor.getString(cursor.getColumnIndex(User.birthday)));
-				((TextView) view.findViewById(R.id.text_diachi)).setText(cursor.getString(cursor.getColumnIndex(User.address)));
-				((TextView) view.findViewById(R.id.text_sogiaodichthanhcongtrongthang)).setText(getText(cursor.getString(cursor.getColumnIndex(User.exchange_number_month))));
-				((TextView) view.findViewById(R.id.text_sogiaodichthanhcong)).setText(getText(cursor.getString(cursor.getColumnIndex(User.exchange_number))));
-				((TextView) view.findViewById(R.id.text_sotienhoahongtrongthang)).setText(getText(cursor.getString(cursor.getColumnIndex(User.poundage_month))) + " " + getString(R.string.vnd));
-				((TextView) view.findViewById(R.id.text_sotienhoahong)).setText(getText(cursor.getString(cursor.getColumnIndex(User.poundage))) + " " + getString(R.string.vnd));
-				String cover = cursor.getString(cursor.getColumnIndex(User.COVER));
-				Conts.displayImageCover(cover, menu_left_img_cover);
+		((TextView) view.findViewById(R.id.text_name)).setText(accountStore.getStringInFor(AccountStore.fullname));
+		((TextView) view.findViewById(R.id.text_bidanh)).setText(accountStore.getStringInFor(AccountStore.nickname));
+		((TextView) view.findViewById(R.id.text_ngaysinh)).setText(accountStore.getStringInFor(AccountStore.birthday));
+		((TextView) view.findViewById(R.id.text_diachi)).setText(accountStore.getStringInFor(AccountStore.address));
+		((TextView) view.findViewById(R.id.text_sogiaodichthanhcongtrongthang)).setText(getText(accountStore.getStringInFor(AccountStore.exchange_number_month)));
+		((TextView) view.findViewById(R.id.text_sogiaodichthanhcong)).setText(getText(accountStore.getStringInFor(AccountStore.exchange_number)));
+		((TextView) view.findViewById(R.id.text_sotienhoahongtrongthang)).setText(getText(accountStore.getStringInFor(AccountStore.poundage_month)) + " " + getString(R.string.vnd));
+		((TextView) view.findViewById(R.id.text_sotienhoahong)).setText(getText(accountStore.getStringInFor(AccountStore.poundage)) + " " + getString(R.string.vnd));
+		String cover = accountStore.getStringInFor(AccountStore.cover);
+		Conts.displayImageCover(cover, menu_left_img_cover);
 
-				String avatar = cursor.getString(cursor.getColumnIndex(User.AVATAR));
-				Conts.showInforAvatar(avatar, menu_left_img_avatar);
+		String avatar = accountStore.getStringInFor(AccountStore.avatar);
+		Conts.showInforAvatar(avatar, menu_left_img_avatar);
 
-				TextView menu_left_tv_name = (TextView) view.findViewById(R.id.menu_left_tv_name);
-				menu_left_tv_name.setText(String.format("%s (%s)", User.getName(cursor), Conts.getSDT(cursor.getString(cursor.getColumnIndex(User.USER)))));
+		TextView menu_left_tv_name = (TextView) view.findViewById(R.id.menu_left_tv_name);
+		menu_left_tv_name.setText(String.format("%s (%s)", accountStore.getStringInFor(AccountStore.fullname), Conts.getSDT(accountStore.getUser())));
 
-				cursor.close();
-			}
-		} catch (Exception exception) {
-
-		}
 	}
 
 	private String getText(String str) {

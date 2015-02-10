@@ -158,42 +158,19 @@ public class MImusicService extends Service {
 		Conts.executeNoProgressBar((is3G ? RequestMethod.GET : RequestMethod.POST), (is3G ? API.API_R001 : API.API_R002), this, bundle, new IContsCallBack() {
 			@Override
 			public void onStart() {
-				if (contsCallBack != null)
+				if (contsCallBack != null) {
 					contsCallBack.onStart();
+				}
 			}
 
 			@Override
 			public void onSuscess(JSONObject jsonObject) {
-				try {
-
-					accountStore.save(jsonObject, p);
-
-					String token = jsonObject.getString("token");
-					String keyRefresh = jsonObject.getString("keyRefresh");
-					String phone_number = jsonObject.getString("phone");
-					ContentValues values = new ContentValues();
-					values.put(User.USER, phone_number);
-					if (!Conts.isBlank(p)) {
-						values.put(User.PASSWORD, p);
-					}
-					values.put(User.AVATAR, Conts.getString(jsonObject, User.AVATAR));
-					values.put(User.TOKEN, token);
-					values.put(User.KEYREFRESH, keyRefresh);
-					values.put(User.STATUS, "1");
-					String selection = String.format("%s='%s'", User.USER, phone_number);
-					Cursor cursor = getContentResolver().query(User.CONTENT_URI, null, selection, null, null);
-
-					boolean isUpdate = cursor != null && cursor.getCount() >= 1;
-					cursor.close();
-
-					if (isUpdate) {
-						getContentResolver().update(User.CONTENT_URI, values, selection, null);
-					} else {
-						getContentResolver().insert(User.CONTENT_URI, values);
-					}
-				} catch (Exception e) {
-				}
-				callUpdateData();
+				accountStore.save(jsonObject, p);
+				// try {
+				//
+				// User.updateInForLogin(MImusicService.this, jsonObject, p);
+				// } catch (Exception e) {
+				// }
 
 				/*
 				 * get thong tin dich vu
@@ -239,58 +216,58 @@ public class MImusicService extends Service {
 					contsCallBack.onError();
 			}
 		});
+
+		callUpdateData();
 	}
 
 	private void callUpdateData() {
 
-		// /**
-		// * get infor
-		// */
-		// execute(RequestMethod.GET, API.API_R006, new Bundle(), new
-		// IContsCallBack() {
-		//
-		// @Override
-		// public void onSuscess(JSONObject response) {
-		// sendBroadcast(new
-		// Intent("broadcastReceivermactivity_slidemenu_menuleft"));
-		// }
-		//
-		// @Override
-		// public void onStart() {
-		//
-		// }
-		//
-		// @Override
-		// public void onError(String message) {
-		//
-		// }
-		//
-		// @Override
-		// public void onError() {
-		//
-		// }
-		// });
-		//
-		// callDongBoDanhBaLen(new IContsCallBack() {
-		//
-		// @Override
-		// public void onSuscess(JSONObject response) {
-		// }
-		//
-		// @Override
-		// public void onStart() {
-		//
-		// }
-		//
-		// @Override
-		// public void onError(String message) {
-		// }
-		//
-		// @Override
-		// public void onError() {
-		//
-		// }
-		// });
+		/**
+		 * get infor
+		 */
+		execute(RequestMethod.GET, API.API_R006, new Bundle(), new IContsCallBack() {
+
+			@Override
+			public void onSuscess(JSONObject response) {
+				sendBroadcast(new Intent("broadcastReceivermactivity_slidemenu_menuleft"));
+			}
+
+			@Override
+			public void onStart() {
+
+			}
+
+			@Override
+			public void onError(String message) {
+
+			}
+
+			@Override
+			public void onError() {
+
+			}
+		});
+
+		callDongBoDanhBaLen(new IContsCallBack() {
+
+			@Override
+			public void onSuscess(JSONObject response) {
+			}
+
+			@Override
+			public void onStart() {
+
+			}
+
+			@Override
+			public void onError(String message) {
+			}
+
+			@Override
+			public void onError() {
+
+			}
+		});
 	}
 
 	public void callDongBoDanhBaLen(final IContsCallBack contsCallBack) {
@@ -462,7 +439,7 @@ public class MImusicService extends Service {
 					@Override
 					protected String doInBackground(String... params) {
 						if (API.API_R006.equals(api)) {
-							updateInFor(response);
+							updateUserInFor(response);
 						} else if (API.API_R007.equals(api)) {
 							updateInFor(bundle);
 						} else if (API.API_R017.equals(api)) {
@@ -707,13 +684,9 @@ public class MImusicService extends Service {
 	}
 
 	protected void updateInFor(Bundle bundle) {
-		ContentValues contentValues = new ContentValues();
-		Set<String> keys = bundle.keySet();
-		for (String key : keys) {
-			contentValues.put(key, bundle.getString(key));
-		}
 
-		getContentResolver().update(User.CONTENT_URI, contentValues, String.format("%s=='1'", User.STATUS), null);
+		// User.updateInFor(this, bundle);
+		accountStore.updateInFor(this, bundle);
 	}
 
 	/**
@@ -722,24 +695,9 @@ public class MImusicService extends Service {
 	 * @param response
 	 */
 
-	private void updateInFor(JSONObject response) {
-		ContentValues contentValues = new ContentValues();
-		contentValues.put(User.address, Conts.getString(response, User.address));
-		contentValues.put(User.ID, Conts.getString(response, User.ID));
-		contentValues.put(User.exchange_number, Conts.getString(response, User.exchange_number));
-		contentValues.put(User.exchange_number_month, Conts.getString(response, User.exchange_number_month));
-		contentValues.put(User.fullname, Conts.getString(response, User.fullname));
-		contentValues.put(User.nickname, Conts.getString(response, User.nickname));
-		contentValues.put(User.poundage, Conts.getString(response, User.poundage));
-		contentValues.put(User.poundage_month, Conts.getString(response, User.poundage_month));
-		contentValues.put(User.birthday, Conts.getString(response, User.birthday));
-		String avatar = Conts.getString(response, User.AVATAR);
-		// LogUtils.e("avatar", avatar + "");
-		if (!Conts.isBlank(avatar)) {
-			contentValues.put(User.AVATAR, avatar);
-		}
-
-		getContentResolver().update(User.CONTENT_URI, contentValues, String.format("%s=='1'", User.STATUS), null);
+	private void updateUserInFor(JSONObject response) {
+		accountStore.saveUserInFor(response);
+		// User.updateUserInFor(this, response);
 	}
 
 	private void updateReGetToken(JSONObject response) {
@@ -826,10 +784,6 @@ public class MImusicService extends Service {
 	}
 
 	public void executeHttps(final RequestMethod requestMethod, final String api, final Bundle bundle, final IContsCallBack contsCallBack) {
-		// contsCallBack.onStart();
-		// ProgressConnect connect = new ProgressConnect(this);
-		// connect.execute(api, requestMethod, bundle, contsCallBack);
-
 		execute(requestMethod, api, bundle, contsCallBack);
 	}
 
@@ -839,5 +793,4 @@ public class MImusicService extends Service {
 		bundle.putString("images", images);// path
 		execute(RequestMethod.POST, API.API_R023, bundle, iContsCallBack);
 	}
-
 }

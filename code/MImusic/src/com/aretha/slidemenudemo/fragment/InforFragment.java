@@ -12,6 +12,7 @@ import org.json.JSONObject;
 import vnp.com.api.API;
 import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.User;
+import vnp.com.db.datastore.AccountStore;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.base.diablog.VasProgessDialog;
 import vnp.com.mimusic.util.Conts;
@@ -26,7 +27,6 @@ import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -105,21 +105,16 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 	}
 
 	private void showData() {
-		Cursor cursor = getActivity().getContentResolver().query(User.CONTENT_URI, null, String.format("%s = '1'", User.STATUS), null, null);
-		if (cursor != null && cursor.getCount() >= 1) {
-			cursor.moveToNext();
-			menu_left_tv_name.setText(String.format("%s (%s)", User.getName(cursor), Conts.getSDT(cursor.getString(cursor.getColumnIndex(User.USER)))));
-			infor_name.setText(User.getName(cursor));
-			infor_bidanh.setText(cursor.getString(cursor.getColumnIndex(User.nickname)));
-			infor_diachi.setText(cursor.getString(cursor.getColumnIndex(User.address)));
-			infor_ngaysinh.setText(cursor.getString(cursor.getColumnIndex(User.birthday)));
+		menu_left_tv_name.setText(String.format("%s (%s)", accountStore.getStringInFor(AccountStore.fullname), Conts.getSDT(accountStore.getUser())));
+		infor_name.setText(accountStore.getStringInFor(AccountStore.fullname));
+		infor_bidanh.setText(accountStore.getStringInFor(AccountStore.nickname));
+		infor_diachi.setText(accountStore.getStringInFor(AccountStore.address));
+		infor_ngaysinh.setText(accountStore.getStringInFor(AccountStore.birthday));
 
-			String cover = cursor.getString(cursor.getColumnIndex(User.COVER));
-			Conts.displayImageCover(cover, menu_left_img_cover);
-			String avatar = cursor.getString(cursor.getColumnIndex(User.AVATAR));
-			Conts.showInforAvatar(avatar, menu_left_img_avatar);
-			cursor.close();
-		}
+		String cover = accountStore.getStringInFor(AccountStore.cover);
+		Conts.displayImageCover(cover, menu_left_img_cover);
+		String avatar = accountStore.getStringInFor(AccountStore.avatar);
+		Conts.showInforAvatar(avatar, menu_left_img_avatar);
 	}
 
 	@Override
@@ -128,34 +123,38 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 		if (requestCode == 100 && resultCode == Activity.RESULT_OK) {
 			String path = data.getData().toString();
 			if (path != null) {
-				ContentValues contentValues = new ContentValues();
-				contentValues.put(User.COVER, path);
-				int index = getActivity().getContentResolver().update(User.CONTENT_URI, contentValues, String.format("%s = '1'", User.STATUS), null);
-
-				if (index > 0) {
-					Toast.makeText(getActivity(), getActivity().getString(R.string.updatethanhcong), Toast.LENGTH_SHORT).show();
-					showData();
-				} else {
-					Toast.makeText(getActivity(), getActivity().getString(R.string.updatethatbai), Toast.LENGTH_SHORT).show();
-				}
+				updateCover(path);
+				
+//				ContentValues contentValues = new ContentValues();
+//				contentValues.put(User.COVER, path);
+//				int index = getActivity().getContentResolver().update(User.CONTENT_URI, contentValues, String.format("%s = '1'", User.STATUS), null);
+//
+//				if (index > 0) {
+//					Toast.makeText(getActivity(), getActivity().getString(R.string.updatethanhcong), Toast.LENGTH_SHORT).show();
+//					showData();
+//				} else {
+//					Toast.makeText(getActivity(), getActivity().getString(R.string.updatethatbai), Toast.LENGTH_SHORT).show();
+//				}
 			} else {
 				Toast.makeText(getActivity(), getActivity().getString(R.string.khongthelayduocduongdan), Toast.LENGTH_SHORT).show();
 			}
 		} else if (requestCode == 101 && resultCode == Activity.RESULT_OK) {
 			String path = mFileTemp.getPath();
-			if (path != null) {
-				ContentValues contentValues = new ContentValues();
-				contentValues.put(User.COVER, path);
-				int index = getActivity().getContentResolver().update(User.CONTENT_URI, contentValues, String.format("%s = '1'", User.STATUS), null);
-				if (index > 0) {
-					Toast.makeText(getActivity(), getActivity().getString(R.string.updatethanhcong), Toast.LENGTH_SHORT).show();
-					showData();
-				} else {
-					Toast.makeText(getActivity(), getActivity().getString(R.string.updatethatbai), Toast.LENGTH_SHORT).show();
-				}
-			} else {
-				Toast.makeText(getActivity(), getActivity().getString(R.string.khongthelayduocduongdan), Toast.LENGTH_SHORT).show();
-			}
+			
+			updateCover(path);
+//			if (path != null) {
+//				ContentValues contentValues = new ContentValues();
+//				contentValues.put(User.COVER, path);
+//				int index = getActivity().getContentResolver().update(User.CONTENT_URI, contentValues, String.format("%s = '1'", User.STATUS), null);
+//				if (index > 0) {
+//					Toast.makeText(getActivity(), getActivity().getString(R.string.updatethanhcong), Toast.LENGTH_SHORT).show();
+//					showData();
+//				} else {
+//					Toast.makeText(getActivity(), getActivity().getString(R.string.updatethatbai), Toast.LENGTH_SHORT).show();
+//				}
+//			} else {
+//				Toast.makeText(getActivity(), getActivity().getString(R.string.khongthelayduocduongdan), Toast.LENGTH_SHORT).show();
+//			}
 
 		} else if (requestCode == REQUEST_CODE_GALLERY && resultCode == Activity.RESULT_OK) {
 			try {
@@ -180,6 +179,11 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 
 			uploadAvatar(path);
 		}
+	}
+
+	private void updateCover(String path) {
+		accountStore.saveCover(path);
+		showData();
 	}
 
 	public static void copyStream(InputStream input, OutputStream output) throws IOException {
@@ -230,10 +234,10 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 				@Override
 				public void onSuscess(JSONObject response) {
 
-					ContentValues contentValues = new ContentValues();
-					contentValues.put(User.AVATAR, path);
-					int index = getActivity().getContentResolver().update(User.CONTENT_URI, contentValues, String.format("%s = '1'", User.STATUS), null);
-
+//					ContentValues contentValues = new ContentValues();
+//					contentValues.put(User.AVATAR, path);
+//					int index = getActivity().getContentResolver().update(User.CONTENT_URI, contentValues, String.format("%s = '1'", User.STATUS), null);
+					accountStore.saveAvatar(path);
 					showData();
 					if (progressDialog != null) {
 						progressDialog.dismiss();

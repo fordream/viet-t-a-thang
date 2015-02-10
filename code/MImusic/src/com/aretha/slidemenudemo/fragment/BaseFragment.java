@@ -1,6 +1,7 @@
 package com.aretha.slidemenudemo.fragment;
 
 import vnp.com.api.RestClient.RequestMethod;
+import vnp.com.db.datastore.AccountStore;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.VApplication;
 import vnp.com.mimusic.util.Conts;
@@ -11,6 +12,7 @@ import android.support.v4.app.Fragment;
 import android.view.View;
 
 public class BaseFragment extends Fragment {
+	public AccountStore accountStore;
 
 	public void execute(final RequestMethod requestMethod, final String api, final Bundle bundle, final IContsCallBack contsCallBack) {
 		((VApplication) getActivity().getApplication()).execute(requestMethod, api, bundle, contsCallBack);
@@ -31,6 +33,7 @@ public class BaseFragment extends Fragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		accountStore = new AccountStore(getActivity());
 	}
 
 	public BaseFragment() {
@@ -64,8 +67,8 @@ public class BaseFragment extends Fragment {
 		header.findViewById(R.id.header_btn_right).setOnClickListener(homeOnClick);
 
 		if (title == R.string.kenhbanvas) {
-			//header.findViewById(R.id.img_headder_logo).setVisibility(View.VISIBLE);
-		//	header.setTextHeader("");
+			// header.findViewById(R.id.img_headder_logo).setVisibility(View.VISIBLE);
+			// header.setTextHeader("");
 		}
 
 	}

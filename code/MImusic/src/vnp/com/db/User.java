@@ -1,6 +1,9 @@
 package vnp.com.db;
 
 import java.util.Map;
+import java.util.Set;
+
+import org.json.JSONObject;
 
 import vnp.com.mimusic.util.Conts;
 import android.content.ContentUris;
@@ -11,6 +14,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
+import android.os.Bundle;
 import android.text.TextUtils;
 
 public class User {
@@ -190,70 +194,130 @@ public class User {
 		return name;
 	}
 
-//	public static String getToken(Context activity) {
-//		String token = null;
-//		String selection = User.STATUS + "='1'";
-//		Cursor cursor = activity.getContentResolver().query(User.CONTENT_URI, null, selection, null, null);
-//		if (cursor != null && cursor.getCount() >= 1) {
-//			if (cursor.moveToNext()) {
-//				token = Conts.getStringCursor(cursor, User.TOKEN);
-//			}
-//		}
-//
-//		if (cursor != null) {
-//			cursor.close();
-//		}
-//		return token;
+	// public static String getToken(Context activity) {
+	// String token = null;
+	// String selection = User.STATUS + "='1'";
+	// Cursor cursor = activity.getContentResolver().query(User.CONTENT_URI,
+	// null, selection, null, null);
+	// if (cursor != null && cursor.getCount() >= 1) {
+	// if (cursor.moveToNext()) {
+	// token = Conts.getStringCursor(cursor, User.TOKEN);
+	// }
+	// }
+	//
+	// if (cursor != null) {
+	// cursor.close();
+	// }
+	// return token;
+	// }
+
+	// public static String getUser(Context context) {
+	// if (context == null) {
+	// return "";
+	// }
+	// String user = "";
+	// Cursor cursor = context.getContentResolver().query(User.CONTENT_URI,
+	// null, User.STATUS + "='1'", null, null);
+	// if (cursor != null && cursor.getCount() >= 1) {
+	// cursor.moveToNext();
+	// user = cursor.getString(cursor.getColumnIndex(User.USER));
+	// }
+	//
+	// if (cursor != null) {
+	// cursor.close();
+	// }
+	// return user;
+	// }
+
+	// public static String getPassword(Context context) {
+	// String user = "";
+	// Cursor cursor = context.getContentResolver().query(User.CONTENT_URI,
+	// null, User.STATUS + "='1'", null, null);
+	// if (cursor != null && cursor.getCount() >= 1) {
+	// cursor.moveToNext();
+	// user = cursor.getString(cursor.getColumnIndex(User.PASSWORD));
+	// }
+	//
+	// if (cursor != null) {
+	// cursor.close();
+	// }
+	// return user;
+	//
+	// }
+
+	// public static String getRefreshToken(Context context) {
+	// String token = null;
+	// String selection = User.STATUS + "='1'";
+	// Cursor cursor = context.getContentResolver().query(User.CONTENT_URI,
+	// null, selection, null, null);
+	// if (cursor != null && cursor.getCount() >= 1) {
+	// cursor.moveToNext();
+	// token = cursor.getString(cursor.getColumnIndex(User.KEYREFRESH));
+	// }
+	//
+	// if (cursor != null) {
+	// cursor.close();
+	// }
+	// return token;
+	// }
+
+//	public static Cursor queryUser(Context context) {
+//		return context.getContentResolver().query(User.CONTENT_URI, null, String.format("%s = '1'", User.STATUS), null, null);
 //	}
 
-//	public static String getUser(Context context) {
-//		if (context == null) {
-//			return "";
-//		}
-//		String user = "";
-//		Cursor cursor = context.getContentResolver().query(User.CONTENT_URI, null, User.STATUS + "='1'", null, null);
-//		if (cursor != null && cursor.getCount() >= 1) {
-//			cursor.moveToNext();
-//			user = cursor.getString(cursor.getColumnIndex(User.USER));
+//	public static void updateUserInFor(Context context, JSONObject response) {
+//		ContentValues contentValues = new ContentValues();
+//		contentValues.put(User.address, Conts.getString(response, User.address));
+//		contentValues.put(User.ID, Conts.getString(response, User.ID));
+//		contentValues.put(User.exchange_number, Conts.getString(response, User.exchange_number));
+//		contentValues.put(User.exchange_number_month, Conts.getString(response, User.exchange_number_month));
+//		contentValues.put(User.fullname, Conts.getString(response, User.fullname));
+//		contentValues.put(User.nickname, Conts.getString(response, User.nickname));
+//		contentValues.put(User.poundage, Conts.getString(response, User.poundage));
+//		contentValues.put(User.poundage_month, Conts.getString(response, User.poundage_month));
+//		contentValues.put(User.birthday, Conts.getString(response, User.birthday));
+//		String avatar = Conts.getString(response, User.AVATAR);
+//		// LogUtils.e("avatar", avatar + "");
+//		if (!Conts.isBlank(avatar)) {
+//			contentValues.put(User.AVATAR, avatar);
 //		}
 //
-//		if (cursor != null) {
-//			cursor.close();
-//		}
-//		return user;
+//		context.getContentResolver().update(User.CONTENT_URI, contentValues, String.format("%s=='1'", User.STATUS), null);
 //	}
-
-//	public static String getPassword(Context context) {
-//		String user = "";
-//		Cursor cursor = context.getContentResolver().query(User.CONTENT_URI, null, User.STATUS + "='1'", null, null);
-//		if (cursor != null && cursor.getCount() >= 1) {
-//			cursor.moveToNext();
-//			user = cursor.getString(cursor.getColumnIndex(User.PASSWORD));
-//		}
 //
-//		if (cursor != null) {
-//			cursor.close();
+//	public static void updateInForLogin(Context context, JSONObject jsonObject, String p) {
+//		String token = Conts.getString(jsonObject, "token");
+//		String keyRefresh = Conts.getString(jsonObject, "keyRefresh");
+//		String phone_number = Conts.getString(jsonObject, "phone");
+//		ContentValues values = new ContentValues();
+//		values.put(User.USER, phone_number);
+//		if (!Conts.isBlank(p)) {
+//			values.put(User.PASSWORD, p);
 //		}
-//		return user;
-//
-//	}
-
-//	public static String getRefreshToken(Context context) {
-//		String token = null;
-//		String selection = User.STATUS + "='1'";
+//		values.put(User.AVATAR, Conts.getString(jsonObject, User.AVATAR));
+//		values.put(User.TOKEN, token);
+//		values.put(User.KEYREFRESH, keyRefresh);
+//		values.put(User.STATUS, "1");
+//		String selection = String.format("%s='%s'", User.USER, phone_number);
 //		Cursor cursor = context.getContentResolver().query(User.CONTENT_URI, null, selection, null, null);
-//		if (cursor != null && cursor.getCount() >= 1) {
-//			cursor.moveToNext();
-//			token = cursor.getString(cursor.getColumnIndex(User.KEYREFRESH));
+//
+//		boolean isUpdate = cursor != null && cursor.getCount() >= 1;
+//		cursor.close();
+//
+//		if (isUpdate) {
+//			context.getContentResolver().update(User.CONTENT_URI, values, selection, null);
+//		} else {
+//			context.getContentResolver().insert(User.CONTENT_URI, values);
+//		}
+//	}
+//
+//	public static void updateInFor(Context context, Bundle bundle) {
+//		ContentValues contentValues = new ContentValues();
+//		Set<String> keys = bundle.keySet();
+//		for (String key : keys) {
+//			contentValues.put(key, bundle.getString(key));
 //		}
 //
-//		if (cursor != null) {
-//			cursor.close();
-//		}
-//		return token;
+//		context.getContentResolver().update(User.CONTENT_URI, contentValues, String.format("%s=='1'", User.STATUS), null);
 //	}
-
-	public static Cursor queryUser(Context context) {
-		return context.getContentResolver().query(User.CONTENT_URI, null, String.format("%s = '1'", User.STATUS), null, null);
-	}
 }
