@@ -109,20 +109,6 @@ public class Conts {
 	public static final String MOITHANHVIEN = "MOITHANHVIEN";
 	public static final String DICHVUBANCHAY = "DICHVUBANCHAY";
 
-	public static String getName(Cursor cursor) {
-		String name = cursor.getString(cursor.getColumnIndex(User.fullname));
-
-		if (name == null || name != null && name.trim().equals("")) {
-			name = cursor.getString(cursor.getColumnIndex(User.NAME_CONTACT));
-		}
-
-		if (name != null && !name.trim().equals("")) {
-			return name;
-		}
-
-		return cursor.getString(cursor.getColumnIndex(User.USER));
-	}
-
 	public static boolean isBlank(String cover) {
 		return cover == null || cover != null && cover.trim().equals("");
 	}
@@ -140,6 +126,7 @@ public class Conts {
 			int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
 			cursor.moveToFirst();
 			String path = cursor.getString(column_index);
+			cursor.close();
 			return path == null ? uri.getPath() : path;
 		}
 		return uri.getPath();
@@ -174,21 +161,6 @@ public class Conts {
 		canvas.drawBitmap(sourceBitmap, new Rect(0, 0, sourceBitmap.getWidth(), sourceBitmap.getHeight()), new Rect(0, 0, targetWidth, targetHeight), null);
 
 		return targetBitmap;
-	}
-
-	public static String getToken(Context activity) {
-		String token = null;
-		String selection = User.STATUS + "='1'";
-		Cursor cursor = activity.getContentResolver().query(User.CONTENT_URI, null, selection, null, null);
-		if (cursor != null && cursor.getCount() >= 1) {
-			cursor.moveToNext();
-			token = getStringCursor(cursor, User.TOKEN);
-		}
-
-		if (cursor != null) {
-			cursor.close();
-		}
-		return token;
 	}
 
 	public static void executeNoProgressBar(final RequestMethod requestMethod, final String api, final MImusicService activity, final Bundle bundles, final IContsCallBack contsCallBack) {
@@ -283,7 +255,7 @@ public class Conts {
 		};
 
 		if (!API.API_R013.equals(resClientCallBack.getApiName())) {
-			bundles.putString("token", Conts.getToken(activity));
+			bundles.putString("token", User.getToken(activity));
 		}
 
 		Set<String> keys = bundles.keySet();
@@ -423,67 +395,6 @@ public class Conts {
 		} catch (JSONException e) {
 			return "";
 		}
-	}
-
-	public static boolean haveContact(String phone, Context context) {
-		boolean hasContact = false;
-		Cursor cursor = context.getContentResolver().query(User.CONTENT_URI, null, String.format("%s='%s'", User.USER, phone), null, null);
-
-		if (cursor != null) {
-			if (cursor.moveToNext()) {
-				hasContact = true;
-			}
-			cursor.close();
-		}
-
-		return hasContact;
-	}
-
-	public static String getUser(Context context) {
-		if (context == null) {
-			return "";
-		}
-		String user = "";
-		Cursor cursor = context.getContentResolver().query(User.CONTENT_URI, null, User.STATUS + "='1'", null, null);
-		if (cursor != null && cursor.getCount() >= 1) {
-			cursor.moveToNext();
-			user = cursor.getString(cursor.getColumnIndex(User.USER));
-		}
-
-		if (cursor != null) {
-			cursor.close();
-		}
-		return user;
-	}
-
-	public static String getPassword(Context context) {
-		String user = "";
-		Cursor cursor = context.getContentResolver().query(User.CONTENT_URI, null, User.STATUS + "='1'", null, null);
-		if (cursor != null && cursor.getCount() >= 1) {
-			cursor.moveToNext();
-			user = cursor.getString(cursor.getColumnIndex(User.PASSWORD));
-		}
-
-		if (cursor != null) {
-			cursor.close();
-		}
-		return user;
-
-	}
-
-	public static String getRefreshToken(Context context) {
-		String token = null;
-		String selection = User.STATUS + "='1'";
-		Cursor cursor = context.getContentResolver().query(User.CONTENT_URI, null, selection, null, null);
-		if (cursor != null && cursor.getCount() >= 1) {
-			cursor.moveToNext();
-			token = cursor.getString(cursor.getColumnIndex(User.KEYREFRESH));
-		}
-
-		if (cursor != null) {
-			cursor.close();
-		}
-		return token;
 	}
 
 	public static void addViewScale(View view) {
@@ -630,10 +541,6 @@ public class Conts {
 		} catch (Exception exception) {
 
 		}
-	}
-
-	public static void getPhoto(String photo_id) {
-
 	}
 
 	public static int getDataColor(int position) {

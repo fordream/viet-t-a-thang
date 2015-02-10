@@ -60,7 +60,7 @@ public class MenuLeftView extends LinearLayout {
 		Cursor cursor = getContext().getContentResolver().query(User.CONTENT_URI, null, String.format("%s = '1'", User.STATUS), null, null);
 		if (cursor != null && cursor.getCount() >= 1) {
 			cursor.moveToNext();
-			menu_left_tv_name.setText(String.format("%s (%s)", Conts.getName(cursor), Conts.getSDT(cursor.getString(cursor.getColumnIndex(User.USER)))));
+			menu_left_tv_name.setText(String.format("%s (%s)", User.getName(cursor), Conts.getSDT(cursor.getString(cursor.getColumnIndex(User.USER)))));
 			String cover = cursor.getString(cursor.getColumnIndex(User.COVER));
 			Conts.displayImageCover(cover, menu_left_img_cover);
 			String avatar = cursor.getString(cursor.getColumnIndex(User.AVATAR));

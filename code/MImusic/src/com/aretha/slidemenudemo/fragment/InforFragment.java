@@ -108,8 +108,8 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 		Cursor cursor = getActivity().getContentResolver().query(User.CONTENT_URI, null, String.format("%s = '1'", User.STATUS), null, null);
 		if (cursor != null && cursor.getCount() >= 1) {
 			cursor.moveToNext();
-			menu_left_tv_name.setText(String.format("%s (%s)", Conts.getName(cursor), Conts.getSDT(cursor.getString(cursor.getColumnIndex(User.USER)))));
-			infor_name.setText(Conts.getName(cursor));
+			menu_left_tv_name.setText(String.format("%s (%s)", User.getName(cursor), Conts.getSDT(cursor.getString(cursor.getColumnIndex(User.USER)))));
+			infor_name.setText(User.getName(cursor));
 			infor_bidanh.setText(cursor.getString(cursor.getColumnIndex(User.nickname)));
 			infor_diachi.setText(cursor.getString(cursor.getColumnIndex(User.address)));
 			infor_ngaysinh.setText(cursor.getString(cursor.getColumnIndex(User.birthday)));
@@ -161,7 +161,7 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 			try {
 				InputStream inputStream = getActivity().getContentResolver().openInputStream(data.getData());
 				createMFileTemp();
-				
+
 				FileOutputStream fileOutputStream = new FileOutputStream(mFileTemp);
 				copyStream(inputStream, fileOutputStream);
 				fileOutputStream.close();
@@ -202,8 +202,7 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 
 	private void uploadAvatar(final String path) {
 		if (!Conts.isBlank(path)) {
-			
-			
+
 			executeUpdateHttpsAvatar(path, new IContsCallBack() {
 				ProgressDialog progressDialog;
 

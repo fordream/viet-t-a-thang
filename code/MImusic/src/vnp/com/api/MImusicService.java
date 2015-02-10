@@ -74,8 +74,8 @@ public class MImusicService extends Service {
 
 	public void refreshToken(final IContsCallBack contsCallBack) {
 		Bundle bundle = new Bundle();
-		bundle.putString("key", Conts.getRefreshToken(this));
-		bundle.putString(User.KEYREFRESH, Conts.getRefreshToken(this));
+		bundle.putString("key", User.getRefreshToken(this));
+		bundle.putString(User.KEYREFRESH, User.getRefreshToken(this));
 		execute(RequestMethod.GET, API.API_R013, bundle, new IContsCallBack() {
 
 			@Override
@@ -239,60 +239,54 @@ public class MImusicService extends Service {
 
 	private void callUpdateData() {
 
-		/**
-		 * get recomment
-		 */
-
-		/**
-		 * get list dich vu
-		 */
-		// execute(RequestMethod.GET, API.API_R004, new Bundle(), null);
-		/**
-		 * get infor
-		 */
-		execute(RequestMethod.GET, API.API_R006, new Bundle(), new IContsCallBack() {
-
-			@Override
-			public void onSuscess(JSONObject response) {
-				sendBroadcast(new Intent("broadcastReceivermactivity_slidemenu_menuleft"));
-			}
-
-			@Override
-			public void onStart() {
-
-			}
-
-			@Override
-			public void onError(String message) {
-
-			}
-
-			@Override
-			public void onError() {
-
-			}
-		});
-
-		callDongBoDanhBaLen(new IContsCallBack() {
-
-			@Override
-			public void onSuscess(JSONObject response) {
-			}
-
-			@Override
-			public void onStart() {
-
-			}
-
-			@Override
-			public void onError(String message) {
-			}
-
-			@Override
-			public void onError() {
-
-			}
-		});
+		// /**
+		// * get infor
+		// */
+		// execute(RequestMethod.GET, API.API_R006, new Bundle(), new
+		// IContsCallBack() {
+		//
+		// @Override
+		// public void onSuscess(JSONObject response) {
+		// sendBroadcast(new
+		// Intent("broadcastReceivermactivity_slidemenu_menuleft"));
+		// }
+		//
+		// @Override
+		// public void onStart() {
+		//
+		// }
+		//
+		// @Override
+		// public void onError(String message) {
+		//
+		// }
+		//
+		// @Override
+		// public void onError() {
+		//
+		// }
+		// });
+		//
+		// callDongBoDanhBaLen(new IContsCallBack() {
+		//
+		// @Override
+		// public void onSuscess(JSONObject response) {
+		// }
+		//
+		// @Override
+		// public void onStart() {
+		//
+		// }
+		//
+		// @Override
+		// public void onError(String message) {
+		// }
+		//
+		// @Override
+		// public void onError() {
+		//
+		// }
+		// });
 	}
 
 	public void callDongBoDanhBaLen(final IContsCallBack contsCallBack) {
@@ -532,7 +526,7 @@ public class MImusicService extends Service {
 
 	private void updateMauMoi(JSONObject response, String service_code) {
 		try {
-			String user = Conts.getUser(this);
+			String user = User.getUser(this);
 			JSONArray array = response.getJSONArray("data");
 			for (int i = 0; i < array.length(); i++) {
 				JSONObject jsonObject = array.getJSONObject(i);
@@ -582,7 +576,7 @@ public class MImusicService extends Service {
 
 			contentValues.put(User.contact_id, contact_id);
 
-			if (Conts.haveContact(phone, this)) {
+			if (User.haveContact(phone, this)) {
 				getContentResolver().update(User.CONTENT_URI, contentValues, String.format("%s = '%s'", User.USER, phone), null);
 			} else {
 				getContentResolver().insert(User.CONTENT_URI, contentValues);
@@ -593,7 +587,7 @@ public class MImusicService extends Service {
 	private void updateDongBoXuong(JSONObject response) {
 
 		try {
-			String user = Conts.getUser(MImusicService.this);
+			String user = User.getUser(MImusicService.this);
 			JSONArray array = response.getJSONArray("data");
 			for (int i = 0; i < array.length(); i++) {
 				JSONObject jsonObject = array.getJSONObject(i);
@@ -646,7 +640,7 @@ public class MImusicService extends Service {
 
 				contentValues.put(User.LISTIDDVSUDUNG, service_codes);
 				contentValues.put(User.LISTIDTENDVSUDUNG, service_codes_name);
-				if (Conts.haveContact(phone, this)) {
+				if (User.haveContact(phone, this)) {
 					getContentResolver().update(User.CONTENT_URI, contentValues, String.format("%s = '%s'", User.USER, phone), null);
 				} else {
 					getContentResolver().insert(User.CONTENT_URI, contentValues);
@@ -766,7 +760,7 @@ public class MImusicService extends Service {
 			try {
 				String serviceCodes = "";
 				String phones = "";
-				String user = Conts.getUser(this);
+				String user = User.getUser(this);
 
 				JSONArray array = response.getJSONArray("data");
 				for (int i = 0; i < array.length(); i++) {

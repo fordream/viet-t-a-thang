@@ -2,6 +2,7 @@ package vnp.com.db;
 
 import java.util.Map;
 
+import vnp.com.mimusic.util.Conts;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
@@ -156,4 +157,99 @@ public class User {
 		return mContext.getContentResolver().query(CONTENT_URI, null, selection.toString(), null, NAME_CONTACT_ENG);
 	}
 
+	public static String getName(Cursor cursor) {
+		String name = cursor.getString(cursor.getColumnIndex(User.fullname));
+
+		if (name == null || name != null && name.trim().equals("")) {
+			name = cursor.getString(cursor.getColumnIndex(User.NAME_CONTACT));
+		}
+
+		if (name != null && !name.trim().equals("")) {
+		} else {
+			name = cursor.getString(cursor.getColumnIndex(User.USER));
+		}
+
+		if (cursor != null) {
+			// cursor.close();
+		}
+
+		return name;
+	}
+
+	public static String getToken(Context activity) {
+		String token = null;
+		String selection = User.STATUS + "='1'";
+		Cursor cursor = activity.getContentResolver().query(User.CONTENT_URI, null, selection, null, null);
+		if (cursor != null && cursor.getCount() >= 1) {
+			if (cursor.moveToNext()) {
+				token = Conts.getStringCursor(cursor, User.TOKEN);
+			}
+		}
+
+		if (cursor != null) {
+			cursor.close();
+		}
+		return token;
+	}
+
+	public static boolean haveContact(String phone, Context context) {
+		boolean hasContact = false;
+		Cursor cursor = context.getContentResolver().query(User.CONTENT_URI, null, String.format("%s='%s'", User.USER, phone), null, null);
+
+		if (cursor != null) {
+			if (cursor.moveToNext()) {
+				hasContact = true;
+			}
+			cursor.close();
+		}
+
+		return hasContact;
+	}
+
+	public static String getUser(Context context) {
+		if (context == null) {
+			return "";
+		}
+		String user = "";
+		Cursor cursor = context.getContentResolver().query(User.CONTENT_URI, null, User.STATUS + "='1'", null, null);
+		if (cursor != null && cursor.getCount() >= 1) {
+			cursor.moveToNext();
+			user = cursor.getString(cursor.getColumnIndex(User.USER));
+		}
+
+		if (cursor != null) {
+			cursor.close();
+		}
+		return user;
+	}
+
+	public static String getPassword(Context context) {
+		String user = "";
+		Cursor cursor = context.getContentResolver().query(User.CONTENT_URI, null, User.STATUS + "='1'", null, null);
+		if (cursor != null && cursor.getCount() >= 1) {
+			cursor.moveToNext();
+			user = cursor.getString(cursor.getColumnIndex(User.PASSWORD));
+		}
+
+		if (cursor != null) {
+			cursor.close();
+		}
+		return user;
+
+	}
+
+	public static String getRefreshToken(Context context) {
+		String token = null;
+		String selection = User.STATUS + "='1'";
+		Cursor cursor = context.getContentResolver().query(User.CONTENT_URI, null, selection, null, null);
+		if (cursor != null && cursor.getCount() >= 1) {
+			cursor.moveToNext();
+			token = cursor.getString(cursor.getColumnIndex(User.KEYREFRESH));
+		}
+
+		if (cursor != null) {
+			cursor.close();
+		}
+		return token;
+	}
 }

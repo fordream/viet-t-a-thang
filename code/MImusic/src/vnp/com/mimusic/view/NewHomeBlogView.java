@@ -120,6 +120,10 @@ public abstract class NewHomeBlogView extends LinearLayout implements OnClickLis
 
 				}
 			}
+
+			if (cursorUserRecomment != null) {
+				cursorUserRecomment.close();
+			}
 		} else {
 			Cursor cursorDVHot = DichVu.getCursorFromUser(getContext(), 3);
 
@@ -169,6 +173,10 @@ public abstract class NewHomeBlogView extends LinearLayout implements OnClickLis
 						});
 					}
 				}
+			}
+
+			if (cursorDVHot != null) {
+				cursorDVHot.close();
 			}
 		}
 	}

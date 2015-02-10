@@ -142,7 +142,7 @@ public class BangXepHang {
 	public static void update(Context context, JSONObject response, Bundle bundle, String api) {
 		// API.API_R024,API.API_R025
 		String type = bundle.getString(BangXepHang.type);
-		String user = Conts.getUser(context);
+		String user = User.getUser(context);
 
 		if (API.API_R024.equals(api)) {
 
@@ -185,7 +185,7 @@ public class BangXepHang {
 
 	public static Cursor getBangXepHang(Context context, String type, String id) {
 		String selection = String.format("%s ='%s' and %s = '%s' and %s = '%s'"//
-				, BangXepHang.USER, Conts.getUser(context)//
+				, BangXepHang.USER, User.getUser(context)//
 				, BangXepHang.type, type//
 				, BangXepHang.ID, id);//
 		Cursor cursor = context.getContentResolver().query(CONTENT_URI, null, selection, null, null);
@@ -193,8 +193,8 @@ public class BangXepHang {
 	}
 
 	public static Cursor getBangXepHang(Context context, String type) {
-		String selection = String.format("%s ='%s' and %s = '%s'", BangXepHang.USER, Conts.getUser(context), BangXepHang.type, type);
-		Cursor cursor = context.getContentResolver().query(CONTENT_URI, null, selection, null, (typeSOLUONG.equals(type) ? quantity : commission ) + " DESC");
+		String selection = String.format("%s ='%s' and %s = '%s'", BangXepHang.USER, User.getUser(context), BangXepHang.type, type);
+		Cursor cursor = context.getContentResolver().query(CONTENT_URI, null, selection, null, (typeSOLUONG.equals(type) ? quantity : commission) + " DESC");
 		return cursor;
 	}
 }

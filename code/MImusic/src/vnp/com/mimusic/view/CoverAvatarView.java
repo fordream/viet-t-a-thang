@@ -37,7 +37,7 @@ public class CoverAvatarView extends LinearLayout {
 		if (cursor != null && cursor.getCount() >= 1) {
 			if (cursor.moveToNext()) {
 
-				menu_left_tv_name.setText(String.format("%s (%s)", Conts.getName(cursor), Conts.getSDT(cursor.getString(cursor.getColumnIndex(User.USER)))));
+				menu_left_tv_name.setText(String.format("%s (%s)", User.getName(cursor), Conts.getSDT(cursor.getString(cursor.getColumnIndex(User.USER)))));
 
 				String cover = cursor.getString(cursor.getColumnIndex(User.COVER));
 				Conts.displayImageCover(cover, menu_left_img_cover);

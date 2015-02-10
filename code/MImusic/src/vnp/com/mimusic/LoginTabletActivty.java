@@ -2,6 +2,7 @@ package vnp.com.mimusic;
 
 import org.json.JSONObject;
 
+import vnp.com.db.User;
 import vnp.com.mimusic.VApplication.IServiceConfig;
 import vnp.com.mimusic.base.VTAnimationListener;
 import vnp.com.mimusic.main.BaseMusicSlideMenuActivity;
@@ -37,7 +38,8 @@ public class LoginTabletActivty extends Activity implements OnClickListener {
 		setContentView(R.layout.activity_login);
 		progressBar1 = (LoadingView) findViewById(R.id.loadingView1);
 		Conts.showView(progressBar1, false);
-//		overridePendingTransition(R.anim.abc_nothing_0, R.anim.abc_nothing_0);
+		// overridePendingTransition(R.anim.abc_nothing_0,
+		// R.anim.abc_nothing_0);
 
 		findViewById(R.id.activity_login_btn).setOnClickListener(this);
 		findViewById(R.id.activity_login_btn).setOnTouchListener(new OnTouchAnimation());
@@ -81,13 +83,13 @@ public class LoginTabletActivty extends Activity implements OnClickListener {
 	}
 
 	private void callInitSetting() {
-		((TextView) findViewById(R.id.activity_login_number_phone)).setText(Conts.getUser(this));
-		((TextView) findViewById(R.id.activity_login_password)).setText(Conts.getPassword(this));
+		((TextView) findViewById(R.id.activity_login_number_phone)).setText(User.getUser(this));
+		((TextView) findViewById(R.id.activity_login_password)).setText(User.getPassword(this));
 
 		((TextView) findViewById(R.id.activity_login_number_phone)).setText("0964506972");
 		((TextView) findViewById(R.id.activity_login_password)).setText("265376");
 
-		if (Conts.isBlank(Conts.getUser(this))) {
+		if (Conts.isBlank(User.getUser(this))) {
 			if (Conts.is3GConnected(LoginTabletActivty.this)) {
 				login(true, "", "");
 			}

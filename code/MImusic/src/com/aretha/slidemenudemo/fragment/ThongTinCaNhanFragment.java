@@ -119,7 +119,7 @@ public class ThongTinCaNhanFragment extends BaseFragment implements OnItemClickL
 			if (cursor != null && cursor.getCount() >= 1) {
 				cursor.moveToNext();
 
-				((TextView) view.findViewById(R.id.text_name)).setText(Conts.getName(cursor));
+				((TextView) view.findViewById(R.id.text_name)).setText(User.getName(cursor));
 				((TextView) view.findViewById(R.id.text_bidanh)).setText(cursor.getString(cursor.getColumnIndex(User.nickname)));
 				((TextView) view.findViewById(R.id.text_ngaysinh)).setText(cursor.getString(cursor.getColumnIndex(User.birthday)));
 				((TextView) view.findViewById(R.id.text_diachi)).setText(cursor.getString(cursor.getColumnIndex(User.address)));
@@ -134,7 +134,7 @@ public class ThongTinCaNhanFragment extends BaseFragment implements OnItemClickL
 				Conts.showInforAvatar(avatar, menu_left_img_avatar);
 
 				TextView menu_left_tv_name = (TextView) view.findViewById(R.id.menu_left_tv_name);
-				menu_left_tv_name.setText(String.format("%s (%s)", Conts.getName(cursor), Conts.getSDT(cursor.getString(cursor.getColumnIndex(User.USER)))));
+				menu_left_tv_name.setText(String.format("%s (%s)", User.getName(cursor), Conts.getSDT(cursor.getString(cursor.getColumnIndex(User.USER)))));
 
 				cursor.close();
 			}

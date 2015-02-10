@@ -131,6 +131,10 @@ public class ChiTietDichVuFragment extends BaseFragment implements View.OnClickL
 			service_content = Conts.getStringCursor(cursor, DichVu.service_content);
 			service_guide = Conts.getStringCursor(cursor, DichVu.service_guide);
 			update(service_content);
+
+		}
+
+		if (cursor != null) {
 			cursor.close();
 		}
 		if (Conts.isBlank(service_content)) {

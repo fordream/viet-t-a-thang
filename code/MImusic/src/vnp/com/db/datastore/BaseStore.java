@@ -41,4 +41,8 @@ public class BaseStore {
 	public String getString(String key) {
 		return preferences.getString(key, "");
 	}
+
+	public String key() {
+		return "id";
+	}
 }
