@@ -252,4 +252,8 @@ public class User {
 		}
 		return token;
 	}
+
+	public static Cursor queryUser(Context context) {
+		return context.getContentResolver().query(User.CONTENT_URI, null, String.format("%s = '1'", User.STATUS), null, null);
+	}
 }

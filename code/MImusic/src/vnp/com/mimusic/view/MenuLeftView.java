@@ -57,7 +57,11 @@ public class MenuLeftView extends LinearLayout {
 		ImageView menu_left_img_cover = (ImageView) findViewById(R.id.menu_left_img_cover);
 		TextView menu_left_tv_name = (TextView) findViewById(R.id.menu_left_tv_name);
 
-		Cursor cursor = getContext().getContentResolver().query(User.CONTENT_URI, null, String.format("%s = '1'", User.STATUS), null, null);
+		// Cursor cursor =
+		// getContext().getContentResolver().query(User.CONTENT_URI, null,
+		// String.format("%s = '1'", User.STATUS), null, null);
+
+		Cursor cursor = User.queryUser(getContext());
 		if (cursor != null && cursor.getCount() >= 1) {
 			cursor.moveToNext();
 			menu_left_tv_name.setText(String.format("%s (%s)", User.getName(cursor), Conts.getSDT(cursor.getString(cursor.getColumnIndex(User.USER)))));
