@@ -2,8 +2,11 @@ package vnp.com.db;
 
 import java.util.Map;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import vnp.com.db.datastore.DichVuStore;
 import vnp.com.mimusic.util.Conts;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -180,5 +183,52 @@ public class DichVu {
 			context.getContentResolver().update(CONTENT_URI, values, String.format("%s = '%s'", DichVu.service_code, strService_code), null);
 		}
 
+	}
+
+	public static void updateDichVuDangKy(Context context, Bundle bundle) {
+		String cs = bundle.getString(DichVu.service_code);
+		ContentValues contentValues = new ContentValues();
+		contentValues.put(DichVu.service_status, "0");
+		context.getContentResolver().update(DichVu.CONTENT_URI, contentValues, String.format("%s=='%s'", DichVu.service_code, cs), null);
+
+	}
+
+	public static void updateDichVu(Context context, JSONObject response) {
+		try {
+			JSONArray jsonArray = response.getJSONArray("data");
+			for (int i = 0; i < jsonArray.length(); i++) {
+				JSONObject jsonObject = jsonArray.getJSONObject(i);
+				ContentValues contentValues = new ContentValues();
+				contentValues.put(DichVu.ID, Conts.getString(jsonObject, DichVu.ID));
+				contentValues.put(DichVu.service_name, Conts.getString(jsonObject, DichVu.service_name));
+				contentValues.put(DichVu.service_name_eng, Conts.StringConnvert.convertVNToAlpha(Conts.getString(jsonObject, DichVu.service_name)));
+				contentValues.put(DichVu.service_code, Conts.getString(jsonObject, DichVu.service_code));
+				contentValues.put(DichVu.service_icon, Conts.getString(jsonObject, DichVu.service_icon));
+				contentValues.put(DichVu.service_content, Conts.getString(jsonObject, DichVu.service_content));
+				contentValues.put(DichVu.service_price, Conts.getString(jsonObject, DichVu.service_price));
+				contentValues.put(DichVu.service_status, Conts.getString(jsonObject, DichVu.service_status));
+				String service_guide = Conts.getString(jsonObject, DichVu.service_guide);
+
+				if (!Conts.isBlank(service_guide)) {
+					contentValues.put(DichVu.service_guide, service_guide);
+				}
+
+				String selection = String.format("%s='%s'", DichVu.service_code, jsonObject.getString(DichVu.service_code));
+				Cursor cursor = context.getContentResolver().query(DichVu.CONTENT_URI, null, selection, null, null);
+
+				boolean isUpdate = cursor != null && cursor.getCount() >= 1;
+
+				if (cursor != null) {
+					cursor.close();
+				}
+
+				if (isUpdate) {
+					context.getContentResolver().update(DichVu.CONTENT_URI, contentValues, selection, null);
+				} else {
+					context.getContentResolver().insert(DichVu.CONTENT_URI, contentValues);
+				}
+			}
+		} catch (JSONException e) {
+		}
 	}
 }

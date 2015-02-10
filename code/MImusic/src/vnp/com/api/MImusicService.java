@@ -16,6 +16,7 @@ import vnp.com.db.MauMoi;
 import vnp.com.db.Recomment;
 import vnp.com.db.User;
 import vnp.com.db.datastore.AccountStore;
+import vnp.com.db.datastore.DichVuStore;
 import vnp.com.db.datastore.TintucStore;
 import vnp.com.db.datastore.huongDanBanHangStore;
 import vnp.com.mimusic.util.Conts;
@@ -38,6 +39,7 @@ public class MImusicService extends Service {
 	public static final String METHOD = "METHOD";
 	private Map<String, String> avatarHashmap = new HashMap<String, String>();
 	private AccountStore accountStore;
+	private DichVuStore dichVuStore;
 
 	public MImusicService() {
 		super();
@@ -48,6 +50,7 @@ public class MImusicService extends Service {
 		super.onCreate();
 		mImusicBin = new MImusicBin(this);
 		accountStore = new AccountStore(this);
+		dichVuStore = new DichVuStore(this);
 	}
 
 	@Override
@@ -642,50 +645,14 @@ public class MImusicService extends Service {
 	}
 
 	private void updateDichVu(JSONObject response) {
-		try {
-			JSONArray jsonArray = response.getJSONArray("data");
-			for (int i = 0; i < jsonArray.length(); i++) {
-				JSONObject jsonObject = jsonArray.getJSONObject(i);
-				ContentValues contentValues = new ContentValues();
-				contentValues.put(DichVu.ID, Conts.getString(jsonObject, DichVu.ID));
-				contentValues.put(DichVu.service_name, Conts.getString(jsonObject, DichVu.service_name));
-				contentValues.put(DichVu.service_name_eng, Conts.StringConnvert.convertVNToAlpha(Conts.getString(jsonObject, DichVu.service_name)));
-				contentValues.put(DichVu.service_code, Conts.getString(jsonObject, DichVu.service_code));
-				contentValues.put(DichVu.service_icon, Conts.getString(jsonObject, DichVu.service_icon));
-				contentValues.put(DichVu.service_content, Conts.getString(jsonObject, DichVu.service_content));
-				contentValues.put(DichVu.service_price, Conts.getString(jsonObject, DichVu.service_price));
-				contentValues.put(DichVu.service_status, Conts.getString(jsonObject, DichVu.service_status));
-
-				String service_guide = Conts.getString(jsonObject, DichVu.service_guide);
-
-				if (!Conts.isBlank(service_guide)) {
-					contentValues.put(DichVu.service_guide, service_guide);
-				}
-
-				String selection = String.format("%s='%s'", DichVu.service_code, jsonObject.getString(DichVu.service_code));
-				Cursor cursor = getContentResolver().query(DichVu.CONTENT_URI, null, selection, null, null);
-
-				boolean isUpdate = cursor != null && cursor.getCount() >= 1;
-
-				if (cursor != null) {
-					cursor.close();
-				}
-
-				if (isUpdate) {
-					getContentResolver().update(DichVu.CONTENT_URI, contentValues, selection, null);
-				} else {
-					getContentResolver().insert(DichVu.CONTENT_URI, contentValues);
-				}
-			}
-		} catch (JSONException e) {
-		}
+		DichVu.updateDichVu(this, response);
+		dichVuStore.updateDichvu(response);
 	}
 
 	protected void updateDichVuDangKy(Bundle bundle) {
-		String cs = bundle.getString(DichVu.service_code);
-		ContentValues contentValues = new ContentValues();
-		contentValues.put(DichVu.service_status, "0");
-		getContentResolver().update(DichVu.CONTENT_URI, contentValues, String.format("%s=='%s'", DichVu.service_code, cs), null);
+
+		DichVu.updateDichVuDangKy(this, bundle);
+		dichVuStore.register(bundle.getString(DichVuStore.service_code), "0");
 	}
 
 	protected void updateInFor(Bundle bundle) {
@@ -766,8 +733,6 @@ public class MImusicService extends Service {
 							}
 						}
 
-						// getContentResolver().insert(Recomment.CONTENT_URI,
-						// values);
 						updateDongBoXuongRecomment(phone, name);
 					}
 				}
