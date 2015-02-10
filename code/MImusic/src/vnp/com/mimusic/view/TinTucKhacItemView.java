@@ -31,8 +31,8 @@ public class TinTucKhacItemView extends LinearLayout {
 	}
 
 	public void setData(int position) {
-		findViewById(R.id.imageView1).setBackgroundResource(position % 2 == 0 ? R.drawable.new_tintuc_khac_choice_1 : R.drawable.new_tintuc_khac_choice_2);
-		((TextView) findViewById(R.id.tintuckhac_item_tv_content)).setTextColor(getContext().getResources().getColor(position % 2 == 0 ? R.color.new_tintuc_khac_1 : R.color.new_tintuc_khac_2));
+		//findViewById(R.id.imageView1).setBackgroundResource(position % 2 == 0 ? R.drawable.new_tintuc_khac_choice_1 : R.drawable.new_tintuc_khac_choice_2);
+		//((TextView) findViewById(R.id.tintuckhac_item_tv_content)).setTextColor(getContext().getResources().getColor(position % 2 == 0 ? R.color.new_tintuc_khac_1 : R.color.new_tintuc_khac_2));
 	}
 
 }
