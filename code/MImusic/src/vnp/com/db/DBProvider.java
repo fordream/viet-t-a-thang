@@ -29,7 +29,7 @@ public class DBProvider extends ContentProvider {
 			uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 			User.addUriMatcher(uriMatcher, PROVIDER_NAME);
 			Account.addUriMatcher(uriMatcher, PROVIDER_NAME);
-			HuongDanBanHang.addUriMatcher(uriMatcher, PROVIDER_NAME);
+//			HuongDanBanHang.addUriMatcher(uriMatcher, PROVIDER_NAME);
 //			TinTuc.addUriMatcher(uriMatcher, PROVIDER_NAME);
 			DichVu.addUriMatcher(uriMatcher, PROVIDER_NAME);
 			Recomment.addUriMatcher(uriMatcher, PROVIDER_NAME);
@@ -56,7 +56,7 @@ public class DBProvider extends ContentProvider {
 //			_uri = TinTuc.insert(match, db, _uri, values);
 		}
 		if (_uri == null) {
-			_uri = HuongDanBanHang.insert(match, db, _uri, values);
+//			_uri = HuongDanBanHang.insert(match, db, _uri, values);
 		}
 
 		if (_uri == null) {
@@ -92,7 +92,7 @@ public class DBProvider extends ContentProvider {
 		}
 
 		if (c == null) {
-			c = HuongDanBanHang.query(match, db, uri, projection, selection, selectionArgs, sortOrder);
+//			c = HuongDanBanHang.query(match, db, uri, projection, selection, selectionArgs, sortOrder);
 		}
 		// cursor == null --> request othr
 		if (c == null) {
@@ -135,7 +135,7 @@ public class DBProvider extends ContentProvider {
 			count = DichVu.delete(match, db, uri, selection, selectionArgs);
 		}
 		if (count == -2) {
-			count = HuongDanBanHang.delete(match, db, uri, selection, selectionArgs);
+//			count = HuongDanBanHang.delete(match, db, uri, selection, selectionArgs);
 		}
 		// count == -2 delete other
 		if (count == -2) {
@@ -180,7 +180,7 @@ public class DBProvider extends ContentProvider {
 //			count = TinTuc.update(match, db, uri, values, selection, selectionArgs);
 		}
 		if (count == -2) {
-			count = HuongDanBanHang.update(match, db, uri, values, selection, selectionArgs);
+//			count = HuongDanBanHang.update(match, db, uri, values, selection, selectionArgs);
 		}
 		if (count == -2) {
 			count = Recomment.update(match, db, uri, values, selection, selectionArgs);
@@ -208,7 +208,7 @@ public class DBProvider extends ContentProvider {
 		DichVu.getType(mMap);
 		Recomment.getType(mMap);
 //		TinTuc.getType(mMap);
-		HuongDanBanHang.getType(mMap);
+//		HuongDanBanHang.getType(mMap);
 		BangXepHang.getType(mMap);
 		MauMoi.getType(mMap);
 		String type = mMap.get(uriMatcher.match(uri));

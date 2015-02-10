@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -13,12 +12,12 @@ import org.json.JSONObject;
 import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.BangXepHang;
 import vnp.com.db.DichVu;
-import vnp.com.db.HuongDanBanHang;
 import vnp.com.db.MauMoi;
 import vnp.com.db.Recomment;
 import vnp.com.db.User;
 import vnp.com.db.datastore.AccountStore;
 import vnp.com.db.datastore.TintucStore;
+import vnp.com.db.datastore.huongDanBanHangStore;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
 import android.app.Service;
@@ -143,9 +142,10 @@ public class MImusicService extends Service {
 	 * @param contsCallBack
 	 */
 	public void login(boolean is3G, final String u, final String p, final IContsCallBack contsCallBack) {
-//		ContentValues contentValues = new ContentValues();
-//		contentValues.put(User.STATUS, "0");
-//		getContentResolver().update(User.CONTENT_URI, contentValues, null, null);
+		// ContentValues contentValues = new ContentValues();
+		// contentValues.put(User.STATUS, "0");
+		// getContentResolver().update(User.CONTENT_URI, contentValues, null,
+		// null);
 		Bundle bundle = new Bundle();
 		if (!Conts.isBlank(u)) {
 			bundle.putString("u", u);
@@ -465,7 +465,11 @@ public class MImusicService extends Service {
 							// response);
 							new TintucStore(MImusicService.this).save(response);
 						} else if (API.API_R010.equals(api)) {
-							HuongDanBanHang.update(MImusicService.this, response);
+							// HuongDanBanHang.update(MImusicService.this,
+							// response);
+							String strGuide_text = Conts.getString(response, huongDanBanHangStore.guide_text);
+							if (!Conts.isBlank(strGuide_text))
+								new huongDanBanHangStore(MImusicService.this).saveHdbh(strGuide_text);
 						} else if (API.API_R005.equals(api)) {
 							DichVu.updateService_content(MImusicService.this, response, bundle);
 						} else if (API.API_R024.equals(api)) {
@@ -582,7 +586,8 @@ public class MImusicService extends Service {
 				contentValues.put(User.USER, phone);
 				contentValues.put(User.NAME_CONTACT, name);
 				contentValues.put(User.NAME_CONTACT_ENG, Conts.StringConnvert.convertVNToAlpha(name));
-//				contentValues.put(User.STATUS, user.equals(phone) ? "1" : "0");
+				// contentValues.put(User.STATUS, user.equals(phone) ? "1" :
+				// "0");
 
 				String contact_id = "";
 				if (avatarHashmap.containsKey(phone)) {
@@ -704,8 +709,7 @@ public class MImusicService extends Service {
 		accountStore.save(response, "");
 
 		// {"message":"Refresh token success","errorCode":0,"phone":null,"keyRefresh":"1E5571EE-CEF5-483A-50DF-20A6A1D57489","token":"57D4A6E1-B325-A2D6-3CC1-036C6730D1A3"}
-//		User.updateReGetToken(this, response);
-		
+		// User.updateReGetToken(this, response);
 
 	}
 

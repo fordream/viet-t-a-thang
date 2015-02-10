@@ -4,7 +4,7 @@ import org.json.JSONObject;
 
 import vnp.com.api.API;
 import vnp.com.api.RestClient.RequestMethod;
-import vnp.com.db.HuongDanBanHang;
+import vnp.com.db.datastore.huongDanBanHangStore;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
@@ -19,9 +19,17 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class HuongDanBanHangFragment extends BaseFragment implements OnItemClickListener, View.OnClickListener {
+	private huongDanBanHangStore huongDanBanHangStore;
+
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+	}
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		huongDanBanHangStore = new huongDanBanHangStore(getActivity());
 	}
 
 	private MusicListView dichvu_list;
@@ -47,7 +55,7 @@ public class HuongDanBanHangFragment extends BaseFragment implements OnItemClick
 			}
 		});
 
-		textHuongDanBanHang = HuongDanBanHang.getTextHuongDanBanHang(getActivity());
+		textHuongDanBanHang = huongDanBanHangStore.getHdbh();
 		if (!Conts.isBlank(textHuongDanBanHang)) {
 			dichvu_list.setTextNoDataX(true, Html.fromHtml(textHuongDanBanHang));
 		}
@@ -58,7 +66,7 @@ public class HuongDanBanHangFragment extends BaseFragment implements OnItemClick
 			@Override
 			public void onSuscess(JSONObject response) {
 				if (getActivity() != null) {
-					textHuongDanBanHang = HuongDanBanHang.getTextHuongDanBanHang(getActivity());
+					textHuongDanBanHang = huongDanBanHangStore.getHdbh();
 					if (!Conts.isBlank(textHuongDanBanHang)) {
 						dichvu_list.setTextNoDataX(true, Html.fromHtml(textHuongDanBanHang));
 					}
@@ -75,7 +83,7 @@ public class HuongDanBanHangFragment extends BaseFragment implements OnItemClick
 
 			@Override
 			public void onError(String message) {
-				textHuongDanBanHang = HuongDanBanHang.getTextHuongDanBanHang(getActivity());
+				textHuongDanBanHang = huongDanBanHangStore.getHdbh();
 				if (!Conts.isBlank(textHuongDanBanHang)) {
 					dichvu_list.setTextNoDataX(true, Html.fromHtml(textHuongDanBanHang));
 				} else {
