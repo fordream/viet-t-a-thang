@@ -114,6 +114,8 @@ public class DichVuFragment extends BaseFragment implements OnItemClickListener,
 					}.show();
 				}
 			});
+
+			//cursor.close();
 		}
 	}
 
