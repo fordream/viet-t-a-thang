@@ -16,13 +16,11 @@ import vnp.com.db.DichVu;
 import vnp.com.db.HuongDanBanHang;
 import vnp.com.db.MauMoi;
 import vnp.com.db.Recomment;
-import vnp.com.db.TinTuc;
 import vnp.com.db.User;
+import vnp.com.db.datastore.TintucStore;
 import vnp.com.mimusic.util.Conts;
-import vnp.com.mimusic.util.LogUtils;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
 import android.app.Service;
-import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
@@ -476,9 +474,11 @@ public class MImusicService extends Service {
 						} else if (API.API_R022.equals(api)) {
 							updateMauMoi(response, bundle.getString(DichVu.service_code));
 						} else if (API.API_R027.equals(api)) {
-							TinTuc.updateTintuc(MImusicService.this, response);
+//							TinTuc.updateTintuc(MImusicService.this, response);
+							new TintucStore(MImusicService.this).save(response);
 						} else if (API.API_R028.equals(api)) {
-							TinTuc.updateTintuc(MImusicService.this, response);
+//							TinTuc.updateTintuc(MImusicService.this, response);
+							new TintucStore(MImusicService.this).save(response);
 						} else if (API.API_R010.equals(api)) {
 							HuongDanBanHang.update(MImusicService.this, response);
 						} else if (API.API_R005.equals(api)) {

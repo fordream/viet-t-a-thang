@@ -5,7 +5,6 @@ package vnp.com.mimusic.activity;
 
 import java.util.List;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -14,11 +13,10 @@ import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.BangXepHang;
 import vnp.com.db.DichVu;
 import vnp.com.db.MauMoi;
-import vnp.com.db.TinTuc;
 import vnp.com.db.User;
+import vnp.com.db.datastore.TintucStore;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.VApplication;
-import vnp.com.mimusic.adapter.MauMoiAdaper;
 import vnp.com.mimusic.adapter.data.NewHomeItem;
 import vnp.com.mimusic.base.diablog.VasProgessDialog;
 import vnp.com.mimusic.util.Conts;
@@ -330,11 +328,13 @@ public class RootMenuActivity extends FragmentActivity {
 	}
 
 	public void gotoChiTietTinTuc(AdapterView<?> parent, View view, int position, long id) {
-		Cursor data = (Cursor) parent.getItemAtPosition(position);
+		// Cursor data = (Cursor) parent.getItemAtPosition(position);
+		String idNews = parent.getItemAtPosition(position).toString();
+		JSONObject data = new TintucStore(getContext()).getJsonById(idNews);
 		Intent intent = new Intent(this, RootMenuActivity.class);
 		intent.putExtra("type", Conts.CHITIETTINTUC);
-		intent.putExtra("id", Conts.getStringCursor(data, TinTuc.ID));
-		intent.putExtra("news_id", Conts.getStringCursor(data, TinTuc.ID));
+		intent.putExtra("id", Conts.getString(data, TintucStore.ID));
+		intent.putExtra("news_id", Conts.getString(data, TintucStore.ID));
 		getParent().startActivity(intent);
 		overridePendingTransitionStartActivity();
 	}
