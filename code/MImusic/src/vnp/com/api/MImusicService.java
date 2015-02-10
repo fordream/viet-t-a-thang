@@ -146,10 +146,13 @@ public class MImusicService extends Service {
 		contentValues.put(User.STATUS, "0");
 		getContentResolver().update(User.CONTENT_URI, contentValues, null, null);
 		Bundle bundle = new Bundle();
-		if (!Conts.isBlank(u))
+		if (!Conts.isBlank(u)) {
 			bundle.putString("u", u);
-		if (!Conts.isBlank(p))
+		}
+
+		if (!Conts.isBlank(p)) {
 			bundle.putString("p", p);
+		}
 
 		Conts.executeNoProgressBar((is3G ? RequestMethod.GET : RequestMethod.POST), (is3G ? API.API_R001 : API.API_R002), this, bundle, new IContsCallBack() {
 			@Override
@@ -303,8 +306,7 @@ public class MImusicService extends Service {
 			@Override
 			protected StringBuilder doInBackground(String... params) {
 				StringBuilder conttacts = new StringBuilder();
-				ContentResolver cr = getContentResolver();
-				Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
+				Cursor cur = getContentResolver().query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
 				while (cur != null && cur.moveToNext()) {
 					String contact_id = cur.getString(cur.getColumnIndex(ContactsContract.Contacts._ID));
 					String name = cur.getString(cur.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
@@ -312,7 +314,8 @@ public class MImusicService extends Service {
 					String photo_id = Conts.getStringCursor(cur, ContactsContract.Contacts.PHOTO_ID);
 
 					if (Integer.parseInt(cur.getString(cur.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))) > 0) {
-						Cursor pCur = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?", new String[] { contact_id }, null);
+						Cursor pCur = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?",
+								new String[] { contact_id }, null);
 						while (pCur.moveToNext()) {
 							String phoneNo = pCur.getString(pCur.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
 							if (!Conts.isBlank(phoneNo)) {
@@ -342,6 +345,10 @@ public class MImusicService extends Service {
 
 						pCur.close();
 					}
+				}
+
+				if (cur != null) {
+					cur.close();
 				}
 				return conttacts;
 			}
@@ -485,7 +492,7 @@ public class MImusicService extends Service {
 						} else if (API.API_R025.equals(api)) {
 							BangXepHang.update(MImusicService.this, response, bundle, API.API_R025);
 						} else if (API.API_R015.equals(api)) {
-//							LogUtils.e("AAAAA", response.toString());
+							// LogUtils.e("AAAAA", response.toString());
 						}
 
 						return null;

@@ -213,11 +213,6 @@ public class Conts {
 
 					if (API.API_R015.equals(api)) {
 						Set<String> keys = bundles.keySet();
-						for (String key : keys) {
-							LogUtils.e("AAAAA", key + " " + bundles.getString(key));
-						}
-
-						LogUtils.e("AAAAA", response + "");
 					}
 
 					if (Conts.isBlank(response)) {
