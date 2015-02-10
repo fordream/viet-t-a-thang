@@ -343,7 +343,9 @@ public class MImusicService extends Service {
 							}
 						}
 
-						pCur.close();
+						if (pCur != null) {
+							pCur.close();
+						}
 					}
 				}
 

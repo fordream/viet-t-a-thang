@@ -426,18 +426,17 @@ public class Conts {
 	}
 
 	public static boolean haveContact(String phone, Context context) {
+		boolean hasContact = false;
 		Cursor cursor = context.getContentResolver().query(User.CONTENT_URI, null, String.format("%s='%s'", User.USER, phone), null, null);
 
-		if (cursor != null && cursor.getCount() > 0) {
-			cursor.close();
-			return true;
-		}
-
 		if (cursor != null) {
+			if (cursor.moveToNext()) {
+				hasContact = true;
+			}
 			cursor.close();
 		}
 
-		return false;
+		return hasContact;
 	}
 
 	public static String getUser(Context context) {
