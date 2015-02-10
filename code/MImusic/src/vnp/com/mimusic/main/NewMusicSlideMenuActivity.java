@@ -21,7 +21,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.DrawerLayout;
@@ -311,7 +310,7 @@ public class NewMusicSlideMenuActivity extends TabActivity {
 					@Override
 					public void run() {
 						finish();
-						overridePendingTransition(R.anim.abc_nothing, R.anim.abc_slide_out_bottom);
+						overridePendingTransition(R.anim.abc_nothing, R.anim.abc_slide_right_out);
 					}
 				}, 100);
 			}
@@ -356,7 +355,7 @@ public class NewMusicSlideMenuActivity extends TabActivity {
 	}
 
 	private void overridePendingTransitionStartActivity() {
-		overridePendingTransition(R.anim.abc_scale_in, R.anim.abc_nothing);
+		overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_nothing);
 	}
 
 	public void addTab(Class<?> activity, String tabSpect, String indicator, String type) {

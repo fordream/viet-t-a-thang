@@ -82,25 +82,25 @@ public class RootMenuActivity extends FragmentActivity {
 		String type = getIntent().getStringExtra("type");
 
 		if (Conts.HOME.equals(type)) {
-			changeFragemt(R.id.root_main_fragment, new HomeFragment());
+			changeFragemt(R.id.root_main_fragment, new HomeFragment(), false);
 		} else if (Conts.BANGXEPHANG.equals(type)) {
-			changeFragemt(R.id.root_main_fragment, new BangXepHangFragment());
+			changeFragemt(R.id.root_main_fragment, new BangXepHangFragment(), false);
 		} else if (Conts.DICHVU.equals(type)) {
-			changeFragemt(R.id.root_main_fragment, new DichVuFragment());
+			changeFragemt(R.id.root_main_fragment, new DichVuFragment(), false);
 		} else if (Conts.HUONGDANBANHANG.equals(type)) {
-			changeFragemt(R.id.root_main_fragment, new HuongDanBanHangFragment());
+			changeFragemt(R.id.root_main_fragment, new HuongDanBanHangFragment(), false);
 		} else if (Conts.LICHSUBANHANG.equals(type)) {
-			changeFragemt(R.id.root_main_fragment, new LichSuBanHangFragment());
+			changeFragemt(R.id.root_main_fragment, new LichSuBanHangFragment(), false);
 		} else if (Conts.ORTHER.equals(type)) {
 			//
 		} else if (Conts.QUYDINHBANHANG.equals(type)) {
-			changeFragemt(R.id.root_main_fragment, new QuyDinhBanHangFragment());
+			changeFragemt(R.id.root_main_fragment, new QuyDinhBanHangFragment(), false);
 		} else if (Conts.TIMKIEM.equals(type)) {
-			changeFragemt(R.id.root_main_fragment, new SearchFragment());
+			changeFragemt(R.id.root_main_fragment, new SearchFragment(), false);
 		} else if (Conts.THONGTINCANHAN.equals(type)) {
-			changeFragemt(R.id.root_main_fragment, new ThongTinCaNhanFragment());
+			changeFragemt(R.id.root_main_fragment, new ThongTinCaNhanFragment(), false);
 		} else if (Conts.TINTUC.equals(type)) {
-			changeFragemt(R.id.root_main_fragment, new TinTucFragment());
+			changeFragemt(R.id.root_main_fragment, new TinTucFragment(), false);
 		} else if (Conts.NHIEUDICHVU.equals(type)) {
 			String _id = getIntent().getStringExtra(User._ID);
 			Bundle bundle = new Bundle();
@@ -111,21 +111,21 @@ public class RootMenuActivity extends FragmentActivity {
 
 			MoiNhieuDichVuFragment moiNhieuDichVuFragment = new MoiNhieuDichVuFragment();
 			moiNhieuDichVuFragment.setArguments(bundle);
-			changeFragemt(R.id.root_main_fragment, moiNhieuDichVuFragment);
+			changeFragemt(R.id.root_main_fragment, moiNhieuDichVuFragment, false);
 		} else if (Conts.CHITIETTINTUC.equals(type)) {
 			ChiTietTintucFragment chiTietTintucFragment = new ChiTietTintucFragment();
 			Bundle args = new Bundle();
 			// args.putString("id", getIntent().getStringExtra("id") + "");
 			args.putString("news_id", getIntent().getStringExtra("news_id") + "");
 			chiTietTintucFragment.setArguments(args);
-			changeFragemt(R.id.root_main_fragment, chiTietTintucFragment);
+			changeFragemt(R.id.root_main_fragment, chiTietTintucFragment, false);
 		} else if (Conts.MOIDICHVUCHONHIEUNGUOI.equals(type)) {
 			MoiDvChoNhieuNguoiFragment chiTietTintucFragment = new MoiDvChoNhieuNguoiFragment();
 			Bundle args = new Bundle();
 			args.putString("id", getIntent().getStringExtra("id") + "");
 			args.putInt("getPosition", getIntent().getIntExtra("getPosition", 0));
 			chiTietTintucFragment.setArguments(args);
-			changeFragemt(R.id.root_main_fragment, chiTietTintucFragment);
+			changeFragemt(R.id.root_main_fragment, chiTietTintucFragment, false);
 		} else if (Conts.CHITIETDICHVU.equals(type)) {
 			ChiTietDichVuFragment chiTietTintucFragment = new ChiTietDichVuFragment();
 			Bundle args = new Bundle();
@@ -133,25 +133,25 @@ public class RootMenuActivity extends FragmentActivity {
 			if (getIntent().hasExtra(DichVu.service_code))
 				args.putString(DichVu.service_code, getIntent().getStringExtra(DichVu.service_code) + "");
 			chiTietTintucFragment.setArguments(args);
-			changeFragemt(R.id.root_main_fragment, chiTietTintucFragment);
+			changeFragemt(R.id.root_main_fragment, chiTietTintucFragment, false);
 		} else if (Conts.CHITIETCANHANBANGXEPHANG.equals(type)) {
-			changeFragemt(R.id.root_main_fragment, new ChiTietCaNhanBangXepHangFragment());
+			changeFragemt(R.id.root_main_fragment, new ChiTietCaNhanBangXepHangFragment(), false);
 		} else if (Conts.CHITIETCANHANBANGXEPHANGTUNGDICHVU.equals(type)) {
 			ChiTietCaNhanBangXepHangTungDichVuFragment chiTietCaNhanBangXepHangTungDichVuFragment = new ChiTietCaNhanBangXepHangTungDichVuFragment();
 			chiTietCaNhanBangXepHangTungDichVuFragment.setArguments(getIntent().getExtras());
-			changeFragemt(R.id.root_main_fragment, chiTietCaNhanBangXepHangTungDichVuFragment);
+			changeFragemt(R.id.root_main_fragment, chiTietCaNhanBangXepHangTungDichVuFragment, false);
 		} else if (Conts.CHITTIETLICHSUBANHANG.equals(type)) {
-			changeFragemt(R.id.root_main_fragment, new ChiTietListSuBanHangFragment());
+			changeFragemt(R.id.root_main_fragment, new ChiTietListSuBanHangFragment(), false);
 		} else if (Conts.CHONSODIENTHOAIFRAGMENT.equals(type)) {
-			changeFragemt(R.id.root_main_fragment, new ChonSoDienThoaiFragment());
+			changeFragemt(R.id.root_main_fragment, new ChonSoDienThoaiFragment(), false);
 		} else if (Conts.CHONDICHVU.equals(type)) {
-			changeFragemt(R.id.root_main_fragment, new ChonDichvuFragment());
+			changeFragemt(R.id.root_main_fragment, new ChonDichvuFragment(), false);
 		} else if (Conts.DICHVUHOT.equals(type)) {
-			changeFragemt(R.id.root_main_fragment, new DichVuHotFragment());
+			changeFragemt(R.id.root_main_fragment, new DichVuHotFragment(), false);
 		} else if (Conts.DICHVUBANCHAY.equals(type)) {
-			changeFragemt(R.id.root_main_fragment, new DichVuBanChayFragment());
+			changeFragemt(R.id.root_main_fragment, new DichVuBanChayFragment(), false);
 		} else if (Conts.MOITHANHVIEN.equals(type)) {
-			changeFragemt(R.id.root_main_fragment, new MoiThanhVienFragment());
+			changeFragemt(R.id.root_main_fragment, new MoiThanhVienFragment(), false);
 		}
 	}
 
@@ -203,15 +203,11 @@ public class RootMenuActivity extends FragmentActivity {
 				((vnp.com.mimusic.main.NewMusicSlideMenuActivity) getParent()).finish(true);
 			} catch (Exception exception) {
 				finish();
-				overridePendingTransition(R.anim.abc_nothing, R.anim.abc_scale_out);
+				overridePendingTransition(R.anim.abc_nothing, R.anim.abc_slide_right_out);
 			}
 		} else {
 			super.onBackPressed();
 		}
-	}
-
-	public void changeFragemt(int res, Fragment fragment) {
-		changeFragemt(res, fragment, false);
 	}
 
 	public void changeFragemt(int res, Fragment fragment, boolean haveAnimation) {
@@ -219,7 +215,7 @@ public class RootMenuActivity extends FragmentActivity {
 		android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
 
 		if (haveAnimation) {
-			transaction.setCustomAnimations(R.anim.abc_scale_in, R.anim.abc_scale_in, R.anim.abc_scale_out, R.anim.abc_scale_out);
+			transaction.setCustomAnimations(R.anim.abc_slide_right_in, R.anim.abc_slide_right_in, R.anim.abc_slide_right_out, R.anim.abc_slide_right_out);
 		}
 		transaction.add(res, fragment, "" + System.currentTimeMillis());
 		transaction.addToBackStack(null);
@@ -490,12 +486,12 @@ public class RootMenuActivity extends FragmentActivity {
 	}
 
 	private void overridePendingTransitionStartActivity() {
-		getParent().overridePendingTransition(R.anim.abc_scale_in, R.anim.abc_nothing);
+		getParent().overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_nothing);
 	}
 
 	public void closeActivity() {
 		finish();
-		overridePendingTransition(R.anim.abc_scale_in, R.anim.abc_nothing);
+		overridePendingTransition(R.anim.abc_nothing, R.anim.abc_slide_right_out);
 	}
 
 	public void execute(final RequestMethod requestMethod, final String api, final Bundle bundle, final IContsCallBack contsCallBack) {
@@ -628,7 +624,7 @@ public class RootMenuActivity extends FragmentActivity {
 		bundle.putString("name", "");
 		MoiNhieuDichVuFragment moiNhieuDichVuFragment = new MoiNhieuDichVuFragment();
 		moiNhieuDichVuFragment.setArguments(bundle);
-		changeFragemt(R.id.root_main_fragment, moiNhieuDichVuFragment);
+		changeFragemt(R.id.root_main_fragment, moiNhieuDichVuFragment, false);
 	}
 
 	public void gotoChiTietDichVuFromHome(String id) {
@@ -640,7 +636,6 @@ public class RootMenuActivity extends FragmentActivity {
 	}
 
 	public void homeXemall(String name) {
-		// TODO
 
 		if (!Conts.isBlank(name)) {
 			Intent intent = new Intent(this, RootMenuActivity.class);

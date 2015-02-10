@@ -68,7 +68,7 @@ public class SplashScreenActivity extends Activity {
 						if (!isFinishing()) {
 							startActivity(new Intent(SplashScreenActivity.this, NewMusicSlideMenuActivity.class));
 							finish();
-							overridePendingTransition(R.anim.abc_scale_in, R.anim.abc_nothing);
+							overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_nothing);
 						}
 					}
 
@@ -78,7 +78,7 @@ public class SplashScreenActivity extends Activity {
 						if (!isFinishing()) {
 							startActivity(new Intent(SplashScreenActivity.this, LoginActivty.class));
 							finish();
-							overridePendingTransition(R.anim.abc_scale_in, R.anim.abc_nothing);
+							overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_nothing);
 						}
 					}
 
@@ -91,7 +91,7 @@ public class SplashScreenActivity extends Activity {
 				if (!isFinishing()) {
 					startActivity(new Intent(SplashScreenActivity.this, LoginActivty.class));
 					finish();
-					overridePendingTransition(R.anim.abc_scale_in, R.anim.abc_nothing);
+					overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_nothing);
 				}
 			}
 		}

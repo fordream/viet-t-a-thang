@@ -89,7 +89,7 @@ public class LoginActivty extends Activity implements OnClickListener, OnTouchLi
 		if (!isFinishing()) {
 			startActivity(new Intent(this, NewMusicSlideMenuActivity.class));
 			finish();
-			overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_nothing);
+			overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_nothing);
 		}
 	}
 

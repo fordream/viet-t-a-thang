@@ -37,7 +37,7 @@ public class LoginTabletActivty extends Activity implements OnClickListener {
 		setContentView(R.layout.activity_login);
 		progressBar1 = (LoadingView) findViewById(R.id.loadingView1);
 		Conts.showView(progressBar1, false);
-		overridePendingTransition(R.anim.abc_nothing_0, R.anim.abc_nothing_0);
+//		overridePendingTransition(R.anim.abc_nothing_0, R.anim.abc_nothing_0);
 
 		findViewById(R.id.activity_login_btn).setOnClickListener(this);
 		findViewById(R.id.activity_login_btn).setOnTouchListener(new OnTouchAnimation());
@@ -58,7 +58,6 @@ public class LoginTabletActivty extends Activity implements OnClickListener {
 			}
 		});
 
-//		findViewById(R.id.activity_login_splash).startAnimation(alphaAnimation);
 	}
 
 	private IServiceConfig config = new IServiceConfig() {
@@ -77,7 +76,7 @@ public class LoginTabletActivty extends Activity implements OnClickListener {
 		if (!isFinishing()) {
 			startActivity(new Intent(this, BaseMusicSlideMenuActivity.class));
 			finish();
-			overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_nothing);
+			overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_nothing);
 		}
 	}
 
