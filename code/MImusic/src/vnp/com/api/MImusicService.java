@@ -144,11 +144,7 @@ public class MImusicService extends Service {
 	 * @param p
 	 * @param contsCallBack
 	 */
-	public void login(boolean is3G, final String u, final String p, final IContsCallBack contsCallBack) {
-		// ContentValues contentValues = new ContentValues();
-		// contentValues.put(User.STATUS, "0");
-		// getContentResolver().update(User.CONTENT_URI, contentValues, null,
-		// null);
+	public void login(final boolean is3G, final String u, final String p, final IContsCallBack contsCallBack) {
 		Bundle bundle = new Bundle();
 		if (!Conts.isBlank(u)) {
 			bundle.putString("u", u);
@@ -159,7 +155,6 @@ public class MImusicService extends Service {
 		}
 
 		Conts.executeNoProgressBar((is3G ? RequestMethod.GET : RequestMethod.POST), (is3G ? API.API_R001 : API.API_R002), this, bundle, new IContsCallBack() {
-			long time = 0;
 
 			@Override
 			public void onStart() {
@@ -167,24 +162,14 @@ public class MImusicService extends Service {
 					contsCallBack.onStart();
 				}
 
-				time = System.currentTimeMillis();
 			}
 
 			@Override
 			public void onSuscess(JSONObject jsonObject) {
-
+				long time = System.currentTimeMillis();
 				accountStore.save(jsonObject, p);
-				// try {
-				//
-				// User.updateInForLogin(MImusicService.this, jsonObject, p);
-				// } catch (Exception e) {
-				// }
-				// contsCallBack.onSuscess(jsonObject);
-				/*
-				 * get thong tin dich vu
-				 */
+				LogUtils.e("timex", (is3G ? API.API_R001 : API.API_R002) + " update " + (System.currentTimeMillis() - time));
 				execute(RequestMethod.GET, API.API_R004, new Bundle(), new vnp.com.mimusic.util.Conts.IContsCallBack() {
-
 					@Override
 					public void onStart() {
 					}
@@ -206,7 +191,6 @@ public class MImusicService extends Service {
 						if (contsCallBack != null) {
 							contsCallBack.onSuscess(response);
 						}
-						// callRecocmment(contsCallBack);
 					}
 				});
 			}
@@ -445,6 +429,7 @@ public class MImusicService extends Service {
 				new AsyncTask<String, String, String>() {
 					@Override
 					protected String doInBackground(String... params) {
+						long time = System.currentTimeMillis();
 						if (API.API_R006.equals(api)) {
 							updateUserInFor(response);
 						} else if (API.API_R007.equals(api)) {
@@ -473,8 +458,6 @@ public class MImusicService extends Service {
 								new huongDanBanHangStore(MImusicService.this).saveHdbh(strGuide_text);
 							}
 						} else if (API.API_R005.equals(api)) {
-							// DichVu.updateService_content(MImusicService.this,
-							// response, bundle);
 							dichVuStore.updateService_content(MImusicService.this, response, bundle);
 
 						} else if (API.API_R024.equals(api)) {
@@ -483,7 +466,7 @@ public class MImusicService extends Service {
 							BangXepHang.update(MImusicService.this, response, bundle, API.API_R025);
 						} else if (API.API_R015.equals(api)) {
 						}
-
+						LogUtils.e("timex", api + " upddate " + (System.currentTimeMillis() - time));
 						return null;
 					}
 

@@ -29,6 +29,7 @@ public abstract class ResClientCallBack extends CallBack {
 
 	@Override
 	public Object execute() {
+		long time = System.currentTimeMillis();
 		System.setProperty("http.keepAlive", "false");
 		RestClient client = new RestClient(Conts.SERVER + getApiName());
 		Set<String> set = maps.keySet();
@@ -38,6 +39,7 @@ public abstract class ResClientCallBack extends CallBack {
 
 		client.execute(getMedthod());
 
+		LogUtils.e("timex", getApiName() + " " + (System.currentTimeMillis() - time));
 		return client;
 	}
 
