@@ -4,7 +4,7 @@ import org.json.JSONObject;
 
 import vnp.com.api.API;
 import vnp.com.api.RestClient.RequestMethod;
-import vnp.com.db.datastore.huongDanBanHangStore;
+import vnp.com.db.datastore.HuongDanBanHangStore;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
@@ -19,7 +19,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class HuongDanBanHangFragment extends BaseFragment implements OnItemClickListener, View.OnClickListener {
-	private huongDanBanHangStore huongDanBanHangStore;
+	private HuongDanBanHangStore huongDanBanHangStore;
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
@@ -29,7 +29,7 @@ public class HuongDanBanHangFragment extends BaseFragment implements OnItemClick
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		huongDanBanHangStore = new huongDanBanHangStore(getActivity());
+		huongDanBanHangStore = new HuongDanBanHangStore(getActivity());
 	}
 
 	private MusicListView dichvu_list;

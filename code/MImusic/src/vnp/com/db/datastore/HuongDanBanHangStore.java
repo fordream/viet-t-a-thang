@@ -2,9 +2,13 @@ package vnp.com.db.datastore;
 
 import android.content.Context;
 
-public class huongDanBanHangStore extends BaseStore {
+public class HuongDanBanHangStore extends BaseStore {
+	@Override
+	public String getNameSave() {
+		return "HuongDanBanHangStore";
+	}
 
-	public huongDanBanHangStore(Context context) {
+	public HuongDanBanHangStore(Context context) {
 		super(context);
 	}
 

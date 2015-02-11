@@ -16,6 +16,10 @@ import android.os.Bundle;
 public class DichVuStore extends BaseStore {
 	private String user;
 
+	@Override
+	public String getNameSave() {
+		return "DichVuStore";
+	}
 	public static final String ID = "id";
 	public static final String service_name = "service_name";
 	public static final String service_name_eng = "service_name_eng";
@@ -64,13 +68,20 @@ public class DichVuStore extends BaseStore {
 
 		JSONObject jsonObject = new JSONObject();
 		try {
-			jsonObject.put(ID, getString(user + serviceCode + ID));
-			jsonObject.put(service_name, getString(user + serviceCode + service_name));
-			jsonObject.put(service_name_eng, getString(user + serviceCode + service_name_eng));
-			jsonObject.put(service_icon, getString(user + serviceCode + service_icon));
-			jsonObject.put(service_code, getString(user + serviceCode + service_code));
-			jsonObject.put(service_content, getString(user + serviceCode + service_content));
-			jsonObject.put(service_price, getString(user + serviceCode + service_price));
+			// jsonObject.put(ID, getString(user + serviceCode + ID));
+			// jsonObject.put(service_name, getString(user + serviceCode +
+			// service_name));
+			// jsonObject.put(service_name_eng, getString(user + serviceCode +
+			// service_name_eng));
+			// jsonObject.put(service_icon, getString(user + serviceCode +
+			// service_icon));
+			// jsonObject.put(service_code, getString(user + serviceCode +
+			// service_code));
+			// jsonObject.put(service_content, getString(user + serviceCode +
+			// service_content));
+			// jsonObject.put(service_price, getString(user + serviceCode +
+			// service_price));
+			jsonObject = new JSONObject(getString(user + serviceCode));
 		} catch (Exception exception) {
 		}
 		return jsonObject;
@@ -86,6 +97,7 @@ public class DichVuStore extends BaseStore {
 				String serviceCode = Conts.getString(jsonObject, DichVuStore.service_code);
 				serviceCodeList.add(serviceCode);
 				save(user + serviceCode, jsonObject.toString());
+
 				save(user + serviceCode + ID, Conts.getString(jsonObject, DichVuStore.ID));
 				save(user + serviceCode + service_name, Conts.getString(jsonObject, DichVuStore.service_name));
 				save(user + serviceCode + service_name_eng, Conts.getString(jsonObject, DichVuStore.service_name_eng));
@@ -101,6 +113,7 @@ public class DichVuStore extends BaseStore {
 
 			LogUtils.e("serviceCodeList.toString()", serviceCodeList.toString());
 		} catch (Exception e) {
+			LogUtils.e("serviceCodeList.toString()", e);
 		}
 	}
 

@@ -17,7 +17,7 @@ import vnp.com.db.User;
 import vnp.com.db.datastore.AccountStore;
 import vnp.com.db.datastore.DichVuStore;
 import vnp.com.db.datastore.TintucStore;
-import vnp.com.db.datastore.huongDanBanHangStore;
+import vnp.com.db.datastore.HuongDanBanHangStore;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
 import vnp.com.mimusic.util.LogUtils;
@@ -169,6 +169,7 @@ public class MImusicService extends Service {
 				long time = System.currentTimeMillis();
 				accountStore.save(jsonObject, p);
 				LogUtils.e("timex", (is3G ? API.API_R001 : API.API_R002) + " update " + (System.currentTimeMillis() - time));
+				
 				execute(RequestMethod.GET, API.API_R004, new Bundle(), new vnp.com.mimusic.util.Conts.IContsCallBack() {
 					@Override
 					public void onStart() {
@@ -453,9 +454,9 @@ public class MImusicService extends Service {
 						} else if (API.API_R028.equals(api)) {
 							new TintucStore(MImusicService.this).save(response);
 						} else if (API.API_R010.equals(api)) {
-							String strGuide_text = Conts.getString(response, huongDanBanHangStore.guide_text);
+							String strGuide_text = Conts.getString(response, HuongDanBanHangStore.guide_text);
 							if (!Conts.isBlank(strGuide_text)) {
-								new huongDanBanHangStore(MImusicService.this).saveHdbh(strGuide_text);
+								new HuongDanBanHangStore(MImusicService.this).saveHdbh(strGuide_text);
 							}
 						} else if (API.API_R005.equals(api)) {
 							dichVuStore.updateService_content(MImusicService.this, response, bundle);

@@ -106,4 +106,9 @@ public class AccountStore extends BaseStore {
 		save(user + avatar, path);
 	}
 
+	@Override
+	public String getNameSave() {
+		return "AccountStore";
+	}
+
 }

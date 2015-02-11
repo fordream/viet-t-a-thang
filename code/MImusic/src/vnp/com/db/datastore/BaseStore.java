@@ -8,7 +8,7 @@ import vnp.com.mimusic.util.Conts;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-public class BaseStore {
+public abstract class BaseStore {
 	private SharedPreferences preferences;
 	private Context context;
 
@@ -26,8 +26,10 @@ public class BaseStore {
 	 */
 	public BaseStore(Context context) {
 		this.context = context;
-		preferences = context.getSharedPreferences(getClass().getSimpleName(), 0);
+		preferences = context.getSharedPreferences(getNameSave(), 0);
 	}
+
+	public abstract String getNameSave();
 
 	/**
 	 * 
