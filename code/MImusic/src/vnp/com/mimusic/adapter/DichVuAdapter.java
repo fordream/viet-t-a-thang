@@ -1,5 +1,9 @@
 package vnp.com.mimusic.adapter;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import vnp.com.db.datastore.DichVuStore;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.util.Conts;
@@ -10,56 +14,72 @@ import android.database.Cursor;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.CursorAdapter;
 
-public abstract class DichVuAdapter extends CursorAdapter {
+public abstract class DichVuAdapter extends ArrayAdapter<JSONObject> {
+	JSONArray array;
+	private DichVuStore dichVuStore;
 
-	public DichVuAdapter(Context context, Cursor c) {
-		super(context, c, true);
+	public DichVuAdapter(Context context, JSONArray array) {
+		super(context, 0);
+		this.array = array;
+		dichVuStore = new DichVuStore(getContext());
 	}
 
 	@Override
-	public void bindView(View convertView, Context context, Cursor cursor) {
-		if (convertView == null) {
-			convertView = new DichVuItemView(context);
+	public int getCount() {
+		return array.length();
+	}
+
+	@Override
+	public JSONObject getItem(int position) {
+		try {
+			return array.getJSONObject(position);
+		} catch (JSONException e) {
+			return new JSONObject();
 		}
 
+	}
+
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		if (convertView == null) {
+			convertView = new DichVuItemView(parent.getContext());
+		}
 		/*
 		 * kiem tra xem co hien thi item nay khong
 		 */
-		String name = cursor.getString(cursor.getColumnIndex(DichVuStore.service_name));
-		final String id = cursor.getString(cursor.getColumnIndex(DichVuStore.ID));
+		JSONObject cursor = getItem(position);
+
+		String name = Conts.getString(cursor, DichVuStore.service_name);
+		final String id = Conts.getString(cursor, DichVuStore.ID);
 		convertView.findViewById(R.id.home_item_main).setVisibility(Conts.xDontains(textSearch, false, new String[] { name }) ? View.VISIBLE : View.GONE);
 
 		/**
 		 * set data
 		 */
-		((DichVuItemView) convertView).setData(cursor);
-		final boolean isDangKy = "0".equals(cursor.getString(cursor.getColumnIndex(DichVuStore.service_status)));
+		((DichVuItemView) convertView).setData(cursor, position);
+		final boolean isDangKy = dichVuStore.isRegister(Conts.getString(cursor, DichVuStore.service_code));//
 
 		/**
 		 * add action
 		 */
 		ContentValues values = new ContentValues();
-		values.put("name", String.format(context.getString(R.string.title_dangky), cursor.getString(cursor.getColumnIndex(DichVuStore.service_name))));
-		values.put(DichVuStore.service_name, cursor.getString(cursor.getColumnIndex(DichVuStore.service_name)));
-		values.put(DichVuStore.service_code, cursor.getString(cursor.getColumnIndex(DichVuStore.service_code)));
-		String content = String.format(context.getString(R.string.xacnhandangky_form), Conts.getStringCursor(cursor, DichVuStore.service_name),
-				Conts.getStringCursor(cursor, DichVuStore.service_price));
+		values.put("name", String.format(parent.getContext().getString(R.string.title_dangky), Conts.getString(cursor, DichVuStore.service_name)));
+		values.put(DichVuStore.service_name, Conts.getString(cursor, DichVuStore.service_name));
+		values.put(DichVuStore.service_code, Conts.getString(cursor, DichVuStore.service_code));
+		String content = String.format(parent.getContext().getString(R.string.xacnhandangky_form), Conts.getString(cursor, DichVuStore.service_name),
+				Conts.getString(cursor, DichVuStore.service_price));
 		values.put("content", content);
-		values.put(DichVuStore.ID, cursor.getString(cursor.getColumnIndex(DichVuStore.ID)));
+		values.put(DichVuStore.ID, Conts.getString(cursor, DichVuStore.ID));
 		values.put("type", "dangky");
 		convertView.findViewById(R.id.home_item_right_control_1).setOnClickListener(new DangKyClickListener(values, isDangKy));
 		convertView.findViewById(R.id.home_item_right_control_2).setOnClickListener(new MoiDichVuClickListener(id));
-
+		return convertView;
 	}
 
 	public abstract void dangKy(ContentValues values);
-
-	@Override
-	public View newView(Context context, Cursor cursor, ViewGroup parent) {
-		return new DichVuItemView(context);
-	}
 
 	public abstract void moiDVChoNhieuNguoi(String id);
 

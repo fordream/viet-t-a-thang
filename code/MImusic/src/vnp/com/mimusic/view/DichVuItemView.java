@@ -96,4 +96,9 @@ public class DichVuItemView extends LinearLayout {
 		findViewById(R.id.home_item_right_control).setBackgroundResource(poistion % 2 == 0 ? R.drawable.home_dv_bg_x_0 : R.drawable.home_dv_bg_x_1);
 
 	}
+
+//	public void setData(JSONObject cursor) {
+//		// TODO Auto-generated method stub
+//		
+//	}
 }

@@ -2,6 +2,7 @@ package com.aretha.slidemenudemo.fragment;
 
 import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.datastore.AccountStore;
+import vnp.com.db.datastore.DichVuStore;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.VApplication;
 import vnp.com.mimusic.util.Conts;
@@ -13,6 +14,7 @@ import android.view.View;
 
 public class BaseFragment extends Fragment {
 	public AccountStore accountStore;
+	public DichVuStore dichVuStore;
 
 	public void execute(final RequestMethod requestMethod, final String api, final Bundle bundle, final IContsCallBack contsCallBack) {
 		((VApplication) getActivity().getApplication()).execute(requestMethod, api, bundle, contsCallBack);
@@ -34,6 +36,7 @@ public class BaseFragment extends Fragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		accountStore = new AccountStore(getActivity());
+		dichVuStore = new DichVuStore(getActivity());
 	}
 
 	public BaseFragment() {
