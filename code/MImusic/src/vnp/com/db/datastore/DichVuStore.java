@@ -1,5 +1,9 @@
 package vnp.com.db.datastore;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,51 +36,70 @@ public class DichVuStore extends BaseStore {
 	}
 
 	public void register(String service_code, String service_status) {
-		save(user + service_code, service_status);
+		save(user + service_code + "cregister", service_status);
 	}
 
 	public boolean isRegister(String service_code) {
-		String service_status = getString(user + service_code);
+		String service_status = getString(user + service_code + "cregister");
 		return "0".equals(service_status);
 	}
 
 	public JSONArray getDichvu() {
+		JSONArray array = new JSONArray();
 		try {
-			return new JSONArray(getString(user + "getDichvuALL"));
-		} catch (JSONException e) {
+			String list = getString(user + "serviceCodeList");
+			list = list.replace("[", "").replace("]", "").replace(" ", "");
+			StringTokenizer stringTokenizer = new StringTokenizer(list, ",");
+			while (stringTokenizer.hasMoreElements()) {
+				String serviceCode = stringTokenizer.nextElement().toString();
+				array.put(getDvByServiceCode(serviceCode));
+			}
+		} catch (Exception e) {
 		}
 
-		return new JSONArray();
+		return array;
 	}
 
 	public JSONObject getDvByServiceCode(String serviceCode) {
 
-		JSONArray array = getDichvu();
-		for (int i = 0; i < array.length(); i++) {
-			try {
-				JSONObject jsonObject = array.getJSONObject(i);
-				if (serviceCode != null && serviceCode.equals(Conts.getString(jsonObject, service_code))) {
-					return jsonObject;
-				}
-			} catch (JSONException e) {
-
-			}
+		JSONObject jsonObject = new JSONObject();
+		try {
+			jsonObject.put(ID, getString(user + serviceCode + ID));
+			jsonObject.put(service_name, getString(user + serviceCode + service_name));
+			jsonObject.put(service_name_eng, getString(user + serviceCode + service_name_eng));
+			jsonObject.put(service_icon, getString(user + serviceCode + service_icon));
+			jsonObject.put(service_code, getString(user + serviceCode + service_code));
+			jsonObject.put(service_content, getString(user + serviceCode + service_content));
+			jsonObject.put(service_price, getString(user + serviceCode + service_price));
+		} catch (Exception exception) {
 		}
-
-		return new JSONObject();
+		return jsonObject;
 	}
 
 	public void updateDichvu(JSONObject response) {
 		try {
 			JSONArray jsonArray = response.getJSONArray("data");
-			save(user + "getDichvuALL", jsonArray.toString());
-			LogUtils.e("errror", jsonArray.toString());
+
+			List<String> serviceCodeList = new ArrayList<String>();
 			for (int i = 0; i < jsonArray.length(); i++) {
 				JSONObject jsonObject = jsonArray.getJSONObject(i);
-				String _service_code = Conts.getString(jsonObject, DichVuStore.service_code);
-				save(user + _service_code, jsonObject.toString());
+				String serviceCode = Conts.getString(jsonObject, DichVuStore.service_code);
+				serviceCodeList.add(serviceCode);
+				save(user + serviceCode, jsonObject.toString());
+				save(user + serviceCode + ID, Conts.getString(jsonObject, DichVuStore.ID));
+				save(user + serviceCode + service_name, Conts.getString(jsonObject, DichVuStore.service_name));
+				save(user + serviceCode + service_name_eng, Conts.getString(jsonObject, DichVuStore.service_name_eng));
+				save(user + serviceCode + service_icon, Conts.getString(jsonObject, DichVuStore.service_icon));
+				save(user + serviceCode + service_code, Conts.getString(jsonObject, DichVuStore.service_code));
+				save(user + serviceCode + service_content, Conts.getString(jsonObject, DichVuStore.service_content));
+				save(user + serviceCode + service_price, Conts.getString(jsonObject, DichVuStore.service_price));
+
 				register(Conts.getString(jsonObject, DichVuStore.service_code), Conts.getString(jsonObject, DichVuStore.service_status));
 			}
+
+			save(user + "serviceCodeList", serviceCodeList.toString());
+
+			LogUtils.e("serviceCodeList.toString()", serviceCodeList.toString());
 		} catch (Exception e) {
 		}
 	}
