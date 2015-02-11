@@ -7,6 +7,7 @@ import vnp.com.db.datastore.DichVuStore;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.ImageLoaderUtils;
+import vnp.com.mimusic.util.LogUtils;
 import android.content.Context;
 import android.database.Cursor;
 import android.util.AttributeSet;
@@ -73,7 +74,6 @@ public class ReCommentDichVuItemView extends LinearLayout {
 		Conts.setTextView(findViewById(R.id.name), "");
 
 		String service_icon = Conts.getString(item, DichVuStore.service_icon);
-
 		Conts.showLogoDichvu(home_item_img_icon, service_icon);
 		Conts.setTextView(findViewById(R.id.name), item, DichVuStore.service_name);
 

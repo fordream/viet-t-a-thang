@@ -48,8 +48,8 @@ public abstract class NewHomeBlogView extends LinearLayout implements OnClickLis
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		Cursor cursor = (Cursor) parent.getItemAtPosition(position);
-		String xid = Conts.getStringCursor(cursor, DichVu.ID);
+		JSONObject cursor = (JSONObject) parent.getItemAtPosition(position);
+		String xid = Conts.getString(cursor, DichVuStore.ID);
 		(((RootMenuActivity) xContext)).gotoChiTietDichVuFromHome(xid);
 	}
 
@@ -260,9 +260,7 @@ public abstract class NewHomeBlogView extends LinearLayout implements OnClickLis
 		while (stringTokenizer.hasMoreElements()) {
 			String serviceCode = stringTokenizer.nextElement().toString();
 			if (!Conts.isBlank(serviceCode)) {
-				serviceCode = serviceCode.replace("\"'", "").replace("'\"", "");
-				
-				LogUtils.e("AAAx", serviceCode);
+				serviceCode = serviceCode.replace("\"", "").replace("'", "");
 				array.put(dichVuStore.getDvByServiceCode(serviceCode));
 			}
 		}
