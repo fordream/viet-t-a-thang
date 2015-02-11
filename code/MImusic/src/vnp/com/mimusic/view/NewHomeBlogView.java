@@ -1,24 +1,20 @@
 package vnp.com.mimusic.view;
 
-import java.util.List;
 import java.util.StringTokenizer;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import vnp.com.db.DichVu;
 import vnp.com.db.Recomment;
 import vnp.com.db.User;
 import vnp.com.db.datastore.DichVuStore;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.util.Conts;
-import vnp.com.mimusic.util.LogUtils;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -104,11 +100,11 @@ public abstract class NewHomeBlogView extends LinearLayout implements OnClickLis
 				JSONObject object = array.getJSONObject(i);
 				final ContentValues values = new ContentValues();
 				values.put("name", String.format(xContext.getString(R.string.title_dangky), Conts.getString(object, DichVuStore.service_name)));
-				values.put(DichVu.service_name, Conts.getString(object, DichVuStore.service_name));
-				values.put(DichVu.service_code, Conts.getString(object, DichVuStore.service_code));
+				values.put(DichVuStore.service_name, Conts.getString(object, DichVuStore.service_name));
+				values.put(DichVuStore.service_code, Conts.getString(object, DichVuStore.service_code));
 				String content = String.format(xContext.getString(R.string.xacnhandangky_form), Conts.getString(object, DichVuStore.service_name), Conts.getString(object, DichVuStore.service_price));
 				values.put("content", content);
-				values.put(DichVu.ID, Conts.getString(object, DichVuStore.ID));
+				values.put(DichVuStore.ID, Conts.getString(object, DichVuStore.ID));
 				values.put("type", "dangky");
 
 				DichVuItemView child = new DichVuItemView(getContext());
