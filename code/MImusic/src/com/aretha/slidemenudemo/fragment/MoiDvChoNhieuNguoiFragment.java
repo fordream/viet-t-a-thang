@@ -137,34 +137,20 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 		 * show data
 		 */
 
-		final String id = getArguments().getString(DichVuStore.ID);
-		String selection = DichVuStore.ID + "='" + id + "'";
+		String mService_code = getArguments().getString(DichVuStore.service_code);
 
-		if (Conts.isBlank(id)) {
-			String mService_code = getArguments().getString(DichVuStore.service_code);
-			selection = DichVuStore.service_code + "='" + mService_code + "'";
-		}
+		final JSONObject mcursor = dichVuStore.getDvByServiceCode(mService_code);
+		service_code = Conts.getString(mcursor, DichVuStore.service_code);
+		Conts.setTextView(view.findViewById(R.id.name), mcursor, DichVuStore.service_name);
+		Conts.setTextView(view.findViewById(R.id.gia), mcursor, DichVuStore.service_price);
+		ImageView home_item_img_icon = (ImageView) view.findViewById(R.id.icon);
 
-		// final Cursor mcursor =
-		// getActivity().getContentResolver().query(DichVuStore.CONTENT_URI,
-		// null, selection, null, null);
-		final Cursor mcursor = null;
-		if (mcursor != null && mcursor.getCount() >= 1) {
-			mcursor.moveToNext();
-			service_code = mcursor.getString(mcursor.getColumnIndex(DichVuStore.service_code));
-			Conts.setTextViewCursor(view.findViewById(R.id.name), mcursor, DichVuStore.service_name);
-			Conts.setTextViewCursor(view.findViewById(R.id.gia), mcursor, DichVuStore.service_price);
-			ImageView home_item_img_icon = (ImageView) view.findViewById(R.id.icon);
+		String service_icon = Conts.getString(mcursor, DichVuStore.service_icon);
+		// ImageLoaderUtils.getInstance(getActivity()).displayImage(service_icon,
+		// home_item_img_icon, R.drawable.no_image);
 
-			String service_icon = Conts.getStringCursor(mcursor, DichVuStore.service_icon);
-			// ImageLoaderUtils.getInstance(getActivity()).displayImage(service_icon,
-			// home_item_img_icon, R.drawable.no_image);
-
-			Conts.showLogoDichvu(home_item_img_icon, service_icon);
-			nhieuNgoiHeaderView.setData(mcursor);
-			mcursor.close();
-			// /
-		}
+		Conts.showLogoDichvu(home_item_img_icon, service_icon);
+		nhieuNgoiHeaderView.setData(mcursor);
 
 		moi_list.setOnItemClickListener(this);
 
@@ -458,6 +444,14 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 		public MoiNhieuNgoiHeaderView(Context context) {
 			super(context);
 			((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.moinghieunguoi_header, this);
+		}
+
+		public void setData(JSONObject mcursor) {
+			Conts.setTextView(findViewById(R.id.name), mcursor, DichVuStore.service_name);
+			Conts.setTextView(findViewById(R.id.gia), mcursor, DichVuStore.service_price);
+			ImageView home_item_img_icon = (ImageView) findViewById(R.id.icon);
+			String service_icon = Conts.getString(mcursor, DichVuStore.service_icon);
+			Conts.showLogoDichvu(home_item_img_icon, service_icon);
 		}
 
 		public void setData(Cursor mcursor) {

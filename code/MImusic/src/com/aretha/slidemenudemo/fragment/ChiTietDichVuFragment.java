@@ -36,8 +36,6 @@ public class ChiTietDichVuFragment extends BaseFragment implements View.OnClickL
 		mchitiet.setText(service_content);
 	}
 
-	private String id = "";
-
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.chitietdichvu, null);
@@ -71,76 +69,53 @@ public class ChiTietDichVuFragment extends BaseFragment implements View.OnClickL
 
 		final ChiTietDichVuNoFeatureView chitietdichvu_chitietdichvunofeatureview = (ChiTietDichVuNoFeatureView) view.findViewById(R.id.chitietdichvu_chitietdichvunofeatureview);
 
-		id = getArguments().getString(DichVuStore.ID);
-		String service_code = "";
-		String selection = DichVuStore.ID + "='" + id + "'";
+		final String service_code = getArguments().getString(DichVuStore.service_code);
 
-		if (getArguments().containsKey(DichVuStore.service_code)) {
-			service_code = getArguments().getString(DichVuStore.service_code);
+		JSONObject cursor = dichVuStore.getDvByServiceCode(service_code);
+		chitietdichvu_chitietdichvunofeatureview.setData(cursor);
+		final ContentValues values = new ContentValues();
+		values.put(DichVuStore.ID, Conts.getString(cursor, DichVuStore.ID));
+		values.put("type", "dangky");
+		values.put(DichVuStore.service_code, Conts.getString(cursor, DichVuStore.service_code));
+		values.put("name", String.format(getString(R.string.title_dangky), Conts.getString(cursor, DichVuStore.service_name)));
 
-			if (!Conts.isBlank(service_code)) {
-				selection = DichVuStore.service_code + "='" + service_code + "'";
-			}
-		}
+		String content = String.format(getString(R.string.xacnhandangky_form), Conts.getString(cursor, DichVuStore.service_name), Conts.getString(cursor, DichVuStore.service_price));
+		values.put("content", content);
+		final String name = Conts.getString(cursor, DichVuStore.service_name);
 
-		// final Cursor cursor =
-		// getActivity().getContentResolver().query(DichVuStore.CONTENT_URI,
-		// null, selection, null, null);
+		boolean isDangKy = dichVuStore.isRegister(service_code);
 
-		final Cursor cursor = null;
-		String service_content = "";
-		if (cursor != null && cursor.getCount() >= 1) {
-			cursor.moveToNext();
-			service_code = cursor.getString(cursor.getColumnIndex(DichVuStore.service_code));
-			id = cursor.getString(cursor.getColumnIndex(DichVuStore.ID));
-			chitietdichvu_chitietdichvunofeatureview.setData(cursor);
-			final ContentValues values = new ContentValues();
-			values.put(DichVuStore.ID, id);
-			values.put("type", "dangky");
-			values.put(DichVuStore.service_code, cursor.getString(cursor.getColumnIndex(DichVuStore.service_code)));
-			values.put("name", String.format(getString(R.string.title_dangky), cursor.getString(cursor.getColumnIndex(DichVuStore.service_name))));
-
-			String content = String.format(getString(R.string.xacnhandangky_form), Conts.getStringCursor(cursor, DichVuStore.service_name), Conts.getStringCursor(cursor, DichVuStore.service_price));
-			values.put("content", content);
-			final String name = Conts.getStringCursor(cursor, DichVuStore.service_name);
-			boolean isDangKy = "0".equals(cursor.getString(cursor.getColumnIndex(DichVuStore.service_status)));
-
-			if (!isDangKy) {
-				chitietdichvu_chitietdichvunofeatureview.findViewById(R.id.home_item_right_control_1).setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						new DangKyDialog(v.getContext(), values) {
-							@Override
-							public void updateUiDangKy() {
-								super.updateUiDangKy();
-								Conts.showDialogThongbao(getContext(), String.format(getContext().getString(R.string.bandangkythanhcongdichvu), name));
-
-								chitietdichvu_chitietdichvunofeatureview.findViewById(R.id.home_item_right_control_1).setOnClickListener(null);
-								chitietdichvu_chitietdichvunofeatureview.updateDangDung();
-								chitietdichvu_chitietdichvunofeatureview.hiddenChitietdichvu_no_feature_dangky();
-							}
-						}.show();
-					}
-				});
-			} else {
-				chitietdichvu_chitietdichvunofeatureview.findViewById(R.id.home_item_right_control_1).setOnClickListener(null);
-			}
-			chitietdichvu_chitietdichvunofeatureview.findViewById(R.id.home_item_right_control_2).setOnClickListener(new View.OnClickListener() {
+		if (!isDangKy) {
+			chitietdichvu_chitietdichvunofeatureview.findViewById(R.id.home_item_right_control_1).setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					(((RootMenuActivity) getActivity())).gotoMoiDvChoNhieuNguoiFragment(id);
+					new DangKyDialog(v.getContext(), values) {
+						@Override
+						public void updateUiDangKy() {
+							super.updateUiDangKy();
+							Conts.showDialogThongbao(getContext(), String.format(getContext().getString(R.string.bandangkythanhcongdichvu), name));
+
+							chitietdichvu_chitietdichvunofeatureview.findViewById(R.id.home_item_right_control_1).setOnClickListener(null);
+							chitietdichvu_chitietdichvunofeatureview.updateDangDung();
+							chitietdichvu_chitietdichvunofeatureview.hiddenChitietdichvu_no_feature_dangky();
+						}
+					}.show();
 				}
 			});
-
-			service_content = Conts.getStringCursor(cursor, DichVuStore.service_content);
-			service_guide = Conts.getStringCursor(cursor, DichVuStore.service_guide);
-			update(service_content);
-
+		} else {
+			chitietdichvu_chitietdichvunofeatureview.findViewById(R.id.home_item_right_control_1).setOnClickListener(null);
 		}
+		chitietdichvu_chitietdichvunofeatureview.findViewById(R.id.home_item_right_control_2).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				(((RootMenuActivity) getActivity())).gotoMoiDvChoNhieuNguoiFragment(service_code);
+			}
+		});
 
-		if (cursor != null) {
-			cursor.close();
-		}
+		String service_content = Conts.getString(cursor, DichVuStore.service_content);
+		service_guide = Conts.getString(cursor, DichVuStore.service_guide);
+		update(service_content);
+
 		if (Conts.isBlank(service_content)) {
 			Bundle bundles = new Bundle();
 			bundles.putString("service_code", service_code);
@@ -150,7 +125,6 @@ public class ChiTietDichVuFragment extends BaseFragment implements View.OnClickL
 				public void onSuscess(JSONObject response) {
 					try {
 						final String service_content = response.getString("service_content");
-						// service_guide = response.getString("service_guide");
 						update(service_content);
 					} catch (JSONException e) {
 					}
@@ -159,19 +133,19 @@ public class ChiTietDichVuFragment extends BaseFragment implements View.OnClickL
 
 				@Override
 				public void onError(String message) {
-					Conts.toast(getActivity(), message);
+					// Conts.toast(getActivity(), message);
 					Conts.showView(loadingView, false);
 				}
 
 				@Override
 				public void onError() {
-					Conts.toast(getActivity(), "onError");
+					// Conts.toast(getActivity(), "onError");
 					Conts.showView(loadingView, false);
 				}
 
 				@Override
 				public void onStart() {
-					Conts.showView(loadingView, true);
+					Conts.showView(loadingView, false);
 				}
 			});
 		}

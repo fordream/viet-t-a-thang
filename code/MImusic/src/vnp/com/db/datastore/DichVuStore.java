@@ -55,17 +55,13 @@ public class DichVuStore extends BaseStore {
 		for (int i = 0; i < array.length(); i++) {
 			try {
 				JSONObject jsonObject = array.getJSONObject(i);
-				if (serviceCode.equals(Conts.getString(jsonObject, service_code))) {
+				if (serviceCode != null && serviceCode.equals(Conts.getString(jsonObject, service_code))) {
 					return jsonObject;
 				}
 			} catch (JSONException e) {
 
 			}
 		}
-		// try {
-		// return new JSONObject(getString(user + serviceCode));
-		// } catch (JSONException e) {
-		// }
 
 		return new JSONObject();
 	}
@@ -73,11 +69,9 @@ public class DichVuStore extends BaseStore {
 	public void updateDichvu(JSONObject response) {
 		try {
 			JSONArray jsonArray = response.getJSONArray("data");
-			save(user + "getDichvuALL", jsonArray.toString());
 
 			for (int i = 0; i < jsonArray.length(); i++) {
 				JSONObject jsonObject = jsonArray.getJSONObject(i);
-				LogUtils.e("AAAAAAAAx", jsonObject.toString());
 				String _service_code = Conts.getString(jsonObject, DichVuStore.service_code);
 				save(user + _service_code, jsonObject.toString());
 				register(Conts.getString(jsonObject, DichVuStore.service_code), Conts.getString(jsonObject, DichVuStore.service_status));

@@ -75,7 +75,7 @@ public abstract class DichVuAdapter extends ArrayAdapter<JSONObject> {
 		values.put(DichVuStore.ID, Conts.getString(cursor, DichVuStore.ID));
 		values.put("type", "dangky");
 		convertView.findViewById(R.id.home_item_right_control_1).setOnClickListener(new DangKyClickListener(values, isDangKy));
-		convertView.findViewById(R.id.home_item_right_control_2).setOnClickListener(new MoiDichVuClickListener(id));
+		convertView.findViewById(R.id.home_item_right_control_2).setOnClickListener(new MoiDichVuClickListener(Conts.getString(cursor, DichVuStore.service_code)));
 		return convertView;
 	}
 
@@ -90,15 +90,15 @@ public abstract class DichVuAdapter extends ArrayAdapter<JSONObject> {
 	}
 
 	private class MoiDichVuClickListener implements OnClickListener {
-		private String id;
+		private String serviceCode;
 
 		public MoiDichVuClickListener(String id) {
-			this.id = id;
+			this.serviceCode = id;
 		}
 
 		@Override
 		public void onClick(View v) {
-			moiDVChoNhieuNguoi(id);
+			moiDVChoNhieuNguoi(serviceCode);
 		}
 	}
 

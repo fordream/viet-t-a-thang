@@ -121,6 +121,7 @@ public class RootMenuActivity extends FragmentActivity {
 			MoiDvChoNhieuNguoiFragment chiTietTintucFragment = new MoiDvChoNhieuNguoiFragment();
 			Bundle args = new Bundle();
 			args.putString("id", getIntent().getStringExtra("id") + "");
+			args.putString(DichVuStore.service_code, getIntent().getStringExtra(DichVuStore.service_code) + "");
 			args.putInt("getPosition", getIntent().getIntExtra("getPosition", 0));
 			chiTietTintucFragment.setArguments(args);
 			changeFragemt(R.id.root_main_fragment, chiTietTintucFragment, false);
@@ -289,22 +290,22 @@ public class RootMenuActivity extends FragmentActivity {
 		overridePendingTransitionStartActivity();
 	}
 
-	public void gotoMoiDvChoNhieuNguoi(String id, int position) {
+	public void gotoMoiDvChoNhieuNguoi(String service_code, int position) {
 		Conts.hiddenKeyBoard(this);
 		Intent intent = new Intent(this, RootMenuActivity.class);
 		intent.putExtra("type", Conts.MOIDICHVUCHONHIEUNGUOI);
-		intent.putExtra("id", id);
+		intent.putExtra(DichVuStore.service_code, service_code);
 		intent.putExtra("getPosition", position);
 		getParent().startActivity(intent);
 		overridePendingTransitionStartActivity();
 	}
 
-	public void gotoMoiDvChoNhieuNguoiFragment(String id) {
+	public void gotoMoiDvChoNhieuNguoiFragment(String service_code) {
 		Conts.hiddenKeyBoard(this);
 
 		MoiDvChoNhieuNguoiFragment choNhieuNguoiFragment = new MoiDvChoNhieuNguoiFragment();
 		Bundle args = new Bundle();
-		args.putString("id", id);
+		args.putString(DichVuStore.service_code, service_code);
 		choNhieuNguoiFragment.setArguments(args);
 		changeFragemt(R.id.root_main_fragment, choNhieuNguoiFragment, true);
 
@@ -627,10 +628,10 @@ public class RootMenuActivity extends FragmentActivity {
 		changeFragemt(R.id.root_main_fragment, moiNhieuDichVuFragment, false);
 	}
 
-	public void gotoChiTietDichVuFromHome(String id) {
+	public void gotoChiTietDichVuFromHome(String service_code) {
 		Intent intent = new Intent(this, RootMenuActivity.class);
 		intent.putExtra("type", Conts.CHITIETDICHVU);
-		intent.putExtra("id", id);
+		intent.putExtra(DichVuStore.service_code, service_code);
 		getParent().startActivity(intent);
 		overridePendingTransitionStartActivity();
 	}

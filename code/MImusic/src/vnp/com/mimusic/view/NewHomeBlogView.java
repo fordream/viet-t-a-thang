@@ -45,7 +45,8 @@ public abstract class NewHomeBlogView extends LinearLayout implements OnClickLis
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		JSONObject cursor = (JSONObject) parent.getItemAtPosition(position);
-		String xid = Conts.getString(cursor, DichVuStore.ID);
+		String xid = Conts.getString(cursor, DichVuStore.service_code);
+
 		(((RootMenuActivity) xContext)).gotoChiTietDichVuFromHome(xid);
 	}
 
@@ -111,23 +112,23 @@ public abstract class NewHomeBlogView extends LinearLayout implements OnClickLis
 				child.setData(object, index);
 				main.addView(child);
 				final String id = Conts.getString(object, DichVuStore.ID);
+				final String service_code = Conts.getString(object, DichVuStore.service_code);
+				
 				final int position = index;
 				child.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						((RootMenuActivity) xContext).gotoChiTietDichVuFromHome(id);
+						((RootMenuActivity) xContext).gotoChiTietDichVuFromHome(service_code);
 					}
 				});
 
 				child.findViewById(R.id.home_item_right_control_2).setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						(((RootMenuActivity) xContext)).gotoMoiDvChoNhieuNguoi(id, position);
+						(((RootMenuActivity) xContext)).gotoMoiDvChoNhieuNguoi(service_code, position);
 					}
 				});
 
-				// final boolean isDangKy =
-				// "0".equals(cursorDVHot.getString(cursorDVHot.getColumnIndex(DichVu.service_status)));
 				final boolean isDangKy = dichVuStore.isRegister(Conts.getString(object, DichVuStore.service_code));
 
 				if (isDangKy) {
@@ -150,67 +151,7 @@ public abstract class NewHomeBlogView extends LinearLayout implements OnClickLis
 
 			}
 		}
-		// Cursor cursorDVHot = DichVu.getCursorFromUser(getContext(), 3);
-		// main.removeAllViews();
-		// if (cursorDVHot != null) {
-		// while (cursorDVHot.moveToNext()) {
-		// final ContentValues values = new ContentValues();
-		// values.put("name",
-		// String.format(xContext.getString(R.string.title_dangky),
-		// cursorDVHot.getString(cursorDVHot.getColumnIndex(DichVu.service_name))));
-		// values.put(DichVu.service_name,
-		// cursorDVHot.getString(cursorDVHot.getColumnIndex(DichVu.service_name)));
-		// values.put(DichVu.service_code,
-		// cursorDVHot.getString(cursorDVHot.getColumnIndex(DichVu.service_code)));
-		// String content =
-		// String.format(xContext.getString(R.string.xacnhandangky_form),
-		// Conts.getStringCursor(cursorDVHot, DichVu.service_name),
-		// Conts.getStringCursor(cursorDVHot, DichVu.service_price));
-		// values.put("content", content);
-		// values.put(DichVu.ID,
-		// cursorDVHot.getString(cursorDVHot.getColumnIndex(DichVu.ID)));
-		// values.put("type", "dangky");
-		//
-		// DichVuItemView child = new DichVuItemView(getContext());
-		// child.setData(cursorDVHot);
-		// main.addView(child);
-		// final String id = Conts.getStringCursor(cursorDVHot, DichVu.ID);
-		// final int position = cursorDVHot.getPosition();
-		// child.setOnClickListener(new OnClickListener() {
-		// @Override
-		// public void onClick(View v) {
-		// ((RootMenuActivity) xContext).gotoChiTietDichVuFromHome(id);
-		// }
-		// });
-		//
-		// child.findViewById(R.id.home_item_right_control_2).setOnClickListener(new
-		// OnClickListener() {
-		// @Override
-		// public void onClick(View v) {
-		// (((RootMenuActivity) xContext)).gotoMoiDvChoNhieuNguoi(id, position);
-		// }
-		// });
-		//
-		// final boolean isDangKy =
-		// "0".equals(cursorDVHot.getString(cursorDVHot.getColumnIndex(DichVu.service_status)));
-		// if (isDangKy) {
-		// child.findViewById(R.id.home_item_right_control_1).setOnClickListener(null);
-		// } else {
-		// child.findViewById(R.id.home_item_right_control_1).setOnClickListener(new
-		// OnClickListener() {
-		//
-		// @Override
-		// public void onClick(View v) {
-		// dangky(values);
-		// }
-		// });
-		// }
-		// }
-		// }
-		//
-		// if (cursorDVHot != null) {
-		// cursorDVHot.close();
-		// }
+
 	}
 
 	private void addUerHot() {
@@ -261,7 +202,6 @@ public abstract class NewHomeBlogView extends LinearLayout implements OnClickLis
 			}
 		}
 
-		// Cursor cursor = Recomment.getCursorFromDichvu(getContext(), -1);
 		BaseAdapter adapter = new BaseAdapter() {
 
 			@Override
@@ -295,20 +235,6 @@ public abstract class NewHomeBlogView extends LinearLayout implements OnClickLis
 
 		mHlvSimpleList.setAdapter(adapter);
 
-		// mHlvSimpleList.setAdapter(new CursorAdapter(getContext(), cursor) {
-		// @Override
-		// public View newView(Context arg0, Cursor arg1, ViewGroup arg2) {
-		// return new ReCommentDichVuItemView(arg0);
-		// }
-		//
-		// @Override
-		// public void bindView(View arg0, Context arg1, Cursor cursor) {
-		// if (arg0 == null) {
-		// arg0 = new ReCommentDichVuItemView(arg1);
-		// }
-		// ((ReCommentDichVuItemView) arg0).setData(cursor);
-		// }
-		// });
 	}
 
 	public void dangky(ContentValues values) {
