@@ -1,6 +1,6 @@
 package vnp.com.mimusic.view;
 
-import vnp.com.db.DichVu;
+import vnp.com.db.datastore.DichVuStore;
 import vnp.com.mimusic.R;
 import android.content.Context;
 import android.database.Cursor;
@@ -30,8 +30,8 @@ public class QuyDinhBanHangItemView extends LinearLayout {
 		home_item_tv_name.setText("");
 		home_item_tv_content.setText("");
 		home_item_tv_name.setText(String.format(getContext().getString(R.string.formatdieukhoan), (cursor.getPosition() + 1)));
-		home_item_tv_name_dv.setText(cursor.getString(cursor.getColumnIndex(DichVu.service_name)));
-		home_item_tv_content.setText(cursor.getString(cursor.getColumnIndex(DichVu.service_content)));
+		home_item_tv_name_dv.setText(cursor.getString(cursor.getColumnIndex(DichVuStore.service_name)));
+		home_item_tv_content.setText(cursor.getString(cursor.getColumnIndex(DichVuStore.service_content)));
 	}
 
 }

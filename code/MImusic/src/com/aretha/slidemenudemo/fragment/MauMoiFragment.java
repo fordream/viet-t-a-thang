@@ -5,8 +5,8 @@ import org.json.JSONObject;
 
 import vnp.com.api.API;
 import vnp.com.api.RestClient.RequestMethod;
-import vnp.com.db.DichVu;
 import vnp.com.db.MauMoi;
+import vnp.com.db.datastore.DichVuStore;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.adapter.MauMoiAdaper;
@@ -72,13 +72,13 @@ public class MauMoiFragment extends BaseFragment implements android.view.View.On
 		// });
 
 		if (!type) {
-			String selection = DichVu.ID + "='" + id + "'";
-			final Cursor mcursor = getActivity().getContentResolver().query(DichVu.CONTENT_URI, null, selection, null, null);
-			if (mcursor != null && mcursor.getCount() >= 1) {
-				mcursor.moveToNext();
-				service_code = mcursor.getString(mcursor.getColumnIndex(DichVu.service_code));
-				mcursor.close();
-			}
+//			String selection = DichVuStore.ID + "='" + id + "'";
+//			final Cursor mcursor = getActivity().getContentResolver().query(DichVuStore.CONTENT_URI, null, selection, null, null);
+//			if (mcursor != null && mcursor.getCount() >= 1) {
+//				mcursor.moveToNext();
+//				service_code = mcursor.getString(mcursor.getColumnIndex(DichVuStore.service_code));
+//				mcursor.close();
+//			}
 		}
 
 		JSONArray array = MauMoi.getCursorMauMoiListJson(getActivity(), service_code);
@@ -174,7 +174,8 @@ public class MauMoiFragment extends BaseFragment implements android.view.View.On
 		bundle.putString("service_code", service_code);
 		bundle.putString("customers", customers.replace("{", "").replace("}", "").replace("\"", ""));
 		// • customers
-//		Conts.showDialogThongbao(getActivity(), String.format("contacts_list:%s", customers));
+		// Conts.showDialogThongbao(getActivity(),
+		// String.format("contacts_list:%s", customers));
 		((RootMenuActivity) getActivity()).moiTheoDichVu(bundle);
 
 	}

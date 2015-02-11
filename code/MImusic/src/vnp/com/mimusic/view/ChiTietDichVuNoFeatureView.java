@@ -1,9 +1,8 @@
 package vnp.com.mimusic.view;
 
-import vnp.com.db.DichVu;
+import vnp.com.db.datastore.DichVuStore;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.util.Conts;
-import vnp.com.mimusic.util.ImageLoaderUtils;
 import android.content.Context;
 import android.database.Cursor;
 import android.util.AttributeSet;
@@ -36,20 +35,18 @@ public class ChiTietDichVuNoFeatureView extends LinearLayout {
 	}
 
 	public void setData(Cursor cursor) {
-		boolean isDangKy = "0".equals(cursor.getString(cursor.getColumnIndex(DichVu.service_status)));
+		boolean isDangKy = "0".equals(cursor.getString(cursor.getColumnIndex(DichVuStore.service_status)));
 		ImageView home_item_img_icon = (ImageView) findViewById(R.id.home_item_img_icon);
 		TextView home_item_tv_name = (TextView) findViewById(R.id.home_item_tv_name);
-		home_item_tv_name.setText(cursor.getString(cursor.getColumnIndex(DichVu.service_name)));
+		home_item_tv_name.setText(cursor.getString(cursor.getColumnIndex(DichVuStore.service_name)));
 
 		home_item_img_icon.setImageResource(R.drawable.no_avatar);
-		// show image
-		String service_icon = cursor.getString(cursor.getColumnIndex(DichVu.service_icon)) + "";
-//		ImageLoaderUtils.getInstance(getContext()).displayImage(service_icon, home_item_img_icon, R.drawable.no_image);
+		String service_icon = cursor.getString(cursor.getColumnIndex(DichVuStore.service_icon)) + "";
 		Conts.showLogoDichvu(home_item_img_icon, service_icon);
 
 		((TextView) findViewById(R.id.home_item_right_control_1_tv)).setText(isDangKy ? R.string.dangdung : R.string.dangky);
 
-		Conts.setTextViewCursor(findViewById(R.id.gia), cursor, DichVu.service_price);
+		Conts.setTextViewCursor(findViewById(R.id.gia), cursor, DichVuStore.service_price);
 	}
 
 	public void hiddenChitietdichvu_no_feature_dangky() {

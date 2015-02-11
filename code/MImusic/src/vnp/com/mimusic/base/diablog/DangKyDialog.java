@@ -4,7 +4,7 @@ import org.json.JSONObject;
 
 import vnp.com.api.API;
 import vnp.com.api.RestClient.RequestMethod;
-import vnp.com.db.DichVu;
+import vnp.com.db.datastore.DichVuStore;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.VApplication;
 import vnp.com.mimusic.base.BaseAdialog;
@@ -109,7 +109,7 @@ public class DangKyDialog extends BaseAdialog implements android.view.View.OnCli
 	public void mOpen() {
 		if ("dangky".equals(type)) {
 			Bundle bundle = new Bundle();
-			bundle.putString(DichVu.service_code, contentValues.getAsString(DichVu.service_code));
+			bundle.putString(DichVuStore.service_code, contentValues.getAsString(DichVuStore.service_code));
 
 			((VApplication) getmContext().getApplicationContext()).execute(RequestMethod.POST, API.API_R017, bundle, new IContsCallBack() {
 

@@ -11,9 +11,9 @@ import org.json.JSONObject;
 import vnp.com.api.API;
 import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.BangXepHang;
-import vnp.com.db.DichVu;
 import vnp.com.db.MauMoi;
 import vnp.com.db.User;
+import vnp.com.db.datastore.DichVuStore;
 import vnp.com.db.datastore.TintucStore;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.VApplication;
@@ -127,9 +127,9 @@ public class RootMenuActivity extends FragmentActivity {
 		} else if (Conts.CHITIETDICHVU.equals(type)) {
 			ChiTietDichVuFragment chiTietTintucFragment = new ChiTietDichVuFragment();
 			Bundle args = new Bundle();
-			args.putString("id", getIntent().getStringExtra(DichVu.ID) + "");
-			if (getIntent().hasExtra(DichVu.service_code))
-				args.putString(DichVu.service_code, getIntent().getStringExtra(DichVu.service_code) + "");
+			args.putString("id", getIntent().getStringExtra(DichVuStore.ID) + "");
+			if (getIntent().hasExtra(DichVuStore.service_code))
+				args.putString(DichVuStore.service_code, getIntent().getStringExtra(DichVuStore.service_code) + "");
 			chiTietTintucFragment.setArguments(args);
 			changeFragemt(R.id.root_main_fragment, chiTietTintucFragment, false);
 		} else if (Conts.CHITIETCANHANBANGXEPHANG.equals(type)) {
@@ -274,7 +274,7 @@ public class RootMenuActivity extends FragmentActivity {
 		Intent intent = new Intent(this, RootMenuActivity.class);
 		intent.putExtra("type", Conts.CHITIETDICHVU);
 		Cursor cursor = (Cursor) parent.getItemAtPosition(position);
-		intent.putExtra("id", cursor.getString(cursor.getColumnIndex(DichVu.ID)));
+		intent.putExtra("id", cursor.getString(cursor.getColumnIndex(DichVuStore.ID)));
 		getParent().startActivity(intent);
 		overridePendingTransitionStartActivity();
 	}
@@ -314,7 +314,7 @@ public class RootMenuActivity extends FragmentActivity {
 		Cursor cursor = (Cursor) parent.getItemAtPosition(position);
 		ChiTietDichVuFragment chiTietDichVuFragment = new ChiTietDichVuFragment();
 		Bundle args = new Bundle();
-		args.putString("id", cursor.getString(cursor.getColumnIndex(DichVu.ID)));
+		args.putString("id", cursor.getString(cursor.getColumnIndex(DichVuStore.ID)));
 		chiTietDichVuFragment.setArguments(args);
 		changeFragemt(R.id.root_main_fragment, chiTietDichVuFragment, true);
 	}

@@ -1,6 +1,6 @@
 package vnp.com.mimusic.adapter;
 
-import vnp.com.db.DichVu;
+import vnp.com.db.datastore.DichVuStore;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.view.DichVuItemView;
@@ -27,26 +27,27 @@ public abstract class DichVuAdapter extends CursorAdapter {
 		/*
 		 * kiem tra xem co hien thi item nay khong
 		 */
-		String name = cursor.getString(cursor.getColumnIndex(DichVu.service_name));
-		final String id = cursor.getString(cursor.getColumnIndex(DichVu.ID));
+		String name = cursor.getString(cursor.getColumnIndex(DichVuStore.service_name));
+		final String id = cursor.getString(cursor.getColumnIndex(DichVuStore.ID));
 		convertView.findViewById(R.id.home_item_main).setVisibility(Conts.xDontains(textSearch, false, new String[] { name }) ? View.VISIBLE : View.GONE);
 
 		/**
 		 * set data
 		 */
 		((DichVuItemView) convertView).setData(cursor);
-		final boolean isDangKy = "0".equals(cursor.getString(cursor.getColumnIndex(DichVu.service_status)));
+		final boolean isDangKy = "0".equals(cursor.getString(cursor.getColumnIndex(DichVuStore.service_status)));
 
 		/**
 		 * add action
 		 */
 		ContentValues values = new ContentValues();
-		values.put("name", String.format(context.getString(R.string.title_dangky), cursor.getString(cursor.getColumnIndex(DichVu.service_name))));
-		values.put(DichVu.service_name, cursor.getString(cursor.getColumnIndex(DichVu.service_name)));
-		values.put(DichVu.service_code, cursor.getString(cursor.getColumnIndex(DichVu.service_code)));
-		String content = String.format(context.getString(R.string.xacnhandangky_form), Conts.getStringCursor(cursor, DichVu.service_name), Conts.getStringCursor(cursor, DichVu.service_price));
+		values.put("name", String.format(context.getString(R.string.title_dangky), cursor.getString(cursor.getColumnIndex(DichVuStore.service_name))));
+		values.put(DichVuStore.service_name, cursor.getString(cursor.getColumnIndex(DichVuStore.service_name)));
+		values.put(DichVuStore.service_code, cursor.getString(cursor.getColumnIndex(DichVuStore.service_code)));
+		String content = String.format(context.getString(R.string.xacnhandangky_form), Conts.getStringCursor(cursor, DichVuStore.service_name),
+				Conts.getStringCursor(cursor, DichVuStore.service_price));
 		values.put("content", content);
-		values.put(DichVu.ID, cursor.getString(cursor.getColumnIndex(DichVu.ID)));
+		values.put(DichVuStore.ID, cursor.getString(cursor.getColumnIndex(DichVuStore.ID)));
 		values.put("type", "dangky");
 		convertView.findViewById(R.id.home_item_right_control_1).setOnClickListener(new DangKyClickListener(values, isDangKy));
 		convertView.findViewById(R.id.home_item_right_control_2).setOnClickListener(new MoiDichVuClickListener(id));

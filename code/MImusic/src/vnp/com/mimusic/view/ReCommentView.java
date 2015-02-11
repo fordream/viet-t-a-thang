@@ -10,7 +10,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import vnp.com.db.DichVu;
+import vnp.com.db.datastore.DichVuStore;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.util.Conts;
 import android.content.Context;
@@ -132,7 +132,7 @@ public abstract class ReCommentView extends LinearLayout {
 							@Override
 							public void onClick(View v) {
 								close();
-								addDv(Conts.getString(jsonObject, DichVu.service_code));
+								addDv(Conts.getString(jsonObject, DichVuStore.service_code));
 							}
 						});
 						recommnet_list_dv_banchay.addView(banChayView);

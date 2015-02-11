@@ -2,11 +2,9 @@ package vnp.com.mimusic.view;
 
 import org.json.JSONObject;
 
-import vnp.com.db.DichVu;
 import vnp.com.db.datastore.DichVuStore;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.util.Conts;
-import vnp.com.mimusic.util.ImageLoaderUtils;
 import android.content.Context;
 import android.database.Cursor;
 import android.util.AttributeSet;
@@ -30,7 +28,7 @@ public class DichVuItemView extends LinearLayout {
 	public void setData(Cursor cursor) {
 		findViewById(R.id.home_item_header).setVisibility(View.GONE);
 
-		final boolean isDangKy = "0".equals(cursor.getString(cursor.getColumnIndex(DichVu.service_status)));
+		final boolean isDangKy = "0".equals(cursor.getString(cursor.getColumnIndex(DichVuStore.service_status)));
 		int poistion = cursor.getPosition();
 
 		/**
@@ -40,12 +38,12 @@ public class DichVuItemView extends LinearLayout {
 		findViewById(R.id.home_item_img_icon).setBackgroundResource(poistion % 2 == 0 ? R.drawable.new_dichvu_icon_bg_0 : R.drawable.new_dichvu_icon_bg_1);
 
 		Conts.setTextResource(findViewById(R.id.home_item_right_control_1_tv), isDangKy ? R.string.dangdung : R.string.dangky);
-		Conts.setTextViewCursor(findViewById(R.id.home_item_tv_name), cursor, DichVu.service_name);
-		Conts.setTextViewCursor(findViewById(R.id.home_item_tv_content), cursor, DichVu.service_content);
+		Conts.setTextViewCursor(findViewById(R.id.home_item_tv_name), cursor, DichVuStore.service_name);
+		Conts.setTextViewCursor(findViewById(R.id.home_item_tv_content), cursor, DichVuStore.service_content);
 
 		// show image of service
 		ImageView home_item_img_icon = (ImageView) findViewById(R.id.home_item_img_icon);
-		String service_icon = cursor.getString(cursor.getColumnIndex(DichVu.service_icon)) + "";
+		String service_icon = cursor.getString(cursor.getColumnIndex(DichVuStore.service_icon)) + "";
 		// ImageLoaderUtils.getInstance(getContext()).displayImage(service_icon,
 		// home_item_img_icon, R.drawable.no_image);
 
@@ -73,7 +71,7 @@ public class DichVuItemView extends LinearLayout {
 		findViewById(R.id.home_item_header).setVisibility(View.GONE);
 
 		final boolean isDangKy = dichVuStore.isRegister(Conts.getString(object, DichVuStore.service_code));
-		// "0".equals(cursor.getString(cursor.getColumnIndex(DichVu.service_status)));
+		// "0".equals(cursor.getString(cursor.getColumnIndex(DichVuStore.service_status)));
 		// int poistion = cursor.getPosition();
 
 		/**
@@ -88,7 +86,7 @@ public class DichVuItemView extends LinearLayout {
 
 		// show image of service
 		ImageView home_item_img_icon = (ImageView) findViewById(R.id.home_item_img_icon);
-		String service_icon = Conts.getString(object, DichVuStore.service_icon);// cursor.getString(cursor.getColumnIndex(DichVu.service_icon))
+		String service_icon = Conts.getString(object, DichVuStore.service_icon);// cursor.getString(cursor.getColumnIndex(DichVuStore.service_icon))
 																				// +
 																				// "";
 		// ImageLoaderUtils.getInstance(getContext()).displayImage(service_icon,

@@ -1,12 +1,10 @@
 package com.aretha.slidemenudemo.fragment;
 
-import vnp.com.db.DichVu;
 import vnp.com.db.User;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.adapter.MoiNhieuDichVuAdapter;
 import vnp.com.mimusic.util.Conts;
-import vnp.com.mimusic.util.ImageLoaderUtils;
 import vnp.com.mimusic.view.MenuRightItemView;
 import android.content.Context;
 import android.database.Cursor;
@@ -97,7 +95,10 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 			}
 		}
 
-		Cursor cursorDV = getActivity().getContentResolver().query(DichVu.CONTENT_URI, null, null, null, null);
+		// Cursor cursorDV =
+		// getActivity().getContentResolver().query(DichVu.CONTENT_URI, null,
+		// null, null, null);
+		Cursor cursorDV = null;
 		moinhieudichvu_dialog_search.addTextChangedListener(new TextWatcher() {
 
 			@Override
@@ -223,7 +224,8 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 		public void setIcon(String icon) {
 			ImageView moinhieudichvu_img_icon = (ImageView) findViewById(R.id.imageView1);
 			moinhieudichvu_img_icon.setImageResource(R.drawable.no_avatar);
-//			ImageLoaderUtils.getInstance(getActivity()).displayImage(icon, moinhieudichvu_img_icon, R.drawable.no_image);
+			// ImageLoaderUtils.getInstance(getActivity()).displayImage(icon,
+			// moinhieudichvu_img_icon, R.drawable.no_image);
 			Conts.showLogoDichvu(moinhieudichvu_img_icon, icon);
 		}
 

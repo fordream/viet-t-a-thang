@@ -2,12 +2,9 @@ package vnp.com.mimusic.view;
 
 import org.json.JSONObject;
 
-import vnp.com.db.DichVu;
 import vnp.com.db.datastore.DichVuStore;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.util.Conts;
-import vnp.com.mimusic.util.ImageLoaderUtils;
-import vnp.com.mimusic.util.LogUtils;
 import android.content.Context;
 import android.database.Cursor;
 import android.util.AttributeSet;
@@ -38,10 +35,10 @@ public class ReCommentDichVuItemView extends LinearLayout {
 		Conts.setTextView(findViewById(R.id.name), "");
 
 		if (cursor != null) {
-			String service_icon = cursor.getString(cursor.getColumnIndex(DichVu.service_icon)) + "";
+			String service_icon = cursor.getString(cursor.getColumnIndex(DichVuStore.service_icon)) + "";
 
 			Conts.showLogoDichvu(home_item_img_icon, service_icon);
-			Conts.setTextViewCursor(findViewById(R.id.name), cursor, DichVu.service_name);
+			Conts.setTextViewCursor(findViewById(R.id.name), cursor, DichVuStore.service_name);
 
 			int poistion = cursor.getPosition();
 

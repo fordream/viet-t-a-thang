@@ -5,7 +5,7 @@ import org.json.JSONObject;
 
 import vnp.com.api.API;
 import vnp.com.api.RestClient.RequestMethod;
-import vnp.com.db.DichVu;
+import vnp.com.db.datastore.DichVuStore;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.base.diablog.DangKyDialog;
@@ -71,35 +71,39 @@ public class ChiTietDichVuFragment extends BaseFragment implements View.OnClickL
 
 		final ChiTietDichVuNoFeatureView chitietdichvu_chitietdichvunofeatureview = (ChiTietDichVuNoFeatureView) view.findViewById(R.id.chitietdichvu_chitietdichvunofeatureview);
 
-		id = getArguments().getString(DichVu.ID);
+		id = getArguments().getString(DichVuStore.ID);
 		String service_code = "";
-		String selection = DichVu.ID + "='" + id + "'";
+		String selection = DichVuStore.ID + "='" + id + "'";
 
-		if (getArguments().containsKey(DichVu.service_code)) {
-			service_code = getArguments().getString(DichVu.service_code);
+		if (getArguments().containsKey(DichVuStore.service_code)) {
+			service_code = getArguments().getString(DichVuStore.service_code);
 
 			if (!Conts.isBlank(service_code)) {
-				selection = DichVu.service_code + "='" + service_code + "'";
+				selection = DichVuStore.service_code + "='" + service_code + "'";
 			}
 		}
 
-		final Cursor cursor = getActivity().getContentResolver().query(DichVu.CONTENT_URI, null, selection, null, null);
+		// final Cursor cursor =
+		// getActivity().getContentResolver().query(DichVuStore.CONTENT_URI,
+		// null, selection, null, null);
+
+		final Cursor cursor = null;
 		String service_content = "";
 		if (cursor != null && cursor.getCount() >= 1) {
 			cursor.moveToNext();
-			service_code = cursor.getString(cursor.getColumnIndex(DichVu.service_code));
-			id = cursor.getString(cursor.getColumnIndex(DichVu.ID));
+			service_code = cursor.getString(cursor.getColumnIndex(DichVuStore.service_code));
+			id = cursor.getString(cursor.getColumnIndex(DichVuStore.ID));
 			chitietdichvu_chitietdichvunofeatureview.setData(cursor);
 			final ContentValues values = new ContentValues();
-			values.put(DichVu.ID, id);
+			values.put(DichVuStore.ID, id);
 			values.put("type", "dangky");
-			values.put(DichVu.service_code, cursor.getString(cursor.getColumnIndex(DichVu.service_code)));
-			values.put("name", String.format(getString(R.string.title_dangky), cursor.getString(cursor.getColumnIndex(DichVu.service_name))));
+			values.put(DichVuStore.service_code, cursor.getString(cursor.getColumnIndex(DichVuStore.service_code)));
+			values.put("name", String.format(getString(R.string.title_dangky), cursor.getString(cursor.getColumnIndex(DichVuStore.service_name))));
 
-			String content = String.format(getString(R.string.xacnhandangky_form), Conts.getStringCursor(cursor, DichVu.service_name), Conts.getStringCursor(cursor, DichVu.service_price));
+			String content = String.format(getString(R.string.xacnhandangky_form), Conts.getStringCursor(cursor, DichVuStore.service_name), Conts.getStringCursor(cursor, DichVuStore.service_price));
 			values.put("content", content);
-			final String name = Conts.getStringCursor(cursor, DichVu.service_name);
-			boolean isDangKy = "0".equals(cursor.getString(cursor.getColumnIndex(DichVu.service_status)));
+			final String name = Conts.getStringCursor(cursor, DichVuStore.service_name);
+			boolean isDangKy = "0".equals(cursor.getString(cursor.getColumnIndex(DichVuStore.service_status)));
 
 			if (!isDangKy) {
 				chitietdichvu_chitietdichvunofeatureview.findViewById(R.id.home_item_right_control_1).setOnClickListener(new View.OnClickListener() {
@@ -128,8 +132,8 @@ public class ChiTietDichVuFragment extends BaseFragment implements View.OnClickL
 				}
 			});
 
-			service_content = Conts.getStringCursor(cursor, DichVu.service_content);
-			service_guide = Conts.getStringCursor(cursor, DichVu.service_guide);
+			service_content = Conts.getStringCursor(cursor, DichVuStore.service_content);
+			service_guide = Conts.getStringCursor(cursor, DichVuStore.service_guide);
 			update(service_content);
 
 		}

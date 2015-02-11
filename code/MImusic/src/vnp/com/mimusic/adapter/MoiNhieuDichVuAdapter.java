@@ -5,10 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import vnp.com.db.DichVu;
+import vnp.com.db.datastore.DichVuStore;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.util.Conts;
-import vnp.com.mimusic.util.ImageLoaderUtils;
 import vnp.com.mimusic.view.MoiNhieuDichVuItemView;
 import android.content.Context;
 import android.database.Cursor;
@@ -60,16 +59,17 @@ public abstract class MoiNhieuDichVuAdapter extends CursorAdapter {
 			convertView = new MoiNhieuDichVuItemView(context);
 		}
 		ImageView moinhieudichvu_item_icon = (ImageView) convertView.findViewById(R.id.moinhieudichvu_item_icon);
-		final String _id = cursor.getString(cursor.getColumnIndex(DichVu._ID));
-		final String cs = cursor.getString(cursor.getColumnIndex(DichVu.service_code));
-		String name = cursor.getString(cursor.getColumnIndex(DichVu.service_name));
+		final String _id = cursor.getString(cursor.getColumnIndex(DichVuStore.ID));
+		final String cs = cursor.getString(cursor.getColumnIndex(DichVuStore.service_code));
+		String name = cursor.getString(cursor.getColumnIndex(DichVuStore.service_name));
 		moinhieudichvu_item_icon.setImageResource(R.drawable.no_avatar);
 		// show image
-		final String service_icon = cursor.getString(cursor.getColumnIndex(DichVu.service_icon)) + "";
+		final String service_icon = cursor.getString(cursor.getColumnIndex(DichVuStore.service_icon)) + "";
 
-//		ImageLoaderUtils.getInstance(context).displayImage(service_icon, moinhieudichvu_item_icon, R.drawable.no_image);
+		// ImageLoaderUtils.getInstance(context).displayImage(service_icon,
+		// moinhieudichvu_item_icon, R.drawable.no_image);
 		Conts.showLogoDichvu(moinhieudichvu_item_icon, service_icon);
-		String service_code = cursor.getString(cursor.getColumnIndex(DichVu.service_code));
+		String service_code = cursor.getString(cursor.getColumnIndex(DichVuStore.service_code));
 		View main = convertView.findViewById(R.id.moinhieudichvu_item_main);
 
 		boolean needShow = Conts.xDontains(textSearch, false, new String[] { name });
@@ -78,7 +78,7 @@ public abstract class MoiNhieuDichVuAdapter extends CursorAdapter {
 
 		((MoiNhieuDichVuItemView) convertView).moinhieudichvu_item_tv_name.setText(name);
 
-		Conts.setTextViewCursor(Conts.getView(convertView, R.id.content), cursor, DichVu.service_content);
+		Conts.setTextViewCursor(Conts.getView(convertView, R.id.content), cursor, DichVuStore.service_content);
 
 		((MoiNhieuDichVuItemView) convertView).moinhieudichvu_item_checkbox.setOnCheckedChangeListener(null);
 		((MoiNhieuDichVuItemView) convertView).moinhieudichvu_item_checkbox.setChecked(listSelect.contains(_id));

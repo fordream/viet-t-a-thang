@@ -1,6 +1,6 @@
 package vnp.com.mimusic.adapter;
 
-import vnp.com.db.DichVu;
+import vnp.com.db.datastore.DichVuStore;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.base.diablog.DangKyDialog;
 import vnp.com.mimusic.util.Conts;
@@ -33,20 +33,19 @@ public abstract class HomeAdapter extends CursorAdapter {
 		final ContentValues values = new ContentValues();
 		values.put("name",
 
-		String.format(context.getString(R.string.title_dangky), cursor.getString(cursor.getColumnIndex(DichVu.service_name)))
+		String.format(context.getString(R.string.title_dangky), cursor.getString(cursor.getColumnIndex(DichVuStore.service_name)))
 
 		);
-		values.put(DichVu.service_code, cursor.getString(cursor.getColumnIndex(DichVu.service_code)));
-		
-		String content = String.format(context.getString(R.string.xacnhandangky_form), 
-				Conts.getStringCursor(cursor, DichVu.service_name),
-				Conts.getStringCursor(cursor, DichVu.service_price)
-				);
-//		values.put("content", cursor.getString(cursor.getColumnIndex(DichVu.service_content)));
+		values.put(DichVuStore.service_code, cursor.getString(cursor.getColumnIndex(DichVuStore.service_code)));
+
+		String content = String.format(context.getString(R.string.xacnhandangky_form), Conts.getStringCursor(cursor, DichVuStore.service_name),
+				Conts.getStringCursor(cursor, DichVuStore.service_price));
+		// values.put("content",
+		// cursor.getString(cursor.getColumnIndex(DichVuStore.service_content)));
 		values.put("content", content);
-		values.put(DichVu.ID, cursor.getString(cursor.getColumnIndex(DichVu.ID)));
+		values.put(DichVuStore.ID, cursor.getString(cursor.getColumnIndex(DichVuStore.ID)));
 		values.put("type", "dangky");
-		final boolean isDangKy = "0".equals(cursor.getString(cursor.getColumnIndex(DichVu.service_status)));
+		final boolean isDangKy = "0".equals(cursor.getString(cursor.getColumnIndex(DichVuStore.service_status)));
 
 		convertView.findViewById(R.id.home_item_right_control_1).setOnClickListener(new OnClickListener() {
 			@Override

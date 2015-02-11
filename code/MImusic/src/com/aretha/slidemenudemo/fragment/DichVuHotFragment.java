@@ -1,17 +1,10 @@
 package com.aretha.slidemenudemo.fragment;
 
-import com.vnp.core.scroll.VasDichvuScrollListView;
-
-import vnp.com.db.DichVu;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.adapter.DichVuAdapter;
-import vnp.com.mimusic.base.diablog.DangKyDialog;
 import vnp.com.mimusic.util.Conts;
-import vnp.com.mimusic.util.LogUtils;
 import vnp.com.mimusic.view.HeaderView;
-import android.content.ContentValues;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -23,6 +16,8 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ListView;
+
+import com.vnp.core.scroll.VasDichvuScrollListView;
 
 public class DichVuHotFragment extends BaseFragment implements OnItemClickListener, View.OnClickListener {
 	@Override
@@ -111,28 +106,28 @@ public class DichVuHotFragment extends BaseFragment implements OnItemClickListen
 	}
 
 	private void callSHowData() {
-
-		Cursor cursor = DichVu.getCursorFromUser(getActivity(), -1);
-
-		if (cursor != null) {
-			dichvu_list.setAdapter(adapter = new DichVuAdapter(getActivity(), cursor) {
-				@Override
-				public void moiDVChoNhieuNguoi(String id) {
-					(((RootMenuActivity) getActivity())).gotoMoiDvChoNhieuNguoiFragment(id);
-				}
-
-				@Override
-				public void dangKy(final ContentValues values) {
-					new DangKyDialog(getActivity(), values) {
-						public void updateUiDangKy() {
-							Conts.showDialogThongbao(getContext(), String.format(getContext().getString(R.string.bandangkythanhcongdichvu), values.getAsString(DichVu.service_name)));
-
-							callSHowData();
-						};
-					}.show();
-				}
-			});
-		}
+//
+//		Cursor cursor = DichVu.getCursorFromUser(getActivity(), -1);
+//
+//		if (cursor != null) {
+//			dichvu_list.setAdapter(adapter = new DichVuAdapter(getActivity(), cursor) {
+//				@Override
+//				public void moiDVChoNhieuNguoi(String id) {
+//					(((RootMenuActivity) getActivity())).gotoMoiDvChoNhieuNguoiFragment(id);
+//				}
+//
+//				@Override
+//				public void dangKy(final ContentValues values) {
+//					new DangKyDialog(getActivity(), values) {
+//						public void updateUiDangKy() {
+//							Conts.showDialogThongbao(getContext(), String.format(getContext().getString(R.string.bandangkythanhcongdichvu), values.getAsString(DichVu.service_name)));
+//
+//							callSHowData();
+//						};
+//					}.show();
+//				}
+//			});
+//		}
 	}
 
 	@Override

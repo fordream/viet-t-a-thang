@@ -3,11 +3,10 @@ package vnp.com.mimusic.base.diablog;
 import java.util.ArrayList;
 import java.util.List;
 
-import vnp.com.db.DichVu;
+import vnp.com.db.datastore.DichVuStore;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.base.BaseAdialog;
 import vnp.com.mimusic.util.Conts;
-import vnp.com.mimusic.util.ImageLoaderUtils;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -38,23 +37,26 @@ public abstract class DichVuDialog extends BaseAdialog implements android.view.V
 	final List<ContentValues> contentValues = new ArrayList<ContentValues>();
 
 	private void callSHowData() {
-		Cursor cursor = getContext().getContentResolver().query(DichVu.CONTENT_URI, null, null, null, null);
+		// Cursor cursor =
+		// getContext().getContentResolver().query(DichVuStore.CONTENT_URI,
+		// null, null, null, null);
+		Cursor cursor = null;
 		ContentValues values = new ContentValues();
-		values.put(DichVu.service_name, getContext().getResources().getString(R.string.tatca));
-		values.put(DichVu.service_icon, "");
-		values.put(DichVu.ID, "");
+		values.put(DichVuStore.service_name, getContext().getResources().getString(R.string.tatca));
+		values.put(DichVuStore.service_icon, "");
+		values.put(DichVuStore.ID, "");
 		contentValues.add(values);
 
 		int index = 0;
 
 		while (cursor != null && cursor.moveToNext()) {
 			ContentValues _values = new ContentValues();
-			_values.put(DichVu.service_name, cursor.getString(cursor.getColumnIndex(DichVu.service_name)));
-			_values.put(DichVu.service_icon, cursor.getString(cursor.getColumnIndex(DichVu.service_icon)));
-			_values.put(DichVu.ID, cursor.getString(cursor.getColumnIndex(DichVu.ID)));
+			_values.put(DichVuStore.service_name, cursor.getString(cursor.getColumnIndex(DichVuStore.service_name)));
+			_values.put(DichVuStore.service_icon, cursor.getString(cursor.getColumnIndex(DichVuStore.service_icon)));
+			_values.put(DichVuStore.ID, cursor.getString(cursor.getColumnIndex(DichVuStore.ID)));
 			contentValues.add(_values);
 
-			if (id.equals(cursor.getString(cursor.getColumnIndex(DichVu.ID)))) {
+			if (id.equals(cursor.getString(cursor.getColumnIndex(DichVuStore.ID)))) {
 				index = contentValues.size() - 1;
 			}
 		}
@@ -87,16 +89,17 @@ public abstract class DichVuDialog extends BaseAdialog implements android.view.V
 				ImageView imageView = (ImageView) convertView.findViewById(R.id.imageView1);
 				TextView date_title = (TextView) convertView.findViewById(R.id.date_title);
 				ContentValues values = contentValues.get(index);
-				date_title.setText(values.getAsString(DichVu.service_name));
+				date_title.setText(values.getAsString(DichVuStore.service_name));
 
-				String id = values.getAsString(DichVu.ID);
+				String id = values.getAsString(DichVuStore.ID);
 
 				if (Conts.isBlank(id)) {
 					imageView.setImageBitmap(null);
 				} else {
-//					ImageLoaderUtils.getInstance(parent.getContext()).displayImage(values.getAsString(DichVu.service_icon), imageView, R.drawable.no_image);
+					// ImageLoaderUtils.getInstance(parent.getContext()).displayImage(values.getAsString(DichVu.service_icon),
+					// imageView, R.drawable.no_image);
 				}
-				Conts.showLogoDichvu(imageView,values.getAsString(DichVu.service_icon));
+				Conts.showLogoDichvu(imageView, values.getAsString(DichVuStore.service_icon));
 				return convertView;
 			}
 

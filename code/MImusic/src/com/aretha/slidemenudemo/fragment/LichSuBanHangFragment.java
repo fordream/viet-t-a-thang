@@ -2,8 +2,8 @@ package com.aretha.slidemenudemo.fragment;
 
 import java.util.Calendar;
 
-import vnp.com.db.DichVu;
 import vnp.com.db.User;
+import vnp.com.db.datastore.DichVuStore;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.util.Conts;
@@ -159,8 +159,8 @@ public class LichSuBanHangFragment extends Fragment implements OnItemClickListen
 
 			Conts.getSDT(lsbh_sdt);
 		} else if (requestCode == 20001 && resultCode == Activity.RESULT_OK) {
-			idDv = data.getStringExtra(DichVu.ID);
-			lsbt_dichvu.setText(data.getStringExtra(DichVu.service_name));
+			idDv = data.getStringExtra(DichVuStore.ID);
+			lsbt_dichvu.setText(data.getStringExtra(DichVuStore.service_name));
 		}
 	}
 

@@ -1,9 +1,8 @@
 package vnp.com.mimusic.view;
 
-import vnp.com.db.DichVu;
+import vnp.com.db.datastore.DichVuStore;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.util.Conts;
-import vnp.com.mimusic.util.ImageLoaderUtils;
 import android.content.Context;
 import android.database.Cursor;
 import android.text.Html;
@@ -106,7 +105,7 @@ public class HomeItemView extends LinearLayout {
 		findViewById(R.id.home_item_main).setBackgroundColor(getResources().getColor(poistion % 2 == 0 ? android.R.color.white : R.color.f3f3f3));
 		findViewById(R.id.home_item_img_icon).setBackgroundColor(getResources().getColor(poistion % 2 == 1 ? android.R.color.white : R.color.f3f3f3));
 
-		final boolean isDangKy = "0".equals(cursor.getString(cursor.getColumnIndex(DichVu.service_status)));
+		final boolean isDangKy = "0".equals(cursor.getString(cursor.getColumnIndex(DichVuStore.service_status)));
 		int mColor = getResources().getColor(isDangKy ? R.color.c475055 : (poistion == 0 ? android.R.color.white : R.color.c475055));
 		TextView home_item_right_control_1_tv = (TextView) findViewById(R.id.home_item_right_control_1_tv);
 
@@ -138,15 +137,16 @@ public class HomeItemView extends LinearLayout {
 		TextView home_item_tv_content = (TextView) findViewById(R.id.home_item_tv_content);
 		TextView home_item_header_tv = (TextView) findViewById(R.id.home_item_header_tv);
 
-		home_item_tv_name.setText(cursor.getString(cursor.getColumnIndex(DichVu.service_name)));
-		home_item_tv_content.setText(Html.fromHtml(cursor.getString(cursor.getColumnIndex(DichVu.service_content)) + ""));
+		home_item_tv_name.setText(cursor.getString(cursor.getColumnIndex(DichVuStore.service_name)));
+		home_item_tv_content.setText(Html.fromHtml(cursor.getString(cursor.getColumnIndex(DichVuStore.service_content)) + ""));
 
 		home_item_img_icon.setImageResource(R.drawable.no_avatar);
 		// show image
-		String service_icon = cursor.getString(cursor.getColumnIndex(DichVu.service_icon)) + "";
+		String service_icon = cursor.getString(cursor.getColumnIndex(DichVuStore.service_icon)) + "";
 
-//		ImageLoaderUtils.getInstance(getContext()).displayImage(service_icon, home_item_img_icon, R.drawable.no_image);
-		
+		// ImageLoaderUtils.getInstance(getContext()).displayImage(service_icon,
+		// home_item_img_icon, R.drawable.no_image);
+
 		Conts.showLogoDichvu(home_item_img_icon, service_icon);
 	}
 }

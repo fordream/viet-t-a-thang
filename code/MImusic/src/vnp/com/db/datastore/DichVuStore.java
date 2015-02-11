@@ -7,6 +7,7 @@ import org.json.JSONObject;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.LogUtils;
 import android.content.Context;
+import android.os.Bundle;
 
 public class DichVuStore extends BaseStore {
 	private String user;
@@ -84,4 +85,22 @@ public class DichVuStore extends BaseStore {
 		} catch (Exception e) {
 		}
 	}
+
+	public void updateService_content(Context context, JSONObject response, Bundle bundle) {
+
+	}
+
+	// public static void updateService_content(Context context, JSONObject
+	// response, Bundle bundle) {
+	// if (bundle.containsKey(DichVu.service_code)) {
+	// String strService_code = bundle.getString(DichVu.service_code);
+	// ContentValues values = new ContentValues();
+	// values.put(service_content, Conts.getString(response, service_content));
+	//
+	// context.getContentResolver().update(CONTENT_URI, values,
+	// String.format("%s = '%s'", DichVu.service_code, strService_code), null);
+	// }
+	//
+	// }
+	//
 }

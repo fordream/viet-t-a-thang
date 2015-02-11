@@ -1,10 +1,7 @@
 package com.aretha.slidemenudemo.fragment;
 
-import vnp.com.db.DichVu;
 import vnp.com.mimusic.R;
-import vnp.com.mimusic.adapter.QuyDinhBanHangAdapter;
 import vnp.com.mimusic.view.HeaderView;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -39,10 +36,10 @@ public class QuyDinhBanHangFragment extends Fragment implements OnItemClickListe
 		});
 		ListView dichvu_list = (ListView) view.findViewById(R.id.quydinhbanhang_list);
 		dichvu_list.setOnItemClickListener(this);
-		Cursor cursor = getActivity().getContentResolver().query(DichVu.CONTENT_URI, null, null, null, null);
-		if (cursor != null) {
-			dichvu_list.setAdapter(new QuyDinhBanHangAdapter(getActivity(), cursor));
-		}
+//		Cursor cursor = getActivity().getContentResolver().query(DichVuStore.CONTENT_URI, null, null, null, null);
+//		if (cursor != null) {
+//			dichvu_list.setAdapter(new QuyDinhBanHangAdapter(getActivity(), cursor));
+//		}
 
 		return view;
 	}

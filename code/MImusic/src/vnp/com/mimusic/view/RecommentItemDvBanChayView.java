@@ -2,10 +2,9 @@ package vnp.com.mimusic.view;
 
 import org.json.JSONObject;
 
-import vnp.com.db.DichVu;
+import vnp.com.db.datastore.DichVuStore;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.util.Conts;
-import vnp.com.mimusic.util.ImageLoaderUtils;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -36,12 +35,12 @@ public class RecommentItemDvBanChayView extends LinearLayout {
 
 	public void setData(JSONObject jsonObject) {
 		ImageView icondichvuc = (ImageView) findViewById(R.id.icondichvuc);
-		String url = Conts.getString(jsonObject, DichVu.service_icon);
+		String url = Conts.getString(jsonObject, DichVuStore.service_icon);
 
 //		ImageLoaderUtils.getInstance(getContext()).displayImage(url, icondichvuc, R.drawable.no_image);
 		
 		
 		Conts.showLogoDichvu(icondichvuc, url);
-		((TextView) findViewById(R.id.dangky_dialog_content)).setText(Conts.getString(jsonObject, DichVu.service_name));
+		((TextView) findViewById(R.id.dangky_dialog_content)).setText(Conts.getString(jsonObject, DichVuStore.service_name));
 	}
 }

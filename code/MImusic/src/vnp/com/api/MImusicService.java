@@ -11,7 +11,6 @@ import org.json.JSONObject;
 
 import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.BangXepHang;
-import vnp.com.db.DichVu;
 import vnp.com.db.MauMoi;
 import vnp.com.db.Recomment;
 import vnp.com.db.User;
@@ -20,8 +19,8 @@ import vnp.com.db.datastore.DichVuStore;
 import vnp.com.db.datastore.TintucStore;
 import vnp.com.db.datastore.huongDanBanHangStore;
 import vnp.com.mimusic.util.Conts;
-import vnp.com.mimusic.util.LogUtils;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
+import vnp.com.mimusic.util.LogUtils;
 import android.app.Service;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -467,7 +466,7 @@ public class MImusicService extends Service {
 						} else if (API.API_R026.equals(api)) {
 							saveRecomend(response);
 						} else if (API.API_R022.equals(api)) {
-							updateMauMoi(response, bundle.getString(DichVu.service_code));
+							updateMauMoi(response, bundle.getString(DichVuStore.service_code));
 						} else if (API.API_R027.equals(api)) {
 							new TintucStore(MImusicService.this).save(response);
 						} else if (API.API_R028.equals(api)) {
@@ -478,7 +477,10 @@ public class MImusicService extends Service {
 								new huongDanBanHangStore(MImusicService.this).saveHdbh(strGuide_text);
 							}
 						} else if (API.API_R005.equals(api)) {
-							DichVu.updateService_content(MImusicService.this, response, bundle);
+							// DichVu.updateService_content(MImusicService.this,
+							// response, bundle);
+							dichVuStore.updateService_content(MImusicService.this, response, bundle);
+
 						} else if (API.API_R024.equals(api)) {
 							BangXepHang.update(MImusicService.this, response, bundle, API.API_R024);
 						} else if (API.API_R025.equals(api)) {
@@ -619,11 +621,11 @@ public class MImusicService extends Service {
 						if (Conts.isBlank(service_codes)) {
 							service_codes = service_code;
 							if (count <= 3)
-								service_codes_name = String.format(format, services.getJSONObject(in).getString(DichVu.service_name));
+								service_codes_name = String.format(format, services.getJSONObject(in).getString(DichVuStore.service_name));
 						} else {
 							service_codes = service_codes + "," + service_code;
 							if (count <= 3)
-								service_codes_name = service_codes_name + " | " + String.format(format, services.getJSONObject(in).getString(DichVu.service_name));
+								service_codes_name = service_codes_name + " | " + String.format(format, services.getJSONObject(in).getString(DichVuStore.service_name));
 						}
 
 						if ("%s".equals(format)) {
@@ -648,14 +650,14 @@ public class MImusicService extends Service {
 	}
 
 	private void updateDichVu(JSONObject response) {
-		DichVu.updateDichVu(this, response);
+		// DichVu.updateDichVu(this, response);
 		dichVuStore.updateDichvu(response);
 	}
 
 	protected void updateDichVuDangKy(Bundle bundle) {
-		
-		DichVu.updateDichVuDangKy(this, bundle);
-		
+
+		// DichVu.updateDichVuDangKy(this, bundle);
+
 		dichVuStore.register(bundle.getString(DichVuStore.service_code), "0");
 	}
 

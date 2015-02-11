@@ -4,15 +4,14 @@ import org.json.JSONObject;
 
 import vnp.com.api.API;
 import vnp.com.api.RestClient.RequestMethod;
-import vnp.com.db.DichVu;
 import vnp.com.db.User;
+import vnp.com.db.datastore.DichVuStore;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.adapter.MoiDvChoNhieuNguoiAdaper;
 import vnp.com.mimusic.base.diablog.VasProgessDialog;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
-import vnp.com.mimusic.util.ImageLoaderUtils;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.database.Cursor;
@@ -138,24 +137,26 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 		 * show data
 		 */
 
-		final String id = getArguments().getString(DichVu.ID);
-		String selection = DichVu.ID + "='" + id + "'";
+		final String id = getArguments().getString(DichVuStore.ID);
+		String selection = DichVuStore.ID + "='" + id + "'";
 
 		if (Conts.isBlank(id)) {
-			String mService_code = getArguments().getString(DichVu.service_code);
-			selection = DichVu.service_code + "='" + mService_code + "'";
+			String mService_code = getArguments().getString(DichVuStore.service_code);
+			selection = DichVuStore.service_code + "='" + mService_code + "'";
 		}
 
-		final Cursor mcursor = getActivity().getContentResolver().query(DichVu.CONTENT_URI, null, selection, null, null);
-
+		// final Cursor mcursor =
+		// getActivity().getContentResolver().query(DichVuStore.CONTENT_URI,
+		// null, selection, null, null);
+		final Cursor mcursor = null;
 		if (mcursor != null && mcursor.getCount() >= 1) {
 			mcursor.moveToNext();
-			service_code = mcursor.getString(mcursor.getColumnIndex(DichVu.service_code));
-			Conts.setTextViewCursor(view.findViewById(R.id.name), mcursor, DichVu.service_name);
-			Conts.setTextViewCursor(view.findViewById(R.id.gia), mcursor, DichVu.service_price);
+			service_code = mcursor.getString(mcursor.getColumnIndex(DichVuStore.service_code));
+			Conts.setTextViewCursor(view.findViewById(R.id.name), mcursor, DichVuStore.service_name);
+			Conts.setTextViewCursor(view.findViewById(R.id.gia), mcursor, DichVuStore.service_price);
 			ImageView home_item_img_icon = (ImageView) view.findViewById(R.id.icon);
 
-			String service_icon = Conts.getStringCursor(mcursor, DichVu.service_icon);
+			String service_icon = Conts.getStringCursor(mcursor, DichVuStore.service_icon);
 			// ImageLoaderUtils.getInstance(getActivity()).displayImage(service_icon,
 			// home_item_img_icon, R.drawable.no_image);
 
@@ -341,7 +342,7 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 			Conts.hiddenKeyBoard(getActivity());
 			boardView.setVisibility(View.GONE);
 			mkeyboard(false);
-			gotoLoiMoi(getArguments().getString(DichVu.ID));
+			gotoLoiMoi(getArguments().getString(DichVuStore.ID));
 		} else if (v.getId() == R.id.moidichvuchonhieunguoi_contact) {
 
 			if (boardView.getVisibility() == View.VISIBLE) {
@@ -460,10 +461,10 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 		}
 
 		public void setData(Cursor mcursor) {
-			Conts.setTextViewCursor(findViewById(R.id.name), mcursor, DichVu.service_name);
-			Conts.setTextViewCursor(findViewById(R.id.gia), mcursor, DichVu.service_price);
+			Conts.setTextViewCursor(findViewById(R.id.name), mcursor, DichVuStore.service_name);
+			Conts.setTextViewCursor(findViewById(R.id.gia), mcursor, DichVuStore.service_price);
 			ImageView home_item_img_icon = (ImageView) findViewById(R.id.icon);
-			String service_icon = Conts.getStringCursor(mcursor, DichVu.service_icon);
+			String service_icon = Conts.getStringCursor(mcursor, DichVuStore.service_icon);
 			// ImageLoaderUtils.getInstance(getActivity()).displayImage(service_icon,
 			// home_item_img_icon, R.drawable.no_image);
 			Conts.showLogoDichvu(home_item_img_icon, service_icon);

@@ -2,6 +2,7 @@ package vnp.com.db;
 
 import java.util.Map;
 
+import vnp.com.db.datastore.DichVuStore;
 import vnp.com.mimusic.util.Conts;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -126,10 +127,11 @@ public class Recomment {
 	}
 
 	public static String getListReCommentDichvu(Context context) {
-//		String selection = String.format("%s = '%s') GROUP BY ( %s", Recomment.user, Conts.getUser(context), Recomment.service_code);
-//		if (context == null) {
-//			return "";
-//		}
+		// String selection = String.format("%s = '%s') GROUP BY ( %s",
+		// Recomment.user, Conts.getUser(context), Recomment.service_code);
+		// if (context == null) {
+		// return "";
+		// }
 		// Cursor cursor =
 		// context.getContentResolver().query(Recomment.CONTENT_URI, null,
 		// selection, null, String.format("%s", Recomment.service_code));
@@ -184,19 +186,19 @@ public class Recomment {
 		return getPhoneList(context);
 	}
 
-	public static Cursor getCursorFromDichvu(Context context, int maxColum) {
-		if(context == null){
-			return null;
-		}
-		String selection = String.format("%s in (%s)", DichVu.service_code, getListReCommentDichvu(context));
-		String limit = null;
-		if (maxColum > 0) {
-			limit = String.format("%s limit %s ", DichVu.service_name, maxColum);
-		}
-
-		return context.getContentResolver().query(DichVu.CONTENT_URI, null, selection, null, limit);
-
-	}
+//	public static Cursor getCursorFromDichvu(Context context, int maxColum) {
+//		if (context == null) {
+//			return null;
+//		}
+//		String selection = String.format("%s in (%s)", DichVuStore.service_code, getListReCommentDichvu(context));
+//		String limit = null;
+//		if (maxColum > 0) {
+//			limit = String.format("%s limit %s ", DichVuStore.service_name, maxColum);
+//		}
+//
+//		return context.getContentResolver().query(DichVuStore.CONTENT_URI, null, selection, null, limit);
+//
+//	}
 
 	public static Cursor getCursorFromUser(Context context, int maxColum) {
 		String selection = String.format("%s in (%s)", User.USER, getListPhone(context));

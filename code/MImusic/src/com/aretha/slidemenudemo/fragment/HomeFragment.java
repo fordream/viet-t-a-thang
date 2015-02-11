@@ -4,11 +4,9 @@ import org.json.JSONObject;
 
 import vnp.com.api.API;
 import vnp.com.api.RestClient.RequestMethod;
-import vnp.com.db.DichVu;
-import vnp.com.db.Recomment;
+import vnp.com.db.datastore.DichVuStore;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
-import vnp.com.mimusic.adapter.NewHomeAdapter;
 import vnp.com.mimusic.adapter.NewHomeAdapter.UpdateSuccess;
 import vnp.com.mimusic.adapter.data.NewHomeItem;
 import vnp.com.mimusic.base.diablog.DangKyDialog;
@@ -19,25 +17,16 @@ import vnp.com.mimusic.view.HeaderView;
 import vnp.com.mimusic.view.LoadingView;
 import vnp.com.mimusic.view.MusicListView;
 import vnp.com.mimusic.view.NewHomeBlogView;
-import vnp.com.mimusic.view.ReCommentDichVuItemView;
 import android.content.ContentValues;
-import android.content.Context;
-import android.database.Cursor;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.LinearLayout;
 
-import com.meetme.android.horizontallistview.HorizontalListView;
 import com.vnp.core.scroll.VasHomeScrollListView;
 
 public class HomeFragment extends BaseFragment implements OnItemClickListener, View.OnClickListener {
@@ -154,7 +143,7 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 				super.dangky(values);
 				new DangKyDialog(getActivity(), values) {
 					public void updateUiDangKy() {
-						Conts.showDialogThongbao(getContext(), String.format(getContext().getString(R.string.bandangkythanhcongdichvu), values.getAsString(DichVu.service_name)));
+						Conts.showDialogThongbao(getContext(), String.format(getContext().getString(R.string.bandangkythanhcongdichvu), values.getAsString(DichVuStore.service_name)));
 						updateUI(updateSuccess);
 					};
 				}.show();
