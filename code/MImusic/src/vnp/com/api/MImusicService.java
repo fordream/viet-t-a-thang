@@ -462,7 +462,6 @@ public class MImusicService extends Service {
 							}
 						} else if (API.API_R005.equals(api)) {
 							dichVuStore.updateService_content(MImusicService.this, response, bundle);
-
 						} else if (API.API_R024.equals(api)) {
 							BangXepHang.update(MImusicService.this, response, bundle, API.API_R024);
 						} else if (API.API_R025.equals(api)) {
