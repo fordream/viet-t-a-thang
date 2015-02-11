@@ -69,7 +69,7 @@ public class DichVuStore extends BaseStore {
 	public void updateDichvu(JSONObject response) {
 		try {
 			JSONArray jsonArray = response.getJSONArray("data");
-
+			save(user + "getDichvuALL", jsonArray.toString());
 			for (int i = 0; i < jsonArray.length(); i++) {
 				JSONObject jsonObject = jsonArray.getJSONObject(i);
 				String _service_code = Conts.getString(jsonObject, DichVuStore.service_code);
