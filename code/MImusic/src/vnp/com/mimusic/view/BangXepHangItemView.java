@@ -5,7 +5,6 @@ import org.json.JSONObject;
 import vnp.com.db.BangXepHang;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.util.Conts;
-import vnp.com.mimusic.util.ImageLoaderUtils;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Color;

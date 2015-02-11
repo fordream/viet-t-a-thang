@@ -15,7 +15,6 @@ import vnp.com.mimusic.view.ChiTietDichVuNoFeatureView;
 import vnp.com.mimusic.view.HeaderView;
 import vnp.com.mimusic.view.LoadingView;
 import android.content.ContentValues;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;

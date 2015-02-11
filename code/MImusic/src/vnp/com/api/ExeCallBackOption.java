@@ -1,7 +1,6 @@
 package vnp.com.api;
 
 import vnp.com.mimusic.base.diablog.VasProgessDialog;
-import vnp.com.mimusic.util.BynalProgressDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 

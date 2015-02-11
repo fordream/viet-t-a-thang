@@ -15,8 +15,6 @@ import java.util.WeakHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import com.vnp.core.common.https.HttpsRestClient;
-
 import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.util.Conts;
@@ -36,6 +34,8 @@ import android.net.Uri;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.widget.ImageView;
+
+import com.vnp.core.common.https.HttpsRestClient;
 
 public class ImageLoader2 {
 

@@ -1,7 +1,5 @@
 package com.aretha.slidemenudemo.fragment;
 
-import com.vnp.core.scroll.VasDichvuScrollListView;
-
 import vnp.com.db.Recomment;
 import vnp.com.db.User;
 import vnp.com.mimusic.R;
@@ -22,6 +20,8 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ListView;
+
+import com.vnp.core.scroll.VasDichvuScrollListView;
 
 public class MoiThanhVienFragment extends BaseFragment implements OnItemClickListener, View.OnClickListener {
 	@Override

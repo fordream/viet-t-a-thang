@@ -12,7 +12,6 @@ import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.view.HeaderView;
 import vnp.com.mimusic.view.LoadingView;
 import android.content.ContentValues;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;

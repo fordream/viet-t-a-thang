@@ -1,6 +1,5 @@
 package com.vnp.core.scroll;
 
-import vnp.com.mimusic.util.Conts;
 import android.app.Activity;
 import android.view.View;
 import android.view.View.OnTouchListener;

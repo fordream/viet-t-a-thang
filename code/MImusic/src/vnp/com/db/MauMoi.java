@@ -7,7 +7,6 @@ import org.json.JSONObject;
 
 import vnp.com.db.datastore.AccountStore;
 import vnp.com.mimusic.util.Conts;
-import android.app.Activity;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;

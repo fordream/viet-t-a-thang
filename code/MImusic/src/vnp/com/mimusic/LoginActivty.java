@@ -2,7 +2,6 @@ package vnp.com.mimusic;
 
 import org.json.JSONObject;
 
-import vnp.com.db.User;
 import vnp.com.db.datastore.AccountStore;
 import vnp.com.mimusic.main.NewMusicSlideMenuActivity;
 import vnp.com.mimusic.util.Conts;

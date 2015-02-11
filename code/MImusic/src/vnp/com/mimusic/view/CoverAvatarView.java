@@ -1,11 +1,9 @@
 package vnp.com.mimusic.view;
 
-import vnp.com.db.User;
 import vnp.com.db.datastore.AccountStore;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.util.Conts;
 import android.content.Context;
-import android.database.Cursor;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.ImageView;

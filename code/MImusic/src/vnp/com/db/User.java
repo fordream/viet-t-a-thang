@@ -1,12 +1,7 @@
 package vnp.com.db;
 
 import java.util.Map;
-import java.util.Set;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import vnp.com.mimusic.util.Conts;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
@@ -15,7 +10,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
-import android.os.Bundle;
 import android.text.TextUtils;
 
 public class User {

@@ -1,6 +1,7 @@
 package lazyload;
 
 import java.io.File;
+
 import android.content.Context;
 
 public class FileCache {

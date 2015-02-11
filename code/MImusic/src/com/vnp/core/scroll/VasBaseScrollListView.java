@@ -2,7 +2,6 @@ package com.vnp.core.scroll;
 
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.util.Conts;
-import vnp.com.mimusic.util.LogUtils;
 import vnp.com.mimusic.view.HeaderView;
 import android.app.Activity;
 import android.view.MotionEvent;

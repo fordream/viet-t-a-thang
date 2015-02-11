@@ -6,9 +6,7 @@ import org.json.JSONObject;
 
 import vnp.com.db.User;
 import vnp.com.mimusic.util.Conts;
-import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
 import android.os.Bundle;
 
 public class AccountStore extends BaseStore {

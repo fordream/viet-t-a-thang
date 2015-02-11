@@ -2,8 +2,6 @@ package vnp.com.db;
 
 import java.util.Map;
 
-import vnp.com.db.datastore.DichVuStore;
-import vnp.com.mimusic.util.Conts;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;

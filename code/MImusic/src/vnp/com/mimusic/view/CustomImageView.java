@@ -1,6 +1,5 @@
 package vnp.com.mimusic.view;
 
-import vnp.com.mimusic.util.Conts;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.AttributeSet;

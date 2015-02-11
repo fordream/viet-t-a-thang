@@ -3,15 +3,12 @@ package vnp.com.mimusic.adapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import vnp.com.db.Recomment;
-import vnp.com.db.User;
 import vnp.com.db.datastore.DichVuStore;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.adapter.data.NewHomeItem;
 import vnp.com.mimusic.util.Conts;
 import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
 import android.os.AsyncTask;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;

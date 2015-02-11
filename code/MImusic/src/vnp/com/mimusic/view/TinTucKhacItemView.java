@@ -8,7 +8,6 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 public class TinTucKhacItemView extends LinearLayout {
 
