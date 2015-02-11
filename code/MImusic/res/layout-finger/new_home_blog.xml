@@ -8,7 +8,6 @@
         android:id="@+id/home_header_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/home_bg"
         android:orientation="vertical"
         android:scrollbarThumbHorizontal="@drawable/tranfer"
         android:scrollbarThumbVertical="@drawable/tranfer"
@@ -18,6 +17,7 @@
             android:id="@+id/dichvubanchay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/home_bg"
             android:padding="@dimen/dimen_12dp" >
 
             <vnp.com.mimusic.view.textview.TextViewBold
@@ -44,7 +44,8 @@
         <com.meetme.android.horizontallistview.HorizontalListView
             android:id="@+id/hlvSimpleList"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_105dp"
+            android:layout_height="@dimen/dimen_120dp"
+            android:background="@drawable/home_bg"
             android:visibility="gone" />
 
         <LinearLayout
@@ -54,13 +55,18 @@
             android:orientation="vertical" >
         </LinearLayout>
 
-        <View
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="2px"
-            android:layout_marginLeft="@dimen/dimen_12dp"
-            android:layout_marginRight="@dimen/dimen_12dp"
-            android:background="@drawable/new_home_line"
-            android:visibility="gone" />
+             android:layout_height="@dimen/dimen_10dp"
+            android:background="@drawable/home_bg"
+            android:gravity="center|bottom" >
+
+            <View
+                android:layout_width="@dimen/dimen_296dp"
+                android:layout_height="2px"
+                android:background="#e4e4e4"
+                android:visibility="visible" />
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

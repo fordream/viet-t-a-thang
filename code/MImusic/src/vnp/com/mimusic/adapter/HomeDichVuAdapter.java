@@ -35,7 +35,7 @@ public abstract class HomeDichVuAdapter extends CursorAdapter {
 		 * set data
 		 */
 		((DichVuItemView) convertView).setData(cursor);
-		((DichVuItemView) convertView).setDataHome(cursor);
+//		((DichVuItemView) convertView).setDataHome(cursor);
 		final boolean isDangKy = "0".equals(cursor.getString(cursor.getColumnIndex(DichVuStore.service_status)));
 
 		/**

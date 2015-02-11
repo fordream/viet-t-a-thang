@@ -57,14 +57,14 @@ public class DichVuItemView extends LinearLayout {
 		findViewById(R.id.home_item_header).setOnClickListener(null);
 	}
 
-	public void setDataHome(Cursor cursor) {
-		int poistion = cursor.getPosition() + 1;
-		/**
-		 * config backgroud for item
-		 */
-		findViewById(R.id.home_item_main).setBackgroundResource(poistion % 2 == 0 ? R.drawable.tranfer : R.drawable.new_dichvu_item_2_bg);
-		findViewById(R.id.home_item_img_icon).setBackgroundResource(poistion % 2 == 0 ? R.drawable.new_dichvu_icon_bg_0 : R.drawable.new_dichvu_icon_bg_1);
-	}
+//	public void setDataHome(Cursor cursor) {
+//		int poistion = cursor.getPosition() + 1;
+//		/**
+//		 * config backgroud for item
+//		 */
+//		findViewById(R.id.home_item_main).setBackgroundResource(poistion % 2 == 0 ? R.drawable.tranfer : R.drawable.new_dichvu_item_2_bg);
+//		findViewById(R.id.home_item_img_icon).setBackgroundResource(poistion % 2 == 0 ? R.drawable.new_dichvu_icon_bg_0 : R.drawable.new_dichvu_icon_bg_1);
+//	}
 
 	public void setData(JSONObject object, int poistion) {
 		DichVuStore dichVuStore = new DichVuStore(getContext());
@@ -94,7 +94,6 @@ public class DichVuItemView extends LinearLayout {
 
 		Conts.showLogoDichvu(home_item_img_icon, service_icon);
 		findViewById(R.id.home_item_right_control).setBackgroundResource(poistion % 2 == 0 ? R.drawable.home_dv_bg_x_0 : R.drawable.home_dv_bg_x_1);
-
 	}
 
 }

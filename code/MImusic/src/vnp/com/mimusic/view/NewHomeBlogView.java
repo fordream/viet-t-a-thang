@@ -109,11 +109,11 @@ public abstract class NewHomeBlogView extends LinearLayout implements OnClickLis
 				values.put("type", "dangky");
 
 				DichVuItemView child = new DichVuItemView(getContext());
-				child.setData(object, index);
+				child.setData(object, i);
+
 				main.addView(child);
-				final String id = Conts.getString(object, DichVuStore.ID);
 				final String service_code = Conts.getString(object, DichVuStore.service_code);
-				
+
 				final int position = index;
 				child.setOnClickListener(new OnClickListener() {
 					@Override

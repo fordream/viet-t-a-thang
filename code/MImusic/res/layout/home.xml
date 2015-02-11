@@ -2,13 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/home_bg" >
+    android:background="@drawable/new_dichvu_bg" >
 
     <vnp.com.mimusic.view.MusicListView
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/home_bg"
+        android:divider="@drawable/tranfer"
+        android:dividerHeight="@dimen/dimen_0dp"
         android:listSelector="@drawable/tranfer"
         android:orientation="vertical"
         android:scrollbarThumbHorizontal="@drawable/tranfer"
@@ -25,7 +26,8 @@
     <vnp.com.mimusic.view.LoadingView
         android:id="@+id/loadingView1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:visibility="gone" >
     </vnp.com.mimusic.view.LoadingView>
 
 </RelativeLayout>
