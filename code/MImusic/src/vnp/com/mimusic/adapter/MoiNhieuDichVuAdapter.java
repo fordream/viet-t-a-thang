@@ -5,6 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import vnp.com.db.datastore.DichVuStore;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.util.Conts;
@@ -13,11 +17,35 @@ import android.content.Context;
 import android.database.Cursor;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
-import android.widget.CursorAdapter;
 import android.widget.ImageView;
 
-public abstract class MoiNhieuDichVuAdapter extends CursorAdapter {
+public abstract class MoiNhieuDichVuAdapter extends ArrayAdapter<JSONObject> {
+	JSONArray array;
+	private DichVuStore dichVuStore;
+
+	public MoiNhieuDichVuAdapter(Context context, JSONArray array) {
+		super(context, 0);
+		this.array = array;
+		dichVuStore = new DichVuStore(getContext());
+	}
+
+	@Override
+	public int getCount() {
+		return array.length();
+	}
+
+	@Override
+	public JSONObject getItem(int position) {
+		try {
+			return array.getJSONObject(position);
+		} catch (JSONException e) {
+			return new JSONObject();
+		}
+
+	}
+
 	private List<String> listSelect = new ArrayList<String>();
 
 	public List<String> getListSelect() {
@@ -43,33 +71,24 @@ public abstract class MoiNhieuDichVuAdapter extends CursorAdapter {
 		notifyDataSetChanged();
 	}
 
-	private String lISTIDDVSUDUNG;
-
-	public MoiNhieuDichVuAdapter(Context context, Cursor c, String lISTIDDVSUDUNG) {
-		super(context, c, true);
-		this.lISTIDDVSUDUNG = lISTIDDVSUDUNG;
-		if (Conts.isBlank(lISTIDDVSUDUNG)) {
-			lISTIDDVSUDUNG = "";
-		}
-	}
-
 	@Override
-	public void bindView(View convertView, Context context, Cursor cursor) {
+	public View getView(int position, View convertView, ViewGroup parent) {
 		if (convertView == null) {
-			convertView = new MoiNhieuDichVuItemView(context);
+			convertView = new MoiNhieuDichVuItemView(parent.getContext());
 		}
+		JSONObject cursor = getItem(position);
 		ImageView moinhieudichvu_item_icon = (ImageView) convertView.findViewById(R.id.moinhieudichvu_item_icon);
-		final String _id = cursor.getString(cursor.getColumnIndex(DichVuStore.ID));
-		final String cs = cursor.getString(cursor.getColumnIndex(DichVuStore.service_code));
-		String name = cursor.getString(cursor.getColumnIndex(DichVuStore.service_name));
+		final String id = Conts.getString(cursor, DichVuStore.ID);
+		final String cs = Conts.getString(cursor, DichVuStore.service_code);
+		String name = Conts.getString(cursor, DichVuStore.service_name);
 		moinhieudichvu_item_icon.setImageResource(R.drawable.no_avatar);
 		// show image
-		final String service_icon = cursor.getString(cursor.getColumnIndex(DichVuStore.service_icon)) + "";
+		final String service_icon = Conts.getString(cursor, DichVuStore.service_icon) + "";
 
 		// ImageLoaderUtils.getInstance(context).displayImage(service_icon,
 		// moinhieudichvu_item_icon, R.drawable.no_image);
 		Conts.showLogoDichvu(moinhieudichvu_item_icon, service_icon);
-		String service_code = cursor.getString(cursor.getColumnIndex(DichVuStore.service_code));
+		String service_code = Conts.getString(cursor, DichVuStore.service_code);
 		View main = convertView.findViewById(R.id.moinhieudichvu_item_main);
 
 		boolean needShow = Conts.xDontains(textSearch, false, new String[] { name });
@@ -78,14 +97,14 @@ public abstract class MoiNhieuDichVuAdapter extends CursorAdapter {
 
 		((MoiNhieuDichVuItemView) convertView).moinhieudichvu_item_tv_name.setText(name);
 
-		Conts.setTextViewCursor(Conts.getView(convertView, R.id.content), cursor, DichVuStore.service_content);
+		Conts.setTextView(Conts.getView(convertView, R.id.content), cursor, DichVuStore.service_content);
 
 		((MoiNhieuDichVuItemView) convertView).moinhieudichvu_item_checkbox.setOnCheckedChangeListener(null);
-		((MoiNhieuDichVuItemView) convertView).moinhieudichvu_item_checkbox.setChecked(listSelect.contains(_id));
+		((MoiNhieuDichVuItemView) convertView).moinhieudichvu_item_checkbox.setChecked(listSelect.contains(id));
 		((MoiNhieuDichVuItemView) convertView).moinhieudichvu_item_checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				add(_id, service_icon, cs);
+				add(id, service_icon, cs);
 			}
 		});
 
@@ -93,18 +112,13 @@ public abstract class MoiNhieuDichVuAdapter extends CursorAdapter {
 
 			@Override
 			public void onClick(View v) {
-				add(_id, service_icon, cs);
+				add(id, service_icon, cs);
 			}
 		});
 
 		((MoiNhieuDichVuItemView) convertView).findViewById(R.id.moinhieudichvu_item_main).setBackgroundColor(
-				context.getResources().getColor(cursor.getPosition() % 2 == 0 ? R.color.f6f6f6 : R.color.ffffff));
-
-	}
-
-	@Override
-	public View newView(Context context, Cursor cursor, ViewGroup parent) {
-		return new MoiNhieuDichVuItemView(context);
+				parent.getContext().getResources().getColor(position % 2 == 0 ? R.color.f6f6f6 : R.color.ffffff));
+		return convertView;
 	}
 
 	private String textSearch = "";

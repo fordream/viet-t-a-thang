@@ -24,7 +24,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
-public class MoiNhieuDichVuFragment extends Fragment implements android.view.View.OnClickListener, OnTouchListener {
+public class MoiNhieuDichVuFragment extends BaseFragment implements android.view.View.OnClickListener, OnTouchListener {
 
 	private View moi;
 	private LinearLayout moinhieudichvu_dialog_list_hor;
@@ -117,7 +117,7 @@ public class MoiNhieuDichVuFragment extends Fragment implements android.view.Vie
 				adapter.notifyDataSetChanged();
 			}
 		});
-		maumoi_list.setAdapter(adapter = new MoiNhieuDichVuAdapter(getActivity(), cursorDV, LISTIDDVSUDUNG) {
+		maumoi_list.setAdapter(adapter = new MoiNhieuDichVuAdapter(getActivity(), dichVuStore.getDichvu()) {
 
 			@Override
 			public void addOrRemove(final String _id, boolean isAdd, String icon) {
