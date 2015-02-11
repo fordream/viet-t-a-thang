@@ -75,7 +75,6 @@ public class BangXephangListView extends LinearLayout {
 					progressDialog.dismiss();
 				message.setText("");
 				if (adaper.getCount() == 0) {
-					// message.setText(noDataText);
 				} else {
 					message.setText("");
 				}
@@ -93,12 +92,12 @@ public class BangXephangListView extends LinearLayout {
 			public void onError(String xmessage) {
 				if (progressDialog != null)
 					progressDialog.dismiss();
-
-				if (list.getCount() <= 0) {
-					message.setText(noDataText);
-				} else {
-					message.setText("");
-				}
+				adaper.getFilter().filter("" + new Random().nextDouble());
+//				if (list.getCount() <= 0) {
+//					message.setText(noDataText);
+//				} else {
+//					message.setText("");
+//				}
 			}
 
 			@Override

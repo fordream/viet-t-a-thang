@@ -39,7 +39,8 @@ public abstract class ResClientCallBack extends CallBack {
 
 		client.execute(getMedthod());
 		// if (API.API_R001.equals(getApiName())) {
-		LogUtils.e("timex", getApiName() + " " + (System.currentTimeMillis() - time));
+		LogUtils.e("timex", getApiName() + " " + (System.currentTimeMillis() - time) );
+		LogUtils.e("response" , getApiName() + " " + client.getResponse());
 		// }
 
 		return client;

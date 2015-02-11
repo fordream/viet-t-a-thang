@@ -44,19 +44,12 @@ public class BangXepHangCursorAdaper extends CursorAdapter {
 
 			@Override
 			protected void publishResults(final CharSequence constraint, final FilterResults results) {
-				((Activity) mContext).runOnUiThread(new Runnable() {
-
-					@Override
-					public void run() {
-						if (((Cursor) results.values).getCount() == 0) {
-							message.setText(noDataText);
-						} else {
-							message.setText("");
-						}
-						changeCursor((Cursor) results.values);
-
-					}
-				});
+				if (((Cursor) results.values).getCount() == 0) {
+					message.setText(noDataText);
+				} else {
+					message.setText("");
+				}
+				changeCursor((Cursor) results.values);
 
 			}
 

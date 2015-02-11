@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import vnp.com.api.API;
 import vnp.com.db.datastore.AccountStore;
 import vnp.com.mimusic.util.Conts;
+import vnp.com.mimusic.util.LogUtils;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
@@ -141,6 +142,8 @@ public class BangXepHang {
 	}
 
 	public static void update(Context context, JSONObject response, Bundle bundle, String api) {
+
+		LogUtils.e("bangxephang", response.toString());
 		// API.API_R024,API.API_R025
 		String type = bundle.getString(BangXepHang.type);
 		String user = new AccountStore(context).getUser();
