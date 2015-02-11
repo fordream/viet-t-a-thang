@@ -14,12 +14,14 @@ import android.content.Context;
 import android.os.Bundle;
 
 public class DichVuStore extends BaseStore {
-	private String user;
+	// private String user;
+	private AccountStore accountStore;;
 
 	@Override
 	public String getNameSave() {
 		return "DichVuStore";
 	}
+
 	public static final String ID = "id";
 	public static final String service_name = "service_name";
 	public static final String service_name_eng = "service_name_eng";
@@ -36,30 +38,49 @@ public class DichVuStore extends BaseStore {
 
 	public DichVuStore(Context context) {
 		super(context);
-		user = new AccountStore(getContext()).getUser();
+
+		accountStore = new AccountStore(getContext());
+	}
+
+	private String getUser() {
+		return accountStore.getUser();
 	}
 
 	public void register(String service_code, String service_status) {
-		save(user + service_code + "cregister", service_status);
+		save(getUser() + service_code + "cregister", service_status);
 	}
 
 	public boolean isRegister(String service_code) {
-		String service_status = getString(user + service_code + "cregister");
+		String service_status = getString(getUser() + service_code + "cregister");
 		return "0".equals(service_status);
 	}
 
 	public JSONArray getDichvu() {
 		JSONArray array = new JSONArray();
-		try {
-			String list = getString(user + "serviceCodeList");
-			list = list.replace("[", "").replace("]", "").replace(" ", "");
-			StringTokenizer stringTokenizer = new StringTokenizer(list, ",");
-			while (stringTokenizer.hasMoreElements()) {
-				String serviceCode = stringTokenizer.nextElement().toString();
-				array.put(getDvByServiceCode(serviceCode));
+		JSONArray jsonArray = listRowId();
+
+		for (int i = 0; i < jsonArray.length(); i++) {
+
+			try {
+				array.put(getJsonById(jsonArray.getString(i)));
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		} catch (Exception e) {
 		}
+
+		// try {
+		// String list = getString(user + "serviceCodeList");
+		// LogUtils.e("listxxxxx", "a" + list);
+		// list = list.replace("[", "").replace("]", "").replace(" ", "");
+		// StringTokenizer stringTokenizer = new StringTokenizer(list, ",");
+		// while (stringTokenizer.hasMoreElements()) {
+		// String serviceCode = stringTokenizer.nextElement().toString();
+		// array.put(getDvByServiceCode(serviceCode));
+		// }
+		// LogUtils.e("listxxxxx", list);
+		// } catch (Exception e) {
+		// }
 
 		return array;
 	}
@@ -81,7 +102,9 @@ public class DichVuStore extends BaseStore {
 			// service_content));
 			// jsonObject.put(service_price, getString(user + serviceCode +
 			// service_price));
-			jsonObject = new JSONObject(getString(user + serviceCode));
+			// jsonObject = new JSONObject(getString(user + serviceCode));
+
+			jsonObject = getJsonById(getUser() + serviceCode);
 		} catch (Exception exception) {
 		}
 		return jsonObject;
@@ -96,24 +119,12 @@ public class DichVuStore extends BaseStore {
 				JSONObject jsonObject = jsonArray.getJSONObject(i);
 				String serviceCode = Conts.getString(jsonObject, DichVuStore.service_code);
 				serviceCodeList.add(serviceCode);
-				save(user + serviceCode, jsonObject.toString());
-
-				save(user + serviceCode + ID, Conts.getString(jsonObject, DichVuStore.ID));
-				save(user + serviceCode + service_name, Conts.getString(jsonObject, DichVuStore.service_name));
-				save(user + serviceCode + service_name_eng, Conts.getString(jsonObject, DichVuStore.service_name_eng));
-				save(user + serviceCode + service_icon, Conts.getString(jsonObject, DichVuStore.service_icon));
-				save(user + serviceCode + service_code, Conts.getString(jsonObject, DichVuStore.service_code));
-				save(user + serviceCode + service_content, Conts.getString(jsonObject, DichVuStore.service_content));
-				save(user + serviceCode + service_price, Conts.getString(jsonObject, DichVuStore.service_price));
-
+				saveJsonById(getUser() + serviceCode, jsonObject);
 				register(Conts.getString(jsonObject, DichVuStore.service_code), Conts.getString(jsonObject, DichVuStore.service_status));
 			}
 
-			save(user + "serviceCodeList", serviceCodeList.toString());
-
-			LogUtils.e("serviceCodeList.toString()", serviceCodeList.toString());
+			save(getUser() + "serviceCodeList", serviceCodeList.toString());
 		} catch (Exception e) {
-			LogUtils.e("serviceCodeList.toString()", e);
 		}
 	}
 

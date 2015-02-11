@@ -9,7 +9,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 public abstract class BaseStore {
-	private SharedPreferences preferences;
+
 	private Context context;
 
 	/**
@@ -26,7 +26,7 @@ public abstract class BaseStore {
 	 */
 	public BaseStore(Context context) {
 		this.context = context;
-		preferences = context.getSharedPreferences(getNameSave(), 0);
+
 	}
 
 	public abstract String getNameSave();
@@ -37,7 +37,11 @@ public abstract class BaseStore {
 	 * @param content
 	 */
 	public void save(String key, String content) {
-		preferences.edit().putString(key, content).commit();
+		preferences().edit().putString(key, content).commit();
+	}
+
+	private SharedPreferences preferences() {
+		return context.getSharedPreferences(getNameSave(), 0);
 	}
 
 	/**
@@ -46,7 +50,7 @@ public abstract class BaseStore {
 	 * @return
 	 */
 	public String getString(String key) {
-		return preferences.getString(key, "");
+		return preferences().getString(key, "");
 	}
 
 	public String key() {
