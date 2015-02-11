@@ -305,6 +305,7 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 					if (message.contains("Phone")) {
 						message = getActivity().getString(R.string.sdtkhongphaicuabiettel);
 					}
+					message = getActivity().getString(R.string.error_sdt_viettel);
 					Conts.showDialogThongbao(getActivity(), message);
 				}
 

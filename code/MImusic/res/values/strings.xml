@@ -147,7 +147,7 @@
     <string name="validateaddnguoi">Bạn cần mời ít nhất 1 người bạn.</string>
     <string name="success_moi">Bạn đã mới thành công, bạn chọn \"Đồng ý\" để đóng màn hình mời.</string>
     <string name="validatesodichvu">Bạ cần chọn ít nhất 1 dịch vụ.</string>
-    <string name="default_error">{\"errorCode\":10000,\"message\":\"Không thể kết nối đến server, bạn cần kiểm tra lại kết nối wifi hoặc 3G.\"}</string>
+    <string name="default_error">{\"errorCode\":10000,\"message\":\"Lỗi đường truyền, bạn cần kiểm tra lại mạng\"}</string>
     <string name="formatdieukhoan" formatted="false">Điều khoản %s</string>
     <string name="chupanhmoi">Chụp ảnh mới</string>
     <string name="chonanhcosan">Chọn ảnh có sẵn</string>
@@ -204,5 +204,9 @@
     <string name="ngayketthucphaisaungaybatdau">Bạn cần nhập ngày kết thúc sau ngày bắt đầu.</string>
     <string name="khongthelayduocmaumoi">Có lỗi xay ra, bạn không thể thực hiện lời mời.</string>
     <string name="bandangkythanhcongdichvu">Bạn đăng ký thành công dịch vụ %s</string>
+    
+    <!-- Error message -->
+    <string name="error_sdt_viettel">Số điện thoại bạn nhập không phải số viettel hoặc là sim 3g</string>
+    <string name="message_dongbo">Đồng bộ danh bạ thành công</string>
 
 </resources>

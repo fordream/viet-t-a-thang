@@ -232,7 +232,7 @@ public class NewMusicSlideMenuActivity extends TabActivity {
 							progressDialog.dismiss();
 						}
 
-						Conts.showDialogThongbao(NewMusicSlideMenuActivity.this, Conts.getString(response, "message"));
+						Conts.showDialogThongbao(NewMusicSlideMenuActivity.this, getString(R.string.message_dongbo));
 					}
 
 					@Override
