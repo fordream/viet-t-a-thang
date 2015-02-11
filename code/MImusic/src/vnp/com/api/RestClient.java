@@ -172,9 +172,7 @@ public class RestClient {
 				this.executeRequest(request, url);
 			}
 
-			LogUtils.e("AAA", xurl + getResponse());
 		} catch (Exception exception) {
-			LogUtils.e("AAA", exception);
 		}
 	}
 

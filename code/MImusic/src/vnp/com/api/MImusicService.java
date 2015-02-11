@@ -173,10 +173,6 @@ public class MImusicService extends Service {
 			@Override
 			public void onSuscess(JSONObject jsonObject) {
 
-				LogUtils.e("AAA", "Login call API" + (System.currentTimeMillis() - time));
-				time = System.currentTimeMillis();
-				LogUtils.e("AAA", "Login call SAVE" + (System.currentTimeMillis() - time));
-
 				accountStore.save(jsonObject, p);
 				// try {
 				//

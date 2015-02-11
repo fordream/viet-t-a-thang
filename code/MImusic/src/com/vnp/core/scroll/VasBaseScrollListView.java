@@ -98,7 +98,6 @@ public abstract class VasBaseScrollListView implements OnTouchListener {
 
 		marginTop = marginTop - dy;
 
-		LogUtils.e("dy", dy + "");
 		if (marginTop < -height) {
 			marginTop = -height;
 		} else if (marginTop > 0) {
