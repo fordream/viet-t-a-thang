@@ -4,9 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import vnp.com.db.DichVu;
 import vnp.com.mimusic.util.Conts;
-import android.content.ContentValues;
 import android.content.Context;
 
 public class DichVuStore extends BaseStore {
