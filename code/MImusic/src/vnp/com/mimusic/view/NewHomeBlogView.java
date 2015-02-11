@@ -1,11 +1,20 @@
 package vnp.com.mimusic.view;
 
+import java.util.List;
+import java.util.StringTokenizer;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import vnp.com.db.DichVu;
 import vnp.com.db.Recomment;
 import vnp.com.db.User;
+import vnp.com.db.datastore.DichVuStore;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.util.Conts;
+import vnp.com.mimusic.util.LogUtils;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -16,6 +25,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -30,6 +40,7 @@ import com.meetme.android.horizontallistview.HorizontalListView;
 
 // vnp.com.mimusic.view.BangXepHangHeaderView
 public abstract class NewHomeBlogView extends LinearLayout implements OnClickListener, OnItemClickListener {
+	private DichVuStore dichVuStore;
 	private LinearLayout main;
 	private TextView title;
 	private HorizontalListView mHlvSimpleList;
@@ -50,6 +61,8 @@ public abstract class NewHomeBlogView extends LinearLayout implements OnClickLis
 
 	private void init() {
 		((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.new_home_blog, this);
+		dichVuStore = new DichVuStore(getContext());
+
 		findViewById(R.id.dichvubanchay).setOnClickListener(this);
 		mHlvSimpleList = (HorizontalListView) findViewById(R.id.hlvSimpleList);
 		mHlvSimpleList.setOnItemClickListener(this);
@@ -74,111 +87,234 @@ public abstract class NewHomeBlogView extends LinearLayout implements OnClickLis
 
 	public void update() {
 		if (type() == 0) {
-
-			if (mHlvSimpleList.getAdapter() != null) {
-				if (mHlvSimpleList.getAdapter().getCount() > 0) {
-					return;
-				}
-			}
-
-			Cursor cursor = Recomment.getCursorFromDichvu(getContext(), -1);
-			mHlvSimpleList.setAdapter(new CursorAdapter(getContext(), cursor) {
-				@Override
-				public View newView(Context arg0, Cursor arg1, ViewGroup arg2) {
-					return new ReCommentDichVuItemView(arg0);
-				}
-
-				@Override
-				public void bindView(View arg0, Context arg1, Cursor cursor) {
-					if (arg0 == null) {
-						arg0 = new ReCommentDichVuItemView(arg1);
-					}
-					((ReCommentDichVuItemView) arg0).setData(cursor);
-				}
-			});
+			addDichVuDeXuat();
 		} else if (type() == 1) {
-			Cursor cursorUserRecomment = Recomment.getCursorFromUser(getContext(), 5);
-
-			main.removeAllViews();
-
-			if (cursorUserRecomment != null) {
-				while (cursorUserRecomment.moveToNext()) {
-					NewHomeItemView child = new NewHomeItemView(getContext());
-					child.updateUser(cursorUserRecomment);
-					main.addView(child);
-					final String user = Conts.getStringCursor(cursorUserRecomment, User.USER);
-					final String name = Conts.getStringCursor(cursorUserRecomment, User.NAME_CONTACT);
-					final int position = cursorUserRecomment.getPosition();
-
-					child.setOnClickListener(new OnClickListener() {
-
-						@Override
-						public void onClick(View v) {
-							(((RootMenuActivity) xContext)).moiContactUser(user, name, position);
-						}
-					});
-
-				}
-			}
-
-			if (cursorUserRecomment != null) {
-				cursorUserRecomment.close();
-			}
+			addUerHot();
 		} else {
-			Cursor cursorDVHot = DichVu.getCursorFromUser(getContext(), 3);
+			addDichVuHot();
+		}
+	}
 
-			main.removeAllViews();
+	private void addDichVuHot() {
+		JSONArray array = dichVuStore.getDichvu();
+		int index = 0;
+		main.removeAllViews();
+		for (int i = 0; i < array.length(); i++) {
+			try {
+				JSONObject object = array.getJSONObject(i);
+				final ContentValues values = new ContentValues();
+				values.put("name", String.format(xContext.getString(R.string.title_dangky), Conts.getString(object, DichVuStore.service_name)));
+				values.put(DichVu.service_name, Conts.getString(object, DichVuStore.service_name));
+				values.put(DichVu.service_code, Conts.getString(object, DichVuStore.service_code));
+				String content = String.format(xContext.getString(R.string.xacnhandangky_form), Conts.getString(object, DichVuStore.service_name), Conts.getString(object, DichVuStore.service_price));
+				values.put("content", content);
+				values.put(DichVu.ID, Conts.getString(object, DichVuStore.ID));
+				values.put("type", "dangky");
 
-			if (cursorDVHot != null) {
-				while (cursorDVHot.moveToNext()) {
-					final ContentValues values = new ContentValues();
-					values.put("name", String.format(xContext.getString(R.string.title_dangky), cursorDVHot.getString(cursorDVHot.getColumnIndex(DichVu.service_name))));
-					values.put(DichVu.service_name, cursorDVHot.getString(cursorDVHot.getColumnIndex(DichVu.service_name)));
-					values.put(DichVu.service_code, cursorDVHot.getString(cursorDVHot.getColumnIndex(DichVu.service_code)));
-					String content = String.format(xContext.getString(R.string.xacnhandangky_form), Conts.getStringCursor(cursorDVHot, DichVu.service_name),
-							Conts.getStringCursor(cursorDVHot, DichVu.service_price));
-					values.put("content", content);
-					values.put(DichVu.ID, cursorDVHot.getString(cursorDVHot.getColumnIndex(DichVu.ID)));
-					values.put("type", "dangky");
-
-					DichVuItemView child = new DichVuItemView(getContext());
-					child.setData(cursorDVHot);
-					main.addView(child);
-					final String id = Conts.getStringCursor(cursorDVHot, DichVu.ID);
-					final int position = cursorDVHot.getPosition();
-					child.setOnClickListener(new OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							((RootMenuActivity) xContext).gotoChiTietDichVuFromHome(id);
-						}
-					});
-
-					child.findViewById(R.id.home_item_right_control_2).setOnClickListener(new OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							(((RootMenuActivity) xContext)).gotoMoiDvChoNhieuNguoi(id, position);
-						}
-					});
-
-					final boolean isDangKy = "0".equals(cursorDVHot.getString(cursorDVHot.getColumnIndex(DichVu.service_status)));
-					if (isDangKy) {
-						child.findViewById(R.id.home_item_right_control_1).setOnClickListener(null);
-					} else {
-						child.findViewById(R.id.home_item_right_control_1).setOnClickListener(new OnClickListener() {
-
-							@Override
-							public void onClick(View v) {
-								dangky(values);
-							}
-						});
+				DichVuItemView child = new DichVuItemView(getContext());
+				child.setData(object, index);
+				main.addView(child);
+				final String id = Conts.getString(object, DichVuStore.ID);
+				final int position = index;
+				child.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						((RootMenuActivity) xContext).gotoChiTietDichVuFromHome(id);
 					}
-				}
-			}
+				});
 
-			if (cursorDVHot != null) {
-				cursorDVHot.close();
+				child.findViewById(R.id.home_item_right_control_2).setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						(((RootMenuActivity) xContext)).gotoMoiDvChoNhieuNguoi(id, position);
+					}
+				});
+
+				// final boolean isDangKy =
+				// "0".equals(cursorDVHot.getString(cursorDVHot.getColumnIndex(DichVu.service_status)));
+				final boolean isDangKy = dichVuStore.isRegister(Conts.getString(object, DichVuStore.service_code));
+
+				if (isDangKy) {
+					child.findViewById(R.id.home_item_right_control_1).setOnClickListener(null);
+				} else {
+					child.findViewById(R.id.home_item_right_control_1).setOnClickListener(new OnClickListener() {
+
+						@Override
+						public void onClick(View v) {
+							dangky(values);
+						}
+					});
+				}
+
+				index++;
+				if (index == 3) {
+					break;
+				}
+			} catch (Exception exception) {
+
 			}
 		}
+		// Cursor cursorDVHot = DichVu.getCursorFromUser(getContext(), 3);
+		// main.removeAllViews();
+		// if (cursorDVHot != null) {
+		// while (cursorDVHot.moveToNext()) {
+		// final ContentValues values = new ContentValues();
+		// values.put("name",
+		// String.format(xContext.getString(R.string.title_dangky),
+		// cursorDVHot.getString(cursorDVHot.getColumnIndex(DichVu.service_name))));
+		// values.put(DichVu.service_name,
+		// cursorDVHot.getString(cursorDVHot.getColumnIndex(DichVu.service_name)));
+		// values.put(DichVu.service_code,
+		// cursorDVHot.getString(cursorDVHot.getColumnIndex(DichVu.service_code)));
+		// String content =
+		// String.format(xContext.getString(R.string.xacnhandangky_form),
+		// Conts.getStringCursor(cursorDVHot, DichVu.service_name),
+		// Conts.getStringCursor(cursorDVHot, DichVu.service_price));
+		// values.put("content", content);
+		// values.put(DichVu.ID,
+		// cursorDVHot.getString(cursorDVHot.getColumnIndex(DichVu.ID)));
+		// values.put("type", "dangky");
+		//
+		// DichVuItemView child = new DichVuItemView(getContext());
+		// child.setData(cursorDVHot);
+		// main.addView(child);
+		// final String id = Conts.getStringCursor(cursorDVHot, DichVu.ID);
+		// final int position = cursorDVHot.getPosition();
+		// child.setOnClickListener(new OnClickListener() {
+		// @Override
+		// public void onClick(View v) {
+		// ((RootMenuActivity) xContext).gotoChiTietDichVuFromHome(id);
+		// }
+		// });
+		//
+		// child.findViewById(R.id.home_item_right_control_2).setOnClickListener(new
+		// OnClickListener() {
+		// @Override
+		// public void onClick(View v) {
+		// (((RootMenuActivity) xContext)).gotoMoiDvChoNhieuNguoi(id, position);
+		// }
+		// });
+		//
+		// final boolean isDangKy =
+		// "0".equals(cursorDVHot.getString(cursorDVHot.getColumnIndex(DichVu.service_status)));
+		// if (isDangKy) {
+		// child.findViewById(R.id.home_item_right_control_1).setOnClickListener(null);
+		// } else {
+		// child.findViewById(R.id.home_item_right_control_1).setOnClickListener(new
+		// OnClickListener() {
+		//
+		// @Override
+		// public void onClick(View v) {
+		// dangky(values);
+		// }
+		// });
+		// }
+		// }
+		// }
+		//
+		// if (cursorDVHot != null) {
+		// cursorDVHot.close();
+		// }
+	}
+
+	private void addUerHot() {
+		Cursor cursorUserRecomment = Recomment.getCursorFromUser(getContext(), 5);
+
+		main.removeAllViews();
+
+		if (cursorUserRecomment != null) {
+			while (cursorUserRecomment.moveToNext()) {
+				NewHomeItemView child = new NewHomeItemView(getContext());
+				child.updateUser(cursorUserRecomment);
+				main.addView(child);
+				final String user = Conts.getStringCursor(cursorUserRecomment, User.USER);
+				final String name = Conts.getStringCursor(cursorUserRecomment, User.NAME_CONTACT);
+				final int position = cursorUserRecomment.getPosition();
+
+				child.setOnClickListener(new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						(((RootMenuActivity) xContext)).moiContactUser(user, name, position);
+					}
+				});
+
+			}
+		}
+
+		if (cursorUserRecomment != null) {
+			cursorUserRecomment.close();
+		}
+	}
+
+	private void addDichVuDeXuat() {
+		if (mHlvSimpleList.getAdapter() != null) {
+			if (mHlvSimpleList.getAdapter().getCount() > 0) {
+				return;
+			}
+		}
+
+		String listRecomment = Recomment.getListReCommentDichvu(getContext());
+		StringTokenizer stringTokenizer = new StringTokenizer(listRecomment, ",");
+		final JSONArray array = new JSONArray();
+		while (stringTokenizer.hasMoreElements()) {
+			String serviceCode = stringTokenizer.nextElement().toString();
+			if (!Conts.isBlank(serviceCode)) {
+				serviceCode = serviceCode.replace("\"'", "").replace("'\"", "");
+				
+				LogUtils.e("AAAx", serviceCode);
+				array.put(dichVuStore.getDvByServiceCode(serviceCode));
+			}
+		}
+
+		// Cursor cursor = Recomment.getCursorFromDichvu(getContext(), -1);
+		BaseAdapter adapter = new BaseAdapter() {
+
+			@Override
+			public View getView(int position, View convertView, ViewGroup parent) {
+				if (convertView == null) {
+					convertView = new ReCommentDichVuItemView(parent.getContext());
+				}
+				((ReCommentDichVuItemView) convertView).setData((JSONObject) getItem(position), position);
+				return convertView;
+			}
+
+			@Override
+			public long getItemId(int position) {
+				return position;
+			}
+
+			@Override
+			public Object getItem(int position) {
+				try {
+					return array.get(position);
+				} catch (JSONException e) {
+					return new JSONObject();
+				}
+			}
+
+			@Override
+			public int getCount() {
+				return array.length();
+			}
+		};
+
+		mHlvSimpleList.setAdapter(adapter);
+
+		// mHlvSimpleList.setAdapter(new CursorAdapter(getContext(), cursor) {
+		// @Override
+		// public View newView(Context arg0, Cursor arg1, ViewGroup arg2) {
+		// return new ReCommentDichVuItemView(arg0);
+		// }
+		//
+		// @Override
+		// public void bindView(View arg0, Context arg1, Cursor cursor) {
+		// if (arg0 == null) {
+		// arg0 = new ReCommentDichVuItemView(arg1);
+		// }
+		// ((ReCommentDichVuItemView) arg0).setData(cursor);
+		// }
+		// });
 	}
 
 	public void dangky(ContentValues values) {

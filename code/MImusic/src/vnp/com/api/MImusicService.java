@@ -653,8 +653,9 @@ public class MImusicService extends Service {
 	}
 
 	protected void updateDichVuDangKy(Bundle bundle) {
-
+		
 		DichVu.updateDichVuDangKy(this, bundle);
+		
 		dichVuStore.register(bundle.getString(DichVuStore.service_code), "0");
 	}
 
