@@ -1,8 +1,11 @@
 package com.aretha.slidemenudemo.fragment;
 
+import org.json.JSONObject;
+
 import vnp.com.db.datastore.DichVuStore;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.adapter.ChonDichVuAdapter;
+import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.view.HeaderView;
 import vnp.com.mimusic.view.MusicListView;
 import android.app.Activity;
@@ -45,9 +48,9 @@ public class ChonDichvuFragment extends BaseFragment implements android.view.Vie
 
 				Intent intent = new Intent();
 				if (adaper != null) {
-					Cursor cursor = (Cursor) adaper.getItem(position - 1);
-					intent.putExtra(DichVuStore.ID, cursor.getString(cursor.getColumnIndex(DichVuStore.ID)));
-					intent.putExtra(DichVuStore.service_name, cursor.getString(cursor.getColumnIndex(DichVuStore.service_name)));
+					JSONObject cursor = (JSONObject) adaper.getItem(position - 1);
+					intent.putExtra(DichVuStore.ID, Conts.getString(cursor, DichVuStore.ID));
+					intent.putExtra(DichVuStore.service_name, Conts.getString(cursor, DichVuStore.service_name));
 				}
 				getActivity().setResult(Activity.RESULT_OK, intent);
 				getActivity().onBackPressed();
@@ -103,23 +106,20 @@ public class ChonDichvuFragment extends BaseFragment implements android.view.Vie
 		// Cursor cursor =
 		// getActivity().getContentResolver().query(DichVuStore.CONTENT_URI,
 		// null, null, null, null);
-		Cursor cursor = null;
-		if (cursor != null) {
-			adaper = new ChonDichVuAdapter(getActivity(), cursor) {
+		adaper = new ChonDichVuAdapter(getActivity(), dichVuStore.getDichvu()) {
 
-				@Override
-				public void dangKy(ContentValues values) {
+			@Override
+			public void dangKy(ContentValues values) {
 
-				}
+			}
 
-				@Override
-				public void moiDVChoNhieuNguoi(String id) {
+			@Override
+			public void moiDVChoNhieuNguoi(String id) {
 
-				}
+			}
 
-			};
-			bangxephang_list.setAdapter(adaper);
-		}
+		};
+		bangxephang_list.setAdapter(adaper);
 	}
 
 	private EditText menu_right_editext;

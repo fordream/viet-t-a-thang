@@ -125,17 +125,10 @@ public class LichSuBanHangFragment extends Fragment implements OnItemClickListen
 	// private String phoneContact = "";
 
 	private void showDichvu() {
-		// new DichVuDialog(getActivity(), idDv) {
-		// @Override
-		// public void sendData(ContentValues index) {
-		// idDv = index.getAsString(DichVu.ID);
-		// lsbt_dichvu.setText(index.getAsString(DichVu.service_name));
-		// }
-		// }.show();
-
 		Intent intent = new Intent(getActivity(), RootMenuActivity.class);
 		intent.putExtra("type", Conts.CHONDICHVU);
 		startActivityForResult(intent, 20001);
+		((RootMenuActivity) getActivity()).overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_nothing);
 
 	}
 
@@ -143,6 +136,7 @@ public class LichSuBanHangFragment extends Fragment implements OnItemClickListen
 		Intent intent = new Intent(getActivity(), RootMenuActivity.class);
 		intent.putExtra("type", Conts.CHONSODIENTHOAIFRAGMENT);
 		startActivityForResult(intent, 2000);
+		((RootMenuActivity) getActivity()).overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_nothing);
 	}
 
 	@Override

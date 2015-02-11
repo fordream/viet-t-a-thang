@@ -97,8 +97,4 @@ public class DichVuItemView extends LinearLayout {
 
 	}
 
-//	public void setData(JSONObject cursor) {
-//		// TODO Auto-generated method stub
-//		
-//	}
 }
