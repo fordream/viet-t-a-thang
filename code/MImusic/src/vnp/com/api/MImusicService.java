@@ -174,7 +174,7 @@ public class MImusicService extends Service {
 				// User.updateInForLogin(MImusicService.this, jsonObject, p);
 				// } catch (Exception e) {
 				// }
-
+				contsCallBack.onSuscess(jsonObject);
 				/*
 				 * get thong tin dich vu
 				 */
