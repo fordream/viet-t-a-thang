@@ -70,6 +70,7 @@ public class DichVuStore extends BaseStore {
 		try {
 			JSONArray jsonArray = response.getJSONArray("data");
 			save(user + "getDichvuALL", jsonArray.toString());
+			LogUtils.e("errror", jsonArray.toString());
 			for (int i = 0; i < jsonArray.length(); i++) {
 				JSONObject jsonObject = jsonArray.getJSONObject(i);
 				String _service_code = Conts.getString(jsonObject, DichVuStore.service_code);
