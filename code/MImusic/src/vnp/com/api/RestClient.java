@@ -35,6 +35,7 @@ import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
 import vnp.com.mimusic.util.Conts;
+import vnp.com.mimusic.util.LogUtils;
 import android.content.Context;
 
 import com.vnp.core.common.https.RunSSL;
@@ -83,92 +84,98 @@ public class RestClient {
 		headers.add(new BasicNameValuePair(name, value));
 	}
 
-	public void execute(RequestMethod method) throws Exception {
-		HttpUriRequest request = null;
-		switch (method) {
-		case GET: {
-			// add parameters
-			String combinedParams = "";
-			try {
-				if (!params.isEmpty()) {
-					combinedParams += "?";
-					for (NameValuePair p : params) {
+	public void execute(RequestMethod method) {
 
-						String name = p.getName();
-						String value = p.getValue();
+		try {
+			String xurl = url;
+			HttpUriRequest request = null;
+			switch (method) {
+			case GET: {
+				// add parameters
+				String combinedParams = "";
+				try {
+					if (!params.isEmpty()) {
+						combinedParams += "?";
+						for (NameValuePair p : params) {
 
-						if (Conts.isBlank(name)) {
-							name = "";
-						}
+							String name = p.getName();
+							String value = p.getValue();
 
-						if (Conts.isBlank(value)) {
-							value = "";
-						}
-						String paramString = name + "=" + URLEncoder.encode(value, "UTF-8");
-						if (combinedParams.length() > 1) {
-							combinedParams += "&" + paramString;
-						} else {
-							combinedParams += paramString;
+							if (Conts.isBlank(name)) {
+								name = "";
+							}
+
+							if (Conts.isBlank(value)) {
+								value = "";
+							}
+							String paramString = name + "=" + URLEncoder.encode(value, "UTF-8");
+							if (combinedParams.length() > 1) {
+								combinedParams += "&" + paramString;
+							} else {
+								combinedParams += paramString;
+							}
 						}
 					}
+				} catch (Exception exception) {
 				}
-			} catch (Exception exception) {
+				xurl = url + combinedParams;
+				request = new HttpGet(url + combinedParams);
+				// add headers
+				for (NameValuePair h : headers) {
+					request.addHeader(h.getName(), h.getValue());
+				}
+
+				// this.executeRequest(request, url);
+				break;
 			}
-			request = new HttpGet(url + combinedParams);
-			// add headers
-			for (NameValuePair h : headers) {
-				request.addHeader(h.getName(), h.getValue());
+			case POST: {
+				request = new HttpPost(url);
+
+				// add headers
+				for (NameValuePair h : headers) {
+					request.addHeader(h.getName(), h.getValue());
+				}
+
+				if (!params.isEmpty()) {
+					((HttpPost) request).setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
+				}
+
+				// this.executeRequest(request, url);
+				break;
+			}
+			case PUT: {
+				request = new HttpPut(url);
+				// add headers
+				for (NameValuePair h : headers) {
+					request.addHeader(h.getName(), h.getValue());
+				}
+				if (!params.isEmpty()) {
+					((HttpPut) request).setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
+				}
+				// this.executeRequest(request, url);
+				break;
+
+			}
+			case DELETE: {
+				request = new HttpDelete(url);
+				// add headers
+				for (NameValuePair h : headers) {
+					request.addHeader(h.getName(), h.getValue());
+				}
+				// this.executeRequest(request, url);
+				break;
+
 			}
 
-			// this.executeRequest(request, url);
-			break;
+			}
+			if (request != null) {
+				this.executeRequest(request, url);
+			}
+
+			LogUtils.e("AAA", xurl + getResponse());
+		} catch (Exception exception) {
+			LogUtils.e("AAA", exception);
 		}
-		case POST: {
-			request = new HttpPost(url);
-
-			// add headers
-			for (NameValuePair h : headers) {
-				request.addHeader(h.getName(), h.getValue());
-			}
-
-			if (!params.isEmpty()) {
-				((HttpPost) request).setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
-			}
-
-			// this.executeRequest(request, url);
-			break;
-		}
-		case PUT: {
-			request = new HttpPut(url);
-			// add headers
-			for (NameValuePair h : headers) {
-				request.addHeader(h.getName(), h.getValue());
-			}
-			if (!params.isEmpty()) {
-				((HttpPut) request).setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
-			}
-			// this.executeRequest(request, url);
-			break;
-
-		}
-		case DELETE: {
-			request = new HttpDelete(url);
-			// add headers
-			for (NameValuePair h : headers) {
-				request.addHeader(h.getName(), h.getValue());
-			}
-			// this.executeRequest(request, url);
-			break;
-
-		}
-
-		}
-		// if (url != null && url.startsWith("https")) {
-		// executeHttps();
-		// return;
-		// }
-		if (request != null)
-			this.executeRequest(request, url);
 	}
 
 	private void executeHttps() {

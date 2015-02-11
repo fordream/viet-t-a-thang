@@ -255,7 +255,8 @@ public class Conts {
 			}
 		};
 
-		if (!API.API_R013.equals(resClientCallBack.getApiName())) {
+		if (!API.API_R013.equals(resClientCallBack.getApiName()) 
+				&& !API.API_R001.equals(resClientCallBack.getApiName())) {
 			bundles.putString("token", new AccountStore(activity).getToken());
 		}
 
