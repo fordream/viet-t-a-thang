@@ -83,7 +83,6 @@ public class MImusicService extends Service {
 
 			@Override
 			public void onSuscess(JSONObject response) {
-				callUpdateData();
 
 				/*
 				 * get thong tin dich vu
@@ -112,6 +111,8 @@ public class MImusicService extends Service {
 						if (contsCallBack != null) {
 							contsCallBack.onSuscess(response);
 						}
+
+						callUpdateData();
 					}
 				});
 
@@ -169,7 +170,7 @@ public class MImusicService extends Service {
 				long time = System.currentTimeMillis();
 				accountStore.save(jsonObject, p);
 				LogUtils.e("timex", (is3G ? API.API_R001 : API.API_R002) + " update " + (System.currentTimeMillis() - time));
-				
+
 				execute(RequestMethod.GET, API.API_R004, new Bundle(), new vnp.com.mimusic.util.Conts.IContsCallBack() {
 					@Override
 					public void onStart() {
@@ -192,6 +193,8 @@ public class MImusicService extends Service {
 						if (contsCallBack != null) {
 							contsCallBack.onSuscess(response);
 						}
+
+						callUpdateData();
 					}
 				});
 			}
@@ -209,7 +212,6 @@ public class MImusicService extends Service {
 			}
 		});
 
-		callUpdateData();
 	}
 
 	private void callUpdateData() {
