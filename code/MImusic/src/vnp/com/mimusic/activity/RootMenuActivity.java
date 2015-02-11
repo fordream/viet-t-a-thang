@@ -346,7 +346,7 @@ public class RootMenuActivity extends FragmentActivity {
 	 * @param id
 	 * @param customers
 	 */
-	public void gotoLoiMoi(String id, String customers) {
+	public void gotoLoiMoi(String serviceCode, String customers) {
 		Conts.hiddenKeyBoard(this);
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -354,11 +354,10 @@ public class RootMenuActivity extends FragmentActivity {
 
 		Bundle args = new Bundle();
 		args.putBoolean("type", false);
-		args.putString("id", id);
+		args.putString(DichVuStore.service_code, serviceCode);
 		args.putString("customers", customers);
 
 		args.putString("sdt", "");
-		args.putString("service_code", "");
 		args.putString("service_codes", "");
 		mauMoiFragment.setArguments(args);
 		transaction.setCustomAnimations(R.anim.abc_alpha_in, R.anim.abc_alpha_in, R.anim.abc_alpha_out, R.anim.abc_alpha_out);

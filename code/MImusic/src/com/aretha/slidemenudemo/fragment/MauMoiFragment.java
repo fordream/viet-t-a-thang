@@ -26,16 +26,15 @@ public class MauMoiFragment extends BaseFragment implements android.view.View.On
 	private View loading;
 	private MauMoiAdaper adaper;
 	private boolean type = false;
-	private String id, customers, sdt, service_code, service_codes;
+	private String customers, sdt, service_code, service_codes;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		type = getArguments().getBoolean("type");
-		id = getArguments().getString("id");
 		customers = getArguments().getString("customers");
 		sdt = getArguments().getString("sdt");
-		service_code = getArguments().getString("service_code");
+		service_code = getArguments().getString(DichVuStore.service_code);
 		service_codes = getArguments().getString("service_codes");
 
 	}
@@ -72,13 +71,16 @@ public class MauMoiFragment extends BaseFragment implements android.view.View.On
 		// });
 
 		if (!type) {
-//			String selection = DichVuStore.ID + "='" + id + "'";
-//			final Cursor mcursor = getActivity().getContentResolver().query(DichVuStore.CONTENT_URI, null, selection, null, null);
-//			if (mcursor != null && mcursor.getCount() >= 1) {
-//				mcursor.moveToNext();
-//				service_code = mcursor.getString(mcursor.getColumnIndex(DichVuStore.service_code));
-//				mcursor.close();
-//			}
+			// String selection = DichVuStore.ID + "='" + id + "'";
+			// final Cursor mcursor =
+			// getActivity().getContentResolver().query(DichVuStore.CONTENT_URI,
+			// null, selection, null, null);
+			// if (mcursor != null && mcursor.getCount() >= 1) {
+			// mcursor.moveToNext();
+			// service_code =
+			// mcursor.getString(mcursor.getColumnIndex(DichVuStore.service_code));
+			// mcursor.close();
+			// }
 		}
 
 		JSONArray array = MauMoi.getCursorMauMoiListJson(getActivity(), service_code);

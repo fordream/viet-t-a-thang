@@ -328,7 +328,7 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 			Conts.hiddenKeyBoard(getActivity());
 			boardView.setVisibility(View.GONE);
 			mkeyboard(false);
-			gotoLoiMoi(getArguments().getString(DichVuStore.ID));
+			gotoLoiMoi(getArguments().getString(DichVuStore.service_code));
 		} else if (v.getId() == R.id.moidichvuchonhieunguoi_contact) {
 
 			if (boardView.getVisibility() == View.VISIBLE) {
@@ -369,7 +369,7 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 		}
 	}
 
-	private void gotoLoiMoi(String id) {
+	private void gotoLoiMoi(String serviceCode) {
 
 		int count = adaper.getListAdd().size() + adaper.getListSeList().size();
 		if (count == 0) {
@@ -401,7 +401,7 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 			}
 		}
 		customers = String.format("{%s}", customers);
-		(((RootMenuActivity) getActivity())).gotoLoiMoi(id, customers);
+		(((RootMenuActivity) getActivity())).gotoLoiMoi(serviceCode, customers);
 	}
 
 	@Override
