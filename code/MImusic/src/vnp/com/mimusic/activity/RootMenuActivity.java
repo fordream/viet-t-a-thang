@@ -312,10 +312,10 @@ public class RootMenuActivity extends FragmentActivity {
 	}
 
 	public void gotoChiTietDichVuFragment(AdapterView<?> parent, View view, int position, long id) {
-		Cursor cursor = (Cursor) parent.getItemAtPosition(position);
+		JSONObject cursor = (JSONObject) parent.getItemAtPosition(position);
 		ChiTietDichVuFragment chiTietDichVuFragment = new ChiTietDichVuFragment();
 		Bundle args = new Bundle();
-		args.putString("id", cursor.getString(cursor.getColumnIndex(DichVuStore.ID)));
+		args.putString(DichVuStore.service_code, Conts.getString(cursor, DichVuStore.service_code));
 		chiTietDichVuFragment.setArguments(args);
 		changeFragemt(R.id.root_main_fragment, chiTietDichVuFragment, true);
 	}

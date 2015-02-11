@@ -1,10 +1,18 @@
 package com.aretha.slidemenudemo.fragment;
 
+import java.util.StringTokenizer;
+
+import org.json.JSONArray;
+
+import vnp.com.db.Recomment;
+import vnp.com.db.datastore.DichVuStore;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.adapter.DichVuAdapter;
+import vnp.com.mimusic.base.diablog.DangKyDialog;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.view.HeaderView;
+import android.content.ContentValues;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -106,28 +114,36 @@ public class DichVuHotFragment extends BaseFragment implements OnItemClickListen
 	}
 
 	private void callSHowData() {
-//
-//		Cursor cursor = DichVu.getCursorFromUser(getActivity(), -1);
-//
-//		if (cursor != null) {
-//			dichvu_list.setAdapter(adapter = new DichVuAdapter(getActivity(), cursor) {
-//				@Override
-//				public void moiDVChoNhieuNguoi(String id) {
-//					(((RootMenuActivity) getActivity())).gotoMoiDvChoNhieuNguoiFragment(id);
-//				}
-//
-//				@Override
-//				public void dangKy(final ContentValues values) {
-//					new DangKyDialog(getActivity(), values) {
-//						public void updateUiDangKy() {
-//							Conts.showDialogThongbao(getContext(), String.format(getContext().getString(R.string.bandangkythanhcongdichvu), values.getAsString(DichVu.service_name)));
-//
-//							callSHowData();
-//						};
-//					}.show();
-//				}
-//			});
-//		}
+		//
+		String listRecomment = Recomment.getListReCommentDichvu(getActivity());
+		StringTokenizer stringTokenizer = new StringTokenizer(listRecomment, ",");
+		final JSONArray array = new JSONArray();
+		while (stringTokenizer.hasMoreElements()) {
+			String serviceCode = stringTokenizer.nextElement().toString();
+			if (!Conts.isBlank(serviceCode)) {
+				serviceCode = serviceCode.replace("\"", "").replace("'", "");
+				array.put(dichVuStore.getDvByServiceCode(serviceCode));
+			}
+		}
+
+		dichvu_list.setAdapter(adapter = new DichVuAdapter(getActivity(), array) {
+			@Override
+			public void moiDVChoNhieuNguoi(String id) {
+				(((RootMenuActivity) getActivity())).gotoMoiDvChoNhieuNguoiFragment(id);
+			}
+
+			@Override
+			public void dangKy(final ContentValues values) {
+				new DangKyDialog(getActivity(), values) {
+					public void updateUiDangKy() {
+						Conts.showDialogThongbao(getContext(), String.format(getContext().getString(R.string.bandangkythanhcongdichvu), values.getAsString(DichVuStore.service_name)));
+
+						callSHowData();
+					};
+				}.show();
+			}
+		});
+
 	}
 
 	@Override
