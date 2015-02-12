@@ -58,27 +58,12 @@ public class DichVuStore extends BaseStore {
 		JSONArray jsonArray = listRowId();
 
 		for (int i = 0; i < jsonArray.length(); i++) {
-
 			try {
 				array.put(getJsonById(jsonArray.getString(i)));
 			} catch (JSONException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-
-		// try {
-		// String list = getString(user + "serviceCodeList");
-		// LogUtils.e("listxxxxx", "a" + list);
-		// list = list.replace("[", "").replace("]", "").replace(" ", "");
-		// StringTokenizer stringTokenizer = new StringTokenizer(list, ",");
-		// while (stringTokenizer.hasMoreElements()) {
-		// String serviceCode = stringTokenizer.nextElement().toString();
-		// array.put(getDvByServiceCode(serviceCode));
-		// }
-		// LogUtils.e("listxxxxx", list);
-		// } catch (Exception e) {
-		// }
 
 		return array;
 	}
@@ -87,21 +72,6 @@ public class DichVuStore extends BaseStore {
 
 		JSONObject jsonObject = new JSONObject();
 		try {
-			// jsonObject.put(ID, getString(user + serviceCode + ID));
-			// jsonObject.put(service_name, getString(user + serviceCode +
-			// service_name));
-			// jsonObject.put(service_name_eng, getString(user + serviceCode +
-			// service_name_eng));
-			// jsonObject.put(service_icon, getString(user + serviceCode +
-			// service_icon));
-			// jsonObject.put(service_code, getString(user + serviceCode +
-			// service_code));
-			// jsonObject.put(service_content, getString(user + serviceCode +
-			// service_content));
-			// jsonObject.put(service_price, getString(user + serviceCode +
-			// service_price));
-			// jsonObject = new JSONObject(getString(user + serviceCode));
-
 			jsonObject = getJsonById(getUser() + serviceCode);
 		} catch (Exception exception) {
 		}
@@ -111,8 +81,9 @@ public class DichVuStore extends BaseStore {
 	public void updateDichvu(JSONObject response) {
 		try {
 			JSONArray jsonArray = response.getJSONArray("data");
-
 			List<String> serviceCodeList = new ArrayList<String>();
+
+			save(getUser() + "listAllDcchvu", jsonArray.toString());
 			for (int i = 0; i < jsonArray.length(); i++) {
 				JSONObject jsonObject = jsonArray.getJSONObject(i);
 				String serviceCode = Conts.getString(jsonObject, DichVuStore.service_code);
@@ -129,18 +100,4 @@ public class DichVuStore extends BaseStore {
 	public void updateService_content(Context context, JSONObject response, Bundle bundle) {
 
 	}
-
-	// public static void updateService_content(Context context, JSONObject
-	// response, Bundle bundle) {
-	// if (bundle.containsKey(DichVu.service_code)) {
-	// String strService_code = bundle.getString(DichVu.service_code);
-	// ContentValues values = new ContentValues();
-	// values.put(service_content, Conts.getString(response, service_content));
-	//
-	// context.getContentResolver().update(CONTENT_URI, values,
-	// String.format("%s = '%s'", DichVu.service_code, strService_code), null);
-	// }
-	//
-	// }
-	//
 }

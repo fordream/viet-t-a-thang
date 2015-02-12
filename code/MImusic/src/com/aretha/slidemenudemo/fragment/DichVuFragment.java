@@ -98,9 +98,6 @@ public class DichVuFragment extends BaseFragment implements OnItemClickListener,
 	private void callSHowData() {
 		JSONArray array = dichVuStore.getDichvu();
 
-		// Cursor cursor =
-		// getActivity().getContentResolver().query(DichVu.CONTENT_URI, null,
-		// null, null, null);
 
 		dichvu_list.setAdapter(adapter = new DichVuAdapter(getActivity(), array) {
 			@Override

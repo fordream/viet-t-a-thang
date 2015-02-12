@@ -167,33 +167,6 @@ public class MImusicService extends Service {
 				long time = System.currentTimeMillis();
 				accountStore.save(jsonObject, p);
 				exeDichvu(contsCallBack);
-				// execute(RequestMethod.GET, API.API_R004, new Bundle(), new
-				// vnp.com.mimusic.util.Conts.IContsCallBack() {
-				// @Override
-				// public void onStart() {
-				// }
-				//
-				// @Override
-				// public void onError() {
-				// onError("");
-				// }
-				//
-				// @Override
-				// public void onError(String message) {
-				// if (contsCallBack != null) {
-				// contsCallBack.onError(message);
-				// }
-				// }
-				//
-				// @Override
-				// public void onSuscess(JSONObject response) {
-				// if (contsCallBack != null) {
-				// contsCallBack.onSuscess(response);
-				// }
-				//
-				// callUpdateData();
-				// }
-				// });
 			}
 
 			@Override

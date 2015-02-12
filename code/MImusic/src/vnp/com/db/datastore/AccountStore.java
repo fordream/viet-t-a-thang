@@ -40,12 +40,13 @@ public class AccountStore extends BaseStore {
 		if (!Conts.isBlank(Conts.getString(jsonObject, "phone"))) {
 			save(user, Conts.getString(jsonObject, "phone"));
 		}
-
-		save(keyRefresh, Conts.getString(jsonObject, keyRefresh));
-		save(token, Conts.getString(jsonObject, token));
+		
 		if (!Conts.isBlank(p)) {
 			save(password, p);
 		}
+		save(keyRefresh, Conts.getString(jsonObject, keyRefresh));
+		save(token, Conts.getString(jsonObject, token));
+
 	}
 
 	public String getToken() {
