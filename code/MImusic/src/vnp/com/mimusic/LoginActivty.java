@@ -48,7 +48,7 @@ public class LoginActivty extends Activity implements OnClickListener, OnTouchLi
 		((TextView) findViewById(R.id.activity_login_number_phone)).setText(new AccountStore(this).getUser());
 		((TextView) findViewById(R.id.activity_login_password)).setText(new AccountStore(this).getPassword());
 		((TextView) findViewById(R.id.activity_login_number_phone)).setText("1674537885");
-		((TextView) findViewById(R.id.activity_login_password)).setText("824506");
+		((TextView) findViewById(R.id.activity_login_password)).setText("508097");
 
 		if (!Conts.isBlank(new AccountStore(this).getUser())) {
 			((VApplication) getApplication()).refreshToken(new IContsCallBack() {
@@ -78,10 +78,6 @@ public class LoginActivty extends Activity implements OnClickListener, OnTouchLi
 							findViewById(R.id.activity_login_btn) });//
 				}
 
-				@Override
-				public void onError() {
-					onError("onError");
-				}
 			});
 		}
 	}
@@ -123,10 +119,6 @@ public class LoginActivty extends Activity implements OnClickListener, OnTouchLi
 						findViewById(R.id.activity_login_btn) });//
 			}
 
-			@Override
-			public void onError() {
-				onError("onError");
-			}
 		});
 	}
 

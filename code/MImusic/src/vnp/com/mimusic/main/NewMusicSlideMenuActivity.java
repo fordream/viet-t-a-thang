@@ -252,10 +252,6 @@ public class NewMusicSlideMenuActivity extends TabActivity {
 						}
 					}
 
-					@Override
-					public void onError() {
-						onError("onError");
-					}
 				});
 			}
 		});

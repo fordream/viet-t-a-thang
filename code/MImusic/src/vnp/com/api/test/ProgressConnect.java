@@ -95,7 +95,7 @@ public class ProgressConnect {
 					}
 				} catch (Exception exception) {
 					if (contsCallBack != null)
-						contsCallBack.onError();
+						contsCallBack.onError(context.getString(R.string.error_network));
 				}
 			};
 		}.execute("");

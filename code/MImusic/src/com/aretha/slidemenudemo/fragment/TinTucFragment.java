@@ -102,10 +102,6 @@ public class TinTucFragment extends BaseFragment implements OnItemClickListener,
 				onSuscess(null);
 			}
 
-			@Override
-			public void onError() {
-				onError("");
-			}
 		});
 
 		ListView listViews[] = new ListView[] { bangxephang_list };

@@ -114,11 +114,6 @@ public class MauMoiFragment extends BaseFragment implements android.view.View.On
 					Conts.showView(loading, false);
 				}
 
-				@Override
-				public void onError() {
-					Conts.toast(getActivity(), "onError");
-					Conts.showView(loading, false);
-				}
 			});
 		}
 		view.findViewById(R.id.recomment_main_background).setOnTouchListener(new OnTouchListener() {

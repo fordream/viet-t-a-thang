@@ -427,10 +427,6 @@ public class RootMenuActivity extends FragmentActivity {
 					Conts.showDialogThongbao(RootMenuActivity.this, message);
 				}
 
-				@Override
-				public void onError() {
-					onError("");
-				}
 			});
 		}
 		// FragmentManager fragmentManager = getSupportFragmentManager();
@@ -546,10 +542,6 @@ public class RootMenuActivity extends FragmentActivity {
 					dialog.dismiss();
 			}
 
-			@Override
-			public void onError() {
-				onError("onError");
-			}
 		});
 	}
 
@@ -598,10 +590,6 @@ public class RootMenuActivity extends FragmentActivity {
 					dialog.dismiss();
 			}
 
-			@Override
-			public void onError() {
-				onError("onError");
-			}
 		});
 	}
 

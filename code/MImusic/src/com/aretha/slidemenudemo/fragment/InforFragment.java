@@ -121,37 +121,51 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 			String path = data.getData().toString();
 			if (path != null) {
 				updateCover(path);
-				
-//				ContentValues contentValues = new ContentValues();
-//				contentValues.put(User.COVER, path);
-//				int index = getActivity().getContentResolver().update(User.CONTENT_URI, contentValues, String.format("%s = '1'", User.STATUS), null);
-//
-//				if (index > 0) {
-//					Toast.makeText(getActivity(), getActivity().getString(R.string.updatethanhcong), Toast.LENGTH_SHORT).show();
-//					showData();
-//				} else {
-//					Toast.makeText(getActivity(), getActivity().getString(R.string.updatethatbai), Toast.LENGTH_SHORT).show();
-//				}
+
+				// ContentValues contentValues = new ContentValues();
+				// contentValues.put(User.COVER, path);
+				// int index =
+				// getActivity().getContentResolver().update(User.CONTENT_URI,
+				// contentValues, String.format("%s = '1'", User.STATUS), null);
+				//
+				// if (index > 0) {
+				// Toast.makeText(getActivity(),
+				// getActivity().getString(R.string.updatethanhcong),
+				// Toast.LENGTH_SHORT).show();
+				// showData();
+				// } else {
+				// Toast.makeText(getActivity(),
+				// getActivity().getString(R.string.updatethatbai),
+				// Toast.LENGTH_SHORT).show();
+				// }
 			} else {
 				Toast.makeText(getActivity(), getActivity().getString(R.string.khongthelayduocduongdan), Toast.LENGTH_SHORT).show();
 			}
 		} else if (requestCode == 101 && resultCode == Activity.RESULT_OK) {
 			String path = mFileTemp.getPath();
-			
+
 			updateCover(path);
-//			if (path != null) {
-//				ContentValues contentValues = new ContentValues();
-//				contentValues.put(User.COVER, path);
-//				int index = getActivity().getContentResolver().update(User.CONTENT_URI, contentValues, String.format("%s = '1'", User.STATUS), null);
-//				if (index > 0) {
-//					Toast.makeText(getActivity(), getActivity().getString(R.string.updatethanhcong), Toast.LENGTH_SHORT).show();
-//					showData();
-//				} else {
-//					Toast.makeText(getActivity(), getActivity().getString(R.string.updatethatbai), Toast.LENGTH_SHORT).show();
-//				}
-//			} else {
-//				Toast.makeText(getActivity(), getActivity().getString(R.string.khongthelayduocduongdan), Toast.LENGTH_SHORT).show();
-//			}
+			// if (path != null) {
+			// ContentValues contentValues = new ContentValues();
+			// contentValues.put(User.COVER, path);
+			// int index =
+			// getActivity().getContentResolver().update(User.CONTENT_URI,
+			// contentValues, String.format("%s = '1'", User.STATUS), null);
+			// if (index > 0) {
+			// Toast.makeText(getActivity(),
+			// getActivity().getString(R.string.updatethanhcong),
+			// Toast.LENGTH_SHORT).show();
+			// showData();
+			// } else {
+			// Toast.makeText(getActivity(),
+			// getActivity().getString(R.string.updatethatbai),
+			// Toast.LENGTH_SHORT).show();
+			// }
+			// } else {
+			// Toast.makeText(getActivity(),
+			// getActivity().getString(R.string.khongthelayduocduongdan),
+			// Toast.LENGTH_SHORT).show();
+			// }
 
 		} else if (requestCode == REQUEST_CODE_GALLERY && resultCode == Activity.RESULT_OK) {
 			try {
@@ -216,11 +230,6 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 				}
 
 				@Override
-				public void onError() {
-					onError("onError");
-				}
-
-				@Override
 				public void onError(String message) {
 					Conts.showDialogThongbao(getActivity(), message);
 					if (progressDialog != null) {
@@ -231,9 +240,12 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 				@Override
 				public void onSuscess(JSONObject response) {
 
-//					ContentValues contentValues = new ContentValues();
-//					contentValues.put(User.AVATAR, path);
-//					int index = getActivity().getContentResolver().update(User.CONTENT_URI, contentValues, String.format("%s = '1'", User.STATUS), null);
+					// ContentValues contentValues = new ContentValues();
+					// contentValues.put(User.AVATAR, path);
+					// int index =
+					// getActivity().getContentResolver().update(User.CONTENT_URI,
+					// contentValues, String.format("%s = '1'", User.STATUS),
+					// null);
 					accountStore.saveAvatar(path);
 					showData();
 					if (progressDialog != null) {
@@ -344,10 +356,6 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 					Conts.showDialogThongbao(getActivity(), message);
 				}
 
-				@Override
-				public void onError() {
-					onError("onError");
-				}
 			});
 		}
 	}

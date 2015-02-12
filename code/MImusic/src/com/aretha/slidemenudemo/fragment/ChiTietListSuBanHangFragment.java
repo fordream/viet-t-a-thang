@@ -48,7 +48,7 @@ public class ChiTietListSuBanHangFragment extends BaseFragment implements OnItem
 		execute(RequestMethod.GET, API.API_R008, getArguments(), new IContsCallBack() {
 			@Override
 			public void onSuscess(JSONObject response) {
-				
+
 				home_list.setText(false, R.string.nodata);
 				try {
 					JSONArray data = response.getJSONArray("data");
@@ -74,10 +74,6 @@ public class ChiTietListSuBanHangFragment extends BaseFragment implements OnItem
 				home_list.setTextNoData(true, message);
 			}
 
-			@Override
-			public void onError() {
-				onError("onError");
-			}
 		});
 
 		return view;

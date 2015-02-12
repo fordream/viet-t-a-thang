@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.text.Spanned;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -29,7 +30,7 @@ public class MusicListView extends ListView {
 	private void init() {
 		try {
 			setCacheColorHint(Color.TRANSPARENT);
-//			setSelector(R.drawable.xml_list_selection);
+			// setSelector(R.drawable.xml_list_selection);
 			setDividerHeight(0);
 			setDivider(null);
 		} catch (Exception exception) {
@@ -88,4 +89,5 @@ public class MusicListView extends ListView {
 		headerListTextView.setTextNoDataX(needShow, fromHtml);
 		setAdapter(new ArrayAdapter<String>(getContext(), 0, new String[] {}));
 	}
+
 }

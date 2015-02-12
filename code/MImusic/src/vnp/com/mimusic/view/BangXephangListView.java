@@ -100,10 +100,6 @@ public class BangXephangListView extends LinearLayout {
 //				}
 			}
 
-			@Override
-			public void onError() {
-				onError("");
-			}
 		});
 	}
 

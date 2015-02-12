@@ -105,20 +105,12 @@ public class ChiTietTintucFragment extends BaseFragment implements OnItemClickLi
 					Conts.showDialogThongbao(getActivity(), message);
 				}
 
-				@Override
-				public void onError() {
-					onError("");
-				}
 			});
 
 		executeHttps(RequestMethod.GET, API.API_R029, arguments, new IContsCallBack() {
 			@Override
 			public void onStart() {
 				chitiet_tintuc_tintuckhac_list.removeAllViews();
-			}
-
-			@Override
-			public void onError() {
 			}
 
 			@Override

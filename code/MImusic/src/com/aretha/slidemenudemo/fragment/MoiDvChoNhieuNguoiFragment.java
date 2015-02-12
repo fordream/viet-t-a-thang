@@ -312,10 +312,6 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 				progressDialog.dismiss();
 			}
 
-			@Override
-			public void onError() {
-				onError("");
-			}
 		});
 
 	}

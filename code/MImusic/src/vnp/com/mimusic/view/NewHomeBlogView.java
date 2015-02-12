@@ -12,10 +12,12 @@ import vnp.com.db.datastore.DichVuStore;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.util.Conts;
+import vnp.com.mimusic.util.LogUtils;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -26,6 +28,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.meetme.android.horizontallistview.HorizontalListView;
+import com.meetme.android.horizontallistview.HorizontalListView.OnScrollStateChangedListener;
 
 /**
  * vnp.com.mimusic.view.HeaderView
@@ -65,6 +68,8 @@ public abstract class NewHomeBlogView extends LinearLayout implements OnClickLis
 		mHlvSimpleList.setOnItemClickListener(this);
 		main = Conts.getView(this, R.id.main);
 		title = Conts.getView(this, R.id.title);
+
+//		mHlvSimpleList.setOnTouchListener(onTouchLinstener);
 		if (type() == 0) {
 			title.setText(R.string.dichvudexuat);
 			mHlvSimpleList.setVisibility(View.VISIBLE);
@@ -249,4 +254,23 @@ public abstract class NewHomeBlogView extends LinearLayout implements OnClickLis
 	 * 
 	 */
 	public abstract int type();
+
+//	private OnTouchListener onTouchLinstener = new OnTouchListener() {
+//
+//		@Override
+//		public boolean onTouch(View v, MotionEvent event) {
+//
+//			if (event.getAction() == MotionEvent.ACTION_DOWN || event.getAction() == MotionEvent.ACTION_MOVE) {
+//				enableScroll(false);
+//			} else if (event.getAction() == MotionEvent.ACTION_CANCEL || event.getAction() == MotionEvent.ACTION_UP) {
+//				enableScroll(true);
+//			}
+//			return false;
+//		}
+//	};
+
+	public void enableScroll(boolean b) {
+
+	}
+
 }

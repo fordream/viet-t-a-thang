@@ -135,10 +135,6 @@ public class DangKyDialog extends BaseAdialog implements android.view.View.OnCli
 					closePopUp();
 				}
 
-				@Override
-				public void onError() {
-					onError("onError");
-				}
 			});
 		} else {
 			mDismiss();

@@ -224,12 +224,12 @@ public class Conts {
 						} catch (Exception exception) {
 						}
 						if (contsCallBack != null) {
-							contsCallBack.onError(message);
+							contsCallBack.onError("");
 						}
 					}
 				} catch (Exception exception) {
 					if (contsCallBack != null) {
-						contsCallBack.onError();
+						contsCallBack.onError(activity.getString(R.string.error_network));
 					}
 				}
 
@@ -252,8 +252,7 @@ public class Conts {
 			}
 		};
 
-		if (!API.API_R013.equals(resClientCallBack.getApiName()) 
-				&& !API.API_R001.equals(resClientCallBack.getApiName())) {
+		if (!API.API_R013.equals(resClientCallBack.getApiName()) && !API.API_R001.equals(resClientCallBack.getApiName())) {
 			bundles.putString("token", new AccountStore(activity).getToken());
 		}
 
@@ -271,7 +270,7 @@ public class Conts {
 	public interface IContsCallBack {
 		public void onStart();
 
-		public void onError();
+//		public void onError();
 
 		public void onError(String message);
 
@@ -765,8 +764,10 @@ public class Conts {
 		ImageLoaderUtils.getInstance(menu_right_item_img_icon.getContext()).showAvatarContact(menu_right_item_img_icon, avatar, contact_id, resAvatar);
 	}
 
-	public static void showLogoDichvu(final ImageView menu_right_item_img_icon, final String avatar) {
-		ImageLoaderUtils.getInstance(menu_right_item_img_icon.getContext()).showLogoDichvu(menu_right_item_img_icon, avatar);
+	public static void showLogoDichvu(final ImageView icon, final String avatar) {
+
+//		LogUtils.e("showLogoDichvu", avatar);
+		ImageLoaderUtils.getInstance(icon.getContext()).showLogoDichvu(icon, avatar);
 	}
 
 	public static void showLogoTinTuc(ImageView tintuc_item_img_icon, String images) {

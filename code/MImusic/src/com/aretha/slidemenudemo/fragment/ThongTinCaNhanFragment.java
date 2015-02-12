@@ -100,11 +100,6 @@ public class ThongTinCaNhanFragment extends BaseFragment implements OnItemClickL
 				Conts.showView(loadingView, false);
 			}
 
-			@Override
-			public void onError() {
-				Conts.toast(getActivity(), "onError");
-				Conts.showView(loadingView, false);
-			}
 		});
 
 		return view;

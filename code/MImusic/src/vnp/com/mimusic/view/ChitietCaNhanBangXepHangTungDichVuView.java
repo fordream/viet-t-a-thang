@@ -119,12 +119,6 @@ public class ChitietCaNhanBangXepHangTungDichVuView extends LinearLayout impleme
 			}
 
 			@Override
-			public void onError() {
-				if (positionChecked == indexApi)
-					onError("erorr");
-			}
-
-			@Override
 			public void onError(String message) {
 				if (positionChecked == indexApi) {
 					Conts.showDialogThongbao(getContext(), message);

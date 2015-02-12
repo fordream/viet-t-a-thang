@@ -96,10 +96,6 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 
 			}
 
-			@Override
-			public void onError() {
-				onError("");
-			}
 		});
 
 		new VasHomeScrollListView(getHeaderView(), headerView, new ListView[] { list }, getActivity());
@@ -120,6 +116,12 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 			@Override
 			public void onClickHeader() {
 				(((RootMenuActivity) getActivity())).homeXemall(getString(R.string.dichvudexuat));
+			}
+
+			@Override
+			public void enableScroll(boolean b) {
+				super.enableScroll(b);
+
 			}
 		};
 		list.addHeaderView(dichcudexuat);

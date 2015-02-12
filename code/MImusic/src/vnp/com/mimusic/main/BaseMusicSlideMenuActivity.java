@@ -225,10 +225,6 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 						}
 					}
 
-					@Override
-					public void onError() {
-						onError("onError");
-					}
 				});
 			}
 		});

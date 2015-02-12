@@ -92,10 +92,6 @@ public class HuongDanBanHangFragment extends BaseFragment implements OnItemClick
 				Conts.showView(loadingView, false);
 			}
 
-			@Override
-			public void onError() {
-				onError("onError");
-			}
 		});
 
 		return view;

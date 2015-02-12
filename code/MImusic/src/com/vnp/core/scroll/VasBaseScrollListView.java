@@ -83,7 +83,7 @@ public abstract class VasBaseScrollListView implements OnTouchListener {
 	private int height;
 
 	private void update(int dy, int yCurrentTop) {
-		dy = dy / 2;
+		dy = dy / 4;
 		ViewGroup.LayoutParams layoutParams = header.getLayoutParams();
 
 		int marginTop = 0;

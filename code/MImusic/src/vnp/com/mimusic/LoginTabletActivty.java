@@ -122,10 +122,6 @@ public class LoginTabletActivty extends Activity implements OnClickListener {
 							findViewById(R.id.activity_login_btn) });//
 				}
 
-				@Override
-				public void onError() {
-					onError("onError");
-				}
 			});
 		}
 		findViewById(R.id.activity_login_main).setVisibility(View.VISIBLE);
@@ -160,10 +156,6 @@ public class LoginTabletActivty extends Activity implements OnClickListener {
 						findViewById(R.id.activity_login_btn) });//
 			}
 
-			@Override
-			public void onError() {
-				onError("onError");
-			}
 		});
 	}
 

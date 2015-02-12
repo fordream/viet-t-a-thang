@@ -87,34 +87,37 @@ public class MImusicService extends Service {
 				/*
 				 * get thong tin dich vu
 				 */
-				execute(RequestMethod.GET, API.API_R004, new Bundle(), new vnp.com.mimusic.util.Conts.IContsCallBack() {
 
-					@Override
-					public void onStart() {
-
-					}
-
-					@Override
-					public void onError() {
-						onError("");
-					}
-
-					@Override
-					public void onError(String message) {
-						if (contsCallBack != null) {
-							contsCallBack.onError(message);
-						}
-					}
-
-					@Override
-					public void onSuscess(JSONObject response) {
-						if (contsCallBack != null) {
-							contsCallBack.onSuscess(response);
-						}
-
-						callUpdateData();
-					}
-				});
+				exeDichvu(contsCallBack);
+				// execute(RequestMethod.GET, API.API_R004, new Bundle(), new
+				// vnp.com.mimusic.util.Conts.IContsCallBack() {
+				//
+				// @Override
+				// public void onStart() {
+				//
+				// }
+				//
+				// @Override
+				// public void onError() {
+				// onError("");
+				// }
+				//
+				// @Override
+				// public void onError(String message) {
+				// if (contsCallBack != null) {
+				// contsCallBack.onError(message);
+				// }
+				// }
+				//
+				// @Override
+				// public void onSuscess(JSONObject response) {
+				// if (contsCallBack != null) {
+				// contsCallBack.onSuscess(response);
+				// }
+				//
+				// callUpdateData();
+				// }
+				// });
 
 			}
 
@@ -128,12 +131,6 @@ public class MImusicService extends Service {
 			public void onError(String message) {
 				if (contsCallBack != null)
 					contsCallBack.onError(message);
-			}
-
-			@Override
-			public void onError() {
-				if (contsCallBack != null)
-					contsCallBack.onError();
 			}
 		});
 	}
@@ -169,47 +166,43 @@ public class MImusicService extends Service {
 			public void onSuscess(JSONObject jsonObject) {
 				long time = System.currentTimeMillis();
 				accountStore.save(jsonObject, p);
-				LogUtils.e("timex", (is3G ? API.API_R001 : API.API_R002) + " update " + (System.currentTimeMillis() - time));
-
-				execute(RequestMethod.GET, API.API_R004, new Bundle(), new vnp.com.mimusic.util.Conts.IContsCallBack() {
-					@Override
-					public void onStart() {
-					}
-
-					@Override
-					public void onError() {
-						onError("");
-					}
-
-					@Override
-					public void onError(String message) {
-						if (contsCallBack != null) {
-							contsCallBack.onError(message);
-						}
-					}
-
-					@Override
-					public void onSuscess(JSONObject response) {
-						if (contsCallBack != null) {
-							contsCallBack.onSuscess(response);
-						}
-
-						callUpdateData();
-					}
-				});
+				exeDichvu(contsCallBack);
+				// execute(RequestMethod.GET, API.API_R004, new Bundle(), new
+				// vnp.com.mimusic.util.Conts.IContsCallBack() {
+				// @Override
+				// public void onStart() {
+				// }
+				//
+				// @Override
+				// public void onError() {
+				// onError("");
+				// }
+				//
+				// @Override
+				// public void onError(String message) {
+				// if (contsCallBack != null) {
+				// contsCallBack.onError(message);
+				// }
+				// }
+				//
+				// @Override
+				// public void onSuscess(JSONObject response) {
+				// if (contsCallBack != null) {
+				// contsCallBack.onSuscess(response);
+				// }
+				//
+				// callUpdateData();
+				// }
+				// });
 			}
 
 			@Override
 			public void onError(String message) {
-				if (contsCallBack != null)
+				if (contsCallBack != null) {
 					contsCallBack.onError(message);
+				}
 			}
 
-			@Override
-			public void onError() {
-				if (contsCallBack != null)
-					contsCallBack.onError();
-			}
 		});
 
 	}
@@ -236,10 +229,6 @@ public class MImusicService extends Service {
 
 			}
 
-			@Override
-			public void onError() {
-
-			}
 		});
 
 		callDongBoDanhBaLen(new IContsCallBack() {
@@ -257,10 +246,6 @@ public class MImusicService extends Service {
 			public void onError(String message) {
 			}
 
-			@Override
-			public void onError() {
-
-			}
 		});
 	}
 
@@ -342,17 +327,10 @@ public class MImusicService extends Service {
 
 						@Override
 						public void onError(String message) {
-							Conts.toast(MImusicService.this, message);
-							startDongBoDAnhBaXuong();
-						}
-
-						@Override
-						public void onError() {
 							startDongBoDAnhBaXuong();
 						}
 
 						private void startDongBoDAnhBaXuong() {
-
 							dongboDanhBaXuong(contsCallBack, listSdt);
 						}
 					});
@@ -365,7 +343,6 @@ public class MImusicService extends Service {
 	private void addPhoneId(String phoneNo, String photo_id) {
 
 		if (!Conts.isBlank(phoneNo) && !Conts.isBlank(photo_id)) {
-
 			if (phoneNo.startsWith("+840")) {
 				phoneNo = "84" + phoneNo.substring("+840".length(), phoneNo.length());
 			} else if (phoneNo.startsWith("+84")) {
@@ -409,12 +386,6 @@ public class MImusicService extends Service {
 				}
 			}
 
-			@Override
-			public void onError() {
-				if (contsCallBack != null) {
-					contsCallBack.onError();
-				}
-			}
 		});
 	}
 
@@ -476,10 +447,6 @@ public class MImusicService extends Service {
 						if (contsCallBack != null) {
 							contsCallBack.onSuscess(response);
 						}
-
-						if (API.API_R013.equals(api)) {
-							callUpdateData();
-						}
 					};
 				}.execute("");
 
@@ -491,11 +458,6 @@ public class MImusicService extends Service {
 					contsCallBack.onError(message);
 			}
 
-			@Override
-			public void onError() {
-				if (contsCallBack != null)
-					contsCallBack.onError();
-			}
 		});
 	}
 
@@ -743,5 +705,38 @@ public class MImusicService extends Service {
 		String images = Conts.encodeToString(this, path);
 		bundle.putString("images", images);// path
 		execute(RequestMethod.POST, API.API_R023, bundle, iContsCallBack);
+	}
+
+	private void exeDichvu(final IContsCallBack contsCallBack) {
+
+		final boolean isLoaded = dichVuStore.getDichvu().length() > 0;
+		if (isLoaded) {
+			contsCallBack.onSuscess(null);
+		}
+
+		execute(RequestMethod.GET, API.API_R004, new Bundle(), new vnp.com.mimusic.util.Conts.IContsCallBack() {
+			@Override
+			public void onStart() {
+			}
+
+			@Override
+			public void onError(String message) {
+				if (contsCallBack != null && !isLoaded) {
+					contsCallBack.onError(message);
+				}
+			}
+
+			@Override
+			public void onSuscess(JSONObject response) {
+				if (contsCallBack != null && !isLoaded) {
+					contsCallBack.onSuscess(response);
+				}
+
+				if (!isLoaded) {
+					callUpdateData();
+				}
+			}
+		});
+
 	}
 }

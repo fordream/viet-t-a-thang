@@ -82,10 +82,6 @@ public class SplashScreenActivity extends Activity {
 						}
 					}
 
-					@Override
-					public void onError() {
-						onError("onError");
-					}
 				});
 			} else {
 				if (!isFinishing()) {

@@ -52,15 +52,15 @@ public class ReCommentDichVuItemView extends LinearLayout {
 	}
 
 	public void setData(JSONObject item, int position) {
-		ImageView home_item_img_icon = (ImageView) findViewById(R.id.icon);
+		ImageView icon = (ImageView) findViewById(R.id.icon);
 
 		Conts.getView(this, R.id.left).setVisibility(View.GONE);
-		home_item_img_icon.setBackgroundResource(R.drawable.new_home_dv_bg_1);
-		home_item_img_icon.setImageResource(R.drawable.tranfer);
+//		icon.setBackgroundResource(R.drawable.new_home_dv_bg_1);
+		icon.setImageResource(R.drawable.tranfer);
 		Conts.setTextView(findViewById(R.id.name), "");
 
 		String service_icon = Conts.getString(item, DichVuStore.service_icon);
-		Conts.showLogoDichvu(home_item_img_icon, service_icon);
+		Conts.showLogoDichvu(icon, service_icon);
 		Conts.setTextView(findViewById(R.id.name), item, DichVuStore.service_name);
 
 		Conts.getView(this, R.id.left).setVisibility(position == 0 ? View.VISIBLE : View.GONE);

@@ -137,12 +137,6 @@ public class ChiTietDichVuFragment extends BaseFragment implements View.OnClickL
 				}
 
 				@Override
-				public void onError() {
-					// Conts.toast(getActivity(), "onError");
-					Conts.showView(loadingView, false);
-				}
-
-				@Override
 				public void onStart() {
 					Conts.showView(loadingView, false);
 				}
