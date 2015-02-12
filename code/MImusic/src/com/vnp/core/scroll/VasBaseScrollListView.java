@@ -73,13 +73,7 @@ public abstract class VasBaseScrollListView implements OnTouchListener {
 		update(marginTop);
 
 		update(header, marginTop);
-		// if (layoutParams instanceof LinearLayout.LayoutParams) {
-		// ((LinearLayout.LayoutParams) layoutParams).topMargin = marginTop;
-		// } else if (layoutParams instanceof RelativeLayout.LayoutParams) {
-		// ((RelativeLayout.LayoutParams) layoutParams).topMargin = marginTop;
-		// }
-		//
-		// header.setLayoutParams(layoutParams);
+
 	}
 
 	private int height;
@@ -108,32 +102,20 @@ public abstract class VasBaseScrollListView implements OnTouchListener {
 		}
 
 		update(marginTop);
-		// if (layoutParams instanceof LinearLayout.LayoutParams) {
-		// ((LinearLayout.LayoutParams) layoutParams).topMargin = marginTop;
-		// } else if (layoutParams instanceof RelativeLayout.LayoutParams) {
-		// ((RelativeLayout.LayoutParams) layoutParams).topMargin = marginTop;
-		// }
-		//
-		// header.setLayoutParams(layoutParams);
 
 		update(header, marginTop);
 	}
 
 	public void update(final View v, final int margintop) {
 		if (v != null) {
-			v.post(new Runnable() {
 
-				@Override
-				public void run() {
-					ViewGroup.LayoutParams layoutParamsHeader = v.getLayoutParams();
-					if (layoutParamsHeader instanceof LinearLayout.LayoutParams) {
-						((LinearLayout.LayoutParams) layoutParamsHeader).topMargin = margintop;
-					} else if (layoutParamsHeader instanceof RelativeLayout.LayoutParams) {
-						((RelativeLayout.LayoutParams) layoutParamsHeader).topMargin = margintop;
-					}
-					v.setLayoutParams(layoutParamsHeader);
-				}
-			});
+			ViewGroup.LayoutParams layoutParamsHeader = v.getLayoutParams();
+			if (layoutParamsHeader instanceof LinearLayout.LayoutParams) {
+				((LinearLayout.LayoutParams) layoutParamsHeader).topMargin = margintop;
+			} else if (layoutParamsHeader instanceof RelativeLayout.LayoutParams) {
+				((RelativeLayout.LayoutParams) layoutParamsHeader).topMargin = margintop;
+			}
+			v.setLayoutParams(layoutParamsHeader);
 
 		}
 	}
@@ -144,20 +126,7 @@ public abstract class VasBaseScrollListView implements OnTouchListener {
 			if (listView.getHeaderViewsCount() > 0) {
 				View view = listView.getChildAt(0);
 				if (view instanceof HeaderView) {
-					HeaderView headerView = ((HeaderView) view);
-					ViewGroup.LayoutParams layoutParamsHeader = headerView.findViewById(R.id.header_main_content).getLayoutParams();
-					// if (layoutParamsHeader instanceof
-					// LinearLayout.LayoutParams) {
-					// ((LinearLayout.LayoutParams)
-					// layoutParamsHeader).topMargin = marginTop;
-					// } else if (layoutParamsHeader instanceof
-					// RelativeLayout.LayoutParams) {
-					// ((RelativeLayout.LayoutParams)
-					// layoutParamsHeader).topMargin = marginTop;
-					// }
-					// headerView.findViewById(R.id.header_main_content).setLayoutParams(layoutParamsHeader);
-
-					update(headerView.findViewById(R.id.header_main_content), marginTop);
+					update(view.findViewById(R.id.header_main_content), marginTop);
 				}
 			}
 		}

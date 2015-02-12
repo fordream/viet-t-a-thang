@@ -12,23 +12,22 @@ import vnp.com.db.datastore.DichVuStore;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.util.Conts;
-import vnp.com.mimusic.util.LogUtils;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.BaseAdapter;
+import android.widget.ArrayAdapter;
+import android.widget.Filter;
+import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.meetme.android.horizontallistview.HorizontalListView;
-import com.meetme.android.horizontallistview.HorizontalListView.OnScrollStateChangedListener;
 
 /**
  * vnp.com.mimusic.view.HeaderView
@@ -42,14 +41,17 @@ public abstract class NewHomeBlogView extends LinearLayout implements OnClickLis
 	private DichVuStore dichVuStore;
 	private LinearLayout main;
 	private TextView title;
-	private HorizontalListView mHlvSimpleList;
+	private HorizontalScrollView horizontalscrollview;
+	private LinearLayout horizontalscrollview_main;
 	private Context xContext;
+	private View home_header_main;
+
+	// private DichVuDeXuatAdapter dichVuDeXuatAdapter;
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		JSONObject cursor = (JSONObject) parent.getItemAtPosition(position);
 		String xid = Conts.getString(cursor, DichVuStore.service_code);
-
 		(((RootMenuActivity) xContext)).gotoChiTietDichVuFromHome(xid);
 	}
 
@@ -62,17 +64,19 @@ public abstract class NewHomeBlogView extends LinearLayout implements OnClickLis
 	private void init() {
 		((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.new_home_blog, this);
 		dichVuStore = new DichVuStore(getContext());
-
+		// dichVuDeXuatAdapter = new DichVuDeXuatAdapter(getContext());
 		findViewById(R.id.dichvubanchay).setOnClickListener(this);
-		mHlvSimpleList = (HorizontalListView) findViewById(R.id.hlvSimpleList);
-		mHlvSimpleList.setOnItemClickListener(this);
+
+		home_header_main = findViewById(R.id.home_header_main);
+
+		horizontalscrollview = (HorizontalScrollView) findViewById(R.id.horizontalscrollview);
+		horizontalscrollview_main = (LinearLayout) findViewById(R.id.horizontalscrollview_main);
+
 		main = Conts.getView(this, R.id.main);
 		title = Conts.getView(this, R.id.title);
-
-//		mHlvSimpleList.setOnTouchListener(onTouchLinstener);
 		if (type() == 0) {
 			title.setText(R.string.dichvudexuat);
-			mHlvSimpleList.setVisibility(View.VISIBLE);
+			horizontalscrollview.setVisibility(View.VISIBLE);
 		} else if (type() == 1) {
 			title.setText(R.string.moithanhvien);
 		} else {
@@ -98,9 +102,12 @@ public abstract class NewHomeBlogView extends LinearLayout implements OnClickLis
 	}
 
 	private void addDichVuHot() {
+		// if (main.getChildCount() > 0) {
+		// return;
+		// }
+		main.removeAllViews();
 		JSONArray array = dichVuStore.getDichvu();
 		int index = 0;
-		main.removeAllViews();
 		for (int i = 0; i < array.length(); i++) {
 			try {
 				JSONObject object = array.getJSONObject(i);
@@ -112,13 +119,10 @@ public abstract class NewHomeBlogView extends LinearLayout implements OnClickLis
 				values.put("content", content);
 				values.put(DichVuStore.ID, Conts.getString(object, DichVuStore.ID));
 				values.put("type", "dangky");
-
 				DichVuItemView child = new DichVuItemView(getContext());
 				child.setData(object, i);
-
 				main.addView(child);
 				final String service_code = Conts.getString(object, DichVuStore.service_code);
-
 				final int position = index;
 				child.setOnClickListener(new OnClickListener() {
 					@Override
@@ -140,7 +144,6 @@ public abstract class NewHomeBlogView extends LinearLayout implements OnClickLis
 					child.findViewById(R.id.home_item_right_control_1).setOnClickListener(null);
 				} else {
 					child.findViewById(R.id.home_item_right_control_1).setOnClickListener(new OnClickListener() {
-
 						@Override
 						public void onClick(View v) {
 							dangky(values);
@@ -160,10 +163,11 @@ public abstract class NewHomeBlogView extends LinearLayout implements OnClickLis
 	}
 
 	private void addUerHot() {
+		if (main.getChildCount() > 0) {
+			return;
+		}
+
 		Cursor cursorUserRecomment = Recomment.getCursorFromUser(getContext(), 5);
-
-		main.removeAllViews();
-
 		if (cursorUserRecomment != null) {
 			while (cursorUserRecomment.moveToNext()) {
 				NewHomeItemView child = new NewHomeItemView(getContext());
@@ -180,25 +184,29 @@ public abstract class NewHomeBlogView extends LinearLayout implements OnClickLis
 						(((RootMenuActivity) xContext)).moiContactUser(user, name, position);
 					}
 				});
-
 			}
 		}
 
 		if (cursorUserRecomment != null) {
 			cursorUserRecomment.close();
 		}
+
+		if (main.getChildCount() > 0) {
+			home_header_main.setVisibility(View.VISIBLE);
+		} else {
+			home_header_main.setVisibility(View.GONE);
+		}
 	}
 
 	private void addDichVuDeXuat() {
-		if (mHlvSimpleList.getAdapter() != null) {
-			if (mHlvSimpleList.getAdapter().getCount() > 0) {
-				return;
-			}
+
+		if (horizontalscrollview_main.getChildCount() > 0) {
+			return;
 		}
 
 		String listRecomment = Recomment.getListReCommentDichvu(getContext());
 		StringTokenizer stringTokenizer = new StringTokenizer(listRecomment, ",");
-		final JSONArray array = new JSONArray();
+		JSONArray array = new JSONArray();
 		while (stringTokenizer.hasMoreElements()) {
 			String serviceCode = stringTokenizer.nextElement().toString();
 			if (!Conts.isBlank(serviceCode)) {
@@ -207,39 +215,23 @@ public abstract class NewHomeBlogView extends LinearLayout implements OnClickLis
 			}
 		}
 
-		BaseAdapter adapter = new BaseAdapter() {
-
-			@Override
-			public View getView(int position, View convertView, ViewGroup parent) {
-				if (convertView == null) {
-					convertView = new ReCommentDichVuItemView(parent.getContext());
-				}
-				((ReCommentDichVuItemView) convertView).setData((JSONObject) getItem(position), position);
-				return convertView;
+		for (int position = 0; position < array.length(); position++) {
+			try {
+				JSONObject object = array.getJSONObject(position);
+				ReCommentDichVuItemView convertView = new ReCommentDichVuItemView(getContext());
+				((ReCommentDichVuItemView) convertView).setData((JSONObject) object, position);
+				horizontalscrollview_main.addView(convertView);
+				convertView.setOnClickListener(new DichVuDeXuatOnClickListener(object));
+			} catch (JSONException e) {
 			}
 
-			@Override
-			public long getItemId(int position) {
-				return position;
-			}
+		}
 
-			@Override
-			public Object getItem(int position) {
-				try {
-					return array.get(position);
-				} catch (JSONException e) {
-					return new JSONObject();
-				}
-			}
-
-			@Override
-			public int getCount() {
-				return array.length();
-			}
-		};
-
-		mHlvSimpleList.setAdapter(adapter);
-
+		if (horizontalscrollview_main.getChildCount() > 0) {
+			home_header_main.setVisibility(View.VISIBLE);
+		} else {
+			home_header_main.setVisibility(View.GONE);
+		}
 	}
 
 	public void dangky(ContentValues values) {
@@ -255,22 +247,21 @@ public abstract class NewHomeBlogView extends LinearLayout implements OnClickLis
 	 */
 	public abstract int type();
 
-//	private OnTouchListener onTouchLinstener = new OnTouchListener() {
-//
-//		@Override
-//		public boolean onTouch(View v, MotionEvent event) {
-//
-//			if (event.getAction() == MotionEvent.ACTION_DOWN || event.getAction() == MotionEvent.ACTION_MOVE) {
-//				enableScroll(false);
-//			} else if (event.getAction() == MotionEvent.ACTION_CANCEL || event.getAction() == MotionEvent.ACTION_UP) {
-//				enableScroll(true);
-//			}
-//			return false;
-//		}
-//	};
-
 	public void enableScroll(boolean b) {
 
 	}
 
+	private class DichVuDeXuatOnClickListener implements View.OnClickListener {
+		JSONObject cursor;
+
+		public DichVuDeXuatOnClickListener(JSONObject jsonObject) {
+			this.cursor = jsonObject;
+		}
+
+		@Override
+		public void onClick(View v) {
+			String service_code = Conts.getString(cursor, DichVuStore.service_code);
+			(((RootMenuActivity) xContext)).gotoChiTietDichVuFromHome(service_code);
+		}
+	}
 }

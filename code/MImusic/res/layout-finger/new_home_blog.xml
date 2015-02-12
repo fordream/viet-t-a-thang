@@ -40,13 +40,32 @@
                 android:textColor="#3d3d3d"
                 android:textSize="@dimen/dimen_11dp" />
         </RelativeLayout>
-
+        <!--
         <com.meetme.android.horizontallistview.HorizontalListView
             android:id="@+id/hlvSimpleList"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_120dp"
             android:background="@drawable/home_bg"
             android:visibility="gone" />
+        -->
+
+        <HorizontalScrollView
+            android:id="@+id/horizontalscrollview"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_120dp"
+            android:background="@drawable/home_bg"
+            android:scrollbarThumbHorizontal="@drawable/tranfer"
+            android:scrollbarThumbVertical="@drawable/tranfer"
+            android:scrollbars="none"
+            android:visibility="gone" >
+
+            <LinearLayout
+                android:id="@+id/horizontalscrollview_main"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal" >
+            </LinearLayout>
+        </HorizontalScrollView>
 
         <LinearLayout
             android:id="@+id/main"
@@ -57,7 +76,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-             android:layout_height="@dimen/dimen_10dp"
+            android:layout_height="@dimen/dimen_10dp"
             android:background="@drawable/home_bg"
             android:gravity="center|bottom" >
 
