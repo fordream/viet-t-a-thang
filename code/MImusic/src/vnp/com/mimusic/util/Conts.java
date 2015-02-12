@@ -223,8 +223,12 @@ public class Conts {
 							}
 						} catch (Exception exception) {
 						}
+
 						if (contsCallBack != null) {
-							contsCallBack.onError(activity.getString(R.string.error_network));
+							if (Conts.isBlank(message)) {
+								message = activity.getString(R.string.error_network);
+							}
+							contsCallBack.onError(message);
 						}
 					}
 				} catch (Exception exception) {
