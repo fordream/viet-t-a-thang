@@ -710,7 +710,7 @@ public class MImusicService extends Service {
 	private void exeDichvu(final IContsCallBack contsCallBack) {
 
 		final boolean isLoaded = dichVuStore.getDichvu().length() > 0;
-		if (isLoaded) {
+		if (isLoaded && contsCallBack != null) {
 			contsCallBack.onSuscess(null);
 		}
 

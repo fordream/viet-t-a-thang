@@ -224,7 +224,7 @@ public class Conts {
 						} catch (Exception exception) {
 						}
 						if (contsCallBack != null) {
-							contsCallBack.onError("");
+							contsCallBack.onError(activity.getString(R.string.error_network));
 						}
 					}
 				} catch (Exception exception) {
@@ -270,7 +270,7 @@ public class Conts {
 	public interface IContsCallBack {
 		public void onStart();
 
-//		public void onError();
+		// public void onError();
 
 		public void onError(String message);
 
@@ -766,7 +766,7 @@ public class Conts {
 
 	public static void showLogoDichvu(final ImageView icon, final String avatar) {
 
-//		LogUtils.e("showLogoDichvu", avatar);
+		// LogUtils.e("showLogoDichvu", avatar);
 		ImageLoaderUtils.getInstance(icon.getContext()).showLogoDichvu(icon, avatar);
 	}
 

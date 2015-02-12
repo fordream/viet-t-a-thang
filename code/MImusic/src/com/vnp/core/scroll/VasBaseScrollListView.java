@@ -50,14 +50,14 @@ public abstract class VasBaseScrollListView implements OnTouchListener {
 			}
 		}
 		return false;
-
 	}
 
 	private void release() {
-		ViewGroup.LayoutParams layoutParams = header.getLayoutParams();
+
 		int marginTop = 0;
 		int height = header.getHeight();
 
+		ViewGroup.LayoutParams layoutParams = header.getLayoutParams();
 		if (layoutParams instanceof LinearLayout.LayoutParams) {
 			marginTop = ((LinearLayout.LayoutParams) layoutParams).topMargin;
 		} else if (layoutParams instanceof RelativeLayout.LayoutParams) {
@@ -71,26 +71,28 @@ public abstract class VasBaseScrollListView implements OnTouchListener {
 		}
 
 		update(marginTop);
-		if (layoutParams instanceof LinearLayout.LayoutParams) {
-			((LinearLayout.LayoutParams) layoutParams).topMargin = marginTop;
-		} else if (layoutParams instanceof RelativeLayout.LayoutParams) {
-			((RelativeLayout.LayoutParams) layoutParams).topMargin = marginTop;
-		}
 
-		header.setLayoutParams(layoutParams);
+		update(header, marginTop);
+		// if (layoutParams instanceof LinearLayout.LayoutParams) {
+		// ((LinearLayout.LayoutParams) layoutParams).topMargin = marginTop;
+		// } else if (layoutParams instanceof RelativeLayout.LayoutParams) {
+		// ((RelativeLayout.LayoutParams) layoutParams).topMargin = marginTop;
+		// }
+		//
+		// header.setLayoutParams(layoutParams);
 	}
 
 	private int height;
 
 	private void update(int dy, int yCurrentTop) {
-		dy = dy / 4;
-		ViewGroup.LayoutParams layoutParams = header.getLayoutParams();
+		dy = dy / 2;
 
 		int marginTop = 0;
 		if (height == 0) {
 			height = header.getHeight();
 		}
 
+		ViewGroup.LayoutParams layoutParams = header.getLayoutParams();
 		if (layoutParams instanceof LinearLayout.LayoutParams) {
 			marginTop = ((LinearLayout.LayoutParams) layoutParams).topMargin;
 		} else if (layoutParams instanceof RelativeLayout.LayoutParams) {
@@ -106,30 +108,56 @@ public abstract class VasBaseScrollListView implements OnTouchListener {
 		}
 
 		update(marginTop);
-		if (layoutParams instanceof LinearLayout.LayoutParams) {
-			((LinearLayout.LayoutParams) layoutParams).topMargin = marginTop;
-		} else if (layoutParams instanceof RelativeLayout.LayoutParams) {
-			((RelativeLayout.LayoutParams) layoutParams).topMargin = marginTop;
-		}
+		// if (layoutParams instanceof LinearLayout.LayoutParams) {
+		// ((LinearLayout.LayoutParams) layoutParams).topMargin = marginTop;
+		// } else if (layoutParams instanceof RelativeLayout.LayoutParams) {
+		// ((RelativeLayout.LayoutParams) layoutParams).topMargin = marginTop;
+		// }
+		//
+		// header.setLayoutParams(layoutParams);
 
-		header.setLayoutParams(layoutParams);
+		update(header, marginTop);
+	}
+
+	public void update(final View v, final int margintop) {
+		if (v != null) {
+			v.post(new Runnable() {
+
+				@Override
+				public void run() {
+					ViewGroup.LayoutParams layoutParamsHeader = v.getLayoutParams();
+					if (layoutParamsHeader instanceof LinearLayout.LayoutParams) {
+						((LinearLayout.LayoutParams) layoutParamsHeader).topMargin = margintop;
+					} else if (layoutParamsHeader instanceof RelativeLayout.LayoutParams) {
+						((RelativeLayout.LayoutParams) layoutParamsHeader).topMargin = margintop;
+					}
+					v.setLayoutParams(layoutParamsHeader);
+				}
+			});
+
+		}
 	}
 
 	private void update(int marginTop) {
+
 		for (ListView listView : listViews) {
 			if (listView.getHeaderViewsCount() > 0) {
 				View view = listView.getChildAt(0);
 				if (view instanceof HeaderView) {
 					HeaderView headerView = ((HeaderView) view);
+					ViewGroup.LayoutParams layoutParamsHeader = headerView.findViewById(R.id.header_main_content).getLayoutParams();
+					// if (layoutParamsHeader instanceof
+					// LinearLayout.LayoutParams) {
+					// ((LinearLayout.LayoutParams)
+					// layoutParamsHeader).topMargin = marginTop;
+					// } else if (layoutParamsHeader instanceof
+					// RelativeLayout.LayoutParams) {
+					// ((RelativeLayout.LayoutParams)
+					// layoutParamsHeader).topMargin = marginTop;
+					// }
+					// headerView.findViewById(R.id.header_main_content).setLayoutParams(layoutParamsHeader);
 
-					ViewGroup.LayoutParams layoutParams = headerView.findViewById(R.id.header_main_content).getLayoutParams();
-					if (layoutParams instanceof LinearLayout.LayoutParams) {
-						((LinearLayout.LayoutParams) layoutParams).topMargin = marginTop;
-					} else if (layoutParams instanceof RelativeLayout.LayoutParams) {
-						((RelativeLayout.LayoutParams) layoutParams).topMargin = marginTop;
-					}
-
-					headerView.findViewById(R.id.header_main_content).setLayoutParams(layoutParams);
+					update(headerView.findViewById(R.id.header_main_content), marginTop);
 				}
 			}
 		}

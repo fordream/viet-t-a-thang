@@ -46,11 +46,6 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 	}
 
 	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
-	}
-
-	@Override
 	public void onResume() {
 		super.onResume();
 		updateUI(updateSuccess);
@@ -74,8 +69,6 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 
 		list.setAdapter(new ArrayAdapter<String>(getActivity(), 0, new String[] {}));
 
-		// updateUI(updateSuccess);
-
 		Bundle bundle = new Bundle();
 		execute(RequestMethod.GET, API.API_R026, bundle, new IContsCallBack() {
 			@Override
@@ -93,7 +86,6 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 			@Override
 			public void onError(String message) {
 				updateUI(updateSuccess);
-
 			}
 
 		});
@@ -180,7 +172,6 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 	};
 
 	private void updateUI(UpdateSuccess updateSuceess) {
-
 		sothuebaonenmoi.update();
 		dichvubanchay.update();
 		dichcudexuat.update();
