@@ -1,1 +1,9 @@
 phòng 904, nhà A3, làng Quốc tế thăng long, cạnh nhà Internet VDC, nguyễn phong sắc
+
+
+Bản Android
+1. bị lỗi truy cập dữ liệu sau 20' mở app ko dùng
+2. chưa bỏ fix sẵn sdt test ở màn hình login
+3.Login chậm( trên máy a Quang )
+4. Màn hình home giật ( trên máy a Quang )
+5 Cần phải customize tất cả các message từ server trả về từ tiếng anh sang tiêng việt
