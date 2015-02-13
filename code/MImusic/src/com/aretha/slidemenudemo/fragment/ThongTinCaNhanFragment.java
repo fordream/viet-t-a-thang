@@ -84,9 +84,11 @@ public class ThongTinCaNhanFragment extends BaseFragment implements OnItemClickL
 
 			@Override
 			public void onSuscess(JSONObject response) {
-				Conts.showView(loadingView, false);
+				if (getActivity() != null) {
+					Conts.showView(loadingView, false);
 
-				showData(view);
+					showData(view);
+				}
 			}
 
 			@Override
@@ -96,8 +98,10 @@ public class ThongTinCaNhanFragment extends BaseFragment implements OnItemClickL
 
 			@Override
 			public void onError(String message) {
-				Conts.toast(getActivity(), message);
-				Conts.showView(loadingView, false);
+				if (getActivity() != null) {
+					Conts.toast(getActivity(), message);
+					Conts.showView(loadingView, false);
+				}
 			}
 
 		});
