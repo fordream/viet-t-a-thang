@@ -106,26 +106,29 @@ public class ThongTinCaNhanFragment extends BaseFragment implements OnItemClickL
 	}
 
 	private void showData(View view) {
-		if (view == null)
-			view = getView();
 
-		((TextView) view.findViewById(R.id.text_name)).setText(accountStore.getStringInFor(AccountStore.fullname));
-		((TextView) view.findViewById(R.id.text_bidanh)).setText(accountStore.getStringInFor(AccountStore.nickname));
-		((TextView) view.findViewById(R.id.text_ngaysinh)).setText(accountStore.getStringInFor(AccountStore.birthday));
-		((TextView) view.findViewById(R.id.text_diachi)).setText(accountStore.getStringInFor(AccountStore.address));
-		((TextView) view.findViewById(R.id.text_sogiaodichthanhcongtrongthang)).setText(getText(accountStore.getStringInFor(AccountStore.exchange_number_month)));
-		((TextView) view.findViewById(R.id.text_sogiaodichthanhcong)).setText(getText(accountStore.getStringInFor(AccountStore.exchange_number)));
-		((TextView) view.findViewById(R.id.text_sotienhoahongtrongthang)).setText(getText(accountStore.getStringInFor(AccountStore.poundage_month)) + " " + getString(R.string.vnd));
-		((TextView) view.findViewById(R.id.text_sotienhoahong)).setText(getText(accountStore.getStringInFor(AccountStore.poundage)) + " " + getString(R.string.vnd));
-		String cover = accountStore.getStringInFor(AccountStore.cover);
-		Conts.displayImageCover(cover, menu_left_img_cover);
+		try {
+			if (view == null)
+				view = getView();
 
-		String avatar = accountStore.getStringInFor(AccountStore.avatar);
-		Conts.showInforAvatar(avatar, menu_left_img_avatar);
+			((TextView) view.findViewById(R.id.text_name)).setText(accountStore.getStringInFor(AccountStore.fullname));
+			((TextView) view.findViewById(R.id.text_bidanh)).setText(accountStore.getStringInFor(AccountStore.nickname));
+			((TextView) view.findViewById(R.id.text_ngaysinh)).setText(accountStore.getStringInFor(AccountStore.birthday));
+			((TextView) view.findViewById(R.id.text_diachi)).setText(accountStore.getStringInFor(AccountStore.address));
+			((TextView) view.findViewById(R.id.text_sogiaodichthanhcongtrongthang)).setText(getText(accountStore.getStringInFor(AccountStore.exchange_number_month)));
+			((TextView) view.findViewById(R.id.text_sogiaodichthanhcong)).setText(getText(accountStore.getStringInFor(AccountStore.exchange_number)));
+			((TextView) view.findViewById(R.id.text_sotienhoahongtrongthang)).setText(getText(accountStore.getStringInFor(AccountStore.poundage_month)) + " " + getString(R.string.vnd));
+			((TextView) view.findViewById(R.id.text_sotienhoahong)).setText(getText(accountStore.getStringInFor(AccountStore.poundage)) + " " + getString(R.string.vnd));
+			String cover = accountStore.getStringInFor(AccountStore.cover);
+			Conts.displayImageCover(cover, menu_left_img_cover);
 
-		TextView menu_left_tv_name = (TextView) view.findViewById(R.id.menu_left_tv_name);
-		menu_left_tv_name.setText(String.format("%s (%s)", accountStore.getStringInFor(AccountStore.fullname), Conts.getSDT(accountStore.getUser())));
+			String avatar = accountStore.getStringInFor(AccountStore.avatar);
+			Conts.showInforAvatar(avatar, menu_left_img_avatar);
 
+			TextView menu_left_tv_name = (TextView) view.findViewById(R.id.menu_left_tv_name);
+			menu_left_tv_name.setText(String.format("%s (%s)", accountStore.getStringInFor(AccountStore.fullname), Conts.getSDT(accountStore.getUser())));
+		} catch (Exception exception) {
+		}
 	}
 
 	private String getText(String str) {
