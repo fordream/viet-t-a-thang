@@ -20,7 +20,7 @@ public class User {
 	public static final String USER = "user";
 
 	public static final String PASSWORD = "password";
-//	public static final String STATUS = "status";
+	// public static final String STATUS = "status";
 	public static final String NAME = "name";
 	public static final String NAME_CONTACT = "name_contact";
 	public static final String NAME_CONTACT_ENG = "name_contact_ENG";
@@ -47,6 +47,10 @@ public class User {
 	public static final String poundage_month = "poundage_month";
 
 	public static final String contact_id = "contact_id";
+	/**
+	 * save time current moi
+	 */
+	public static final String time_moi = "time_moi";
 
 	public static final String CREATE_DB_TABLE() {
 		StringBuilder builder = new StringBuilder();
@@ -56,9 +60,9 @@ public class User {
 		String[] colums = new String[] {//
 		nickname, fullname, exchange_number, exchange_number_month, poundage, poundage_month, TOKEN, KEYREFRESH,
 
-		USER, PASSWORD
-//		, STATUS
-		, COVER, NAME_CONTACT_ENG, ID, birthday, address, NAME, NAME_CONTACT, contact_id,//
+		USER, PASSWORD, time_moi
+				// , STATUS
+				, COVER, NAME_CONTACT_ENG, ID, birthday, address, NAME, NAME_CONTACT, contact_id,//
 				EMAIL, AVATAR, LISTIDDVSUDUNG, SOLUONG, DOANHTHU, LISTIDUSERDAMOI, LISTIDTENDVSUDUNG //
 		};
 		for (int i = 0; i < colums.length; i++) {
@@ -191,17 +195,19 @@ public class User {
 		return name;
 	}
 
-//	public static void updateReGetToken(Context mImusicService, JSONObject response) {
-//		// TODO Auto-generated method stub
-//		ContentValues contentValues = new ContentValues();
-//		try {
-//			contentValues.put(User.KEYREFRESH, response.getString(User.KEYREFRESH));
-//			contentValues.put(User.TOKEN, response.getString(User.TOKEN));
-//			mImusicService.getContentResolver().update(User.CONTENT_URI, contentValues, String.format("%s=='1'", User.STATUS), null);
-//		} catch (JSONException e) {
-//		}
-//		
-//	}
+	// public static void updateReGetToken(Context mImusicService, JSONObject
+	// response) {
+	// // TODO Auto-generated method stub
+	// ContentValues contentValues = new ContentValues();
+	// try {
+	// contentValues.put(User.KEYREFRESH, response.getString(User.KEYREFRESH));
+	// contentValues.put(User.TOKEN, response.getString(User.TOKEN));
+	// mImusicService.getContentResolver().update(User.CONTENT_URI,
+	// contentValues, String.format("%s=='1'", User.STATUS), null);
+	// } catch (JSONException e) {
+	// }
+	//
+	// }
 
 	// public static String getToken(Context activity) {
 	// String token = null;
@@ -270,63 +276,77 @@ public class User {
 	// return token;
 	// }
 
-//	public static Cursor queryUser(Context context) {
-//		return context.getContentResolver().query(User.CONTENT_URI, null, String.format("%s = '1'", User.STATUS), null, null);
-//	}
+	// public static Cursor queryUser(Context context) {
+	// return context.getContentResolver().query(User.CONTENT_URI, null,
+	// String.format("%s = '1'", User.STATUS), null, null);
+	// }
 
-//	public static void updateUserInFor(Context context, JSONObject response) {
-//		ContentValues contentValues = new ContentValues();
-//		contentValues.put(User.address, Conts.getString(response, User.address));
-//		contentValues.put(User.ID, Conts.getString(response, User.ID));
-//		contentValues.put(User.exchange_number, Conts.getString(response, User.exchange_number));
-//		contentValues.put(User.exchange_number_month, Conts.getString(response, User.exchange_number_month));
-//		contentValues.put(User.fullname, Conts.getString(response, User.fullname));
-//		contentValues.put(User.nickname, Conts.getString(response, User.nickname));
-//		contentValues.put(User.poundage, Conts.getString(response, User.poundage));
-//		contentValues.put(User.poundage_month, Conts.getString(response, User.poundage_month));
-//		contentValues.put(User.birthday, Conts.getString(response, User.birthday));
-//		String avatar = Conts.getString(response, User.AVATAR);
-//		// LogUtils.e("avatar", avatar + "");
-//		if (!Conts.isBlank(avatar)) {
-//			contentValues.put(User.AVATAR, avatar);
-//		}
-//
-//		context.getContentResolver().update(User.CONTENT_URI, contentValues, String.format("%s=='1'", User.STATUS), null);
-//	}
-//
-//	public static void updateInForLogin(Context context, JSONObject jsonObject, String p) {
-//		String token = Conts.getString(jsonObject, "token");
-//		String keyRefresh = Conts.getString(jsonObject, "keyRefresh");
-//		String phone_number = Conts.getString(jsonObject, "phone");
-//		ContentValues values = new ContentValues();
-//		values.put(User.USER, phone_number);
-//		if (!Conts.isBlank(p)) {
-//			values.put(User.PASSWORD, p);
-//		}
-//		values.put(User.AVATAR, Conts.getString(jsonObject, User.AVATAR));
-//		values.put(User.TOKEN, token);
-//		values.put(User.KEYREFRESH, keyRefresh);
-//		values.put(User.STATUS, "1");
-//		String selection = String.format("%s='%s'", User.USER, phone_number);
-//		Cursor cursor = context.getContentResolver().query(User.CONTENT_URI, null, selection, null, null);
-//
-//		boolean isUpdate = cursor != null && cursor.getCount() >= 1;
-//		cursor.close();
-//
-//		if (isUpdate) {
-//			context.getContentResolver().update(User.CONTENT_URI, values, selection, null);
-//		} else {
-//			context.getContentResolver().insert(User.CONTENT_URI, values);
-//		}
-//	}
-//
-//	public static void updateInFor(Context context, Bundle bundle) {
-//		ContentValues contentValues = new ContentValues();
-//		Set<String> keys = bundle.keySet();
-//		for (String key : keys) {
-//			contentValues.put(key, bundle.getString(key));
-//		}
-//
-//		context.getContentResolver().update(User.CONTENT_URI, contentValues, String.format("%s=='1'", User.STATUS), null);
-//	}
+	// public static void updateUserInFor(Context context, JSONObject response)
+	// {
+	// ContentValues contentValues = new ContentValues();
+	// contentValues.put(User.address, Conts.getString(response, User.address));
+	// contentValues.put(User.ID, Conts.getString(response, User.ID));
+	// contentValues.put(User.exchange_number, Conts.getString(response,
+	// User.exchange_number));
+	// contentValues.put(User.exchange_number_month, Conts.getString(response,
+	// User.exchange_number_month));
+	// contentValues.put(User.fullname, Conts.getString(response,
+	// User.fullname));
+	// contentValues.put(User.nickname, Conts.getString(response,
+	// User.nickname));
+	// contentValues.put(User.poundage, Conts.getString(response,
+	// User.poundage));
+	// contentValues.put(User.poundage_month, Conts.getString(response,
+	// User.poundage_month));
+	// contentValues.put(User.birthday, Conts.getString(response,
+	// User.birthday));
+	// String avatar = Conts.getString(response, User.AVATAR);
+	// // LogUtils.e("avatar", avatar + "");
+	// if (!Conts.isBlank(avatar)) {
+	// contentValues.put(User.AVATAR, avatar);
+	// }
+	//
+	// context.getContentResolver().update(User.CONTENT_URI, contentValues,
+	// String.format("%s=='1'", User.STATUS), null);
+	// }
+	//
+	// public static void updateInForLogin(Context context, JSONObject
+	// jsonObject, String p) {
+	// String token = Conts.getString(jsonObject, "token");
+	// String keyRefresh = Conts.getString(jsonObject, "keyRefresh");
+	// String phone_number = Conts.getString(jsonObject, "phone");
+	// ContentValues values = new ContentValues();
+	// values.put(User.USER, phone_number);
+	// if (!Conts.isBlank(p)) {
+	// values.put(User.PASSWORD, p);
+	// }
+	// values.put(User.AVATAR, Conts.getString(jsonObject, User.AVATAR));
+	// values.put(User.TOKEN, token);
+	// values.put(User.KEYREFRESH, keyRefresh);
+	// values.put(User.STATUS, "1");
+	// String selection = String.format("%s='%s'", User.USER, phone_number);
+	// Cursor cursor = context.getContentResolver().query(User.CONTENT_URI,
+	// null, selection, null, null);
+	//
+	// boolean isUpdate = cursor != null && cursor.getCount() >= 1;
+	// cursor.close();
+	//
+	// if (isUpdate) {
+	// context.getContentResolver().update(User.CONTENT_URI, values, selection,
+	// null);
+	// } else {
+	// context.getContentResolver().insert(User.CONTENT_URI, values);
+	// }
+	// }
+	//
+	// public static void updateInFor(Context context, Bundle bundle) {
+	// ContentValues contentValues = new ContentValues();
+	// Set<String> keys = bundle.keySet();
+	// for (String key : keys) {
+	// contentValues.put(key, bundle.getString(key));
+	// }
+	//
+	// context.getContentResolver().update(User.CONTENT_URI, contentValues,
+	// String.format("%s=='1'", User.STATUS), null);
+	// }
 }
