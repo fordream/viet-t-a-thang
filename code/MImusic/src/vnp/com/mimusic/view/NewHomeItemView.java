@@ -74,7 +74,7 @@ public class NewHomeItemView extends LinearLayout {
 		Conts.setTextViewCursor(name, cursor, User.NAME_CONTACT);
 		Conts.getSDT(name);
 
-		Conts.setTextViewCursor(sdt, cursor, User.USER);
+		Conts.setTextViewCursor(sdt, cursor, User.PHONE);
 		Conts.getSDT(sdt);
 	}
 

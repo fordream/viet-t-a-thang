@@ -40,7 +40,7 @@ public abstract class MoiDvChoNhieuNguoiAdaper extends CursorAdapter {
 	}
 
 	public void addSdt(String sdt, Context context) {
-		String selection = String.format("%s = '%s'", User.USER, sdt);
+		String selection = String.format("%s = '%s'", User.PHONE, sdt);
 		Cursor cursor = context.getContentResolver().query(User.CONTENT_URI, null, selection, null, null);
 		int position = 0;
 		String _id = null;
@@ -49,7 +49,7 @@ public abstract class MoiDvChoNhieuNguoiAdaper extends CursorAdapter {
 			position = cursor.getPosition();
 			if (!listSelect.contains(cursor.getString(cursor.getColumnIndex(User._ID)))) {
 				_id = cursor.getString(cursor.getColumnIndex(User._ID));
-				user = cursor.getString(cursor.getColumnIndex(User.USER));
+				user = cursor.getString(cursor.getColumnIndex(User.PHONE));
 			} else {
 				Conts.toast(context, mContext.getString(R.string.daaddsdt));
 				return;
@@ -107,7 +107,7 @@ public abstract class MoiDvChoNhieuNguoiAdaper extends CursorAdapter {
 		menu_right_detail_checkbox.setOnCheckedChangeListener(null);
 
 		final String _id = cursor.getString(cursor.getColumnIndex(User._ID));
-		final String user = cursor.getString(cursor.getColumnIndex(User.USER));
+		final String user = cursor.getString(cursor.getColumnIndex(User.PHONE));
 		menu_right_detail_checkbox.setChecked(listSelect.contains(_id));
 		final int position = cursor.getPosition();
 		menu_right_detail_checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

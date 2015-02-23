@@ -62,12 +62,12 @@ public class MoiNhieuDichVuFragment extends BaseFragment implements android.view
 			LISTIDDVSUDUNG = "";
 			menuright_item.initData(getArguments().getString("name"));
 			moiNhieuDichVuHeader.initData(getArguments().getString("name"));
-			where = String.format("%s = '%s'", User.USER, sdt);
+			where = String.format("%s = '%s'", User.PHONE, sdt);
 			Cursor cursor = getActivity().getContentResolver().query(User.CONTENT_URI, null, where, null, null);
 			if (cursor != null && cursor.getCount() >= 1) {
 				cursor.moveToNext();
 				LISTIDDVSUDUNG = cursor.getString(cursor.getColumnIndex(User.LISTIDDVSUDUNG));
-				sdt = cursor.getString(cursor.getColumnIndex(User.USER));
+				sdt = cursor.getString(cursor.getColumnIndex(User.PHONE));
 
 				menuright_item.initData(cursor, "", getPosition);
 
@@ -83,7 +83,7 @@ public class MoiNhieuDichVuFragment extends BaseFragment implements android.view
 			if (cursor != null && cursor.getCount() >= 1) {
 				cursor.moveToNext();
 				LISTIDDVSUDUNG = cursor.getString(cursor.getColumnIndex(User.LISTIDDVSUDUNG));
-				sdt = cursor.getString(cursor.getColumnIndex(User.USER));
+				sdt = cursor.getString(cursor.getColumnIndex(User.PHONE));
 
 				menuright_item.initData(cursor, "", getPosition);
 				moiNhieuDichVuHeader.initData(cursor, "", getPosition);

@@ -73,7 +73,7 @@ public class ChiTietListSuBanHangAdaper extends ArrayAdapter<JSONObject> {
 //			ImageLoaderUtils.getInstance(getContext()).displayImage(xAvatar, avatar, R.drawable.new_no_avatar);
 			Conts.showAvatarContact(avatar, xAvatar, "", Conts.resavatar()[position % Conts.resavatar().length]);
 		} else {
-			String selection = String.format("%s ='%s'", User.USER, Conts.getString(jsonObject, "phone_custom"));
+			String selection = String.format("%s ='%s'", User.PHONE, Conts.getString(jsonObject, "phone_custom"));
 			Cursor cursor = getContext().getContentResolver().query(User.CONTENT_URI, null, selection, null, null);
 			if (cursor != null && cursor.getCount() >= 1) {
 				cursor.moveToNext();

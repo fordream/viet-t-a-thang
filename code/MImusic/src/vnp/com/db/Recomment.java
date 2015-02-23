@@ -125,81 +125,17 @@ public class Recomment {
 	}
 
 	public static String getListReCommentDichvu(Context context) {
-		// String selection = String.format("%s = '%s') GROUP BY ( %s",
-		// Recomment.user, Conts.getUser(context), Recomment.service_code);
-		// if (context == null) {
-		// return "";
-		// }
-		// Cursor cursor =
-		// context.getContentResolver().query(Recomment.CONTENT_URI, null,
-		// selection, null, String.format("%s", Recomment.service_code));
-		// String dichvu = "";
-		// if (cursor != null) {
-		// while (cursor.moveToNext()) {
-		// String service_code = Conts.getStringCursor(cursor,
-		// Recomment.service_code);
-		//
-		// if (!Conts.isBlank(service_code)) {
-		// if (Conts.isBlank(dichvu)) {
-		// dichvu = String.format("'%s'", service_code);
-		// } else {
-		// dichvu = String.format("%s,'%s'", dichvu, service_code);
-		// }
-		// }
-		// }
-		//
-		// cursor.close();
-		// }
-		//
-		// return String.format("%s", dichvu);
 
 		return getServiceList(context);
 	}
 
 	public static String getListPhone(Context context) {
-		// String selection = String.format("%s = '%s') GROUP BY ( %s",
-		// Recomment.user, Conts.getUser(context), Recomment.phone);
-		// Cursor cursor =
-		// context.getContentResolver().query(Recomment.CONTENT_URI, null,
-		// selection, null, String.format("%s", Recomment.service_code));
-		// String dichvu = "";
-		// if (cursor != null) {
-		// while (cursor.moveToNext()) {
-		// String service_code = Conts.getStringCursor(cursor, Recomment.phone);
-		//
-		// if (!Conts.isBlank(service_code)) {
-		// if (Conts.isBlank(dichvu)) {
-		// dichvu = String.format("'%s'", service_code);
-		// } else {
-		// dichvu = String.format("%s,'%s'", dichvu, service_code);
-		// }
-		// }
-		// }
-		//
-		// cursor.close();
-		// }
-		//
-		// return String.format("(%s)", dichvu);
 
 		return getPhoneList(context);
 	}
 
-//	public static Cursor getCursorFromDichvu(Context context, int maxColum) {
-//		if (context == null) {
-//			return null;
-//		}
-//		String selection = String.format("%s in (%s)", DichVuStore.service_code, getListReCommentDichvu(context));
-//		String limit = null;
-//		if (maxColum > 0) {
-//			limit = String.format("%s limit %s ", DichVuStore.service_name, maxColum);
-//		}
-//
-//		return context.getContentResolver().query(DichVuStore.CONTENT_URI, null, selection, null, limit);
-//
-//	}
-
 	public static Cursor getCursorFromUser(Context context, int maxColum) {
-		String selection = String.format("%s in (%s)", User.USER, getListPhone(context));
+		String selection = String.format("%s in (%s)", User.PHONE, getListPhone(context));
 		String limit = null;
 		if (maxColum > 0) {
 			limit = String.format("%s limit %s ", User.NAME_CONTACT, maxColum);

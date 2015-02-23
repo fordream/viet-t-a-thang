@@ -149,7 +149,7 @@ public class LichSuBanHangFragment extends Fragment implements OnItemClickListen
 			// if (!Conts.isBlank(phoneContact)) {
 			// lsbh_sdt.setText(phoneContact);
 			// }
-			lsbh_sdt.setText(data.getStringExtra(User.USER));
+			lsbh_sdt.setText(data.getStringExtra(User.PHONE));
 
 			Conts.getSDT(lsbh_sdt);
 		} else if (requestCode == 20001 && resultCode == Activity.RESULT_OK) {

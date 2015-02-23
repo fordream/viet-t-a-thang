@@ -43,7 +43,7 @@ public class ChonSoDienThoaiFragment extends BaseFragment implements android.vie
 				if (adaper != null) {
 					Cursor cursor = (Cursor) adaper.getItem(position - 1);
 					intent.putExtra(User.NAME_CONTACT, cursor.getString(cursor.getColumnIndex(User.NAME_CONTACT)));
-					intent.putExtra(User.USER, cursor.getString(cursor.getColumnIndex(User.USER)));
+					intent.putExtra(User.PHONE, cursor.getString(cursor.getColumnIndex(User.PHONE)));
 				}
 				getActivity().setResult(Activity.RESULT_OK, intent);
 				getActivity().onBackPressed();
@@ -62,7 +62,7 @@ public class ChonSoDienThoaiFragment extends BaseFragment implements android.vie
 			public void onClick(View v) {
 				Intent intent = new Intent();
 				intent.putExtra(User.NAME_CONTACT, getString(R.string.tatca));
-				intent.putExtra(User.USER, "");
+				intent.putExtra(User.PHONE, "");
 				getActivity().setResult(Activity.RESULT_OK, intent);
 				getActivity().onBackPressed();
 			}

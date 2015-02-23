@@ -2,8 +2,10 @@ package vnp.com.api;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -376,7 +378,6 @@ public class MImusicService extends Service {
 				new AsyncTask<String, String, String>() {
 					@Override
 					protected String doInBackground(String... params) {
-						long time = System.currentTimeMillis();
 						if (API.API_R006.equals(api)) {
 							updateUserInFor(response);
 						} else if (API.API_R007.equals(api)) {
@@ -411,8 +412,10 @@ public class MImusicService extends Service {
 						} else if (API.API_R025.equals(api)) {
 							BangXepHang.update(MImusicService.this, response, bundle, API.API_R025);
 						} else if (API.API_R015.equals(api)) {
+							updateMoitheodichvu(bundle);
+						} else if (API.API_R016.equals(api)) {
+							updateMoitheodichvu(bundle);
 						}
-						LogUtils.e("timex", api + " upddate " + (System.currentTimeMillis() - time));
 						return null;
 					}
 
@@ -474,7 +477,7 @@ public class MImusicService extends Service {
 	private void updateDongBoXuongRecomment(String phone, String name) {
 		if (!Conts.isBlank(phone)) {
 			ContentValues contentValues = new ContentValues();
-			contentValues.put(User.USER, phone);
+			contentValues.put(User.PHONE, phone);
 			contentValues.put(User.NAME_CONTACT, name);
 
 			contentValues.put(User.NAME_CONTACT_ENG, Conts.StringConnvert.convertVNToAlpha(name));
@@ -490,9 +493,28 @@ public class MImusicService extends Service {
 			contentValues.put(User.contact_id, contact_id);
 
 			if (User.haveContact(phone, this)) {
-				getContentResolver().update(User.CONTENT_URI, contentValues, String.format("%s = '%s'", User.USER, phone), null);
+				getContentResolver().update(User.CONTENT_URI, contentValues, String.format("%s = '%s'", User.PHONE, phone), null);
 			} else {
 				getContentResolver().insert(User.CONTENT_URI, contentValues);
+			}
+		}
+	}
+
+	private void updateMoitheodichvu(Bundle bundle) {
+		// TODO
+		// customers 01674537885 or {123,123,123}
+		String sdt = bundle.getString("customers");
+
+		if (!Conts.isBlank(sdt)) {
+			sdt = sdt.replace("{", "").replace("}", "");
+
+			StringTokenizer stringTokenizer = new StringTokenizer(sdt, ",");
+			while (stringTokenizer.hasMoreElements()) {
+				String object = stringTokenizer.nextElement().toString();
+				if (!Conts.isBlank(object)) {
+					User.updateTimeMoi(MImusicService.this, object);
+					
+				}
 			}
 		}
 	}
@@ -507,7 +529,7 @@ public class MImusicService extends Service {
 				String phone = Conts.getString(jsonObject, "phone");
 				String name = Conts.getString(jsonObject, "name");
 				ContentValues contentValues = new ContentValues();
-				contentValues.put(User.USER, phone);
+				contentValues.put(User.PHONE, phone);
 				contentValues.put(User.NAME_CONTACT, name);
 				contentValues.put(User.NAME_CONTACT_ENG, Conts.StringConnvert.convertVNToAlpha(name));
 				// contentValues.put(User.STATUS, user.equals(phone) ? "1" :
@@ -555,7 +577,7 @@ public class MImusicService extends Service {
 				contentValues.put(User.LISTIDDVSUDUNG, service_codes);
 				contentValues.put(User.LISTIDTENDVSUDUNG, service_codes_name);
 				if (User.haveContact(phone, this)) {
-					getContentResolver().update(User.CONTENT_URI, contentValues, String.format("%s = '%s'", User.USER, phone), null);
+					getContentResolver().update(User.CONTENT_URI, contentValues, String.format("%s = '%s'", User.PHONE, phone), null);
 				} else {
 					getContentResolver().insert(User.CONTENT_URI, contentValues);
 				}
@@ -567,6 +589,7 @@ public class MImusicService extends Service {
 
 	private void updateDichVu(JSONObject response) {
 		// DichVu.updateDichVu(this, response);
+		// LogUtils.e("servicex", response.toString());
 		dichVuStore.updateDichvu(response);
 	}
 

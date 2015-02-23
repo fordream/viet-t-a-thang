@@ -12,7 +12,7 @@ import android.os.Bundle;
 public class AccountStore extends BaseStore {
 	public static final String ID = "id";
 	public static final String user = "user";
-
+	public static final String AVATAR = "avatar";
 	public static final String password = "password";
 	public static final String status = "status";
 	public static final String email = "email";
@@ -40,7 +40,7 @@ public class AccountStore extends BaseStore {
 		if (!Conts.isBlank(Conts.getString(jsonObject, "phone"))) {
 			save(user, Conts.getString(jsonObject, "phone"));
 		}
-		
+
 		if (!Conts.isBlank(p)) {
 			save(password, p);
 		}
@@ -68,18 +68,18 @@ public class AccountStore extends BaseStore {
 
 	public void saveUserInFor(JSONObject response) {
 		String user = getUser();
-		save(user + User.address, Conts.getString(response, User.address));
-		save(user + User.ID, Conts.getString(response, User.ID));
-		save(user + User.exchange_number, Conts.getString(response, User.exchange_number));
-		save(user + User.exchange_number_month, Conts.getString(response, User.exchange_number_month));
-		save(user + User.fullname, Conts.getString(response, User.fullname));
-		save(user + User.nickname, Conts.getString(response, User.nickname));
-		save(user + User.poundage, Conts.getString(response, User.poundage));
-		save(user + User.poundage_month, Conts.getString(response, User.poundage_month));
-		save(user + User.birthday, Conts.getString(response, User.birthday));
-		String avatar = Conts.getString(response, User.AVATAR);
+		save(user + address, Conts.getString(response, address));
+		save(user + ID, Conts.getString(response, ID));
+		save(user + exchange_number, Conts.getString(response, exchange_number));
+		save(user + exchange_number_month, Conts.getString(response, exchange_number_month));
+		save(user + fullname, Conts.getString(response, fullname));
+		save(user + nickname, Conts.getString(response, nickname));
+		save(user + poundage, Conts.getString(response, poundage));
+		save(user + poundage_month, Conts.getString(response, poundage_month));
+		save(user + birthday, Conts.getString(response, birthday));
+		String avatar = Conts.getString(response, AVATAR);
 		if (!Conts.isBlank(avatar)) {
-			save(user + User.AVATAR, avatar);
+			save(user + AVATAR, avatar);
 		}
 	}
 

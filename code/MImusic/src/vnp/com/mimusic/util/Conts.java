@@ -181,9 +181,9 @@ public class Conts {
 
 				try {
 
-					if (API.API_R015.equals(api)) {
-						Set<String> keys = bundles.keySet();
-					}
+//					if (API.API_R015.equals(api)) {
+//						Set<String> keys = bundles.keySet();
+//					}
 
 					if (Conts.isBlank(response)) {
 						response = activity.getString(R.string.default_error);

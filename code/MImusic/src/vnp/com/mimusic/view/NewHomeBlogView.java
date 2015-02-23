@@ -163,17 +163,17 @@ public abstract class NewHomeBlogView extends LinearLayout implements OnClickLis
 	}
 
 	private void addUerHot() {
-		if (main.getChildCount() > 0) {
-			return;
-		}
-
+//		if (main.getChildCount() > 0) {
+//			return;
+//		}
+		main.removeAllViews();
 		Cursor cursorUserRecomment = Recomment.getCursorFromUser(getContext(), 5);
 		if (cursorUserRecomment != null) {
 			while (cursorUserRecomment.moveToNext()) {
 				NewHomeItemView child = new NewHomeItemView(getContext());
 				child.updateUser(cursorUserRecomment);
 				main.addView(child);
-				final String user = Conts.getStringCursor(cursorUserRecomment, User.USER);
+				final String user = Conts.getStringCursor(cursorUserRecomment, User.PHONE);
 				final String name = Conts.getStringCursor(cursorUserRecomment, User.NAME_CONTACT);
 				final int position = cursorUserRecomment.getPosition();
 
