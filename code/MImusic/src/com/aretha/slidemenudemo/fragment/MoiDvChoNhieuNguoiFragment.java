@@ -62,7 +62,6 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 				boardView.clear();
 				boardView.setVisibility(View.GONE);
 				mkeyboard(false);
-				// moidichvuchonhieunguoi_number.setEnabled(true);
 			} else {
 				Conts.toast(getActivity(), String.format(getString(R.string.format_check_sdt), moidichvuchonhieunguoi_numberText));
 			}
@@ -154,7 +153,7 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 
 		moi_list.setOnItemClickListener(this);
 
-		Cursor cursor = getActivity().getContentResolver().query(VasContact.CONTENT_URI, null, null, null, VasContact.NAME_CONTACT);
+		Cursor cursor = getActivity().getContentResolver().query(VasContact.CONTENT_URI, null, null, null, VasContact.NAME_CONTACT_SHORT);
 		adaper = new MoiDvChoNhieuNguoiAdaper(getActivity(), cursor, service_code) {
 
 			@Override

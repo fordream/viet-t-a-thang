@@ -138,10 +138,10 @@ public class Recomment {
 		String selection = String.format("%s in (%s)", VasContact.PHONE, getListPhone(context));
 		String limit = null;
 		if (maxColum > 0) {
-//DESC
-			limit = String.format("%s , %s limit %s ", VasContact.time_moi, VasContact.NAME_CONTACT, maxColum);
+			// DESC
+			limit = String.format("%s , %s limit %s ", VasContact.NAME_CONTACT_SHORT, VasContact.NAME_CONTACT, maxColum);
 		} else {
-			limit = VasContact.NAME_CONTACT;
+			limit = VasContact.NAME_CONTACT_SHORT;
 		}
 
 		return context.getContentResolver().query(VasContact.CONTENT_URI, null, selection, null, limit);

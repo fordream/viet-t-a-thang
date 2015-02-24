@@ -67,6 +67,8 @@ public class NewMusicSlideMenuActivity extends TabActivity {
 		registerReceiver(broadcastReceiver, new IntentFilter("broadcastReceivermactivity_slidemenu_menuleft"));
 		registerReceiver(broadcastReceiverDongBoDanhBa, new IntentFilter("dongbodanhba"));
 		((MenuLeftView) findViewById(R.id.mactivity_slidemenu_menuleft)).showData();
+		MenuRightView mactivity_menu_right = (MenuRightView) findViewById(R.id.mactivity_menu_right);
+		mactivity_menu_right.initData();
 	}
 
 	@Override

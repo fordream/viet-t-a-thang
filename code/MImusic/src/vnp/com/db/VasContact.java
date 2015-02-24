@@ -209,15 +209,19 @@ public class VasContact {
 				ContentValues values = new ContentValues();
 				values.put(time_moi, System.currentTimeMillis() + "");
 				values.put(NAME_CONTACT_SHORT, "Z" + System.currentTimeMillis() + "");
-
 				String where = String.format("%s = '%s'", PHONE, sdt);
 				context.getContentResolver().update(CONTENT_URI, values, where, null);
 			}
 		}
 	}
 
-	public static Cursor queryContact(Context context) {
-		Cursor cursor = context.getContentResolver().query(VasContact.CONTENT_URI, null, null, null, VasContact.NAME_CONTACT_SHORT);
-		return cursor;
+	public static Cursor queryContactSearch(Context context, String search) {
+//		Cursor cursor = context.getContentResolver().query(VasContact.CONTENT_URI, null, null, null, VasContact.NAME_CONTACT_SHORT);
+//		return cursor;
+		
+		StringBuilder selection = new StringBuilder();
+		selection.append(NAME_CONTACT_ENG).append(" LIKE '%").append(search.toLowerCase()).append("%' ");
+		selection.append(" OR ").append(PHONE).append(" LIKE '%").append(search.toLowerCase()).append("%' ");
+		return context.getContentResolver().query(CONTENT_URI, null, selection.toString(), null, NAME_CONTACT_SHORT);
 	}
 }

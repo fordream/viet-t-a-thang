@@ -78,7 +78,6 @@ public abstract class MenuRightAdaper extends CursorAdapter implements SectionIn
 					@Override
 					public void run() {
 						changeCursor((Cursor) results.values);
-						// handler.sendEmptyMessage(0);
 
 					}
 				});
@@ -89,7 +88,7 @@ public abstract class MenuRightAdaper extends CursorAdapter implements SectionIn
 			protected FilterResults performFiltering(CharSequence constraint) {
 				final FilterResults oReturn = new FilterResults();
 				String search = constraint.toString().trim();
-				oReturn.values = VasContact.querySearch(mContext, search);
+				oReturn.values = VasContact.queryContactSearch(mContext, search);
 				return oReturn;
 			}
 		};
