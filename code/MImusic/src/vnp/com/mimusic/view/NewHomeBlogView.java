@@ -59,7 +59,6 @@ public abstract class NewHomeBlogView extends LinearLayout implements OnClickLis
 	private void init() {
 		((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.new_home_blog, this);
 		dichVuStore = new DichVuStore(getContext());
-		// dichVuDeXuatAdapter = new DichVuDeXuatAdapter(getContext());
 		findViewById(R.id.dichvubanchay).setOnClickListener(this);
 
 		home_header_main = findViewById(R.id.home_header_main);
@@ -97,9 +96,6 @@ public abstract class NewHomeBlogView extends LinearLayout implements OnClickLis
 	}
 
 	private void addDichVuHot() {
-		// if (main.getChildCount() > 0) {
-		// return;
-		// }
 		main.removeAllViews();
 		JSONArray array = dichVuStore.getDichvu();
 		int index = 0;
@@ -158,9 +154,9 @@ public abstract class NewHomeBlogView extends LinearLayout implements OnClickLis
 	}
 
 	private void addUerHot() {
-//		if (main.getChildCount() > 0) {
-//			return;
-//		}
+		// if (main.getChildCount() > 0) {
+		// return;
+		// }
 		main.removeAllViews();
 		Cursor cursorUserRecomment = Recomment.getCursorFromUser(getContext(), 5);
 		if (cursorUserRecomment != null) {
