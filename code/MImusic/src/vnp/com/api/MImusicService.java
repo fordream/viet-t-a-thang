@@ -134,7 +134,6 @@ public class MImusicService extends Service {
 
 			@Override
 			public void onSuscess(JSONObject jsonObject) {
-				long time = System.currentTimeMillis();
 				accountStore.save(jsonObject, p);
 				exeDichvu(contsCallBack);
 			}
@@ -481,7 +480,6 @@ public class MImusicService extends Service {
 				String object = stringTokenizer.nextElement().toString();
 				if (!Conts.isBlank(object)) {
 					VasContact.updateTimeMoi(MImusicService.this, object);
-
 				}
 			}
 		}
@@ -500,8 +498,6 @@ public class MImusicService extends Service {
 				contentValues.put(VasContact.PHONE, phone);
 				contentValues.put(VasContact.NAME_CONTACT, name);
 				contentValues.put(VasContact.NAME_CONTACT_ENG, Conts.StringConnvert.convertVNToAlpha(name));
-				// contentValues.put(User.STATUS, user.equals(phone) ? "1" :
-				// "0");
 
 				String contact_id = "";
 				if (avatarHashmap.containsKey(phone)) {
@@ -547,6 +543,7 @@ public class MImusicService extends Service {
 				if (VasContact.haveContact(phone, this)) {
 					getContentResolver().update(VasContact.CONTENT_URI, contentValues, String.format("%s = '%s'", VasContact.PHONE, phone), null);
 				} else {
+					contentValues.put(VasContact.NAME_CONTACT_SHORT, name);
 					getContentResolver().insert(VasContact.CONTENT_URI, contentValues);
 				}
 			}

@@ -24,6 +24,9 @@ public class VasContact {
 	// public static final String STATUS = "status";
 	public static final String NAME = "name";
 	public static final String NAME_CONTACT = "name_contact";
+
+	public static final String NAME_CONTACT_SHORT = "name_contact_short";
+
 	public static final String NAME_CONTACT_ENG = "name_contact_ENG";
 	public static final String EMAIL = "email";
 	public static final String AVATAR = "avatar";
@@ -32,13 +35,13 @@ public class VasContact {
 	public static final String SOLUONG = "soluong";
 	public static final String DOANHTHU = "doanhthu";
 	public static final String LISTIDUSERDAMOI = "listiduserdamoi";
-//	public static final String COVER = "COVER";
+	// public static final String COVER = "COVER";
 
 	public static final String birthday = "birthday";
 	public static final String address = "address";
 
-//	public static final String TOKEN = "token";
-//	public static final String KEYREFRESH = "keyRefresh";
+	// public static final String TOKEN = "token";
+	// public static final String KEYREFRESH = "keyRefresh";
 
 	public static final String nickname = "nickname";
 	public static final String fullname = "fullname";
@@ -60,14 +63,15 @@ public class VasContact {
 		builder.append(_ID).append(" INTEGER PRIMARY KEY AUTOINCREMENT").append(",");
 		String[] colums = new String[] {//
 		nickname, fullname, exchange_number, exchange_number_month, poundage, poundage_month,
-//		TOKEN, KEYREFRESH,
+				// TOKEN, KEYREFRESH,
 
-		PHONE, PASSWORD, time_moi
+				PHONE, PASSWORD, time_moi
 				// , STATUS
-//				, COVER
-				, NAME_CONTACT_ENG, ID, birthday, address, NAME, NAME_CONTACT, contact_id,//
+				// , COVER
+				, NAME_CONTACT_SHORT, NAME_CONTACT_ENG, ID, birthday, address, NAME, NAME_CONTACT, contact_id,//
 				EMAIL, AVATAR, LISTIDDVSUDUNG, SOLUONG, DOANHTHU, LISTIDUSERDAMOI, LISTIDTENDVSUDUNG //
 		};
+
 		for (int i = 0; i < colums.length; i++) {
 			if (i < colums.length - 1) {
 				builder.append(colums[i]).append(" TEXT  ").append(",");
@@ -75,6 +79,7 @@ public class VasContact {
 				builder.append(colums[i]).append(" TEXT  ");
 			}
 		}
+
 		builder.append(")");
 
 		return builder.toString();
@@ -203,10 +208,16 @@ public class VasContact {
 			if (context != null) {
 				ContentValues values = new ContentValues();
 				values.put(time_moi, System.currentTimeMillis() + "");
+				values.put(NAME_CONTACT_SHORT, "Z" + System.currentTimeMillis() + "");
 
 				String where = String.format("%s = '%s'", PHONE, sdt);
 				context.getContentResolver().update(CONTENT_URI, values, where, null);
 			}
 		}
+	}
+
+	public static Cursor queryContact(Context context) {
+		Cursor cursor = context.getContentResolver().query(VasContact.CONTENT_URI, null, null, null, VasContact.NAME_CONTACT_SHORT);
+		return cursor;
 	}
 }

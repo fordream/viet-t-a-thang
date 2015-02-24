@@ -56,9 +56,9 @@ public class MenuRightView extends LinearLayout {
 
 		menu_right_list.setOnTouchListener(onTouchListener);
 		if (adaper == null || adaper != null && adaper.getCount() == 0) {
-//			String where = String.format("%s = '0'  ", User.STATUS);
-			Cursor cursor = getContext().getContentResolver().query(VasContact.CONTENT_URI, null, null, null, VasContact.NAME_CONTACT_ENG);
-
+			// String where = String.format("%s = '0'  ", User.STATUS);
+			
+			Cursor cursor = VasContact.queryContact(getContext());
 			if (adaper == null) {
 				adaper = new MenuRightAdaper(getContext(), cursor) {
 					@Override
