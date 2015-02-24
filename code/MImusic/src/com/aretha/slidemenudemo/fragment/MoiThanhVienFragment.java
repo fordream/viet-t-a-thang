@@ -1,7 +1,7 @@
 package com.aretha.slidemenudemo.fragment;
 
 import vnp.com.db.Recomment;
-import vnp.com.db.User;
+import vnp.com.db.VasContact;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.adapter.MenuRightAdaper;
@@ -114,6 +114,6 @@ public class MoiThanhVienFragment extends BaseFragment implements OnItemClickLis
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		Conts.hiddenKeyBoard(getActivity());
 		Cursor cursor = (Cursor) parent.getItemAtPosition(position);
-		(((RootMenuActivity) getActivity())).moiContactUserFragment(Conts.getStringCursor(cursor, User._ID));
+		(((RootMenuActivity) getActivity())).moiContactUserFragment(Conts.getStringCursor(cursor, VasContact._ID));
 	}
 }

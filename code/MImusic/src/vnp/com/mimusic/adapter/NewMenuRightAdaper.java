@@ -3,7 +3,7 @@ package vnp.com.mimusic.adapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import vnp.com.db.User;
+import vnp.com.db.VasContact;
 import vnp.com.mimusic.view.MenuRightItemView;
 import android.content.ContentValues;
 import android.content.Context;
@@ -21,7 +21,7 @@ public abstract class NewMenuRightAdaper extends ArrayAdapter<ContentValues> imp
 	public NewMenuRightAdaper(Context context, int resource, List<ContentValues> objects, Cursor cursor) {
 		super(context, resource, 0, objects);
 		list = objects;
-		mAlphabetIndexer = new AlphabetIndexer(cursor, cursor.getColumnIndex(User.NAME_CONTACT), " ABCDEFGHIJKLMNOPQRTSUVWXYZ");
+		mAlphabetIndexer = new AlphabetIndexer(cursor, cursor.getColumnIndex(VasContact.NAME_CONTACT), " ABCDEFGHIJKLMNOPQRTSUVWXYZ");
 		mAlphabetIndexer.setCursor(cursor);
 		this.cursor = cursor;
 

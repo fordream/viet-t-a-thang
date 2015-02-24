@@ -15,7 +15,7 @@ import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.BangXepHang;
 import vnp.com.db.MauMoi;
 import vnp.com.db.Recomment;
-import vnp.com.db.User;
+import vnp.com.db.VasContact;
 import vnp.com.db.datastore.AccountStore;
 import vnp.com.db.datastore.DichVuStore;
 import vnp.com.db.datastore.HuongDanBanHangStore;
@@ -80,7 +80,7 @@ public class MImusicService extends Service {
 	public void refreshToken(final IContsCallBack contsCallBack) {
 		Bundle bundle = new Bundle();
 		bundle.putString("key", accountStore.getRefreshToken());
-		bundle.putString(User.KEYREFRESH, accountStore.getRefreshToken());
+		bundle.putString(VasContact.KEYREFRESH, accountStore.getRefreshToken());
 		execute(RequestMethod.GET, API.API_R013, bundle, new IContsCallBack() {
 
 			@Override
@@ -477,10 +477,10 @@ public class MImusicService extends Service {
 	private void updateDongBoXuongRecomment(String phone, String name) {
 		if (!Conts.isBlank(phone)) {
 			ContentValues contentValues = new ContentValues();
-			contentValues.put(User.PHONE, phone);
-			contentValues.put(User.NAME_CONTACT, name);
+			contentValues.put(VasContact.PHONE, phone);
+			contentValues.put(VasContact.NAME_CONTACT, name);
 
-			contentValues.put(User.NAME_CONTACT_ENG, Conts.StringConnvert.convertVNToAlpha(name));
+			contentValues.put(VasContact.NAME_CONTACT_ENG, Conts.StringConnvert.convertVNToAlpha(name));
 			String contact_id = "";
 			if (avatarHashmap.containsKey(phone)) {
 				contact_id = avatarHashmap.get(phone);
@@ -490,12 +490,12 @@ public class MImusicService extends Service {
 				contact_id = "";
 			}
 
-			contentValues.put(User.contact_id, contact_id);
+			contentValues.put(VasContact.contact_id, contact_id);
 
-			if (User.haveContact(phone, this)) {
-				getContentResolver().update(User.CONTENT_URI, contentValues, String.format("%s = '%s'", User.PHONE, phone), null);
+			if (VasContact.haveContact(phone, this)) {
+				getContentResolver().update(VasContact.CONTENT_URI, contentValues, String.format("%s = '%s'", VasContact.PHONE, phone), null);
 			} else {
-				getContentResolver().insert(User.CONTENT_URI, contentValues);
+				getContentResolver().insert(VasContact.CONTENT_URI, contentValues);
 			}
 		}
 	}
@@ -512,7 +512,7 @@ public class MImusicService extends Service {
 			while (stringTokenizer.hasMoreElements()) {
 				String object = stringTokenizer.nextElement().toString();
 				if (!Conts.isBlank(object)) {
-					User.updateTimeMoi(MImusicService.this, object);
+					VasContact.updateTimeMoi(MImusicService.this, object);
 					
 				}
 			}
@@ -529,9 +529,9 @@ public class MImusicService extends Service {
 				String phone = Conts.getString(jsonObject, "phone");
 				String name = Conts.getString(jsonObject, "name");
 				ContentValues contentValues = new ContentValues();
-				contentValues.put(User.PHONE, phone);
-				contentValues.put(User.NAME_CONTACT, name);
-				contentValues.put(User.NAME_CONTACT_ENG, Conts.StringConnvert.convertVNToAlpha(name));
+				contentValues.put(VasContact.PHONE, phone);
+				contentValues.put(VasContact.NAME_CONTACT, name);
+				contentValues.put(VasContact.NAME_CONTACT_ENG, Conts.StringConnvert.convertVNToAlpha(name));
 				// contentValues.put(User.STATUS, user.equals(phone) ? "1" :
 				// "0");
 
@@ -544,7 +544,7 @@ public class MImusicService extends Service {
 					contact_id = "";
 				}
 
-				contentValues.put(User.contact_id, contact_id);
+				contentValues.put(VasContact.contact_id, contact_id);
 
 				String service_codes = "";
 				String service_codes_name = "";
@@ -574,12 +574,12 @@ public class MImusicService extends Service {
 					}
 				}
 
-				contentValues.put(User.LISTIDDVSUDUNG, service_codes);
-				contentValues.put(User.LISTIDTENDVSUDUNG, service_codes_name);
-				if (User.haveContact(phone, this)) {
-					getContentResolver().update(User.CONTENT_URI, contentValues, String.format("%s = '%s'", User.PHONE, phone), null);
+				contentValues.put(VasContact.LISTIDDVSUDUNG, service_codes);
+				contentValues.put(VasContact.LISTIDTENDVSUDUNG, service_codes_name);
+				if (VasContact.haveContact(phone, this)) {
+					getContentResolver().update(VasContact.CONTENT_URI, contentValues, String.format("%s = '%s'", VasContact.PHONE, phone), null);
 				} else {
-					getContentResolver().insert(User.CONTENT_URI, contentValues);
+					getContentResolver().insert(VasContact.CONTENT_URI, contentValues);
 				}
 			}
 		} catch (Exception e) {

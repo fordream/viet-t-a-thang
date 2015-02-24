@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import vnp.com.db.User;
+import vnp.com.db.VasContact;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.view.MoiDvChoNhieuNguoiItemView;
@@ -40,16 +40,16 @@ public abstract class MoiDvChoNhieuNguoiAdaper extends CursorAdapter {
 	}
 
 	public void addSdt(String sdt, Context context) {
-		String selection = String.format("%s = '%s'", User.PHONE, sdt);
-		Cursor cursor = context.getContentResolver().query(User.CONTENT_URI, null, selection, null, null);
+		String selection = String.format("%s = '%s'", VasContact.PHONE, sdt);
+		Cursor cursor = context.getContentResolver().query(VasContact.CONTENT_URI, null, selection, null, null);
 		int position = 0;
 		String _id = null;
 		String user = null;
 		if (cursor != null && cursor.moveToNext()) {
 			position = cursor.getPosition();
-			if (!listSelect.contains(cursor.getString(cursor.getColumnIndex(User._ID)))) {
-				_id = cursor.getString(cursor.getColumnIndex(User._ID));
-				user = cursor.getString(cursor.getColumnIndex(User.PHONE));
+			if (!listSelect.contains(cursor.getString(cursor.getColumnIndex(VasContact._ID)))) {
+				_id = cursor.getString(cursor.getColumnIndex(VasContact._ID));
+				user = cursor.getString(cursor.getColumnIndex(VasContact.PHONE));
 			} else {
 				Conts.toast(context, mContext.getString(R.string.daaddsdt));
 				return;
@@ -106,8 +106,8 @@ public abstract class MoiDvChoNhieuNguoiAdaper extends CursorAdapter {
 		CheckBox menu_right_detail_checkbox = (CheckBox) ((MoiDvChoNhieuNguoiItemView) convertView).findViewById(R.id.menu_right_detail_checkbox);
 		menu_right_detail_checkbox.setOnCheckedChangeListener(null);
 
-		final String _id = cursor.getString(cursor.getColumnIndex(User._ID));
-		final String user = cursor.getString(cursor.getColumnIndex(User.PHONE));
+		final String _id = cursor.getString(cursor.getColumnIndex(VasContact._ID));
+		final String user = cursor.getString(cursor.getColumnIndex(VasContact.PHONE));
 		menu_right_detail_checkbox.setChecked(listSelect.contains(_id));
 		final int position = cursor.getPosition();
 		menu_right_detail_checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

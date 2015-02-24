@@ -1,6 +1,6 @@
 package vnp.com.mimusic.adapter;
 
-import vnp.com.db.User;
+import vnp.com.db.VasContact;
 import vnp.com.mimusic.view.MenuRightItemView;
 import android.app.Activity;
 import android.content.ContentValues;
@@ -51,7 +51,7 @@ public abstract class MenuRightAdaper extends CursorAdapter implements SectionIn
 
 	public MenuRightAdaper(Context context, Cursor cursor) {
 		super(context, cursor, true);
-		mAlphabetIndexer = new AlphabetIndexer(cursor, cursor.getColumnIndex(User.NAME_CONTACT), " ABCDEFGHIJKLMNOPQRTSUVWXYZ");
+		mAlphabetIndexer = new AlphabetIndexer(cursor, cursor.getColumnIndex(VasContact.NAME_CONTACT), " ABCDEFGHIJKLMNOPQRTSUVWXYZ");
 		mAlphabetIndexer.setCursor(cursor);
 
 		// setFilterQueryProvider(filterQueryProvider);
@@ -89,7 +89,7 @@ public abstract class MenuRightAdaper extends CursorAdapter implements SectionIn
 			protected FilterResults performFiltering(CharSequence constraint) {
 				final FilterResults oReturn = new FilterResults();
 				String search = constraint.toString().trim();
-				oReturn.values = User.querySearch(mContext, search);
+				oReturn.values = VasContact.querySearch(mContext, search);
 				return oReturn;
 			}
 		};
@@ -98,7 +98,7 @@ public abstract class MenuRightAdaper extends CursorAdapter implements SectionIn
 	@Override
 	public void changeCursor(Cursor cursor) {
 		super.changeCursor(cursor);
-		mAlphabetIndexer = new AlphabetIndexer(cursor, cursor.getColumnIndex(User.NAME_CONTACT_ENG), " ABCDEFGHIJKLMNOPQRTSUVWXYZ");
+		mAlphabetIndexer = new AlphabetIndexer(cursor, cursor.getColumnIndex(VasContact.NAME_CONTACT_ENG), " ABCDEFGHIJKLMNOPQRTSUVWXYZ");
 		mAlphabetIndexer.setCursor(cursor);
 	}
 
@@ -120,7 +120,7 @@ public abstract class MenuRightAdaper extends CursorAdapter implements SectionIn
 		@Override
 		public Cursor runQuery(CharSequence constraint) {
 			String search = constraint.toString().trim();
-			return User.querySearch(mContext, search);
+			return VasContact.querySearch(mContext, search);
 		}
 	};
 }

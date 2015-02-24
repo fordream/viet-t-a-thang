@@ -2,7 +2,7 @@ package com.aretha.slidemenudemo.fragment;
 
 import java.util.Calendar;
 
-import vnp.com.db.User;
+import vnp.com.db.VasContact;
 import vnp.com.db.datastore.DichVuStore;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
@@ -149,7 +149,7 @@ public class LichSuBanHangFragment extends Fragment implements OnItemClickListen
 			// if (!Conts.isBlank(phoneContact)) {
 			// lsbh_sdt.setText(phoneContact);
 			// }
-			lsbh_sdt.setText(data.getStringExtra(User.PHONE));
+			lsbh_sdt.setText(data.getStringExtra(VasContact.PHONE));
 
 			Conts.getSDT(lsbh_sdt);
 		} else if (requestCode == 20001 && resultCode == Activity.RESULT_OK) {

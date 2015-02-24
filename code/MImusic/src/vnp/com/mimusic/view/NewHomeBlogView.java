@@ -7,7 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import vnp.com.db.Recomment;
-import vnp.com.db.User;
+import vnp.com.db.VasContact;
 import vnp.com.db.datastore.DichVuStore;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
@@ -173,8 +173,8 @@ public abstract class NewHomeBlogView extends LinearLayout implements OnClickLis
 				NewHomeItemView child = new NewHomeItemView(getContext());
 				child.updateUser(cursorUserRecomment);
 				main.addView(child);
-				final String user = Conts.getStringCursor(cursorUserRecomment, User.PHONE);
-				final String name = Conts.getStringCursor(cursorUserRecomment, User.NAME_CONTACT);
+				final String user = Conts.getStringCursor(cursorUserRecomment, VasContact.PHONE);
+				final String name = Conts.getStringCursor(cursorUserRecomment, VasContact.NAME_CONTACT);
 				final int position = cursorUserRecomment.getPosition();
 
 				child.setOnClickListener(new OnClickListener() {

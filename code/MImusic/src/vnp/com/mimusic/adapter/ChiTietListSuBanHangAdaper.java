@@ -4,7 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import vnp.com.db.User;
+import vnp.com.db.VasContact;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.util.Conts;
 import android.content.Context;
@@ -73,12 +73,12 @@ public class ChiTietListSuBanHangAdaper extends ArrayAdapter<JSONObject> {
 //			ImageLoaderUtils.getInstance(getContext()).displayImage(xAvatar, avatar, R.drawable.new_no_avatar);
 			Conts.showAvatarContact(avatar, xAvatar, "", Conts.resavatar()[position % Conts.resavatar().length]);
 		} else {
-			String selection = String.format("%s ='%s'", User.PHONE, Conts.getString(jsonObject, "phone_custom"));
-			Cursor cursor = getContext().getContentResolver().query(User.CONTENT_URI, null, selection, null, null);
+			String selection = String.format("%s ='%s'", VasContact.PHONE, Conts.getString(jsonObject, "phone_custom"));
+			Cursor cursor = getContext().getContentResolver().query(VasContact.CONTENT_URI, null, selection, null, null);
 			if (cursor != null && cursor.getCount() >= 1) {
 				cursor.moveToNext();
-				String mavatar = cursor.getString(cursor.getColumnIndex(User.AVATAR));
-				String contact_id = Conts.getStringCursor(cursor, User.contact_id);
+				String mavatar = cursor.getString(cursor.getColumnIndex(VasContact.AVATAR));
+				String contact_id = Conts.getStringCursor(cursor, VasContact.contact_id);
 
 				Conts.showAvatarContact(avatar, mavatar, contact_id, Conts.resavatar()[cursor.getPosition() % Conts.resavatar().length]);
 			}

@@ -12,7 +12,7 @@ import vnp.com.api.API;
 import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.BangXepHang;
 import vnp.com.db.MauMoi;
-import vnp.com.db.User;
+import vnp.com.db.VasContact;
 import vnp.com.db.datastore.DichVuStore;
 import vnp.com.db.datastore.TintucStore;
 import vnp.com.mimusic.R;
@@ -100,9 +100,9 @@ public class RootMenuActivity extends FragmentActivity {
 		} else if (Conts.TINTUC.equals(type)) {
 			changeFragemt(R.id.root_main_fragment, new TinTucFragment(), false);
 		} else if (Conts.NHIEUDICHVU.equals(type)) {
-			String _id = getIntent().getStringExtra(User._ID);
+			String _id = getIntent().getStringExtra(VasContact._ID);
 			Bundle bundle = new Bundle();
-			bundle.putString(User._ID, _id);
+			bundle.putString(VasContact._ID, _id);
 			bundle.putString("msisdn", getIntent().getStringExtra("msisdn"));
 			bundle.putString("name", getIntent().getStringExtra("name"));
 			bundle.putInt("getPosition", getIntent().getIntExtra("getPosition", 0));
@@ -599,7 +599,7 @@ public class RootMenuActivity extends FragmentActivity {
 		intent.putExtra("msisdn", user);
 		intent.putExtra("getPosition", position);
 		intent.putExtra("name", name);
-		intent.putExtra(User._ID, "");
+		intent.putExtra(VasContact._ID, "");
 		startActivity(intent);
 		overridePendingTransitionStartActivity();
 	}
@@ -607,7 +607,7 @@ public class RootMenuActivity extends FragmentActivity {
 	public void moiContactUserFragment(String _id) {
 
 		Bundle bundle = new Bundle();
-		bundle.putString(User._ID, _id);
+		bundle.putString(VasContact._ID, _id);
 		bundle.putString("msisdn", "");
 		bundle.putString("name", "");
 		MoiNhieuDichVuFragment moiNhieuDichVuFragment = new MoiNhieuDichVuFragment();

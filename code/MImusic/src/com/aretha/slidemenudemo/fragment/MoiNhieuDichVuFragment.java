@@ -1,6 +1,6 @@
 package com.aretha.slidemenudemo.fragment;
 
-import vnp.com.db.User;
+import vnp.com.db.VasContact;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.adapter.MoiNhieuDichVuAdapter;
@@ -56,18 +56,18 @@ public class MoiNhieuDichVuFragment extends BaseFragment implements android.view
 		menuright_item = (MenuRightItemView) view.findViewById(R.id.menurightitem);
 		int getPosition = getArguments().getInt("getPosition");
 
-		String where = String.format("%s = '%s'", User._ID, getArguments().getString(User._ID));
-		if (Conts.isBlank(getArguments().getString(User._ID))) {
+		String where = String.format("%s = '%s'", VasContact._ID, getArguments().getString(VasContact._ID));
+		if (Conts.isBlank(getArguments().getString(VasContact._ID))) {
 			sdt = getArguments().getString("msisdn");
 			LISTIDDVSUDUNG = "";
 			menuright_item.initData(getArguments().getString("name"));
 			moiNhieuDichVuHeader.initData(getArguments().getString("name"));
-			where = String.format("%s = '%s'", User.PHONE, sdt);
-			Cursor cursor = getActivity().getContentResolver().query(User.CONTENT_URI, null, where, null, null);
+			where = String.format("%s = '%s'", VasContact.PHONE, sdt);
+			Cursor cursor = getActivity().getContentResolver().query(VasContact.CONTENT_URI, null, where, null, null);
 			if (cursor != null && cursor.getCount() >= 1) {
 				cursor.moveToNext();
-				LISTIDDVSUDUNG = cursor.getString(cursor.getColumnIndex(User.LISTIDDVSUDUNG));
-				sdt = cursor.getString(cursor.getColumnIndex(User.PHONE));
+				LISTIDDVSUDUNG = cursor.getString(cursor.getColumnIndex(VasContact.LISTIDDVSUDUNG));
+				sdt = cursor.getString(cursor.getColumnIndex(VasContact.PHONE));
 
 				menuright_item.initData(cursor, "", getPosition);
 
@@ -79,11 +79,11 @@ public class MoiNhieuDichVuFragment extends BaseFragment implements android.view
 			}
 
 		} else {
-			Cursor cursor = getActivity().getContentResolver().query(User.CONTENT_URI, null, where, null, null);
+			Cursor cursor = getActivity().getContentResolver().query(VasContact.CONTENT_URI, null, where, null, null);
 			if (cursor != null && cursor.getCount() >= 1) {
 				cursor.moveToNext();
-				LISTIDDVSUDUNG = cursor.getString(cursor.getColumnIndex(User.LISTIDDVSUDUNG));
-				sdt = cursor.getString(cursor.getColumnIndex(User.PHONE));
+				LISTIDDVSUDUNG = cursor.getString(cursor.getColumnIndex(VasContact.LISTIDDVSUDUNG));
+				sdt = cursor.getString(cursor.getColumnIndex(VasContact.PHONE));
 
 				menuright_item.initData(cursor, "", getPosition);
 				moiNhieuDichVuHeader.initData(cursor, "", getPosition);

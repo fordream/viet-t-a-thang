@@ -4,7 +4,7 @@ import java.util.Set;
 
 import org.json.JSONObject;
 
-import vnp.com.db.User;
+import vnp.com.db.VasContact;
 import vnp.com.mimusic.util.Conts;
 import android.content.Context;
 import android.os.Bundle;

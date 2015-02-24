@@ -1,6 +1,6 @@
 package com.aretha.slidemenudemo.fragment;
 
-import vnp.com.db.User;
+import vnp.com.db.VasContact;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.adapter.ChonSoDienThoaiAdaper;
 import vnp.com.mimusic.view.HeaderView;
@@ -42,8 +42,8 @@ public class ChonSoDienThoaiFragment extends BaseFragment implements android.vie
 				Intent intent = new Intent();
 				if (adaper != null) {
 					Cursor cursor = (Cursor) adaper.getItem(position - 1);
-					intent.putExtra(User.NAME_CONTACT, cursor.getString(cursor.getColumnIndex(User.NAME_CONTACT)));
-					intent.putExtra(User.PHONE, cursor.getString(cursor.getColumnIndex(User.PHONE)));
+					intent.putExtra(VasContact.NAME_CONTACT, cursor.getString(cursor.getColumnIndex(VasContact.NAME_CONTACT)));
+					intent.putExtra(VasContact.PHONE, cursor.getString(cursor.getColumnIndex(VasContact.PHONE)));
 				}
 				getActivity().setResult(Activity.RESULT_OK, intent);
 				getActivity().onBackPressed();
@@ -61,8 +61,8 @@ public class ChonSoDienThoaiFragment extends BaseFragment implements android.vie
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent();
-				intent.putExtra(User.NAME_CONTACT, getString(R.string.tatca));
-				intent.putExtra(User.PHONE, "");
+				intent.putExtra(VasContact.NAME_CONTACT, getString(R.string.tatca));
+				intent.putExtra(VasContact.PHONE, "");
 				getActivity().setResult(Activity.RESULT_OK, intent);
 				getActivity().onBackPressed();
 			}
@@ -105,7 +105,7 @@ public class ChonSoDienThoaiFragment extends BaseFragment implements android.vie
 
 	private void callSHowData() {
 //		String where = String.format("%s = '0'", User.STATUS);
-		Cursor cursor = getActivity().getContentResolver().query(User.CONTENT_URI, null, null, null, User.NAME_CONTACT);
+		Cursor cursor = getActivity().getContentResolver().query(VasContact.CONTENT_URI, null, null, null, VasContact.NAME_CONTACT);
 
 		if (cursor != null) {
 			adaper = new ChonSoDienThoaiAdaper(getActivity(), cursor);

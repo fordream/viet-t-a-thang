@@ -110,13 +110,13 @@ public class Recomment {
 		if (DICHVU_MATCHER == match) {
 			long rowID = db.insert(RECOMMENT_TABLE_NAME, "", values);
 			if (rowID > 0) {
-				Uri _uri = ContentUris.withAppendedId(User.CONTENT_URI, rowID);
+				Uri _uri = ContentUris.withAppendedId(VasContact.CONTENT_URI, rowID);
 				return _uri;
 			}
 		} else if (DICHVU_MATCHER_ID == match) {
 			long rowID = db.insert(RECOMMENT_TABLE_NAME, "", values);
 			if (rowID > 0) {
-				Uri _uri = ContentUris.withAppendedId(User.CONTENT_URI, rowID);
+				Uri _uri = ContentUris.withAppendedId(VasContact.CONTENT_URI, rowID);
 				return _uri;
 			}
 		}
@@ -135,15 +135,15 @@ public class Recomment {
 	}
 
 	public static Cursor getCursorFromUser(Context context, int maxColum) {
-		String selection = String.format("%s in (%s)", User.PHONE, getListPhone(context));
+		String selection = String.format("%s in (%s)", VasContact.PHONE, getListPhone(context));
 		String limit = null;
 		if (maxColum > 0) {
-			limit = String.format("%s limit %s ", User.NAME_CONTACT, maxColum);
+			limit = String.format("%s limit %s ", VasContact.NAME_CONTACT, maxColum);
 		} else {
-			limit = User.NAME_CONTACT;
+			limit = VasContact.NAME_CONTACT;
 		}
 
-		return context.getContentResolver().query(User.CONTENT_URI, null, selection, null, limit);
+		return context.getContentResolver().query(VasContact.CONTENT_URI, null, selection, null, limit);
 	}
 
 	public static void saveServiceCodeList(Context context, String serviceCodes) {

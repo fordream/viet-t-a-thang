@@ -13,7 +13,7 @@ import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.text.TextUtils;
 
-public class User {
+public class VasContact {
 	public static final String USER_TABLE_NAME = "users";
 
 	public static final String _ID = "_id";
@@ -87,7 +87,7 @@ public class User {
 	public static final String URL = "content://" + DBProvider.PROVIDER_NAME + "/" + USER_TABLE_NAME;
 	public static final Uri CONTENT_URI = Uri.parse(URL);
 
-	public User() {
+	public VasContact() {
 	}
 
 	// matcher
@@ -142,13 +142,13 @@ public class User {
 		if (USER_MATCHER == match) {
 			long rowID = db.insert(USER_TABLE_NAME, "", values);
 			if (rowID > 0) {
-				Uri _uri = ContentUris.withAppendedId(User.CONTENT_URI, rowID);
+				Uri _uri = ContentUris.withAppendedId(VasContact.CONTENT_URI, rowID);
 				return _uri;
 			}
 		} else if (USER_MATCHER_ID == match) {
 			long rowID = db.insert(USER_TABLE_NAME, "", values);
 			if (rowID > 0) {
-				Uri _uri = ContentUris.withAppendedId(User.CONTENT_URI, rowID);
+				Uri _uri = ContentUris.withAppendedId(VasContact.CONTENT_URI, rowID);
 				return _uri;
 			}
 		}
@@ -165,7 +165,7 @@ public class User {
 
 	public static boolean haveContact(String phone, Context context) {
 		boolean hasContact = false;
-		Cursor cursor = context.getContentResolver().query(User.CONTENT_URI, null, String.format("%s='%s'", User.PHONE, phone), null, null);
+		Cursor cursor = context.getContentResolver().query(VasContact.CONTENT_URI, null, String.format("%s='%s'", VasContact.PHONE, phone), null, null);
 
 		if (cursor != null) {
 			if (cursor.moveToNext()) {
@@ -178,15 +178,15 @@ public class User {
 	}
 
 	public static String getName(Cursor cursor) {
-		String name = cursor.getString(cursor.getColumnIndex(User.fullname));
+		String name = cursor.getString(cursor.getColumnIndex(VasContact.fullname));
 
 		if (name == null || name != null && name.trim().equals("")) {
-			name = cursor.getString(cursor.getColumnIndex(User.NAME_CONTACT));
+			name = cursor.getString(cursor.getColumnIndex(VasContact.NAME_CONTACT));
 		}
 
 		if (name != null && !name.trim().equals("")) {
 		} else {
-			name = cursor.getString(cursor.getColumnIndex(User.PHONE));
+			name = cursor.getString(cursor.getColumnIndex(VasContact.PHONE));
 		}
 
 		return name;

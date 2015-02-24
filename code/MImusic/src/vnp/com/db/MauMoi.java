@@ -110,13 +110,13 @@ public class MauMoi {
 		if (DICHVU_MATCHER == match) {
 			long rowID = db.insert(TABLE_NAME, "", values);
 			if (rowID > 0) {
-				Uri _uri = ContentUris.withAppendedId(User.CONTENT_URI, rowID);
+				Uri _uri = ContentUris.withAppendedId(VasContact.CONTENT_URI, rowID);
 				return _uri;
 			}
 		} else if (DICHVU_MATCHER_ID == match) {
 			long rowID = db.insert(TABLE_NAME, "", values);
 			if (rowID > 0) {
-				Uri _uri = ContentUris.withAppendedId(User.CONTENT_URI, rowID);
+				Uri _uri = ContentUris.withAppendedId(VasContact.CONTENT_URI, rowID);
 				return _uri;
 			}
 		}

@@ -1,6 +1,6 @@
 package vnp.com.mimusic.view;
 
-import vnp.com.db.User;
+import vnp.com.db.VasContact;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.util.Conts;
 import android.content.ContentValues;
@@ -47,35 +47,35 @@ public class MenuRightItemView extends LinearLayout {
 	public void initData(Cursor cursor, String textSearch) {
 		try {
 			String name = "";
-			if (cursor.getString(cursor.getColumnIndex(User.NAME)) != null) {
-				name = cursor.getString(cursor.getColumnIndex(User.NAME));
+			if (cursor.getString(cursor.getColumnIndex(VasContact.NAME)) != null) {
+				name = cursor.getString(cursor.getColumnIndex(VasContact.NAME));
 			}
 
-			if (cursor.getString(cursor.getColumnIndex(User.NAME_CONTACT)) != null) {
+			if (cursor.getString(cursor.getColumnIndex(VasContact.NAME_CONTACT)) != null) {
 				if (name == null || name != null && name.trim().equals("")) {
-					name = cursor.getString(cursor.getColumnIndex(User.NAME_CONTACT));
+					name = cursor.getString(cursor.getColumnIndex(VasContact.NAME_CONTACT));
 				}
 			}
 
 			if (name == null || name != null && name.trim().equals("")) {
-				name = cursor.getString(cursor.getColumnIndex(User.PHONE));
+				name = cursor.getString(cursor.getColumnIndex(VasContact.PHONE));
 			}
 
 			if (name == null)
 				name = "";
 
-			menurightitem_main.setVisibility(Conts.xDontains(textSearch, true, new String[] { name, Conts.getStringCursor(cursor, User.PHONE) }) ? View.VISIBLE : View.GONE);
+			menurightitem_main.setVisibility(Conts.xDontains(textSearch, true, new String[] { name, Conts.getStringCursor(cursor, VasContact.PHONE) }) ? View.VISIBLE : View.GONE);
 			menu_right_item_tv_name.setText(name);
 
-			String avatar = cursor.getString(cursor.getColumnIndex(User.AVATAR));
-			String contact_id = Conts.getStringCursor(cursor, User.contact_id);
+			String avatar = cursor.getString(cursor.getColumnIndex(VasContact.AVATAR));
+			String contact_id = Conts.getStringCursor(cursor, VasContact.contact_id);
 
 			Conts.showAvatarContact(menu_right_item_img_icon, avatar, contact_id, Conts.resavatar()[cursor.getPosition() % Conts.resavatar().length]);
 
-			menu_right_item_tv_link.setText(Conts.getStringCursor(cursor, User.PHONE));
+			menu_right_item_tv_link.setText(Conts.getStringCursor(cursor, VasContact.PHONE));
 			Conts.getSDT(menu_right_item_tv_link);
 			Conts.getSDT(menu_right_item_tv_name);
-			String dvDaSuDung = cursor.getString(cursor.getColumnIndex(User.LISTIDDVSUDUNG));
+			String dvDaSuDung = cursor.getString(cursor.getColumnIndex(VasContact.LISTIDDVSUDUNG));
 
 		} catch (Exception exception) {
 
@@ -99,35 +99,35 @@ public class MenuRightItemView extends LinearLayout {
 	public void initData(Cursor cursor, String textSearch, int getPosition) {
 		try {
 			String name = "";
-			if (cursor.getString(cursor.getColumnIndex(User.NAME)) != null) {
-				name = cursor.getString(cursor.getColumnIndex(User.NAME));
+			if (cursor.getString(cursor.getColumnIndex(VasContact.NAME)) != null) {
+				name = cursor.getString(cursor.getColumnIndex(VasContact.NAME));
 			}
 
-			if (cursor.getString(cursor.getColumnIndex(User.NAME_CONTACT)) != null) {
+			if (cursor.getString(cursor.getColumnIndex(VasContact.NAME_CONTACT)) != null) {
 				if (name == null || name != null && name.trim().equals("")) {
-					name = cursor.getString(cursor.getColumnIndex(User.NAME_CONTACT));
+					name = cursor.getString(cursor.getColumnIndex(VasContact.NAME_CONTACT));
 				}
 			}
 
 			if (name == null || name != null && name.trim().equals("")) {
-				name = cursor.getString(cursor.getColumnIndex(User.PHONE));
+				name = cursor.getString(cursor.getColumnIndex(VasContact.PHONE));
 			}
 
 			if (name == null)
 				name = "";
 
-			menurightitem_main.setVisibility(Conts.xDontains(textSearch, true, new String[] { name, Conts.getStringCursor(cursor, User.PHONE) }) ? View.VISIBLE : View.GONE);
+			menurightitem_main.setVisibility(Conts.xDontains(textSearch, true, new String[] { name, Conts.getStringCursor(cursor, VasContact.PHONE) }) ? View.VISIBLE : View.GONE);
 			menu_right_item_tv_name.setText(name);
 
-			String avatar = cursor.getString(cursor.getColumnIndex(User.AVATAR));
-			String contact_id = Conts.getStringCursor(cursor, User.contact_id);
+			String avatar = cursor.getString(cursor.getColumnIndex(VasContact.AVATAR));
+			String contact_id = Conts.getStringCursor(cursor, VasContact.contact_id);
 
 			Conts.showAvatarContact(menu_right_item_img_icon, avatar, contact_id, Conts.resavatar()[getPosition % Conts.resavatar().length]);
 
-			menu_right_item_tv_link.setText(Conts.getStringCursor(cursor, User.PHONE));
+			menu_right_item_tv_link.setText(Conts.getStringCursor(cursor, VasContact.PHONE));
 			Conts.getSDT(menu_right_item_tv_link);
 			Conts.getSDT(menu_right_item_tv_name);
-			String dvDaSuDung = cursor.getString(cursor.getColumnIndex(User.LISTIDDVSUDUNG));
+			String dvDaSuDung = cursor.getString(cursor.getColumnIndex(VasContact.LISTIDDVSUDUNG));
 
 		} catch (Exception exception) {
 

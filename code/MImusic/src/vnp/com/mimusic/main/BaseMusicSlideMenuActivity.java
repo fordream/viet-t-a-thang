@@ -2,7 +2,7 @@ package vnp.com.mimusic.main;
 
 import org.json.JSONObject;
 
-import vnp.com.db.User;
+import vnp.com.db.VasContact;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.VApplication;
 import vnp.com.mimusic.activity.RootMenuActivity;
@@ -233,7 +233,7 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
 				Cursor cursor = (Cursor) arg0.getItemAtPosition(position);
-				final String _id = cursor.getString(cursor.getColumnIndex(User._ID));
+				final String _id = cursor.getString(cursor.getColumnIndex(VasContact._ID));
 
 				getSlideMenu().close(true);
 				getSlideMenu().postDelayed(new Runnable() {
@@ -242,7 +242,7 @@ public class BaseMusicSlideMenuActivity extends TabActivity {
 
 						Intent intent = new Intent(BaseMusicSlideMenuActivity.this, RootMenuActivity.class);
 						intent.putExtra("type", Conts.NHIEUDICHVU);
-						intent.putExtra(User._ID, _id + "");
+						intent.putExtra(VasContact._ID, _id + "");
 						startActivity(intent);
 						overridePendingTransitionStartActivity();
 					}

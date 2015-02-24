@@ -1,6 +1,6 @@
 package vnp.com.mimusic.view;
 
-import vnp.com.db.User;
+import vnp.com.db.VasContact;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.util.Conts;
 import android.content.Context;
@@ -31,18 +31,18 @@ public class MoiDvChoNhieuNguoiItemView extends LinearLayout {
 
 	public void initData(Cursor cursor, String textSearch, String service_code) {
 		String name = "";
-		if (cursor.getString(cursor.getColumnIndex(User.NAME)) != null) {
-			name = cursor.getString(cursor.getColumnIndex(User.NAME));
+		if (cursor.getString(cursor.getColumnIndex(VasContact.NAME)) != null) {
+			name = cursor.getString(cursor.getColumnIndex(VasContact.NAME));
 		}
 
-		if (cursor.getString(cursor.getColumnIndex(User.NAME_CONTACT)) != null) {
+		if (cursor.getString(cursor.getColumnIndex(VasContact.NAME_CONTACT)) != null) {
 			if (name == null || name != null && name.trim().equals("")) {
-				name = cursor.getString(cursor.getColumnIndex(User.NAME_CONTACT));
+				name = cursor.getString(cursor.getColumnIndex(VasContact.NAME_CONTACT));
 			}
 		}
 
 		if (name == null || name != null && name.trim().equals("")) {
-			name = cursor.getString(cursor.getColumnIndex(User.PHONE));
+			name = cursor.getString(cursor.getColumnIndex(VasContact.PHONE));
 		}
 
 		if (name == null)
@@ -50,16 +50,16 @@ public class MoiDvChoNhieuNguoiItemView extends LinearLayout {
 
 		View main = findViewById(R.id.menurightitem_main);
 		main.setVisibility(Conts.xDontains(textSearch, false, new String[] { name }) ? View.VISIBLE : View.GONE);
-		boolean needShow = Conts.xDontains(textSearch, true, new String[] { name, Conts.getStringCursor(cursor, User.PHONE) });
+		boolean needShow = Conts.xDontains(textSearch, true, new String[] { name, Conts.getStringCursor(cursor, VasContact.PHONE) });
 		main.setVisibility(needShow ? View.VISIBLE : View.GONE);
 		((TextView) findViewById(R.id.menu_right_item_tv_name)).setText(name);
 
-		String avatar = cursor.getString(cursor.getColumnIndex(User.AVATAR));
-		String contact_id = Conts.getStringCursor(cursor, User.contact_id);
+		String avatar = cursor.getString(cursor.getColumnIndex(VasContact.AVATAR));
+		String contact_id = Conts.getStringCursor(cursor, VasContact.contact_id);
 
 		Conts.showAvatarContact(((ImageView) findViewById(R.id.menu_right_item_img_icon)), avatar, contact_id, Conts.resavatar()[cursor.getPosition() % Conts.resavatar().length]);
 
-		Conts.setTextViewCursor(findViewById(R.id.menu_right_item_tv_link), cursor, User.PHONE);
+		Conts.setTextViewCursor(findViewById(R.id.menu_right_item_tv_link), cursor, VasContact.PHONE);
 
 		Conts.getSDT(findViewById(R.id.menu_right_item_tv_link));
 		Conts.getSDT(findViewById(R.id.menu_right_item_tv_name));

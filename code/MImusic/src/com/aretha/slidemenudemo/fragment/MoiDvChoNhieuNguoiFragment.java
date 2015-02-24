@@ -4,7 +4,7 @@ import org.json.JSONObject;
 
 import vnp.com.api.API;
 import vnp.com.api.RestClient.RequestMethod;
-import vnp.com.db.User;
+import vnp.com.db.VasContact;
 import vnp.com.db.datastore.DichVuStore;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
@@ -154,7 +154,7 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 
 		moi_list.setOnItemClickListener(this);
 
-		Cursor cursor = getActivity().getContentResolver().query(User.CONTENT_URI, null, null, null, User.NAME_CONTACT);
+		Cursor cursor = getActivity().getContentResolver().query(VasContact.CONTENT_URI, null, null, null, VasContact.NAME_CONTACT);
 		adaper = new MoiDvChoNhieuNguoiAdaper(getActivity(), cursor, service_code) {
 
 			@Override
@@ -420,12 +420,12 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 		public void setMId(String _id, int position) {
 			mId = _id;
 
-			Cursor cursor = getActivity().getContentResolver().query(User.CONTENT_URI, null, String.format("%s =='%s'", User._ID, mId), null, null);
+			Cursor cursor = getActivity().getContentResolver().query(VasContact.CONTENT_URI, null, String.format("%s =='%s'", VasContact._ID, mId), null, null);
 
 			if (cursor != null && cursor.moveToNext()) {
-				((TextView) findViewById(R.id.moinhieudichvu_item_tv_name)).setText(User.getName(cursor));
-				String avatar = cursor.getString(cursor.getColumnIndex(User.AVATAR));
-				String contact_id = Conts.getStringCursor(cursor, User.contact_id);
+				((TextView) findViewById(R.id.moinhieudichvu_item_tv_name)).setText(VasContact.getName(cursor));
+				String avatar = cursor.getString(cursor.getColumnIndex(VasContact.AVATAR));
+				String contact_id = Conts.getStringCursor(cursor, VasContact.contact_id);
 				Conts.showAvatarContact(((ImageView) findViewById(R.id.imageView1)), avatar, contact_id, Conts.resavatar()[position % Conts.resavatar().length]);
 			} else {
 				((TextView) findViewById(R.id.moinhieudichvu_item_tv_name)).setText(_id);

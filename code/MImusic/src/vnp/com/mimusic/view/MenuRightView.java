@@ -1,6 +1,6 @@
 package vnp.com.mimusic.view;
 
-import vnp.com.db.User;
+import vnp.com.db.VasContact;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.adapter.MenuRightAdaper;
 import vnp.com.mimusic.util.Conts;
@@ -57,7 +57,7 @@ public class MenuRightView extends LinearLayout {
 		menu_right_list.setOnTouchListener(onTouchListener);
 		if (adaper == null || adaper != null && adaper.getCount() == 0) {
 //			String where = String.format("%s = '0'  ", User.STATUS);
-			Cursor cursor = getContext().getContentResolver().query(User.CONTENT_URI, null, null, null, User.NAME_CONTACT_ENG);
+			Cursor cursor = getContext().getContentResolver().query(VasContact.CONTENT_URI, null, null, null, VasContact.NAME_CONTACT_ENG);
 
 			if (adaper == null) {
 				adaper = new MenuRightAdaper(getContext(), cursor) {

@@ -1,6 +1,6 @@
 package vnp.com.mimusic.view;
 
-import vnp.com.db.User;
+import vnp.com.db.VasContact;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.adapter.data.NewHomeItem;
 import vnp.com.mimusic.util.Conts;
@@ -68,13 +68,13 @@ public class NewHomeItemView extends LinearLayout {
 		ImageView icon = Conts.getView(this, R.id.menu_right_item_img_icon);
 		TextView name = Conts.getView(this, R.id.menu_right_item_tv_name);
 		TextView sdt = Conts.getView(this, R.id.menu_right_item_tv_link);
-		Conts.showAvatarContact((ImageView) findViewById(R.id.menu_right_item_img_icon), Conts.getStringCursor(cursor, User.AVATAR), Conts.getStringCursor(cursor, User.contact_id),
+		Conts.showAvatarContact((ImageView) findViewById(R.id.menu_right_item_img_icon), Conts.getStringCursor(cursor, VasContact.AVATAR), Conts.getStringCursor(cursor, VasContact.contact_id),
 				Conts.resavatar()[cursor.getPosition() % Conts.resavatar().length]);
 
-		Conts.setTextViewCursor(name, cursor, User.NAME_CONTACT);
+		Conts.setTextViewCursor(name, cursor, VasContact.NAME_CONTACT);
 		Conts.getSDT(name);
 
-		Conts.setTextViewCursor(sdt, cursor, User.PHONE);
+		Conts.setTextViewCursor(sdt, cursor, VasContact.PHONE);
 		Conts.getSDT(sdt);
 	}
 
