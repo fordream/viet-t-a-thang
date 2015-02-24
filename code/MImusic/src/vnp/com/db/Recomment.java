@@ -139,9 +139,9 @@ public class Recomment {
 		String limit = null;
 		if (maxColum > 0) {
 			// DESC
-			limit = String.format("%s , %s limit %s ", VasContact.NAME_CONTACT_SHORT, VasContact.NAME_CONTACT, maxColum);
+			limit = String.format("%s , %s limit %s ", VasContact.time_moi, VasContact.NAME_CONTACT, maxColum);
 		} else {
-			limit = VasContact.NAME_CONTACT_SHORT;
+			limit = VasContact.NAME_CONTACT_ENG;
 		}
 
 		return context.getContentResolver().query(VasContact.CONTENT_URI, null, selection, null, limit);

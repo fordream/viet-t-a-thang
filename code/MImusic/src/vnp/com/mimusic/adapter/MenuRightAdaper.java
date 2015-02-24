@@ -51,7 +51,7 @@ public abstract class MenuRightAdaper extends CursorAdapter implements SectionIn
 
 	public MenuRightAdaper(Context context, Cursor cursor) {
 		super(context, cursor, true);
-		mAlphabetIndexer = new AlphabetIndexer(cursor, cursor.getColumnIndex(VasContact.NAME_CONTACT_SHORT), " ABCDEFGHIJKLMNOPQRTSUVWXYZ");
+		mAlphabetIndexer = new AlphabetIndexer(cursor, cursor.getColumnIndex(VasContact.NAME_CONTACT_ENG), " ABCDEFGHIJKLMNOPQRTSUVWXYZ");
 		mAlphabetIndexer.setCursor(cursor);
 
 		// setFilterQueryProvider(filterQueryProvider);
