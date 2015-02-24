@@ -2,7 +2,6 @@ package vnp.com.api;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
@@ -22,7 +21,6 @@ import vnp.com.db.datastore.HuongDanBanHangStore;
 import vnp.com.db.datastore.TintucStore;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
-import vnp.com.mimusic.util.LogUtils;
 import android.app.Service;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -80,7 +78,7 @@ public class MImusicService extends Service {
 	public void refreshToken(final IContsCallBack contsCallBack) {
 		Bundle bundle = new Bundle();
 		bundle.putString("key", accountStore.getRefreshToken());
-		bundle.putString(VasContact.KEYREFRESH, accountStore.getRefreshToken());
+		bundle.putString(AccountStore.keyRefresh, accountStore.getRefreshToken());
 		execute(RequestMethod.GET, API.API_R013, bundle, new IContsCallBack() {
 
 			@Override
@@ -91,36 +89,6 @@ public class MImusicService extends Service {
 				 */
 
 				exeDichvu(contsCallBack);
-				// execute(RequestMethod.GET, API.API_R004, new Bundle(), new
-				// vnp.com.mimusic.util.Conts.IContsCallBack() {
-				//
-				// @Override
-				// public void onStart() {
-				//
-				// }
-				//
-				// @Override
-				// public void onError() {
-				// onError("");
-				// }
-				//
-				// @Override
-				// public void onError(String message) {
-				// if (contsCallBack != null) {
-				// contsCallBack.onError(message);
-				// }
-				// }
-				//
-				// @Override
-				// public void onSuscess(JSONObject response) {
-				// if (contsCallBack != null) {
-				// contsCallBack.onSuscess(response);
-				// }
-				//
-				// callUpdateData();
-				// }
-				// });
-
 			}
 
 			@Override
@@ -513,7 +481,7 @@ public class MImusicService extends Service {
 				String object = stringTokenizer.nextElement().toString();
 				if (!Conts.isBlank(object)) {
 					VasContact.updateTimeMoi(MImusicService.this, object);
-					
+
 				}
 			}
 		}

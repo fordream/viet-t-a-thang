@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.text.Spanned;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 

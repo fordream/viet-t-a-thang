@@ -37,8 +37,8 @@ public class VasContact {
 	public static final String birthday = "birthday";
 	public static final String address = "address";
 
-	public static final String TOKEN = "token";
-	public static final String KEYREFRESH = "keyRefresh";
+//	public static final String TOKEN = "token";
+//	public static final String KEYREFRESH = "keyRefresh";
 
 	public static final String nickname = "nickname";
 	public static final String fullname = "fullname";
@@ -59,7 +59,8 @@ public class VasContact {
 		builder.append("(");
 		builder.append(_ID).append(" INTEGER PRIMARY KEY AUTOINCREMENT").append(",");
 		String[] colums = new String[] {//
-		nickname, fullname, exchange_number, exchange_number_month, poundage, poundage_month, TOKEN, KEYREFRESH,
+		nickname, fullname, exchange_number, exchange_number_month, poundage, poundage_month,
+//		TOKEN, KEYREFRESH,
 
 		PHONE, PASSWORD, time_moi
 				// , STATUS

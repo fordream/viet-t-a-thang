@@ -2,7 +2,6 @@ package vnp.com.mimusic.adapter;
 
 import vnp.com.db.BangXepHang;
 import vnp.com.mimusic.view.BangXepHangItemView;
-import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.support.v4.widget.CursorAdapter;
