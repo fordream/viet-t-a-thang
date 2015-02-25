@@ -346,25 +346,83 @@ public class RootMenuActivity extends FragmentActivity {
 	 * @param id
 	 * @param customers
 	 */
-	public void gotoLoiMoi(String serviceCode, String customers) {
+	public void gotoLoiMoi(final String serviceCode, final String customers) {
 		Conts.hiddenKeyBoard(this);
-		FragmentManager fragmentManager = getSupportFragmentManager();
-		android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
-		MauMoiFragment mauMoiFragment = new MauMoiFragment();
 
-		Bundle args = new Bundle();
-		args.putBoolean("type", false);
-		args.putString(DichVuStore.service_code, serviceCode);
-		args.putString("customers", customers);
+		String idMauMoi = MauMoi.getCursorMauMoiListJson0(getActivity(), serviceCode);
 
-		args.putString("sdt", "");
-		args.putString("service_codes", "");
-		mauMoiFragment.setArguments(args);
-		transaction.setCustomAnimations(R.anim.abc_alpha_in, R.anim.abc_alpha_in, R.anim.abc_alpha_out, R.anim.abc_alpha_out);
-		transaction.add(R.id.root_main_fragment, mauMoiFragment, "" + System.currentTimeMillis());
-		transaction.addToBackStack(null);
+		if (!Conts.isBlank(idMauMoi)) {
+			Bundle bundle = new Bundle();
+			bundle.putString("template_id", idMauMoi);
+			bundle.putString("service_code", serviceCode);
+			bundle.putString("customers", customers.replace("{", "").replace("}", "").replace("\"", ""));
+			moiTheoDichVu(bundle);
+		} else {
+			Bundle bundle = new Bundle();
+			bundle.putString("service_code", serviceCode);
 
-		transaction.commit();
+			execute(RequestMethod.GET, API.API_R022, bundle, new IContsCallBack() {
+				ProgressDialog progressDialog;
+
+				@Override
+				public void onSuscess(JSONObject response) {
+
+					if (progressDialog != null) {
+						progressDialog.dismiss();
+					}
+
+					String idMauMoi = MauMoi.getCursorMauMoiListJson0(getActivity(), serviceCode);
+					if (!Conts.isBlank(idMauMoi)) {
+						Bundle bundle = new Bundle();
+						bundle.putString("template_id", idMauMoi);
+						bundle.putString("service_code", serviceCode);
+						bundle.putString("customers", customers.replace("{", "").replace("}", "").replace("\"", ""));
+						moiTheoDichVu(bundle);
+					} else {
+						Conts.showDialogThongbao(RootMenuActivity.this, getString(R.string.khongthelayduocmaumoi));
+					}
+				}
+
+				@Override
+				public void onStart() {
+					if (progressDialog == null) {
+						progressDialog = new VasProgessDialog(RootMenuActivity.this);
+						progressDialog.show();
+					}
+				}
+
+				@Override
+				public void onError(String message) {
+					if (progressDialog != null) {
+						progressDialog.dismiss();
+					}
+
+					Conts.showDialogThongbao(RootMenuActivity.this, message);
+				}
+
+			});
+
+		}
+		// TODO
+		// FragmentManager fragmentManager = getSupportFragmentManager();
+		// android.support.v4.app.FragmentTransaction transaction =
+		// fragmentManager.beginTransaction();
+		// MauMoiFragment mauMoiFragment = new MauMoiFragment();
+		//
+		// Bundle args = new Bundle();
+		// args.putBoolean("type", false);
+		// args.putString(DichVuStore.service_code, serviceCode);
+		// args.putString("customers", customers);
+		//
+		// args.putString("sdt", "");
+		// args.putString("service_codes", "");
+		// mauMoiFragment.setArguments(args);
+		// transaction.setCustomAnimations(R.anim.abc_alpha_in,
+		// R.anim.abc_alpha_in, R.anim.abc_alpha_out, R.anim.abc_alpha_out);
+		// transaction.add(R.id.root_main_fragment, mauMoiFragment, "" +
+		// System.currentTimeMillis());
+		// transaction.addToBackStack(null);
+		// transaction.commit();
 	}
 
 	/**
