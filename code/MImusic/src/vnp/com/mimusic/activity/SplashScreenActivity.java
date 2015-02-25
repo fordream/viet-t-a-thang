@@ -8,6 +8,7 @@ import vnp.com.mimusic.VApplication;
 import vnp.com.mimusic.VApplication.IServiceConfig;
 import vnp.com.mimusic.main.NewMusicSlideMenuActivity;
 import vnp.com.mimusic.util.Conts;
+import vnp.com.mimusic.util.Conts.DialogCallBack;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
 import vnp.com.mimusic.view.LoadingView;
 import android.app.Activity;
@@ -76,18 +77,35 @@ public class SplashScreenActivity extends Activity {
 					public void onError(String message) {
 						Conts.showView(loadingView, false);
 						if (!isFinishing()) {
-							startActivity(new Intent(SplashScreenActivity.this, LoginActivty.class));
-							finish();
-							overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_nothing);
+//							startActivity(new Intent(SplashScreenActivity.this, LoginActivty.class));
+//							finish();
+//							overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_nothing);
+							
+							Conts.showDialogDongYCallBack(SplashScreenActivity.this, getString(R.string.khongthedangnhap), new DialogCallBack() {
+
+								@Override
+								public void callback(Object object) {
+									finish();
+								}
+							});
 						}
 					}
-
 				});
 			} else {
 				if (!isFinishing()) {
-					startActivity(new Intent(SplashScreenActivity.this, LoginActivty.class));
-					finish();
-					overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_nothing);
+					Conts.showDialogDongYCallBack(SplashScreenActivity.this, getString(R.string.need3g), new DialogCallBack() {
+
+						@Override
+						public void callback(Object object) {
+							finish();
+						}
+					});
+					// startActivity(new Intent(SplashScreenActivity.this,
+					// LoginActivty.class));
+					// finish();
+					// overridePendingTransition(R.anim.abc_slide_right_in,
+					// R.anim.abc_nothing);
+
 				}
 			}
 		}
