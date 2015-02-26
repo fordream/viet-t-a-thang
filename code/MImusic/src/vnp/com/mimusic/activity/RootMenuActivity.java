@@ -81,11 +81,11 @@ public class RootMenuActivity extends FragmentActivity {
 			return;
 		}
 
+//		LogUtils.e("onCreateX", "onCreate");
 		onCreate = true;
 		CrashExceptionHandler.onCreate(this);
 		setContentView(R.layout.root_main);
 
-		LogUtils.e("onCreateX", "dm");
 		String type = getIntent().getStringExtra("type");
 
 		if (Conts.HOME.equals(type)) {
