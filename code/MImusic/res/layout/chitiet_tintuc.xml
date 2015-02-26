@@ -39,7 +39,6 @@
                         android:id="@+id/chitiettintuc_item_tv_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:singleLine="true"
                         android:text="Khuyến mãi nhạc trờ iMusicz"
                         android:textColor="#475055"
                         android:textSize="@dimen/dimen_15dp"

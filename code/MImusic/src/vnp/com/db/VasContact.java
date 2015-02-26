@@ -25,7 +25,7 @@ public class VasContact {
 	public static final String NAME = "name";
 	public static final String NAME_CONTACT = "name_contact";
 
-	public static final String NAME_CONTACT_SHORT = "name_contact_short";
+	// public static final String NAME_CONTACT_SHORT = "name_contact_short";
 
 	public static final String NAME_CONTACT_ENG = "name_contact_ENG";
 	public static final String EMAIL = "email";
@@ -68,7 +68,8 @@ public class VasContact {
 				PHONE, PASSWORD, time_moi
 				// , STATUS
 				// , COVER
-				, NAME_CONTACT_SHORT, NAME_CONTACT_ENG, ID, birthday, address, NAME, NAME_CONTACT, contact_id,//
+				// , NAME_CONTACT_SHORT
+				, NAME_CONTACT_ENG, ID, birthday, address, NAME, NAME_CONTACT, contact_id,//
 				EMAIL, AVATAR, LISTIDDVSUDUNG, SOLUONG, DOANHTHU, LISTIDUSERDAMOI, LISTIDTENDVSUDUNG //
 		};
 
@@ -208,7 +209,6 @@ public class VasContact {
 			if (context != null) {
 				ContentValues values = new ContentValues();
 				values.put(time_moi, System.currentTimeMillis() + "");
-				values.put(NAME_CONTACT_SHORT, "Z" + System.currentTimeMillis() + "");
 				String where = String.format("%s = '%s'", PHONE, sdt);
 				context.getContentResolver().update(CONTENT_URI, values, where, null);
 			}
@@ -216,12 +216,15 @@ public class VasContact {
 	}
 
 	public static Cursor queryContactSearch(Context context, String search) {
-//		Cursor cursor = context.getContentResolver().query(VasContact.CONTENT_URI, null, null, null, VasContact.NAME_CONTACT_SHORT);
-//		return cursor;
-		
+
 		StringBuilder selection = new StringBuilder();
 		selection.append(NAME_CONTACT_ENG).append(" LIKE '%").append(search.toLowerCase()).append("%' ");
 		selection.append(" OR ").append(PHONE).append(" LIKE '%").append(search.toLowerCase()).append("%' ");
-		return context.getContentResolver().query(CONTENT_URI, null, selection.toString(), null, NAME_CONTACT_SHORT);
+		if (search.startsWith("0")) {
+			selection.append(" OR ").append(PHONE).append(" LIKE '84").append( search.substring(1, search.length()).toLowerCase()).append("%' ");
+			selection.append(" OR ").append(PHONE).append(" LIKE '+84").append( search.substring(1, search.length()).toLowerCase()).append("%' ");
+		}
+
+		return context.getContentResolver().query(CONTENT_URI, null, selection.toString(), null, NAME_CONTACT_ENG);
 	}
 }
