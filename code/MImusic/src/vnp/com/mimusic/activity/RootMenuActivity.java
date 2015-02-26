@@ -20,6 +20,7 @@ import vnp.com.mimusic.VApplication;
 import vnp.com.mimusic.adapter.data.NewHomeItem;
 import vnp.com.mimusic.base.diablog.VasProgessDialog;
 import vnp.com.mimusic.util.Conts;
+import vnp.com.mimusic.util.LogUtils;
 import vnp.com.mimusic.util.Conts.DialogCallBack;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
 import android.app.Activity;
@@ -71,12 +72,20 @@ import com.vnp.core.crash.CrashExceptionHandler;
  */
 public class RootMenuActivity extends FragmentActivity {
 	public static final int DIALOG_LOGIN_FAIL = 1000;
+	private boolean onCreate = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		if (onCreate) {
+			return;
+		}
+
+		onCreate = true;
 		CrashExceptionHandler.onCreate(this);
 		setContentView(R.layout.root_main);
+
+		LogUtils.e("onCreateX", "dm");
 		String type = getIntent().getStringExtra("type");
 
 		if (Conts.HOME.equals(type)) {
