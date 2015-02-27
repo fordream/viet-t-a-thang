@@ -19,7 +19,6 @@ public class IndexActivity extends Activity {
 		}
 
 		finish();
-
 		overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_nothing_0);
 	}
 }

@@ -20,9 +20,9 @@ import vnp.com.mimusic.VApplication;
 import vnp.com.mimusic.adapter.data.NewHomeItem;
 import vnp.com.mimusic.base.diablog.VasProgessDialog;
 import vnp.com.mimusic.util.Conts;
-import vnp.com.mimusic.util.LogUtils;
 import vnp.com.mimusic.util.Conts.DialogCallBack;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
+import vnp.com.mimusic.util.LogUtils;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -54,7 +54,6 @@ import com.aretha.slidemenudemo.fragment.HuongDanBanHangFragment;
 import com.aretha.slidemenudemo.fragment.HuongDanBanHangOfDichVuFragment;
 import com.aretha.slidemenudemo.fragment.InforFragment;
 import com.aretha.slidemenudemo.fragment.LichSuBanHangFragment;
-import com.aretha.slidemenudemo.fragment.MauMoiFragment;
 import com.aretha.slidemenudemo.fragment.MoiDvChoNhieuNguoiFragment;
 import com.aretha.slidemenudemo.fragment.MoiNhieuDichVuFragment;
 import com.aretha.slidemenudemo.fragment.MoiThanhVienFragment;
@@ -81,8 +80,8 @@ public class RootMenuActivity extends FragmentActivity {
 			return;
 		}
 
-//		LogUtils.e("onCreateX", "onCreate");
 		onCreate = true;
+
 		CrashExceptionHandler.onCreate(this);
 		setContentView(R.layout.root_main);
 
@@ -115,7 +114,6 @@ public class RootMenuActivity extends FragmentActivity {
 			bundle.putString("msisdn", getIntent().getStringExtra("msisdn"));
 			bundle.putString("name", getIntent().getStringExtra("name"));
 			bundle.putInt("getPosition", getIntent().getIntExtra("getPosition", 0));
-
 			MoiNhieuDichVuFragment moiNhieuDichVuFragment = new MoiNhieuDichVuFragment();
 			moiNhieuDichVuFragment.setArguments(bundle);
 			changeFragemt(R.id.root_main_fragment, moiNhieuDichVuFragment, false);
