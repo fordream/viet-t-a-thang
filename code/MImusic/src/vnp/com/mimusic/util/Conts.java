@@ -181,9 +181,9 @@ public class Conts {
 
 				try {
 
-//					if (API.API_R015.equals(api)) {
-//						Set<String> keys = bundles.keySet();
-//					}
+					// if (API.API_R015.equals(api)) {
+					// Set<String> keys = bundles.keySet();
+					// }
 
 					if (Conts.isBlank(response)) {
 						response = activity.getString(R.string.default_error);
@@ -222,6 +222,10 @@ public class Conts {
 								}
 							}
 						} catch (Exception exception) {
+						}
+
+						if ("440".equals(errorCode) || "-1".equals(errorCode)) {
+							message = activity.getString(R.string.error_network);
 						}
 
 						if (contsCallBack != null) {
