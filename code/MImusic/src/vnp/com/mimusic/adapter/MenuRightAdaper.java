@@ -1,5 +1,6 @@
 package vnp.com.mimusic.adapter;
 
+import vnp.com.db.Recomment;
 import vnp.com.db.VasContact;
 import vnp.com.mimusic.view.MenuRightItemView;
 import android.app.Activity;
@@ -113,11 +114,22 @@ public abstract class MenuRightAdaper extends CursorAdapter implements SectionIn
 	public void setTextSearch(final String textSearh) {
 		getFilter().filter(textSearh);
 	}
+
+	private boolean isMoiThanhVien = false;
+
+	public void setMoiThanhVien(boolean isMoiThanhVien) {
+		this.isMoiThanhVien = isMoiThanhVien;
+	}
+
 	private FilterQueryProvider filterQueryProvider = new FilterQueryProvider() {
 
 		@Override
 		public Cursor runQuery(CharSequence constraint) {
 			String search = constraint.toString().trim();
+
+			if (isMoiThanhVien) {
+				Recomment.getCursorFromUser(mContext, -1, search);
+			}
 			return VasContact.querySearch(mContext, search);
 		}
 	};

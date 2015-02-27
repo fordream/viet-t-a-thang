@@ -97,12 +97,15 @@ public class MoiThanhVienFragment extends BaseFragment implements OnItemClickLis
 		Cursor cursor = Recomment.getCursorFromUser(getActivity(), -1);
 
 		if (cursor != null) {
-			dichvu_list.setAdapter(adapter = new MenuRightAdaper(getActivity(), cursor) {
+			adapter = new MenuRightAdaper(getActivity(), cursor) {
 				@Override
 				public void openMoi(ContentValues contentValues) {
 
 				}
-			});
+			};
+			adapter.setMoiThanhVien(true);
+			
+			dichvu_list.setAdapter(adapter);
 		}
 	}
 
