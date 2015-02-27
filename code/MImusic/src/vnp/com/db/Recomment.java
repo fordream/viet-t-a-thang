@@ -141,7 +141,7 @@ public class Recomment {
 			// DESC
 			limit = String.format("%s , %s limit %s ", VasContact.time_moi, VasContact.NAME_CONTACT, maxColum);
 		} else {
-			limit = VasContact.NAME_CONTACT_ENG;
+			limit = VasContact.time_moi + "," + VasContact.NAME_CONTACT_ENG;
 		}
 
 		return context.getContentResolver().query(VasContact.CONTENT_URI, null, selection, null, limit);

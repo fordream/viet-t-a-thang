@@ -113,7 +113,6 @@ public abstract class MenuRightAdaper extends CursorAdapter implements SectionIn
 	public void setTextSearch(final String textSearh) {
 		getFilter().filter(textSearh);
 	}
-
 	private FilterQueryProvider filterQueryProvider = new FilterQueryProvider() {
 
 		@Override
