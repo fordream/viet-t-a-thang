@@ -1,5 +1,6 @@
 package vnp.com.mimusic.activity;
 
+import vnp.com.db.VasContact;
 import vnp.com.mimusic.LoginTabletActivty;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.util.Conts;
@@ -12,6 +13,7 @@ public class IndexActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		new VasContact().updateTimeMoi(this);
 		if (Conts.isTablet(this)) {
 			startActivity(new Intent(this, LoginTabletActivty.class));
 		} else {

@@ -221,10 +221,18 @@ public class VasContact {
 		selection.append(NAME_CONTACT_ENG).append(" LIKE '%").append(search.toLowerCase()).append("%' ");
 		selection.append(" OR ").append(PHONE).append(" LIKE '%").append(search.toLowerCase()).append("%' ");
 		if (search.startsWith("0")) {
-			selection.append(" OR ").append(PHONE).append(" LIKE '84").append( search.substring(1, search.length()).toLowerCase()).append("%' ");
-			selection.append(" OR ").append(PHONE).append(" LIKE '+84").append( search.substring(1, search.length()).toLowerCase()).append("%' ");
+			selection.append(" OR ").append(PHONE).append(" LIKE '84").append(search.substring(1, search.length()).toLowerCase()).append("%' ");
+			selection.append(" OR ").append(PHONE).append(" LIKE '+84").append(search.substring(1, search.length()).toLowerCase()).append("%' ");
 		}
 
 		return context.getContentResolver().query(CONTENT_URI, null, selection.toString(), null, NAME_CONTACT_ENG);
+	}
+
+	public void updateTimeMoi(Context context) {
+		if (context != null) {
+			ContentValues values = new ContentValues();
+			values.put(time_moi, "");
+			context.getContentResolver().update(CONTENT_URI, values, null, null);
+		}
 	}
 }
