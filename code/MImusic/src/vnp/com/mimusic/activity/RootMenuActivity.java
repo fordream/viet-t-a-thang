@@ -74,6 +74,15 @@ public class RootMenuActivity extends FragmentActivity {
 	private boolean onCreate = false;
 
 	@Override
+	protected void onStop() {
+		super.onStop();
+
+		if (!isFinishing()) {
+			finish();
+		}
+	}
+
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		if (onCreate) {
