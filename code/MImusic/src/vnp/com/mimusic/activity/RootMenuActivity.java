@@ -77,22 +77,31 @@ public class RootMenuActivity extends FragmentActivity {
 	protected void onStop() {
 		super.onStop();
 
-		if (!isFinishing()) {
-			finish();
-		}
+//		if (!isFinishing()) {
+//			finish();
+//		}
 	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.root_main);
 		if (onCreate) {
 			return;
 		}
+		try {
+			FragmentManager fragmentManager = getSupportFragmentManager();
 
+			List<Fragment> list = fragmentManager.getFragments();
+			if (list.size() > 0) {
+				return;
+			}
+		} catch (Exception exception) {
+
+		}
 		onCreate = true;
 
 		CrashExceptionHandler.onCreate(this);
-		setContentView(R.layout.root_main);
 
 		String type = getIntent().getStringExtra("type");
 
