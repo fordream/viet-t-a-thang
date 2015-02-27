@@ -89,7 +89,12 @@ public abstract class MenuRightAdaper extends CursorAdapter implements SectionIn
 			protected FilterResults performFiltering(CharSequence constraint) {
 				final FilterResults oReturn = new FilterResults();
 				String search = constraint.toString().trim();
-				oReturn.values = VasContact.queryContactSearch(mContext, search);
+				if (isMoiThanhVien) {
+					oReturn.values = Recomment.getCursorFromUser(mContext, search);
+				} else {
+					oReturn.values = VasContact.queryContactSearch(mContext, search);
+				}
+
 				return oReturn;
 			}
 		};
@@ -98,8 +103,10 @@ public abstract class MenuRightAdaper extends CursorAdapter implements SectionIn
 	@Override
 	public void changeCursor(Cursor cursor) {
 		super.changeCursor(cursor);
-		mAlphabetIndexer = new AlphabetIndexer(cursor, cursor.getColumnIndex(VasContact.NAME_CONTACT_ENG), " ABCDEFGHIJKLMNOPQRTSUVWXYZ");
-		mAlphabetIndexer.setCursor(cursor);
+		if (cursor != null) {
+			mAlphabetIndexer = new AlphabetIndexer(cursor, cursor.getColumnIndex(VasContact.NAME_CONTACT_ENG), " ABCDEFGHIJKLMNOPQRTSUVWXYZ");
+			mAlphabetIndexer.setCursor(cursor);
+		}
 	}
 
 	@Override
@@ -121,16 +128,4 @@ public abstract class MenuRightAdaper extends CursorAdapter implements SectionIn
 		this.isMoiThanhVien = isMoiThanhVien;
 	}
 
-	private FilterQueryProvider filterQueryProvider = new FilterQueryProvider() {
-
-		@Override
-		public Cursor runQuery(CharSequence constraint) {
-			String search = constraint.toString().trim();
-
-			if (isMoiThanhVien) {
-				Recomment.getCursorFromUser(mContext, -1, search);
-			}
-			return VasContact.querySearch(mContext, search);
-		}
-	};
 }

@@ -147,19 +147,13 @@ public class Recomment {
 		return context.getContentResolver().query(VasContact.CONTENT_URI, null, selection, null, limit);
 	}
 
-	public static Cursor getCursorFromUser(Context context, int maxColum, String search) {
-		// String selection = String.format("%s in (%s)", VasContact.PHONE,
-		// getListPhone(context));
-		String limit = null;
-		if (maxColum > 0) {
-			limit = String.format("%s , %s limit %s ", VasContact.time_moi, VasContact.NAME_CONTACT, maxColum);
-		} else {
-			limit = VasContact.time_moi + "," + VasContact.NAME_CONTACT_ENG;
-		}
+	public static Cursor getCursorFromUser(Context context, String search) {
+		String limit = String.format("%s , %s ", VasContact.time_moi, VasContact.NAME_CONTACT);
 		StringBuilder selection = new StringBuilder();
-		selection.append(String.format("%s in (%s)", VasContact.PHONE, getListPhone(context))).append(" ");
+		selection.append(String.format("%s in (%s)", VasContact.PHONE, getListPhone(context))).append(" and (");
 		selection.append(VasContact.NAME_CONTACT_ENG).append(" LIKE '%").append(search.toLowerCase()).append("%' ");
 		selection.append(" OR ").append(VasContact.PHONE).append(" LIKE '%").append(search.toLowerCase()).append("%' ");
+		selection.append(")");
 
 		return context.getContentResolver().query(VasContact.CONTENT_URI, null, selection.toString(), null, limit);
 	}
