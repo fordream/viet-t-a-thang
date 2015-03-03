@@ -1,11 +1,14 @@
 package com.aretha.slidemenudemo.fragment;
 
 import vnp.com.db.VasContact;
+import vnp.com.db.datastore.DichVuStore;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.adapter.MoiNhieuDichVuAdapter;
+import vnp.com.mimusic.base.diablog.DangKyDialog;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.view.MenuRightItemView;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -197,19 +200,33 @@ public class MoiNhieuDichVuFragment extends BaseFragment implements android.view
 				Conts.showDialogThongbao(getActivity(), getString(R.string.validatesodichvu));
 				return;
 			}
-			String service_codes = "";
-			for (String _id : adapter.getListSelect()) {
-				String service_code = adapter.getService_code(_id);
-				if (!Conts.isBlank(service_code)) {
-					if (Conts.isBlank(service_codes)) {
-						service_codes = service_code;
-					} else {
-						service_codes = String.format("%s,%s", service_codes, service_code);
-					}
-				}
-			}
 
-			(((RootMenuActivity) getActivity())).gotoLoiMoiNhieuDichVU(sdt, adapter.getService_code(adapter.getListSelect().get(0)), service_codes);
+			ContentValues values = new ContentValues();
+
+			String content = String.format(getString(R.string.ban_co_muon_moi_sdt_nay), Conts.getSDT(sdt));
+			values.put("name", getString(R.string.app_name));
+			values.put("content", content);
+			values.put("btn_right", getString(R.string.dongy));
+			new DangKyDialog(getActivity(), values) {
+				public void updateUiDangKy() {
+					String service_codes = "";
+					for (String _id : adapter.getListSelect()) {
+						String service_code = adapter.getService_code(_id);
+						if (!Conts.isBlank(service_code)) {
+							if (Conts.isBlank(service_codes)) {
+								service_codes = service_code;
+							} else {
+								service_codes = String.format("%s,%s", service_codes, service_code);
+							}
+						}
+					}
+					(((RootMenuActivity) getActivity())).gotoLoiMoiNhieuDichVU(sdt, adapter.getService_code(adapter.getListSelect().get(0)), service_codes);
+				};
+			}.show();
+
+			// (((RootMenuActivity) getActivity())).gotoLoiMoiNhieuDichVU(sdt,
+			// adapter.getService_code(adapter.getListSelect().get(0)),
+			// service_codes);
 		}
 	}
 

@@ -9,10 +9,12 @@ import vnp.com.db.datastore.DichVuStore;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.adapter.MoiDvChoNhieuNguoiAdaper;
+import vnp.com.mimusic.base.diablog.DangKyDialog;
 import vnp.com.mimusic.base.diablog.VasProgessDialog;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
 import android.app.ProgressDialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -141,6 +143,8 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 		final JSONObject mcursor = dichVuStore.getDvByServiceCode(mService_code);
 		service_code = Conts.getString(mcursor, DichVuStore.service_code);
 		Conts.setTextView(view.findViewById(R.id.name), mcursor, DichVuStore.service_name);
+
+		service_name = Conts.getString(mcursor, DichVuStore.service_name);
 		Conts.setTextView(view.findViewById(R.id.gia), mcursor, DichVuStore.service_price);
 		ImageView home_item_img_icon = (ImageView) view.findViewById(R.id.icon);
 
@@ -315,6 +319,8 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 
 	}
 
+	private String service_name;
+
 	@Override
 	public void onClick(View v) {
 		if (v.getId() == R.id.back) {
@@ -324,7 +330,19 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 			Conts.hiddenKeyBoard(getActivity());
 			boardView.setVisibility(View.GONE);
 			mkeyboard(false);
-			gotoLoiMoi(getArguments().getString(DichVuStore.service_code));
+
+			ContentValues values = new ContentValues();
+
+			String content = String.format(getString(R.string.ban_co_muon_moi_dv_nay), service_name);
+			values.put("name", getString(R.string.app_name));
+			values.put("content", content);
+			values.put("btn_right", getString(R.string.dongy));
+			new DangKyDialog(getActivity(), values) {
+				public void updateUiDangKy() {
+					gotoLoiMoi(getArguments().getString(DichVuStore.service_code));
+				};
+			}.show();
+			// gotoLoiMoi(getArguments().getString(DichVuStore.service_code));
 		} else if (v.getId() == R.id.moidichvuchonhieunguoi_contact) {
 
 			if (boardView.getVisibility() == View.VISIBLE) {
