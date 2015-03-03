@@ -211,7 +211,7 @@
     <string name="error_network">Lỗi đường truyền, bạn cần kiểm tra lại mạng.</string>
     <string name="need3g">Để sử dụng ứng dụng, bạn cần sử dụng 3G.</string>
     <string name="khongthedangnhap">Đăng nhập thất bại\nBạn cần kiểm tra lại kết nối 3G</string>
-    <string name="ban_co_muon_moi_sdt_nay">Bạn có muốn mời số điên thoại %s.</string>
-    <string name="ban_co_muon_moi_dv_nay">Bạn có muốn mời dịch vụ  %s.</string>
+    <string name="ban_co_muon_moi_sdt_nay">Bạn có muốn gửi lời mời đến %s?</string>
+    <string name="ban_co_muon_moi_dv_nay">Bạn có muốn gửi lời mời sử dụng dịch vụ %s?</string>
 
 </resources>
