@@ -100,4 +100,12 @@ public class DichVuStore extends BaseStore {
 	public void updateService_content(Context context, JSONObject response, Bundle bundle) {
 
 	}
+
+	public String getDichvuSericeCodeFirst() {
+		try {
+			return getDichvu().getJSONObject(0).getString(service_code);
+		} catch (Exception exception) {
+			return "";
+		}
+	}
 }

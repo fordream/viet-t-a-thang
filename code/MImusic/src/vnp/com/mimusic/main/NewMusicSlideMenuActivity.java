@@ -197,13 +197,26 @@ public class NewMusicSlideMenuActivity extends TabActivity {
 					overridePendingTransitionStartActivity();
 					// overridePendingTransition(R.anim.abc_slide_right_in,
 					// R.anim.abc_slide_left_out);
-				} else {
+				} else if (position == 3) {
 					// chinh sua thong tin
 					// getTabHost().setCurrentTab(6);
 					//
 					Intent intent = new Intent(NewMusicSlideMenuActivity.this, RootMenuActivity.class);
 					Bundle extras = new Bundle();
 					extras.putString("type", Conts.THONGTINCANHAN);
+					intent.putExtras(extras);
+					startActivity(intent);
+					overridePendingTransitionStartActivity();
+					// overridePendingTransition(R.anim.abc_slide_right_in,
+					// R.anim.abc_slide_left_out);
+
+				} else if (position == 4) {
+					// chinh sua thong tin
+					// getTabHost().setCurrentTab(6);
+					//
+					Intent intent = new Intent(NewMusicSlideMenuActivity.this, RootMenuActivity.class);
+					Bundle extras = new Bundle();
+					extras.putString("type", Conts.MOISUDUNGUNGDUNG);
 					intent.putExtras(extras);
 					startActivity(intent);
 					overridePendingTransitionStartActivity();
