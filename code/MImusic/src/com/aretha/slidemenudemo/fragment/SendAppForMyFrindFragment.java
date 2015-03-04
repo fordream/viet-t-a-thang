@@ -72,7 +72,6 @@ public class SendAppForMyFrindFragment extends BaseFragment implements OnItemCli
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.moidichvuchonhieunguoi, null);
-		// nhieuNgoiHeaderView = new MoiNhieuNgoiHeaderView(getActivity());
 		view.findViewById(R.id.LinearLayout01).setOnClickListener(null);
 		mkeyboard = view.findViewById(R.id.mkeyboard);
 		mkeyboard.setOnClickListener(this);
@@ -121,10 +120,8 @@ public class SendAppForMyFrindFragment extends BaseFragment implements OnItemCli
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				// if (!moidichvuchonhieunguoi_contact.isChecked()) {
 				adaper.setTextSearch(moidichvuchonhieunguoi_number.getText().toString().trim());
 				adaper.notifyDataSetChanged();
-				// }
 			}
 		});
 
@@ -347,12 +344,14 @@ public class SendAppForMyFrindFragment extends BaseFragment implements OnItemCli
 
 		ContentValues values = new ContentValues();
 
-		String content = String.format(getString(R.string.ban_co_muon_moi_dv_nay), "xxxx");
-		values.put("name", getString(R.string.app_name));
+		String content = getString(R.string.message_moitaiungdung);
+		values.put("name", getString(R.string.moitaiungdung));
 		values.put("content", content);
-		values.put("btn_right", getString(R.string.dongy));
+		values.put("btn_right", getString(R.string.moi));
+
 		new DangKyDialog(getActivity(), values) {
-			public void updateUiDangKy() {
+			public void mOpen() {
+				super.mOpen();
 				String customers = "";
 				for (String _id : adaper.getListSeList()) {
 					String user = adaper.getUserFrom_ID(_id);
@@ -360,7 +359,7 @@ public class SendAppForMyFrindFragment extends BaseFragment implements OnItemCli
 
 					if (!Conts.isBlank(user)) {
 						if (customers.endsWith("\"")) {
-							customers = String.format("%s,\"%s\"", customers, user);
+							customers = String.format("%s;\"%s\"", customers, user);
 						} else {
 							customers = String.format("\"%s\"", user);
 						}
@@ -370,7 +369,7 @@ public class SendAppForMyFrindFragment extends BaseFragment implements OnItemCli
 				for (String user : adaper.getListAdd()) {
 					if (!Conts.isBlank(user)) {
 						if (customers.endsWith("\"")) {
-							customers = String.format("%s,\"%s\"", customers, user);
+							customers = String.format("%s;\"%s\"", customers, user);
 						} else {
 							customers = String.format("\"%s\"", user);
 						}

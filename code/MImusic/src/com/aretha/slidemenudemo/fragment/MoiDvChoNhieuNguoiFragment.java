@@ -333,12 +333,14 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 
 			ContentValues values = new ContentValues();
 
-			String content = String.format(getString(R.string.ban_co_muon_moi_dv_nay), service_name);
+//			String content = String.format(getString(R.string.ban_co_muon_moi_dv_nay), service_name);
+			String content = getString(R.string.ban_co_muon_moi_dv_nays);
 			values.put("name", getString(R.string.app_name));
 			values.put("content", content);
 			values.put("btn_right", getString(R.string.dongy));
 			new DangKyDialog(getActivity(), values) {
-				public void updateUiDangKy() {
+				public void mOpen() {
+					super.mOpen();
 					gotoLoiMoi(getArguments().getString(DichVuStore.service_code));
 				};
 			}.show();

@@ -59,6 +59,7 @@ import com.aretha.slidemenudemo.fragment.MoiNhieuDichVuFragment;
 import com.aretha.slidemenudemo.fragment.MoiThanhVienFragment;
 import com.aretha.slidemenudemo.fragment.QuyDinhBanHangFragment;
 import com.aretha.slidemenudemo.fragment.SearchFragment;
+import com.aretha.slidemenudemo.fragment.SendAppForMyFrindFragment;
 import com.aretha.slidemenudemo.fragment.ThongTinCaNhanFragment;
 import com.aretha.slidemenudemo.fragment.TinTucFragment;
 import com.vnp.core.crash.CrashExceptionHandler;
@@ -176,6 +177,8 @@ public class RootMenuActivity extends FragmentActivity {
 			changeFragemt(R.id.root_main_fragment, new DichVuBanChayFragment(), false);
 		} else if (Conts.MOITHANHVIEN.equals(type)) {
 			changeFragemt(R.id.root_main_fragment, new MoiThanhVienFragment(), false);
+		} else if (Conts.MOISUDUNGUNGDUNG.equals(type)) {
+			changeFragemt(R.id.root_main_fragment, new SendAppForMyFrindFragment(), false);
 		}
 	}
 
@@ -373,55 +376,47 @@ public class RootMenuActivity extends FragmentActivity {
 	 */
 	public void gotoLoiMoiUseApp(final String customers) {
 		Conts.hiddenKeyBoard(this);
+		Bundle bundle = new Bundle();
+		
+		bundle.putString("msisdns", customers.replace("{", "").replace("}", "").replace("\"", ""));
 
-		// Bundle bundle = new Bundle();
-		// bundle.putString("service_code", serviceCode);
-		//
-		// execute(RequestMethod.GET, API.API_R022, bundle, new IContsCallBack()
-		// {
-		// ProgressDialog progressDialog;
-		//
-		// @Override
-		// public void onSuscess(JSONObject response) {
-		//
-		// if (progressDialog != null) {
-		// progressDialog.dismiss();
-		// }
-		//
-		// String idMauMoi = MauMoi.getCursorMauMoiListJson0(getActivity(),
-		// serviceCode);
-		// if (!Conts.isBlank(idMauMoi)) {
-		// Bundle bundle = new Bundle();
-		// bundle.putString("template_id", idMauMoi);
-		// bundle.putString("service_code", serviceCode);
-		// bundle.putString("customers", customers.replace("{", "").replace("}",
-		// "").replace("\"", ""));
-		// moiTheoDichVu(bundle);
-		// } else {
-		// Conts.showDialogThongbao(RootMenuActivity.this,
-		// getString(R.string.khongthelayduocmaumoi));
-		// }
-		// }
-		//
-		// @Override
-		// public void onStart() {
-		// if (progressDialog == null) {
-		// progressDialog = new VasProgessDialog(RootMenuActivity.this);
-		// progressDialog.show();
-		// }
-		// }
-		//
-		// @Override
-		// public void onError(String message) {
-		// if (progressDialog != null) {
-		// progressDialog.dismiss();
-		// }
-		//
-		// Conts.showDialogThongbao(RootMenuActivity.this, message);
-		// }
-		//
-		// });
+		execute(RequestMethod.POST, API.API_R021, bundle, new IContsCallBack() {
+			ProgressDialog progressDialog;
 
+			@Override
+			public void onSuscess(JSONObject response) {
+
+				if (progressDialog != null) {
+					progressDialog.dismiss();
+				}
+
+				Conts.showDialogDongYCallBack(RootMenuActivity.this, getString(R.string.moiungdungthanhcong), new DialogCallBack() {
+
+					@Override
+					public void callback(Object object) {
+						onBackPressed();
+					}
+				});
+			}
+
+			@Override
+			public void onStart() {
+				if (progressDialog == null) {
+					progressDialog = new VasProgessDialog(RootMenuActivity.this);
+					progressDialog.show();
+				}
+			}
+
+			@Override
+			public void onError(String message) {
+				if (progressDialog != null) {
+					progressDialog.dismiss();
+				}
+
+				Conts.showDialogThongbao(RootMenuActivity.this, message);
+			}
+
+		});
 	}
 
 	/**

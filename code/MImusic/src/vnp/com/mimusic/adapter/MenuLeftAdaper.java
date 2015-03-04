@@ -30,7 +30,7 @@ public class MenuLeftAdaper extends ArrayAdapter<String> {
 				//R.drawable.menu_left_icon_3,//
 				R.drawable.menu_left_icon_4,//
 				R.drawable.menu_left_icon_5,//
-				R.drawable.menu_left_icon_5,//
+				R.drawable.menu_left_icon_6,//
 		};//
 		ImageView menu_item_img_icon = (ImageView) convertView.findViewById(R.id.menu_item_img_icon);
 		menu_item_img_icon.setBackgroundResource(resimg[position]);

@@ -203,12 +203,14 @@ public class MoiNhieuDichVuFragment extends BaseFragment implements android.view
 
 			ContentValues values = new ContentValues();
 
-			String content = String.format(getString(R.string.ban_co_muon_moi_sdt_nay), Conts.getSDT(sdt));
+//			String content = String.format(getString(R.string.ban_co_muon_moi_sdt_nay), Conts.getSDT(sdt));
+			String content = getString(R.string.ban_co_muon_moi_sdt_nays);
 			values.put("name", getString(R.string.app_name));
 			values.put("content", content);
 			values.put("btn_right", getString(R.string.dongy));
 			new DangKyDialog(getActivity(), values) {
-				public void updateUiDangKy() {
+				public void mOpen() {
+					super.mOpen();
 					String service_codes = "";
 					for (String _id : adapter.getListSelect()) {
 						String service_code = adapter.getService_code(_id);

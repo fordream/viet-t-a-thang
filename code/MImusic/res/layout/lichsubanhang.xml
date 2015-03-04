@@ -56,7 +56,8 @@
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/dimen_13dp" />
                 </LinearLayout>
-
+<!--   android:textColor="#727a7e"
+                    android:textColorHint="#727a7e" -->
                 <vnp.com.mimusic.view.textview.EditextTextRegular
                     android:id="@+id/lsbh_sdt"
                     android:layout_width="match_parent"
@@ -68,8 +69,8 @@
                     android:paddingLeft="@dimen/dimen_10dp"
                     android:paddingRight="@dimen/dimen_10dp"
                     android:singleLine="true"
-                    android:textColor="#727a7e"
-                    android:textColorHint="#727a7e"
+                    android:textColor="@android:color/black"
+                    android:textColorHint="@android:color/black"
                     android:textSize="@dimen/dimen_13dp" />
             </LinearLayout>
 
@@ -89,8 +90,8 @@
                     android:paddingLeft="@dimen/dimen_10dp"
                     android:paddingRight="@dimen/dimen_10dp"
                     android:singleLine="true"
-                  android:textColor="#727a7e"
-                    android:textColorHint="#727a7e"
+                  android:textColor="@android:color/black"
+                    android:textColorHint="@android:color/black"
                     android:textSize="@dimen/dimen_13dp" />
 
                 <ImageView
@@ -117,8 +118,8 @@
                     android:paddingLeft="@dimen/dimen_10dp"
                     android:paddingRight="@dimen/dimen_10dp"
                     android:singleLine="true"
-                     android:textColor="#727a7e"
-                    android:textColorHint="#727a7e"
+                     android:textColor="@android:color/black"
+                    android:textColorHint="@android:color/black"
                     android:textSize="@dimen/dimen_13dp" />
 
                 <ImageView
@@ -147,8 +148,8 @@
                     android:paddingLeft="@dimen/dimen_10dp"
                     android:paddingRight="@dimen/dimen_10dp"
                     android:singleLine="true"
-                   android:textColor="#727a7e"
-                    android:textColorHint="#727a7e"
+                   android:textColor="@android:color/black"
+                    android:textColorHint="@android:color/black"
                     android:textSize="@dimen/dimen_13dp" />
 
                 <ImageView
@@ -176,8 +177,8 @@
                     android:paddingLeft="@dimen/dimen_10dp"
                     android:paddingRight="@dimen/dimen_10dp"
                     android:singleLine="true"
-                   android:textColor="#727a7e"
-                    android:textColorHint="#727a7e"
+                   android:textColor="@android:color/black"
+                    android:textColorHint="@android:color/black"
                     android:textSize="@dimen/dimen_13dp" />
 
                 <ImageView
