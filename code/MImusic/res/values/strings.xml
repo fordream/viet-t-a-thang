@@ -136,7 +136,7 @@
     <string name="dong">Đóng</string>
     <string name="thongbao">Thông báo</string>
     <string name="validateaddnguoi">Bạn cần mời ít nhất 1 người bạn.</string>
-    <string name="success_moi">Bạn đã mời thành công, bạn chọn \"Đồng ý\" để đóng màn hình mời.</string>
+    <string name="success_moi">Bạn đã mời thành công, chọn \"Đồng ý\" để đóng màn hình mời.</string>
     <string name="validatesodichvu">Bạn cần chọn ít nhất 1 dịch vụ.</string>
     <string name="default_error">{\"errorCode\":10000,\"message\":\"Lỗi đường truyền, bạn cần kiểm tra lại mạng\"}</string>
     <string name="formatdieukhoan" formatted="false">Điều khoản %s</string>
