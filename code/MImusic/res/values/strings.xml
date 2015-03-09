@@ -51,11 +51,9 @@
     <string name="gui">Gửi</string>
     <string name="dangnhap">Đăng nhập</string>
     <string name="tinkhac">Tin khác</string>
-    <string name="recoment">Recomnet</string>
     <string name="khuyenmai">Khuyến mãi</string>
     <string name="danhsachcacthuebaodachon">Danh sách các thuê bao đã chọn</string>
     <string name="chonloimoi">Chọn lời mời</string>
-    <string name="mautinmoitemplete">Mẫu tin mời Template</string>
     <string name="danhsachdichvudachon">Danh sách dịch vụ đã chọn</string>
     <string name="moidanhba">Mời danh bạ</string>
     <string name="chitiettintuc">Chi tiết tin tức</string>
@@ -78,14 +76,6 @@
     <string name="giacuoc">Giá cước</string>
     <string name="matkhau">Mật khẩu</string>
     <string name="thoigiantrave">Thời gian trả về</string>
-    <string name="tinhnangdichvuexample">1.Website nhặc trực tuyến của tập đoản viễn thông quân đội viettel, các bài hát hot nhất, mới nhất , kết nối với các nhạc sĩ tên tuổi nhất...
-         \n\n2.Website nhặc trực tuyến của tập đoản viễn thông quân đội viettel, các bài hát hot nhất, mới nhất , kết nối với các nhạc sĩ tên tuổi nhất...
-         \n\n3.Website nhặc trực tuyến của tập đoản viễn thông quân đội viettel, các bài hát hot nhất, mới nhất , kết nối với các nhạc sĩ tên tuổi nhất...
-         \n\n4.Website nhặc trực tuyến của tập đoản viễn thông quân đội viettel, các bài hát hot nhất, mới nhất , kết nối với các nhạc sĩ tên tuổi nhất...
-         \n\n5.Website nhặc trực tuyến của tập đoản viễn thông quân đội viettel, các bài hát hot nhất, mới nhất , kết nối với các nhạc sĩ tên tuổi nhất...
-         \n\n6.Website nhặc trực tuyến của tập đoản viễn thông quân đội viettel, các bài hát hot nhất, mới nhất , kết nối với các nhạc sĩ tên tuổi nhất...
-         \n\n7.Website nhặc trực tuyến của tập đoản viễn thông quân đội viettel, các bài hát hot nhất, mới nhất , kết nối với các nhạc sĩ tên tuổi nhất...
-         \n\n8.Website nhặc trực tuyến của tập đoản viễn thông quân đội viettel, các bài hát hot nhất, mới nhất , kết nối với các nhạc sĩ tên tuổi nhất...</string>
     <string name="sodienthoaikhachhang">Số điện thoại khách hàng</string>
     <string name="danhba">Danh bạ</string>
     <string name="thoigianban">Thời gian bán</string>
@@ -119,8 +109,8 @@
     </string-array>
 
     <string name="daaddsdt">Bạn đã thêm số điện thoại này rồi, vui lòng nhập số điện thoại khác.</string>
-    <string name="format_check_sdt">Bạn cần kiểm tra lại số điện thoại (%s).\nSố điện thoại phải là số viettel và có 10 hoặc 11 số.</string>
-    <string name="noappsendmessage">Không tìm thấy trình gửi tin nhắn.</string>
+    <string name="format_check_sdt">Bạn cần kiểm tra lại số điện thoại (%s).\nSố điện thoại phải là số Viettel và có 10 hoặc 11 số.</string>
+    <string name="noappsendmessage">Không tìm thấy chương trình gửi tin nhắn.</string>
     <string name="thanhcong">Thành công</string>
     <string name="thatbai">Thất bại</string>
     <string name="chontrangthai">Chọn trạng thái</string>
@@ -146,8 +136,8 @@
     <string name="dong">Đóng</string>
     <string name="thongbao">Thông báo</string>
     <string name="validateaddnguoi">Bạn cần mời ít nhất 1 người bạn.</string>
-    <string name="success_moi">Bạn đã mới thành công, bạn chọn \"Đồng ý\" để đóng màn hình mời.</string>
-    <string name="validatesodichvu">Bạ cần chọn ít nhất 1 dịch vụ.</string>
+    <string name="success_moi">Bạn đã mời thành công, bạn chọn \"Đồng ý\" để đóng màn hình mời.</string>
+    <string name="validatesodichvu">Bạn cần chọn ít nhất 1 dịch vụ.</string>
     <string name="default_error">{\"errorCode\":10000,\"message\":\"Lỗi đường truyền, bạn cần kiểm tra lại mạng\"}</string>
     <string name="formatdieukhoan" formatted="false">Điều khoản %s</string>
     <string name="chupanhmoi">Chụp ảnh mới</string>
@@ -171,7 +161,7 @@
     <string name="title_dangky">Đăng ký dịch vụ %s</string>
     <string name="format_tien">%s VNĐ</string>
     <string name="xacnhandangky_form" formatted="false">Xác nhận đăng ký dịch vụ %s \ngiá %s/tháng</string>
-    <string name="banchuacomatkhauvuilongsoantinnhan">Bạn chưa có hoặc quên mât khẩu!\nVui lòng soạn tin nhắn(miễn phí)</string>
+    <string name="banchuacomatkhauvuilongsoantinnhan">Bạn chưa có hoặc quên mật khẩu!\nVui lòng soạn tin nhắn(miễn phí)</string>
     <string name="bancannhapsdtvamatkkau">Bạn cần nhập số điện thoại và mật khẩu.</string>
     <string name="xemtatca">Xem tất cả ></string>
     <string name="moithanhvien">Số thuê bao nên mời</string>
@@ -189,17 +179,16 @@
     <string name="chitietcanhanbxh">Chi tiết cá nhân BXH</string>
     <string name="them">Thêm</string>
     <string name="gia">Giá</string>
-    <string name="cancel">Cancel</string>
     <string name="save">Save</string>
-    <string name="saving_image">Saving image</string>
-    <string name="preparing_card">Preparing card</string>
-    <string name="no_storage_card">No storage card</string>
-    <string name="not_enough_space">Not enough space</string>
+    <string name="saving_image">Lưu hình ảnh.</string>
+    <string name="preparing_card">Chuẩn bị thẻ nhớ.</string>
+    <string name="no_storage_card">Không có thẻ nhớ.</string>
+    <string name="not_enough_space">Không đủ dung lượng bộ nhớ.</string>
     <string name="tinlienquan">Tin liên quan</string>
 
     <color name="f6f6f6">#f6f6f6</color>
 
-    <string name="sdtkhongphaicuabiettel">Số điện thoại không phải của viettel.</string>
+    <string name="sdtkhongphaicuabiettel">Số điện thoại không phải của Viettel.</string>
     <string name="banphainhapngaybatdau">Bạn cần nhập ngày bắt đầu.</string>
     <string name="banphainhapngaykethuc">Bạn cần nhập ngày kết thúc.</string>
     <string name="ngayketthucphaisaungaybatdau">Bạn cần nhập ngày kết thúc sau ngày bắt đầu.</string>
@@ -207,7 +196,7 @@
     <string name="bandangkythanhcongdichvu">Bạn đăng ký thành công dịch vụ %s</string>
 
     <!-- Error message -->
-    <string name="error_sdt_viettel">Số điện thoại bạn nhập không phải số viettel hoặc là sim 3g</string>
+    <string name="error_sdt_viettel">Số điện thoại bạn nhập không phải số Viettel hoặc là sim 3g</string>
     <string name="message_dongbo">Đồng bộ danh bạ thành công</string>
     <string name="error_network">Lỗi đường truyền, bạn cần kiểm tra lại mạng.</string>
     <string name="need3g">Để sử dụng ứng dụng, bạn cần sử dụng 3G.</string>
