@@ -58,7 +58,7 @@ public class SplashScreenActivity extends Activity {
 		@Override
 		public void onServiceConnected() {
 			// TODO
-			startActivity(new Intent(SplashScreenActivity.this, NewMusicSlideMenuActivity.class));
+			//startActivity(new Intent(SplashScreenActivity.this, NewMusicSlideMenuActivity.class));
 
 			if (Conts.is3GConnected(SplashScreenActivity.this)) {
 				((VApplication) getApplication()).login(true, "", "", new IContsCallBack() {
