@@ -44,8 +44,9 @@ public class SplashScreenActivity extends Activity {
 				}
 			}
 		}, 1000);
-	
-		//startActivity(new Intent(SplashScreenActivity.this, NewMusicSlideMenuActivity.class));
+
+		// startActivity(new Intent(SplashScreenActivity.this,
+		// NewMusicSlideMenuActivity.class));
 	}
 
 	private IServiceConfig config = new IServiceConfig() {
@@ -56,6 +57,9 @@ public class SplashScreenActivity extends Activity {
 
 		@Override
 		public void onServiceConnected() {
+			// TODO
+			startActivity(new Intent(SplashScreenActivity.this, NewMusicSlideMenuActivity.class));
+
 			if (Conts.is3GConnected(SplashScreenActivity.this)) {
 				((VApplication) getApplication()).login(true, "", "", new IContsCallBack() {
 
@@ -79,10 +83,13 @@ public class SplashScreenActivity extends Activity {
 					public void onError(String message) {
 						Conts.showView(loadingView, false);
 						if (!isFinishing()) {
-//							startActivity(new Intent(SplashScreenActivity.this, LoginActivty.class));
-//							finish();
-//							overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_nothing);
-							
+							// startActivity(new
+							// Intent(SplashScreenActivity.this,
+							// LoginActivty.class));
+							// finish();
+							// overridePendingTransition(R.anim.abc_slide_right_in,
+							// R.anim.abc_nothing);
+
 							Conts.showDialogDongYCallBack(SplashScreenActivity.this, getString(R.string.khongthedangnhap), new DialogCallBack() {
 
 								@Override
