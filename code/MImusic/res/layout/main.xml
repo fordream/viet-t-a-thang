@@ -39,18 +39,28 @@
         </TabHost>
     </FrameLayout>
 
-    <vnp.com.mimusic.view.MenuLeftView
-        android:id="@+id/mactivity_slidemenu_menuleft"
+    <FrameLayout
         android:layout_width="@dimen/dimen_282dp"
         android:layout_height="match_parent"
         android:layout_gravity="start" >
-    </vnp.com.mimusic.view.MenuLeftView>
 
-    <vnp.com.mimusic.view.MenuRightView
-        android:id="@+id/mactivity_menu_right"
+        <vnp.com.mimusic.view.MenuLeftView
+            android:id="@+id/mactivity_slidemenu_menuleft"
+            android:layout_width="@dimen/dimen_282dp"
+            android:layout_height="match_parent" >
+        </vnp.com.mimusic.view.MenuLeftView>
+    </FrameLayout>
+
+    <FrameLayout
         android:layout_width="@dimen/dimen_282dp"
         android:layout_height="match_parent"
         android:layout_gravity="end" >
-    </vnp.com.mimusic.view.MenuRightView>
+
+        <vnp.com.mimusic.view.MenuRightView
+            android:id="@+id/mactivity_menu_right"
+            android:layout_width="@dimen/dimen_282dp"
+            android:layout_height="match_parent" >
+        </vnp.com.mimusic.view.MenuRightView>
+    </FrameLayout>
 
 </android.support.v4.widget.DrawerLayout>
