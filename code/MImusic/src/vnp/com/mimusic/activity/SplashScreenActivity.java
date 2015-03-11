@@ -44,6 +44,8 @@ public class SplashScreenActivity extends Activity {
 				}
 			}
 		}, 1000);
+	
+		//startActivity(new Intent(SplashScreenActivity.this, NewMusicSlideMenuActivity.class));
 	}
 
 	private IServiceConfig config = new IServiceConfig() {

@@ -83,7 +83,6 @@
                     android:layout_below="@+id/xmain"
                     android:layout_marginBottom="@dimen/dimen_15dp"
                     android:gravity="center"
-                    android:maxLines="2"
                     android:singleLine="true"
                     android:text="Hoài Anh (0968678678)"
                     android:textColor="#515a5e"

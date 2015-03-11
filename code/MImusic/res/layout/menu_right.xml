@@ -8,8 +8,8 @@
     android:scaleType="center" >
 
     <View
-        android:layout_width="@dimen/dimen_12dp"
         android:id="@+id/xleft"
+        android:layout_width="@dimen/dimen_12dp"
         android:layout_height="fill_parent"
         android:background="@drawable/menu_right_space_1" />
 
@@ -42,9 +42,7 @@
                 android:layout_marginRight="@dimen/dimen_15dp"
                 android:layout_toLeftOf="@+id/menu_right_img_search"
                 android:background="@drawable/new_menu_right_edit"
-                android:gravity="center"
-                android:singleLine="true"
-                android:textSize="@dimen/dimen_13dp" >
+                android:gravity="center" >
 
                 <vnp.com.mimusic.view.textview.EditextTextThin
                     android:id="@+id/menu_right_editext"
