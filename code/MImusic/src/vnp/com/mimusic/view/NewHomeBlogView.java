@@ -92,7 +92,7 @@ public abstract class NewHomeBlogView extends LinearLayout implements OnClickLis
 		} else if (type() == 1) {
 			addUerHot();
 		} else {
-			addDichVuHot();
+			// addDichVuHot();
 		}
 	}
 
@@ -159,9 +159,7 @@ public abstract class NewHomeBlogView extends LinearLayout implements OnClickLis
 	}
 
 	private void addUerHot() {
-		// if (main.getChildCount() > 0) {
-		// return;
-		// }
+
 		main.removeAllViews();
 		Cursor cursorUserRecomment = Recomment.getCursorFromUser(getContext(), 5);
 		if (cursorUserRecomment != null) {

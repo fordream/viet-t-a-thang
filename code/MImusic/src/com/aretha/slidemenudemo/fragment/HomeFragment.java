@@ -1,5 +1,7 @@
 package com.aretha.slidemenudemo.fragment;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import vnp.com.api.API;
@@ -14,17 +16,21 @@ import vnp.com.mimusic.main.NewMusicSlideMenuActivity;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
 import vnp.com.mimusic.view.HeaderView;
+import vnp.com.mimusic.view.HomeDichVuItemView;
 import vnp.com.mimusic.view.LoadingView;
 import vnp.com.mimusic.view.MusicListView;
 import vnp.com.mimusic.view.NewHomeBlogView;
 import android.content.ContentValues;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Filter;
 import android.widget.ListView;
 
 import com.vnp.core.scroll.VasHomeScrollListView;
@@ -34,6 +40,7 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 	// private HomeHeaderView home_header;
 	private LoadingView loadingView;
 	private HeaderView headerView;
+	private NewHomeAdapter adapter;
 
 	@Override
 	public void onCLickButtonLeft() {
@@ -55,6 +62,7 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.home, null);
 		loadHeader(view, R.id.header, R.string.kenhbanvas, true, true);
+		adapter = new NewHomeAdapter(getActivity());
 
 		loadingView = Conts.getView(view, R.id.loadingView1);
 		list = (MusicListView) view.findViewById(R.id.list);
@@ -67,7 +75,8 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 		addSothuebaonenmoi(list);
 		addDichvuBanChay(list);
 
-		list.setAdapter(new ArrayAdapter<String>(getActivity(), 0, new String[] {}));
+		list.setAdapter(adapter);
+		adapter.getFilter().filter("");
 
 		Bundle bundle = new Bundle();
 		execute(RequestMethod.GET, API.API_R026, bundle, new IContsCallBack() {
@@ -178,6 +187,8 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 			dichvubanchay.update();
 		if (dichcudexuat != null)
 			dichcudexuat.update();
+		if (adapter != null)
+			adapter.notifyDataSetChanged();
 	}
 
 	@Override
@@ -193,4 +204,117 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 		}
 	}
 
+	private class NewHomeAdapter extends ArrayAdapter<JSONObject> {
+		public NewHomeAdapter(Context context) {
+			super(context, 0);
+		}
+
+		private JSONArray array = new JSONArray();
+
+		@Override
+		public int getCount() {
+			return array.length();
+		}
+
+		@Override
+		public JSONObject getItem(int position) {
+			try {
+				return array.getJSONObject(position);
+			} catch (Exception exception) {
+				return null;
+			}
+		}
+
+		@Override
+		public View getView(final int position, View view, final ViewGroup parent) {
+			if (view == null) {
+				view = new HomeDichVuItemView(parent.getContext());
+			}
+			JSONObject object = (JSONObject) getItem(position);
+
+			final ContentValues values = new ContentValues();
+			values.put("name", String.format(parent.getContext().getString(R.string.title_dangky), Conts.getString(object, DichVuStore.service_name)));
+			values.put(DichVuStore.service_name, Conts.getString(object, DichVuStore.service_name));
+			values.put(DichVuStore.service_code, Conts.getString(object, DichVuStore.service_code));
+			String content = String.format(parent.getContext().getString(R.string.xacnhandangky_form), Conts.getString(object, DichVuStore.service_name),
+					Conts.getString(object, DichVuStore.service_price));
+			values.put("content", content);
+			values.put(DichVuStore.ID, Conts.getString(object, DichVuStore.ID));
+			values.put("type", "dangky");
+			final String service_code = Conts.getString(object, DichVuStore.service_code);
+			view.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					((RootMenuActivity) parent.getContext()).gotoChiTietDichVuFromHome(service_code);
+				}
+			});
+
+			view.findViewById(R.id.home_item_right_control_2).setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					(((RootMenuActivity) getActivity())).gotoMoiDvChoNhieuNguoi(service_code, position);
+				}
+			});
+
+			final boolean isDangKy = dichVuStore.isRegister(Conts.getString(object, DichVuStore.service_code));
+
+			if (isDangKy) {
+				view.findViewById(R.id.home_item_right_control_1).setOnClickListener(null);
+			} else {
+				view.findViewById(R.id.home_item_right_control_1).setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						dangky(values);
+					}
+				});
+			}
+			((HomeDichVuItemView) view).setData(object, position);
+			return view;
+		}
+
+		@Override
+		public Filter getFilter() {
+			return new Filter() {
+
+				@Override
+				protected void publishResults(CharSequence constraint, FilterResults results) {
+					array = (JSONArray) results.values;
+					notifyDataSetChanged();
+				}
+
+				@Override
+				protected FilterResults performFiltering(CharSequence constraint) {
+					FilterResults filterResults = new FilterResults();
+					JSONArray array = new JSONArray();
+					JSONArray data = new DichVuStore(getContext()).getDichvu();
+					if (data != null) {
+						if (data.length() <= 3) {
+							array = data;
+						} else {
+							for (int i = 0; i < 3; i++) {
+								try {
+									array.put(data.get(i));
+								} catch (JSONException e) {
+									e.printStackTrace();
+								}
+							}
+						}
+					}
+					filterResults.values = array;
+					return filterResults;
+				}
+			};
+		}
+
+	}
+
+	public void dangky(final ContentValues values) {
+
+		new DangKyDialog(getActivity(), values) {
+			public void updateUiDangKy() {
+				Conts.showDialogThongbao(getContext(), String.format(getContext().getString(R.string.bandangkythanhcongdichvu), values.getAsString(DichVuStore.service_name)));
+				updateUI(updateSuccess);
+			};
+		}.show();
+	}
 }
