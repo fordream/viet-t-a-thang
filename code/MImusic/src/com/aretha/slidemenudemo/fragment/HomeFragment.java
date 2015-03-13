@@ -172,9 +172,12 @@ public class HomeFragment extends BaseFragment implements OnItemClickListener, V
 	};
 
 	private void updateUI(UpdateSuccess updateSuceess) {
-		sothuebaonenmoi.update();
-		dichvubanchay.update();
-		dichcudexuat.update();
+		if (sothuebaonenmoi != null)
+			sothuebaonenmoi.update();
+		if (dichvubanchay != null)
+			dichvubanchay.update();
+		if (dichcudexuat != null)
+			dichcudexuat.update();
 	}
 
 	@Override

@@ -17,9 +17,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.BaseAdapter;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -60,7 +62,6 @@ public abstract class NewHomeBlogView extends LinearLayout implements OnClickLis
 		((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.new_home_blog, this);
 		dichVuStore = new DichVuStore(getContext());
 		findViewById(R.id.dichvubanchay).setOnClickListener(this);
-
 		home_header_main = findViewById(R.id.home_header_main);
 
 		horizontalscrollview = (HorizontalScrollView) findViewById(R.id.horizontalscrollview);
@@ -96,8 +97,12 @@ public abstract class NewHomeBlogView extends LinearLayout implements OnClickLis
 	}
 
 	private void addDichVuHot() {
+
+		final JSONArray array = dichVuStore.getDichvu();
+		if (array == null) {
+			return;
+		}
 		main.removeAllViews();
-		JSONArray array = dichVuStore.getDichvu();
 		int index = 0;
 		for (int i = 0; i < array.length(); i++) {
 			try {
@@ -110,7 +115,7 @@ public abstract class NewHomeBlogView extends LinearLayout implements OnClickLis
 				values.put("content", content);
 				values.put(DichVuStore.ID, Conts.getString(object, DichVuStore.ID));
 				values.put("type", "dangky");
-				DichVuItemView child = new DichVuItemView(getContext());
+				HomeDichVuItemView child = new HomeDichVuItemView(getContext());
 				child.setData(object, i);
 				main.addView(child);
 				final String service_code = Conts.getString(object, DichVuStore.service_code);
@@ -215,7 +220,6 @@ public abstract class NewHomeBlogView extends LinearLayout implements OnClickLis
 				convertView.setOnClickListener(new DichVuDeXuatOnClickListener(object));
 			} catch (JSONException e) {
 			}
-
 		}
 
 		if (horizontalscrollview_main.getChildCount() > 0) {

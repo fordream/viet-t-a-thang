@@ -143,7 +143,7 @@ public class BangXepHang {
 
 	public static void update(Context context, JSONObject response, Bundle bundle, String api) {
 
-		LogUtils.e("bangxephang", response.toString());
+		//LogUtils.e("bangxephang", response.toString());
 		// API.API_R024,API.API_R025
 		String type = bundle.getString(BangXepHang.type);
 		String user = new AccountStore(context).getUser();

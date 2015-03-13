@@ -2,6 +2,7 @@ package vnp.com.mimusic.view.textview;
 
 import vnp.com.mimusic.util.FontsUtils;
 import android.content.Context;
+import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
@@ -31,5 +32,13 @@ public class TextViewMedium extends TextView {
 	private void init() {
 
 		FontsUtils.getInstance().setTextFontsRobotoMedium(this);
+	}
+
+	@Override
+	protected void onDraw(Canvas canvas) {
+		try {
+			super.onDraw(canvas);
+		} catch (Exception exception) {
+		}
 	}
 }

@@ -24,30 +24,24 @@
             android:background="@drawable/no_avatar"
             android:scaleType="centerCrop" />
 
-        <LinearLayout
+        <vnp.com.mimusic.view.textview.TextViewRegular
+            android:id="@+id/name"
             android:layout_width="match_parent"
-            android:gravity="center"
             android:layout_height="@dimen/dimen_35dp"
-            android:orientation="vertical" >
-
-            <vnp.com.mimusic.view.textview.TextViewRegular
-                android:id="@+id/name"
-                android:gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:paddingLeft="@dimen/dimen_5dp"
-                android:paddingRight="@dimen/dimen_5dp"
-                android:singleLine="true"
-                android:text="Trần Hữu Nhật Minh"
-                android:textColor="#3d3d3d"
-                android:textSize="@dimen/dimen_12dp"/>
-        </LinearLayout>
+            android:ellipsize="end"
+            android:gravity="center"
+            android:paddingLeft="@dimen/dimen_5dp"
+            android:paddingRight="@dimen/dimen_5dp"
+            android:singleLine="true"
+            android:textColor="#3d3d3d"
+            android:textSize="@dimen/dimen_12dp" />
     </LinearLayout>
-   <LinearLayout
+
+    <LinearLayout
         android:id="@+id/right"
         android:layout_width="@dimen/dimen_9dp"
         android:layout_height="match_parent"
         android:orientation="vertical" >
     </LinearLayout>
+
 </LinearLayout>

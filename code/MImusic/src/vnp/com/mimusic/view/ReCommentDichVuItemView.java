@@ -38,8 +38,10 @@ public class ReCommentDichVuItemView extends LinearLayout {
 			String service_icon = cursor.getString(cursor.getColumnIndex(DichVuStore.service_icon)) + "";
 
 			Conts.showLogoDichvu(home_item_img_icon, service_icon);
-			Conts.setTextViewCursor(findViewById(R.id.name), cursor, DichVuStore.service_name);
-
+			try {
+				Conts.setTextViewCursor(findViewById(R.id.name), cursor, DichVuStore.service_name);
+			} catch (Exception exception) {
+			}
 			int poistion = cursor.getPosition();
 
 			Conts.getView(this, R.id.left).setVisibility(poistion == 0 ? View.VISIBLE : View.GONE);
@@ -55,14 +57,17 @@ public class ReCommentDichVuItemView extends LinearLayout {
 		ImageView icon = (ImageView) findViewById(R.id.icon);
 
 		Conts.getView(this, R.id.left).setVisibility(View.GONE);
-//		icon.setBackgroundResource(R.drawable.new_home_dv_bg_1);
+		// icon.setBackgroundResource(R.drawable.new_home_dv_bg_1);
 		icon.setImageResource(R.drawable.tranfer);
 		Conts.setTextView(findViewById(R.id.name), "");
 
 		String service_icon = Conts.getString(item, DichVuStore.service_icon);
 		Conts.showLogoDichvu(icon, service_icon);
-		Conts.setTextView(findViewById(R.id.name), item, DichVuStore.service_name);
+		try {
+			Conts.setTextView(findViewById(R.id.name), item, DichVuStore.service_name);
+		} catch (Exception exception) {
 
+		}
 		Conts.getView(this, R.id.left).setVisibility(position == 0 ? View.VISIBLE : View.GONE);
 	}
 }

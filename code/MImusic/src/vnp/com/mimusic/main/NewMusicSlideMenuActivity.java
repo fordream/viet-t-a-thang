@@ -66,9 +66,15 @@ public class NewMusicSlideMenuActivity extends TabActivity {
 		super.onResume();
 		registerReceiver(broadcastReceiver, new IntentFilter("broadcastReceivermactivity_slidemenu_menuleft"));
 		registerReceiver(broadcastReceiverDongBoDanhBa, new IntentFilter("dongbodanhba"));
-		((MenuLeftView) findViewById(R.id.mactivity_slidemenu_menuleft)).showData();
-		MenuRightView mactivity_menu_right = (MenuRightView) findViewById(R.id.mactivity_menu_right);
-		mactivity_menu_right.initData();
+
+		if (findViewById(R.id.mactivity_slidemenu_menuleft) != null) {
+			((MenuLeftView) findViewById(R.id.mactivity_slidemenu_menuleft)).showData();
+		}
+
+		if (findViewById(R.id.mactivity_menu_right) != null) {
+			MenuRightView mactivity_menu_right = (MenuRightView) findViewById(R.id.mactivity_menu_right);
+			mactivity_menu_right.initData();
+		}
 	}
 
 	@Override
@@ -99,6 +105,8 @@ public class NewMusicSlideMenuActivity extends TabActivity {
 				Conts.hiddenKeyBoard(NewMusicSlideMenuActivity.this);
 			}
 		});
+		
+		
 		getTabHost().setOnTabChangedListener(new OnTabChangeListener() {
 			@Override
 			public void onTabChanged(String tabId) {
@@ -134,7 +142,77 @@ public class NewMusicSlideMenuActivity extends TabActivity {
 		for (String menu : menus) {
 			addTab(RootMenuActivity.class, menu, menu, menu);
 		}
+		TabView mactivityslide_menu_tabview = (TabView) findViewById(R.id.mactivityslide_menu_tabview);
+		mactivityslide_menu_tabview.setOnClickListener(tabOnClick, homeOnClick);
+		
+		configMenuLeft();
 
+		configMenuRight();
+		
+		
+	}
+
+	private void configMenuRight() {
+		// Menu Right
+		final MenuRightView mactivity_menu_right = (MenuRightView) findViewById(R.id.mactivity_menu_right);
+		mactivity_menu_right.initData();
+
+		mactivity_menu_right.findViewById(R.id.menu_right_img_search).setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				((VApplication) getApplication()).callDongBoDanhBaLen(new IContsCallBack() {
+					private ProgressDialog progressDialog;
+
+					@Override
+					public void onSuscess(JSONObject response) {
+						if (progressDialog != null) {
+							progressDialog.dismiss();
+						}
+
+						Conts.showDialogThongbao(NewMusicSlideMenuActivity.this, getString(R.string.message_dongbo));
+					}
+
+					@Override
+					public void onStart() {
+						if (progressDialog == null) {
+							progressDialog = new VasProgessDialog(NewMusicSlideMenuActivity.this);
+							progressDialog.show();
+						}
+					}
+
+					@Override
+					public void onError(String message) {
+
+						Conts.showDialogThongbao(NewMusicSlideMenuActivity.this, message);
+						if (progressDialog != null) {
+							progressDialog.dismiss();
+						}
+					}
+
+				});
+			}
+		});
+		mactivity_menu_right.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+				Cursor cursor = (Cursor) arg0.getItemAtPosition(position);
+				final String _id = cursor.getString(cursor.getColumnIndex(VasContact._ID));
+
+				closeMenu();
+
+				Intent intent = new Intent(NewMusicSlideMenuActivity.this, RootMenuActivity.class);
+				intent.putExtra("type", Conts.NHIEUDICHVU);
+				intent.putExtra(VasContact._ID, _id + "");
+				intent.putExtra("getPosition", cursor.getPosition());
+				startActivity(intent);
+				overridePendingTransitionStartActivity();
+			}
+		});
+	}
+
+	private void configMenuLeft() {
 		MenuLeftView mactivity_slidemenu_menuleft = (MenuLeftView) findViewById(R.id.mactivity_slidemenu_menuleft);
 
 		mactivity_slidemenu_menuleft.findViewById(R.id.menu_footer_t).setOnClickListener(new OnClickListener() {
@@ -142,10 +220,7 @@ public class NewMusicSlideMenuActivity extends TabActivity {
 			@Override
 			public void onClick(View v) {
 				closeMenu();
-				// Intent browserIntent = new
-				// Intent("android.intent.action.VIEW",
-				// Uri.parse("https://www.facebook.com/Idea.Sinhvu"));
-				// startActivity(browserIntent);
+
 			}
 		});
 		mactivity_slidemenu_menuleft.findViewById(R.id.menu_footer_f).setOnClickListener(new OnClickListener() {
@@ -153,10 +228,7 @@ public class NewMusicSlideMenuActivity extends TabActivity {
 			@Override
 			public void onClick(View v) {
 				closeMenu();
-				// Intent browserIntent = new
-				// Intent("android.intent.action.VIEW",
-				// Uri.parse("https://www.facebook.com/Idea.Sinhvu"));
-				// startActivity(browserIntent);
+
 			}
 		});
 
@@ -224,67 +296,6 @@ public class NewMusicSlideMenuActivity extends TabActivity {
 					// R.anim.abc_slide_left_out);
 
 				}
-			}
-		});
-
-		TabView mactivityslide_menu_tabview = (TabView) findViewById(R.id.mactivityslide_menu_tabview);
-		mactivityslide_menu_tabview.setOnClickListener(tabOnClick, homeOnClick);
-
-		// Menu Right
-		final MenuRightView mactivity_menu_right = (MenuRightView) findViewById(R.id.mactivity_menu_right);
-		mactivity_menu_right.initData();
-
-		mactivity_menu_right.findViewById(R.id.menu_right_img_search).setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				((VApplication) getApplication()).callDongBoDanhBaLen(new IContsCallBack() {
-					private ProgressDialog progressDialog;
-
-					@Override
-					public void onSuscess(JSONObject response) {
-						if (progressDialog != null) {
-							progressDialog.dismiss();
-						}
-
-						Conts.showDialogThongbao(NewMusicSlideMenuActivity.this, getString(R.string.message_dongbo));
-					}
-
-					@Override
-					public void onStart() {
-						if (progressDialog == null) {
-							progressDialog = new VasProgessDialog(NewMusicSlideMenuActivity.this);
-							progressDialog.show();
-						}
-					}
-
-					@Override
-					public void onError(String message) {
-
-						Conts.showDialogThongbao(NewMusicSlideMenuActivity.this, message);
-						if (progressDialog != null) {
-							progressDialog.dismiss();
-						}
-					}
-
-				});
-			}
-		});
-		mactivity_menu_right.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-				Cursor cursor = (Cursor) arg0.getItemAtPosition(position);
-				final String _id = cursor.getString(cursor.getColumnIndex(VasContact._ID));
-
-				closeMenu();
-
-				Intent intent = new Intent(NewMusicSlideMenuActivity.this, RootMenuActivity.class);
-				intent.putExtra("type", Conts.NHIEUDICHVU);
-				intent.putExtra(VasContact._ID, _id + "");
-				intent.putExtra("getPosition", cursor.getPosition());
-				startActivity(intent);
-				overridePendingTransitionStartActivity();
 			}
 		});
 	}

@@ -2,6 +2,7 @@ package vnp.com.mimusic.view.textview;
 
 import vnp.com.mimusic.util.FontsUtils;
 import android.content.Context;
+import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
@@ -28,9 +29,21 @@ public class TextViewLightHeight extends TextView {
 		init();
 	}
 
+	@Override
+	protected void onDraw(Canvas canvas) {
+		try {
+			super.onDraw(canvas);
+		} catch (Exception exception) {
+		}
+	}
+
 	private void init() {
 
 		FontsUtils.getInstance().setTextFontsRobotoLight(this);
-		setLineSpacing(1.3f, 1.3f);
+		try {
+			setLineSpacing(1.3f, 1.3f);
+		} catch (Exception exception) {
+
+		}
 	}
 }
