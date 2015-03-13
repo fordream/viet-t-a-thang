@@ -28,28 +28,28 @@ public class FontsUtils {
 	private static final String TOBOTO_Bold = "Roboto-Bold.ttf";
 
 	public void setTextFontsRobotoLight(TextView textView) {
-		// if (map.containsKey(TOBOTO_LIGHT))
-		// textView.setTypeface(map.get(TOBOTO_LIGHT));
+		if (map.containsKey(TOBOTO_LIGHT))
+			textView.setTypeface(map.get(TOBOTO_LIGHT));
 	}
 
 	public void setTextFontsRobotoRegular(TextView textView) {
-		// if (map.containsKey(TOBOTO_Regular))
-		// textView.setTypeface(map.get(TOBOTO_Regular));
+		if (map.containsKey(TOBOTO_Regular))
+			textView.setTypeface(map.get(TOBOTO_Regular));
 	}
 
 	public void setTextFontsRobotoMedium(TextView textView) {
-		// if (map.containsKey(TOBOTO_Medium))
-		// textView.setTypeface(map.get(TOBOTO_Medium));
+		if (map.containsKey(TOBOTO_Medium))
+			textView.setTypeface(map.get(TOBOTO_Medium));
 	}
 
 	public void setTextFontsRobotoThin(TextView textView) {
-		// if (map.containsKey(TOBOTO_Thin))
-		// textView.setTypeface(map.get(TOBOTO_Thin));
+		if (map.containsKey(TOBOTO_Thin))
+			textView.setTypeface(map.get(TOBOTO_Thin));
 	}
 
 	public void setTextFontsRobotoBold(TextView textView) {
-		// if (map.containsKey(TOBOTO_Bold))
-		// textView.setTypeface(map.get(TOBOTO_Bold));
+		if (map.containsKey(TOBOTO_Bold))
+			textView.setTypeface(map.get(TOBOTO_Bold));
 
 	}
 
