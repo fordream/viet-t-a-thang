@@ -179,7 +179,6 @@ public class Conts {
 				String errorCode = "";
 				RestClient restClient = (RestClient) object;
 				String response = restClient.getResponse();
-
 				try {
 
 					// if (API.API_R015.equals(api)) {
