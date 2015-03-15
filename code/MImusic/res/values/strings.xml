@@ -207,5 +207,6 @@
     <string name="moitaiungdung">Mời tải ứng dụng</string>
     <string name="message_moitaiungdung">Hãy chia sẻ với bạn bè để cùng tải và sử dụng Kênh Bán Vas.\nHệ thống sẽ tự động gửi tin nhắn mời sử dụng tới các thuê bao đã chọn.</string>
     <string name="moiungdungthanhcong">Mời sử dụng ứng dụng thành công.</string>
+    <string name="moithatbai">Mời thất bại.</string>
 
 </resources>

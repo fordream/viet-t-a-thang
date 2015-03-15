@@ -20,6 +20,7 @@ import vnp.com.db.datastore.DichVuStore;
 import vnp.com.db.datastore.HuongDanBanHangStore;
 import vnp.com.db.datastore.TintucStore;
 import vnp.com.mimusic.util.Conts;
+import vnp.com.mimusic.util.LogUtils;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
 import android.app.Service;
 import android.content.ContentValues;
@@ -228,8 +229,8 @@ public class MImusicService extends Service {
 									listSdt.add(phoneNo);
 									if (!Conts.isBlank(phoneNo) && !Conts.isBlank(photo_id)) {
 										addPhoneId(phoneNo, contact_id);
-
 									}
+									
 									if (conttacts.length() == 0) {
 										conttacts.append(String.format("{\"phone\":\"%s\",\"name\":\"%s\"}", phoneNo, name));
 									} else {
@@ -255,8 +256,11 @@ public class MImusicService extends Service {
 				if (result.length() == 0) {
 					dongboDanhBaXuong(contsCallBack, listSdt);
 				} else {
+
 					Bundle bundle = new Bundle();
 					bundle.putString("contacts", String.format("[%s]", result.toString()));
+					
+					
 					MImusicService.this.execute(RequestMethod.POST, API.API_R011, bundle, new IContsCallBack() {
 						@Override
 						public void onSuscess(JSONObject response) {
@@ -543,7 +547,8 @@ public class MImusicService extends Service {
 				if (VasContact.haveContact(phone, this)) {
 					getContentResolver().update(VasContact.CONTENT_URI, contentValues, String.format("%s = '%s'", VasContact.PHONE, phone), null);
 				} else {
-//					contentValues.put(VasContact.NAME_CONTACT_SHORT,  Conts.StringConnvert.convertVNToAlpha(name));
+					// contentValues.put(VasContact.NAME_CONTACT_SHORT,
+					// Conts.StringConnvert.convertVNToAlpha(name));
 					getContentResolver().insert(VasContact.CONTENT_URI, contentValues);
 				}
 			}

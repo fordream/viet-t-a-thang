@@ -413,7 +413,7 @@ public class RootMenuActivity extends FragmentActivity {
 					progressDialog.dismiss();
 				}
 
-				Conts.showDialogThongbao(RootMenuActivity.this, message);
+				Conts.showDialogThongbao(RootMenuActivity.this, getString(R.string.moithatbai));
 			}
 
 		});
