@@ -151,25 +151,27 @@ public class SendAppForMyFrindFragment extends BaseFragment implements OnItemCli
 						@Override
 						public void onClick(View v) {
 
-							Conts.removeViewScale(addItemView, new AnimationListener() {
-
-								@Override
-								public void onAnimationStart(Animation animation) {
-
-								}
-
-								@Override
-								public void onAnimationRepeat(Animation animation) {
-
-								}
-
-								@Override
-								public void onAnimationEnd(Animation animation) {
-									moinhieudichvu_dialog_list_hor.removeView(addItemView);
-									Conts.showAlpha(SendAppForMyFrindFragment.this.getView().findViewById(R.id.moi), (moinhieudichvu_dialog_list_hor.getChildCount() == 0));
-
-								}
-							});
+//							Conts.removeViewScale(addItemView, new AnimationListener() {
+//
+//								@Override
+//								public void onAnimationStart(Animation animation) {
+//
+//								}
+//
+//								@Override
+//								public void onAnimationRepeat(Animation animation) {
+//
+//								}
+//
+//								@Override
+//								public void onAnimationEnd(Animation animation) {
+//									moinhieudichvu_dialog_list_hor.removeView(addItemView);
+//									Conts.showAlpha(SendAppForMyFrindFragment.this.getView().findViewById(R.id.moi), (moinhieudichvu_dialog_list_hor.getChildCount() == 0));
+//
+//								}
+//							});
+							
+							moinhieudichvu_dialog_list_hor.removeView(addItemView);
 							adaper.remove(_id);
 							adaper.notifyDataSetChanged();
 						}
@@ -179,25 +181,29 @@ public class SendAppForMyFrindFragment extends BaseFragment implements OnItemCli
 						final MoiNhieuSDTAddItemView child = ((MoiNhieuSDTAddItemView) moinhieudichvu_dialog_list_hor.getChildAt(i));
 						if (child.getmId().equals(_id)) {
 
-							Conts.removeViewScale(child, new AnimationListener() {
+//							Conts.removeViewScale(child, new AnimationListener() {
+//
+//								@Override
+//								public void onAnimationStart(Animation animation) {
+//
+//								}
+//
+//								@Override
+//								public void onAnimationRepeat(Animation animation) {
+//
+//								}
+//
+//								@Override
+//								public void onAnimationEnd(Animation animation) {
+//									moinhieudichvu_dialog_list_hor.removeView(child);
+//									Conts.showAlpha(SendAppForMyFrindFragment.this.getView().findViewById(R.id.moi), (moinhieudichvu_dialog_list_hor.getChildCount() == 0));
+//
+//								}
+//							});
+							
+							moinhieudichvu_dialog_list_hor.removeView(child);
+							Conts.showAlpha(SendAppForMyFrindFragment.this.getView().findViewById(R.id.moi), (moinhieudichvu_dialog_list_hor.getChildCount() == 0));
 
-								@Override
-								public void onAnimationStart(Animation animation) {
-
-								}
-
-								@Override
-								public void onAnimationRepeat(Animation animation) {
-
-								}
-
-								@Override
-								public void onAnimationEnd(Animation animation) {
-									moinhieudichvu_dialog_list_hor.removeView(child);
-									Conts.showAlpha(SendAppForMyFrindFragment.this.getView().findViewById(R.id.moi), (moinhieudichvu_dialog_list_hor.getChildCount() == 0));
-
-								}
-							});
 							break;
 						}
 					}
@@ -217,24 +223,28 @@ public class SendAppForMyFrindFragment extends BaseFragment implements OnItemCli
 						@Override
 						public void onClick(View v) {
 
-							Conts.removeViewScale(addItemView, new AnimationListener() {
-
-								@Override
-								public void onAnimationStart(Animation animation) {
-
-								}
-
-								@Override
-								public void onAnimationRepeat(Animation animation) {
-
-								}
-
-								@Override
-								public void onAnimationEnd(Animation animation) {
-									moinhieudichvu_dialog_list_hor.removeView(addItemView);
-									Conts.showAlpha(SendAppForMyFrindFragment.this.getView().findViewById(R.id.moi), (moinhieudichvu_dialog_list_hor.getChildCount() == 0));
-								}
-							});
+//							Conts.removeViewScale(addItemView, new AnimationListener() {
+//
+//								@Override
+//								public void onAnimationStart(Animation animation) {
+//
+//								}
+//
+//								@Override
+//								public void onAnimationRepeat(Animation animation) {
+//
+//								}
+//
+//								@Override
+//								public void onAnimationEnd(Animation animation) {
+//									moinhieudichvu_dialog_list_hor.removeView(addItemView);
+//									Conts.showAlpha(SendAppForMyFrindFragment.this.getView().findViewById(R.id.moi), (moinhieudichvu_dialog_list_hor.getChildCount() == 0));
+//								}
+//							});
+							
+							moinhieudichvu_dialog_list_hor.removeView(addItemView);
+							Conts.showAlpha(SendAppForMyFrindFragment.this.getView().findViewById(R.id.moi), (moinhieudichvu_dialog_list_hor.getChildCount() == 0));
+						
 							adaper.remove(sdt);
 							adaper.notifyDataSetChanged();
 						}

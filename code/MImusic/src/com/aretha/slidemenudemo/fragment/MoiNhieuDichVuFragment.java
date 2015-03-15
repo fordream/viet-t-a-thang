@@ -135,26 +135,31 @@ public class MoiNhieuDichVuFragment extends BaseFragment implements android.view
 						@Override
 						public void onClick(View v) {
 
-							Conts.removeViewScale(addItemView, new AnimationListener() {
-
-								@Override
-								public void onAnimationStart(Animation animation) {
-
-								}
-
-								@Override
-								public void onAnimationRepeat(Animation animation) {
-
-								}
-
-								@Override
-								public void onAnimationEnd(Animation animation) {
-									moinhieudichvu_dialog_list_hor.removeView(addItemView);
-									updateMoi();
-								}
-							});
+//							Conts.removeViewScale(addItemView, new AnimationListener() {
+//
+//								@Override
+//								public void onAnimationStart(Animation animation) {
+//
+//								}
+//
+//								@Override
+//								public void onAnimationRepeat(Animation animation) {
+//
+//								}
+//
+//								@Override
+//								public void onAnimationEnd(Animation animation) {
+//									moinhieudichvu_dialog_list_hor.removeView(addItemView);
+//									updateMoi();
+//								}
+//							});
+							
+							
 							adapter.remove(_id);
 							adapter.notifyDataSetChanged();
+							
+							moinhieudichvu_dialog_list_hor.removeView(addItemView);
+							updateMoi();
 						}
 					});
 				} else {
@@ -162,23 +167,27 @@ public class MoiNhieuDichVuFragment extends BaseFragment implements android.view
 						final MoiNhieuDichVuAddItemView child = ((MoiNhieuDichVuAddItemView) moinhieudichvu_dialog_list_hor.getChildAt(i));
 						if (child.getmId().equals(_id)) {
 
-							Conts.removeViewScale(child, new AnimationListener() {
-								@Override
-								public void onAnimationStart(Animation animation) {
-
-								}
-
-								@Override
-								public void onAnimationRepeat(Animation animation) {
-
-								}
-
-								@Override
-								public void onAnimationEnd(Animation animation) {
-									moinhieudichvu_dialog_list_hor.removeView(child);
-									updateMoi();
-								}
-							});
+//							Conts.removeViewScale(child, new AnimationListener() {
+//								@Override
+//								public void onAnimationStart(Animation animation) {
+//
+//								}
+//
+//								@Override
+//								public void onAnimationRepeat(Animation animation) {
+//
+//								}
+//
+//								@Override
+//								public void onAnimationEnd(Animation animation) {
+//									moinhieudichvu_dialog_list_hor.removeView(child);
+//									updateMoi();
+//								}
+//							});
+							
+							
+							moinhieudichvu_dialog_list_hor.removeView(child);
+							updateMoi();
 							break;
 						}
 					}

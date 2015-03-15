@@ -1,4 +1,4 @@
-package com.vnp.core.crash;
+  package com.vnp.core.crash;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

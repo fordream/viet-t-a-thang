@@ -173,25 +173,30 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 						@Override
 						public void onClick(View v) {
 
-							Conts.removeViewScale(addItemView, new AnimationListener() {
+//							Conts.removeViewScale(addItemView, new AnimationListener() {
+//
+//								@Override
+//								public void onAnimationStart(Animation animation) {
+//
+//								}
+//
+//								@Override
+//								public void onAnimationRepeat(Animation animation) {
+//
+//								}
+//
+//								@Override
+//								public void onAnimationEnd(Animation animation) {
+//									moinhieudichvu_dialog_list_hor.removeView(addItemView);
+//									Conts.showAlpha(MoiDvChoNhieuNguoiFragment.this.getView().findViewById(R.id.moi), (moinhieudichvu_dialog_list_hor.getChildCount() == 0));
+//
+//								}
+//							});
+							
+							moinhieudichvu_dialog_list_hor.removeView(addItemView);
+							Conts.showAlpha(MoiDvChoNhieuNguoiFragment.this.getView().findViewById(R.id.moi), (moinhieudichvu_dialog_list_hor.getChildCount() == 0));
 
-								@Override
-								public void onAnimationStart(Animation animation) {
-
-								}
-
-								@Override
-								public void onAnimationRepeat(Animation animation) {
-
-								}
-
-								@Override
-								public void onAnimationEnd(Animation animation) {
-									moinhieudichvu_dialog_list_hor.removeView(addItemView);
-									Conts.showAlpha(MoiDvChoNhieuNguoiFragment.this.getView().findViewById(R.id.moi), (moinhieudichvu_dialog_list_hor.getChildCount() == 0));
-
-								}
-							});
+							
 							adaper.remove(_id);
 							adaper.notifyDataSetChanged();
 						}
@@ -201,25 +206,30 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 						final MoiNhieuSDTAddItemView child = ((MoiNhieuSDTAddItemView) moinhieudichvu_dialog_list_hor.getChildAt(i));
 						if (child.getmId().equals(_id)) {
 
-							Conts.removeViewScale(child, new AnimationListener() {
+//							Conts.removeViewScale(child, new AnimationListener() {
+//
+//								@Override
+//								public void onAnimationStart(Animation animation) {
+//
+//								}
+//
+//								@Override
+//								public void onAnimationRepeat(Animation animation) {
+//
+//								}
+//
+//								@Override
+//								public void onAnimationEnd(Animation animation) {
+//									moinhieudichvu_dialog_list_hor.removeView(child);
+//									Conts.showAlpha(MoiDvChoNhieuNguoiFragment.this.getView().findViewById(R.id.moi), (moinhieudichvu_dialog_list_hor.getChildCount() == 0));
+//
+//								}
+//							});
+							
+							moinhieudichvu_dialog_list_hor.removeView(child);
+							Conts.showAlpha(MoiDvChoNhieuNguoiFragment.this.getView().findViewById(R.id.moi), (moinhieudichvu_dialog_list_hor.getChildCount() == 0));
 
-								@Override
-								public void onAnimationStart(Animation animation) {
-
-								}
-
-								@Override
-								public void onAnimationRepeat(Animation animation) {
-
-								}
-
-								@Override
-								public void onAnimationEnd(Animation animation) {
-									moinhieudichvu_dialog_list_hor.removeView(child);
-									Conts.showAlpha(MoiDvChoNhieuNguoiFragment.this.getView().findViewById(R.id.moi), (moinhieudichvu_dialog_list_hor.getChildCount() == 0));
-
-								}
-							});
+						
 							break;
 						}
 					}
@@ -239,24 +249,28 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 						@Override
 						public void onClick(View v) {
 
-							Conts.removeViewScale(addItemView, new AnimationListener() {
-
-								@Override
-								public void onAnimationStart(Animation animation) {
-
-								}
-
-								@Override
-								public void onAnimationRepeat(Animation animation) {
-
-								}
-
-								@Override
-								public void onAnimationEnd(Animation animation) {
-									moinhieudichvu_dialog_list_hor.removeView(addItemView);
-									Conts.showAlpha(MoiDvChoNhieuNguoiFragment.this.getView().findViewById(R.id.moi), (moinhieudichvu_dialog_list_hor.getChildCount() == 0));
-								}
-							});
+//							Conts.removeViewScale(addItemView, new AnimationListener() {
+//
+//								@Override
+//								public void onAnimationStart(Animation animation) {
+//
+//								}
+//
+//								@Override
+//								public void onAnimationRepeat(Animation animation) {
+//
+//								}
+//
+//								@Override
+//								public void onAnimationEnd(Animation animation) {
+//									moinhieudichvu_dialog_list_hor.removeView(addItemView);
+//									Conts.showAlpha(MoiDvChoNhieuNguoiFragment.this.getView().findViewById(R.id.moi), (moinhieudichvu_dialog_list_hor.getChildCount() == 0));
+//								}
+//							});
+							
+							moinhieudichvu_dialog_list_hor.removeView(addItemView);
+							Conts.showAlpha(MoiDvChoNhieuNguoiFragment.this.getView().findViewById(R.id.moi), (moinhieudichvu_dialog_list_hor.getChildCount() == 0));
+						
 							adaper.remove(sdt);
 							adaper.notifyDataSetChanged();
 						}

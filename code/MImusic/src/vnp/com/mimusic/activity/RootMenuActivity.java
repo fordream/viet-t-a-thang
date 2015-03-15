@@ -22,7 +22,6 @@ import vnp.com.mimusic.base.diablog.VasProgessDialog;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.DialogCallBack;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
-import vnp.com.mimusic.util.LogUtils;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -78,9 +77,9 @@ public class RootMenuActivity extends FragmentActivity {
 	protected void onStop() {
 		super.onStop();
 
-		// if (!isFinishing()) {
-		// finish();
-		// }
+		if (!isFinishing()) {
+			finish();
+		}
 	}
 
 	@Override
@@ -377,7 +376,7 @@ public class RootMenuActivity extends FragmentActivity {
 	public void gotoLoiMoiUseApp(final String customers) {
 		Conts.hiddenKeyBoard(this);
 		Bundle bundle = new Bundle();
-		
+
 		bundle.putString("msisdns", customers.replace("{", "").replace("}", "").replace("\"", ""));
 
 		execute(RequestMethod.POST, API.API_R021, bundle, new IContsCallBack() {

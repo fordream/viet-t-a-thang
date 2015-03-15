@@ -13,6 +13,7 @@ import vnp.com.mimusic.util.Conts.IContsCallBack;
 import vnp.com.mimusic.view.MenuLeftView;
 import vnp.com.mimusic.view.MenuRightView;
 import vnp.com.mimusic.view.TabView;
+import vnp.com.mimusic.view.add.OnTouchAnimation;
 import android.app.ProgressDialog;
 import android.app.TabActivity;
 import android.content.BroadcastReceiver;
@@ -105,8 +106,7 @@ public class NewMusicSlideMenuActivity extends TabActivity {
 				Conts.hiddenKeyBoard(NewMusicSlideMenuActivity.this);
 			}
 		});
-		
-		
+
 		getTabHost().setOnTabChangedListener(new OnTabChangeListener() {
 			@Override
 			public void onTabChanged(String tabId) {
@@ -144,18 +144,19 @@ public class NewMusicSlideMenuActivity extends TabActivity {
 		}
 		TabView mactivityslide_menu_tabview = (TabView) findViewById(R.id.mactivityslide_menu_tabview);
 		mactivityslide_menu_tabview.setOnClickListener(tabOnClick, homeOnClick);
-		
+
 		configMenuLeft();
 
 		configMenuRight();
-		
-		
+
 	}
 
 	private void configMenuRight() {
 		// Menu Right
 		final MenuRightView mactivity_menu_right = (MenuRightView) findViewById(R.id.mactivity_menu_right);
 		mactivity_menu_right.initData();
+		// add touch for
+		mactivity_menu_right.findViewById(R.id.menu_right_img_search).setOnTouchListener(new OnTouchAnimation());
 
 		mactivity_menu_right.findViewById(R.id.menu_right_img_search).setOnClickListener(new OnClickListener() {
 
