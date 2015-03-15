@@ -149,12 +149,24 @@ public class Recomment {
 
 	public static Cursor getCursorFromUser(Context context, String search) {
 		String limit = String.format("%s , %s ", VasContact.time_moi, VasContact.NAME_CONTACT);
+		// StringBuilder selection = new StringBuilder();
+		// selection.append(String.format("%s in (%s)", VasContact.PHONE,
+		// getListPhone(context))).append(" and (");
+		// selection.append(VasContact.NAME_CONTACT_ENG).append(" LIKE '%").append(search.toLowerCase()).append("%' ");
+		// selection.append(" OR ").append(VasContact.PHONE).append(" LIKE '%").append(search.toLowerCase()).append("%' ");
+		// selection.append(")");
+
 		StringBuilder selection = new StringBuilder();
-		selection.append(String.format("%s in (%s)", VasContact.PHONE, getListPhone(context))).append(" and (");
+		selection.append(String.format("  %s in (%s)", VasContact.PHONE, getListPhone(context)));
+		selection.append(" and (");
+
 		selection.append(VasContact.NAME_CONTACT_ENG).append(" LIKE '%").append(search.toLowerCase()).append("%' ");
 		selection.append(" OR ").append(VasContact.PHONE).append(" LIKE '%").append(search.toLowerCase()).append("%' ");
+		if (search.startsWith("0")) {
+			selection.append(" OR ").append(VasContact.PHONE).append(" LIKE '84").append(search.substring(1, search.length()).toLowerCase()).append("%' ");
+			selection.append(" OR ").append(VasContact.PHONE).append(" LIKE '+84").append(search.substring(1, search.length()).toLowerCase()).append("%' ");
+		}
 		selection.append(")");
-
 		return context.getContentResolver().query(VasContact.CONTENT_URI, null, selection.toString(), null, limit);
 	}
 
