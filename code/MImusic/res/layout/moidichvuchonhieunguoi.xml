@@ -39,8 +39,12 @@
                     android:layout_height="@dimen/dimen_28dp"
                     android:layout_toLeftOf="@+id/moidichvuchonhieunguoi_contact"
                     android:background="@drawable/a_est" >
-<!--   android:textColor="#475055"
-                        android:textColorHint="#475055" -->
+
+                    <!--
+       android:textColor="#475055"
+                        android:textColorHint="#475055"
+                    -->
+
                     <vnp.com.mimusic.view.textview.EditextTextThin
                         android:id="@+id/search"
                         android:layout_width="match_parent"
@@ -219,19 +223,30 @@
                         </LinearLayout>
                     </HorizontalScrollView>
 
-                    <vnp.com.mimusic.view.textview.TextViewRegular
+                    <LinearLayout
                         android:id="@+id/moi"
-                        android:layout_width="@dimen/dimen_40dp"
-                        android:layout_height="@dimen/dimen_22dp"
+                        android:layout_width="@dimen/dimen_70dp"
+                        android:layout_height="@dimen/dimen_70dp"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/dimen_12dp"
-                        android:layout_marginRight="@dimen/dimen_12dp"
-                        android:background="@drawable/xmoi"
                         android:gravity="center"
                         android:text="@string/moi"
                         android:textColor="@android:color/white"
-                        android:textSize="@dimen/dimen_11dp" />
+                        android:textSize="@dimen/dimen_11dp" >
+
+                        <vnp.com.mimusic.view.textview.TextViewRegular
+                            android:layout_width="@dimen/dimen_40dp"
+                            android:layout_height="@dimen/dimen_22dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/dimen_12dp"
+                            android:layout_marginRight="@dimen/dimen_12dp"
+                            android:background="@drawable/xmoi"
+                            android:gravity="center"
+                            android:text="@string/moi"
+                            android:textColor="@android:color/white"
+                            android:textSize="@dimen/dimen_11dp" />
+                    </LinearLayout>
                 </RelativeLayout>
             </LinearLayout>
         </RelativeLayout>
@@ -239,14 +254,13 @@
 
     <LinearLayout
         android:id="@+id/mkeyboard"
-        android:background="@drawable/new_dialog_bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/keyBoardView1"
-        android:visibility="gone" 
         android:layout_marginBottom="@dimen/dimen_70dp"
-        android:orientation="vertical" >
-
+        android:background="@drawable/new_dialog_bg"
+        android:orientation="vertical"
+        android:visibility="gone" >
     </LinearLayout>
 
     <vnp.com.mimusic.view.KeyBoardView
@@ -255,7 +269,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:visibility="gone" >
-
     </vnp.com.mimusic.view.KeyBoardView>
 
 </RelativeLayout>

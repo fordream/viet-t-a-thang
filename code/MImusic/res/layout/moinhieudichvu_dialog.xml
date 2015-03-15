@@ -30,23 +30,24 @@
             android:layout_height="@dimen/dimen_26dp"
             android:layout_marginRight="@dimen/dimen_12dp"
             android:background="@drawable/a_est" >
-<!--    android:textColor="#475055"
-                android:textColorHint="#475055" -->
+
+            <!--
+        android:textColor="#475055"
+                android:textColorHint="#475055"
+            -->
+
             <vnp.com.mimusic.view.textview.EditextTextThin
-                 android:inputType="textNoSuggestions"
                 android:id="@+id/moinhieudichvu_dialog_search"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_35dp"
                 android:background="@drawable/tranfer"
                 android:gravity="center"
                 android:hint="@string/timkiemdichvu"
+                android:inputType="textNoSuggestions"
                 android:paddingLeft="@dimen/dimen_15dp"
                 android:singleLine="true"
-             
-                
-                
-                  android:textColor="@android:color/black"
-                        android:textColorHint="@android:color/black"
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/black"
                 android:textSize="@dimen/dimen_12dp"
                 android:textStyle="bold" >
             </vnp.com.mimusic.view.textview.EditextTextThin>
@@ -63,10 +64,10 @@
     </LinearLayout>
 
     <LinearLayout
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:visibility="gone" >
 
         <vnp.com.mimusic.view.MenuRightItemView
             android:id="@+id/menurightitem"
@@ -144,19 +145,30 @@
                     </LinearLayout>
                 </HorizontalScrollView>
 
-                <vnp.com.mimusic.view.textview.TextViewRegular
+                <LinearLayout
                     android:id="@+id/moi"
-                    android:layout_width="@dimen/dimen_40dp"
-                    android:layout_height="@dimen/dimen_22dp"
+                    android:layout_width="@dimen/dimen_70dp"
+                    android:layout_height="@dimen/dimen_70dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/dimen_12dp"
-                    android:layout_marginRight="@dimen/dimen_12dp"
-                    android:background="@drawable/xmoi"
                     android:gravity="center"
                     android:text="@string/moi"
                     android:textColor="@android:color/white"
-                    android:textSize="@dimen/dimen_11dp" />
+                    android:textSize="@dimen/dimen_11dp" >
+
+                    <vnp.com.mimusic.view.textview.TextViewRegular
+                        android:layout_width="@dimen/dimen_40dp"
+                        android:layout_height="@dimen/dimen_22dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/dimen_12dp"
+                        android:layout_marginRight="@dimen/dimen_12dp"
+                        android:background="@drawable/xmoi"
+                        android:gravity="center"
+                        android:text="@string/moi"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/dimen_11dp" />
+                </LinearLayout>
             </RelativeLayout>
         </LinearLayout>
     </RelativeLayout>
