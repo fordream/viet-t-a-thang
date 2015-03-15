@@ -226,7 +226,7 @@ public class Conts {
 						}
 
 						if ("440".equals(errorCode) || "-1".equals(errorCode)) {
-							message = activity.getString(R.string.error_network);
+							message = activity.getString(R.string.token_error);
 						}
 
 						if (contsCallBack != null) {

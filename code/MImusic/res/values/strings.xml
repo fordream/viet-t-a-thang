@@ -199,6 +199,7 @@
     <string name="error_sdt_viettel">Số điện thoại bạn nhập không phải số Viettel hoặc là sim 3g</string>
     <string name="message_dongbo">Đồng bộ danh bạ thành công</string>
     <string name="error_network">Lỗi đường truyền, bạn cần kiểm tra lại mạng.</string>
+    <string name="token_error">Lỗi đường truyền, vui lòng thử lại.</string>
     <string name="need3g">Để sử dụng ứng dụng, bạn cần sử dụng 3G.</string>
     <string name="khongthedangnhap">Đăng nhập thất bại\nBạn cần kiểm tra lại kết nối 3G</string>
     <string name="ban_co_muon_moi_sdt_nays">Bạn có muốn gửi lời mời ngay bây giờ không?</string>
