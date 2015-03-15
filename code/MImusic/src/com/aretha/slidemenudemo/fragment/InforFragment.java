@@ -11,6 +11,7 @@ import org.json.JSONObject;
 
 import vnp.com.api.API;
 import vnp.com.api.RestClient.RequestMethod;
+import vnp.com.db.DataStore;
 import vnp.com.db.datastore.AccountStore;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.base.diablog.VasProgessDialog;
@@ -56,6 +57,7 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		DataStore.getInstance().init(getActivity());
 		View view = inflater.inflate(R.layout.infor, null);
 		view.findViewById(R.id.scrollview).setOnTouchListener(new OnTouchListener() {
 
@@ -117,6 +119,7 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
+		DataStore.getInstance().save("RootMenuActivity", false);
 		if (requestCode == 100 && resultCode == Activity.RESULT_OK) {
 			String path = data.getData().toString();
 			if (path != null) {
@@ -207,6 +210,8 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 	}
 
 	private void startCropImage() {
+		DataStore.getInstance().save("RootMenuActivity", true);
+		
 		Intent intent = new Intent(getActivity(), CropImage.class);
 		intent.putExtra(CropImage.IMAGE_PATH, mFileTemp.getPath());
 		intent.putExtra(CropImage.SCALE, true);
@@ -276,10 +281,12 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					if (which == 1) {
+						DataStore.getInstance().save("RootMenuActivity", true);
 						Intent intent = new Intent(Intent.ACTION_PICK);
 						intent.setType("image/*");
 						startActivityForResult(Intent.createChooser(intent, getActivity().getString(R.string.chonanh)), REQUEST_CODE_GALLERY);
 					} else {
+						DataStore.getInstance().save("RootMenuActivity", true);
 						createMFileTemp();
 
 						Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
@@ -305,9 +312,11 @@ public class InforFragment extends BaseFragment implements OnItemClickListener, 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					if (which == 1) {
+						DataStore.getInstance().save("RootMenuActivity", true);
 						Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 						startActivityForResult(i, 100);
 					} else {
+						DataStore.getInstance().save("RootMenuActivity", true);
 						createMFileTemp();
 						Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
 						Uri mImageCaptureUri = null;

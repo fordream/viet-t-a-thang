@@ -11,6 +11,7 @@ import org.json.JSONObject;
 import vnp.com.api.API;
 import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.BangXepHang;
+import vnp.com.db.DataStore;
 import vnp.com.db.MauMoi;
 import vnp.com.db.VasContact;
 import vnp.com.db.datastore.DichVuStore;
@@ -76,8 +77,8 @@ public class RootMenuActivity extends FragmentActivity {
 	@Override
 	protected void onStop() {
 		super.onStop();
-
-		if (!isFinishing()) {
+		DataStore.getInstance().init(this);
+		if (!isFinishing() && !DataStore.getInstance().get("RootMenuActivity", false)) {
 			finish();
 		}
 	}

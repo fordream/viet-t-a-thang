@@ -2,6 +2,7 @@ package vnp.com.mimusic.activity;
 
 import org.json.JSONObject;
 
+import vnp.com.db.DataStore;
 import vnp.com.mimusic.LoginActivty;
 import vnp.com.mimusic.R;
 import vnp.com.mimusic.VApplication;
@@ -25,6 +26,8 @@ public class SplashScreenActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		DataStore.getInstance().init(this);
+		DataStore.getInstance().save("RootMenuActivity", false);
 		/**
 		 * log for crash
 		 */
