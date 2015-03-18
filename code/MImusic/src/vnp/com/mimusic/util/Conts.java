@@ -36,8 +36,10 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Path;
 import android.graphics.Rect;
+import android.graphics.Paint.Join;
 import android.net.ConnectivityManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
@@ -59,6 +61,35 @@ import android.widget.Toast;
 
 public class Conts {
 	public static final class StringConnvert {
+		/**
+		 * Load infor of app from server
+		 */
+		public interface AppInforGetCallBack {
+			public void onSuccess(String softwareVersion);
+		}
+
+		public static void loadAppInfor(final String packageName, final AppInforGetCallBack restClientCallBack) {
+			new AsyncTask<String, String, String>() {
+				@Override
+				protected String doInBackground(String... params) {
+					String url = "http://api.playstoreapi.com/v1.1/apps/%s?key=0f9723628e28a2863004b44f2440aeed";
+					url = String.format(url, packageName);
+					RestClient client = new RestClient(url);
+					client.execute(RequestMethod.GET);
+					return client.getResponse();
+				}
+
+				protected void onPostExecute(String result) {
+					try {
+						JSONObject jsonObject = new JSONObject(result);
+						restClientCallBack.onSuccess(jsonObject.getJSONObject("additionalInfo").getString("softwareVersion"));
+					} catch (Exception exception) {
+						restClientCallBack.onSuccess("");
+					}
+				};
+			}.execute("");
+		}
+
 		public static final String convertVNToAlpha(String str) {
 			if (isBlank(str)) {
 				return str;
