@@ -30,13 +30,13 @@ import android.app.Dialog;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Path;
 import android.graphics.Rect;
-import android.graphics.Paint.Join;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -60,35 +60,45 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class Conts {
+	public interface AppInforGetCallBack {
+		public void onSuccess(String softwareVersion);
+	}
+
+	public static void loadAppInfor(final String packageName, final AppInforGetCallBack restClientCallBack) {
+		new AsyncTask<String, String, String>() {
+			@Override
+			protected String doInBackground(String... params) {
+				String url = "http://api.playstoreapi.com/v1.1/apps/%s?key=0f9723628e28a2863004b44f2440aeed";
+				url = String.format(url, packageName);
+				RestClient client = new RestClient(url);
+				client.execute(RequestMethod.GET);
+				return client.getResponse();
+			}
+
+			protected void onPostExecute(String result) {
+				// restClientCallBack.onSuccess(result);
+				try {
+					JSONObject jsonObject = new JSONObject(result);
+					JSONArray array = jsonObject.getJSONArray("additionalInfo");
+					String softwareVersion = "";
+					for (int i = 0; i < array.length(); i++) {
+						JSONObject ob = array.getJSONObject(i);
+						if (ob.has("softwareVersion")) {
+							softwareVersion = ob.getString("softwareVersion");
+						}
+					}
+					restClientCallBack.onSuccess(softwareVersion);
+				} catch (Exception exception) {
+					restClientCallBack.onSuccess("");
+				}
+			};
+		}.execute("");
+	}
+
 	public static final class StringConnvert {
 		/**
 		 * Load infor of app from server
 		 */
-		public interface AppInforGetCallBack {
-			public void onSuccess(String softwareVersion);
-		}
-
-		public static void loadAppInfor(final String packageName, final AppInforGetCallBack restClientCallBack) {
-			new AsyncTask<String, String, String>() {
-				@Override
-				protected String doInBackground(String... params) {
-					String url = "http://api.playstoreapi.com/v1.1/apps/%s?key=0f9723628e28a2863004b44f2440aeed";
-					url = String.format(url, packageName);
-					RestClient client = new RestClient(url);
-					client.execute(RequestMethod.GET);
-					return client.getResponse();
-				}
-
-				protected void onPostExecute(String result) {
-					try {
-						JSONObject jsonObject = new JSONObject(result);
-						restClientCallBack.onSuccess(jsonObject.getJSONObject("additionalInfo").getString("softwareVersion"));
-					} catch (Exception exception) {
-						restClientCallBack.onSuccess("");
-					}
-				};
-			}.execute("");
-		}
 
 		public static final String convertVNToAlpha(String str) {
 			if (isBlank(str)) {
@@ -830,6 +840,25 @@ public class Conts {
 
 		return cacheDir;
 
+	}
+
+	public static String getVersionName(Context context) {
+		try {
+			return context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName;
+		} catch (Exception e) {
+			return "";
+		}
+	}
+
+	public static void callMarket(Context context) {
+		try {
+			Intent i = new Intent(android.content.Intent.ACTION_VIEW);
+			String packageName = "org.com.cnc.qrcode";
+			packageName = context.getPackageName();
+			i.setData(Uri.parse("https://play.google.com/store/apps/details?id=" + packageName));
+			context.startActivity(i);
+		} catch (Exception e) {
+		}
 	}
 
 }

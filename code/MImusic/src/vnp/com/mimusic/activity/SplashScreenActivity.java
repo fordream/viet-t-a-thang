@@ -9,6 +9,7 @@ import vnp.com.mimusic.VApplication;
 import vnp.com.mimusic.VApplication.IServiceConfig;
 import vnp.com.mimusic.main.NewMusicSlideMenuActivity;
 import vnp.com.mimusic.util.Conts;
+import vnp.com.mimusic.util.Conts.AppInforGetCallBack;
 import vnp.com.mimusic.util.Conts.DialogCallBack;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
 import vnp.com.mimusic.view.LoadingView;
@@ -60,54 +61,48 @@ public class SplashScreenActivity extends Activity {
 
 		@Override
 		public void onServiceConnected() {
-			// TODO
-			// startActivity(new Intent(SplashScreenActivity.this,
-			// NewMusicSlideMenuActivity.class));
 
 			if (Conts.LOGINWIFI) {
 				startActivity(new Intent(SplashScreenActivity.this, LoginActivty.class));
 				return;
 			}
+
 			if (Conts.is3GConnected(SplashScreenActivity.this)) {
-				((VApplication) getApplication()).login(true, "", "", new IContsCallBack() {
+				Conts.loadAppInfor("org.com.cnc.qrcode", new AppInforGetCallBack() {
 
 					@Override
-					public void onStart() {
-						Conts.showView(loadingView, true);
-					}
+					public void onSuccess(String softwareVersion) {
 
-					@Override
-					public void onSuscess(JSONObject response) {
-						//
-						Conts.showView(loadingView, false);
-						if (!isFinishing()) {
-							startActivity(new Intent(SplashScreenActivity.this, NewMusicSlideMenuActivity.class));
-							finish();
-							overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_nothing);
-						}
-					}
+						String nowVersionName = Conts.getVersionName(SplashScreenActivity.this);
 
-					@Override
-					public void onError(String message) {
-						Conts.showView(loadingView, false);
-						if (!isFinishing()) {
-							// startActivity(new
-							// Intent(SplashScreenActivity.this,
-							// LoginActivty.class));
-							// finish();
-							// overridePendingTransition(R.anim.abc_slide_right_in,
-							// R.anim.abc_nothing);
+						if (Conts.isBlank(nowVersionName)) {
+							login3g();
+						} else {
+							if (Conts.isBlank(softwareVersion)) {
+								login3g();
+							} else if (Conts.isBlank(softwareVersion)) {
+								Conts.showDialogDongYCallBack(SplashScreenActivity.this, getString(R.string.need3g), new DialogCallBack() {
 
-							Conts.showDialogDongYCallBack(SplashScreenActivity.this, getString(R.string.khongthedangnhap), new DialogCallBack() {
-
-								@Override
-								public void callback(Object object) {
-									finish();
-								}
-							});
+									@Override
+									public void callback(Object object) {
+										finish();
+									}
+								});
+							} else if (nowVersionName.equals(softwareVersion)) {
+								login3g();
+							} else {
+								Conts.showDialogDongYCallBack(SplashScreenActivity.this, getString(R.string.needupdate), new DialogCallBack() {
+									@Override
+									public void callback(Object object) {
+										Conts.callMarket(SplashScreenActivity.this);
+										finish();
+									}
+								});
+							}
 						}
 					}
 				});
+
 			} else {
 				if (!isFinishing()) {
 					Conts.showDialogDongYCallBack(SplashScreenActivity.this, getString(R.string.need3g), new DialogCallBack() {
@@ -117,14 +112,45 @@ public class SplashScreenActivity extends Activity {
 							finish();
 						}
 					});
-					// startActivity(new Intent(SplashScreenActivity.this,
-					// LoginActivty.class));
-					// finish();
-					// overridePendingTransition(R.anim.abc_slide_right_in,
-					// R.anim.abc_nothing);
 
 				}
 			}
 		}
 	};
+
+	private void login3g() {
+		((VApplication) getApplication()).login(true, "", "", new IContsCallBack() {
+
+			@Override
+			public void onStart() {
+				Conts.showView(loadingView, true);
+			}
+
+			@Override
+			public void onSuscess(JSONObject response) {
+				//
+				Conts.showView(loadingView, false);
+				if (!isFinishing()) {
+					startActivity(new Intent(SplashScreenActivity.this, NewMusicSlideMenuActivity.class));
+					finish();
+					overridePendingTransition(R.anim.abc_slide_right_in, R.anim.abc_nothing);
+				}
+			}
+
+			@Override
+			public void onError(String message) {
+				Conts.showView(loadingView, false);
+				if (!isFinishing()) {
+
+					Conts.showDialogDongYCallBack(SplashScreenActivity.this, getString(R.string.khongthedangnhap), new DialogCallBack() {
+
+						@Override
+						public void callback(Object object) {
+							finish();
+						}
+					});
+				}
+			}
+		});
+	}
 }
