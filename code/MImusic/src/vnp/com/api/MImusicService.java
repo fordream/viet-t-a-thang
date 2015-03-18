@@ -230,7 +230,7 @@ public class MImusicService extends Service {
 									if (!Conts.isBlank(phoneNo) && !Conts.isBlank(photo_id)) {
 										addPhoneId(phoneNo, contact_id);
 									}
-									
+
 									if (conttacts.length() == 0) {
 										conttacts.append(String.format("{\"phone\":\"%s\",\"name\":\"%s\"}", phoneNo, name));
 									} else {
@@ -259,8 +259,7 @@ public class MImusicService extends Service {
 
 					Bundle bundle = new Bundle();
 					bundle.putString("contacts", String.format("[%s]", result.toString()));
-					
-					
+
 					MImusicService.this.execute(RequestMethod.POST, API.API_R011, bundle, new IContsCallBack() {
 						@Override
 						public void onSuscess(JSONObject response) {
@@ -679,8 +678,10 @@ public class MImusicService extends Service {
 		if (isLoaded && contsCallBack != null) {
 			contsCallBack.onSuscess(null);
 		}
+		Bundle bundle = new Bundle();
+		bundle.putString("page", "1");
 
-		execute(RequestMethod.GET, API.API_R004, new Bundle(), new vnp.com.mimusic.util.Conts.IContsCallBack() {
+		execute(RequestMethod.GET, API.API_R004, bundle, new vnp.com.mimusic.util.Conts.IContsCallBack() {
 			@Override
 			public void onStart() {
 			}
@@ -698,9 +699,42 @@ public class MImusicService extends Service {
 					contsCallBack.onSuscess(response);
 				}
 
+				callUpdateNextDichVu(2);
 				if (!isLoaded) {
 					callUpdateData();
 				}
+			}
+		});
+
+	}
+
+	private void callUpdateNextDichVu(final int index) {
+		Bundle bundlex = new Bundle();
+		bundlex.putString("page", index + "");
+		execute(RequestMethod.GET, API.API_R004, bundlex, new IContsCallBack() {
+
+			@Override
+			public void onSuscess(JSONObject response) {
+				if (response != null) {
+					try {
+
+						if (response.has("data") && response.getJSONArray("data").length() > 0) {
+							callUpdateNextDichVu(index + 1);
+						}
+
+					} catch (Exception e) {
+					}
+				}
+			}
+
+			@Override
+			public void onStart() {
+
+			}
+
+			@Override
+			public void onError(String message) {
+
 			}
 		});
 
