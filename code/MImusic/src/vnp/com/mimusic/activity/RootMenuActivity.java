@@ -429,8 +429,9 @@ public class RootMenuActivity extends FragmentActivity {
 		Conts.hiddenKeyBoard(this);
 
 		String idMauMoi = MauMoi.getCursorMauMoiListJson0(getActivity(), serviceCode);
-
+		idMauMoi = "a";
 		if (!Conts.isBlank(idMauMoi)) {
+			idMauMoi = "";
 			Bundle bundle = new Bundle();
 			bundle.putString("template_id", idMauMoi);
 			bundle.putString("service_code", serviceCode);
@@ -495,8 +496,9 @@ public class RootMenuActivity extends FragmentActivity {
 		Conts.hiddenKeyBoard(this);
 
 		String idMauMoi = MauMoi.getCursorMauMoiListJson0(getActivity(), service_code);
-
+		idMauMoi = "a";
 		if (!Conts.isBlank(idMauMoi)) {
+			idMauMoi = "";
 			Bundle bundle = new Bundle();
 			bundle.putString("template_id", idMauMoi);
 			bundle.putString("customers", sdt);
