@@ -130,7 +130,7 @@ public class DangKyDialog extends BaseAdialog implements android.view.View.OnCli
 
 				@Override
 				public void onError(String message) {
-					Conts.toast(getContext(), message);
+					Conts.showDialogThongbao(getContext(), message);
 					progressDialog.dismiss();
 					closePopUp();
 				}

@@ -51,7 +51,9 @@ public abstract class MoiDvChoNhieuNguoiAdaper extends CursorAdapter {
 				_id = cursor.getString(cursor.getColumnIndex(VasContact._ID));
 				user = cursor.getString(cursor.getColumnIndex(VasContact.PHONE));
 			} else {
-				Conts.toast(context, mContext.getString(R.string.daaddsdt));
+//				Conts.toast(context, mContext.getString(R.string.daaddsdt));
+				
+				Conts.showDialogDongYCallBack(mContext, mContext.getString(R.string.daaddsdt));
 				return;
 			}
 		}
@@ -62,7 +64,8 @@ public abstract class MoiDvChoNhieuNguoiAdaper extends CursorAdapter {
 			add(_id, user, position);
 		} else {
 			if (listAdd.contains(sdt)) {
-				Conts.toast(context, mContext.getString(R.string.daaddsdt));
+				Conts.showDialogDongYCallBack(mContext, mContext.getString(R.string.daaddsdt));
+//				Conts.toast(context, mContext.getString(R.string.daaddsdt));
 			} else {
 				listAdd.add(sdt);
 				addOrRemoveSdt(true, sdt, position);

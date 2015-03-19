@@ -632,7 +632,7 @@ public class RootMenuActivity extends FragmentActivity {
 				if (Conts.isBlank(message)) {
 					message = getActivity().getString(R.string.success_moi);
 				} else {
-					message = String.format("%s\n%s", message, getActivity().getString(R.string.success_moi));
+					message = getActivity().getString(R.string.success_moi);
 				}
 				Conts.showDialogDongYCallBack(getActivity(), message, new DialogCallBack() {
 					@Override
@@ -680,7 +680,7 @@ public class RootMenuActivity extends FragmentActivity {
 				if (Conts.isBlank(message)) {
 					message = getActivity().getString(R.string.success_moi);
 				} else {
-					message = String.format("%s\n%s", message, getActivity().getString(R.string.success_moi));
+					message = getActivity().getString(R.string.success_moi);
 				}
 				Conts.showDialogDongYCallBack(getActivity(), message, new DialogCallBack() {
 					@Override

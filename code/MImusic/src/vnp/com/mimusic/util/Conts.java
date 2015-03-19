@@ -331,13 +331,13 @@ public class Conts {
 		public void onCallBack(Object response);
 	}
 
-	public static void toast(Context activity, String message) {
-		try {
-			Toast.makeText(activity, message + "", Toast.LENGTH_SHORT).show();
-		} catch (Exception exception) {
-
-		}
-	}
+	// public static void toast(Context activity, String message) {
+	// try {
+	// Toast.makeText(activity, message + "", Toast.LENGTH_SHORT).show();
+	// } catch (Exception exception) {
+	//
+	// }
+	// }
 
 	public static void hiddenKeyBoard(Activity context) {
 		try {
@@ -400,7 +400,6 @@ public class Conts {
 			contentValues.put("btn_left_close", true);
 			contentValues.put("name", context.getString(R.string.thongbao));
 			contentValues.put("content", message);
-
 			contentValues.put("typeThongBao", true);
 
 			DangKyDialog dangKyDialog = new DangKyDialog(context, contentValues);
@@ -422,10 +421,15 @@ public class Conts {
 			public void mOpen() {
 				super.mOpen();
 				dismiss();
-				dialogCallBack.callback(null);
+				if (dialogCallBack != null)
+					dialogCallBack.callback(null);
 			}
 		};
 		dangKyDialog.show();
+	}
+
+	public static void showDialogDongYCallBack(Context context, String message) {
+		showDialogThongbao(context, message);
 	}
 
 	public interface DialogCallBack {

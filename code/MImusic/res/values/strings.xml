@@ -135,9 +135,9 @@
     <string name="nodata">Không có dữ liệu</string>
     <string name="dong">Đóng</string>
     <string name="thongbao">Thông báo</string>
-    <string name="validateaddnguoi">Bạn cần mời ít nhất 1 người bạn.</string>
-    <string name="success_moi">Bạn đã mời thành công, chọn \"Đồng ý\" để đóng màn hình mời.</string>
-    <string name="validatesodichvu">Bạn cần chọn ít nhất 1 dịch vụ.</string>
+    <string name="validateaddnguoi">Vui lòng chọn số điện thoại trước khi mời.</string>
+    <string name="success_moi">Bạn đã mời thành công</string>
+    <string name="validatesodichvu">Vui lòng chọn dịch vụ trước khi mời.</string>
     <string name="default_error">{\"errorCode\":10000,\"message\":\"Lỗi đường truyền, bạn cần kiểm tra lại mạng\"}</string>
     <string name="formatdieukhoan" formatted="false">Điều khoản %s</string>
     <string name="chupanhmoi">Chụp ảnh mới</string>
@@ -208,7 +208,6 @@
     <string name="message_moitaiungdung">Hãy chia sẻ với bạn bè để cùng tải và sử dụng Kênh Bán Vas.\nHệ thống sẽ tự động gửi tin nhắn mời sử dụng tới các thuê bao đã chọn.</string>
     <string name="moiungdungthanhcong">Mời sử dụng ứng dụng thành công.</string>
     <string name="moithatbai">Mời thất bại.</string>
-    
     <string name="needupdate">Bạn cần cập nhật phiên bản mới của ứng dụng.</string>
 
 </resources>

@@ -65,7 +65,8 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 				boardView.setVisibility(View.GONE);
 				mkeyboard(false);
 			} else {
-				Conts.toast(getActivity(), String.format(getString(R.string.format_check_sdt), moidichvuchonhieunguoi_numberText));
+
+				Conts.showDialogDongYCallBack(getActivity(), String.format(getString(R.string.format_check_sdt), moidichvuchonhieunguoi_numberText));
 			}
 		}
 	};
@@ -173,30 +174,34 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 						@Override
 						public void onClick(View v) {
 
-//							Conts.removeViewScale(addItemView, new AnimationListener() {
-//
-//								@Override
-//								public void onAnimationStart(Animation animation) {
-//
-//								}
-//
-//								@Override
-//								public void onAnimationRepeat(Animation animation) {
-//
-//								}
-//
-//								@Override
-//								public void onAnimationEnd(Animation animation) {
-//									moinhieudichvu_dialog_list_hor.removeView(addItemView);
-//									Conts.showAlpha(MoiDvChoNhieuNguoiFragment.this.getView().findViewById(R.id.moi), (moinhieudichvu_dialog_list_hor.getChildCount() == 0));
-//
-//								}
-//							});
-							
+							// Conts.removeViewScale(addItemView, new
+							// AnimationListener() {
+							//
+							// @Override
+							// public void onAnimationStart(Animation animation)
+							// {
+							//
+							// }
+							//
+							// @Override
+							// public void onAnimationRepeat(Animation
+							// animation) {
+							//
+							// }
+							//
+							// @Override
+							// public void onAnimationEnd(Animation animation) {
+							// moinhieudichvu_dialog_list_hor.removeView(addItemView);
+							// Conts.showAlpha(MoiDvChoNhieuNguoiFragment.this.getView().findViewById(R.id.moi),
+							// (moinhieudichvu_dialog_list_hor.getChildCount()
+							// == 0));
+							//
+							// }
+							// });
+
 							moinhieudichvu_dialog_list_hor.removeView(addItemView);
 							Conts.showAlpha(MoiDvChoNhieuNguoiFragment.this.getView().findViewById(R.id.moi), (moinhieudichvu_dialog_list_hor.getChildCount() == 0));
 
-							
 							adaper.remove(_id);
 							adaper.notifyDataSetChanged();
 						}
@@ -206,30 +211,34 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 						final MoiNhieuSDTAddItemView child = ((MoiNhieuSDTAddItemView) moinhieudichvu_dialog_list_hor.getChildAt(i));
 						if (child.getmId().equals(_id)) {
 
-//							Conts.removeViewScale(child, new AnimationListener() {
-//
-//								@Override
-//								public void onAnimationStart(Animation animation) {
-//
-//								}
-//
-//								@Override
-//								public void onAnimationRepeat(Animation animation) {
-//
-//								}
-//
-//								@Override
-//								public void onAnimationEnd(Animation animation) {
-//									moinhieudichvu_dialog_list_hor.removeView(child);
-//									Conts.showAlpha(MoiDvChoNhieuNguoiFragment.this.getView().findViewById(R.id.moi), (moinhieudichvu_dialog_list_hor.getChildCount() == 0));
-//
-//								}
-//							});
-							
+							// Conts.removeViewScale(child, new
+							// AnimationListener() {
+							//
+							// @Override
+							// public void onAnimationStart(Animation animation)
+							// {
+							//
+							// }
+							//
+							// @Override
+							// public void onAnimationRepeat(Animation
+							// animation) {
+							//
+							// }
+							//
+							// @Override
+							// public void onAnimationEnd(Animation animation) {
+							// moinhieudichvu_dialog_list_hor.removeView(child);
+							// Conts.showAlpha(MoiDvChoNhieuNguoiFragment.this.getView().findViewById(R.id.moi),
+							// (moinhieudichvu_dialog_list_hor.getChildCount()
+							// == 0));
+							//
+							// }
+							// });
+
 							moinhieudichvu_dialog_list_hor.removeView(child);
 							Conts.showAlpha(MoiDvChoNhieuNguoiFragment.this.getView().findViewById(R.id.moi), (moinhieudichvu_dialog_list_hor.getChildCount() == 0));
 
-						
 							break;
 						}
 					}
@@ -249,28 +258,33 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 						@Override
 						public void onClick(View v) {
 
-//							Conts.removeViewScale(addItemView, new AnimationListener() {
-//
-//								@Override
-//								public void onAnimationStart(Animation animation) {
-//
-//								}
-//
-//								@Override
-//								public void onAnimationRepeat(Animation animation) {
-//
-//								}
-//
-//								@Override
-//								public void onAnimationEnd(Animation animation) {
-//									moinhieudichvu_dialog_list_hor.removeView(addItemView);
-//									Conts.showAlpha(MoiDvChoNhieuNguoiFragment.this.getView().findViewById(R.id.moi), (moinhieudichvu_dialog_list_hor.getChildCount() == 0));
-//								}
-//							});
-							
+							// Conts.removeViewScale(addItemView, new
+							// AnimationListener() {
+							//
+							// @Override
+							// public void onAnimationStart(Animation animation)
+							// {
+							//
+							// }
+							//
+							// @Override
+							// public void onAnimationRepeat(Animation
+							// animation) {
+							//
+							// }
+							//
+							// @Override
+							// public void onAnimationEnd(Animation animation) {
+							// moinhieudichvu_dialog_list_hor.removeView(addItemView);
+							// Conts.showAlpha(MoiDvChoNhieuNguoiFragment.this.getView().findViewById(R.id.moi),
+							// (moinhieudichvu_dialog_list_hor.getChildCount()
+							// == 0));
+							// }
+							// });
+
 							moinhieudichvu_dialog_list_hor.removeView(addItemView);
 							Conts.showAlpha(MoiDvChoNhieuNguoiFragment.this.getView().findViewById(R.id.moi), (moinhieudichvu_dialog_list_hor.getChildCount() == 0));
-						
+
 							adaper.remove(sdt);
 							adaper.notifyDataSetChanged();
 						}
@@ -345,20 +359,7 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 			boardView.setVisibility(View.GONE);
 			mkeyboard(false);
 
-			ContentValues values = new ContentValues();
-
-//			String content = String.format(getString(R.string.ban_co_muon_moi_dv_nay), service_name);
-			String content = getString(R.string.ban_co_muon_moi_dv_nays);
-			values.put("name", getString(R.string.app_name));
-			values.put("content", content);
-			values.put("btn_right", getString(R.string.dongy));
-			new DangKyDialog(getActivity(), values) {
-				public void mOpen() {
-					super.mOpen();
-					gotoLoiMoi(getArguments().getString(DichVuStore.service_code));
-				};
-			}.show();
-			// gotoLoiMoi(getArguments().getString(DichVuStore.service_code));
+			gotoLoiMoi(getArguments().getString(DichVuStore.service_code));
 		} else if (v.getId() == R.id.moidichvuchonhieunguoi_contact) {
 
 			if (boardView.getVisibility() == View.VISIBLE) {
@@ -399,39 +400,52 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 		}
 	}
 
-	private void gotoLoiMoi(String serviceCode) {
+	private void gotoLoiMoi(final String serviceCode) {
 
 		int count = adaper.getListAdd().size() + adaper.getListSeList().size();
 		if (count == 0) {
-			Conts.toast(getActivity(), getString(R.string.validateaddnguoi));
+			Conts.showDialogDongYCallBack(getActivity(), getString(R.string.validateaddnguoi));
 			return;
 		}
 
-		String customers = "";
-		for (String _id : adaper.getListSeList()) {
-			String user = adaper.getUserFrom_ID(_id);
-			user = Conts.getSDT(user);
+		ContentValues values = new ContentValues();
 
-			if (!Conts.isBlank(user)) {
-				if (customers.endsWith("\"")) {
-					customers = String.format("%s,\"%s\"", customers, user);
-				} else {
-					customers = String.format("\"%s\"", user);
-				}
-			}
-		}
+		String content = getString(R.string.ban_co_muon_moi_dv_nays);
+		values.put("name", getString(R.string.app_name));
+		values.put("content", content);
+		values.put("btn_right", getString(R.string.dongy));
 
-		for (String user : adaper.getListAdd()) {
-			if (!Conts.isBlank(user)) {
-				if (customers.endsWith("\"")) {
-					customers = String.format("%s,\"%s\"", customers, user);
-				} else {
-					customers = String.format("\"%s\"", user);
+		new DangKyDialog(getActivity(), values) {
+			public void mOpen() {
+				super.mOpen();
+				String customers = "";
+				for (String _id : adaper.getListSeList()) {
+					String user = adaper.getUserFrom_ID(_id);
+					user = Conts.getSDT(user);
+
+					if (!Conts.isBlank(user)) {
+						if (customers.endsWith("\"")) {
+							customers = String.format("%s,\"%s\"", customers, user);
+						} else {
+							customers = String.format("\"%s\"", user);
+						}
+					}
 				}
-			}
-		}
-		customers = String.format("{%s}", customers);
-		(((RootMenuActivity) getActivity())).gotoLoiMoi(serviceCode, customers);
+
+				for (String user : adaper.getListAdd()) {
+					if (!Conts.isBlank(user)) {
+						if (customers.endsWith("\"")) {
+							customers = String.format("%s,\"%s\"", customers, user);
+						} else {
+							customers = String.format("\"%s\"", user);
+						}
+					}
+				}
+				customers = String.format("{%s}", customers);
+				(((RootMenuActivity) getActivity())).gotoLoiMoi(serviceCode, customers);
+			};
+		}.show();
+
 	}
 
 	@Override

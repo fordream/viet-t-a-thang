@@ -98,8 +98,10 @@ public class ThongTinCaNhanFragment extends BaseFragment implements OnItemClickL
 
 			@Override
 			public void onError(String message) {
+				
 				if (getActivity() != null) {
-					Conts.toast(getActivity(), message);
+					Conts.showDialogDongYCallBack(getActivity(), message);
+//					Conts.toast(getActivity(), message);
 					Conts.showView(loadingView, false);
 				}
 			}

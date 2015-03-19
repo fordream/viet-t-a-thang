@@ -64,7 +64,8 @@ public class SendAppForMyFrindFragment extends BaseFragment implements OnItemCli
 				boardView.setVisibility(View.GONE);
 				mkeyboard(false);
 			} else {
-				Conts.toast(getActivity(), String.format(getString(R.string.format_check_sdt), moidichvuchonhieunguoi_numberText));
+				Conts.showDialogDongYCallBack(getActivity(), String.format(getString(R.string.format_check_sdt), moidichvuchonhieunguoi_numberText));
+//				Conts.toast(getActivity(), String.format(getString(R.string.format_check_sdt), moidichvuchonhieunguoi_numberText));
 			}
 		}
 	};
@@ -348,7 +349,9 @@ public class SendAppForMyFrindFragment extends BaseFragment implements OnItemCli
 
 		int count = adaper.getListAdd().size() + adaper.getListSeList().size();
 		if (count == 0) {
-			Conts.toast(getActivity(), getString(R.string.validateaddnguoi));
+//			Conts.toast(getActivity(), getString(R.string.validateaddnguoi));
+			
+			Conts.showDialogDongYCallBack(getActivity(), getActivity().getString(R.string.validateaddnguoi));
 			return;
 		}
 

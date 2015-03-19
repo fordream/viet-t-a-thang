@@ -170,7 +170,8 @@ public class LoginTabletActivty extends Activity implements OnClickListener {
 				sendIntent.putExtra("address", "567");
 				startActivity(sendIntent);
 			} catch (Exception exception) {
-				Conts.toast(this, getString(R.string.noappsendmessage));
+				
+				Conts.showDialogDongYCallBack(this, getString(R.string.noappsendmessage));
 			}
 			return;
 		}
