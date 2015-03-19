@@ -68,7 +68,7 @@ public class SplashScreenActivity extends Activity {
 			}
 
 			if (Conts.is3GConnected(SplashScreenActivity.this)) {
-				Conts.loadAppInfor("org.com.cnc.qrcode", new AppInforGetCallBack() {
+				Conts.loadAppInfor("com.viettel.vtt.vdealer", new AppInforGetCallBack() {
 
 					@Override
 					public void onSuccess(String softwareVersion) {
@@ -91,7 +91,9 @@ public class SplashScreenActivity extends Activity {
 							} else if (nowVersionName.equals(softwareVersion)) {
 								login3g();
 							} else {
-								Conts.showDialogDongYCallBack(SplashScreenActivity.this, getString(R.string.needupdate), new DialogCallBack() {
+								String message = getString(R.string.needupdate);
+								message = String.format(message, getString(R.string.app_name), softwareVersion);
+								Conts.showDialogDongYCallBack(SplashScreenActivity.this, message, new DialogCallBack() {
 									@Override
 									public void callback(Object object) {
 										Conts.callMarket(SplashScreenActivity.this);
