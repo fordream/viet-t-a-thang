@@ -5,7 +5,6 @@ import org.json.JSONObject;
 import vnp.com.api.API;
 import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.datastore.DichVuStore;
-import vnp.com.mimusic.R;
 import vnp.com.mimusic.VApplication;
 import vnp.com.mimusic.base.BaseAdialog;
 import vnp.com.mimusic.util.Conts;
@@ -19,6 +18,8 @@ import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
+
+import com.viettel.vtt.vdealer.R;
 
 public class DangKyDialog extends BaseAdialog implements android.view.View.OnClickListener {
 	private ContentValues contentValues;

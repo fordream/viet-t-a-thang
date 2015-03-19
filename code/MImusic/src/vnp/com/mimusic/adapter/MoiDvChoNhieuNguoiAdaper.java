@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import vnp.com.db.VasContact;
-import vnp.com.mimusic.R;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.view.MoiDvChoNhieuNguoiItemView;
 import android.content.Context;
@@ -16,6 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+
+import com.viettel.vtt.vdealer.R;
 
 public abstract class MoiDvChoNhieuNguoiAdaper extends CursorAdapter {
 	private List<String> listSelect = new ArrayList<String>();

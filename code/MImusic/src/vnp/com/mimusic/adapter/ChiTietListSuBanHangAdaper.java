@@ -5,7 +5,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import vnp.com.db.VasContact;
-import vnp.com.mimusic.R;
 import vnp.com.mimusic.util.Conts;
 import android.content.Context;
 import android.database.Cursor;
@@ -15,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.viettel.vtt.vdealer.R;
 
 public class ChiTietListSuBanHangAdaper extends ArrayAdapter<JSONObject> {
 

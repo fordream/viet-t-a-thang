@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="vnp.com.mimusic"
+    package="com.viettel.vtt.vdealer"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -21,30 +21,30 @@
     <uses-permission android:name="android.permission.SEND_SMS" />
 
     <application
-        android:name="VApplication"
+        android:name="vnp.com.mimusic.VApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="LoginActivty"
+            android:name="vnp.com.mimusic.LoginActivty"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden"
            >
         </activity>
         <activity
-            android:name="LoginTabletActivty"
+            android:name="vnp.com.mimusic.LoginTabletActivty"
             android:label="@string/app_name"
             android:screenOrientation="landscape" >
         </activity>
         <activity
-            android:name=".main.BaseMusicSlideMenuActivity"
+            android:name="vnp.com.mimusic.main.BaseMusicSlideMenuActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" >
         </activity>
         <activity
-            android:name=".main.NewMusicSlideMenuActivity"
+            android:name="vnp.com.mimusic.main.NewMusicSlideMenuActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|fontScale">
         </activity>
@@ -70,7 +70,7 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".activity.IndexActivity" >
+        <activity android:name="vnp.com.mimusic.activity.IndexActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

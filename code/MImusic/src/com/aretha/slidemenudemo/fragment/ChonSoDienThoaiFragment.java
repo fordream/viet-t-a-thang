@@ -1,7 +1,6 @@
 package com.aretha.slidemenudemo.fragment;
 
 import vnp.com.db.VasContact;
-import vnp.com.mimusic.R;
 import vnp.com.mimusic.adapter.ChonSoDienThoaiAdaper;
 import vnp.com.mimusic.view.HeaderView;
 import android.app.Activity;
@@ -18,6 +17,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.viettel.vtt.vdealer.R;
 import com.vnp.core.scroll.VasChonSdtScrollListView;
 
 public class ChonSoDienThoaiFragment extends BaseFragment implements android.view.View.OnClickListener {

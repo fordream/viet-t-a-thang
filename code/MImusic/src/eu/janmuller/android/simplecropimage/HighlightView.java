@@ -17,7 +17,6 @@
 package eu.janmuller.android.simplecropimage;
 
 
-import vnp.com.mimusic.R;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
@@ -27,6 +26,8 @@ import android.graphics.RectF;
 import android.graphics.Region;
 import android.graphics.drawable.Drawable;
 import android.view.View;
+
+import com.viettel.vtt.vdealer.R;
 
 // This class is used by CropImage to display a highlighted cropping rectangle
 // overlayed with the image. There are two coordinate spaces in use. One is

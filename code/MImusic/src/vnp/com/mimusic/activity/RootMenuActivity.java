@@ -16,7 +16,6 @@ import vnp.com.db.MauMoi;
 import vnp.com.db.VasContact;
 import vnp.com.db.datastore.DichVuStore;
 import vnp.com.db.datastore.TintucStore;
-import vnp.com.mimusic.R;
 import vnp.com.mimusic.VApplication;
 import vnp.com.mimusic.adapter.data.NewHomeItem;
 import vnp.com.mimusic.base.diablog.VasProgessDialog;
@@ -62,6 +61,7 @@ import com.aretha.slidemenudemo.fragment.SearchFragment;
 import com.aretha.slidemenudemo.fragment.SendAppForMyFrindFragment;
 import com.aretha.slidemenudemo.fragment.ThongTinCaNhanFragment;
 import com.aretha.slidemenudemo.fragment.TinTucFragment;
+import com.viettel.vtt.vdealer.R;
 import com.vnp.core.crash.CrashExceptionHandler;
 
 /**

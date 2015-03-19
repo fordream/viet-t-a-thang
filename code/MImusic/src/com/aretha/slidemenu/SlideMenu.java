@@ -14,7 +14,6 @@
  */
 package com.aretha.slidemenu;
 
-import vnp.com.mimusic.R;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -42,6 +41,7 @@ import android.widget.Scroller;
 
 import com.aretha.slidemenu.utils.ScrollDetectors;
 import com.aretha.slidemenu.utils.ScrollDetectors.ScrollDetector;
+import com.viettel.vtt.vdealer.R;
 
 /**
  * Swipe left/right to show the hidden menu behind the content view, Use

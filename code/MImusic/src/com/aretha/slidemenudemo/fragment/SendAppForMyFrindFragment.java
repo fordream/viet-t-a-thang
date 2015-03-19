@@ -6,7 +6,6 @@ import vnp.com.api.API;
 import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.VasContact;
 import vnp.com.db.datastore.DichVuStore;
-import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.adapter.MoiDvChoNhieuNguoiAdaper;
 import vnp.com.mimusic.base.diablog.DangKyDialog;
@@ -27,8 +26,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -38,6 +35,8 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
+
+import com.viettel.vtt.vdealer.R;
 
 public class SendAppForMyFrindFragment extends BaseFragment implements OnItemClickListener, View.OnClickListener, OnTouchListener {
 	@Override

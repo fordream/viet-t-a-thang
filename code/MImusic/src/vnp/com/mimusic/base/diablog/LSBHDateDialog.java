@@ -3,7 +3,6 @@ package vnp.com.mimusic.base.diablog;
 import java.util.Calendar;
 import java.util.StringTokenizer;
 
-import vnp.com.mimusic.R;
 import vnp.com.mimusic.base.BaseAdialog;
 import vnp.com.mimusic.util.Conts;
 import android.content.Context;
@@ -19,6 +18,7 @@ import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
+import com.viettel.vtt.vdealer.R;
 import com.vnp.core.view.wheel.WheelView;
 import com.vnp.core.view.wheel.WheelView.OnWheelChangedListener;
 import com.vnp.core.view.wheel.WheelViewAdapter;

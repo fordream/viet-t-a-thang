@@ -3,7 +3,6 @@ package com.aretha.slidemenudemo.fragment;
 import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.datastore.AccountStore;
 import vnp.com.db.datastore.DichVuStore;
-import vnp.com.mimusic.R;
 import vnp.com.mimusic.VApplication;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
@@ -11,6 +10,8 @@ import vnp.com.mimusic.view.HeaderView;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
+
+import com.viettel.vtt.vdealer.R;
 
 public class BaseFragment extends Fragment {
 	public AccountStore accountStore;

@@ -1,7 +1,6 @@
 package vnp.com.mimusic.adapter;
 
 import vnp.com.db.datastore.DichVuStore;
-import vnp.com.mimusic.R;
 import vnp.com.mimusic.base.diablog.DangKyDialog;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.view.HomeItemView;
@@ -12,6 +11,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
+
+import com.viettel.vtt.vdealer.R;
 
 public abstract class HomeAdapter extends CursorAdapter {
 	public HomeAdapter(Context context, Cursor c) {

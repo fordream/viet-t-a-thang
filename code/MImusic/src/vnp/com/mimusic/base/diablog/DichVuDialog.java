@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import vnp.com.db.datastore.DichVuStore;
-import vnp.com.mimusic.R;
 import vnp.com.mimusic.base.BaseAdialog;
 import vnp.com.mimusic.util.Conts;
 import android.content.ContentValues;
@@ -21,6 +20,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.viettel.vtt.vdealer.R;
 import com.vnp.core.view.wheel.WheelView;
 import com.vnp.core.view.wheel.WheelViewAdapter;
 

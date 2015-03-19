@@ -1,12 +1,13 @@
 package vnp.com.mimusic.view;
 
-import vnp.com.mimusic.R;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
+import com.viettel.vtt.vdealer.R;
 
 public class TabView extends LinearLayout {
 	private ImageView tab_1_img, tab_2_img, tab_3_img, tab_4_img;

@@ -1,7 +1,6 @@
 package vnp.com.mimusic.view;
 
 import vnp.com.db.VasContact;
-import vnp.com.mimusic.R;
 import vnp.com.mimusic.adapter.MenuRightAdaper;
 import vnp.com.mimusic.util.Conts;
 import android.content.ContentValues;
@@ -17,6 +16,8 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+
+import com.viettel.vtt.vdealer.R;
 
 //vnp.com.mimusic.view.MenuRightView
 public class MenuRightView extends LinearLayout {

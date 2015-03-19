@@ -1,7 +1,6 @@
 package vnp.com.mimusic.view;
 
 import vnp.com.db.datastore.AccountStore;
-import vnp.com.mimusic.R;
 import vnp.com.mimusic.adapter.MenuLeftAdaper;
 import vnp.com.mimusic.util.Conts;
 import android.content.Context;
@@ -14,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.viettel.vtt.vdealer.R;
 
 public class MenuLeftView extends LinearLayout {
 	private AccountStore accountStore;

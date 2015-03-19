@@ -1,8 +1,9 @@
 package vnp.com.mimusic.util;
 
-import vnp.com.mimusic.R;
 import android.content.Context;
 import android.widget.ImageView;
+
+import com.viettel.vtt.vdealer.R;
 
 public class ImageLoaderUtils {
 	private ImageLoader imageLoader;

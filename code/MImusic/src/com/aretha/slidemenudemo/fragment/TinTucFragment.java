@@ -4,7 +4,6 @@ import org.json.JSONObject;
 
 import vnp.com.api.API;
 import vnp.com.api.RestClient.RequestMethod;
-import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.adapter.JsonTintucAdaper;
 import vnp.com.mimusic.main.NewMusicSlideMenuActivity;
@@ -20,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
+import com.viettel.vtt.vdealer.R;
 import com.vnp.core.scroll.VasTintucScrollListView;
 
 public class TinTucFragment extends BaseFragment implements OnItemClickListener, View.OnClickListener {

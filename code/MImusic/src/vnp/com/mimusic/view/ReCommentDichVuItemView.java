@@ -3,7 +3,6 @@ package vnp.com.mimusic.view;
 import org.json.JSONObject;
 
 import vnp.com.db.datastore.DichVuStore;
-import vnp.com.mimusic.R;
 import vnp.com.mimusic.util.Conts;
 import android.content.Context;
 import android.database.Cursor;
@@ -12,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
+import com.viettel.vtt.vdealer.R;
 
 //vnp.com.mimusic.view.ReCommentDichVuItemView
 public class ReCommentDichVuItemView extends LinearLayout {

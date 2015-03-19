@@ -2,11 +2,12 @@ package vnp.com.mimusic.activity;
 
 import vnp.com.db.VasContact;
 import vnp.com.mimusic.LoginTabletActivty;
-import vnp.com.mimusic.R;
 import vnp.com.mimusic.util.Conts;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+
+import com.viettel.vtt.vdealer.R;
 
 public class IndexActivity extends Activity {
 	@Override

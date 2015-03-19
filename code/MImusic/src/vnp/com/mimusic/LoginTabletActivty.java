@@ -22,6 +22,7 @@ import android.view.animation.Animation;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.viettel.vtt.vdealer.R;
 import com.vnp.core.crash.CrashExceptionHandler;
 
 public class LoginTabletActivty extends Activity implements OnClickListener {

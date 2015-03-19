@@ -5,7 +5,6 @@ import org.json.JSONObject;
 import vnp.com.api.API;
 import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.datastore.AccountStore;
-import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
@@ -23,6 +22,8 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.viettel.vtt.vdealer.R;
 
 public class ThongTinCaNhanFragment extends BaseFragment implements OnItemClickListener, View.OnClickListener {
 	@Override

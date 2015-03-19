@@ -13,7 +13,6 @@ import vnp.com.api.API;
 import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.DataStore;
 import vnp.com.db.datastore.AccountStore;
-import vnp.com.mimusic.R;
 import vnp.com.mimusic.base.diablog.VasProgessDialog;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
@@ -39,6 +38,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.viettel.vtt.vdealer.R;
+
 import eu.janmuller.android.simplecropimage.CropImage;
 import eu.janmuller.android.simplecropimage.example.InternalStorageContentProvider;
 

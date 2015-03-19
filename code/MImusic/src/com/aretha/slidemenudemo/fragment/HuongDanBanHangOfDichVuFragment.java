@@ -1,6 +1,5 @@
 package com.aretha.slidemenudemo.fragment;
 
-import vnp.com.mimusic.R;
 import vnp.com.mimusic.view.HeaderView;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView;
+
+import com.viettel.vtt.vdealer.R;
 
 public class HuongDanBanHangOfDichVuFragment extends BaseFragment implements OnItemClickListener, View.OnClickListener {
 	@Override

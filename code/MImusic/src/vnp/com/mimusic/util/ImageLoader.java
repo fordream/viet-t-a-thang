@@ -16,7 +16,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import vnp.com.api.RestClient.RequestMethod;
-import vnp.com.mimusic.R;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
@@ -32,6 +31,7 @@ import android.os.Handler;
 import android.provider.MediaStore;
 import android.widget.ImageView;
 
+import com.viettel.vtt.vdealer.R;
 import com.vnp.core.common.https.HttpsRestClient;
 
 public class ImageLoader {

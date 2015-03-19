@@ -4,7 +4,6 @@ import org.json.JSONObject;
 
 import vnp.com.api.API;
 import vnp.com.api.RestClient.RequestMethod;
-import vnp.com.mimusic.R;
 import vnp.com.mimusic.VApplication;
 import vnp.com.mimusic.base.VTAnimationListener;
 import vnp.com.mimusic.util.Conts;
@@ -18,6 +17,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.viettel.vtt.vdealer.R;
 
 //vnp.com.mimusic.view.ChitietCaNhanBangXepHangTungDichVuView
 public class ChitietCaNhanBangXepHangTungDichVuView extends LinearLayout implements View.OnClickListener {

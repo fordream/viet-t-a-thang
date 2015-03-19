@@ -1,12 +1,13 @@
 package vnp.com.mimusic.adapter;
 
-import vnp.com.mimusic.R;
 import vnp.com.mimusic.view.QuyDinhBanHangItemView;
 import android.content.Context;
 import android.database.Cursor;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
+
+import com.viettel.vtt.vdealer.R;
 
 public class QuyDinhBanHangAdapter extends CursorAdapter {
 

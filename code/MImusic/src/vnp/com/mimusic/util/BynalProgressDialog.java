@@ -1,9 +1,10 @@
 package vnp.com.mimusic.util;
 
-import vnp.com.mimusic.R;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
+
+import com.viettel.vtt.vdealer.R;
 
 public class BynalProgressDialog extends ProgressDialog {
 

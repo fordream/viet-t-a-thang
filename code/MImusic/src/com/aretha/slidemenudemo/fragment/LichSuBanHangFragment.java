@@ -4,7 +4,6 @@ import java.util.Calendar;
 
 import vnp.com.db.VasContact;
 import vnp.com.db.datastore.DichVuStore;
-import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IShowDateDialog;
@@ -24,6 +23,8 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.viettel.vtt.vdealer.R;
 
 public class LichSuBanHangFragment extends Fragment implements OnItemClickListener, View.OnClickListener {
 	@Override

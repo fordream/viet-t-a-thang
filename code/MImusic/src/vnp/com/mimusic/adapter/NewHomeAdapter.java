@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import vnp.com.db.datastore.DichVuStore;
-import vnp.com.mimusic.R;
 import vnp.com.mimusic.adapter.data.NewHomeItem;
 import vnp.com.mimusic.util.Conts;
 import android.content.ContentValues;
@@ -18,6 +17,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
+import com.viettel.vtt.vdealer.R;
 
 public abstract class NewHomeAdapter extends ArrayAdapter<NewHomeItem> {
 	private List<NewHomeItem> list = new ArrayList<NewHomeItem>();

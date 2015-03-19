@@ -1,6 +1,5 @@
 package com.aretha.slidemenudemo.fragment;
 
-import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.adapter.ChiTietCaNhanDichVuAdaper;
 import vnp.com.mimusic.view.BangXepHangItemView;
@@ -13,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+
+import com.viettel.vtt.vdealer.R;
 
 public class ChiTietCaNhanDichVuFragment extends Fragment implements OnItemClickListener, View.OnClickListener {
 	@Override

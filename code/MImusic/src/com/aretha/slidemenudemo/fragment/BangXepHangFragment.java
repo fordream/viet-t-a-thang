@@ -1,7 +1,6 @@
 package com.aretha.slidemenudemo.fragment;
 
 import vnp.com.db.BangXepHang;
-import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.main.NewMusicSlideMenuActivity;
 import vnp.com.mimusic.view.BangXepHangHeaderView;
@@ -16,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
+import com.viettel.vtt.vdealer.R;
 import com.vnp.core.scroll.VasBangXepHangScrollListView;
 
 public class BangXepHangFragment extends BaseFragment implements OnItemClickListener, View.OnClickListener {

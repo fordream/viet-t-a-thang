@@ -1,6 +1,5 @@
 package com.aretha.slidemenudemo.fragment;
 
-import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.view.HeaderView;
 import android.os.Bundle;
@@ -8,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.viettel.vtt.vdealer.R;
 
 public class ChiTietCaNhanBangXepHangFragment extends Fragment implements View.OnClickListener {
 	@Override

@@ -31,7 +31,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-import vnp.com.mimusic.R;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -56,6 +55,8 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.Scroller;
+
+import com.viettel.vtt.vdealer.R;
 
 // @formatter:off
 /**

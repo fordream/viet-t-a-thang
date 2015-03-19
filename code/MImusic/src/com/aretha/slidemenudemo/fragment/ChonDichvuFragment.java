@@ -3,7 +3,6 @@ package com.aretha.slidemenudemo.fragment;
 import org.json.JSONObject;
 
 import vnp.com.db.datastore.DichVuStore;
-import vnp.com.mimusic.R;
 import vnp.com.mimusic.adapter.ChonDichVuAdapter;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.view.HeaderView;
@@ -22,6 +21,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.viettel.vtt.vdealer.R;
 import com.vnp.core.scroll.VasChonDichvuScrollListView;
 
 public class ChonDichvuFragment extends BaseFragment implements android.view.View.OnClickListener {

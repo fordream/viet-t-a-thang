@@ -10,7 +10,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import vnp.com.db.datastore.DichVuStore;
-import vnp.com.mimusic.R;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.view.MoiNhieuDichVuItemView;
 import android.content.Context;
@@ -19,6 +18,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+
+import com.viettel.vtt.vdealer.R;
 
 public abstract class MoiNhieuDichVuAdapter extends ArrayAdapter<JSONObject> {
 	JSONArray array;

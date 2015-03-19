@@ -1,6 +1,5 @@
 package com.vnp.core.scroll;
 
-import vnp.com.mimusic.R;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.view.HeaderView;
 import android.app.Activity;
@@ -11,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+
+import com.viettel.vtt.vdealer.R;
 
 public abstract class VasBaseScrollListView implements OnTouchListener {
 	private ListView listViews[];

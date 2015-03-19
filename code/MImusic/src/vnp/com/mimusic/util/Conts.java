@@ -23,7 +23,6 @@ import vnp.com.api.RestClient;
 import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.DataStore;
 import vnp.com.db.datastore.AccountStore;
-import vnp.com.mimusic.R;
 import vnp.com.mimusic.base.diablog.DangKyDialog;
 import android.app.Activity;
 import android.app.Dialog;
@@ -57,7 +56,8 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.viettel.vtt.vdealer.R;
 
 public class Conts {
 	public interface AppInforGetCallBack {

@@ -18,6 +18,7 @@ import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.widget.TextView;
 
+import com.viettel.vtt.vdealer.R;
 import com.vnp.core.crash.CrashExceptionHandler;
 
 public class LoginActivty extends Activity implements OnClickListener, OnTouchListener {

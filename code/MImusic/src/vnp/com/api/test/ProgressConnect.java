@@ -8,12 +8,13 @@ import org.json.JSONObject;
 import vnp.com.api.API;
 import vnp.com.api.RestClient;
 import vnp.com.api.RestClient.RequestMethod;
-import vnp.com.mimusic.R;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+
+import com.viettel.vtt.vdealer.R;
 
 public class ProgressConnect {
 	private Context context;

@@ -7,7 +7,6 @@ import vnp.com.api.API;
 import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.MauMoi;
 import vnp.com.db.datastore.DichVuStore;
-import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.adapter.MauMoiAdaper;
 import vnp.com.mimusic.util.Conts;
@@ -20,6 +19,8 @@ import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+
+import com.viettel.vtt.vdealer.R;
 
 public class MauMoiFragment extends BaseFragment implements android.view.View.OnClickListener {
 	private View loading;

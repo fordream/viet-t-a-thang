@@ -1,10 +1,11 @@
 package vnp.com.mimusic.view;
 
-import vnp.com.mimusic.R;
 import vnp.com.mimusic.util.FontsUtils;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.RadioButton;
+
+import com.viettel.vtt.vdealer.R;
 
 //vnp.com.mimusic.view.BangXepHangHeaderRadioButton
 public class BangXepHangHeaderRadioButton extends RadioButton {

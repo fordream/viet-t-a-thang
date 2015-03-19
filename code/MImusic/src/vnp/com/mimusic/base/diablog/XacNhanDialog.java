@@ -1,6 +1,5 @@
 package vnp.com.mimusic.base.diablog;
 
-import vnp.com.mimusic.R;
 import vnp.com.mimusic.base.BaseAdialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -9,6 +8,8 @@ import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
+
+import com.viettel.vtt.vdealer.R;
 
 public class XacNhanDialog extends BaseAdialog implements android.view.View.OnClickListener {
 

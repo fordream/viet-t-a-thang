@@ -5,12 +5,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import vnp.com.db.datastore.TintucStore;
-import vnp.com.mimusic.R;
 import vnp.com.mimusic.view.TintucItemView;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+
+import com.viettel.vtt.vdealer.R;
 
 public class JsonTintucAdaper extends BaseAdapter {
 	private JSONArray array = new JSONArray();

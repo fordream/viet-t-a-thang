@@ -7,7 +7,6 @@ import org.json.JSONObject;
 import vnp.com.api.API;
 import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.BangXepHang;
-import vnp.com.mimusic.R;
 import vnp.com.mimusic.VApplication;
 import vnp.com.mimusic.adapter.BangXepHangCursorAdaper;
 import vnp.com.mimusic.base.diablog.VasProgessDialog;
@@ -21,6 +20,8 @@ import android.view.LayoutInflater;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.viettel.vtt.vdealer.R;
 
 //vnp.com.mimusic.view.BangXephangListView
 public class BangXephangListView extends LinearLayout {

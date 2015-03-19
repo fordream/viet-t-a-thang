@@ -11,7 +11,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import vnp.com.db.datastore.DichVuStore;
-import vnp.com.mimusic.R;
 import vnp.com.mimusic.util.Conts;
 import android.content.Context;
 import android.util.AttributeSet;
@@ -24,6 +23,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.viettel.vtt.vdealer.R;
 
 /**
  * vnp.com.mimusic.view.HeaderView

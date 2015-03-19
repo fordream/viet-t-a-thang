@@ -1,7 +1,6 @@
 package com.aretha.slidemenudemo.fragment;
 
 import vnp.com.db.datastore.DichVuStore;
-import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.adapter.DichVuAdapter;
 import vnp.com.mimusic.base.diablog.DangKyDialog;
@@ -20,6 +19,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.viettel.vtt.vdealer.R;
 import com.vnp.core.scroll.VasDichvuScrollListView;
 
 public class DichVuBanChayFragment extends BaseFragment implements OnItemClickListener, View.OnClickListener {

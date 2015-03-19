@@ -1,12 +1,13 @@
 package com.aretha.slidemenudemo.fragment;
 
-import vnp.com.mimusic.R;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.view.HeaderView;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.viettel.vtt.vdealer.R;
 
 public class ChiTietCaNhanBangXepHangTungDichVuFragment extends BaseFragment implements View.OnClickListener {
 	// private TextView soGDTrongThang, soGD, soHHTrongThang, soHH,

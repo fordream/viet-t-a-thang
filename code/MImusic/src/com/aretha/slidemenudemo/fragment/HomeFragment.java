@@ -7,7 +7,6 @@ import org.json.JSONObject;
 import vnp.com.api.API;
 import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.datastore.DichVuStore;
-import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.adapter.NewHomeAdapter.UpdateSuccess;
 import vnp.com.mimusic.adapter.data.NewHomeItem;
@@ -25,14 +24,15 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.ListView;
 
+import com.viettel.vtt.vdealer.R;
 import com.vnp.core.scroll.VasHomeScrollListView;
 
 public class HomeFragment extends BaseFragment implements OnItemClickListener, View.OnClickListener {

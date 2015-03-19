@@ -1,6 +1,5 @@
 package vnp.com.mimusic.view;
 
-import vnp.com.mimusic.R;
 import android.content.Context;
 import android.text.Spanned;
 import android.util.AttributeSet;
@@ -8,6 +7,8 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.viettel.vtt.vdealer.R;
 
 /**
  * vnp.com.mimusic.view.HeaderView

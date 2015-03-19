@@ -1,6 +1,5 @@
 package vnp.com.mimusic.base.diablog;
 
-import vnp.com.mimusic.R;
 import vnp.com.mimusic.base.BaseAdialog;
 import android.content.Context;
 import android.database.DataSetObserver;
@@ -15,6 +14,7 @@ import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
+import com.viettel.vtt.vdealer.R;
 import com.vnp.core.view.wheel.WheelView;
 import com.vnp.core.view.wheel.WheelView.OnWheelScrollListener;
 import com.vnp.core.view.wheel.WheelViewAdapter;

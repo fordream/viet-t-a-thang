@@ -1,8 +1,6 @@
 package com.aretha.slidemenudemo.fragment;
 
 import vnp.com.db.VasContact;
-import vnp.com.db.datastore.DichVuStore;
-import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.adapter.MoiNhieuDichVuAdapter;
 import vnp.com.mimusic.base.diablog.DangKyDialog;
@@ -19,12 +17,12 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.Animation.AnimationListener;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+
+import com.viettel.vtt.vdealer.R;
 
 public class MoiNhieuDichVuFragment extends BaseFragment implements android.view.View.OnClickListener, OnTouchListener {
 

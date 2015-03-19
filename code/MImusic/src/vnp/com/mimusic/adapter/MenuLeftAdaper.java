@@ -1,6 +1,5 @@
 package vnp.com.mimusic.adapter;
 
-import vnp.com.mimusic.R;
 import vnp.com.mimusic.view.MenuLeftFooterView;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.viettel.vtt.vdealer.R;
 
 public class MenuLeftAdaper extends ArrayAdapter<String> {
 

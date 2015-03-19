@@ -4,7 +4,6 @@ import org.json.JSONObject;
 
 import vnp.com.db.DataStore;
 import vnp.com.mimusic.LoginActivty;
-import vnp.com.mimusic.R;
 import vnp.com.mimusic.VApplication;
 import vnp.com.mimusic.VApplication.IServiceConfig;
 import vnp.com.mimusic.main.NewMusicSlideMenuActivity;
@@ -18,6 +17,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.viettel.vtt.vdealer.R;
 import com.vnp.core.crash.CrashExceptionHandler;
 
 //vnp.com.mimusic.activity.SplashScreenActivity
@@ -68,7 +68,9 @@ public class SplashScreenActivity extends Activity {
 			}
 
 			if (Conts.is3GConnected(SplashScreenActivity.this)) {
-				Conts.loadAppInfor("com.viettel.vtt.vdealer", new AppInforGetCallBack() {
+				// com.viettel.vtt.vdealer
+				// vnp.com.mimusic
+				Conts.loadAppInfor(SplashScreenActivity.this.getPackageName(), new AppInforGetCallBack() {
 
 					@Override
 					public void onSuccess(String softwareVersion) {

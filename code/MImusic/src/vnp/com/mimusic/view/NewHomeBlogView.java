@@ -9,7 +9,6 @@ import org.json.JSONObject;
 import vnp.com.db.Recomment;
 import vnp.com.db.VasContact;
 import vnp.com.db.datastore.DichVuStore;
-import vnp.com.mimusic.R;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.util.Conts;
 import android.content.ContentValues;
@@ -17,14 +16,14 @@ import android.content.Context;
 import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.BaseAdapter;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.viettel.vtt.vdealer.R;
 
 /**
  * vnp.com.mimusic.view.HeaderView

@@ -3,7 +3,6 @@ package vnp.com.mimusic.main;
 import org.json.JSONObject;
 
 import vnp.com.db.VasContact;
-import vnp.com.mimusic.R;
 import vnp.com.mimusic.VApplication;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.base.diablog.DangKyDialog;
@@ -35,6 +34,7 @@ import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabSpec;
 
+import com.viettel.vtt.vdealer.R;
 import com.vnp.core.crash.CrashExceptionHandler;
 
 public class NewMusicSlideMenuActivity extends TabActivity {

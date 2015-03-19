@@ -1,7 +1,6 @@
 package vnp.com.mimusic.adapter;
 
 import vnp.com.db.datastore.DichVuStore;
-import vnp.com.mimusic.R;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.view.DichVuItemView;
 import android.content.ContentValues;
@@ -11,6 +10,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
+
+import com.viettel.vtt.vdealer.R;
 
 public abstract class HomeDichVuAdapter extends CursorAdapter {
 

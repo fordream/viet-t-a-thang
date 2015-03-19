@@ -3,7 +3,6 @@ package vnp.com.mimusic.view;
 import org.json.JSONObject;
 
 import vnp.com.db.datastore.TintucStore;
-import vnp.com.mimusic.R;
 import vnp.com.mimusic.util.Conts;
 import android.content.Context;
 import android.util.AttributeSet;
@@ -11,6 +10,8 @@ import android.view.LayoutInflater;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.viettel.vtt.vdealer.R;
 
 public class TintucItemView extends LinearLayout {
 

@@ -3,7 +3,6 @@ package vnp.com.mimusic.view;
 import java.util.ArrayList;
 import java.util.List;
 
-import vnp.com.mimusic.R;
 import vnp.com.mimusic.adapter.MenuRightDetailAdaper;
 import android.content.ContentValues;
 import android.content.Context;
@@ -17,6 +16,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+
+import com.viettel.vtt.vdealer.R;
 
 //vnp.com.mimusic.view.MenuRightDetailView
 public class MenuRightDetailView extends LinearLayout {
