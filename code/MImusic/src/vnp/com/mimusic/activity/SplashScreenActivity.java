@@ -2,21 +2,30 @@ package vnp.com.mimusic.activity;
 
 import org.json.JSONObject;
 
+import vnp.com.api.RestClient;
+import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.DataStore;
 import vnp.com.mimusic.LoginActivty;
 import vnp.com.mimusic.VApplication;
 import vnp.com.mimusic.VApplication.IServiceConfig;
 import vnp.com.mimusic.main.NewMusicSlideMenuActivity;
 import vnp.com.mimusic.util.Conts;
+import vnp.com.mimusic.util.LogUtils;
 import vnp.com.mimusic.util.Conts.AppInforGetCallBack;
 import vnp.com.mimusic.util.Conts.DialogCallBack;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
 import vnp.com.mimusic.view.LoadingView;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.gc.android.market.api.MarketSession;
+import com.gc.android.market.api.MarketSession.Callback;
+import com.gc.android.market.api.model.Market.AppsRequest;
+import com.gc.android.market.api.model.Market.AppsResponse;
+import com.gc.android.market.api.model.Market.ResponseContext;
 import com.viettel.vtt.vdealer.R;
 import com.vnp.core.crash.CrashExceptionHandler;
 
@@ -68,60 +77,122 @@ public class SplashScreenActivity extends Activity {
 			if (Conts.is3GConnected(SplashScreenActivity.this)) {
 				// com.viettel.vtt.vdealer
 				// vnp.com.mimusic
-				//Conts.showDialogThongbao(SplashScreenActivity.this, SplashScreenActivity.this.getPackageName());
-				Conts.loadAppInfor(SplashScreenActivity.this.getPackageName(), new AppInforGetCallBack() {
 
-					@Override
-					public void onSuccess(String softwareVersion) {
+				// https://play.google.com/store/apps/details?id=com.viettel.vtt.vdealer
 
-						String nowVersionName = Conts.getVersionName(SplashScreenActivity.this);
+				checkVersionOffApp();
 
-						if (Conts.isBlank(nowVersionName)) {
-							login3g();
-						} else {
-
-							//Conts.showDialogThongbao(SplashScreenActivity.this, softwareVersion + "");
-							if (Conts.isBlank(softwareVersion)) {
-								login3g();
-							} else if (Conts.isBlank(softwareVersion)) {
-								Conts.showDialogDongYCallBack(SplashScreenActivity.this, getString(R.string.need3g), new DialogCallBack() {
-
-									@Override
-									public void callback(Object object) {
-										finish();
-									}
-								});
-							} else if (Conts.convertToFloat(nowVersionName) >= Conts.convertToFloat(softwareVersion)) {
-								login3g();
-							} else {
-								String message = getString(R.string.needupdate);
-								message = String.format(message, getString(R.string.app_name), softwareVersion);
-								Conts.showDialogDongYCallBack(SplashScreenActivity.this, message, new DialogCallBack() {
-									@Override
-									public void callback(Object object) {
-										Conts.callMarket(SplashScreenActivity.this);
-										finish();
-									}
-								});
-							}
-						}
-					}
-				});
+				// Conts.loadAppInfor(SplashScreenActivity.this.getPackageName(),
+				// new AppInforGetCallBack() {
+				//
+				// @Override
+				// public void onSuccess(String softwareVersion) {
+				//
+				// String nowVersionName =
+				// Conts.getVersionName(SplashScreenActivity.this);
+				//
+				// if (Conts.isBlank(nowVersionName)) {
+				// login3g();
+				// } else {
+				//
+				// if (Conts.isBlank(softwareVersion)) {
+				// login3g();
+				// } else if (Conts.isBlank(softwareVersion)) {
+				// showDialogNeed3g();
+				//
+				// } else if (Conts.convertToFloat(nowVersionName) >=
+				// Conts.convertToFloat(softwareVersion)) {
+				// login3g();
+				// } else {
+				// String message = getString(R.string.needupdate);
+				// message = String.format(message,
+				// getString(R.string.app_name), softwareVersion);
+				// Conts.showDialogDongYCallBack(SplashScreenActivity.this,
+				// message, new DialogCallBack() {
+				// @Override
+				// public void callback(Object object) {
+				// Conts.callMarket(SplashScreenActivity.this);
+				// finish();
+				// }
+				// });
+				// }
+				// }
+				// }
+				// });
 
 			} else {
 				if (!isFinishing()) {
-					Conts.showDialogDongYCallBack(SplashScreenActivity.this, getString(R.string.need3g), new DialogCallBack() {
-
-						@Override
-						public void callback(Object object) {
-							finish();
-						}
-					});
-
+					showDialogNeed3g();
 				}
 			}
 		}
+
 	};
+
+	private void checkVersionOffApp() {
+		new AsyncTask<String, String, String>() {
+			@Override
+			protected String doInBackground(String... params) {
+				RestClient restClient = new RestClient("https://play.google.com/store/apps/details?id=" + SplashScreenActivity.this.getPackageName());
+				restClient.execute(RequestMethod.GET);
+				String response = restClient.getResponse();
+				try {
+					String softwareVersion = response.substring(response.indexOf("softwareVersion") + "softwareVersion".length());
+					softwareVersion = softwareVersion.substring(softwareVersion.indexOf("\">") + 2);
+					softwareVersion = softwareVersion.substring(0, softwareVersion.indexOf("<"));
+					return softwareVersion.trim();
+				} catch (Exception exception) {
+
+				}
+				return null;
+			}
+
+			@Override
+			protected void onPostExecute(String softwareVersion) {
+				super.onPostExecute(softwareVersion);
+
+				if (Conts.isBlank(softwareVersion)) {
+					showDialogNeed3g();
+				} else {
+					String nowVersionName = Conts.getVersionName(SplashScreenActivity.this);
+
+					if (Conts.isBlank(nowVersionName)) {
+						login3g();
+					} else {
+
+						if (Conts.isBlank(softwareVersion)) {
+							login3g();
+						} else if (Conts.isBlank(softwareVersion)) {
+							showDialogNeed3g();
+
+						} else if (Conts.convertToFloat(nowVersionName) >= Conts.convertToFloat(softwareVersion)) {
+							login3g();
+						} else {
+							String message = getString(R.string.needupdate);
+							message = String.format(message, getString(R.string.app_name), softwareVersion);
+							Conts.showDialogDongYCallBack(SplashScreenActivity.this, message, new DialogCallBack() {
+								@Override
+								public void callback(Object object) {
+									Conts.callMarket(SplashScreenActivity.this);
+									finish();
+								}
+							});
+						}
+					}
+				}
+			}
+		}.execute("");
+	}
+
+	private void showDialogNeed3g() {
+		Conts.showDialogDongYCallBack(SplashScreenActivity.this, getString(R.string.need3g), new DialogCallBack() {
+
+			@Override
+			public void callback(Object object) {
+				finish();
+			}
+		});
+	}
 
 	private void login3g() {
 		((VApplication) getApplication()).login(true, "", "", new IContsCallBack() {
