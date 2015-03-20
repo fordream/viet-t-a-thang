@@ -865,4 +865,13 @@ public class Conts {
 		}
 	}
 
+	public static float convertToFloat(String nowVersionName) {
+		try {
+			return Float.valueOf(nowVersionName);
+		} catch (Exception e) {
+
+		}
+		return 0;
+	}
+
 }

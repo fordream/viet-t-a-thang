@@ -49,8 +49,6 @@ public class SplashScreenActivity extends Activity {
 			}
 		}, 1000);
 
-		// startActivity(new Intent(SplashScreenActivity.this,
-		// NewMusicSlideMenuActivity.class));
 	}
 
 	private IServiceConfig config = new IServiceConfig() {
@@ -90,7 +88,7 @@ public class SplashScreenActivity extends Activity {
 										finish();
 									}
 								});
-							} else if (nowVersionName.equals(softwareVersion)) {
+							} else if (Conts.convertToFloat(nowVersionName) >= Conts.convertToFloat(softwareVersion)) {
 								login3g();
 							} else {
 								String message = getString(R.string.needupdate);
