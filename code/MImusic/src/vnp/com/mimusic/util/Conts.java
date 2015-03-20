@@ -68,7 +68,7 @@ public class Conts {
 		new AsyncTask<String, String, String>() {
 			@Override
 			protected String doInBackground(String... params) {
-				String url = "http://api.playstoreapi.com/v1.1/apps/%s?key=0f9723628e28a2863004b44f2440aeed";
+				String url = "http://api.playstoreapi.com/v1.1/apps/%s?key=3cadcb5e82de7dbbfbc0dcafd03f4ec6";
 				url = String.format(url, packageName);
 				RestClient client = new RestClient(url);
 				client.execute(RequestMethod.GET);
@@ -77,7 +77,6 @@ public class Conts {
 
 			protected void onPostExecute(String result) {
 				// restClientCallBack.onSuccess(result);
-				LogUtils.e("AAAAAAAAAA", result);
 				try {
 					JSONObject jsonObject = new JSONObject(result);
 					JSONArray array = jsonObject.getJSONArray("additionalInfo");
