@@ -68,6 +68,7 @@ public class SplashScreenActivity extends Activity {
 			if (Conts.is3GConnected(SplashScreenActivity.this)) {
 				// com.viettel.vtt.vdealer
 				// vnp.com.mimusic
+				//Conts.showDialogThongbao(SplashScreenActivity.this, SplashScreenActivity.this.getPackageName());
 				Conts.loadAppInfor(SplashScreenActivity.this.getPackageName(), new AppInforGetCallBack() {
 
 					@Override
@@ -78,6 +79,8 @@ public class SplashScreenActivity extends Activity {
 						if (Conts.isBlank(nowVersionName)) {
 							login3g();
 						} else {
+
+							//Conts.showDialogThongbao(SplashScreenActivity.this, softwareVersion + "");
 							if (Conts.isBlank(softwareVersion)) {
 								login3g();
 							} else if (Conts.isBlank(softwareVersion)) {

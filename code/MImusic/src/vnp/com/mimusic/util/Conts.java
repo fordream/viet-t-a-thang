@@ -77,6 +77,7 @@ public class Conts {
 
 			protected void onPostExecute(String result) {
 				// restClientCallBack.onSuccess(result);
+				LogUtils.e("AAAAAAAAAA", result);
 				try {
 					JSONObject jsonObject = new JSONObject(result);
 					JSONArray array = jsonObject.getJSONArray("additionalInfo");
