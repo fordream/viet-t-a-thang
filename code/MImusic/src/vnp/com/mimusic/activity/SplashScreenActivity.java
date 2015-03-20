@@ -150,33 +150,34 @@ public class SplashScreenActivity extends Activity {
 			@Override
 			protected void onPostExecute(String softwareVersion) {
 				super.onPostExecute(softwareVersion);
-
-				if (Conts.isBlank(softwareVersion)) {
-					showDialogNeed3g();
-				} else {
-					String nowVersionName = Conts.getVersionName(SplashScreenActivity.this);
-
-					if (Conts.isBlank(nowVersionName)) {
-						login3g();
+				if (!isFinishing()) {
+					if (Conts.isBlank(softwareVersion)) {
+						showDialogNeed3g();
 					} else {
+						String nowVersionName = Conts.getVersionName(SplashScreenActivity.this);
 
-						if (Conts.isBlank(softwareVersion)) {
-							login3g();
-						} else if (Conts.isBlank(softwareVersion)) {
-							showDialogNeed3g();
-
-						} else if (Conts.convertToFloat(nowVersionName) >= Conts.convertToFloat(softwareVersion)) {
+						if (Conts.isBlank(nowVersionName)) {
 							login3g();
 						} else {
-							String message = getString(R.string.needupdate);
-							message = String.format(message, getString(R.string.app_name), softwareVersion);
-							Conts.showDialogDongYCallBack(SplashScreenActivity.this, message, new DialogCallBack() {
-								@Override
-								public void callback(Object object) {
-									Conts.callMarket(SplashScreenActivity.this);
-									finish();
-								}
-							});
+
+							if (Conts.isBlank(softwareVersion)) {
+								login3g();
+							} else if (Conts.isBlank(softwareVersion)) {
+								showDialogNeed3g();
+
+							} else if (Conts.convertToFloat(nowVersionName) >= Conts.convertToFloat(softwareVersion)) {
+								login3g();
+							} else {
+								String message = getString(R.string.needupdate);
+								message = String.format(message, getString(R.string.app_name), softwareVersion);
+								Conts.showDialogDongYCallBack(SplashScreenActivity.this, message, new DialogCallBack() {
+									@Override
+									public void callback(Object object) {
+										Conts.callMarket(SplashScreenActivity.this);
+										finish();
+									}
+								});
+							}
 						}
 					}
 				}

@@ -409,23 +409,26 @@ public class Conts {
 	}
 
 	public static void showDialogDongYCallBack(Context context, String message, final DialogCallBack dialogCallBack) {
-		ContentValues contentValues = new ContentValues();
-		contentValues.put("btn_right", context.getString(R.string.dongy));
-		contentValues.put("btn_left_close", true);
-		contentValues.put("name", context.getString(R.string.thongbao));
-		contentValues.put("content", message);
-		contentValues.put("type", "x");
+		try {
+			ContentValues contentValues = new ContentValues();
+			contentValues.put("btn_right", context.getString(R.string.dongy));
+			contentValues.put("btn_left_close", true);
+			contentValues.put("name", context.getString(R.string.thongbao));
+			contentValues.put("content", message);
+			contentValues.put("type", "x");
 
-		DangKyDialog dangKyDialog = new DangKyDialog(context, contentValues) {
-			@Override
-			public void mOpen() {
-				super.mOpen();
-				dismiss();
-				if (dialogCallBack != null)
-					dialogCallBack.callback(null);
-			}
-		};
-		dangKyDialog.show();
+			DangKyDialog dangKyDialog = new DangKyDialog(context, contentValues) {
+				@Override
+				public void mOpen() {
+					super.mOpen();
+					dismiss();
+					if (dialogCallBack != null)
+						dialogCallBack.callback(null);
+				}
+			};
+			dangKyDialog.show();
+		} catch (Exception exception) {
+		}
 	}
 
 	public static void showDialogDongYCallBack(Context context, String message) {
