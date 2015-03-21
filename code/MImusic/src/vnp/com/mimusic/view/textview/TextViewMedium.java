@@ -30,7 +30,6 @@ public class TextViewMedium extends TextView {
 	}
 
 	private void init() {
-
 		FontsUtils.getInstance().setTextFontsRobotoMedium(this);
 	}
 
@@ -39,6 +38,7 @@ public class TextViewMedium extends TextView {
 		try {
 			super.onDraw(canvas);
 		} catch (Exception exception) {
+		} catch (Error e) {
 		}
 	}
 }

@@ -38,9 +38,8 @@ public class TextViewLight extends TextView {
 	protected void onDraw(Canvas canvas) {
 		try {
 			super.onDraw(canvas);
-
 		} catch (Exception exception) {
-
+		} catch (Error e) {
 		}
 	}
 }

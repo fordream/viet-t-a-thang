@@ -34,6 +34,7 @@ public class TextViewLightHeight extends TextView {
 		try {
 			super.onDraw(canvas);
 		} catch (Exception exception) {
+		} catch (Error e) {
 		}
 	}
 
