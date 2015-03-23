@@ -1,6 +1,9 @@
 package vnp.com.mimusic.view;
 
+import org.json.JSONObject;
+
 import vnp.com.db.VasContact;
+import vnp.com.db.datastore.DichVuStore;
 import vnp.com.mimusic.adapter.data.NewHomeItem;
 import vnp.com.mimusic.util.Conts;
 import android.content.Context;
@@ -13,6 +16,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.viettel.vtt.vdealer.R;
+
+//vnp.com.mimusic.view.NewHomeItemView
 
 public class NewHomeItemView extends LinearLayout {
 	public NewHomeItemView(Context context) {
@@ -80,6 +85,63 @@ public class NewHomeItemView extends LinearLayout {
 	}
 
 	public void updateDichvu(Cursor cursor) {
+
+	}
+
+	public void showHeader(String header) {
+		int type = 0;
+		findViewById(R.id.new_home_item_blog0).setVisibility(type == 0 ? View.VISIBLE : View.GONE);
+		findViewById(R.id.new_home_item_blog1).setVisibility(type == 1 ? View.VISIBLE : View.GONE);
+		findViewById(R.id.new_home_item_blog2).setVisibility(type == 2 ? View.VISIBLE : View.GONE);
+
+		Conts.setTextView(findViewById(R.id.name_1), header);
+		Conts.setTextView(findViewById(R.id.menu_right_item_tv_name), header);
+		Conts.setTextView(findViewById(R.id.home_item_tv_name), header);
+	}
+
+	public void showContact(String name, String sdt, String avatar, String contact_id, int position) {
+
+		int type = 1;
+		findViewById(R.id.new_home_item_blog0).setVisibility(type == 0 ? View.VISIBLE : View.GONE);
+		findViewById(R.id.new_home_item_blog1).setVisibility(type == 1 ? View.VISIBLE : View.GONE);
+		findViewById(R.id.new_home_item_blog2).setVisibility(type == 2 ? View.VISIBLE : View.GONE);
+
+		Conts.setTextView(findViewById(R.id.menu_right_item_tv_name), name);
+		Conts.setTextView(findViewById(R.id.menu_right_item_tv_link), sdt);
+		Conts.getSDT(findViewById(R.id.menu_right_item_tv_name));
+		Conts.getSDT(findViewById(R.id.menu_right_item_tv_link));
+		Conts.showAvatarContact((ImageView) findViewById(R.id.menu_right_item_img_icon), avatar, contact_id, Conts.resavatar()[position % Conts.resavatar().length]);
+
+	}
+
+	public void showDichvu(JSONObject item, int position) {
+
+		int type = 2;
+
+		findViewById(R.id.new_home_item_blog0).setVisibility(type == 0 ? View.VISIBLE : View.GONE);
+		findViewById(R.id.new_home_item_blog1).setVisibility(type == 1 ? View.VISIBLE : View.GONE);
+		findViewById(R.id.new_home_item_blog2).setVisibility(type == 2 ? View.VISIBLE : View.GONE);
+
+		final boolean isDangKy = new DichVuStore(getContext()).isRegister(Conts.getString(item, DichVuStore.service_code));
+		Conts.setTextView(findViewById(R.id.name_1), item, DichVuStore.service_name);
+		Conts.setTextView(findViewById(R.id.menu_right_item_tv_name), item, DichVuStore.service_name);
+		Conts.setTextView(findViewById(R.id.home_item_tv_name), item, DichVuStore.service_name);
+		Conts.setTextView(findViewById(R.id.menu_right_item_tv_name), item, DichVuStore.service_name);
+
+		String avatar = Conts.getString(item, DichVuStore.service_icon);
+		Conts.showLogoDichvu((ImageView) findViewById(R.id.home_item_img_icon), avatar);
+		/**
+		 * content
+		 */
+		String content = Conts.getString(item, DichVuStore.service_content);
+		Conts.setTextView(findViewById(R.id.menu_right_item_tv_link), content);
+		Conts.getSDT(findViewById(R.id.menu_right_item_tv_link));
+		Conts.setTextView(findViewById(R.id.home_item_tv_content), content);
+		Conts.setTextView(findViewById(R.id.home_item_right_control_1_tv), getContext().getString(isDangKy ? R.string.dangdung : R.string.dangky));
+
+		findViewById(R.id.new_home_item_blog2).setBackgroundResource(position % 2 == 0 ? R.drawable.tranfer : R.drawable.new_dichvu_item_2_bg);
+		findViewById(R.id.home_item_right_control).setBackgroundResource(position % 2 == 0 ? R.drawable.home_dv_bg_x_0 : R.drawable.home_dv_bg_x_1);
+		findViewById(R.id.home_item_img_icon).setBackgroundResource(position % 2 == 0 ? R.drawable.new_dichvu_icon_bg_0 : R.drawable.new_dichvu_icon_bg_1);
 
 	}
 }

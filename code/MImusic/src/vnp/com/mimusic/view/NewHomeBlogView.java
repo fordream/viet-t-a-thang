@@ -171,7 +171,6 @@ public abstract class NewHomeBlogView extends LinearLayout implements OnClickLis
 				final int position = cursorUserRecomment.getPosition();
 
 				child.setOnClickListener(new OnClickListener() {
-
 					@Override
 					public void onClick(View v) {
 						(((RootMenuActivity) xContext)).moiContactUser(user, name, position);

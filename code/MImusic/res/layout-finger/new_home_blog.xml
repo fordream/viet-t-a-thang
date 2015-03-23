@@ -46,8 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_120dp"
             android:background="@drawable/home_bg"
-            android:visibility="gone" />
-        -->
+            android:visibility="gone" />        -->
 
         <HorizontalScrollView
             android:id="@+id/horizontalscrollview"
@@ -84,7 +83,7 @@
                 android:layout_width="@dimen/dimen_296dp"
                 android:layout_height="2px"
                 android:background="#e4e4e4"
-                android:visibility="visible" />
+                android:visibility="gone" />
         </LinearLayout>
     </LinearLayout>
 

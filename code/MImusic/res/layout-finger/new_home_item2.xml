@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/new_home_item_2_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/home_bg"
+        android:padding="@dimen/dimen_12dp" >
+
+        <vnp.com.mimusic.view.textview.TextViewBold
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:singleLine="true"
+            android:text="@string/moithanhvien"
+            android:textColor="#3d3d3d"
+            android:textSize="@dimen/dimen_16dp" />
+
+        <vnp.com.mimusic.view.textview.TextViewLight
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:singleLine="true"
+            android:text="@string/xemtatca"
+            android:textColor="#3d3d3d"
+            android:textSize="@dimen/dimen_11dp" />
+    </RelativeLayout>
+
+</LinearLayout>

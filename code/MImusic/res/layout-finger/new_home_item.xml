@@ -8,6 +8,7 @@
         android:id="@+id/new_home_item_blog0"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/home_bg"
         android:orientation="vertical" >
 
         <View
@@ -15,7 +16,8 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_25dp"
             android:layout_marginLeft="@dimen/dimen_12dp"
-            android:layout_marginRight="@dimen/dimen_12dp" />
+            android:layout_marginRight="@dimen/dimen_12dp"
+            android:visibility="gone" />
 
         <View
             android:layout_width="match_parent"
@@ -25,9 +27,9 @@
             android:background="@drawable/new_home_line" />
 
         <RelativeLayout
+            android:id="@+id/xemall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-              android:id="@+id/xemall"
             android:padding="@dimen/dimen_12dp" >
 
             <vnp.com.mimusic.view.textview.TextViewBold
@@ -41,7 +43,6 @@
                 android:textSize="@dimen/dimen_16dp" />
 
             <vnp.com.mimusic.view.textview.TextViewLight
-              
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -54,20 +55,19 @@
     </LinearLayout>
 
     <LinearLayout
-        android:background="@drawable/home_bg"
         android:id="@+id/new_home_item_blog1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/home_bg"
         android:orientation="vertical" >
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_12dp"
             android:layout_marginLeft="@dimen/dimen_12dp"
             android:layout_marginRight="@dimen/dimen_12dp"
-            android:layout_marginTop="@dimen/dimen_12dp" 
-            android:layout_marginBottom="@dimen/dimen_12dp"
-            >
+            android:layout_marginTop="@dimen/dimen_12dp" >
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -79,8 +79,7 @@
                     android:id="@+id/menu_right_item_img_icon"
                     android:layout_width="@dimen/dimen_50dp"
                     android:layout_height="@dimen/dimen_50dp"
-                    android:layout_marginRight="@dimen/dimen_12dp"
-                    />
+                    android:layout_marginRight="@dimen/dimen_12dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -114,10 +113,10 @@
             <vnp.com.mimusic.view.textview.TextViewRegular
                 android:id="@+id/moi"
                 android:layout_width="@dimen/dimen_40dp"
-                android:layout_marginLeft="@dimen/dimen_12dp"
                 android:layout_height="@dimen/dimen_23dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dimen_12dp"
                 android:background="@drawable/new_home_contact_moi"
                 android:gravity="center"
                 android:text="@string/moi"
@@ -206,7 +205,8 @@
                 android:layout_height="fill_parent"
                 android:background="@drawable/new_dichvu_bg" />
         </RelativeLayout>
-<!-- android:padding="@dimen/dimen_10dp" -->
+        <!-- android:padding="@dimen/dimen_10dp" -->
+
         <ImageView
             android:id="@+id/home_item_img_icon"
             android:layout_width="@dimen/dimen_80dp"
@@ -216,7 +216,6 @@
             android:layout_marginLeft="@dimen/dimen_12dp"
             android:layout_marginRight="@dimen/dimen_12dp"
             android:background="@color/f3f3f3"
-            
             android:scaleType="fitXY"
             android:src="@drawable/dvanybook" />
 

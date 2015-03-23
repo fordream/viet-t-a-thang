@@ -308,12 +308,16 @@ public class RootMenuActivity extends FragmentActivity {
 		overridePendingTransitionStartActivity();
 	}
 
-	public void gotoChiTietDichVuFromHome(AdapterView<?> parent, View view, int position, long id) {
+	/**
+	 * id dichvu
+	 * 
+	 * @param parent
+	 */
+	public void gotoChiTietDichVuFromHomeJson(String service_code) {
 
 		Intent intent = new Intent(this, RootMenuActivity.class);
 		intent.putExtra("type", Conts.CHITIETDICHVU);
-		NewHomeItem cursor = (NewHomeItem) parent.getItemAtPosition(position);
-		intent.putExtra("id", cursor.id);
+		intent.putExtra(DichVuStore.service_code, service_code);
 		getParent().startActivity(intent);
 		overridePendingTransitionStartActivity();
 	}
