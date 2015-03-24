@@ -558,7 +558,7 @@ public class MImusicService extends Service {
 
 	private void updateDichVu(JSONObject response) {
 		// DichVu.updateDichVu(this, response);
-		// LogUtils.e("servicex", response.toString());
+//		 LogUtils.e("servicex", response.toString());
 		dichVuStore.updateDichvu(response);
 	}
 
@@ -717,12 +717,13 @@ public class MImusicService extends Service {
 			public void onSuscess(JSONObject response) {
 				if (response != null) {
 					try {
-
 						if (response.has("data") && response.getJSONArray("data").length() > 0) {
 							callUpdateNextDichVu(index + 1);
+						} else {
+							getStatusDichVu();
 						}
-
 					} catch (Exception e) {
+						getStatusDichVu();
 					}
 				}
 			}
@@ -737,6 +738,38 @@ public class MImusicService extends Service {
 
 			}
 		});
+	}
 
+	private void getStatusDichVu() {
+//		JSONArray array = dichVuStore.getDichvu();
+//		for (int i = 0; i < array.length(); i++) {
+//			try {
+//				JSONObject object = array.getJSONObject(i);
+//
+//				String serviceCode = Conts.getString(object, DichVuStore.service_code);
+//				final String serviceName = Conts.getString(object, DichVuStore.service_name);
+//				Bundle bundle = new Bundle();
+//				bundle.putString("msisdn", "841674537885");
+//				bundle.putString("service_code", serviceCode);
+//				execute(RequestMethod.POST, API.API_R019, bundle, new IContsCallBack() {
+//
+//					@Override
+//					public void onStart() {
+//
+//					}
+//
+//					@Override
+//					public void onError(String message) {
+//
+//					}
+//
+//					@Override
+//					public void onSuscess(JSONObject response) {
+//						LogUtils.e("AAAAAX", serviceName + " :" +response.toString());
+//					}
+//				});
+//			} catch (JSONException e) {
+//			}
+//		}
 	}
 }
