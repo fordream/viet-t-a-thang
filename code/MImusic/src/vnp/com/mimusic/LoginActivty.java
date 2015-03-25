@@ -48,8 +48,8 @@ public class LoginActivty extends Activity implements OnClickListener, OnTouchLi
 	private void init() {
 		((TextView) findViewById(R.id.activity_login_number_phone)).setText(new AccountStore(this).getUser());
 		((TextView) findViewById(R.id.activity_login_password)).setText(new AccountStore(this).getPassword());
-		((TextView) findViewById(R.id.activity_login_number_phone)).setText("84978581052");
-		((TextView) findViewById(R.id.activity_login_password)).setText("917124");
+		((TextView) findViewById(R.id.activity_login_number_phone)).setText("01674537885");
+		((TextView) findViewById(R.id.activity_login_password)).setText("602485");
 
 		if (!Conts.isBlank(new AccountStore(this).getUser())) {
 			((VApplication) getApplication()).refreshToken(new IContsCallBack() {

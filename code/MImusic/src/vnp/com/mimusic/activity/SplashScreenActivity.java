@@ -78,8 +78,9 @@ public class SplashScreenActivity extends Activity {
 				// com.viettel.vtt.vdealer
 				// vnp.com.mimusic
 
-				//Intent intent = new Intent(SplashScreenActivity.this, LoginActivty.class);
-				
+//				Intent intent = new Intent(SplashScreenActivity.this, LoginActivty.class);
+//				startActivity(intent);
+//				finish();
 				checkVersionOffApp();
 
 			} else {
