@@ -55,7 +55,6 @@ public abstract class MenuRightAdaper extends CursorAdapter implements SectionIn
 		mAlphabetIndexer = new AlphabetIndexer(cursor, cursor.getColumnIndex(VasContact.NAME_CONTACT_ENG), " ABCDEFGHIJKLMNOPQRTSUVWXYZ");
 		mAlphabetIndexer.setCursor(cursor);
 
-		// setFilterQueryProvider(filterQueryProvider);
 	}
 
 	@Override
@@ -79,7 +78,6 @@ public abstract class MenuRightAdaper extends CursorAdapter implements SectionIn
 					@Override
 					public void run() {
 						changeCursor((Cursor) results.values);
-
 					}
 				});
 
@@ -118,7 +116,12 @@ public abstract class MenuRightAdaper extends CursorAdapter implements SectionIn
 
 	private String textSearch = "";
 
+	public String getTextSearch() {
+		return textSearch;
+	}
+
 	public void setTextSearch(final String textSearh) {
+		this.textSearch = textSearh;
 		getFilter().filter(textSearh);
 	}
 

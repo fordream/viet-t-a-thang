@@ -42,7 +42,6 @@ public class MenuRightItemView extends LinearLayout {
 	public void initData(final ContentValues contentValues) {
 		menu_right_item_img_icon.setBackgroundResource(R.drawable.bangxephang_avatar_example);
 		menu_right_item_tv_name.setText(contentValues.getAsString("name"));
-
 	}
 
 	public void initData(Cursor cursor, String textSearch) {
@@ -134,5 +133,37 @@ public class MenuRightItemView extends LinearLayout {
 
 		}
 
+	}
+
+	String number = "";;
+
+	public void show(boolean needShow, String text) {
+		text = text.trim();
+		if (needShow) {
+			try {
+				Long.parseLong(text);
+				if (!Conts.isVietTelNUmber(text, getContext())) {
+					needShow = false;
+				}
+			} catch (Exception exception) {
+				needShow = false;
+			}
+		}
+
+		if (!needShow) {
+			findViewById(R.id.menurightitem_main).setVisibility(View.GONE);
+		} else {
+			findViewById(R.id.menurightitem_main).setVisibility(View.VISIBLE);
+		}
+
+		menu_right_item_tv_name.setText(R.string.somoi);
+		menu_right_item_tv_link.setText(text);
+		Conts.getSDT(menu_right_item_tv_link);
+		Conts.showAvatarContact(menu_right_item_img_icon, "", "", Conts.resavatar()[0 % Conts.resavatar().length]);
+		number = text;
+	}
+
+	public String getNumber() {
+		return number;
 	}
 }

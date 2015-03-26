@@ -6,6 +6,8 @@ import vnp.com.mimusic.util.Conts;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
@@ -19,9 +21,8 @@ import android.widget.LinearLayout;
 
 import com.viettel.vtt.vdealer.R;
 
-//vnp.com.mimusic.view.MenuRightView
 public class MenuRightView extends LinearLayout {
-	// private vnp.com.mimusic.view.MenuRightDetailView menu_right_detail_view;
+	private MenuRightItemView header;
 
 	public MenuRightView(Context context) {
 		super(context);
@@ -42,22 +43,36 @@ public class MenuRightView extends LinearLayout {
 	private void init() {
 		((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.menu_right, this);
 		findViewById(R.id.xleft).setOnClickListener(null);
-
 		findViewById(R.id.menu_right_search).setOnClickListener(null);
 
+		header = new MenuRightItemView(getContext());
+		header.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				String number = header.getNumber();
+
+				if (handler != null) {
+					Message message = new Message();
+					message.what = 0;
+					message.obj = number;
+					handler.sendMessage(message);
+				}
+			}
+		});
+		menu_right_list = (com.woozzu.android.widget.IndexableListView) findViewById(R.id.menu_right_list);
+		menu_right_list.addFooterView(header);
+		header.show(false, "");
 	}
 
+	com.woozzu.android.widget.IndexableListView menu_right_list;
 	private MenuRightAdaper adaper;
 
 	public void initData() {
 		final EditText menu_right_editext = (EditText) findViewById(R.id.menu_right_editext);
-		// ImageView menu_right_img_search = (ImageView)
-		// findViewById(R.id.menu_right_img_search);
-		com.woozzu.android.widget.IndexableListView menu_right_list = (com.woozzu.android.widget.IndexableListView) findViewById(R.id.menu_right_list);
 
 		menu_right_list.setOnTouchListener(onTouchListener);
 		if (adaper == null || adaper != null && adaper.getCount() == 0) {
-			// String where = String.format("%s = '0'  ", User.STATUS);
 
 			Cursor cursor = VasContact.queryContactSearch(getContext(), "");
 			if (adaper == null) {
@@ -66,12 +81,30 @@ public class MenuRightView extends LinearLayout {
 					public void openMoi(ContentValues contentValues) {
 
 					}
+
+					@Override
+					public void changeCursor(Cursor cursor) {
+						super.changeCursor(cursor);
+						if (cursor != null) {
+							if (cursor.getCount() == 0) {
+								header.show(true, getTextSearch());
+							} else {
+								header.show(false, "");
+							}
+						}
+					}
 				};
 				menu_right_list.setAdapter(adaper);
 				adaper.setTextSearch(menu_right_editext.getText().toString().trim());
 			} else {
 				adaper.changeCursor(cursor);
+				if (cursor != null && cursor.moveToNext()) {
+					header.show(false, "");
+				}
+
 			}
+		} else {
+			header.show(false, "");
 		}
 
 		menu_right_editext.addTextChangedListener(new TextWatcher() {
@@ -121,4 +154,9 @@ public class MenuRightView extends LinearLayout {
 			return false;
 		}
 	};
+	private Handler handler;
+
+	public void setHandler(Handler handler) {
+		this.handler = handler;
+	}
 }

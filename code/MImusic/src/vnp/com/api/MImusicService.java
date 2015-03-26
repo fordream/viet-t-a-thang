@@ -330,7 +330,6 @@ public class MImusicService extends Service {
 					contsCallBack.onError(message);
 				}
 			}
-
 		});
 	}
 
@@ -361,7 +360,7 @@ public class MImusicService extends Service {
 						} else if (API.API_R013.equals(api)) {
 							updateReGetToken(response);
 						} else if (API.API_R019.equals(api)) {
-							updateKiemTraDieuKienThueBao(response);
+							updateKiemTraDieuKienThueBao(bundle, response);
 						} else if (API.API_R026.equals(api)) {
 							saveRecomend(response);
 						} else if (API.API_R022.equals(api)) {
@@ -407,7 +406,38 @@ public class MImusicService extends Service {
 		});
 	}
 
-	private void updateKiemTraDieuKienThueBao(JSONObject response) {
+	private void updateKiemTraDieuKienThueBao(Bundle extras, JSONObject response) {
+
+		String number = extras.getString("msisdn");
+		String numberx = (number.startsWith("84") ? "" : "84") + number;
+
+		String user = accountStore.getUser();
+		String phone = numberx;
+		String name = "";
+		ContentValues contentValues = new ContentValues();
+		contentValues.put(VasContact.PHONE, phone);
+		contentValues.put(VasContact.NAME_CONTACT, name);
+		contentValues.put(VasContact.NAME_CONTACT_ENG, Conts.StringConnvert.convertVNToAlpha("z"+ System.currentTimeMillis()));
+
+		String contact_id = "";
+		if (avatarHashmap.containsKey(phone)) {
+			contact_id = avatarHashmap.get(phone);
+		}
+
+		if (Conts.isBlank(contact_id)) {
+			contact_id = "";
+		}
+
+		contentValues.put(VasContact.contact_id, contact_id);
+		Cursor cursor = VasContact.queryContactSearch(this, phone);
+		boolean needInser = cursor == null || (cursor != null && cursor.moveToNext());
+		cursor.close();
+
+		if (needInser) {
+			getContentResolver().update(VasContact.CONTENT_URI, contentValues, String.format("%s = '%s'", VasContact.PHONE, phone), null);
+		} else {
+			getContentResolver().insert(VasContact.CONTENT_URI, contentValues);
+		}
 	}
 
 	private void updateMauMoi(JSONObject response, String service_code) {
@@ -558,7 +588,7 @@ public class MImusicService extends Service {
 
 	private void updateDichVu(JSONObject response) {
 		// DichVu.updateDichVu(this, response);
-//		 LogUtils.e("servicex", response.toString());
+		// LogUtils.e("servicex", response.toString());
 		dichVuStore.updateDichvu(response);
 	}
 
@@ -741,35 +771,38 @@ public class MImusicService extends Service {
 	}
 
 	private void getStatusDichVu() {
-//		JSONArray array = dichVuStore.getDichvu();
-//		for (int i = 0; i < array.length(); i++) {
-//			try {
-//				JSONObject object = array.getJSONObject(i);
-//
-//				String serviceCode = Conts.getString(object, DichVuStore.service_code);
-//				final String serviceName = Conts.getString(object, DichVuStore.service_name);
-//				Bundle bundle = new Bundle();
-//				bundle.putString("msisdn", "841674537885");
-//				bundle.putString("service_code", serviceCode);
-//				execute(RequestMethod.POST, API.API_R019, bundle, new IContsCallBack() {
-//
-//					@Override
-//					public void onStart() {
-//
-//					}
-//
-//					@Override
-//					public void onError(String message) {
-//
-//					}
-//
-//					@Override
-//					public void onSuscess(JSONObject response) {
-//						LogUtils.e("AAAAAX", serviceName + " :" +response.toString());
-//					}
-//				});
-//			} catch (JSONException e) {
-//			}
-//		}
+		// JSONArray array = dichVuStore.getDichvu();
+		// for (int i = 0; i < array.length(); i++) {
+		// try {
+		// JSONObject object = array.getJSONObject(i);
+		//
+		// String serviceCode = Conts.getString(object,
+		// DichVuStore.service_code);
+		// final String serviceName = Conts.getString(object,
+		// DichVuStore.service_name);
+		// Bundle bundle = new Bundle();
+		// bundle.putString("msisdn", "841674537885");
+		// bundle.putString("service_code", serviceCode);
+		// execute(RequestMethod.POST, API.API_R019, bundle, new
+		// IContsCallBack() {
+		//
+		// @Override
+		// public void onStart() {
+		//
+		// }
+		//
+		// @Override
+		// public void onError(String message) {
+		//
+		// }
+		//
+		// @Override
+		// public void onSuscess(JSONObject response) {
+		// LogUtils.e("AAAAAX", serviceName + " :" +response.toString());
+		// }
+		// });
+		// } catch (JSONException e) {
+		// }
+		// }
 	}
 }

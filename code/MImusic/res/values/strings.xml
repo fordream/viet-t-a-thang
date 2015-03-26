@@ -209,5 +209,6 @@
     <string name="moiungdungthanhcong">Mời sử dụng ứng dụng thành công.</string>
     <string name="moithatbai">Mời thất bại.</string>
     <string name="needupdate" formatted="false">%s đã có phiên bản mới, bạn cần cập nhật lên phiên bản %s để tiếp tục sử dụng ứng dụng.</string>
+    <string name="somoi">(Số mới)</string>
 
 </resources>

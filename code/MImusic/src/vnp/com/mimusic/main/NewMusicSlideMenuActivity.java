@@ -2,7 +2,10 @@ package vnp.com.mimusic.main;
 
 import org.json.JSONObject;
 
+import vnp.com.api.API;
+import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.VasContact;
+import vnp.com.db.datastore.DichVuStore;
 import vnp.com.mimusic.VApplication;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.base.diablog.DangKyDialog;
@@ -23,6 +26,7 @@ import android.content.IntentFilter;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.DrawerLayout.DrawerListener;
 import android.view.Gravity;
@@ -34,6 +38,7 @@ import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabSpec;
 
+import com.gc.android.market.api.Main;
 import com.viettel.vtt.vdealer.R;
 import com.vnp.core.crash.CrashExceptionHandler;
 
@@ -151,9 +156,83 @@ public class NewMusicSlideMenuActivity extends TabActivity {
 
 	}
 
+	private Handler handler = new Handler() {
+		@Override
+		public void dispatchMessage(Message msg) {
+			super.dispatchMessage(msg);
+			closeMenu();
+			if (msg.obj != null) {
+				String number = msg.obj.toString().trim();
+				checkNumber(number);
+			}
+		}
+
+	};
+
+	private void checkNumber(String moidichvuchonhieunguoi_numberText) {
+		// add
+		while (moidichvuchonhieunguoi_numberText.startsWith("0")) {
+			moidichvuchonhieunguoi_numberText = moidichvuchonhieunguoi_numberText.substring(1, moidichvuchonhieunguoi_numberText.length());
+		}
+
+		Bundle bundle = new Bundle();
+		bundle.putString("msisdn", moidichvuchonhieunguoi_numberText);
+		bundle.putString("service_code", new DichVuStore(NewMusicSlideMenuActivity.this).getDichvuSericeCodeFirst());
+
+		final String sdt = moidichvuchonhieunguoi_numberText;
+		((VApplication) getApplication()).execute(RequestMethod.POST, API.API_R019, bundle, new IContsCallBack() {
+			private ProgressDialog progressDialog;
+
+			@Override
+			public void onSuscess(JSONObject response) {
+				progressDialog.dismiss();
+				String numberx = (sdt.startsWith("84") ? "" : "84") + sdt;
+
+				String _id = "";
+				Cursor cursor = VasContact.queryContactSearch(NewMusicSlideMenuActivity.this, numberx);
+				if (cursor.moveToNext()) {
+					_id = cursor.getString(cursor.getColumnIndex(VasContact._ID));
+				}
+				if (!Conts.isBlank(_id)) {
+					Intent intent = new Intent(NewMusicSlideMenuActivity.this, RootMenuActivity.class);
+					intent.putExtra("type", Conts.NHIEUDICHVU);
+					intent.putExtra(VasContact._ID, _id + "");
+					intent.putExtra("getPosition", cursor.getPosition());
+					startActivity(intent);
+					overridePendingTransitionStartActivity();
+				}
+
+			}
+
+			@Override
+			public void onStart() {
+				if (progressDialog == null) {
+					progressDialog = new VasProgessDialog(NewMusicSlideMenuActivity.this);
+					progressDialog.show();
+				}
+			}
+
+			@Override
+			public void onError(String message) {
+
+				if (!Conts.isBlank(message)) {
+					if (message.contains("Phone")) {
+						message = NewMusicSlideMenuActivity.this.getString(R.string.sdtkhongphaicuabiettel);
+					}
+					message = NewMusicSlideMenuActivity.this.getString(R.string.error_sdt_viettel);
+					Conts.showDialogThongbao(NewMusicSlideMenuActivity.this, message);
+				}
+
+				progressDialog.dismiss();
+			}
+
+		});
+	}
+
 	private void configMenuRight() {
 		// Menu Right
 		final MenuRightView mactivity_menu_right = (MenuRightView) findViewById(R.id.mactivity_menu_right);
+		mactivity_menu_right.setHandler(handler);
 		mactivity_menu_right.initData();
 		// add touch for
 		mactivity_menu_right.findViewById(R.id.menu_right_img_search).setOnTouchListener(new OnTouchAnimation());
@@ -374,6 +453,7 @@ public class NewMusicSlideMenuActivity extends TabActivity {
 	}
 
 	public void openMenuRight() {
+		((MenuRightView) findViewById(R.id.mactivity_menu_right)).initData();
 		drawerLayout.openDrawer(Gravity.END);
 	}
 
