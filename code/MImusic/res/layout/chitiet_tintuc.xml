@@ -18,6 +18,7 @@
         </vnp.com.mimusic.view.HeaderView>
 
         <ScrollView
+            android:id="@+id/mscrollview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/new_tintuc_lienquan_bg"
@@ -29,9 +30,9 @@
                 android:orientation="vertical" >
 
                 <LinearLayout
-                    android:background="@android:color/white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@android:color/white"
                     android:orientation="vertical"
                     android:padding="@dimen/dimen_20dp" >
 
@@ -58,31 +59,39 @@
                     <vnp.com.mimusic.view.textview.TextViewLightHeight
                         android:id="@+id/home_item_right_control_2_tv"
                         android:layout_width="match_parent"
-                        android:gravity="left"
                         android:layout_height="wrap_content"
+                        android:gravity="left"
                         android:textColor="#353f45"
-                        android:textSize="@dimen/dimen_14dp" />
+                        android:textSize="@dimen/dimen_14dp"
+                        android:visibility="gone" />
+
+                    <WebView
+                        android:id="@+id/web_tintuc_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="fill_parent"
+                        android:scrollbarThumbHorizontal="@drawable/tranfer"
+                        android:scrollbarThumbVertical="@drawable/tranfer"
+                        android:scrollbars="none" />
                 </LinearLayout>
 
                 <vnp.com.mimusic.view.textview.TextViewMedium
-                    
                     android:id="@+id/home_item_right_control_1_tv"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen_50dp"
                     android:background="@drawable/tinkhac_bg"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/dimen_12dp"
                     android:singleLine="true"
                     android:text="@string/tinlienquan"
-                    android:paddingLeft="@dimen/dimen_12dp"
                     android:textColor="#475055"
-                    android:gravity="center_vertical"
                     android:textSize="@dimen/dimen_15dp"
                     android:textStyle="bold" />
 
                 <View
-                    android:layout_marginLeft="@dimen/dimen_12dp"
-                    android:layout_marginRight="@dimen/dimen_12dp"
                     android:layout_width="match_parent"
                     android:layout_height="2px"
+                    android:layout_marginLeft="@dimen/dimen_12dp"
+                    android:layout_marginRight="@dimen/dimen_12dp"
                     android:background="#dfdfdf" />
 
                 <LinearLayout

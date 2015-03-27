@@ -18,9 +18,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.viettel.vtt.vdealer.R;
@@ -31,6 +36,8 @@ public class ChiTietTintucFragment extends BaseFragment implements OnItemClickLi
 		super.onActivityCreated(savedInstanceState);
 	}
 
+	private ScrollView mscrollview;
+	private WebView web_tintuc_content;
 	private LoadingView loadingView;
 	private LinearLayout chitiet_tintuc_tintuckhac_list;
 	private TextView chitiettintuc_item_tv_name, chitiettintuc_item_tv_date, home_item_right_control_2_tv;
@@ -39,6 +46,8 @@ public class ChiTietTintucFragment extends BaseFragment implements OnItemClickLi
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.chitiet_tintuc, null);
 
+		mscrollview = (ScrollView) view.findViewById(R.id.mscrollview);
+		web_tintuc_content = (WebView) view.findViewById(R.id.web_tintuc_content);
 		loadingView = (LoadingView) view.findViewById(R.id.loadingView1);
 		HeaderView chitiettintuc_headerview = (HeaderView) view.findViewById(R.id.chitiettintuc_headerview);
 		chitiettintuc_headerview.setTextHeader(R.string.chitiettintuc);
@@ -71,11 +80,39 @@ public class ChiTietTintucFragment extends BaseFragment implements OnItemClickLi
 			chitiettintuc_item_tv_name.setText(Conts.getString(cursor, TintucStore.title));
 			chitiettintuc_item_tv_date.setText(Conts.getString(cursor, TintucStore.public_time));
 			home_item_right_control_2_tv.setText(Html.fromHtml(Conts.getString(cursor, TintucStore.content)));
-			if (!Conts.isBlank(Conts.getString(cursor, TintucStore.title))) {
+
+			updateUi(Conts.getString(cursor, TintucStore.content));
+			if (!Conts.isBlank(Conts.getString(cursor, TintucStore.content))) {
 				needLoad = true;
 			}
 		}
 		return needLoad;
+	}
+
+	private void updateUi(String text) {
+		if (!Conts.isBlank(text)) {
+			//size='-1.0' 
+			String data = String.format("<font color='#353f45'size='-1.0'   style='line-height: 1.5;'>%s</font>", text);
+			//web_tintuc_content.getSettings().setDefaultFontSize((int)getActivity().getResources().getDimension(R.dimen.dimen_7dp));
+			web_tintuc_content.setWebViewClient(new WebViewClient() {
+				@Override
+				public void onPageFinished(WebView view, String url) {
+					super.onPageFinished(view, url);
+					//LinearLayout.LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+					//web_tintuc_content.setLayoutParams(params);
+				}
+			});
+
+			web_tintuc_content.loadDataWithBaseURL(null, data, "text/html", "UTF-8", null);
+			mscrollview.postDelayed(new Runnable() {
+
+				@Override
+				public void run() {
+					mscrollview.scrollTo(0, 0);
+				}
+			}, 10);
+
+		}
 	}
 
 	private void callApi(Bundle arguments) {

@@ -20,6 +20,11 @@ public class VApplication extends Application {
 		super.onCreate();
 		FontsUtils.getInstance().init(this);
 		ImageLoaderUtils.getInstance(this);
+
+		FontsUtils.setDefaultFont(this, "DEFAULT", "fonts/Roboto-Thin.ttf");
+		FontsUtils.setDefaultFont(this, "MONOSPACE", "fonts/Roboto-Thin.ttf");
+		FontsUtils.setDefaultFont(this, "SERIF", "fonts/Roboto-Thin.ttf");
+		FontsUtils.setDefaultFont(this, "SANS_SERIF", "fonts/Roboto-Thin.ttf");
 	}
 
 	/**
