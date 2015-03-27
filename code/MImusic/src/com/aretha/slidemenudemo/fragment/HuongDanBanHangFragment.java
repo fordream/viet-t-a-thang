@@ -108,7 +108,7 @@ public class HuongDanBanHangFragment extends BaseFragment implements OnItemClick
 
 	private void showTextHungDanBanHang(String textHuongDanBanHang) {
 		if (!Conts.isBlank(textHuongDanBanHang)) {
-			String data = String.format("<font color='#353f45' size='-0.5' style='line-height: 1.5;'>%s</font>",textHuongDanBanHang);
+			String data = String.format("<font color='#353f45' size='-1' style='line-height: 1.5;'>%s</font>",textHuongDanBanHang);
 			web_huongdanbanhang.loadDataWithBaseURL(null, data, "text/html", "UTF-8", null);
 		}
 	}
