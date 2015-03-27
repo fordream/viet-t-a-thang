@@ -17,6 +17,11 @@
             android:layout_height="wrap_content" >
         </vnp.com.mimusic.view.HeaderView>
 
+        <WebView
+            android:id="@+id/web_huongdanbanhang"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
         <vnp.com.mimusic.view.MusicListView
             android:id="@+id/quydinhbanhang_list"
             android:layout_width="match_parent"
@@ -29,7 +34,8 @@
     <vnp.com.mimusic.view.LoadingView
         android:id="@+id/loadingView1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:visibility="gone" >
     </vnp.com.mimusic.view.LoadingView>
 
 </RelativeLayout>

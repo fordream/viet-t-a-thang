@@ -89,4 +89,9 @@ public class MusicListView extends ListView {
 		setAdapter(new ArrayAdapter<String>(getContext(), 0, new String[] {}));
 	}
 
+	public void setTextNoDataX2(boolean needShow, Spanned fromHtml) {
+		headerListTextView.setTextNoDataX2(needShow, fromHtml);
+		setAdapter(new ArrayAdapter<String>(getContext(), 0, new String[] {}));
+	}
+
 }

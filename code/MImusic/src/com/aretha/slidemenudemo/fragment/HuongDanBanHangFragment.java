@@ -7,6 +7,7 @@ import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.datastore.HuongDanBanHangStore;
 import vnp.com.mimusic.util.Conts;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
+import vnp.com.mimusic.util.LogUtils;
 import vnp.com.mimusic.view.HeaderView;
 import vnp.com.mimusic.view.MusicListView;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
@@ -21,6 +23,7 @@ import com.viettel.vtt.vdealer.R;
 
 public class HuongDanBanHangFragment extends BaseFragment implements OnItemClickListener, View.OnClickListener {
 	private HuongDanBanHangStore huongDanBanHangStore;
+	private WebView web_huongdanbanhang;
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
@@ -40,6 +43,8 @@ public class HuongDanBanHangFragment extends BaseFragment implements OnItemClick
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.huongdanbanhang, null);
+
+		web_huongdanbanhang = (WebView) view.findViewById(R.id.web_huongdanbanhang);
 		loadingView = view.findViewById(R.id.loadingView1);
 		Conts.showView(loadingView, false);
 		dichvu_list = (MusicListView) view.findViewById(R.id.quydinhbanhang_list);
@@ -58,7 +63,8 @@ public class HuongDanBanHangFragment extends BaseFragment implements OnItemClick
 
 		textHuongDanBanHang = huongDanBanHangStore.getHdbh();
 		if (!Conts.isBlank(textHuongDanBanHang)) {
-			dichvu_list.setTextNoDataX(true, Html.fromHtml(textHuongDanBanHang));
+			dichvu_list.setTextNoDataX2(true, Html.fromHtml(textHuongDanBanHang));
+			showTextHungDanBanHang(textHuongDanBanHang);
 		}
 		Bundle bundle = new Bundle();
 		bundle.putString("type", 4 + "");
@@ -69,7 +75,8 @@ public class HuongDanBanHangFragment extends BaseFragment implements OnItemClick
 				if (getActivity() != null) {
 					textHuongDanBanHang = huongDanBanHangStore.getHdbh();
 					if (!Conts.isBlank(textHuongDanBanHang)) {
-						dichvu_list.setTextNoDataX(true, Html.fromHtml(textHuongDanBanHang));
+						dichvu_list.setTextNoDataX2(true, Html.fromHtml(textHuongDanBanHang));
+						showTextHungDanBanHang(textHuongDanBanHang);
 					}
 					Conts.showView(loadingView, false);
 				}
@@ -86,7 +93,8 @@ public class HuongDanBanHangFragment extends BaseFragment implements OnItemClick
 			public void onError(String message) {
 				textHuongDanBanHang = huongDanBanHangStore.getHdbh();
 				if (!Conts.isBlank(textHuongDanBanHang)) {
-					dichvu_list.setTextNoDataX(true, Html.fromHtml(textHuongDanBanHang));
+					dichvu_list.setTextNoDataX2(true, Html.fromHtml(textHuongDanBanHang));
+					showTextHungDanBanHang(textHuongDanBanHang);
 				} else {
 					dichvu_list.setTextNoData(true, message);
 				}
@@ -96,6 +104,12 @@ public class HuongDanBanHangFragment extends BaseFragment implements OnItemClick
 		});
 
 		return view;
+	}
+
+	private void showTextHungDanBanHang(String textHuongDanBanHang) {
+		if (!Conts.isBlank(textHuongDanBanHang)) {
+			web_huongdanbanhang.loadDataWithBaseURL(null, textHuongDanBanHang, "text/html", "UTF-8", null);
+		}
 	}
 
 	@Override

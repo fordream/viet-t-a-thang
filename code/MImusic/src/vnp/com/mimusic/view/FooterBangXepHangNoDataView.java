@@ -58,8 +58,14 @@ public class FooterBangXepHangNoDataView extends LinearLayout {
 	public void setTextNoDataX(boolean needShow, Spanned fromHtml) {
 		no_data_message.setText(fromHtml);
 		findViewById(R.id.chitietdichvu_no_feature_main).setVisibility(needShow ? VISIBLE : GONE);
-		if(needShow){
+		if (needShow) {
 			no_data_message.setGravity(Gravity.LEFT);
 		}
+	}
+
+	public void setTextNoDataX2(boolean needShow, Spanned fromHtml) {
+		no_data_message.setText(fromHtml);
+		findViewById(R.id.chitietdichvu_no_feature_main).setVisibility(needShow ? VISIBLE : GONE);
+		no_data_message.setGravity(Gravity.LEFT);
 	}
 }
