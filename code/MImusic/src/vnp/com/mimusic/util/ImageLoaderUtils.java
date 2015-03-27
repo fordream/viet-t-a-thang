@@ -63,6 +63,8 @@ public class ImageLoaderUtils {
 		} else {
 			imageLoader.displayImage(avatar, menu_right_item_img_icon, true);
 		}
+		
+		LogUtils.e("AVATARR", avatar);
 	}
 
 }
