@@ -58,9 +58,8 @@
                     <vnp.com.mimusic.view.textview.TextViewLightHeight
                         android:id="@+id/home_item_right_control_2_tv"
                         android:layout_width="match_parent"
+                        android:gravity="left"
                         android:layout_height="wrap_content"
-                        android:ellipsize="end"
-                        android:text="Việc thanh toán cước viễn thông sẽ trở nên dễ dàng, nhanh chóng, thuận tiện hơn với Cổng thanh toán dịch vụ viễn thông trực tuyến của Viettel.Việc thanh toán cước viễn thông sẽ trở nên dễ dàng, nhanh chóng, thuận tiện hơn với Cổng thanh toán dịch vụ viễn thông trực tuyến của Viettel.Việc thanh toán cước viễn thông sẽ trở nên dễ dàng, nhanh chóng, thuận tiện hơn với Cổng thanh toán dịch vụ viễn thông trực tuyến của Viettel.Việc thanh toán cước viễn thông sẽ trở nên dễ dàng, nhanh chóng, thuận tiện hơn với Cổng thanh toán dịch vụ viễn thông trực tuyến của Viettel."
                         android:textColor="#353f45"
                         android:textSize="@dimen/dimen_14dp" />
                 </LinearLayout>

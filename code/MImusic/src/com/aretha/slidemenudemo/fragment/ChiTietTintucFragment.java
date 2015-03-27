@@ -7,11 +7,13 @@ import vnp.com.api.API;
 import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.datastore.TintucStore;
 import vnp.com.mimusic.util.Conts;
+import vnp.com.mimusic.util.LogUtils;
 import vnp.com.mimusic.util.Conts.IContsCallBack;
 import vnp.com.mimusic.view.HeaderView;
 import vnp.com.mimusic.view.LoadingView;
 import vnp.com.mimusic.view.TinTucKhacItemView;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -64,18 +66,11 @@ public class ChiTietTintucFragment extends BaseFragment implements OnItemClickLi
 
 	private boolean updateTintucUI(String id) {
 		boolean needLoad = false;
-		// Cursor cursor = TinTuc.queryFromId(getActivity(), id);
 		if (getActivity() != null) {
 			JSONObject cursor = new TintucStore(getActivity()).getJsonById(id);
-			// if (cursor != null) {
-			// if (cursor.moveToNext()) {
 			chitiettintuc_item_tv_name.setText(Conts.getString(cursor, TintucStore.title));
 			chitiettintuc_item_tv_date.setText(Conts.getString(cursor, TintucStore.public_time));
-			home_item_right_control_2_tv.setText(Conts.getString(cursor, TintucStore.header));
-			// needLoad = true;
-			// }
-			// /cursor.close();
-			// }
+			home_item_right_control_2_tv.setText(Html.fromHtml(Conts.getString(cursor, TintucStore.content)));
 			if (!Conts.isBlank(Conts.getString(cursor, TintucStore.title))) {
 				needLoad = true;
 			}
@@ -105,7 +100,6 @@ public class ChiTietTintucFragment extends BaseFragment implements OnItemClickLi
 					Conts.showView(loadingView, false);
 					Conts.showDialogThongbao(getActivity(), message);
 				}
-
 			});
 
 		executeHttps(RequestMethod.GET, API.API_R029, arguments, new IContsCallBack() {

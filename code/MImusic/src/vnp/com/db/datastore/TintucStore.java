@@ -20,6 +20,7 @@ public class TintucStore extends BaseStore {
 	public static final String header = "header";
 	public static final String images = "images";
 	public static final String public_time = "public_time";
+	public static final String content = "content";
 	public static final String type = "type";
 
 	/**
