@@ -92,7 +92,7 @@ public class ChiTietTintucFragment extends BaseFragment implements OnItemClickLi
 	private void updateUi(String text) {
 		if (!Conts.isBlank(text)) {
 			//size='-1.0' 
-			String data = String.format("<font color='#353f45'size='-1.0'   style='line-height: 1.5;'>%s</font>", text);
+			String data = String.format("<font color='#353f45'size='-0.9'   style='line-height: 1.8;'>%s</font>", text);
 			//web_tintuc_content.getSettings().setDefaultFontSize((int)getActivity().getResources().getDimension(R.dimen.dimen_7dp));
 			web_tintuc_content.setWebViewClient(new WebViewClient() {
 				@Override
