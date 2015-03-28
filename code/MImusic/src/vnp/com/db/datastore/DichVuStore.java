@@ -8,6 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import vnp.com.mimusic.util.Conts;
+import vnp.com.mimusic.util.LogUtils;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -90,6 +91,11 @@ public class DichVuStore extends BaseStore {
 				serviceCodeList.add(serviceCode);
 				saveJsonById(getUser() + serviceCode, jsonObject);
 				register(Conts.getString(jsonObject, DichVuStore.service_code), Conts.getString(jsonObject, DichVuStore.service_status));
+			String text = String.format("%s - %s - %s"
+					, Conts.getString(jsonObject, DichVuStore.service_code)
+					, Conts.getString(jsonObject, DichVuStore.service_name)
+					, Conts.getString(jsonObject, DichVuStore.service_status));
+				LogUtils.e("DichVU", text);
 			}
 
 			save(getUser() + "serviceCodeList", serviceCodeList.toString());

@@ -587,8 +587,7 @@ public class MImusicService extends Service {
 	}
 
 	private void updateDichVu(JSONObject response) {
-		// DichVu.updateDichVu(this, response);
-		// LogUtils.e("servicex", response.toString());
+		
 		dichVuStore.updateDichvu(response);
 	}
 
