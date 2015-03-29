@@ -75,9 +75,7 @@ public class SplashScreenActivity extends Activity {
 			}
 
 			if (Conts.is3GConnected(SplashScreenActivity.this)) {
-
 				checkVersionOffApp();
-
 			} else {
 				if (!isFinishing()) {
 					showDialogNeed3g();
@@ -95,7 +93,9 @@ public class SplashScreenActivity extends Activity {
 				restClient.execute(RequestMethod.GET);
 				String response = restClient.getResponse();
 				try {
+
 					String softwareVersion = response.substring(response.indexOf("softwareVersion") + "softwareVersion".length());
+
 					softwareVersion = softwareVersion.substring(softwareVersion.indexOf("\">") + 2);
 					softwareVersion = softwareVersion.substring(0, softwareVersion.indexOf("<"));
 					return softwareVersion.trim();
@@ -108,6 +108,7 @@ public class SplashScreenActivity extends Activity {
 			@Override
 			protected void onPostExecute(String softwareVersion) {
 				super.onPostExecute(softwareVersion);
+				
 				if (!isFinishing()) {
 					if (Conts.isBlank(softwareVersion)) {
 						showDialogNeed3g();
@@ -117,12 +118,10 @@ public class SplashScreenActivity extends Activity {
 						if (Conts.isBlank(nowVersionName)) {
 							login3g();
 						} else {
-
 							if (Conts.isBlank(softwareVersion)) {
 								login3g();
 							} else if (Conts.isBlank(softwareVersion)) {
 								showDialogNeed3g();
-
 							} else if (Conts.convertToFloat(nowVersionName) >= Conts.convertToFloat(softwareVersion)) {
 								login3g();
 							} else {
