@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DBDatabaseHelper extends SQLiteOpenHelper {
 	private static final String DATABASE_NAME = "midb";
 
-	private static final int DATABASE_VERSION = 11;
+	private static final int DATABASE_VERSION = 12;
 
 	public DBDatabaseHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -17,24 +17,26 @@ public class DBDatabaseHelper extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(Account.CREATE_DB_TABLE());
 		db.execSQL(VasContact.CREATE_DB_TABLE());
-//		db.execSQL(TinTuc.CREATE_DB_TABLE());
-//		db.execSQL(DichVu.CREATE_DB_TABLE());
+		// db.execSQL(TinTuc.CREATE_DB_TABLE());
+		// db.execSQL(DichVu.CREATE_DB_TABLE());
 		db.execSQL(Recomment.CREATE_DB_TABLE());
 		db.execSQL(BangXepHang.CREATE_DB_TABLE());
 		db.execSQL(MauMoi.CREATE_DB_TABLE());
-//		db.execSQL(HuongDanBanHang.CREATE_DB_TABLE());
+		db.execSQL(VasContactUseService.CREATE_DB_TABLE());
+		// db.execSQL(HuongDanBanHang.CREATE_DB_TABLE());
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		db.execSQL("DROP TABLE IF EXISTS " + Account.USER_TABLE_NAME);
 		db.execSQL("DROP TABLE IF EXISTS " + VasContact.TABLE_NAME);
-//		db.execSQL("DROP TABLE IF EXISTS " + DichVu.DICHVU_TABLE_NAME);
+		// db.execSQL("DROP TABLE IF EXISTS " + DichVu.DICHVU_TABLE_NAME);
 		db.execSQL("DROP TABLE IF EXISTS " + Recomment.RECOMMENT_TABLE_NAME);
 		db.execSQL("DROP TABLE IF EXISTS " + BangXepHang.TABLE_NAME);
 		db.execSQL("DROP TABLE IF EXISTS " + MauMoi.TABLE_NAME);
-//		db.execSQL("DROP TABLE IF EXISTS " + TinTuc.TABLE_NAME);
-//		db.execSQL("DROP TABLE IF EXISTS " + HuongDanBanHang.TABLE_NAME);
+		db.execSQL("DROP TABLE IF EXISTS " + VasContactUseService.TABLE_NAME);
+		// db.execSQL("DROP TABLE IF EXISTS " + TinTuc.TABLE_NAME);
+		// db.execSQL("DROP TABLE IF EXISTS " + HuongDanBanHang.TABLE_NAME);
 		onCreate(db);
 	}
 }

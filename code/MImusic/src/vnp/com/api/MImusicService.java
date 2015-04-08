@@ -519,7 +519,6 @@ public class MImusicService extends Service {
 	}
 
 	private void updateDongBoXuong(JSONObject response) {
-
 		try {
 			String user = accountStore.getUser();
 			JSONArray array = response.getJSONArray("data");

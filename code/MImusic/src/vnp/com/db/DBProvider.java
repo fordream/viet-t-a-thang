@@ -29,9 +29,10 @@ public class DBProvider extends ContentProvider {
 			uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 			VasContact.addUriMatcher(uriMatcher, PROVIDER_NAME);
 			Account.addUriMatcher(uriMatcher, PROVIDER_NAME);
-//			HuongDanBanHang.addUriMatcher(uriMatcher, PROVIDER_NAME);
-//			TinTuc.addUriMatcher(uriMatcher, PROVIDER_NAME);
-//			DichVu.addUriMatcher(uriMatcher, PROVIDER_NAME);
+			VasContactUseService.addUriMatcher(uriMatcher, PROVIDER_NAME);
+			// HuongDanBanHang.addUriMatcher(uriMatcher, PROVIDER_NAME);
+			// TinTuc.addUriMatcher(uriMatcher, PROVIDER_NAME);
+			// DichVu.addUriMatcher(uriMatcher, PROVIDER_NAME);
 			Recomment.addUriMatcher(uriMatcher, PROVIDER_NAME);
 			BangXepHang.addUriMatcher(uriMatcher, PROVIDER_NAME);
 			MauMoi.addUriMatcher(uriMatcher, PROVIDER_NAME);
@@ -49,14 +50,14 @@ public class DBProvider extends ContentProvider {
 			_uri = Account.insert(match, db, _uri, values);
 		}
 		if (_uri == null) {
-//			_uri = DichVu.insert(match, db, _uri, values);
+			// _uri = DichVu.insert(match, db, _uri, values);
 		}
 
 		if (_uri == null) {
-//			_uri = TinTuc.insert(match, db, _uri, values);
+			_uri = VasContactUseService.insert(match, db, _uri, values);
 		}
 		if (_uri == null) {
-//			_uri = HuongDanBanHang.insert(match, db, _uri, values);
+			// _uri = HuongDanBanHang.insert(match, db, _uri, values);
 		}
 
 		if (_uri == null) {
@@ -88,15 +89,17 @@ public class DBProvider extends ContentProvider {
 		}
 		// cursor == null --> request othr
 		if (c == null) {
-//			c = DichVu.query(match, db, uri, projection, selection, selectionArgs, sortOrder);
+			c = VasContactUseService.query(match, db, uri, projection, selection, selectionArgs, sortOrder);
 		}
 
 		if (c == null) {
-//			c = HuongDanBanHang.query(match, db, uri, projection, selection, selectionArgs, sortOrder);
+			// c = HuongDanBanHang.query(match, db, uri, projection, selection,
+			// selectionArgs, sortOrder);
 		}
 		// cursor == null --> request othr
 		if (c == null) {
-//			c = TinTuc.query(match, db, uri, projection, selection, selectionArgs, sortOrder);
+			// c = TinTuc.query(match, db, uri, projection, selection,
+			// selectionArgs, sortOrder);
 		}
 		if (c == null) {
 			c = Recomment.query(match, db, uri, projection, selection, selectionArgs, sortOrder);
@@ -132,14 +135,15 @@ public class DBProvider extends ContentProvider {
 		}
 		// count == -2 delete other
 		if (count == -2) {
-//			count = DichVu.delete(match, db, uri, selection, selectionArgs);
+			count = VasContactUseService.delete(match, db, uri, selection, selectionArgs);
 		}
 		if (count == -2) {
-//			count = HuongDanBanHang.delete(match, db, uri, selection, selectionArgs);
+			// count = HuongDanBanHang.delete(match, db, uri, selection,
+			// selectionArgs);
 		}
 		// count == -2 delete other
 		if (count == -2) {
-//			count = TinTuc.delete(match, db, uri, selection, selectionArgs);
+			// count = TinTuc.delete(match, db, uri, selection, selectionArgs);
 		}
 		if (count == -2) {
 			count = Recomment.delete(match, db, uri, selection, selectionArgs);
@@ -174,13 +178,15 @@ public class DBProvider extends ContentProvider {
 		}
 		// count == -2 update other
 		if (count == -2) {
-//			count = DichVu.update(match, db, uri, values, selection, selectionArgs);
+			count = VasContactUseService.update(match, db, uri, values, selection, selectionArgs);
 		}
 		if (count == -2) {
-//			count = TinTuc.update(match, db, uri, values, selection, selectionArgs);
+			// count = TinTuc.update(match, db, uri, values, selection,
+			// selectionArgs);
 		}
 		if (count == -2) {
-//			count = HuongDanBanHang.update(match, db, uri, values, selection, selectionArgs);
+			// count = HuongDanBanHang.update(match, db, uri, values, selection,
+			// selectionArgs);
 		}
 		if (count == -2) {
 			count = Recomment.update(match, db, uri, values, selection, selectionArgs);
@@ -205,10 +211,10 @@ public class DBProvider extends ContentProvider {
 		Map<Integer, String> mMap = new HashMap<Integer, String>();
 		VasContact.getType(mMap);
 		Account.getType(mMap);
-//		DichVu.getType(mMap);
+		VasContactUseService.getType(mMap);
 		Recomment.getType(mMap);
-//		TinTuc.getType(mMap);
-//		HuongDanBanHang.getType(mMap);
+		// TinTuc.getType(mMap);
+		// HuongDanBanHang.getType(mMap);
 		BangXepHang.getType(mMap);
 		MauMoi.getType(mMap);
 		String type = mMap.get(uriMatcher.match(uri));
