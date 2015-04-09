@@ -357,6 +357,8 @@ public class MImusicService extends Service {
 							updateDichVu(response);
 						} else if (API.API_R012.equals(api)) {
 							updateDongBoXuong(response);
+							// update status register of phone
+							executeUpdateStatusOfPhone(null, null, null);
 						} else if (API.API_R013.equals(api)) {
 							updateReGetToken(response);
 						} else if (API.API_R019.equals(api)) {
@@ -406,6 +408,35 @@ public class MImusicService extends Service {
 		});
 	}
 
+	public void executeUpdateStatusOfPhone(final String serviceCode, String phone, final IContsCallBack iContsCallBack) {
+
+		if (Conts.isBlank(serviceCode)) {
+			// update all
+
+			JSONArray services = dichVuStore.getDichvu();
+			for (int i = 0; i < services.length(); i++) {
+				try {
+					JSONObject service = services.getJSONObject(i);
+					String mServiceCode = Conts.getString(service, DichVuStore.service_code);
+					if (!Conts.isBlank(mServiceCode)) {
+						executeUpdateStatusOfPhone(mServiceCode, phone, iContsCallBack);
+					}
+				} catch (Exception e) {
+				}
+			}
+
+		} else {
+			// check for one
+
+			LogUtils.e("serviceCode", serviceCode);
+
+			String mPhone = phone;
+			if (Conts.isBlank(mPhone)) {
+				VasContact.
+			}
+		}
+	}
+
 	private void updateKiemTraDieuKienThueBao(Bundle extras, JSONObject response) {
 
 		String number = extras.getString("msisdn");
@@ -417,7 +448,7 @@ public class MImusicService extends Service {
 		ContentValues contentValues = new ContentValues();
 		contentValues.put(VasContact.PHONE, phone);
 		contentValues.put(VasContact.NAME_CONTACT, name);
-		contentValues.put(VasContact.NAME_CONTACT_ENG, Conts.StringConnvert.convertVNToAlpha("z"+ System.currentTimeMillis()));
+		contentValues.put(VasContact.NAME_CONTACT_ENG, Conts.StringConnvert.convertVNToAlpha("z" + System.currentTimeMillis()));
 
 		String contact_id = "";
 		if (avatarHashmap.containsKey(phone)) {
@@ -586,7 +617,7 @@ public class MImusicService extends Service {
 	}
 
 	private void updateDichVu(JSONObject response) {
-		
+
 		dichVuStore.updateDichvu(response);
 	}
 
