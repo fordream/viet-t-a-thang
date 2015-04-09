@@ -149,4 +149,9 @@ public class VasContactUseService {
 
 		return hasContact;
 	}
+
+	public static Cursor queryListCanUse(Context context) {
+		String selection = String.format("%s = '%s'", service_status, "1");
+		return context.getContentResolver().query(CONTENT_URI, null, selection, null, null);
+	}
 }

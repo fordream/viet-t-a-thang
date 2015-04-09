@@ -5,6 +5,7 @@ import org.json.JSONObject;
 import vnp.com.api.API;
 import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.VasContact;
+import vnp.com.db.VasContactUseService;
 import vnp.com.db.datastore.DichVuStore;
 import vnp.com.mimusic.VApplication;
 import vnp.com.mimusic.activity.RootMenuActivity;
@@ -153,6 +154,12 @@ public class NewMusicSlideMenuActivity extends TabActivity {
 		configMenuLeft();
 
 		configMenuRight();
+		
+//		
+//		Cursor cursor = VasContactUseService.queryListCanUse(this);
+//		cursor.moveToNext();
+//		String text = String.format("%s %s", Conts.getStringCursor(cursor, VasContactUseService.phone),Conts.getStringCursor(cursor, VasContactUseService.service_status));
+//		Conts.showDialogDongYCallBack(this, text);
 
 	}
 
