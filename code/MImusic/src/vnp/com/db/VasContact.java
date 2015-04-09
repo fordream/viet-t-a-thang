@@ -235,4 +235,23 @@ public class VasContact {
 			context.getContentResolver().update(CONTENT_URI, values, null, null);
 		}
 	}
+
+	public static String getPhones(Context context) {
+		String phones = "";
+		Cursor cursor = context.getContentResolver().query(VasContact.CONTENT_URI, null, null, null, VasContact.NAME_CONTACT_ENG);
+
+		if (cursor != null) {
+
+			while (cursor.moveToNext()) {
+				if (Conts.isBlank(phones)) {
+					phones = Conts.getStringCursor(cursor, PHONE);
+				} else {
+					phones = phones + ";" + Conts.getStringCursor(cursor, PHONE);
+				}
+			}
+			cursor.close();
+		}
+
+		return phones;
+	}
 }

@@ -15,6 +15,7 @@ import vnp.com.db.BangXepHang;
 import vnp.com.db.MauMoi;
 import vnp.com.db.Recomment;
 import vnp.com.db.VasContact;
+import vnp.com.db.VasContactUseService;
 import vnp.com.db.datastore.AccountStore;
 import vnp.com.db.datastore.DichVuStore;
 import vnp.com.db.datastore.HuongDanBanHangStore;
@@ -386,6 +387,8 @@ public class MImusicService extends Service {
 							updateMoitheodichvu(bundle);
 						} else if (API.API_R016.equals(api)) {
 							updateMoitheodichvu(bundle);
+						} else if (API.API_R020.equals(api)) {
+							updateSearviceRegister(response, bundle);
 						}
 						return null;
 					}
@@ -408,11 +411,29 @@ public class MImusicService extends Service {
 		});
 	}
 
+	private void updateSearviceRegister(JSONObject response, Bundle bundle) {
+
+		try {
+			JSONArray json = response.getJSONArray("data");
+			for (int i = 0; i < json.length(); i++) {
+				JSONObject object = json.getJSONObject(i);
+				String msisdn = Conts.getString(object, "msisdn");
+				String satifaction = Conts.getString(object, "satifaction");
+				String serviceCode = bundle.getString("service_code");
+				if (!Conts.isBlank(msisdn) && !Conts.isBlank(satifaction) && !Conts.isBlank(serviceCode)) {
+					VasContactUseService.update(this, msisdn, serviceCode, satifaction);
+				}
+			}
+		} catch (Exception e) {
+		}
+	}
+
 	public void executeUpdateStatusOfPhone(final String serviceCode, String phone, final IContsCallBack iContsCallBack) {
+		if (Conts.isBlank(phone)) {
+			phone = VasContact.getPhones(this);
+		}
 
 		if (Conts.isBlank(serviceCode)) {
-			// update all
-
 			JSONArray services = dichVuStore.getDichvu();
 			for (int i = 0; i < services.length(); i++) {
 				try {
@@ -428,11 +449,11 @@ public class MImusicService extends Service {
 		} else {
 			// check for one
 
-			LogUtils.e("serviceCode", serviceCode);
-
-			String mPhone = phone;
-			if (Conts.isBlank(mPhone)) {
-				VasContact.
+			if (!Conts.isBlank(serviceCode) && !Conts.isBlank(phone)) {
+				Bundle bundle = new Bundle();
+				bundle.putString("msisdns", phone);
+				bundle.putString("service_code", serviceCode);
+				execute(RequestMethod.POST, API.API_R020, bundle, iContsCallBack);
 			}
 		}
 	}

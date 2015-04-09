@@ -4,6 +4,7 @@ import java.util.Map;
 
 import android.content.ContentUris;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -19,7 +20,7 @@ public class VasContactUseService {
 	public static final String phone = "phone";
 	public static final String service_code = "service_code";
 	/**
-	 * status = 1 use status = 0 not use
+	 * status = 1 co the moi = 0 khong the moi
 	 */
 	public static final String service_status = "service_status";
 
@@ -122,4 +123,30 @@ public class VasContactUseService {
 		return null;
 	}
 
+	public static void update(Context context, String msisdn, String serviceCode, String satifaction) {
+		String where = String.format("%s = '%s'", phone, msisdn);
+		ContentValues values = new ContentValues();
+		values.put(phone, msisdn);
+		values.put(service_code, serviceCode);
+		values.put(service_status, satifaction);
+		if (haveContact(msisdn, context)) {
+			context.getContentResolver().update(CONTENT_URI, values, where, null);
+		} else {
+			context.getContentResolver().insert(CONTENT_URI, values);
+		}
+	}
+
+	public static boolean haveContact(String xphone, Context context) {
+		boolean hasContact = false;
+		Cursor cursor = context.getContentResolver().query(CONTENT_URI, null, String.format("%s='%s'", phone, xphone), null, null);
+
+		if (cursor != null) {
+			if (cursor.moveToNext()) {
+				hasContact = true;
+			}
+			cursor.close();
+		}
+
+		return hasContact;
+	}
 }
