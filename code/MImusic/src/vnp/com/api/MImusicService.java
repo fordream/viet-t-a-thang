@@ -450,10 +450,12 @@ public class MImusicService extends Service {
 			// check for one
 
 			if (!Conts.isBlank(serviceCode) && !Conts.isBlank(phone)) {
-				Bundle bundle = new Bundle();
-				bundle.putString("msisdns", phone);
-				bundle.putString("service_code", serviceCode);
-				execute(RequestMethod.POST, API.API_R020, bundle, iContsCallBack);
+				// TODO
+				// Bundle bundle = new Bundle();
+				// bundle.putString("msisdns", phone);
+				// bundle.putString("service_code", serviceCode);
+				// execute(RequestMethod.POST, API.API_R020, bundle,
+				// iContsCallBack);
 			}
 		}
 	}
@@ -604,6 +606,10 @@ public class MImusicService extends Service {
 						count++;
 						// id,service_name,service_code,service_icon
 						String service_code = services.getJSONObject(in).getString("service_code");
+
+						// add service that user use
+						VasContactUseService.update(MImusicService.this, phone, service_code, "0");
+
 						if (Conts.isBlank(service_codes)) {
 							service_codes = service_code;
 							if (count <= 3)
@@ -627,8 +633,6 @@ public class MImusicService extends Service {
 				if (VasContact.haveContact(phone, this)) {
 					getContentResolver().update(VasContact.CONTENT_URI, contentValues, String.format("%s = '%s'", VasContact.PHONE, phone), null);
 				} else {
-					// contentValues.put(VasContact.NAME_CONTACT_SHORT,
-					// Conts.StringConnvert.convertVNToAlpha(name));
 					getContentResolver().insert(VasContact.CONTENT_URI, contentValues);
 				}
 			}

@@ -95,7 +95,6 @@ public class DichVuStore extends BaseStore {
 					, Conts.getString(jsonObject, DichVuStore.service_code)
 					, Conts.getString(jsonObject, DichVuStore.service_name)
 					, Conts.getString(jsonObject, DichVuStore.service_status));
-				LogUtils.e("DichVU", text);
 			}
 
 			save(getUser() + "serviceCodeList", serviceCodeList.toString());

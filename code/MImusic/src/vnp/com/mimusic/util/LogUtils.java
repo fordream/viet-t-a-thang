@@ -5,7 +5,7 @@ import android.util.Log;
 public class LogUtils {
 	public static boolean ENABLE = true;
 
-	public static void e(String tag, String messgae) {
+	public static void es(String tag, String messgae) {
 		if (ENABLE) {
 			Log.e(tag, "-------------------Start----------------------");
 			Log.e(tag, messgae + "");
@@ -13,7 +13,7 @@ public class LogUtils {
 		}
 	}
 
-	public static void e(String tag, Exception e) {
+	public static void es(String tag, Exception e) {
 		if (ENABLE) {
 			Log.e(tag, "-------------------Start----------------------");
 			Log.e(tag, "error", e);
