@@ -359,7 +359,7 @@ public class MImusicService extends Service {
 						} else if (API.API_R012.equals(api)) {
 							updateDongBoXuong(response);
 							// update status register of phone
-							executeUpdateStatusOfPhone(null, null, null);
+//							executeUpdateStatusOfPhone(null, null, null);
 						} else if (API.API_R013.equals(api)) {
 							updateReGetToken(response);
 						} else if (API.API_R019.equals(api)) {
