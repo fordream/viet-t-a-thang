@@ -124,21 +124,26 @@ public class VasContactUseService {
 	}
 
 	public static void update(Context context, String msisdn, String serviceCode, String satifaction) {
-		String where = String.format("%s = '%s'", phone, msisdn);
+		String userLogin = Account.getUser(context);
+
+		String where = String.format("%s = '%s' and %s = '%s' and %s = '%s'", phone, msisdn, service_code, serviceCode, user, userLogin);
 		ContentValues values = new ContentValues();
+		values.put(user, userLogin);
 		values.put(phone, msisdn);
 		values.put(service_code, serviceCode);
 		values.put(service_status, satifaction);
-		if (haveContact(msisdn, context)) {
+		if (haveContact(msisdn, serviceCode, context)) {
 			context.getContentResolver().update(CONTENT_URI, values, where, null);
 		} else {
 			context.getContentResolver().insert(CONTENT_URI, values);
 		}
 	}
 
-	public static boolean haveContact(String xphone, Context context) {
+	public static boolean haveContact(String xphone, String serviceCode, Context context) {
+		String userLogin = Account.getUser(context);
 		boolean hasContact = false;
-		Cursor cursor = context.getContentResolver().query(CONTENT_URI, null, String.format("%s='%s'", phone, xphone), null, null);
+		Cursor cursor = context.getContentResolver().query(CONTENT_URI, null, String.format("%s='%s' and %s = '%s' and %s = '%s'", phone, xphone, service_code, serviceCode, user, userLogin), null,
+				null);
 
 		if (cursor != null) {
 			if (cursor.moveToNext()) {
@@ -151,7 +156,8 @@ public class VasContactUseService {
 	}
 
 	public static Cursor queryListCanUse(Context context) {
-		String selection = String.format("%s = '%s'", service_status, "1");
+		String userLogin = Account.getUser(context);
+		String selection = String.format("%s = '%s'  and %s = '%s'", service_status, "1", user, userLogin);
 		return context.getContentResolver().query(CONTENT_URI, null, selection, null, null);
 	}
 }

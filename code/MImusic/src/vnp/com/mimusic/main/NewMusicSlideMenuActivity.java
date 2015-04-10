@@ -156,10 +156,10 @@ public class NewMusicSlideMenuActivity extends TabActivity {
 		configMenuRight();
 		
 //		
-		Cursor cursor = VasContactUseService.queryListCanUse(this);
-		cursor.moveToNext();
-		String text = String.format("%s %s", Conts.getStringCursor(cursor, VasContactUseService.phone),Conts.getStringCursor(cursor, VasContactUseService.service_status));
-		Conts.showDialogDongYCallBack(this, text);
+//		Cursor cursor = VasContactUseService.queryListCanUse(this);
+//		cursor.moveToNext();
+//		String text = String.format("%s %s", Conts.getStringCursor(cursor, VasContactUseService.phone),Conts.getStringCursor(cursor, VasContactUseService.service_status));
+//		Conts.showDialogDongYCallBack(this, text);
 
 	}
 
