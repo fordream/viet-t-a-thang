@@ -1,7 +1,14 @@
 package vnp.com.db;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import vnp.com.db.datastore.DichVuStore;
+import vnp.com.mimusic.util.Conts;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
@@ -10,6 +17,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
+import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 
 public class VasContactUseService {
@@ -159,5 +167,53 @@ public class VasContactUseService {
 		String userLogin = Account.getUser(context);
 		String selection = String.format("%s = '%s'  and %s = '%s'", service_status, "1", user, userLogin);
 		return context.getContentResolver().query(CONTENT_URI, null, selection, null, null);
+	}
+
+	public static List<String> queryListServiceCanUse(Context context, String sdt) {
+		List<String> list = new ArrayList<String>();
+		DichVuStore dichVuStore = new DichVuStore(context);
+		JSONArray array = dichVuStore.getDichvu();
+		for (int i = 0; i < array.length(); i++) {
+			try {
+				String serviceCode = Conts.getString(array.getJSONObject(i), DichVuStore.service_code);
+				if (!Conts.isBlank(serviceCode)) {
+					list.add(serviceCode);
+				}
+			} catch (JSONException e) {
+			}
+		}
+		String where = String.format("%s ='%s' and %s='%s'", phone, sdt, service_status, "0");
+
+		Cursor cursor = context.getContentResolver().query(CONTENT_URI, null, where, null, null);
+		if (cursor != null) {
+			while (cursor.moveToNext()) {
+				String serviceCode = Conts.getStringCursor(cursor, service_code);
+				if (!Conts.isBlank(serviceCode)) {
+					list.remove(serviceCode);
+				}
+			}
+			cursor.close();
+		}
+
+		return list;
+
+	}
+
+	public static String queryListPhoneNotUse(Context context, String serviceCode) {
+		String where = String.format("%s ='%s'  and %s='%s'", service_code, serviceCode, service_status, "0");
+		Cursor cursor = context.getContentResolver().query(CONTENT_URI, null, where, null, null);
+		String phones = "";
+		if (cursor != null) {
+			while (cursor.moveToNext()) {
+				String mPhones = Conts.getStringCursor(cursor, phone);
+				if (!Conts.isBlank(phones)) {
+					phones = phones + "," + mPhones;
+				} else {
+					phones = mPhones;
+				}
+			}
+			cursor.close();
+		}
+		return "(" + phones + ")";
 	}
 }

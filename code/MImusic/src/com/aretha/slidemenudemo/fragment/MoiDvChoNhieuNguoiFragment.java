@@ -5,6 +5,7 @@ import org.json.JSONObject;
 import vnp.com.api.API;
 import vnp.com.api.RestClient.RequestMethod;
 import vnp.com.db.VasContact;
+import vnp.com.db.VasContactUseService;
 import vnp.com.db.datastore.DichVuStore;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.adapter.MoiDvChoNhieuNguoiAdaper;
@@ -64,7 +65,6 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 				boardView.setVisibility(View.GONE);
 				mkeyboard(false);
 			} else {
-
 				Conts.showDialogDongYCallBack(getActivity(), String.format(getString(R.string.format_check_sdt), moidichvuchonhieunguoi_numberText));
 			}
 		}
@@ -121,10 +121,8 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				// if (!moidichvuchonhieunguoi_contact.isChecked()) {
 				adaper.setTextSearch(moidichvuchonhieunguoi_number.getText().toString().trim());
 				adaper.notifyDataSetChanged();
-				// }
 			}
 		});
 
@@ -156,8 +154,10 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 		nhieuNgoiHeaderView.setData(mcursor);
 
 		moi_list.setOnItemClickListener(this);
+		String phones = VasContactUseService.queryListPhoneNotUse(getActivity(), service_code);
+		String where = String.format("%s not in %s", VasContact.PHONE, phones);
+		Cursor cursor = getActivity().getContentResolver().query(VasContact.CONTENT_URI, null, where, null, VasContact.NAME_CONTACT_ENG);
 
-		Cursor cursor = getActivity().getContentResolver().query(VasContact.CONTENT_URI, null, null, null, VasContact.NAME_CONTACT_ENG);
 		adaper = new MoiDvChoNhieuNguoiAdaper(getActivity(), cursor, service_code) {
 
 			@Override
@@ -172,32 +172,6 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 					addItemView.setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
-
-							// Conts.removeViewScale(addItemView, new
-							// AnimationListener() {
-							//
-							// @Override
-							// public void onAnimationStart(Animation animation)
-							// {
-							//
-							// }
-							//
-							// @Override
-							// public void onAnimationRepeat(Animation
-							// animation) {
-							//
-							// }
-							//
-							// @Override
-							// public void onAnimationEnd(Animation animation) {
-							// moinhieudichvu_dialog_list_hor.removeView(addItemView);
-							// Conts.showAlpha(MoiDvChoNhieuNguoiFragment.this.getView().findViewById(R.id.moi),
-							// (moinhieudichvu_dialog_list_hor.getChildCount()
-							// == 0));
-							//
-							// }
-							// });
-
 							moinhieudichvu_dialog_list_hor.removeView(addItemView);
 							Conts.showAlpha(MoiDvChoNhieuNguoiFragment.this.getView().findViewById(R.id.moi), (moinhieudichvu_dialog_list_hor.getChildCount() == 0));
 
@@ -209,32 +183,6 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 					for (int i = 0; i < moinhieudichvu_dialog_list_hor.getChildCount(); i++) {
 						final MoiNhieuSDTAddItemView child = ((MoiNhieuSDTAddItemView) moinhieudichvu_dialog_list_hor.getChildAt(i));
 						if (child.getmId().equals(_id)) {
-
-							// Conts.removeViewScale(child, new
-							// AnimationListener() {
-							//
-							// @Override
-							// public void onAnimationStart(Animation animation)
-							// {
-							//
-							// }
-							//
-							// @Override
-							// public void onAnimationRepeat(Animation
-							// animation) {
-							//
-							// }
-							//
-							// @Override
-							// public void onAnimationEnd(Animation animation) {
-							// moinhieudichvu_dialog_list_hor.removeView(child);
-							// Conts.showAlpha(MoiDvChoNhieuNguoiFragment.this.getView().findViewById(R.id.moi),
-							// (moinhieudichvu_dialog_list_hor.getChildCount()
-							// == 0));
-							//
-							// }
-							// });
-
 							moinhieudichvu_dialog_list_hor.removeView(child);
 							Conts.showAlpha(MoiDvChoNhieuNguoiFragment.this.getView().findViewById(R.id.moi), (moinhieudichvu_dialog_list_hor.getChildCount() == 0));
 
@@ -256,31 +204,6 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 					addItemView.setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
-
-							// Conts.removeViewScale(addItemView, new
-							// AnimationListener() {
-							//
-							// @Override
-							// public void onAnimationStart(Animation animation)
-							// {
-							//
-							// }
-							//
-							// @Override
-							// public void onAnimationRepeat(Animation
-							// animation) {
-							//
-							// }
-							//
-							// @Override
-							// public void onAnimationEnd(Animation animation) {
-							// moinhieudichvu_dialog_list_hor.removeView(addItemView);
-							// Conts.showAlpha(MoiDvChoNhieuNguoiFragment.this.getView().findViewById(R.id.moi),
-							// (moinhieudichvu_dialog_list_hor.getChildCount()
-							// == 0));
-							// }
-							// });
-
 							moinhieudichvu_dialog_list_hor.removeView(addItemView);
 							Conts.showAlpha(MoiDvChoNhieuNguoiFragment.this.getView().findViewById(R.id.moi), (moinhieudichvu_dialog_list_hor.getChildCount() == 0));
 
@@ -316,7 +239,6 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 			@Override
 			public void onSuscess(JSONObject response) {
 				progressDialog.dismiss();
-				// Conts.showDialogThongbao(getActivity(), response.toString());
 				adaper.addSdt((sdt.startsWith("84") ? "" : "84") + sdt, getActivity());
 			}
 
@@ -383,19 +305,7 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 			mkeyboard.setVisibility(View.VISIBLE);
 			mkeyboard.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.abc_alpha_in));
 		} else {
-			// Animation animation = AnimationUtils.loadAnimation(getActivity(),
-			// R.anim.abc_alpha_out);
-			// animation.setAnimationListener(new VTAnimationListener() {
-			// @Override
-			// public void onAnimationEnd(Animation animation) {
-			// super.onAnimationEnd(animation);
-			// //mkeyboard.setVisibility(View.GONE);
-			// }
-			// });
-			// mkeyboard.startAnimation(animation);
-			//
 			mkeyboard.setVisibility(View.GONE);
-
 		}
 	}
 

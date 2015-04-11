@@ -1,6 +1,13 @@
 package com.aretha.slidemenudemo.fragment;
 
+import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import vnp.com.db.VasContact;
+import vnp.com.db.VasContactUseService;
+import vnp.com.db.datastore.DichVuStore;
 import vnp.com.mimusic.activity.RootMenuActivity;
 import vnp.com.mimusic.adapter.MoiNhieuDichVuAdapter;
 import vnp.com.mimusic.base.diablog.DangKyDialog;
@@ -117,7 +124,22 @@ public class MoiNhieuDichVuFragment extends BaseFragment implements android.view
 				adapter.notifyDataSetChanged();
 			}
 		});
-		maumoi_list.setAdapter(adapter = new MoiNhieuDichVuAdapter(getActivity(), dichVuStore.getDichvu()) {
+
+		// sdt;
+		List<String> listServiceCode = VasContactUseService.queryListServiceCanUse(getActivity(), sdt);
+
+		JSONArray array = new JSONArray();
+		JSONArray servives = dichVuStore.getDichvu();
+		for (int i = 0; i < servives.length(); i++) {
+			try {
+				String serviceCode = Conts.getString(servives.getJSONObject(i), DichVuStore.service_code);
+				if (listServiceCode.contains(serviceCode)) {
+					array.put(servives.getJSONObject(i));
+				}
+			} catch (JSONException e) {
+			}
+		}
+		maumoi_list.setAdapter(adapter = new MoiNhieuDichVuAdapter(getActivity(), array) {
 
 			@Override
 			public void addOrRemove(final String _id, boolean isAdd, String icon) {
@@ -133,29 +155,9 @@ public class MoiNhieuDichVuFragment extends BaseFragment implements android.view
 						@Override
 						public void onClick(View v) {
 
-//							Conts.removeViewScale(addItemView, new AnimationListener() {
-//
-//								@Override
-//								public void onAnimationStart(Animation animation) {
-//
-//								}
-//
-//								@Override
-//								public void onAnimationRepeat(Animation animation) {
-//
-//								}
-//
-//								@Override
-//								public void onAnimationEnd(Animation animation) {
-//									moinhieudichvu_dialog_list_hor.removeView(addItemView);
-//									updateMoi();
-//								}
-//							});
-							
-							
 							adapter.remove(_id);
 							adapter.notifyDataSetChanged();
-							
+
 							moinhieudichvu_dialog_list_hor.removeView(addItemView);
 							updateMoi();
 						}
@@ -165,25 +167,6 @@ public class MoiNhieuDichVuFragment extends BaseFragment implements android.view
 						final MoiNhieuDichVuAddItemView child = ((MoiNhieuDichVuAddItemView) moinhieudichvu_dialog_list_hor.getChildAt(i));
 						if (child.getmId().equals(_id)) {
 
-//							Conts.removeViewScale(child, new AnimationListener() {
-//								@Override
-//								public void onAnimationStart(Animation animation) {
-//
-//								}
-//
-//								@Override
-//								public void onAnimationRepeat(Animation animation) {
-//
-//								}
-//
-//								@Override
-//								public void onAnimationEnd(Animation animation) {
-//									moinhieudichvu_dialog_list_hor.removeView(child);
-//									updateMoi();
-//								}
-//							});
-							
-							
 							moinhieudichvu_dialog_list_hor.removeView(child);
 							updateMoi();
 							break;
@@ -210,7 +193,9 @@ public class MoiNhieuDichVuFragment extends BaseFragment implements android.view
 
 			ContentValues values = new ContentValues();
 
-//			String content = String.format(getString(R.string.ban_co_muon_moi_sdt_nay), Conts.getSDT(sdt));
+			// String content =
+			// String.format(getString(R.string.ban_co_muon_moi_sdt_nay),
+			// Conts.getSDT(sdt));
 			String content = getString(R.string.ban_co_muon_moi_sdt_nays);
 			values.put("name", getString(R.string.app_name));
 			values.put("content", content);

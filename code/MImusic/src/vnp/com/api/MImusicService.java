@@ -359,7 +359,7 @@ public class MImusicService extends Service {
 						} else if (API.API_R012.equals(api)) {
 							updateDongBoXuong(response);
 							// update status register of phone
-//							executeUpdateStatusOfPhone(null, null, null);
+							// executeUpdateStatusOfPhone(null, null, null);
 						} else if (API.API_R013.equals(api)) {
 							updateReGetToken(response);
 						} else if (API.API_R019.equals(api)) {
@@ -687,6 +687,7 @@ public class MImusicService extends Service {
 	// private JSONObject recommend;
 
 	public void saveRecomend(JSONObject response) {
+
 		if (response != null && response.has("data")) {
 			try {
 				String serviceCodes = "";
@@ -711,6 +712,7 @@ public class MImusicService extends Service {
 					}
 					JSONArray contacts = jsonObject.getJSONArray("contacts");
 					for (int index = 0; index < contacts.length(); index++) {
+
 						final JSONObject cotnact = contacts.getJSONObject(index);
 						String phone = Conts.getString(cotnact, Recomment.phone);
 						String name = Conts.getString(cotnact, Recomment.name);
@@ -732,6 +734,13 @@ public class MImusicService extends Service {
 						}
 
 						updateDongBoXuongRecomment(phone, name);
+						// service_code
+						// phone
+						if (!Conts.isBlank(phone) && !Conts.isBlank(service_code)) {
+							// LogUtils.es("RECOMMENT", service_code + " " +
+							// phone);
+							VasContactUseService.update(MImusicService.this, phone, service_code, "1");
+						}
 					}
 				}
 
