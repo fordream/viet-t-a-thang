@@ -39,7 +39,8 @@ import android.widget.TextView.OnEditorActionListener;
 
 import com.viettel.vtt.vdealer.R;
 
-public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemClickListener, View.OnClickListener, OnTouchListener {
+public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements
+		OnItemClickListener, View.OnClickListener, OnTouchListener {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
@@ -59,69 +60,88 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 
 			Conts.hiddenKeyBoard(getActivity());
 			String moidichvuchonhieunguoi_numberText = boardView.getString();
-			if (Conts.isVietTelNUmber(moidichvuchonhieunguoi_numberText, getActivity())) {
+			if (Conts.isVietTelNUmber(moidichvuchonhieunguoi_numberText,
+					getActivity())) {
 				addSodt(moidichvuchonhieunguoi_numberText);
 				boardView.clear();
 				boardView.setVisibility(View.GONE);
 				mkeyboard(false);
 			} else {
-				Conts.showDialogDongYCallBack(getActivity(), String.format(getString(R.string.format_check_sdt), moidichvuchonhieunguoi_numberText));
+				Conts.showDialogDongYCallBack(getActivity(), String.format(
+						getString(R.string.format_check_sdt),
+						moidichvuchonhieunguoi_numberText));
 			}
 		}
 	};
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.moidichvuchonhieunguoi, null);
 		nhieuNgoiHeaderView = new MoiNhieuNgoiHeaderView(getActivity());
 		view.findViewById(R.id.LinearLayout01).setOnClickListener(null);
 		mkeyboard = view.findViewById(R.id.mkeyboard);
 		mkeyboard.setOnClickListener(this);
 		boardView = Conts.getView(view, R.id.keyBoardView1);
-		boardView.getKeEditText().setOnEditorActionListener(new OnEditorActionListener() {
+		boardView.getKeEditText().setOnEditorActionListener(
+				new OnEditorActionListener() {
 
-			@Override
-			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-				if (actionId == KeyEvent.KEYCODE_ENDCALL || event == null || KeyEvent.KEYCODE_CALL == actionId) {
-					Conts.hiddenKeyBoard(getActivity());
-					moidichvuchonhieunguoi_add_plusOnCLick.onClick(null);
-				}
-				return false;
-			}
-		});
+					@Override
+					public boolean onEditorAction(TextView v, int actionId,
+							KeyEvent event) {
+						if (actionId == KeyEvent.KEYCODE_ENDCALL
+								|| event == null
+								|| KeyEvent.KEYCODE_CALL == actionId) {
+							Conts.hiddenKeyBoard(getActivity());
+							moidichvuchonhieunguoi_add_plusOnCLick
+									.onClick(null);
+						}
+						return false;
+					}
+				});
 		boardView.addActionOnClickAdd(moidichvuchonhieunguoi_add_plusOnCLick);
-		moidichvuchonhieunguoi_contact = view.findViewById(R.id.moidichvuchonhieunguoi_contact);
+		moidichvuchonhieunguoi_contact = view
+				.findViewById(R.id.moidichvuchonhieunguoi_contact);
 		moidichvuchonhieunguoi_contact.setOnClickListener(this);
 
-		moinhieudichvu_dialog_list_hor = (LinearLayout) view.findViewById(R.id.moinhieudichvu_dialog_list_hor);
-		moidichvuchonhieunguoi_number = (EditText) view.findViewById(R.id.search);
+		moinhieudichvu_dialog_list_hor = (LinearLayout) view
+				.findViewById(R.id.moinhieudichvu_dialog_list_hor);
+		moidichvuchonhieunguoi_number = (EditText) view
+				.findViewById(R.id.search);
 
 		// moidichvuchonhieunguoi_number ime
-		moidichvuchonhieunguoi_number.setOnEditorActionListener(new OnEditorActionListener() {
+		moidichvuchonhieunguoi_number
+				.setOnEditorActionListener(new OnEditorActionListener() {
 
-			@Override
-			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-				if (actionId == KeyEvent.KEYCODE_ENDCALL || event == null || KeyEvent.KEYCODE_CALL == actionId) {
-					Conts.hiddenKeyBoard(getActivity());
-				}
-				return false;
-			}
-		});
+					@Override
+					public boolean onEditorAction(TextView v, int actionId,
+							KeyEvent event) {
+						if (actionId == KeyEvent.KEYCODE_ENDCALL
+								|| event == null
+								|| KeyEvent.KEYCODE_CALL == actionId) {
+							Conts.hiddenKeyBoard(getActivity());
+						}
+						return false;
+					}
+				});
 		moidichvuchonhieunguoi_number.addTextChangedListener(new TextWatcher() {
 
 			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
 
 			}
 
 			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
 
 			}
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				adaper.setTextSearch(moidichvuchonhieunguoi_number.getText().toString().trim());
+				adaper.setTextSearch(moidichvuchonhieunguoi_number.getText()
+						.toString().trim());
 				adaper.notifyDataSetChanged();
 			}
 		});
@@ -136,17 +156,22 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 		 * show data
 		 */
 
-		String mService_code = getArguments().getString(DichVuStore.service_code);
+		String mService_code = getArguments().getString(
+				DichVuStore.service_code);
 
-		final JSONObject mcursor = dichVuStore.getDvByServiceCode(mService_code);
+		final JSONObject mcursor = dichVuStore
+				.getDvByServiceCode(mService_code);
 		service_code = Conts.getString(mcursor, DichVuStore.service_code);
-		Conts.setTextView(view.findViewById(R.id.name), mcursor, DichVuStore.service_name);
+		Conts.setTextView(view.findViewById(R.id.name), mcursor,
+				DichVuStore.service_name);
 
 		service_name = Conts.getString(mcursor, DichVuStore.service_name);
-		Conts.setTextView(view.findViewById(R.id.gia), mcursor, DichVuStore.service_price);
+		Conts.setTextView(view.findViewById(R.id.gia), mcursor,
+				DichVuStore.service_price);
 		ImageView home_item_img_icon = (ImageView) view.findViewById(R.id.icon);
 
-		String service_icon = Conts.getString(mcursor, DichVuStore.service_icon);
+		String service_icon = Conts
+				.getString(mcursor, DichVuStore.service_icon);
 		// ImageLoaderUtils.getInstance(getActivity()).displayImage(service_icon,
 		// home_item_img_icon, R.drawable.no_image);
 
@@ -154,37 +179,55 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 		nhieuNgoiHeaderView.setData(mcursor);
 
 		moi_list.setOnItemClickListener(this);
-		String phones = VasContactUseService.queryListPhoneNotUse(getActivity(), service_code);
-		String where = String.format("%s not in %s", VasContact.PHONE, phones);
-		Cursor cursor = getActivity().getContentResolver().query(VasContact.CONTENT_URI, null, where, null, VasContact.NAME_CONTACT_ENG);
+		String phones = VasContactUseService.queryListPhoneCanUse(
+				getActivity(), service_code);
+		String where = String.format("%s  in %s", VasContact.PHONE, phones);
+		Cursor cursor = getActivity().getContentResolver().query(
+				VasContact.CONTENT_URI, null, where, null,
+				VasContact.NAME_CONTACT_ENG);
 
-		adaper = new MoiDvChoNhieuNguoiAdaper(getActivity(), cursor, service_code) {
+		adaper = new MoiDvChoNhieuNguoiAdaper(getActivity(), cursor,
+				service_code) {
 
 			@Override
-			public void addOrRemove(final String _id, boolean isAdd, int postition) {
+			public void addOrRemove(final String _id, boolean isAdd,
+					int postition) {
 				if (isAdd) {
-					final MoiNhieuSDTAddItemView addItemView = new MoiNhieuSDTAddItemView(getActivity());
+					final MoiNhieuSDTAddItemView addItemView = new MoiNhieuSDTAddItemView(
+							getActivity());
 					addItemView.setMId(_id, postition);
 
 					moinhieudichvu_dialog_list_hor.addView(addItemView);
-					Conts.showAlpha(MoiDvChoNhieuNguoiFragment.this.getView().findViewById(R.id.moi), (moinhieudichvu_dialog_list_hor.getChildCount() == 0));
+					Conts.showAlpha(
+							MoiDvChoNhieuNguoiFragment.this.getView()
+									.findViewById(R.id.moi),
+							(moinhieudichvu_dialog_list_hor.getChildCount() == 0));
 					Conts.addViewScale(addItemView);
 					addItemView.setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
-							moinhieudichvu_dialog_list_hor.removeView(addItemView);
-							Conts.showAlpha(MoiDvChoNhieuNguoiFragment.this.getView().findViewById(R.id.moi), (moinhieudichvu_dialog_list_hor.getChildCount() == 0));
+							moinhieudichvu_dialog_list_hor
+									.removeView(addItemView);
+							Conts.showAlpha(MoiDvChoNhieuNguoiFragment.this
+									.getView().findViewById(R.id.moi),
+									(moinhieudichvu_dialog_list_hor
+											.getChildCount() == 0));
 
 							adaper.remove(_id);
 							adaper.notifyDataSetChanged();
 						}
 					});
 				} else {
-					for (int i = 0; i < moinhieudichvu_dialog_list_hor.getChildCount(); i++) {
-						final MoiNhieuSDTAddItemView child = ((MoiNhieuSDTAddItemView) moinhieudichvu_dialog_list_hor.getChildAt(i));
+					for (int i = 0; i < moinhieudichvu_dialog_list_hor
+							.getChildCount(); i++) {
+						final MoiNhieuSDTAddItemView child = ((MoiNhieuSDTAddItemView) moinhieudichvu_dialog_list_hor
+								.getChildAt(i));
 						if (child.getmId().equals(_id)) {
 							moinhieudichvu_dialog_list_hor.removeView(child);
-							Conts.showAlpha(MoiDvChoNhieuNguoiFragment.this.getView().findViewById(R.id.moi), (moinhieudichvu_dialog_list_hor.getChildCount() == 0));
+							Conts.showAlpha(MoiDvChoNhieuNguoiFragment.this
+									.getView().findViewById(R.id.moi),
+									(moinhieudichvu_dialog_list_hor
+											.getChildCount() == 0));
 
 							break;
 						}
@@ -193,19 +236,28 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 			}
 
 			@Override
-			public void addOrRemoveSdt(boolean isAdd, final String sdt, int position) {
+			public void addOrRemoveSdt(boolean isAdd, final String sdt,
+					int position) {
 				if (isAdd) {
-					final MoiNhieuSDTAddItemView addItemView = new MoiNhieuSDTAddItemView(getActivity());
+					final MoiNhieuSDTAddItemView addItemView = new MoiNhieuSDTAddItemView(
+							getActivity());
 					addItemView.setMId(sdt, position);
 
 					moinhieudichvu_dialog_list_hor.addView(addItemView);
-					Conts.showAlpha(MoiDvChoNhieuNguoiFragment.this.getView().findViewById(R.id.moi), (moinhieudichvu_dialog_list_hor.getChildCount() == 0));
+					Conts.showAlpha(
+							MoiDvChoNhieuNguoiFragment.this.getView()
+									.findViewById(R.id.moi),
+							(moinhieudichvu_dialog_list_hor.getChildCount() == 0));
 
 					addItemView.setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
-							moinhieudichvu_dialog_list_hor.removeView(addItemView);
-							Conts.showAlpha(MoiDvChoNhieuNguoiFragment.this.getView().findViewById(R.id.moi), (moinhieudichvu_dialog_list_hor.getChildCount() == 0));
+							moinhieudichvu_dialog_list_hor
+									.removeView(addItemView);
+							Conts.showAlpha(MoiDvChoNhieuNguoiFragment.this
+									.getView().findViewById(R.id.moi),
+									(moinhieudichvu_dialog_list_hor
+											.getChildCount() == 0));
 
 							adaper.remove(sdt);
 							adaper.notifyDataSetChanged();
@@ -217,7 +269,8 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 
 		moi_list.setAdapter(adaper);
 
-		Conts.showAlpha(view.findViewById(R.id.moi), (moinhieudichvu_dialog_list_hor.getChildCount() == 0));
+		Conts.showAlpha(view.findViewById(R.id.moi),
+				(moinhieudichvu_dialog_list_hor.getChildCount() == 0));
 		return view;
 	}
 
@@ -225,7 +278,8 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 
 		// add
 		while (moidichvuchonhieunguoi_numberText.startsWith("0")) {
-			moidichvuchonhieunguoi_numberText = moidichvuchonhieunguoi_numberText.substring(1, moidichvuchonhieunguoi_numberText.length());
+			moidichvuchonhieunguoi_numberText = moidichvuchonhieunguoi_numberText
+					.substring(1, moidichvuchonhieunguoi_numberText.length());
 		}
 
 		Bundle bundle = new Bundle();
@@ -239,7 +293,8 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 			@Override
 			public void onSuscess(JSONObject response) {
 				progressDialog.dismiss();
-				adaper.addSdt((sdt.startsWith("84") ? "" : "84") + sdt, getActivity());
+				adaper.addSdt((sdt.startsWith("84") ? "" : "84") + sdt,
+						getActivity());
 			}
 
 			@Override
@@ -255,9 +310,11 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 
 				if (!Conts.isBlank(message)) {
 					if (message.contains("Phone")) {
-						message = getActivity().getString(R.string.sdtkhongphaicuabiettel);
+						message = getActivity().getString(
+								R.string.sdtkhongphaicuabiettel);
 					}
-					message = getActivity().getString(R.string.error_sdt_viettel);
+					message = getActivity().getString(
+							R.string.error_sdt_viettel);
 					Conts.showDialogThongbao(getActivity(), message);
 				}
 
@@ -303,7 +360,8 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 	public void mkeyboard(boolean show) {
 		if (show) {
 			mkeyboard.setVisibility(View.VISIBLE);
-			mkeyboard.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.abc_alpha_in));
+			mkeyboard.startAnimation(AnimationUtils.loadAnimation(
+					getActivity(), R.anim.abc_alpha_in));
 		} else {
 			mkeyboard.setVisibility(View.GONE);
 		}
@@ -313,7 +371,8 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 
 		int count = adaper.getListAdd().size() + adaper.getListSeList().size();
 		if (count == 0) {
-			Conts.showDialogDongYCallBack(getActivity(), getString(R.string.validateaddnguoi));
+			Conts.showDialogDongYCallBack(getActivity(),
+					getString(R.string.validateaddnguoi));
 			return;
 		}
 
@@ -334,7 +393,8 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 
 					if (!Conts.isBlank(user)) {
 						if (customers.endsWith("\"")) {
-							customers = String.format("%s,\"%s\"", customers, user);
+							customers = String.format("%s,\"%s\"", customers,
+									user);
 						} else {
 							customers = String.format("\"%s\"", user);
 						}
@@ -344,27 +404,32 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 				for (String user : adaper.getListAdd()) {
 					if (!Conts.isBlank(user)) {
 						if (customers.endsWith("\"")) {
-							customers = String.format("%s,\"%s\"", customers, user);
+							customers = String.format("%s,\"%s\"", customers,
+									user);
 						} else {
 							customers = String.format("\"%s\"", user);
 						}
 					}
 				}
 				customers = String.format("{%s}", customers);
-				(((RootMenuActivity) getActivity())).gotoLoiMoi(serviceCode, customers);
+				(((RootMenuActivity) getActivity())).gotoLoiMoi(serviceCode,
+						customers);
 			};
 		}.show();
 
 	}
 
 	@Override
-	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+	public void onItemClick(AdapterView<?> parent, View view, int position,
+			long id) {
 	}
 
 	private class MoiNhieuSDTAddItemView extends LinearLayout {
 		public MoiNhieuSDTAddItemView(Context context) {
 			super(context);
-			((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.moinhieusdt_add_item, this);
+			((LayoutInflater) getContext().getSystemService(
+					Context.LAYOUT_INFLATER_SERVICE)).inflate(
+					R.layout.moinhieusdt_add_item, this);
 		}
 
 		private String mId = "";
@@ -376,15 +441,25 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 		public void setMId(String _id, int position) {
 			mId = _id;
 
-			Cursor cursor = getActivity().getContentResolver().query(VasContact.CONTENT_URI, null, String.format("%s =='%s'", VasContact._ID, mId), null, null);
+			Cursor cursor = getActivity().getContentResolver()
+					.query(VasContact.CONTENT_URI, null,
+							String.format("%s =='%s'", VasContact._ID, mId),
+							null, null);
 
 			if (cursor != null && cursor.moveToNext()) {
-				((TextView) findViewById(R.id.moinhieudichvu_item_tv_name)).setText(VasContact.getName(cursor));
-				String avatar = cursor.getString(cursor.getColumnIndex(VasContact.AVATAR));
-				String contact_id = Conts.getStringCursor(cursor, VasContact.contact_id);
-				Conts.showAvatarContact(((ImageView) findViewById(R.id.imageView1)), avatar, contact_id, Conts.resavatar()[position % Conts.resavatar().length]);
+				((TextView) findViewById(R.id.moinhieudichvu_item_tv_name))
+						.setText(VasContact.getName(cursor));
+				String avatar = cursor.getString(cursor
+						.getColumnIndex(VasContact.AVATAR));
+				String contact_id = Conts.getStringCursor(cursor,
+						VasContact.contact_id);
+				Conts.showAvatarContact(
+						((ImageView) findViewById(R.id.imageView1)), avatar,
+						contact_id,
+						Conts.resavatar()[position % Conts.resavatar().length]);
 			} else {
-				((TextView) findViewById(R.id.moinhieudichvu_item_tv_name)).setText(_id);
+				((TextView) findViewById(R.id.moinhieudichvu_item_tv_name))
+						.setText(_id);
 			}
 
 			Conts.getSDT(findViewById(R.id.moinhieudichvu_item_tv_name));
@@ -396,22 +471,30 @@ public class MoiDvChoNhieuNguoiFragment extends BaseFragment implements OnItemCl
 	private class MoiNhieuNgoiHeaderView extends LinearLayout {
 		public MoiNhieuNgoiHeaderView(Context context) {
 			super(context);
-			((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.moinghieunguoi_header, this);
+			((LayoutInflater) getContext().getSystemService(
+					Context.LAYOUT_INFLATER_SERVICE)).inflate(
+					R.layout.moinghieunguoi_header, this);
 		}
 
 		public void setData(JSONObject mcursor) {
-			Conts.setTextView(findViewById(R.id.name), mcursor, DichVuStore.service_name);
-			Conts.setTextView(findViewById(R.id.gia), mcursor, DichVuStore.service_price);
+			Conts.setTextView(findViewById(R.id.name), mcursor,
+					DichVuStore.service_name);
+			Conts.setTextView(findViewById(R.id.gia), mcursor,
+					DichVuStore.service_price);
 			ImageView home_item_img_icon = (ImageView) findViewById(R.id.icon);
-			String service_icon = Conts.getString(mcursor, DichVuStore.service_icon);
+			String service_icon = Conts.getString(mcursor,
+					DichVuStore.service_icon);
 			Conts.showLogoDichvu(home_item_img_icon, service_icon);
 		}
 
 		public void setData(Cursor mcursor) {
-			Conts.setTextViewCursor(findViewById(R.id.name), mcursor, DichVuStore.service_name);
-			Conts.setTextViewCursor(findViewById(R.id.gia), mcursor, DichVuStore.service_price);
+			Conts.setTextViewCursor(findViewById(R.id.name), mcursor,
+					DichVuStore.service_name);
+			Conts.setTextViewCursor(findViewById(R.id.gia), mcursor,
+					DichVuStore.service_price);
 			ImageView home_item_img_icon = (ImageView) findViewById(R.id.icon);
-			String service_icon = Conts.getStringCursor(mcursor, DichVuStore.service_icon);
+			String service_icon = Conts.getStringCursor(mcursor,
+					DichVuStore.service_icon);
 			// ImageLoaderUtils.getInstance(getActivity()).displayImage(service_icon,
 			// home_item_img_icon, R.drawable.no_image);
 			Conts.showLogoDichvu(home_item_img_icon, service_icon);

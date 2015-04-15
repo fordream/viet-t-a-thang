@@ -80,7 +80,8 @@ public class MImusicService extends Service {
 	public void refreshToken(final IContsCallBack contsCallBack) {
 		Bundle bundle = new Bundle();
 		bundle.putString("key", accountStore.getRefreshToken());
-		bundle.putString(AccountStore.keyRefresh, accountStore.getRefreshToken());
+		bundle.putString(AccountStore.keyRefresh,
+				accountStore.getRefreshToken());
 		execute(RequestMethod.GET, API.API_R013, bundle, new IContsCallBack() {
 
 			@Override
@@ -114,7 +115,8 @@ public class MImusicService extends Service {
 	 * @param p
 	 * @param contsCallBack
 	 */
-	public void login(final boolean is3G, final String u, final String p, final IContsCallBack contsCallBack) {
+	public void login(final boolean is3G, final String u, final String p,
+			final IContsCallBack contsCallBack) {
 		Bundle bundle = new Bundle();
 		if (!Conts.isBlank(u)) {
 			bundle.putString("u", u);
@@ -124,30 +126,32 @@ public class MImusicService extends Service {
 			bundle.putString("p", p);
 		}
 
-		Conts.executeNoProgressBar((is3G ? RequestMethod.GET : RequestMethod.POST), (is3G ? API.API_R001 : API.API_R002), this, bundle, new IContsCallBack() {
+		Conts.executeNoProgressBar((is3G ? RequestMethod.GET
+				: RequestMethod.POST), (is3G ? API.API_R001 : API.API_R002),
+				this, bundle, new IContsCallBack() {
 
-			@Override
-			public void onStart() {
-				if (contsCallBack != null) {
-					contsCallBack.onStart();
-				}
+					@Override
+					public void onStart() {
+						if (contsCallBack != null) {
+							contsCallBack.onStart();
+						}
 
-			}
+					}
 
-			@Override
-			public void onSuscess(JSONObject jsonObject) {
-				accountStore.save(jsonObject, p);
-				exeDichvu(contsCallBack);
-			}
+					@Override
+					public void onSuscess(JSONObject jsonObject) {
+						accountStore.save(jsonObject, p);
+						exeDichvu(contsCallBack);
+					}
 
-			@Override
-			public void onError(String message) {
-				if (contsCallBack != null) {
-					contsCallBack.onError(message);
-				}
-			}
+					@Override
+					public void onError(String message) {
+						if (contsCallBack != null) {
+							contsCallBack.onError(message);
+						}
+					}
 
-		});
+				});
 
 	}
 
@@ -156,24 +160,26 @@ public class MImusicService extends Service {
 		/**
 		 * get infor
 		 */
-		execute(RequestMethod.GET, API.API_R006, new Bundle(), new IContsCallBack() {
+		execute(RequestMethod.GET, API.API_R006, new Bundle(),
+				new IContsCallBack() {
 
-			@Override
-			public void onSuscess(JSONObject response) {
-				sendBroadcast(new Intent("broadcastReceivermactivity_slidemenu_menuleft"));
-			}
+					@Override
+					public void onSuscess(JSONObject response) {
+						sendBroadcast(new Intent(
+								"broadcastReceivermactivity_slidemenu_menuleft"));
+					}
 
-			@Override
-			public void onStart() {
+					@Override
+					public void onStart() {
 
-			}
+					}
 
-			@Override
-			public void onError(String message) {
+					@Override
+					public void onError(String message) {
 
-			}
+					}
 
-		});
+				});
 
 		callDongBoDanhBaLen(new IContsCallBack() {
 
@@ -204,18 +210,32 @@ public class MImusicService extends Service {
 			@Override
 			protected StringBuilder doInBackground(String... params) {
 				StringBuilder conttacts = new StringBuilder();
-				Cursor cur = getContentResolver().query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
+				Cursor cur = getContentResolver().query(
+						ContactsContract.Contacts.CONTENT_URI, null, null,
+						null, null);
 				while (cur != null && cur.moveToNext()) {
-					String contact_id = cur.getString(cur.getColumnIndex(ContactsContract.Contacts._ID));
-					String name = cur.getString(cur.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+					String contact_id = cur.getString(cur
+							.getColumnIndex(ContactsContract.Contacts._ID));
+					String name = cur
+							.getString(cur
+									.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
 
-					String photo_id = Conts.getStringCursor(cur, ContactsContract.Contacts.PHOTO_ID);
+					String photo_id = Conts.getStringCursor(cur,
+							ContactsContract.Contacts.PHOTO_ID);
 
-					if (Integer.parseInt(cur.getString(cur.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))) > 0) {
-						Cursor pCur = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?",
-								new String[] { contact_id }, null);
+					if (Integer
+							.parseInt(cur.getString(cur
+									.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))) > 0) {
+						Cursor pCur = getContentResolver()
+								.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+										null,
+										ContactsContract.CommonDataKinds.Phone.CONTACT_ID
+												+ " = ?",
+										new String[] { contact_id }, null);
 						while (pCur.moveToNext()) {
-							String phoneNo = pCur.getString(pCur.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+							String phoneNo = pCur
+									.getString(pCur
+											.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
 							if (!Conts.isBlank(phoneNo)) {
 								phoneNo = phoneNo.replace(" ", "");
 							}
@@ -228,14 +248,21 @@ public class MImusicService extends Service {
 								if (!listSdt.contains(phoneNo)) {
 
 									listSdt.add(phoneNo);
-									if (!Conts.isBlank(phoneNo) && !Conts.isBlank(photo_id)) {
+									if (!Conts.isBlank(phoneNo)
+											&& !Conts.isBlank(photo_id)) {
 										addPhoneId(phoneNo, contact_id);
 									}
 
 									if (conttacts.length() == 0) {
-										conttacts.append(String.format("{\"phone\":\"%s\",\"name\":\"%s\"}", phoneNo, name));
+										conttacts
+												.append(String
+														.format("{\"phone\":\"%s\",\"name\":\"%s\"}",
+																phoneNo, name));
 									} else {
-										conttacts.append(String.format(",{\"phone\":\"%s\",\"name\":\"%s\"}", phoneNo, name));
+										conttacts
+												.append(String
+														.format(",{\"phone\":\"%s\",\"name\":\"%s\"}",
+																phoneNo, name));
 									}
 								}
 							}
@@ -259,27 +286,29 @@ public class MImusicService extends Service {
 				} else {
 
 					Bundle bundle = new Bundle();
-					bundle.putString("contacts", String.format("[%s]", result.toString()));
+					bundle.putString("contacts",
+							String.format("[%s]", result.toString()));
 
-					MImusicService.this.execute(RequestMethod.POST, API.API_R011, bundle, new IContsCallBack() {
-						@Override
-						public void onSuscess(JSONObject response) {
-							startDongBoDAnhBaXuong();
-						}
+					MImusicService.this.execute(RequestMethod.POST,
+							API.API_R011, bundle, new IContsCallBack() {
+								@Override
+								public void onSuscess(JSONObject response) {
+									startDongBoDAnhBaXuong();
+								}
 
-						@Override
-						public void onStart() {
-						}
+								@Override
+								public void onStart() {
+								}
 
-						@Override
-						public void onError(String message) {
-							startDongBoDAnhBaXuong();
-						}
+								@Override
+								public void onError(String message) {
+									startDongBoDAnhBaXuong();
+								}
 
-						private void startDongBoDAnhBaXuong() {
-							dongboDanhBaXuong(contsCallBack, listSdt);
-						}
-					});
+								private void startDongBoDAnhBaXuong() {
+									dongboDanhBaXuong(contsCallBack, listSdt);
+								}
+							});
 				}
 			};
 		}.execute("");
@@ -290,15 +319,20 @@ public class MImusicService extends Service {
 
 		if (!Conts.isBlank(phoneNo) && !Conts.isBlank(photo_id)) {
 			if (phoneNo.startsWith("+840")) {
-				phoneNo = "84" + phoneNo.substring("+840".length(), phoneNo.length());
+				phoneNo = "84"
+						+ phoneNo.substring("+840".length(), phoneNo.length());
 			} else if (phoneNo.startsWith("+84")) {
-				phoneNo = "84" + phoneNo.substring("+84".length(), phoneNo.length());
+				phoneNo = "84"
+						+ phoneNo.substring("+84".length(), phoneNo.length());
 			} else if (phoneNo.startsWith("840")) {
-				phoneNo = "84" + phoneNo.substring("840".length(), phoneNo.length());
+				phoneNo = "84"
+						+ phoneNo.substring("840".length(), phoneNo.length());
 			} else if (phoneNo.startsWith("84")) {
-				phoneNo = "84" + phoneNo.substring("84".length(), phoneNo.length());
+				phoneNo = "84"
+						+ phoneNo.substring("84".length(), phoneNo.length());
 			} else if (phoneNo.startsWith("0")) {
-				phoneNo = "84" + phoneNo.substring("0".length(), phoneNo.length());
+				phoneNo = "84"
+						+ phoneNo.substring("0".length(), phoneNo.length());
 			}
 
 			if (avatarHashmap.containsKey(phoneNo)) {
@@ -309,7 +343,8 @@ public class MImusicService extends Service {
 		}
 	}
 
-	public void dongboDanhBaXuong(final IContsCallBack contsCallBack, final List<String> numbers) {
+	public void dongboDanhBaXuong(final IContsCallBack contsCallBack,
+			final List<String> numbers) {
 
 		Bundle bundle = new Bundle();
 		execute(RequestMethod.GET, API.API_R012, bundle, new IContsCallBack() {
@@ -334,101 +369,120 @@ public class MImusicService extends Service {
 		});
 	}
 
-	public void execute(final RequestMethod requestMethod, final String api, final Bundle bundle, final IContsCallBack contsCallBack) {
+	public void execute(final RequestMethod requestMethod, final String api,
+			final Bundle bundle, final IContsCallBack contsCallBack) {
 
-		Conts.executeNoProgressBar(requestMethod, api, this, bundle, new IContsCallBack() {
-			@Override
-			public void onStart() {
-				if (contsCallBack != null)
-					contsCallBack.onStart();
-			}
-
-			@Override
-			public void onSuscess(final JSONObject response) {
-				new AsyncTask<String, String, String>() {
+		Conts.executeNoProgressBar(requestMethod, api, this, bundle,
+				new IContsCallBack() {
 					@Override
-					protected String doInBackground(String... params) {
-						if (API.API_R006.equals(api)) {
-							updateUserInFor(response);
-						} else if (API.API_R007.equals(api)) {
-							updateInFor(bundle);
-						} else if (API.API_R017.equals(api)) {
-							updateDichVuDangKy(bundle);
-						} else if (API.API_R004.equals(api)) {
-							updateDichVu(response);
-						} else if (API.API_R012.equals(api)) {
-							updateDongBoXuong(response);
-							// update status register of phone
-							// executeUpdateStatusOfPhone(null, null, null);
-						} else if (API.API_R013.equals(api)) {
-							updateReGetToken(response);
-						} else if (API.API_R019.equals(api)) {
-							updateKiemTraDieuKienThueBao(bundle, response);
-						} else if (API.API_R026.equals(api)) {
-							saveRecomend(response);
-						} else if (API.API_R022.equals(api)) {
-							updateMauMoi(response, bundle.getString(DichVuStore.service_code));
-						} else if (API.API_R027.equals(api)) {
-							new TintucStore(MImusicService.this).save(response);
-						} else if (API.API_R028.equals(api)) {
-							new TintucStore(MImusicService.this).save(response);
-						} else if (API.API_R010.equals(api)) {
-							String strGuide_text = Conts.getString(response, HuongDanBanHangStore.guide_text);
-							if (!Conts.isBlank(strGuide_text)) {
-								new HuongDanBanHangStore(MImusicService.this).saveHdbh(strGuide_text);
-							}
-						} else if (API.API_R005.equals(api)) {
-							dichVuStore.updateService_content(MImusicService.this, response, bundle);
-						} else if (API.API_R024.equals(api)) {
-							BangXepHang.update(MImusicService.this, response, bundle, API.API_R024);
-						} else if (API.API_R025.equals(api)) {
-							BangXepHang.update(MImusicService.this, response, bundle, API.API_R025);
-						} else if (API.API_R015.equals(api)) {
-							updateMoitheodichvu(bundle);
-						} else if (API.API_R016.equals(api)) {
-							updateMoitheodichvu(bundle);
-						} else if (API.API_R020.equals(api)) {
-							updateSearviceRegister(response, bundle);
-						}
-						return null;
+					public void onStart() {
+						if (contsCallBack != null)
+							contsCallBack.onStart();
 					}
 
-					protected void onPostExecute(String result) {
-						if (contsCallBack != null) {
-							contsCallBack.onSuscess(response);
-						}
-					};
-				}.execute("");
+					@Override
+					public void onSuscess(final JSONObject response) {
+						new AsyncTask<String, String, String>() {
+							@Override
+							protected String doInBackground(String... params) {
+								if (API.API_R006.equals(api)) {
+									updateUserInFor(response);
+								} else if (API.API_R007.equals(api)) {
+									updateInFor(bundle);
+								} else if (API.API_R017.equals(api)) {
+									updateDichVuDangKy(bundle);
+								} else if (API.API_R004.equals(api)) {
+									updateDichVu(response);
+								} else if (API.API_R012.equals(api)) {
+									updateDongBoXuong(response);
+									// update status register of phone
+									// executeUpdateStatusOfPhone(null, null,
+									// null);
+								} else if (API.API_R013.equals(api)) {
+									updateReGetToken(response);
+								} else if (API.API_R019.equals(api)) {
+									updateKiemTraDieuKienThueBao(bundle,
+											response);
+								} else if (API.API_R026.equals(api)) {
+									saveRecomend(response);
+								} else if (API.API_R022.equals(api)) {
+									updateMauMoi(
+											response,
+											bundle.getString(DichVuStore.service_code));
+								} else if (API.API_R027.equals(api)) {
+									new TintucStore(MImusicService.this)
+											.save(response);
+								} else if (API.API_R028.equals(api)) {
+									new TintucStore(MImusicService.this)
+											.save(response);
+								} else if (API.API_R010.equals(api)) {
+									String strGuide_text = Conts.getString(
+											response,
+											HuongDanBanHangStore.guide_text);
+									if (!Conts.isBlank(strGuide_text)) {
+										new HuongDanBanHangStore(
+												MImusicService.this)
+												.saveHdbh(strGuide_text);
+									}
+								} else if (API.API_R005.equals(api)) {
+									dichVuStore.updateService_content(
+											MImusicService.this, response,
+											bundle);
+								} else if (API.API_R024.equals(api)) {
+									BangXepHang.update(MImusicService.this,
+											response, bundle, API.API_R024);
+								} else if (API.API_R025.equals(api)) {
+									BangXepHang.update(MImusicService.this,
+											response, bundle, API.API_R025);
+								} else if (API.API_R015.equals(api)) {
+									updateMoitheodichvu(bundle);
+								} else if (API.API_R016.equals(api)) {
+									updateMoitheodichvu(bundle);
+								} else if (API.API_R020.equals(api)) {
+									// updateSearviceRegister(response, bundle);
+								}
+								return null;
+							}
 
-			}
+							protected void onPostExecute(String result) {
+								if (contsCallBack != null) {
+									contsCallBack.onSuscess(response);
+								}
+							};
+						}.execute("");
 
-			@Override
-			public void onError(String message) {
-				if (contsCallBack != null)
-					contsCallBack.onError(message);
-			}
+					}
 
-		});
+					@Override
+					public void onError(String message) {
+						if (contsCallBack != null)
+							contsCallBack.onError(message);
+					}
+
+				});
 	}
 
-	private void updateSearviceRegister(JSONObject response, Bundle bundle) {
+	// private void updateSearviceRegister(JSONObject response, Bundle bundle) {
+	//
+	// try {
+	// JSONArray json = response.getJSONArray("data");
+	// for (int i = 0; i < json.length(); i++) {
+	// JSONObject object = json.getJSONObject(i);
+	// String msisdn = Conts.getString(object, "msisdn");
+	// String satifaction = Conts.getString(object, "satifaction");
+	// String serviceCode = bundle.getString("service_code");
+	// if (!Conts.isBlank(msisdn) && !Conts.isBlank(satifaction)
+	// && !Conts.isBlank(serviceCode)) {
+	// VasContactUseService.update(this, msisdn, serviceCode,
+	// satifaction);
+	// }
+	// }
+	// } catch (Exception e) {
+	// }
+	// }
 
-		try {
-			JSONArray json = response.getJSONArray("data");
-			for (int i = 0; i < json.length(); i++) {
-				JSONObject object = json.getJSONObject(i);
-				String msisdn = Conts.getString(object, "msisdn");
-				String satifaction = Conts.getString(object, "satifaction");
-				String serviceCode = bundle.getString("service_code");
-				if (!Conts.isBlank(msisdn) && !Conts.isBlank(satifaction) && !Conts.isBlank(serviceCode)) {
-					VasContactUseService.update(this, msisdn, serviceCode, satifaction);
-				}
-			}
-		} catch (Exception e) {
-		}
-	}
-
-	public void executeUpdateStatusOfPhone(final String serviceCode, String phone, final IContsCallBack iContsCallBack) {
+	public void executeUpdateStatusOfPhone(final String serviceCode,
+			String phone, final IContsCallBack iContsCallBack) {
 		if (Conts.isBlank(phone)) {
 			phone = VasContact.getPhones(this);
 		}
@@ -438,9 +492,11 @@ public class MImusicService extends Service {
 			for (int i = 0; i < services.length(); i++) {
 				try {
 					JSONObject service = services.getJSONObject(i);
-					String mServiceCode = Conts.getString(service, DichVuStore.service_code);
+					String mServiceCode = Conts.getString(service,
+							DichVuStore.service_code);
 					if (!Conts.isBlank(mServiceCode)) {
-						executeUpdateStatusOfPhone(mServiceCode, phone, iContsCallBack);
+						executeUpdateStatusOfPhone(mServiceCode, phone,
+								iContsCallBack);
 					}
 				} catch (Exception e) {
 				}
@@ -471,7 +527,10 @@ public class MImusicService extends Service {
 		ContentValues contentValues = new ContentValues();
 		contentValues.put(VasContact.PHONE, phone);
 		contentValues.put(VasContact.NAME_CONTACT, name);
-		contentValues.put(VasContact.NAME_CONTACT_ENG, Conts.StringConnvert.convertVNToAlpha("z" + System.currentTimeMillis()));
+		contentValues.put(
+				VasContact.NAME_CONTACT_ENG,
+				Conts.StringConnvert.convertVNToAlpha("z"
+						+ System.currentTimeMillis()));
 
 		String contact_id = "";
 		if (avatarHashmap.containsKey(phone)) {
@@ -484,11 +543,13 @@ public class MImusicService extends Service {
 
 		contentValues.put(VasContact.contact_id, contact_id);
 		Cursor cursor = VasContact.queryContactSearch(this, phone);
-		boolean needInser = cursor == null || (cursor != null && cursor.moveToNext());
+		boolean needInser = cursor == null
+				|| (cursor != null && cursor.moveToNext());
 		cursor.close();
 
 		if (needInser) {
-			getContentResolver().update(VasContact.CONTENT_URI, contentValues, String.format("%s = '%s'", VasContact.PHONE, phone), null);
+			getContentResolver().update(VasContact.CONTENT_URI, contentValues,
+					String.format("%s = '%s'", VasContact.PHONE, phone), null);
 		} else {
 			getContentResolver().insert(VasContact.CONTENT_URI, contentValues);
 		}
@@ -509,8 +570,11 @@ public class MImusicService extends Service {
 				values.put(MauMoi.service_code, service_code);
 				values.put(MauMoi.user, user);
 
-				String where = String.format("%s = '%s' and %s = '%s'  and %s = '%s'", MauMoi.user, user, MauMoi.service_code, service_code, MauMoi.ID, id);
-				Cursor cursor = getContentResolver().query(MauMoi.CONTENT_URI, null, where, null, null);
+				String where = String.format(
+						"%s = '%s' and %s = '%s'  and %s = '%s'", MauMoi.user,
+						user, MauMoi.service_code, service_code, MauMoi.ID, id);
+				Cursor cursor = getContentResolver().query(MauMoi.CONTENT_URI,
+						null, where, null, null);
 
 				boolean needInsert = true;
 				if (cursor != null) {
@@ -534,7 +598,8 @@ public class MImusicService extends Service {
 			contentValues.put(VasContact.PHONE, phone);
 			contentValues.put(VasContact.NAME_CONTACT, name);
 
-			contentValues.put(VasContact.NAME_CONTACT_ENG, Conts.StringConnvert.convertVNToAlpha(name));
+			contentValues.put(VasContact.NAME_CONTACT_ENG,
+					Conts.StringConnvert.convertVNToAlpha(name));
 			String contact_id = "";
 			if (avatarHashmap.containsKey(phone)) {
 				contact_id = avatarHashmap.get(phone);
@@ -547,9 +612,13 @@ public class MImusicService extends Service {
 			contentValues.put(VasContact.contact_id, contact_id);
 
 			if (VasContact.haveContact(phone, this)) {
-				getContentResolver().update(VasContact.CONTENT_URI, contentValues, String.format("%s = '%s'", VasContact.PHONE, phone), null);
+				getContentResolver().update(VasContact.CONTENT_URI,
+						contentValues,
+						String.format("%s = '%s'", VasContact.PHONE, phone),
+						null);
 			} else {
-				getContentResolver().insert(VasContact.CONTENT_URI, contentValues);
+				getContentResolver().insert(VasContact.CONTENT_URI,
+						contentValues);
 			}
 		}
 	}
@@ -583,7 +652,8 @@ public class MImusicService extends Service {
 				ContentValues contentValues = new ContentValues();
 				contentValues.put(VasContact.PHONE, phone);
 				contentValues.put(VasContact.NAME_CONTACT, name);
-				contentValues.put(VasContact.NAME_CONTACT_ENG, Conts.StringConnvert.convertVNToAlpha(name));
+				contentValues.put(VasContact.NAME_CONTACT_ENG,
+						Conts.StringConnvert.convertVNToAlpha(name));
 
 				String contact_id = "";
 				if (avatarHashmap.containsKey(phone)) {
@@ -598,30 +668,40 @@ public class MImusicService extends Service {
 
 				String service_codes = "";
 				String service_codes_name = "";
+				VasContactUseService.update(MImusicService.this, phone, null,
+						"0");
 				if (jsonObject.has("services")) {
-					
-					
+
 					JSONArray services = jsonObject.getJSONArray("services");
-					
-					LogUtils.es(phone, services.toString());
+
 					String format = "%s";
 					int count = 0;
 					for (int in = 0; in < services.length(); in++) {
 						count++;
-						// id,service_name,service_code,service_icon
-						String service_code = services.getJSONObject(in).getString("service_code");
+						String service_code = services.getJSONObject(in)
+								.getString("service_code");
 
 						// add service that user use
-						VasContactUseService.update(MImusicService.this, phone, service_code, "0");
+						VasContactUseService.update(MImusicService.this, phone,
+								service_code, "1");
 
 						if (Conts.isBlank(service_codes)) {
 							service_codes = service_code;
 							if (count <= 3)
-								service_codes_name = String.format(format, services.getJSONObject(in).getString(DichVuStore.service_name));
+								service_codes_name = String.format(
+										format,
+										services.getJSONObject(in).getString(
+												DichVuStore.service_name));
 						} else {
 							service_codes = service_codes + "," + service_code;
 							if (count <= 3)
-								service_codes_name = service_codes_name + " | " + String.format(format, services.getJSONObject(in).getString(DichVuStore.service_name));
+								service_codes_name = service_codes_name
+										+ " | "
+										+ String.format(
+												format,
+												services.getJSONObject(in)
+														.getString(
+																DichVuStore.service_name));
 						}
 
 						if ("%s".equals(format)) {
@@ -633,11 +713,17 @@ public class MImusicService extends Service {
 				}
 
 				contentValues.put(VasContact.LISTIDDVSUDUNG, service_codes);
-				contentValues.put(VasContact.LISTIDTENDVSUDUNG, service_codes_name);
+				contentValues.put(VasContact.LISTIDTENDVSUDUNG,
+						service_codes_name);
 				if (VasContact.haveContact(phone, this)) {
-					getContentResolver().update(VasContact.CONTENT_URI, contentValues, String.format("%s = '%s'", VasContact.PHONE, phone), null);
+					getContentResolver()
+							.update(VasContact.CONTENT_URI,
+									contentValues,
+									String.format("%s = '%s'",
+											VasContact.PHONE, phone), null);
 				} else {
-					getContentResolver().insert(VasContact.CONTENT_URI, contentValues);
+					getContentResolver().insert(VasContact.CONTENT_URI,
+							contentValues);
 				}
 			}
 		} catch (Exception e) {
@@ -682,7 +768,8 @@ public class MImusicService extends Service {
 
 	}
 
-	public void executeUpdateAvatar(String path, final IContsCallBack iContsCallBack) {
+	public void executeUpdateAvatar(String path,
+			final IContsCallBack iContsCallBack) {
 		Bundle bundle = new Bundle();
 		bundle.putString("images", path);// path
 		execute(RequestMethod.GET, API.API_R023, bundle, iContsCallBack);
@@ -701,7 +788,8 @@ public class MImusicService extends Service {
 				JSONArray array = response.getJSONArray("data");
 				for (int i = 0; i < array.length(); i++) {
 					final JSONObject jsonObject = array.getJSONObject(i);
-					String service_code = Conts.getString(jsonObject, Recomment.service_code);
+					String service_code = Conts.getString(jsonObject,
+							Recomment.service_code);
 
 					// create service code
 
@@ -711,14 +799,17 @@ public class MImusicService extends Service {
 						}
 					} else {
 						if (!Conts.isBlank(service_code)) {
-							serviceCodes = serviceCodes + "," + "'" + service_code + "'";
+							serviceCodes = serviceCodes + "," + "'"
+									+ service_code + "'";
 						}
 					}
 					JSONArray contacts = jsonObject.getJSONArray("contacts");
 					for (int index = 0; index < contacts.length(); index++) {
 
-						final JSONObject cotnact = contacts.getJSONObject(index);
-						String phone = Conts.getString(cotnact, Recomment.phone);
+						final JSONObject cotnact = contacts
+								.getJSONObject(index);
+						String phone = Conts
+								.getString(cotnact, Recomment.phone);
 						String name = Conts.getString(cotnact, Recomment.name);
 
 						ContentValues values = new ContentValues();
@@ -740,17 +831,20 @@ public class MImusicService extends Service {
 						updateDongBoXuongRecomment(phone, name);
 						// service_code
 						// phone
-						if (!Conts.isBlank(phone) && !Conts.isBlank(service_code)) {
+						if (!Conts.isBlank(phone)
+								&& !Conts.isBlank(service_code)) {
 							// LogUtils.es("RECOMMENT", service_code + " " +
 							// phone);
-							VasContactUseService.update(MImusicService.this, phone, service_code, "1");
+							VasContactUseService.update(MImusicService.this,
+									phone, service_code, "1");
 						}
 					}
 				}
 
 				// save service code
 
-				Recomment.saveServiceCodeList(MImusicService.this, serviceCodes);
+				Recomment
+						.saveServiceCodeList(MImusicService.this, serviceCodes);
 				Recomment.savePhoneList(MImusicService.this, phones);
 			} catch (JSONException e) {
 			}
@@ -758,11 +852,14 @@ public class MImusicService extends Service {
 
 	}
 
-	public void executeHttps(final RequestMethod requestMethod, final String api, final Bundle bundle, final IContsCallBack contsCallBack) {
+	public void executeHttps(final RequestMethod requestMethod,
+			final String api, final Bundle bundle,
+			final IContsCallBack contsCallBack) {
 		execute(requestMethod, api, bundle, contsCallBack);
 	}
 
-	public void executeUpdateHttpsAvatar(String path, IContsCallBack iContsCallBack) {
+	public void executeUpdateHttpsAvatar(String path,
+			IContsCallBack iContsCallBack) {
 		Bundle bundle = new Bundle();
 		String images = Conts.encodeToString(this, path);
 		bundle.putString("images", images);// path
@@ -778,30 +875,31 @@ public class MImusicService extends Service {
 		Bundle bundle = new Bundle();
 		bundle.putString("page", "1");
 
-		execute(RequestMethod.GET, API.API_R004, bundle, new vnp.com.mimusic.util.Conts.IContsCallBack() {
-			@Override
-			public void onStart() {
-			}
+		execute(RequestMethod.GET, API.API_R004, bundle,
+				new vnp.com.mimusic.util.Conts.IContsCallBack() {
+					@Override
+					public void onStart() {
+					}
 
-			@Override
-			public void onError(String message) {
-				if (contsCallBack != null && !isLoaded) {
-					contsCallBack.onError(message);
-				}
-			}
+					@Override
+					public void onError(String message) {
+						if (contsCallBack != null && !isLoaded) {
+							contsCallBack.onError(message);
+						}
+					}
 
-			@Override
-			public void onSuscess(JSONObject response) {
-				if (contsCallBack != null && !isLoaded) {
-					contsCallBack.onSuscess(response);
-				}
+					@Override
+					public void onSuscess(JSONObject response) {
+						if (contsCallBack != null && !isLoaded) {
+							contsCallBack.onSuscess(response);
+						}
 
-				callUpdateNextDichVu(2);
-				if (!isLoaded) {
-					callUpdateData();
-				}
-			}
-		});
+						callUpdateNextDichVu(2);
+						if (!isLoaded) {
+							callUpdateData();
+						}
+					}
+				});
 
 	}
 
@@ -814,7 +912,8 @@ public class MImusicService extends Service {
 			public void onSuscess(JSONObject response) {
 				if (response != null) {
 					try {
-						if (response.has("data") && response.getJSONArray("data").length() > 0) {
+						if (response.has("data")
+								&& response.getJSONArray("data").length() > 0) {
 							callUpdateNextDichVu(index + 1);
 						} else {
 							getStatusDichVu();

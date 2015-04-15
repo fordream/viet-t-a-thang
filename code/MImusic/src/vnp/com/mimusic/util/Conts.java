@@ -152,7 +152,7 @@ public class Conts {
 	public static final String MOITHANHVIEN = "MOITHANHVIEN";
 	public static final String DICHVUBANCHAY = "DICHVUBANCHAY";
 	public static final String MOISUDUNGUNGDUNG = "MOISUDUNGUNGDUNG";
-	public static final boolean LOGINWIFI = false;
+	public static final boolean LOGINWIFI = true;
 
 	public static boolean isBlank(String cover) {
 		return cover == null || cover != null && cover.trim().equals("");

@@ -36,7 +36,8 @@ public class VasContactUseService {
 		StringBuilder builder = new StringBuilder();
 		builder.append("CREATE TABLE ").append(TABLE_NAME);
 		builder.append("(");
-		builder.append(_ID).append(" INTEGER PRIMARY KEY AUTOINCREMENT").append(",");
+		builder.append(_ID).append(" INTEGER PRIMARY KEY AUTOINCREMENT")
+				.append(",");
 		String[] colums = new String[] {//
 		user, phone, service_code, service_status };
 
@@ -59,7 +60,8 @@ public class VasContactUseService {
 	 * 
 	 */
 
-	public static final String URL = "content://" + DBProvider.PROVIDER_NAME + "/" + TABLE_NAME;
+	public static final String URL = "content://" + DBProvider.PROVIDER_NAME
+			+ "/" + TABLE_NAME;
 	public static final Uri CONTENT_URI = Uri.parse(URL);
 
 	public VasContactUseService() {
@@ -69,7 +71,8 @@ public class VasContactUseService {
 	public static final int USER_MATCHER = 23;
 	public static final int USER_MATCHER_ID = 24;
 
-	public static final void addUriMatcher(UriMatcher uriMatcher, String PROVIDER_NAME) {
+	public static final void addUriMatcher(UriMatcher uriMatcher,
+			String PROVIDER_NAME) {
 		uriMatcher.addURI(PROVIDER_NAME, TABLE_NAME, USER_MATCHER);
 		uriMatcher.addURI(PROVIDER_NAME, TABLE_NAME + "/#", USER_MATCHER_ID);
 	}
@@ -79,51 +82,72 @@ public class VasContactUseService {
 		mMap.put(USER_MATCHER_ID, "vnd.android.cursor.item/vnp.com.mimusic");
 	}
 
-	public static final int update(int match, SQLiteDatabase db, Uri uri, ContentValues values, String selection, String[] selectionArgs) {
+	public static final int update(int match, SQLiteDatabase db, Uri uri,
+			ContentValues values, String selection, String[] selectionArgs) {
 		if (USER_MATCHER == match) {
 			return db.update(TABLE_NAME, values, selection, selectionArgs);
 		} else if (USER_MATCHER_ID == match) {
-			return db.update(TABLE_NAME, values, _ID + " = " + uri.getPathSegments().get(1) + (!TextUtils.isEmpty(selection) ? " AND (" + selection + ')' : ""), selectionArgs);
+			return db.update(
+					TABLE_NAME,
+					values,
+					_ID
+							+ " = "
+							+ uri.getPathSegments().get(1)
+							+ (!TextUtils.isEmpty(selection) ? " AND ("
+									+ selection + ')' : ""), selectionArgs);
 		} else {
 			return -2;
 		}
 	}
 
-	public static int delete(int match, SQLiteDatabase db, Uri uri, String selection, String[] selectionArgs) {
+	public static int delete(int match, SQLiteDatabase db, Uri uri,
+			String selection, String[] selectionArgs) {
 		if (USER_MATCHER == match) {
 			return db.delete(TABLE_NAME, selection, selectionArgs);
 		} else if (USER_MATCHER_ID == match) {
 			String id = uri.getPathSegments().get(1);
-			return db.delete(TABLE_NAME, _ID + " = " + id + (!TextUtils.isEmpty(selection) ? " AND (" + selection + ')' : ""), selectionArgs);
+			return db.delete(TABLE_NAME,
+					_ID
+							+ " = "
+							+ id
+							+ (!TextUtils.isEmpty(selection) ? " AND ("
+									+ selection + ')' : ""), selectionArgs);
 		} else {
 			return -2;
 		}
 	}
 
-	public static Cursor query(int match, SQLiteDatabase db, Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+	public static Cursor query(int match, SQLiteDatabase db, Uri uri,
+			String[] projection, String selection, String[] selectionArgs,
+			String sortOrder) {
 		SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
 		qb.setTables(TABLE_NAME);
 		if (USER_MATCHER == match) {
-			return qb.query(db, projection, selection, selectionArgs, null, null, sortOrder);
+			return qb.query(db, projection, selection, selectionArgs, null,
+					null, sortOrder);
 		} else if (USER_MATCHER_ID == match) {
 			qb.appendWhere(_ID + "=" + uri.getPathSegments().get(1));
-			return qb.query(db, projection, selection, selectionArgs, null, null, sortOrder);
+			return qb.query(db, projection, selection, selectionArgs, null,
+					null, sortOrder);
 		} else {
 			return null;
 		}
 	}
 
-	public static Uri insert(int match, SQLiteDatabase db, Uri uri, ContentValues values) {
+	public static Uri insert(int match, SQLiteDatabase db, Uri uri,
+			ContentValues values) {
 		if (USER_MATCHER == match) {
 			long rowID = db.insert(TABLE_NAME, "", values);
 			if (rowID > 0) {
-				Uri _uri = ContentUris.withAppendedId(VasContactUseService.CONTENT_URI, rowID);
+				Uri _uri = ContentUris.withAppendedId(
+						VasContactUseService.CONTENT_URI, rowID);
 				return _uri;
 			}
 		} else if (USER_MATCHER_ID == match) {
 			long rowID = db.insert(TABLE_NAME, "", values);
 			if (rowID > 0) {
-				Uri _uri = ContentUris.withAppendedId(VasContactUseService.CONTENT_URI, rowID);
+				Uri _uri = ContentUris.withAppendedId(
+						VasContactUseService.CONTENT_URI, rowID);
 				return _uri;
 			}
 		}
@@ -131,27 +155,43 @@ public class VasContactUseService {
 		return null;
 	}
 
-	public static void update(Context context, String msisdn, String serviceCode, String satifaction) {
+	public static void update(Context context, String msisdn,
+			String serviceCode, String satifaction) {
 		String userLogin = Account.getUser(context);
 
-		String where = String.format("%s = '%s' and %s = '%s' and %s = '%s'", phone, msisdn, service_code, serviceCode, user, userLogin);
+		String where = String.format("%s = '%s' and %s = '%s'", phone, msisdn,
+				user, userLogin);
+		if (!Conts.isBlank(serviceCode)) {
+			where = String.format("%s = '%s' and %s = '%s' and %s = '%s'",
+					phone, msisdn, service_code, serviceCode, user, userLogin);
+		}
+
 		ContentValues values = new ContentValues();
 		values.put(user, userLogin);
 		values.put(phone, msisdn);
-		values.put(service_code, serviceCode);
+		if (!Conts.isBlank(serviceCode)) {
+			values.put(service_code, serviceCode);
+		}
+
 		values.put(service_status, satifaction);
 		if (haveContact(msisdn, serviceCode, context)) {
-			context.getContentResolver().update(CONTENT_URI, values, where, null);
+			context.getContentResolver().update(CONTENT_URI, values, where,
+					null);
 		} else {
 			context.getContentResolver().insert(CONTENT_URI, values);
 		}
 	}
 
-	public static boolean haveContact(String xphone, String serviceCode, Context context) {
+	public static boolean haveContact(String xphone, String serviceCode,
+			Context context) {
 		String userLogin = Account.getUser(context);
 		boolean hasContact = false;
-		Cursor cursor = context.getContentResolver().query(CONTENT_URI, null, String.format("%s='%s' and %s = '%s' and %s = '%s'", phone, xphone, service_code, serviceCode, user, userLogin), null,
-				null);
+		Cursor cursor = context.getContentResolver().query(
+				CONTENT_URI,
+				null,
+				String.format("%s='%s' and %s = '%s' and %s = '%s'", phone,
+						xphone, service_code, serviceCode, user, userLogin),
+				null, null);
 
 		if (cursor != null) {
 			if (cursor.moveToNext()) {
@@ -165,31 +205,38 @@ public class VasContactUseService {
 
 	public static Cursor queryListCanUse(Context context) {
 		String userLogin = Account.getUser(context);
-		String selection = String.format("%s = '%s'  and %s = '%s'", service_status, "1", user, userLogin);
-		return context.getContentResolver().query(CONTENT_URI, null, selection, null, null);
+		String selection = String.format("%s = '%s'  and %s = '%s'",
+				service_status, "1", user, userLogin);
+		return context.getContentResolver().query(CONTENT_URI, null, selection,
+				null, null);
 	}
 
-	public static List<String> queryListServiceCanUse(Context context, String sdt) {
+	public static List<String> queryListServiceCanUse(Context context,
+			String sdt) {
 		List<String> list = new ArrayList<String>();
-		DichVuStore dichVuStore = new DichVuStore(context);
-		JSONArray array = dichVuStore.getDichvu();
-		for (int i = 0; i < array.length(); i++) {
-			try {
-				String serviceCode = Conts.getString(array.getJSONObject(i), DichVuStore.service_code);
-				if (!Conts.isBlank(serviceCode)) {
-					list.add(serviceCode);
-				}
-			} catch (JSONException e) {
-			}
-		}
-		String where = String.format("%s ='%s' and %s='%s'", phone, sdt, service_status, "0");
+		// DichVuStore dichVuStore = new DichVuStore(context);
+		// JSONArray array = dichVuStore.getDichvu();
+		// for (int i = 0; i < array.length(); i++) {
+		// try {
+		// String serviceCode = Conts.getString(array.getJSONObject(i),
+		// DichVuStore.service_code);
+		// if (!Conts.isBlank(serviceCode)) {
+		// list.add(serviceCode);
+		// }
+		// } catch (JSONException e) {
+		// }
+		// }
+		String where = String.format("%s ='%s' and %s='%s'", phone, sdt,
+				service_status, "1");
 
-		Cursor cursor = context.getContentResolver().query(CONTENT_URI, null, where, null, null);
+		Cursor cursor = context.getContentResolver().query(CONTENT_URI, null,
+				where, null, null);
 		if (cursor != null) {
 			while (cursor.moveToNext()) {
-				String serviceCode = Conts.getStringCursor(cursor, service_code);
+				String serviceCode = Conts
+						.getStringCursor(cursor, service_code);
 				if (!Conts.isBlank(serviceCode)) {
-					list.remove(serviceCode);
+					list.add(serviceCode);
 				}
 			}
 			cursor.close();
@@ -199,9 +246,12 @@ public class VasContactUseService {
 
 	}
 
-	public static String queryListPhoneNotUse(Context context, String serviceCode) {
-		String where = String.format("%s ='%s'  and %s='%s'", service_code, serviceCode, service_status, "0");
-		Cursor cursor = context.getContentResolver().query(CONTENT_URI, null, where, null, null);
+	public static String queryListPhoneCanUse(Context context,
+			String serviceCode) {
+		String where = String.format("%s ='%s'  and %s='%s'", service_code,
+				serviceCode, service_status, "1");
+		Cursor cursor = context.getContentResolver().query(CONTENT_URI, null,
+				where, null, null);
 		String phones = "";
 		if (cursor != null) {
 			while (cursor.moveToNext()) {
