@@ -599,7 +599,11 @@ public class MImusicService extends Service {
 				String service_codes = "";
 				String service_codes_name = "";
 				if (jsonObject.has("services")) {
+					
+					
 					JSONArray services = jsonObject.getJSONArray("services");
+					
+					LogUtils.es(phone, services.toString());
 					String format = "%s";
 					int count = 0;
 					for (int in = 0; in < services.length(); in++) {
