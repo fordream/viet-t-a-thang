@@ -124,9 +124,12 @@ public class Conts {
 		}
 	}
 
-	public final static String SERVER = "https://125.235.40.85/api.php/";
+	// http://vasdealer.vietteltelecom.vn
+	// 2015 05 11
+	// https://125.235.40.85/api.php/
+	public final static String SERVER = "http://vasdealer.vietteltelecom.vn/";
 	// :443
-	public final static String SERVERS = "https://125.235.40.85/api.php/";
+	public final static String SERVERS = "http://vasdealer.vietteltelecom.vn";
 	public final static String HOME = "home";
 	public final static String BANGXEPHANG = "bangxephang";
 	public final static String LICHSUBANHANG = "lichsubanhang";
