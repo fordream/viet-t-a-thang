@@ -10,7 +10,7 @@
         android:id="@+id/datePicker1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:calendarViewShown="false" > <!-- style="@style/date_picker_style" -->
+        > <!-- style="@style/date_picker_style" -->
     </DatePicker>
 
     <LinearLayout

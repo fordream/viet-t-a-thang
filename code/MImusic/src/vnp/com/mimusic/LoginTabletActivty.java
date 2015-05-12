@@ -92,7 +92,7 @@ public class LoginTabletActivty extends Activity implements OnClickListener {
 		((TextView) findViewById(R.id.activity_login_password)).setText("265376");
 
 		if (Conts.isBlank(accountStore.getUser())) {
-			if (Conts.is3GConnected(LoginTabletActivty.this)) {
+			if (Conts.is3GConnectedOrWifiConnected(LoginTabletActivty.this)) {
 				login(true, "", "");
 			}
 		} else {

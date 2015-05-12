@@ -30,9 +30,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
-
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.database.DataSetObserver;
@@ -55,7 +53,6 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.Scroller;
-
 import com.viettel.vtt.vdealer.R;
 
 // @formatter:off
@@ -89,6 +86,7 @@ import com.viettel.vtt.vdealer.R;
  * </ul>
  */
 // @formatter:on
+@SuppressLint("WrongCall")
 public class HorizontalListView extends AdapterView<ListAdapter> {
 
 	/**
@@ -575,7 +573,6 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
 		return layoutParams;
 	}
 
-	@SuppressLint("WrongCall")
 	@Override
 	protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
 		super.onLayout(changed, left, top, right, bottom);
@@ -1438,7 +1435,6 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
 		return mMaxX > 0;
 	}
 
-	@TargetApi(11)
 	/** Wrapper class to protect access to API version 11 and above features */
 	private static final class HoneycombPlus {
 		static {
@@ -1455,7 +1451,6 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
 		}
 	}
 
-	@TargetApi(14)
 	/** Wrapper class to protect access to API version 14 and above features */
 	private static final class IceCreamSandwichPlus {
 		static {

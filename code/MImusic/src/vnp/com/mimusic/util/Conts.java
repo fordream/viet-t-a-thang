@@ -127,9 +127,9 @@ public class Conts {
 	// http://vasdealer.vietteltelecom.vn
 	// 2015 05 11
 	// https://125.235.40.85/api.php/
-	public final static String SERVER = "http://vasdealer.vietteltelecom.vn/";
+	public final static String SERVER = "https://125.235.40.85/api.php/";
 	// :443
-	public final static String SERVERS = "http://vasdealer.vietteltelecom.vn";
+	public final static String SERVERS = "https://125.235.40.85/api.php/";
 	public final static String HOME = "home";
 	public final static String BANGXEPHANG = "bangxephang";
 	public final static String LICHSUBANHANG = "lichsubanhang";
@@ -239,6 +239,8 @@ public class Conts {
 				String errorCode = "";
 				RestClient restClient = (RestClient) object;
 				String response = restClient.getResponse();
+				
+				LogUtils.es("dkm", response + "");
 				try {
 
 					// if (API.API_R015.equals(api)) {
@@ -406,10 +408,11 @@ public class Conts {
 		progressBar1.setVisibility(b ? View.VISIBLE : View.GONE);
 	}
 
-	public static boolean is3GConnected(Context context) {
+	public static boolean is3GConnectedOrWifiConnected(Context context) {
 		ConnectivityManager manager = (ConnectivityManager) context
 				.getSystemService(Context.CONNECTIVITY_SERVICE);
 		return manager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE)
+				.isConnectedOrConnecting() || manager.getNetworkInfo(ConnectivityManager.TYPE_WIFI)
 				.isConnectedOrConnecting();
 	}
 
@@ -593,7 +596,7 @@ public class Conts {
 			'U', 'u', };
 
 	public static boolean havenewWork(Context loginActivty) {
-		return is3GConnected(loginActivty) || isWifiConnected(loginActivty);
+		return is3GConnectedOrWifiConnected(loginActivty) || isWifiConnected(loginActivty);
 	}
 
 	public interface IShowDateDialog {

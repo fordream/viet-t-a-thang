@@ -74,7 +74,7 @@ public class SplashScreenActivity extends Activity {
 				return;
 			}
 
-			if (Conts.is3GConnected(SplashScreenActivity.this)) {
+			if (Conts.is3GConnectedOrWifiConnected(SplashScreenActivity.this)) {
 				checkVersionOffApp();
 			} else {
 				if (!isFinishing()) {
@@ -108,7 +108,7 @@ public class SplashScreenActivity extends Activity {
 			@Override
 			protected void onPostExecute(String softwareVersion) {
 				super.onPostExecute(softwareVersion);
-				
+				LogUtils.es("dkm",softwareVersion + "");
 				if (!isFinishing()) {
 					if (Conts.isBlank(softwareVersion)) {
 						showDialogNeed3g();
